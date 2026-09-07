@@ -228,6 +228,28 @@
       "local_checkout": "C:\\Users\\rkhol\\paws-and-potjie",
       "sync_status": "ALIGNED",
       "last_verified": "2026-08-29T03:55:00+02:00"
+    },
+    {
+      "entity_id": "PROJECT_RUNE",
+      "purpose": "RUNE — Runtime Unified Network Endorsement; fail-closed gate + append-only ledger for agent coordination and identity claims",
+      "canonical_repo": "https://github.com/RobynAwesome/Project-Rune",
+      "default_branch": "main",
+      "active_work_branch": "cursor/rune-pending-decisions-impl",
+      "current_revision": "4e47382e12b1f30a32f1161fc0679eea7f07c183",
+      "main_revision": "029d11e43d02b387ebf9f36e8288be4617905673",
+      "local_checkout": "C:\\Users\\rkhol\\source\\repos\\Project-Rune",
+      "local_metal_seed": "Schematics/28-Project Rune",
+      "sync_status": "CLOUD_PUBLISH_SURFACE",
+      "worktree": "pending_decisions_impl",
+      "governance_lane": "KPGS_GOVERNANCE",
+      "generation": "GEN_III",
+      "deployment": "reference MVP — not COMPLETE / DEMO READY; PENDING-001/002/003 implemented not owner-endorsed",
+      "dependencies": ["INTRODUCTION_TO_MCP"],
+      "validation_receipts": ["pytest_38_passed_1_skipped_2026-09-07"],
+      "epistemic_limits": "Ed25519 identity signatures; independence_claimed is claim-not-proof; fail-open only with RUNE_DEV_ESCAPE=1 non-production; Schematics remain gitignored vault",
+      "session_seed": "poc-vs-foc/RUNE_CROSSLINK.md + docs/swarm-ops/RUNE_SESSION_SEED_2026-09-07.md",
+      "last_verified": "2026-09-07T11:50:00+02:00",
+      "reconstruction_path": "git clone https://github.com/RobynAwesome/Project-Rune && git checkout cursor/rune-pending-decisions-impl && pip install -e \".[dev]\" && pytest -q"
     }
   ]
 }
