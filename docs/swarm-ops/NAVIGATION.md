@@ -37,6 +37,8 @@
 | Mirror logs to Schematics vault | `python scripts/kc_sync_vault_logs.py` | After JSONL append |
 | Fork intake charter (capability archaeology) | [../governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md](../governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md) | Forked ≠ admitted; pattern ≠ dependency |
 | Fork intake registry (machine) | [KPGS_FORK_INTAKE_REGISTRY.json](./KPGS_FORK_INTAKE_REGISTRY.json) | Intake states + next vertical slice |
+| Governed actuation POC v0 (spec) | [KPGS_GOVERNED_ACTUATION_POC_V0.md](./KPGS_GOVERNED_ACTUATION_POC_V0.md) | Web + Windows + gate; renter-with-hands claim |
+| Consequence classification v0 | [../governance/KPGS_CONSEQUENCE_CLASSIFICATION_V0.md](../governance/KPGS_CONSEQUENCE_CLASSIFICATION_V0.md) | C0–C3 / CX_UNKNOWN; unknown = stop |
 
 **GUI branch truth (2026-08-28):** `codex/kc-sovereign-gui-full-dev` is retained only as historical testimony. Git comparison against `master` shows it is `0` commits ahead and `347` commits behind. Do not resurrect or present it as an open implementation lane. Current GUI work starts from `master` and the Studio/API surfaces above.
 
