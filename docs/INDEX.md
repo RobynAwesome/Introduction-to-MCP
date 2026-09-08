@@ -30,6 +30,8 @@
 | [swarm-ops/TESTIMONY_PROTOCOL.md](swarm-ops/TESTIMONY_PROTOCOL.md) | Earned convergence: observe/infer/validate without manufacturing the testimony | 🟡 INGRESS / REVIEW |
 | [swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md](swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md) | Privileged-state admission contract using provenance, PKA and KMEC routing | 🟡 INGRESS / REVIEW |
 | [swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md](swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md) | Isolated adversarial containment / honeypot evidence lane | 🟡 INGRESS / REVIEW |
+| [governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md](governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md) | Fork archaeology intake: quarantine → pattern → POC → graduate (never npm-install-as-OS) | 🟢 RATIFIED BASELINE |
+| [swarm-ops/KPGS_FORK_INTAKE_REGISTRY.json](swarm-ops/KPGS_FORK_INTAKE_REGISTRY.json) | Machine registry for Aug 30+ forks + vertical-slice POC candidate | 🟢 RATIFIED BASELINE |
 
 ## Operational Directories
 
