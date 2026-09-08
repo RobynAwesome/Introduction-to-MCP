@@ -24,10 +24,21 @@
   ],
   "one_engine_law": "Providers may supply intelligence and patterns. They do not define the operating system.",
   "next_vertical_slice": {
-    "status": "POC_CANDIDATE",
+    "status": "SPEC_LOCKED",
     "organs": ["webmcp", "mcp-windows", "cf_ai_approvalflow-ai"],
-    "claim": "One governed agent operates browser-native and Windows surfaces; sensitive transitions require KPGS approval; every material action produces a receipt.",
-    "forbidden": "LLM -> computer -> vibes"
+    "poc_spec": "docs/swarm-ops/KPGS_GOVERNED_ACTUATION_POC_V0.md",
+    "classification_spec": "docs/governance/KPGS_CONSEQUENCE_CLASSIFICATION_V0.md",
+    "schemas": [
+      "schemas/kpgs-action-envelope.schema.json",
+      "schemas/kpgs-capability-lease.schema.json",
+      "schemas/kpgs-approval.schema.json",
+      "schemas/kpgs-action-receipt.schema.json"
+    ],
+    "fixtures": "tests/governed-actuation/fixtures/",
+    "claim": "One rented executor operates browser-native and Windows surfaces; authority remains external; every action classified, leased, observed, receipted; sensitive actions require human gate; unknown terminates BLOCKED.",
+    "forbidden": "LLM -> computer -> vibes",
+    "target_upstream_outcome": "PATTERN_ONLY",
+    "implementation": "NOT_STARTED"
   },
   "forks": [
     {

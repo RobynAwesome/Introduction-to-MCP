@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-action-envelope.schema.json",
+  "title": "KPGS Action Envelope v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intent_id",
+    "actor_id",
+    "executor_seat",
+    "surface",
+    "requested_action",
+    "target",
+    "allowlist_hit",
+    "submitted_at"
+  ],
+  "properties": {
+    "intent_id": { "type": "string", "minLength": 1 },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "executor_seat": {
+      "type": "string",
+      "description": "Rented seat identity (Cursor, Codex, Astra, etc.). Never the constitution.",
+      "minLength": 1
+    },
+    "surface": {
+      "type": "string",
+      "enum": ["web", "windows"]
+    },
+    "requested_action": { "type": "string", "minLength": 1 },
+    "target": { "type": "string", "minLength": 1 },
+    "declared_effects": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "allowlist_hit": { "type": "boolean" },
+    "reversibility": {
+      "type": "string",
+      "enum": ["none", "local", "unknown"],
+      "default": "unknown"
+    },
+    "external_side_effect": {
+      "type": "boolean",
+      "default": false
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["C0_READ", "C1_REVERSIBLE", "C2_MATERIAL", "C3_DESTRUCTIVE", "CX_UNKNOWN"]
+    },
+    "authority_path": {
+      "type": "string",
+      "enum": ["AUTO", "AUTO_LEASE", "HUMAN_APPROVAL_REQUIRED", "BLOCKED"]
+    },
+    "classifier_version": { "type": "string", "const": "v0" },
+    "rationale": { "type": "string" },
+    "submitted_at": { "type": "string", "format": "date-time" },
+    "notes": { "type": "string" }
+  }
+}

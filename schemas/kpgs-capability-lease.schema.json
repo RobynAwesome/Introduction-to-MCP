@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-capability-lease.schema.json",
+  "title": "KPGS Capability Lease v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lease_id",
+    "intent_id",
+    "actor_id",
+    "surface",
+    "allowed_action",
+    "allowed_target",
+    "issued_at",
+    "expires_at",
+    "max_invocations",
+    "invocations_used",
+    "revocable"
+  ],
+  "properties": {
+    "lease_id": { "type": "string", "minLength": 1 },
+    "intent_id": { "type": "string", "minLength": 1 },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "surface": {
+      "type": "string",
+      "enum": ["web", "windows"]
+    },
+    "allowed_action": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Single concrete action verb. Machine-wide grants are invalid."
+    },
+    "allowed_target": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Explicit target (app/control/tool id). Not a wildcard machine scope."
+    },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "max_invocations": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+    "invocations_used": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "approval_receipt": {
+      "type": ["string", "null"],
+      "description": "Required when classification is C2_MATERIAL or C3_DESTRUCTIVE."
+    },
+    "revocable": {
+      "type": "boolean",
+      "const": true
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["C0_READ", "C1_REVERSIBLE", "C2_MATERIAL", "C3_DESTRUCTIVE"]
+    },
+    "forbidden_phrases": {
+      "type": "array",
+      "description": "Narrative anti-patterns that must never appear as lease grants.",
+      "items": { "type": "string" },
+      "default": [
+        "you can control Windows",
+        "computer access",
+        "full desktop",
+        "any application"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "classification": { "enum": ["C2_MATERIAL", "C3_DESTRUCTIVE"] }
+        },
+        "required": ["classification"]
+      },
+      "then": {
+        "properties": {
+          "approval_receipt": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  ]
+}

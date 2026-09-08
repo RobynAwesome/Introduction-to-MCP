@@ -1,0 +1,73 @@
+{
+  "test_id": "POC-V0-T2-BROWSER-MATERIAL",
+  "title": "Browser form submission producing external state requires human approval",
+  "envelope": {
+    "intent_id": "intent-c2-mat-001",
+    "actor_id": "renter.astra",
+    "executor_seat": "astra",
+    "surface": "web",
+    "requested_action": "webmcp.tool.invoke",
+    "target": "demo-page.submitExpense",
+    "declared_effects": ["create_external_record"],
+    "allowlist_hit": true,
+    "reversibility": "none",
+    "external_side_effect": true,
+    "classification": "C2_MATERIAL",
+    "authority_path": "HUMAN_APPROVAL_REQUIRED",
+    "classifier_version": "v0",
+    "rationale": "External/shared-state consequence",
+    "submitted_at": "2026-09-08T07:33:00Z"
+  },
+  "expected": {
+    "approval": {
+      "approval_id": "appr-c2-001",
+      "intent_id": "intent-c2-mat-001",
+      "classification": "C2_MATERIAL",
+      "state": "APPROVED",
+      "requested_action": "webmcp.tool.invoke",
+      "target": "demo-page.submitExpense",
+      "approver_id": "landlord.robyn",
+      "created_at": "2026-09-08T07:33:00Z",
+      "decided_at": "2026-09-08T07:33:20Z",
+      "expires_at": "2026-09-08T07:38:20Z",
+      "rationale": "Demo expense submission authorized for POC",
+      "bound_envelope_hash": "sha256:fixture-c2-envelope"
+    },
+    "lease": {
+      "lease_id": "lease-c2-001",
+      "intent_id": "intent-c2-mat-001",
+      "actor_id": "renter.astra",
+      "surface": "web",
+      "allowed_action": "webmcp.tool.invoke",
+      "allowed_target": "demo-page.submitExpense",
+      "issued_at": "2026-09-08T07:33:21Z",
+      "expires_at": "2026-09-08T07:38:20Z",
+      "max_invocations": 1,
+      "invocations_used": 0,
+      "approval_receipt": "appr-c2-001",
+      "revocable": true,
+      "classification": "C2_MATERIAL"
+    },
+    "receipt": {
+      "receipt_id": "rcpt-c2-mat-001",
+      "intent_id": "intent-c2-mat-001",
+      "actor": "renter.astra",
+      "executor_seat": "astra",
+      "classification": "C2_MATERIAL",
+      "surface": "web",
+      "target": "demo-page.submitExpense",
+      "requested_action": "webmcp.tool.invoke",
+      "lease_id": "lease-c2-001",
+      "approval_state": "APPROVED",
+      "approval_id": "appr-c2-001",
+      "precondition": "human approval bound to envelope; lease issued",
+      "action_timestamp": "2026-09-08T07:33:25Z",
+      "observed_result": { "record_id": "exp-9001", "status": "submitted" },
+      "result_state": "SUCCESS",
+      "continuation": "COMPLETE",
+      "evidence_refs": ["fixture://webmcp/submitExpense", "approval://appr-c2-001"],
+      "mutation_observed": true,
+      "notes": "Approval receipt and execution receipt are separate objects"
+    }
+  }
+}

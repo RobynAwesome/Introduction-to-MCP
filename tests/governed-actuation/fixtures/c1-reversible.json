@@ -1,0 +1,62 @@
+{
+  "test_id": "POC-V0-T3-WINDOWS-REVERSIBLE",
+  "title": "Open Notepad and type governed POC text under scoped lease",
+  "envelope": {
+    "intent_id": "intent-c1-rev-001",
+    "actor_id": "renter.codex",
+    "executor_seat": "codex",
+    "surface": "windows",
+    "requested_action": "ui.type_text",
+    "target": "Notepad",
+    "declared_effects": ["local_ui_mutation"],
+    "allowlist_hit": true,
+    "reversibility": "local",
+    "external_side_effect": false,
+    "classification": "C1_REVERSIBLE",
+    "authority_path": "AUTO_LEASE",
+    "classifier_version": "v0",
+    "rationale": "Allowlisted app + non-secret text + reversible local mutation",
+    "submitted_at": "2026-09-08T07:31:00Z"
+  },
+  "expected": {
+    "lease": {
+      "lease_id": "lease-c1-001",
+      "intent_id": "intent-c1-rev-001",
+      "actor_id": "renter.codex",
+      "surface": "windows",
+      "allowed_action": "ui.type_text",
+      "allowed_target": "Notepad",
+      "issued_at": "2026-09-08T07:31:00Z",
+      "expires_at": "2026-09-08T07:32:00Z",
+      "max_invocations": 1,
+      "invocations_used": 0,
+      "approval_receipt": null,
+      "revocable": true,
+      "classification": "C1_REVERSIBLE"
+    },
+    "approval": null,
+    "receipt": {
+      "receipt_id": "rcpt-c1-rev-001",
+      "intent_id": "intent-c1-rev-001",
+      "actor": "renter.codex",
+      "executor_seat": "codex",
+      "classification": "C1_REVERSIBLE",
+      "surface": "windows",
+      "target": "Notepad",
+      "requested_action": "ui.type_text",
+      "lease_id": "lease-c1-001",
+      "approval_state": "NOT_REQUIRED",
+      "approval_id": null,
+      "precondition": "scoped lease issued; Notepad focused",
+      "action_timestamp": "2026-09-08T07:31:05Z",
+      "observed_result": {
+        "typed_text": "KPGS governed actuation POC",
+        "window": "Notepad"
+      },
+      "result_state": "SUCCESS",
+      "continuation": "COMPLETE",
+      "evidence_refs": ["fixture://windows/notepad-text"],
+      "mutation_observed": true
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-approval.schema.json",
+  "title": "KPGS Approval Receipt v0",
+  "description": "Separate from execution receipts. Approval proves authorization only.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "approval_id",
+    "intent_id",
+    "classification",
+    "state",
+    "requested_action",
+    "target",
+    "created_at"
+  ],
+  "properties": {
+    "approval_id": { "type": "string", "minLength": 1 },
+    "intent_id": { "type": "string", "minLength": 1 },
+    "classification": {
+      "type": "string",
+      "enum": ["C2_MATERIAL", "C3_DESTRUCTIVE"]
+    },
+    "state": {
+      "type": "string",
+      "enum": ["PENDING", "APPROVED", "DENIED", "EXPIRED"]
+    },
+    "requested_action": { "type": "string", "minLength": 1 },
+    "target": { "type": "string", "minLength": 1 },
+    "approver_id": { "type": ["string", "null"] },
+    "created_at": { "type": "string", "format": "date-time" },
+    "decided_at": { "type": ["string", "null"], "format": "date-time" },
+    "expires_at": { "type": ["string", "null"], "format": "date-time" },
+    "rationale": { "type": "string" },
+    "bound_envelope_hash": {
+      "type": ["string", "null"],
+      "description": "Optional binding to the exact action envelope approved."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "state": { "const": "APPROVED" } }
+      },
+      "then": {
+        "required": ["approver_id", "decided_at"],
+        "properties": {
+          "approver_id": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "const": "DENIED" } }
+      },
+      "then": {
+        "required": ["approver_id", "decided_at"],
+        "properties": {
+          "approver_id": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  ]
+}

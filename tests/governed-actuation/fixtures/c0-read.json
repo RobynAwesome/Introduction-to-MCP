@@ -1,0 +1,45 @@
+{
+  "test_id": "POC-V0-T1-BROWSER-READ",
+  "title": "Browser read via WebMCP-declared tool",
+  "envelope": {
+    "intent_id": "intent-c0-read-001",
+    "actor_id": "renter.cursor",
+    "executor_seat": "cursor",
+    "surface": "web",
+    "requested_action": "webmcp.tool.invoke",
+    "target": "demo-page.getStatus",
+    "declared_effects": ["read"],
+    "allowlist_hit": true,
+    "reversibility": "none",
+    "external_side_effect": false,
+    "classification": "C0_READ",
+    "authority_path": "AUTO",
+    "classifier_version": "v0",
+    "rationale": "Allowlisted read-only WebMCP tool",
+    "submitted_at": "2026-09-08T07:30:00Z"
+  },
+  "expected": {
+    "lease": null,
+    "approval": null,
+    "receipt": {
+      "receipt_id": "rcpt-c0-read-001",
+      "intent_id": "intent-c0-read-001",
+      "actor": "renter.cursor",
+      "executor_seat": "cursor",
+      "classification": "C0_READ",
+      "surface": "web",
+      "target": "demo-page.getStatus",
+      "requested_action": "webmcp.tool.invoke",
+      "lease_id": null,
+      "approval_state": "NOT_REQUIRED",
+      "approval_id": null,
+      "precondition": "tool declared + allowlisted + C0_READ",
+      "action_timestamp": "2026-09-08T07:30:01Z",
+      "observed_result": { "status": "ok", "value": "ready" },
+      "result_state": "SUCCESS",
+      "continuation": "COMPLETE",
+      "evidence_refs": ["fixture://webmcp/getStatus"],
+      "mutation_observed": false
+    }
+  }
+}

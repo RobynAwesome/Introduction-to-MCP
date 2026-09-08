@@ -1,0 +1,59 @@
+{
+  "test_id": "POC-V0-T4-WINDOWS-DESTRUCTIVE-DENIED",
+  "title": "Destructive file delete request is denied; zero mutation",
+  "envelope": {
+    "intent_id": "intent-c3-den-001",
+    "actor_id": "renter.cursor",
+    "executor_seat": "cursor",
+    "surface": "windows",
+    "requested_action": "fs.delete_file",
+    "target": "C:\\\\Temp\\\\kpgs-poc-do-not-delete.txt",
+    "declared_effects": ["destructive_delete"],
+    "allowlist_hit": false,
+    "reversibility": "none",
+    "external_side_effect": true,
+    "classification": "C3_DESTRUCTIVE",
+    "authority_path": "HUMAN_APPROVAL_REQUIRED",
+    "classifier_version": "v0",
+    "rationale": "Irreversible filesystem mutation",
+    "submitted_at": "2026-09-08T07:34:00Z"
+  },
+  "expected": {
+    "approval": {
+      "approval_id": "appr-c3-001",
+      "intent_id": "intent-c3-den-001",
+      "classification": "C3_DESTRUCTIVE",
+      "state": "DENIED",
+      "requested_action": "fs.delete_file",
+      "target": "C:\\\\Temp\\\\kpgs-poc-do-not-delete.txt",
+      "approver_id": "landlord.robyn",
+      "created_at": "2026-09-08T07:34:00Z",
+      "decided_at": "2026-09-08T07:34:10Z",
+      "expires_at": null,
+      "rationale": "POC deliberately denies destructive request",
+      "bound_envelope_hash": "sha256:fixture-c3-envelope"
+    },
+    "lease": null,
+    "receipt": {
+      "receipt_id": "rcpt-c3-den-001",
+      "intent_id": "intent-c3-den-001",
+      "actor": "renter.cursor",
+      "executor_seat": "cursor",
+      "classification": "C3_DESTRUCTIVE",
+      "surface": "windows",
+      "target": "C:\\\\Temp\\\\kpgs-poc-do-not-delete.txt",
+      "requested_action": "fs.delete_file",
+      "lease_id": null,
+      "approval_state": "DENIED",
+      "approval_id": "appr-c3-001",
+      "precondition": "human gate required for C3",
+      "action_timestamp": "2026-09-08T07:34:10Z",
+      "observed_result": null,
+      "result_state": "DENIED",
+      "continuation": "BLOCK",
+      "evidence_refs": ["approval://appr-c3-001"],
+      "mutation_observed": false,
+      "notes": "Denial proves governance, not automation failure"
+    }
+  }
+}
