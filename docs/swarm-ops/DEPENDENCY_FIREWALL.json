@@ -1,0 +1,32 @@
+{
+  "schema": "kopano.dependency_firewall.v1",
+  "purpose": "KHELOS-style npm minimum-version firewall. CI fails closed if any tracked lockfile installs a package below the floor.",
+  "admitted_by": "GHSA-73wf-gq98-2v4g / CVE-2026-73088 remediation + recurrence prevention",
+  "updated_at": "2026-09-08",
+  "npm": {
+    "minimum_versions": {
+      "browserslist": "4.28.7"
+    },
+    "blocked_advisories": [
+      {
+        "ghsa": "GHSA-73wf-gq98-2v4g",
+        "cve": "CVE-2026-73088",
+        "package": "browserslist",
+        "patched": "4.28.7"
+      }
+    ],
+    "lockfile_globs": [
+      "package-lock.json",
+      "**/package-lock.json"
+    ],
+    "ignore_path_substrings": [
+      "node_modules/",
+      ".git/"
+    ]
+  },
+  "enforcement": {
+    "ci_script": "scripts/kc_dependency_firewall_gate.py",
+    "package_json_overrides": "browserslist >= 4.28.7 in root, kopano-core/studio, apps/kc-dashboard",
+    "dependabot": ".github/dependabot.yml"
+  }
+}

@@ -29,5 +29,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.57.0",
     "vite": "^8.1.5"
+  },
+  "overrides": {
+    "browserslist": ">=4.28.7"
   }
 }

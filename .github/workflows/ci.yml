@@ -14,9 +14,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  dependency-firewall:
+    name: Dependency firewall (npm floors)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Enforce DEPENDENCY_FIREWALL floors
+        run: python scripts/kc_dependency_firewall_gate.py
+
   lint-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    needs: dependency-firewall
     strategy:
       fail-fast: false
       matrix:
@@ -72,6 +90,7 @@ jobs:
   cli-package-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    needs: dependency-firewall
 
     steps:
       - uses: actions/checkout@v4
@@ -106,6 +125,7 @@ jobs:
   gui-check:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    needs: dependency-firewall
 
     defaults:
       run:
@@ -136,6 +156,7 @@ jobs:
     name: Agent build PoC (Bracket / BlackMask / Guardian / Identi / LPM / KPEFS)
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    needs: dependency-firewall
 
     steps:
       - uses: actions/checkout@v4

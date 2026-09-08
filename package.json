@@ -14,7 +14,8 @@
   "scripts": {
     "build": "npm --prefix apps/kc-dashboard install && npm --prefix apps/kc-dashboard run build",
     "build:studio": "npm --prefix apps/kc-dashboard run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "firewall:deps": "python scripts/kc_dependency_firewall_gate.py"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues"
   },
-  "homepage": "https://github.com/RobynAwesome/Introduction-to-MCP#readme"
+  "homepage": "https://github.com/RobynAwesome/Introduction-to-MCP#readme",
+  "overrides": {
+    "browserslist": ">=4.28.7"
+  }
 }
