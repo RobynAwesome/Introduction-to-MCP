@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/server": "2.0.0",
-    "puppeteer-core": "25.9.0",
+    "puppeteer-core": "25.10.0",
     "zod": "4.5.4"
   },
   "devDependencies": {
