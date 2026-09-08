@@ -51,7 +51,7 @@ jobs:
       alp_hash: ${{ steps.alp.outputs.hash }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -99,7 +99,7 @@ jobs:
       url: https://kopanolabs.com
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install lftp
         run: sudo apt-get install -y lftp
@@ -141,7 +141,7 @@ jobs:
     if: always()
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v5
