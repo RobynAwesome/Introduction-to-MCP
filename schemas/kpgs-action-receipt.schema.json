@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-action-receipt.schema.json",
+  "title": "KPGS Action Receipt v0",
+  "description": "Execution/governance outcome receipt. Distinct from approval receipts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "intent_id",
+    "actor",
+    "executor_seat",
+    "classification",
+    "surface",
+    "target",
+    "requested_action",
+    "approval_state",
+    "action_timestamp",
+    "result_state",
+    "continuation"
+  ],
+  "properties": {
+    "receipt_id": { "type": "string", "minLength": 1 },
+    "intent_id": { "type": "string", "minLength": 1 },
+    "actor": { "type": "string", "minLength": 1 },
+    "executor_seat": { "type": "string", "minLength": 1 },
+    "classification": {
+      "type": "string",
+      "enum": ["C0_READ", "C1_REVERSIBLE", "C2_MATERIAL", "C3_DESTRUCTIVE", "CX_UNKNOWN"]
+    },
+    "surface": {
+      "type": "string",
+      "enum": ["web", "windows"]
+    },
+    "target": { "type": "string", "minLength": 1 },
+    "requested_action": { "type": "string", "minLength": 1 },
+    "lease_id": { "type": ["string", "null"] },
+    "approval_state": {
+      "type": "string",
+      "enum": ["NOT_REQUIRED", "PENDING", "APPROVED", "DENIED", "EXPIRED", "N/A"]
+    },
+    "approval_id": { "type": ["string", "null"] },
+    "precondition": { "type": "string" },
+    "action_timestamp": { "type": "string", "format": "date-time" },
+    "observed_result": { "type": ["string", "object", "null"] },
+    "result_state": {
+      "type": "string",
+      "enum": ["SUCCESS", "DENIED", "BLOCKED", "FAILED", "EXPIRED"],
+      "description": "FAILED = authorized attempt failed. BLOCKED = governance prevented attempt."
+    },
+    "continuation": {
+      "type": "string",
+      "enum": ["CONTINUE", "COMPLETE", "BLOCK"]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "mutation_observed": {
+      "type": "boolean",
+      "description": "Must be false for DENIED and BLOCKED outcomes."
+    },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result_state": { "enum": ["DENIED", "BLOCKED"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "mutation_observed": { "const": false },
+          "continuation": { "const": "BLOCK" }
+        }
+      }
+    }
+  ]
+}

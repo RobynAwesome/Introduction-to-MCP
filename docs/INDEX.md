@@ -32,6 +32,8 @@
 | [swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md](swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md) | Isolated adversarial containment / honeypot evidence lane | 🟡 INGRESS / REVIEW |
 | [governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md](governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md) | Fork archaeology intake: quarantine → pattern → POC → graduate (never npm-install-as-OS) | 🟢 RATIFIED BASELINE |
 | [swarm-ops/KPGS_FORK_INTAKE_REGISTRY.json](swarm-ops/KPGS_FORK_INTAKE_REGISTRY.json) | Machine registry for Aug 30+ forks + vertical-slice POC candidate | 🟢 RATIFIED BASELINE |
+| [swarm-ops/KPGS_GOVERNED_ACTUATION_POC_V0.md](swarm-ops/KPGS_GOVERNED_ACTUATION_POC_V0.md) | Governed actuation POC contract (web + Windows + gate) — spec only | 🟡 SPEC LOCKED |
+| [governance/KPGS_CONSEQUENCE_CLASSIFICATION_V0.md](governance/KPGS_CONSEQUENCE_CLASSIFICATION_V0.md) | C0–C3 / CX_UNKNOWN consequence classes for actuation | 🟡 SPEC LOCKED |
 
 ## Operational Directories
 
