@@ -3,7 +3,7 @@
 # Audit date: 2026-06-22
 # Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 typer[all]==0.24.1
-rich==14.3.3
+rich==15.0.0
 pydantic-settings==2.13.1
 python-dotenv==1.2.2
 azure-monitor-opentelemetry==1.8.7
