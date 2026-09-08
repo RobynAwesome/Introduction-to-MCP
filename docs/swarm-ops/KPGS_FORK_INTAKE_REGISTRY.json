@@ -1,0 +1,158 @@
+{
+  "schema": "kpgs.fork_intake_registry.v1",
+  "charter": "docs/governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md",
+  "charter_tag": "KPGS-FORK-INTAKE-2026-09-08",
+  "updated_at": "2026-09-08",
+  "invariant": "Forked != admitted. Useful != trusted. Pattern source != dependency.",
+  "pipeline": [
+    "discover",
+    "fork",
+    "quarantine",
+    "archaeology",
+    "extract_pattern",
+    "threat_audit",
+    "kpgs_translation",
+    "poc",
+    "receipt",
+    "graduate"
+  ],
+  "graduation_outcomes": [
+    "ADMITTED",
+    "PATTERN_ONLY",
+    "RESEARCH_ONLY",
+    "DECLINED"
+  ],
+  "one_engine_law": "Providers may supply intelligence and patterns. They do not define the operating system.",
+  "next_vertical_slice": {
+    "status": "POC_CANDIDATE",
+    "organs": ["webmcp", "mcp-windows", "cf_ai_approvalflow-ai"],
+    "claim": "One governed agent operates browser-native and Windows surfaces; sensitive transitions require KPGS approval; every material action produces a receipt.",
+    "forbidden": "LLM -> computer -> vibes"
+  },
+  "forks": [
+    {
+      "name": "webmcp",
+      "owner_fork": "RobynAwesome/webmcp",
+      "upstream": "webmachinelearning/webmcp",
+      "created_at": "2026-08-31",
+      "intake_state": "QUARANTINE_ADMIT_PATTERN",
+      "allowed_take": "Declarative browser-tool contracts",
+      "graduation_condition": "Page-declared tools behind KPGS permission/receipt gate",
+      "target_outcome": "PATTERN_ONLY"
+    },
+    {
+      "name": "mcp-windows",
+      "owner_fork": "RobynAwesome/mcp-windows",
+      "upstream": "sbroenne/mcp-windows",
+      "created_at": "2026-09-05",
+      "intake_state": "QUARANTINE",
+      "allowed_take": "Windows UI Automation patterns",
+      "graduation_condition": "Scoped allowlist, no arbitrary desktop authority, full action receipts; POC must be Intent->classify->lease->actuate->observe->receipt->continue|block",
+      "target_outcome": "PATTERN_ONLY",
+      "notes": "Body with hands. Must not graduate merely because UI Automation works."
+    },
+    {
+      "name": "adk-samples",
+      "owner_fork": "RobynAwesome/adk-samples",
+      "upstream": "google/adk-samples",
+      "created_at": "2026-09-07",
+      "intake_state": "RESEARCH_ONLY",
+      "allowed_take": "Multi-agent/session/OAuth/guardrail recipes",
+      "graduation_condition": "Reimplement patterns without ADK as orchestration landlord",
+      "target_outcome": "PATTERN_ONLY",
+      "role": "DONOR_ORGANISM"
+    },
+    {
+      "name": "qwencloud-ai",
+      "owner_fork": "RobynAwesome/qwencloud-ai",
+      "upstream": "QwenCloud/qwencloud-ai",
+      "created_at": "2026-09-05",
+      "intake_state": "QUARANTINE",
+      "allowed_take": "Agent Skills structure/packaging ideas",
+      "graduation_condition": "Every imported skill audited, version-pinned, capability-declared, locally governed",
+      "target_outcome": "PATTERN_ONLY",
+      "role": "DONOR_ORGANISM"
+    },
+    {
+      "name": "cf_ai_approvalflow-ai",
+      "owner_fork": "RobynAwesome/cf_ai_approvalflow-ai",
+      "upstream": "RamyaLakshmiKS/cf_ai_approvalflow-ai",
+      "created_at": "2026-08-31",
+      "intake_state": "PATTERN_ADMIT",
+      "allowed_take": "approve/escalate/status/policy UX",
+      "graduation_condition": "Map into KPGS leases, human gates, immutable receipts",
+      "target_outcome": "PATTERN_ONLY",
+      "notes": "Candidate universal gate primitive for consequence-classified actions."
+    },
+    {
+      "name": "sc-spec-driven-development-files",
+      "owner_fork": "RobynAwesome/sc-spec-driven-development-files",
+      "upstream": "https-deeplearning-ai/sc-spec-driven-development-files",
+      "created_at": "2026-09-04",
+      "intake_state": "ADMIT_TO_CURRICULUM",
+      "allowed_take": "spec -> task -> implementation -> validation discipline",
+      "graduation_condition": "Translate into native KPGS spec_first -> POC -> receipt doctrine",
+      "target_outcome": "ADMITTED"
+    },
+    {
+      "name": "bitterbot-desktop",
+      "owner_fork": "RobynAwesome/bitterbot-desktop",
+      "upstream": "Bitterbot-AI/bitterbot-desktop",
+      "created_at": "2026-09-08",
+      "intake_state": "RESEARCH_ONLY",
+      "allowed_take": "memory UX, local-first continuity, P2P skill concepts",
+      "graduation_condition": "No competing memory authority; no uncontrolled P2P trust",
+      "target_outcome": "RESEARCH_ONLY"
+    },
+    {
+      "name": "cudf",
+      "owner_fork": "RobynAwesome/cudf",
+      "upstream": "NVIDIA/cudf",
+      "created_at": "2026-08-31",
+      "intake_state": "DORMANT_ORGAN",
+      "allowed_take": "GPU dataframe acceleration",
+      "graduation_condition": "Proven CPU/pandas bottleneck on real KPGS telemetry volume",
+      "target_outcome": "RESEARCH_ONLY"
+    },
+    {
+      "name": "image-agent-workshop",
+      "owner_fork": "RobynAwesome/image-agent-workshop",
+      "upstream": "yefan/image-agent-workshop",
+      "created_at": "2026-09-06",
+      "intake_state": "TRAINING_LAB",
+      "allowed_take": "tool-contract and vision-agent exercises",
+      "graduation_condition": "None for production; remain learning surface",
+      "target_outcome": "RESEARCH_ONLY"
+    },
+    {
+      "name": "treesense-imaging-legacy",
+      "owner_fork": "RobynAwesome/treesense-imaging-legacy",
+      "upstream": "vipulchaturvedi/treesense-imaging-legacy",
+      "created_at": "2026-09-06",
+      "intake_state": "DOMAIN_RESEARCH",
+      "allowed_take": "CV sub-brain patterns",
+      "graduation_condition": "A real KPGS product requires environmental/geospatial enumeration",
+      "target_outcome": "RESEARCH_ONLY"
+    },
+    {
+      "name": "the-staged-awards",
+      "owner_fork": "RobynAwesome/the-staged-awards",
+      "upstream": "MargaretThomas/the-staged-awards",
+      "created_at": "2026-09-04",
+      "intake_state": "OPTIONAL_UX",
+      "allowed_take": "contributor recognition patterns",
+      "graduation_condition": "Must consume validated receipts, not activity theatre",
+      "target_outcome": "PATTERN_ONLY"
+    },
+    {
+      "name": "tech-writing-tools",
+      "owner_fork": "RobynAwesome/tech-writing-tools",
+      "upstream": "alexandrascript/tech-writing-tools",
+      "created_at": "2026-08-31",
+      "intake_state": "DOCS_TOOLBOX",
+      "allowed_take": "writing/review techniques",
+      "graduation_condition": "No runtime authority",
+      "target_outcome": "PATTERN_ONLY"
+    }
+  ]
+}
