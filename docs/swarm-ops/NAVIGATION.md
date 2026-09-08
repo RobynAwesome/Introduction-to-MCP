@@ -35,6 +35,8 @@
 | KC opinion (memory voice) | [apprenticeship/KC_OPINION.md](./apprenticeship/KC_OPINION.md) | Where teacher_review lives; Save/Watch/Kill |
 | Main Brain / vault audit | [apprenticeship/MAIN_BRAIN_AUDIT.md](./apprenticeship/MAIN_BRAIN_AUDIT.md) | Canonical vs Schematics mirror |
 | Mirror logs to Schematics vault | `python scripts/kc_sync_vault_logs.py` | After JSONL append |
+| Fork intake charter (capability archaeology) | [../governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md](../governance/KPGS_FORK_INTAKE_CHARTER_2026-09-08.md) | Forked ≠ admitted; pattern ≠ dependency |
+| Fork intake registry (machine) | [KPGS_FORK_INTAKE_REGISTRY.json](./KPGS_FORK_INTAKE_REGISTRY.json) | Intake states + next vertical slice |
 
 **GUI branch truth (2026-08-28):** `codex/kc-sovereign-gui-full-dev` is retained only as historical testimony. Git comparison against `master` shows it is `0` commits ahead and `347` commits behind. Do not resurrect or present it as an open implementation lane. Current GUI work starts from `master` and the Studio/API surfaces above.
 
