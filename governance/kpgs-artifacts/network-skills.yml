@@ -1,0 +1,146 @@
+apiVersion: kpgs.kopanolabs/v1alpha1
+kind: NetworkSkillRegistry
+
+metadata:
+  id: kpgs-network-skills
+  version: 0.1.0
+  status: POC
+  observed: 2026-09-09
+  authority: RobynAwesome/Introduction-to-MCP
+
+spec:
+  admission_rule: >-
+    DISCOVERED does not mean trusted, installed, executable, or canonical. Every external
+    skill must pass the KPGS Parser Protocol, provenance checks, scope review, and the
+    appropriate PKA/POC gate before its instructions or scripts gain runtime authority.
+
+  local_skills:
+    - id: awesome.govern-kpgs-documents
+      source_repo: RobynAwesome/Introduction-to-MCP
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/awesome/govern-kpgs-documents
+      status: LOCAL_DISCOVERED
+    - id: awesome.parse-kpgs-directives
+      source_repo: RobynAwesome/Introduction-to-MCP
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/awesome/parse-kpgs-directives
+      status: LOCAL_DISCOVERED
+    - id: pka.vibe-to-proof
+      source_repo: RobynAwesome/Introduction-to-MCP
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/vibe-to-proof
+      status: LOCAL_DISCOVERED
+    - id: pka.watch-what-you-call
+      source_repo: RobynAwesome/Introduction-to-MCP
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/watch-what-you-call
+      status: LOCAL_DISCOVERED
+
+  network_skills:
+    - id: project-jennifer.kpgs-runtime-pack
+      capability: runtime-router
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-runtime-pack/SKILL.md
+      status: DISCOVERED
+      notes: Routes authority, parser, proof gates, model/hardware routing, MAO/MMAO renter workflows, tool scripts and receipts.
+
+    - id: project-jennifer.kpgs-parser-protocol
+      capability: provenance-preserving-parser
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-parser-protocol/SKILL.md
+      status: DISCOVERED
+      notes: Parses docs, skills, model cards, benchmarks and repo rules while preserving source authority and conflicts.
+
+    - id: project-jennifer.kpgs-apple-deployment-parser
+      capability: apple-deployment-security-parser
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-apple-deployment-parser/SKILL.md
+      status: DISCOVERED
+      notes: Xcode/App Store Connect/TestFlight/notarization stages, secret hygiene, proof transitions and script-mediated tool execution.
+
+    - id: project-jennifer.kpgs-model-hardware-router
+      capability: model-hardware-routing
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-model-hardware-router/SKILL.md
+      status: DISCOVERED
+      notes: Selects exact local/cloud/hybrid runtime by hard eligibility, demanded skills, benchmarks, privacy/offline, latency and cost.
+
+    - id: project-jennifer.kpgs-mmao-mao-renter
+      capability: purpose-bound-renter
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-mmao-mao-renter/SKILL.md
+      status: DISCOVERED
+
+    - id: project-jennifer.kpgs-tool-script-runtime
+      capability: bounded-tool-execution
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-tool-script-runtime/SKILL.md
+      status: DISCOVERED
+
+    - id: project-jennifer.poc-foc-evaluation
+      capability: poc-foc-evaluation
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/poc-foc-evaluation/SKILL.md
+      status: DISCOVERED
+
+    - id: project-jennifer.poc-foc-registry-parser
+      capability: poc-foc-registry-parser
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/poc-foc-registry-parser/SKILL.md
+      status: DISCOVERED
+
+    - id: project-jennifer.kpgs-ci-proof-gate
+      capability: ci-proof-gate
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-ci-proof-gate/SKILL.md
+      status: DISCOVERED
+
+    - id: project-jennifer.kpgs-engine-qualification
+      capability: engine-qualification
+      source_repo: RobynAwesome/Project-Jennifer
+      source_ref: f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb
+      uri: https://github.com/RobynAwesome/Project-Jennifer/blob/f04034a9e56f38e7e04ac0ed6ec3a31ca72946bb/skills/kpgs-engine-qualification/SKILL.md
+      status: DISCOVERED
+
+    - id: pka.partial-knowable-algebra
+      capability: partial-knowledge-governance
+      source_repo: RobynAwesome/Partial-Knowable-Algebra
+      source_ref: 0abc68810ee5799f4bb703f8bb99fb2bf11b3e86
+      uri: https://github.com/RobynAwesome/Partial-Knowable-Algebra/blob/0abc68810ee5799f4bb703f8bb99fb2bf11b3e86/SKILL.md
+      status: DISCOVERED
+      notes: X + Y = MAYBE; X partial/changeable observed state, Y knowable/versioned governance state.
+
+  design_sources:
+    - id: ayakha-design-thinking
+      source_repo: RobynAwesome/ayakha-ai
+      source_ref: a20e6d5c93b8b9ae464515059b37ce988752659b
+      uri: https://github.com/RobynAwesome/ayakha-ai/blob/a20e6d5c93b8b9ae464515059b37ce988752659b/README.md
+      status: DISCOVERED_SOURCE
+      notes: Local-first multimodal design-thinking companion; idea -> clarified brief -> editable artifact -> testable next step with approval/ledger evidence.
+
+  provider_skill_surfaces:
+    - id: google-adk-docs-index
+      uri: https://adk.dev/llms.txt
+      authority_scope: google_adk_behavior
+      status: EXTERNAL_PROVIDER_SOURCE
+
+  missing_or_not_yet_discovered:
+    - id: dedicated_android_play_SKILL.md
+      current_evidence: >-
+        Android Play/Keystore/WorkManager parser stages exist in Introduction-to-MCP's
+        pka_kmec_jennifer_bridge.py, but this audit did not find a dedicated portable
+        Android Play SKILL.md in the searched RobynAwesome network.
+      treatment: use_local_bridge_as_current_source_and_continue_network_audit
+
+  invariants:
+    - skill_discovered_is_not_skill_trusted
+    - skill_trusted_is_not_script_executed
+    - provider_docs_are_authoritative_only_within_provider_scope
+    - exact_source_ref_must_be_preserved
+    - model_prior_is_not_retrieved_evidence
+    - unknown_skill_state_must_remain_unknown
