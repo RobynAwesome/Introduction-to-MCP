@@ -1,0 +1,358 @@
+apiVersion: kpgs.kopanolabs/v1alpha1
+kind: CallableArtifact
+
+metadata:
+  id: fep.depiction-of-nature-and-society
+  name: Depiction of Nature and Society
+  group: fep
+  version: 0.1.0
+  status: POC
+  created: 2026-09-09
+  tags:
+    - fep
+    - forensic-sociology
+    - nature
+    - society
+    - pka
+    - poc-vs-foc
+    - smart-ledger
+    - rtc-evolution
+
+spec:
+  purpose: >-
+    Produce an evidence-bearing depiction of how natural conditions and social systems
+    coexist, interact, constrain, and change one another without silently converting
+    observation, testimony, correlation, or model interpretation into causal truth.
+
+  task_mode: AUDIT
+
+  invocation:
+    aliases:
+      - depict nature and society
+      - fep nature society
+      - forensic depiction
+      - DNS-FEP
+    required_inputs:
+      - name: question
+        type: string
+        description: The bounded forensic question to investigate.
+      - name: subject
+        type: string
+        description: Community, event, system, place, or phenomenon being depicted.
+    optional_inputs:
+      - name: place_scope
+        type: string
+      - name: time_scope
+        type: string
+      - name: testimony_refs
+        type: list[string]
+      - name: repository_refs
+        type: list[string]
+      - name: runtime_refs
+        type: list[string]
+      - name: external_research_refs
+        type: list[string]
+      - name: natural_traces
+        type: list[object]
+      - name: social_traces
+        type: list[object]
+
+  identity:
+    policy: explicit_or_resolve
+    preferred_identity: Forge
+    identity_env: KPGS_IDENTITY
+    seat_resolution: required_at_runtime
+    seat_env: KPGS_SEAT
+    authority_rule: task_scoped
+    required_capabilities:
+      - forensic_reconstruction
+      - evidence_classification
+      - semantic_drift_detection
+      - epistemic_restraint
+    receipt_fields:
+      - identity_id
+      - identity_version
+      - seat_id
+      - authority_scope
+
+  model_deliberation:
+    mode: interface_auto_preferred
+    rule: >-
+      If the active IDE/interface exposes Auto model selection, allow that interface to
+      select the model and export the resolved concrete model before ADK construction.
+      If Auto is unavailable, require an explicit model selection and record it.
+    interface_auto_env: KPGS_INTERFACE_SELECTED_MODEL
+    explicit_model_env: KPGS_EXPLICIT_MODEL
+    interface_env: KPGS_INTERFACE_NAME
+    provider_env: KPGS_MODEL_PROVIDER
+    no_selection_policy: fail_closed
+    never_pass_literal_auto_to_adk: true
+    receipt_fields:
+      - interface
+      - provider
+      - model
+      - model_version
+      - auto_selected
+      - selection_reason
+
+  semantic_bindings:
+    FEP:
+      selected: Forensic Evolution Protocol
+      source: kopano-core/kopano/fep_engine.py
+    PKA:
+      selected: Partial Knowable Algebra
+      source: skills/pka/README.md
+    CCP:
+      selected: Conceptual Convergent Protocol
+      source: kopano-core/kopano/fep_engine.py
+    CDP:
+      selected: Conceptual Divergent Protocol
+      source: From_Possibility_to_Proof genealogy
+    CBP:
+      selected: Context Bleeding Protocol
+      source: kopano-core/kopano/adaptiveness/adaptive_strep_order.py
+    BMP:
+      selected: Black Mask Protocol
+      source: kopano-core/kopano/kpgs_protocols_protocol.py
+      conflicts:
+        - source: kopano-core/kopano/fep_engine.py
+          observed_expansion: Black Mass Protocol
+          treatment: preserve_as_drift_evidence_do_not_flatten
+    SWFUS:
+      selected_namespace: vnext_sync
+      bindings:
+        - namespace: legacy_crud2
+          expansion: Sever Watch Fortify Unblock Ship
+          source: kopano-core/kopano/protocols.py
+        - namespace: vnext_sync
+          expansion: State-Wide Framework Universal Synchronization
+          source: kopano-core/kopano/swfus_engine.py
+      rule: invocation_must_name_namespace
+    CRUD:
+      selected: Create Read Update Delete
+      authority: mutable_state_only
+      invariant: CRUD != truth
+    KMEC:
+      selected: KPGS Morning Engine Core
+      role: parser_fabric_and_measurement_surface
+      source: kopano-core/kopano/pka_kmec_jennifer_bridge.py
+
+  protocols:
+    - id: FEP
+      mode: required
+      use: reconstruct traces and classify E1-E4 evidence
+    - id: BP
+      mode: required
+      use: isolate NATURE, SOCIETY, INTERACTION, and UNKNOWN before synthesis
+    - id: PKA
+      mode: required
+      use: preserve partial and unknown states
+    - id: CDP
+      mode: conditional
+      use: hold multiple causal or explanatory candidates without promoting them
+    - id: CCP
+      mode: conditional
+      use: select a candidate for validation, never as automatic truth
+    - id: POCvsFOC
+      mode: required
+      use: classify proof-status and prevent surface claims from acquiring root authority
+    - id: CBP
+      mode: conditional
+      use: admit only relevant historical context within the bounded forensic case
+    - id: SWFUS
+      namespace: vnext_sync
+      mode: conditional
+      use: distribute governed state after evidence/receipt creation
+    - id: CRUD
+      mode: working_state_only
+      use: manipulate provisional working state; never confer truth authority
+
+  parsers:
+    primary:
+      id: fep_nature_society_parser
+      stages:
+        - CAPTURE
+        - ISOLATE
+        - CLASSIFY
+        - RECONSTRUCT
+        - RELATE
+        - DIVERGE
+        - CONVERGE
+        - VALIDATE
+        - RECEIPT
+    inherited_surfaces:
+      - id: apple_deployment_parser
+        source: kopano-core/kopano/pka_kmec_jennifer_bridge.py
+        use_here: reference_pattern_only
+      - id: android_deployment_parser
+        source: kopano-core/kopano/pka_kmec_jennifer_bridge.py
+        use_here: reference_pattern_only
+
+  evidence:
+    classes:
+      E1: Direct user testimony
+      E2: Repository or physical artifact evidence
+      E3: Working inference
+      E4: Unknown; forensic audit required
+    minimum_for_canonical_empirical_claim:
+      - E2
+    rules:
+      - testimony_is_authoritative_for_intent_not_automatic_external_fact
+      - correlation_does_not_become_causation_without_support
+      - unknown_must_remain_representable
+      - conflicting_evidence_must_survive_synthesis
+      - every_empirical_claim_must_point_to_evidence
+
+  brackets:
+    NATURE:
+      examples:
+        - climate
+        - water
+        - terrain
+        - biology
+        - material_constraints
+        - energy
+    SOCIETY:
+      examples:
+        - people
+        - institutions
+        - culture
+        - economics
+        - law
+        - technology
+        - relationships
+    INTERACTION:
+      examples:
+        - adaptation
+        - extraction
+        - dependence
+        - feedback_loop
+        - displacement
+        - cooperation
+    UNKNOWN:
+      examples:
+        - missing_trace
+        - contested_explanation
+        - unverified_memory
+        - insufficient_time_series
+
+  workflow:
+    - step: 1
+      id: capture_case
+      action: Preserve the original question, subject, place/time scope, and source testimony without reinterpretation.
+    - step: 2
+      id: bracket_isolation
+      action: Separate NATURE, SOCIETY, INTERACTION, and UNKNOWN evidence before interpretation.
+    - step: 3
+      id: fep_classification
+      action: Classify each trace as E1, E2, E3, or E4 with provenance.
+    - step: 4
+      id: reconstruct
+      action: Build a chronology and actor/environment relationship map from surviving traces.
+    - step: 5
+      id: pka_state
+      action: Mark claims KNOWN, PARTIAL, POSSIBLE, CONFLICTING, HOLD, POC, or FOC as supported.
+    - step: 6
+      id: cdp_candidates
+      action: Preserve multiple explanations for observed nature-society interactions where causality is unresolved.
+    - step: 7
+      id: ccp_candidate
+      action: Select only the strongest candidate that deserves a bounded validation attempt; selection is not proof.
+    - step: 8
+      id: poc_foc_gate
+      action: Separate descriptive depiction, supported relationship, and proven causal claim.
+    - step: 9
+      id: smart_ledger_receipt
+      action: Emit an append-only evidence receipt containing runtime provenance, claim states, sources, unknowns, and hashes.
+    - step: 10
+      id: evolution_candidate
+      action: Propose governance learning only when the case supplies enough evidence to justify a bounded change or test.
+
+  ledger:
+    engine: SmartLedgerEngine
+    source: kopano-core/kopano/pka_kmec_jennifer_bridge.py
+    write_policy: append_only
+    admission_gate: PKA
+    allowed_states:
+      - OFFLINE_CANDIDATE
+      - PKA_REVALIDATING
+      - POSTGRESQL_ADMITTED
+      - CONFLICT_REJECTED
+      - SUPERSEDED
+    correction_policy: supersede_or_revert_never_silent_rewrite
+    required_receipt_fields:
+      - artifact_id
+      - invocation_id
+      - identity_id
+      - seat_id
+      - interface
+      - provider
+      - model
+      - model_version
+      - auto_selected
+      - question
+      - subject
+      - evidence_refs
+      - epistemic_states
+      - unknowns
+      - pka_verdict
+      - poc_foc_verdict
+      - previous_receipt_hash
+      - receipt_hash
+      - timestamp
+
+  skills:
+    - id: awesome.parse-kpgs-directives
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/awesome/parse-kpgs-directives
+      policy: verify_at_invocation
+    - id: awesome.govern-kpgs-documents
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/awesome/govern-kpgs-documents
+      policy: verify_at_invocation
+    - id: pka.vibe-to-proof
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/vibe-to-proof
+      policy: verify_at_invocation
+    - id: pka.watch-what-you-call
+      uri: https://github.com/RobynAwesome/Introduction-to-MCP/tree/master/skills/pka/watch-what-you-call
+      policy: verify_at_invocation
+    - id: google.adk.docs-index
+      uri: https://adk.dev/llms.txt
+      policy: network_reference
+
+  guardrails:
+    - depiction_is_not_causation
+    - consensus_is_not_truth
+    - model_confidence_is_not_evidence
+    - crud_is_not_truth
+    - ccp_selection_is_not_poc
+    - do_not_flatten_acronym_history
+    - do_not_infer_seat_from_model_or_interface
+    - do_not_promote_e3_or_e4_to_empirical_fact_without_support
+    - high_authority_is_task_scoped
+
+  outputs:
+    - id: structured_depiction
+      type: object
+      description: Nature, society, interaction, and unknown lanes with evidence pointers.
+    - id: evidence_matrix
+      type: object
+      description: E1-E4 claims with provenance and epistemic state.
+    - id: relationship_map
+      type: object
+      description: Actors, natural conditions, social structures, and observed interactions.
+    - id: causal_candidate_set
+      type: list[object]
+      description: CDP hypotheses and optional CCP-selected validation candidate.
+    - id: governance_learning
+      type: object
+      description: Bounded evolution/test candidate, or HOLD when proof is insufficient.
+    - id: smart_ledger_receipt
+      type: object
+      description: Append-only invocation and evidence receipt.
+
+  adk:
+    language: python
+    adapter: agent.py
+    agent_class: google.adk.agents.Agent
+    root_agent_factory: create_root_agent
+    model_rule: resolved_concrete_model_only
+    docs: https://adk.dev/llms.txt
