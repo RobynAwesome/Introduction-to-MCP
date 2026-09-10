@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs-continuous-authorization-receipt.schema.json",
+  "title": "KPGS Continuous Behavioural Authorization Receipt v0",
+  "description": "Pre-actuation decision receipt. Identity is necessary but not sufficient for continued authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "verdict",
+    "compromise_class",
+    "revoke_scope",
+    "actor_id",
+    "intent_id",
+    "session_id",
+    "reason_codes",
+    "trust_vector",
+    "continued_authority",
+    "mutation_allowed",
+    "observer_seat",
+    "teacher_seat",
+    "receipt_hash"
+  ],
+  "properties": {
+    "decision_id": { "type": "string", "pattern": "^cba:" },
+    "verdict": { "type": "string", "enum": ["ALLOW", "CONTAIN", "REVOKE"] },
+    "compromise_class": {
+      "type": "string",
+      "enum": ["NONE", "IMPERSONATION", "BEHAVIOURAL_COMPROMISE", "GOVERNANCE_BLOCK", "UNKNOWN"]
+    },
+    "revoke_scope": { "type": "string", "enum": ["NONE", "LEASE", "SESSION"] },
+    "actor_id": { "type": "string", "minLength": 1 },
+    "intent_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "trust_vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "authority", "intent", "provenance", "state", "behaviour", "temporal"],
+      "properties": {
+        "identity": { "type": "boolean" },
+        "authority": { "type": "boolean" },
+        "intent": { "type": "boolean" },
+        "provenance": { "type": "boolean" },
+        "state": { "type": "boolean" },
+        "behaviour": { "type": "boolean" },
+        "temporal": { "type": "boolean" }
+      }
+    },
+    "continued_authority": { "type": "boolean" },
+    "mutation_allowed": { "type": "boolean" },
+    "observer_seat": { "type": "string", "const": "SEAT_01_KC" },
+    "teacher_seat": { "type": "string", "const": "SEAT_02_CASSEY" },
+    "previous_receipt_hash": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "receipt_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "verdict": { "enum": ["CONTAIN", "REVOKE"] } } },
+      "then": {
+        "properties": {
+          "continued_authority": { "const": false },
+          "mutation_allowed": { "const": false }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "verdict": { "const": "ALLOW" } } },
+      "then": {
+        "properties": {
+          "continued_authority": { "const": true },
+          "mutation_allowed": { "const": true }
+        }
+      }
+    }
+  ]
+}
