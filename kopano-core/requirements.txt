@@ -14,6 +14,6 @@ openai==2.30.0
 httpx==0.28.1
 fastapi==0.135.2
 uvicorn==0.42.0
-gunicorn==22.0.0
+gunicorn==26.2.0
 websockets==16.0
 pywebview==6.2.1
