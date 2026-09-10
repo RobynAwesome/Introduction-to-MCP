@@ -1,0 +1,91 @@
+apiVersion: kpgs.kopanolabs/v1alpha1
+kind: ArtifactBuildReceipt
+
+metadata:
+  id: receipt.fep.depiction-of-nature-and-society.2026-09-09
+  artifact_id: fep.depiction-of-nature-and-society
+  date: 2026-09-09
+  state: CODED_UNVALIDATED
+
+receipt:
+  human_intent:
+    - create callable GSMB/KPGS artifacts with .yml contracts and parser support
+    - bind every artifact to identity, seat, interface and model provenance
+    - support IDE Auto model selection without confusing model selection with identity
+    - compose FEP, PKA, CDP, CCP, CBP, SWFUS, CRUD, KMEC, POCvsFOC and Smart Ledger surfaces
+    - begin with FEP artifact Depiction of Nature and Society
+
+  branch: feat/gsmb-callable-artifacts-fep-001
+  base_sha: 40a31fe8eb54d9943f79ea9b546a89fffc553a2b
+
+  emitted:
+    - governance/kpgs-artifacts/README.md
+    - governance/kpgs-artifacts/groups.yml
+    - governance/kpgs-artifacts/artifact.schema.json
+    - governance/kpgs-artifacts/network-skills.yml
+    - governance/kpgs-artifacts/fep/depiction-of-nature-and-society/artifact.yml
+    - governance/kpgs-artifacts/fep/depiction-of-nature-and-society/agent.py
+    - kopano-core/kopano/callable_artifact_registry.py
+    - scripts/call_kpgs_artifact.py
+    - tests/test_callable_artifact_registry.py
+    - pyproject.toml
+
+  evidence_reused:
+    - kopano-core/kopano/fep_engine.py
+    - kopano-core/kopano/pka_kmec_jennifer_bridge.py
+    - kopano-core/kopano/protocols.py
+    - kopano-core/kopano/swfus_engine.py
+    - kopano-core/kopano/kpgs_protocols_protocol.py
+    - skills/awesome/
+    - skills/pka/
+
+  network_discoveries:
+    - RobynAwesome/Project-Jennifer:skills/kpgs-runtime-pack/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-parser-protocol/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-apple-deployment-parser/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-model-hardware-router/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-mmao-mao-renter/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-tool-script-runtime/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/poc-foc-evaluation/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/poc-foc-registry-parser/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-ci-proof-gate/SKILL.md
+    - RobynAwesome/Project-Jennifer:skills/kpgs-engine-qualification/SKILL.md
+    - RobynAwesome/Partial-Knowable-Algebra:SKILL.md
+    - RobynAwesome/ayakha-ai:README.md
+
+  drift_preserved:
+    SWFUS:
+      - Sever Watch Fortify Unblock Ship
+      - State-Wide Framework Universal Synchronization
+    BMP:
+      selected_for_artifact: Black Mask Protocol
+      conflicting_observation: Black Mass Protocol in fep_engine canonical acronym map
+
+  validation:
+    source_review: COMPLETE
+    dedicated_tests_authored: true
+    local_test_execution: NOT_RUN
+    local_test_blocker: shell environment could not resolve github.com to clone the connected branch
+    ci_test_execution: PENDING_PR_GATE
+    runtime_adk_execution: NOT_RUN
+    smart_ledger_runtime_append: NOT_RUN
+
+  proof_state:
+    implementation: CODED
+    unit_tests: AUTHORED_NOT_EXECUTED_LOCALLY
+    ci: UNKNOWN
+    runtime: UNKNOWN
+    poc: NOT_YET_PROVEN
+
+  next_gate:
+    - open pull request against master
+    - allow 24-RTC Learning Proof Gate to run full unittest discovery
+    - inspect exact-SHA CI result
+    - only then consider TESTED or CI_VALIDATED promotion
+
+  invariants:
+    - implemented_is_not_validated
+    - tests_authored_is_not_tests_passed
+    - ci_unknown_is_not_ci_green
+    - skill_discovered_is_not_skill_trusted
+    - model_selected_is_not_identity_resolved

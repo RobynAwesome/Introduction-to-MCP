@@ -1,0 +1,94 @@
+apiVersion: kpgs.kopanolabs/v1alpha1
+kind: ArtifactGroupRegistry
+metadata:
+  id: kpgs-artifact-groups
+  status: POC
+  created: 2026-09-09
+  source_of_truth: RobynAwesome/Introduction-to-MCP
+
+spec:
+  groups:
+    - id: fep
+      name: Forensic Evolution Protocol
+      purpose: Convert traces into evidence-bearing reconstruction, pattern learning, and bounded governance evolution.
+      artifacts:
+        - id: depiction-of-nature-and-society
+          status: POC_BUILDING
+        - id: actor-relationship-trace-map
+          status: PLANNED
+        - id: semantic-drift-autopsy
+          status: PLANNED
+        - id: incident-to-evolution-receipt
+          status: PLANNED
+        - id: temporal-society-pattern-reconstruction
+          status: PLANNED
+
+    - id: epistemic-proof-and-possibility
+      name: Epistemic Proof & Possibility
+      purpose: Govern partial knowledge, divergence, convergence, admission, and proof status.
+      artifacts:
+        - id: partial-knowable-state
+          status: PLANNED
+        - id: divergence-to-convergence
+          status: PLANNED
+        - id: poc-vs-foc-classifier
+          status: PLANNED
+        - id: invariant-ingress-gate
+          status: PLANNED
+        - id: claim-to-proof-lineage
+          status: PLANNED
+
+    - id: runtime-ledger
+      name: Runtime State, Sync & Smart Ledger
+      purpose: Govern mutable state, parser stages, synchronization, offline replay, and authoritative receipts.
+      artifacts:
+        - id: smart-ledger-admission
+          status: PLANNED
+        - id: apple-deployment-security-parser
+          status: PLANNED
+        - id: android-play-security-parser
+          status: PLANNED
+        - id: swfus-runtime-synchronization
+          status: PLANNED
+        - id: offline-replay-and-reconciliation
+          status: PLANNED
+
+    - id: identity-model-deliberation
+      name: Identity, RTC & Model Deliberation
+      purpose: Resolve accountable identity, seat authority, interface embodiment, and model selection with receipts.
+      artifacts:
+        - id: identity-runtime-envelope
+          status: PLANNED
+        - id: seat-authority-resolver
+          status: PLANNED
+        - id: model-interface-auto-deliberation
+          status: PLANNED
+        - id: rtc-multi-seat-deliberation
+          status: PLANNED
+        - id: substrate-affinity-receipt
+          status: PLANNED
+
+    - id: design-skills-product
+      name: Design, Skills & Product Translation
+      purpose: Translate design thinking, network skills, architecture review, and product distribution constraints into governed execution.
+      artifacts:
+        - id: design-thinking-to-governed-brief
+          status: PLANNED
+        - id: skill-network-resolver
+          status: PLANNED
+        - id: awesome-skill-composer
+          status: PLANNED
+        - id: architecture-ledger-design-review
+          status: PLANNED
+        - id: product-distribution-readiness
+          status: PLANNED
+
+  invariants:
+    - roadmap_slot_is_not_implementation
+    - identity_is_not_model
+    - seat_is_not_identity
+    - interface_is_not_identity
+    - crud_is_not_truth
+    - convergence_is_not_proof
+    - receipt_is_append_only_evidence
+    - historical_semantics_must_not_be_flattened
