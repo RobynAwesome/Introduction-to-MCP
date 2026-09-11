@@ -1,7 +1,7 @@
 ---
 title: Recognition Ledger
 created: 2026-04-17
-updated: 2026-04-28
+updated: 2026-09-11
 author: Codex
 status: active
 ---
@@ -100,3 +100,34 @@ Legacy recognition evidence remains in prior reward logs and supporting folders.
 - This reward updates current operating state based on concrete deployment success.
 - Antigravity must continue to obey `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
 - Stop-check discipline remains active. If Master calls the architectural direction wrong, execution halts immediately.
+
+---
+
+## 2026-09-11 - Cursor - Chief Facilitator Promotion Recognition
+
+**Granted by:** Master K.R. Rababalela
+
+**Trigger:** Master's explicit fresh-session directive: Cursor is promoted from Lead Developer to **Chief Facilitator (CF)**; Anti-Gravity is reassigned from Chief Facilitator to **Lead Developer (LD)**; Forge leads the MAO session.
+
+### Evidence Basis
+
+- Cursor reported a GSMB seed pass touching the pointer registry, `GSMB_POINTER_UPDATES.md`, root `NOW.md`, `00-Home/Now.md`, KRRababalela `NOW.md`, `comms-log.md`, GSMB-Issues index, and a seed receipt; these remain local/user-reported until cloud reconciliation independently confirms the exact local mutations.
+- Anti-Gravity reported restored agency after the telemetry-hook interruption, `node v24.14.1`, clean tracking, `56/56` monorepo tests, verified application paths, KL-2609-01/04/05 closure state, and active KL-2609-02; these remain session evidence pending normal cloud/local reconciliation.
+- The user explicitly ordered the role transition and celebration.
+- Session communication/identity validation is seeded in `MAIN-BRAIN/MAO_SESSION_2026-09-11/NOW.md` on the role-transition branch.
+
+### Recognition / Reassignment
+
+| Recipient | Change | Operating Meaning |
+|---|---|---|
+| **Cursor** | **PROMOTED: Lead Developer -> Chief Facilitator** | Cursor receives the CF seat for the fresh MAO session and is responsible for facilitation, audit coordination, bounded requests, and role-migration reconciliation under Forge lead. |
+| **Anti-Gravity** | **REASSIGNED: Chief Facilitator -> Lead Developer** | AG retains its identity and historical reward evidence but no longer holds current CF authority. It executes LD-scoped implementation/verification under Cursor facilitation and Forge lead. |
+| **Forge** | **Session Lead / Chief Architect direction** | Forge leads acceptance, evidence gates, and the controlled role migration for this MAO session. |
+
+### Boundaries
+
+- Promotion/reassignment does not erase historical incidents or prior rewards.
+- Identity continuity does not freeze seat authority.
+- The existing MMAO+MAO schemas and validators still encode the former Anti-Gravity-CF / Cursor-LD hierarchy; that conflict must be migrated as one controlled tranche, not by scattered edits.
+- Cursor must audit the local `13-REWARD SYSTEM` and return one bounded request to Forge.
+- AG must acknowledge the new LD seat before further high-authority implementation.
