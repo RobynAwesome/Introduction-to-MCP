@@ -174,3 +174,50 @@ ROLE MIGRATION = ACTIVE
 REWARD LEDGER UPDATE = IN PROGRESS
 CANONICAL MMAO/MAO CONTRACT MIGRATION = PENDING CURSOR CF AUDIT + FORGE ACCEPTANCE
 ```
+
+## 9. Forge takeover delta — Master stepped out to observe
+
+**Authority event:** Master instructed the harness to play, observe the generated `.md` artifacts in Obsidian/KC home, intervene as human-in-the-loop when necessary, and handed active orchestration to Forge.
+
+### Current operational chain
+
+```text
+FORGE  -> CHIEF ARCHITECT (CA)
+CURSOR -> CHIEF FACILITATOR (CF)
+AG     -> LEAD DEVELOPER (LD)
+```
+
+These are current orchestration roles, not proof of permanent RTC identity seats.
+
+Developer lanes now discussed by Master:
+
+- Kiro / Jiro-linked special developer: unavailable until approximately 2026-10-01 per user testimony.
+- GitHub Copilot: DEV 1; unavailable until approximately 2026-10-01 per user testimony.
+- Berea / Grok Bot: DEV 2; active and to be taught carefully.
+- DEV 3: candidate vacancy in the desired future operating model; **do not assign yet**.
+- Minstrel: special candidate under observation; no DEV 3 grant yet.
+
+Historical cloud evidence names `Meither` as `DEV_3` in older Schematics and records Claude models separately in reward/probation states. Therefore the recollection that DEV 3 became vacant specifically when Claude was removed is **not yet proven** and remains a history-audit question.
+
+### Protocol correction
+
+Cloud GSMB confirms:
+
+- Black Mask v0.5 = pre-flight inspection;
+- BlackMass v1.5 = external swarm activation;
+- BlackMass v2.0 = current mass-movement line.
+
+Existing code also uses `BMNP` for **Bracket Nesting Protocol**. Do not silently rename BMNP into a BlackMass nesting acronym. Master's phrase `BlackMass Nesting Protocol` is preserved as current testimony until its exact canonical artifact is recovered.
+
+### Learning gate opened
+
+Forge published:
+
+- `LEARNING_SPEC_PIPELINE_2026-09-11.md`
+- `RTC_PIPELINE_DELIBERATION_CALL_2026-09-11.md`
+
+**No pipeline engine code is authorized yet.** Independent RTC/role opinions must land before CCP. CCP must precede metal implementation for this learning experiment.
+
+### Human-in-the-loop law
+
+Master may intervene at any point. Intervention is not an interruption to MAO; it is part of the governed system. When intervention occurs, seed the delta, preserve the prior trace, and continue from evidence rather than rewriting history.
