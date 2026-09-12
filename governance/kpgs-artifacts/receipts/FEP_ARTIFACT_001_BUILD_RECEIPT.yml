@@ -64,11 +64,26 @@ receipt:
   validation:
     source_review: COMPLETE
     dedicated_tests_authored: true
-    local_test_execution: NOT_RUN
-    local_test_blocker: shell environment could not resolve github.com to clone the connected branch
+    local_test_execution: TARGETED_PASS
+    initial_local_test_blocker: shell environment could not resolve github.com to clone the connected branch
+    local_test_blocker: NONE_FOR_TARGETED_PROBE
     ci_test_execution: PENDING_PR_GATE
     runtime_adk_execution: NOT_RUN
-    smart_ledger_runtime_append: NOT_RUN
+    smart_ledger_runtime_append: LOCAL_SQLITE_PASS_NOT_AUTHORITY
+    bounded_runtime_probe:
+      date: 2026-09-10
+      callable_entry_point: PASS
+      concrete_model_envelope: PASS
+      literal_auto_fail_closed: PASS
+      missing_model_fail_closed: PASS
+      smart_ledger_append: PASS
+      smart_ledger_idempotent_replay: PASS
+      smart_ledger_conflicting_replay: REJECTED
+      smart_ledger_chain_integrity: PASS
+      scope: local_python_and_sqlite_only
+      adk_provider_execution: NOT_ESTABLISHED
+      external_authority: NOT_ESTABLISHED
+      durable_receipt_id: NOT_RETAINED_EPHEMERAL_PROBE
 
   proof_state:
     implementation: CODED
