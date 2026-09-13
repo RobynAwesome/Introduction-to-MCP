@@ -40,11 +40,13 @@ jobs:
             expected="$EXPECTED_SHA"
           fi
           git init .
-          git remote add origin "https://github.com/$repo.git"
-          git -c http.extraheader="AUTHORIZATION: bearer $GH_TOKEN" \
-            fetch --no-tags --depth=1 origin "$ref"
+          # The token is the workflow's contents:read token; remove the remote
+          # after the exact commit is checked out so it cannot be reused.
+          git remote add origin "https://x-access-token:$GH_TOKEN@github.com/$repo.git"
+          git fetch --no-tags --depth=1 origin "$ref"
           git checkout --detach FETCH_HEAD
           test "$(git rev-parse HEAD)" = "$expected"
+          git remote remove origin
 
       - name: Validate policy and workflow boundaries
         run: |
