@@ -22,11 +22,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout exact revision
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-        with:
-          fetch-depth: 1
-          persist-credentials: false
+      - name: Checkout exact revision without submodules
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          repo="${{ github.repository }}"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            ref="refs/pull/$PR_NUMBER/head"
+            expected="$PR_HEAD_SHA"
+          else
+            ref="$EXPECTED_SHA"
+            expected="$EXPECTED_SHA"
+          fi
+          git init .
+          git remote add origin "https://github.com/$repo.git"
+          git -c http.extraheader="AUTHORIZATION: bearer $GH_TOKEN" \
+            fetch --no-tags --depth=1 origin "$ref"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$expected"
 
       - name: Validate policy and workflow boundaries
         run: |
