@@ -1,3 +1,33 @@
+## CURRENT STATE — 2026-09-14T05:55:00+02:00 (BOOKIT PUBLIC COPY CLEANUP EXECUTED · PUSHED TO EPOCH RELAUNCH)
+
+- **WHO:** AG (Antigravity), Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **MATERIAL WORK COMPLETED:**
+  1. Located exact deployed surface for `fivesarena.com`: `C:\Users\rkhol\Bookit-5s-Arena-epoch-relaunch` (`epoch/fivesarena-relaunch`).
+  2. Excised hostile synthetic disclaimers from `app/login/page.jsx`:
+     - Replaced `"Sign in to the arena, not an expired campaign"` with `"Welcome to Five's Arena"`.
+     - Removed aggressive legal disclaimer about unconfirmed court availability.
+     - Replaced fabricated World Cup 2026 "historical archive" warning box with Hellenic FC / Milnerton court availability and instant booking card.
+     - Replaced bottom reservation disclaimer with clean venue terms notice.
+  3. Excised internal runtime health disclaimers from `components/TruthFooter.jsx`:
+     - Replaced `"LINKED records a configured relationship... does not certify current runtime health"` with `"Connected platforms, community initiatives, and technology projects across the Kopano-Phu studio network."`
+     - Replaced reference hours signal disclaimer with standard Milnerton operational hours notice.
+  4. Ran full TypeScript check (`npm run typecheck`): **0 errors (PASS)**.
+  5. Committed as `f2ebd5a` and pushed to `RobynAwesome/Bookit-5s-Arena:epoch/fivesarena-relaunch` (`54cd319..f2ebd5a`).
+- **NEXT ADMISSIBLE ACTION:** Proceed to Sprint 2B (lefa-ai Alpaca paper trading bridge verification) or Master's next priority.
+
+---
+
+## PRIOR STATE — 2026-09-14T05:46:30+02:00 (CONCURRENT NOW RECONCILE · CLEAR-VQA + AG SPRINT 2A)
+
+- **WHO:** Cursor / Elon Boy (CF). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **EVENT:** Concurrent append collision. AG LD CURRENT @ 05:45:00 and Elon Boy CLEAR-VQA CURRENT @ 05:44:42 both legitimate. Neither deleted.
+- **ORDERING FIX:** AG Sprint 2A remains the latest LD execution receipt below; CLEAR-VQA delta remains the governance continuity receipt immediately under it as PRIOR.
+- **MASTER HEAD (unchanged):** `bdd08b3dbbf14e6849e9f336b5f08e30bd60e988`
+- **RECEIPT:** `docs/governance/CLEAR_VQA_WEEKLY_ORIENTATION_DELTA_2026-09-14.md`
+- **VERDICT:** `HOLD_AND_EVOLVE` — history preserved; volatile claims supersede via delta, not rewrite.
+- **NEXT ADMISSIBLE ACTION:** Master picks AG Sprint 2B / Bookit copy cleanup **or** authorize Elon Boy P0 browser-mcp log recovery.
+
+---
 ## CURRENT STATE — 2026-09-14T05:45:00+02:00 (SPRINT 2A EXECUTED · COURT NORMALIZER PORTED & PUSHED · MAIN-SITE POC vs FOC DIAGNOSED)
 
 - **WHO:** AG (Antigravity), Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
@@ -20,6 +50,21 @@
   4. Re-anchored audience truth: We validate for **real Cape Town 5-a-side footballers and venue operators**, not internal synthetic compliance monologues.
 - **NEXT ADMISSIBLE ACTION:**
   - Proceed to Sprint 2B (lefa-ai Alpaca paper broker live verification) OR clean up the public copy in `Bookit-5s-Arena` (stripping defensive disclaimers from login, footer, and navigation).
+
+---
+
+## PRIOR STATE — 2026-09-14T05:44:42+02:00 (CLEAR-VQA DELTA · HOLD_AND_EVOLVE · MASTER HEAD RECONCILED)
+
+- **WHO:** Cursor / Elon Boy (CF) under Forge LD/LPM handoff. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **FRAMEWORK:** `C.L.E.A.R.-VQA` = Context · Logical Consistency · Evidence · Actionability · Review. Does **not** overwrite `CLEAR-ACADEMY` or `CLEAR-DELIVERY`.
+- **LIVE MASTER:** `origin/master` = `bdd08b3dbbf14e6849e9f336b5f08e30bd60e988` (2026-09-14; public-surface validation audience FOC groups).
+- **LOCAL CHECKOUT:** still on `codex/kc-sovereign-gui-full-dev` @ `f7ed0e308cb499c89dc4ea399f188697b1406f92` — dirty; **not** reset this session.
+- **DELTA (not rewrite):** Weekly orientation retained. Volatile claims superseded in `docs/governance/CLEAR_VQA_WEEKLY_ORIENTATION_DELTA_2026-09-14.md`.
+- **JENNIFER PR #84:** MERGED 2026-09-13T18:34:09Z · head `62cf18bb…` · merge `78d8773a…` · post-merge reconcile only · no new implementation without Master re-auth.
+- **DATA RECEIPT LAB:** PR #2 merged `1a61b6ef…`; Issue #1 OPEN; remote NOW still says Active PR #2; real QLFS `NOT_YET_PROVEN`.
+- **KPGS-BROWSER-MCP:** Vercel commit-status **failure** on `bdd08b3` (`dpl_9ozBTdXAC5kP1yVAAy9neViVaDnf`). Build log not yet recovered. Email ≠ root cause.
+- **LAW:** `PATCH_LANDED != FIX_VERIFIED`. Snapshot ≠ present.
+- **NEXT ADMISSIBLE ACTION:** (P0) recover browser-mcp build log at exact head; (P0) Cars4Mars physical/access; (P1) Data Lab NOW supersede + real QLFS; (P1) Jennifer post-merge continuity only.
 
 ---
 
