@@ -1,4 +1,41 @@
 
+
+---
+
+## 2026-09-11T14:51 SAST — [🤖 GSMB SEED] Pointer refresh + FORGE wait
+
+**Mode:** Stateless renter — Master order: seed GSMB + relevant `.md` while CA→FORGE instructions inbound  
+**Assertion:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`  
+**Receipt:** `docs/governance/GSMB_SEED_UPDATE_2026-09-11.md`
+
+| # | Asset | Status | Detail |
+|---|-------|--------|--------|
+| 1 | `GSMB_SOVEREIGN_POINTER_REGISTRY.json` | ✅ SEEDED | ITMCP `7556c8aa…`; FIVES `c5a4bd19…`; Hub tip aligned |
+| 2 | `GSMB_POINTER_UPDATES.md` | ✅ EVOLVED | 2026-09-11 header |
+| 3 | Root `NOW.md` + `00-Home/Now.md` + KRRababalela `NOW.md` | ✅ SEEDED | FORGE wait stated |
+| 4 | Bookit PR #13 | ⏸ OPEN | Not claimed merged |
+| 5 | CV / CLEAR lane | 📎 POINTER | Pack ready; fire incomplete |
+
+**Next:** Await CA FORGE packet. No auto-promote of preservation tree.
+
+---
+
+## 2026-09-11T11:15 SAST — [🤖 LD-LPM GOVERNANCE] Kopano Labs Website Structure Evolution + Return Gate UNLOCKED
+
+**Mode:** LD operating as LPM — Rule: *We do not delete, we archive and we evolve.*  
+**Operator:** LD (Cursor) · Sub-Brain: `kopano-labs-website`  
+**Assertion:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`  
+
+### Execution & Governance Rollup
+
+| # | Domain / Asset | Location | Status | Detail / Receipt |
+|---|---|---|---|---|
+| 1 | Workspace Structure Reconciliation | `C:\Users\rkhol\kopano-labs\Stucture\` | ✅ EVOLVED | Stale state resolved; Vercel production deployment (`dpl_7BXFbTyw5WsFyPhAnNMt4NhH64bG`) and IONOS DNS (`76.76.21.21`) formalized. |
+| 2 | Return Gate Graduation | `kopano-labs/Stucture/Return-Gate-Checklist.md` | ✅ UNLOCKED | Rows 1–14 complete (CF ack verified in `CF-ACK.md`, LD comms signed). |
+| 3 | Vault Dual-Plane Parity | `Schematics/.../Kopano Labs Website (Sub-Brain)/Structure/` | ✅ SYNCED | All 9 structure notes synchronized, TBD markers resolved, milestones archived. |
+| 4 | Master Return Gate Registry | `Schematics/.../SUB-BRAIN/RETURN-GATE-REGISTRY.md` | ✅ UNLOCKED | Row 26 set to `UNLOCKED` (14/14 package, Save). |
+| 5 | Active Work Sprint (2026-09) | `Roadmap-CRUD-Slice.md` (KL-2609 series) | ✅ ACTIVE | Sovereign extraction of Lovable suite (`stitch_kopano_labs_platform_suite` → monorepo) decoupled from KPEFS. |
+
 ---
 
 ## 2026-06-24T00:52 SAST — [🤖 AUTONOMOUS EXECUTION] APWA Engine + STAP Tests + BPSP Spec + Evidence Ledger

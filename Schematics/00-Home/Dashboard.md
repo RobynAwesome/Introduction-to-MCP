@@ -1,7 +1,7 @@
 ---
 title: Kopano Context — Dashboard
 created: 2026-04-05
-updated: 2026-05-09
+updated: 2026-09-05
 author: Robyn
 tags:
   - home
@@ -14,6 +14,15 @@ status: active
 ---
 
 # Kopano Context — Dashboard
+
+## Current routing — 2026-09-05
+
+Use [Current Schematics entry](../CURRENT_ENTRY.md) and [repository-root NOW.md](../../NOW.md) before execution. Codex is CA under Robyn's current assignment; AntiGravity remains CF. See the entry note for authority and scope.
+
+## Historical dashboard — May 2026
+
+Everything below preserves the earlier dashboard. Labels such as “current”, “active”, roles, readiness and truth anchors describe that historical snapshot and require fresh evidence before use. The old vault Now.md does not replace repository-root NOW.md.
+
 
 > Central knowledge base for the **Kopano Context** multi-agent orchestration system and its integration with KasiLink.
 > Primary alias: **Cassy**.
@@ -56,7 +65,7 @@ status: active
 | CRITICAL | [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) | Production-hardening truth and proof-lane register |
 | CRITICAL | [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md) | Internal scaffolding vs owner-visible KC reality |
 | CRITICAL | [Open Issues](../06-Reference/Open%20Issues.md) | Current blocker ledger and containment rules |
-| CRITICAL | [19-TOKEN USAGE](../19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) | Token discipline, Monday review, and machine-readable closeout law |
+| CRITICAL | [19-TOKEN USAGE](../19-TOKEN%20USAGE/19-TOKEN%20USAGE%20-%20Index.md) | Token discipline, Monday review, and machine-readable closeout law |
 | HIGH | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%21%20-%20Index.md) | Demo hub, owner checklist, and Azure path |
 | HIGH | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
 | HIGH     | [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
@@ -104,7 +113,7 @@ For `AUDIT MAIN-BRAIN`, the audit level must be declared first:
 4. [18-PROTOCOLS](../18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
 5. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
 6. [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
-7. [19-TOKEN USAGE](../19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) when cost, discipline, or onboarding is relevant
+7. [19-TOKEN USAGE](../19-TOKEN%20USAGE/19-TOKEN%20USAGE%20-%20Index.md) when cost, discipline, or onboarding is relevant
 
 ### Deep Audit
 
@@ -117,7 +126,7 @@ For governance work inside the operating band, the brother-folder read order is 
 1. [18-PROTOCOLS](../18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
 2. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
 3. [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
-4. [19-TOKEN USAGE](../19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) for any token, onboarding, or closeout work
+4. [19-TOKEN USAGE](../19-TOKEN%20USAGE/19-TOKEN%20USAGE%20-%20Index.md) for any token, onboarding, or closeout work
 
 No AI may update, cite, or enforce these governance folders without fully reading the current contents required for the task. No summary-only governance work is valid.
 
@@ -140,7 +149,7 @@ Protocol home:
 - [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) - permanent critical hallucination audit system
 - [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md) - planning archive with lifecycle and propagation tracking
 - [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md) - recognition, penalties, restrictions, and operating status outcomes
-- [19-TOKEN USAGE](../19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) - token governance, Monday reviews, usage ledgers, and new-AI closeout law
+- [19-TOKEN USAGE](../19-TOKEN%20USAGE/19-TOKEN%20USAGE%20-%20Index.md) - token governance, Monday reviews, usage ledgers, and new-AI closeout law
 - [20-THESIS SESSIONS](../20-THESIS%20SESSIONS/20-THESIS%20SESSIONS%20-%20Index.md) - thesis discussion rounds, mode protocols, and social-underpinning sessions
 - [Kopano Context Train Logs](../05-Training/Kopano Context%20Train%20Logs/index.md) - successes, failures, hierarchy events, and self-reflection logs
 

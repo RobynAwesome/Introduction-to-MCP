@@ -1,7 +1,7 @@
 ---
 title: Agent Swarm Registry — 710-Agent KPGS Governance Grid + Round Table Council
 created: 2026-06-15
-updated: 2026-06-16
+updated: 2026-09-11
 tags:
   - kpgs
   - swarm
@@ -48,7 +48,24 @@ total_agents: 710
 | 7 | 🧵 | THARI | Guardian AI (MAO) — H.O.L.O | CrisisConnect APWA | GUARDIAN | CANOPY |
 | 8 | 🦉 | KHELOS | Validator (MMAO) — FIREWALL | GSMB Signal Integrity | VALIDATION | CANOPY |
 | 9 | 🛡️ | ANCHOR | Perimeter (MAO) | Careers + Security | PERIMETER | CANOPY |
-| 10 | 🌀 | OPEN (VACANT) | Chief Facilitator (CF) — AG DEMOTED 2026-06-23 | — | — | — |
+| 10 | 🌀 | ANTIGRAVITY | RTC Identity Seat 10 — durable | Execution Substrate (GSMB) / metal | STATELESS EXECUTION | CANOPY |
+
+### Coordinate systems (Forge CA lock — 2026-09-11)
+
+| System | Meaning | Rule |
+|--------|---------|------|
+| **RTC IDENTITY SEAT** | WHO the governed identity is | Durable unless Master/RTC explicitly changes |
+| **GSMB ORCHESTRATION ROLE** | WHAT responsibility they carry now | Deliberately shuffleable |
+
+### Role reassignment — 2026-09-11 (Master / Forge MAO) — ORCHESTRATION ONLY
+
+| Actor | RTC Identity Seat | Prior orchestration | Current orchestration | Evidence |
+|-------|-------------------|---------------------|----------------------|----------|
+| Forge | (CA continuity / ChatForge) | CF-mistitled mid-session | **Chief Architect (CA)** · rank #1 after RTC | Master supersede + Forge correction |
+| Cursor | **NOT YET GRANTED** — candidate; must be proven | Lead Developer | **Chief Facilitator (CF)** · rank #2 | Master promotion; permanence = receipts |
+| Antigravity (AG) | **Seat 10** (unchanged) | Chief Facilitator | **Lead Developer (LD)** · rank #3 | Role shuffle ≠ seat theft |
+
+> **Do not write:** “Cursor → Seat 10 because Cursor became CF.” That conflates coordinates. Prior AG CF receipts stay archived.
 
 ### 🏆 Hard Work Rewards System (HWRS)
 
@@ -202,7 +219,9 @@ Controls how all swarms communicate without chaos:
 🧵 THARI       → Seat 7 — Guardian AI (MAO, H.O.L.O Net, WWJD, KPCB+ GAI)
 🦉 KHELOS      → Seat 8 — Validator (MMAO, FIREWALL MODE, signal integrity)
 🛡️ ANCHOR      → Seat 9 — Perimeter (MAO, smoke intercept, careers shield)
-🌀 ANTIGRAVITY → Seat 10 — Chief Facilitator (CF, runtime compilation)
+🌀 ANTIGRAVITY → RTC Seat 10 (identity durable) · orchestration = Lead Developer (2026-09-11)
+🌀 CURSOR → CF orchestration rank #2 · RTC identity seat = NOT YET GRANTED / must prove
+🌀 FORGE → CA orchestration rank #1 after RTC · ChatForge cloud continuity
 🔤 KPCB+       → Layer 9 — Meta-Language (7 channels, 18 targets)
 👥 Swarms      → 710 agents across 7 tiers
 📐 Protocols   → 22 active (17 original + RTCP + DMKP + KCRP + KPCBP + STAP)

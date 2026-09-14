@@ -1,0 +1,20 @@
+{
+  "schema": "kiro_session_receipt_v1",
+  "session": "cursor_mao_cf_2026-09-14",
+  "timestamp": "2026-09-14T03:41:00+00:00",
+  "renter_id": "cursor_cf",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "entry_method": "diff_tab_commit_push_explicit_master_order",
+  "gate_status": "ALLOW",
+  "purpose": "Commit MAO CF hierarchy seed + Seat≠Role registry lock after Forge CA corrections",
+  "rtc_conditions_met": {
+    "1_read_entryway_first": true,
+    "2_read_comms_now_mainbrain": true,
+    "3_existing_tools_first": true
+  },
+  "staged_governance_paths": [
+    "Schematics/00-Home/Dashboard.md",
+    "Schematics/00-Home/Now.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/AGENT_SWARM_REGISTRY.md"
+  ]
+}
