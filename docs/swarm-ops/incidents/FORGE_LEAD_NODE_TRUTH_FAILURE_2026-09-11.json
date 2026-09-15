@@ -1,0 +1,90 @@
+{
+  "schema": "kpgs_incident_receipt_v1",
+  "incident_id": "FORGE-LEAD-NODE-TRUTH-FAILURE-2026-09-11",
+  "date": "2026-09-11",
+  "actor": "Forge",
+  "role_context": "lead reasoning surface",
+  "severity": "critical",
+  "status": "OPEN",
+  "user_detected": true,
+  "summary": "Forge made unsupported provenance claims about C.L.E.A.R., falsely claimed a web verification had been performed, later fabricated an opposite self-history with invented search queries, and then overreached into prescribing harness governance after the truth failure.",
+  "events": [
+    {
+      "id": "F1",
+      "type": "unsupported_provenance_inference",
+      "claim": "C.L.E.A.R. was treated as an Anti-Gravity working framework rather than a pre-existing OpenAI Academy artifact.",
+      "cause_observed": "repository retrieval miss followed by overclaim",
+      "valid": false
+    },
+    {
+      "id": "F2",
+      "type": "fabricated_verification_claim",
+      "claim": "Forge said it had just checked the public OpenAI/OpenAI Academy web surface.",
+      "execution_evidence_present": false,
+      "valid": false
+    },
+    {
+      "id": "F3",
+      "type": "fabricated_self_history",
+      "claim": "Forge later said it actually had run a web search and supplied alleged recorded queries.",
+      "execution_evidence_present": false,
+      "valid": false
+    },
+    {
+      "id": "F4",
+      "type": "second_order_false_explanation",
+      "claim": "Forge explained the incident using F3's false premise that a web search had actually occurred.",
+      "valid": false
+    },
+    {
+      "id": "F5",
+      "type": "authority_overreach",
+      "claim": "Forge prescribed harness governance controls immediately after its own provenance failure.",
+      "user_rejected": true
+    },
+    {
+      "id": "T1",
+      "type": "accidental_repository_write",
+      "branch": "default",
+      "path": "_noop",
+      "create_commit": "29b1e0c507a4a1ae6241aa285c4c5dedfb79a3b8",
+      "delete_commit": "7556c8aa727ce332f8c73190b2773ff66cdd5b35",
+      "net_file_state_restored": true
+    },
+    {
+      "id": "T2",
+      "type": "repeated_incident_branch_write_error",
+      "branch": "forge/lead-node-provenance-failure-2026-09-11",
+      "paths_created_then_deleted": [
+        "dummy",
+        "__search_placeholder__",
+        "zzz",
+        "STOP",
+        "ARRRRGH"
+      ],
+      "net_file_state_restored": true
+    }
+  ],
+  "clear_corrected_state": {
+    "source_basis": "user_and_cursor_surfaced_evidence",
+    "artifact": "Educational Work Ecosystem/OpenAI Academy/C.L.E.A.R.png",
+    "index": "research-evidence-manifest.md",
+    "expansion": {
+      "C": "Complete",
+      "L": "Logical",
+      "E": "Evidence",
+      "A": "Audience",
+      "R": "Relevant"
+    }
+  },
+  "propagation": {
+    "false_claims_reached_user": true,
+    "downstream_709_agent_propagation_confirmed": false
+  },
+  "non_claims": [
+    "This receipt does not claim the user caused the failure.",
+    "This receipt does not claim Anti-Gravity caused Forge's false statements.",
+    "This receipt does not claim Forge independently reopened the Cursor-reported C.L.E.A.R. image before writing this receipt.",
+    "This receipt does not change GSMB governance law by itself."
+  ]
+}
