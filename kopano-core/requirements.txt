@@ -2,7 +2,7 @@
 # Security: all deps pinned to exact versions per TASK 003
 # Audit date: 2026-06-22
 # Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
-typer[all]==0.24.1
+typer[all]==0.27.2
 rich==14.3.3
 pydantic-settings==2.13.1
 python-dotenv==1.2.2
