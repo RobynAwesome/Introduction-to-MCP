@@ -1,0 +1,72 @@
+name: KPGS Zero-Trust Admission Gate
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+# Pull-request code is untrusted. This gate is read-only and receives no
+# repository secrets, write token, or OIDC identity.
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-zero-trust-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  admission:
+    name: Validate zero-trust admission controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact revision without submodules
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          repo="${{ github.repository }}"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            ref="refs/pull/$PR_NUMBER/head"
+            expected="$PR_HEAD_SHA"
+          else
+            ref="$EXPECTED_SHA"
+            expected="$EXPECTED_SHA"
+          fi
+          git init .
+          # The token is the workflow's contents:read token; remove the remote
+          # after the exact commit is checked out so it cannot be reused.
+          git remote add origin "https://x-access-token:$GH_TOKEN@github.com/$repo.git"
+          git fetch --no-tags --depth=1 origin "$ref"
+          git checkout --detach FETCH_HEAD
+          test "$(git rev-parse HEAD)" = "$expected"
+          git remote remove origin
+
+      - name: Validate policy and workflow boundaries
+        run: |
+          python3 scripts/ci/validate_zero_trust_workflows.py \
+            --policy governance/kpgs-vnext/security/zero-trust-policy.json \
+            --workflow .github/workflows/kpgs-zero-trust-gate.yml \
+            --workflow .github/workflows/deploy.yml \
+            --workflow .github/workflows/deploy-web.yml \
+            --pinned-workflow .github/workflows/kpgs-zero-trust-gate.yml
+
+      - name: Prove policy validator behavior
+        run: python3 -m unittest discover -s tests -p 'test_zero_trust_workflow_policy.py' -v
+
+      - name: Validate capability-lease contract
+        run: python3 governance/kpgs-vnext/security/validate_capability_lease.py
+
+      - name: Prove fail-closed lease behavior
+        run: python3 -m unittest discover -s tests -p 'test_capability_lease_runtime.py' -v
+
+      - name: Prove continuous authorization before actuation
+        env:
+          PYTHONPATH: kopano-core
+        run: python3 scripts/ci/validate_continuous_authorization.py

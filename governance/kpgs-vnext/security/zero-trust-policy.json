@@ -1,0 +1,107 @@
+{
+  "schema": "kpgs.zero-trust-policy.v1",
+  "authority": "governance/kpgs-vnext/security",
+  "source_of_truth": {
+    "repository": "RobynAwesome/Introduction-to-MCP",
+    "default_branch": "master",
+    "canonical_files": [
+      "CURRENT_CLOUD_ESTATE.md",
+      "ACTIVE_PROJECT_REGISTRY.json",
+      "NOW.md",
+      "governance/kpgs-vnext/estate-registry/estate.json"
+    ],
+    "rule": "Resolve the newest explicitly canonical evidence before comparing state."
+  },
+  "decision_rule": "DENY unless identity, policy, lease scope, provenance, and evidence requirements all pass.",
+  "controls": [
+    {
+      "id": "ZT-WF-01",
+      "name": "untrusted event isolation",
+      "enforcement": "enforced",
+      "requirements": [
+        "Never use pull_request_target or workflow_run for untrusted repository code.",
+        "A pull_request job must not receive secrets or an OIDC token.",
+        "Workflow permissions are explicitly least privilege."
+      ]
+    },
+    {
+      "id": "ZT-ID-01",
+      "name": "identity and model separation",
+      "enforcement": "enforced",
+      "requirements": [
+        "A selected model is runtime provenance, not identity, seat, or authority.",
+        "The concrete model and interface selection are recorded in the runtime envelope."
+      ]
+    },
+    {
+      "id": "ZT-LEASE-01",
+      "name": "capability lease boundary",
+      "enforcement": "enforced",
+      "requirements": [
+        "Leases are short lived, exact scoped, revocable, nonce protected, and audited.",
+        "Lease verification cannot broaden the governing specification or policy decision.",
+        "No durable plaintext secret is embedded in a lease or browser payload."
+      ]
+    },
+    {
+      "id": "ZT-SUPPLY-01",
+      "name": "dependency and action provenance",
+      "enforcement": "staged",
+      "requirements": [
+        "Dependency upgrades change the direct declaration, override, and lockfile together.",
+        "Production admission requires a reviewed exact-head proof and a provenance record.",
+        "New workflow action references are pinned to immutable commit SHAs."
+      ]
+    },
+    {
+      "id": "ZT-DEPLOY-01",
+      "name": "deployment admission",
+      "enforcement": "staged",
+      "requirements": [
+        "A READY preview is evidence of a build, not production approval.",
+        "Production deployment requires a reviewed SHA, successful governed checks, and a bounded receipt.",
+        "DNS remains unknown until authoritative DNS evidence is collected."
+      ]
+    },
+    {
+      "id": "ZT-OBS-01",
+      "name": "evidence and response",
+      "enforcement": "staged",
+      "requirements": [
+        "Every deny, contain, or revoke decision has a sanitized correlation and evidence reference.",
+        "Unknown and partially knowable states remain explicit and cannot be promoted by omission.",
+        "Recovery is a new reviewed transition, not an implicit retry."
+      ]
+    }
+  ],
+  "production_admission": {
+    "required_manifest_states": ["validated", "approved"],
+    "required_license_status": "verified-compatible",
+    "require_capability_lease": true,
+    "require_provenance": true,
+    "require_exact_head_ci": true,
+    "require_preview_or_production_evidence": true,
+    "require_human_review": true
+  },
+  "known_holds": [
+    {
+      "id": "intro-kpgs-browser-mcp",
+      "state": "HOLD",
+      "reason": "A reviewed configuration fix exists in open PR #162; production admission waits for review and exact-head proof.",
+      "evidence": "https://github.com/RobynAwesome/Introduction-to-MCP/pull/162"
+    },
+    {
+      "id": "project-jennifer-governance",
+      "state": "HOLD",
+      "reason": "Issue #167 requires an independent RTC inquest before role-transition or deployment work resumes.",
+      "evidence": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/167"
+    }
+  ],
+  "unknowns": [
+    "Authoritative DNS health and ownership for declared estate domains.",
+    "The exact account condition behind blocked GitHub Actions billing evidence.",
+    "External Google ADK/provider execution beyond local bounded probes.",
+    "Final Project Jennifer seating and disputed role authority until RTC output is recorded."
+  ]
+}
+
