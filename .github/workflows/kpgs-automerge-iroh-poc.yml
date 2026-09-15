@@ -19,7 +19,7 @@ jobs:
         working-directory: governance/kpgs-vnext/offline-replication/iroh-automerge-poc
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Rust 1.91
         run: |
