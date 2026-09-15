@@ -60,6 +60,9 @@ on:
       - codex/kc-sovereign-gui-full-dev
     paths: *swarm_paths
 
+permissions:
+  contents: read
+
 jobs:
   swarm-jsonl:
     runs-on: ubuntu-latest
