@@ -10,10 +10,12 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import yaml
-from google.adk.agents import Agent
+
+if TYPE_CHECKING:
+    from google.adk.agents import Agent
 
 
 ARTIFACT_PATH = Path(__file__).with_name("artifact.yml")
@@ -184,6 +186,8 @@ seat, source, model provenance field, causal mechanism, or missing evidence.
 
 def create_root_agent() -> Agent:
     """Create the ADK Agent after KPGS has resolved the runtime model and identity envelope."""
+    from google.adk.agents import Agent
+
     contract = load_artifact()
     runtime = resolve_runtime(contract)
     return Agent(
