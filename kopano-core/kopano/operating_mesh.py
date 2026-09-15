@@ -355,5 +355,5 @@ def lint_bracket_text(text: str) -> dict[str, Any]:
 
         violations = lint_brackets(text or "")
         return {"ok": len(violations) == 0, "violations": violations}
-    except ImportError as exc:
-        return {"ok": False, "violations": [f"lint_unavailable: {exc}"]}
+    except ImportError:
+        return {"ok": False, "violations": ["lint_unavailable"]}

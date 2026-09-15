@@ -7,6 +7,9 @@ on:
     branches: [ master, main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   verify-rtc-learning:
     name: 24-RTC Learning & Epistemic Gate Verification

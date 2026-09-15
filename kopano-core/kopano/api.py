@@ -10,6 +10,7 @@ from .database import init_db, get_db_connection, register_user, authenticate_us
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
+import html
 import json
 import asyncio
 import os
@@ -487,8 +488,9 @@ def mao_status():
         mao_mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mao_mod)
         return mao_mod.mao_swarm_status()
-    except Exception as e:
-        return {"error": str(e), "mao_available": False}
+    except Exception:
+        logger.exception("MAO status unavailable")
+        return {"error": "MAO unavailable", "mao_available": False}
 
 
 @app.post("/api/mao/route")
@@ -497,8 +499,9 @@ def mao_route_task(request: MaoTaskRequest):
         from .mao_dispatch import route_task
 
         return route_task(intent=request.intent, message=request.message)
-    except Exception as e:
-        return {"error": str(e)}
+    except Exception:
+        logger.exception("MAO route failed")
+        return {"error": "MAO route failed"}
 
 
 @app.post("/api/mao/execute")
@@ -511,8 +514,9 @@ def mao_execute_task(request: MaoTaskRequest):
             message=request.message,
             force_agent_id=request.force_agent_id,
         )
-    except Exception as e:
-        return {"error": str(e)}
+    except Exception:
+        logger.exception("MAO execute failed")
+        return {"error": "MAO execute failed"}
 
 
 @app.post("/api/mao/philosophy-check")
@@ -528,8 +532,9 @@ def mao_philosophy(action_description: str, has_proof: bool, survives_constraint
             has_proof=has_proof,
             survives_constraints=survives_constraints,
         )
-    except Exception as e:
-        return {"error": str(e)}
+    except Exception:
+        logger.exception("MAO philosophy-check failed")
+        return {"error": "MAO philosophy-check failed"}
 
 
 # --- OBSERVABLE COGNITION SURFACE & GOVERNANCE TRACES ---
@@ -621,6 +626,9 @@ def observability_dashboard(session_id: str = "default_session"):
     """
     Renders the rich Observable Cognition Surface & KMEC Observational Dataset Dashboard.
     """
+    # Escape query param for HTML text nodes and as a JSON string for JS embedding.
+    safe_session_html = html.escape(session_id, quote=True)
+    safe_session_js = json.dumps(session_id)
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -775,7 +783,7 @@ def observability_dashboard(session_id: str = "default_session"):
             <p>Weight-Bearing Activity Ledger · Cold-Restart Resilient · Anti-"Trust Me Bro" Derivation Gate</p>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
-            <span class="badge">Session: {session_id}</span>
+            <span class="badge">Session: {safe_session_html}</span>
             <span class="badge" style="color: var(--accent-cyan); background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3);">29/29 Metal Pass</span>
         </div>
     </div>
@@ -842,7 +850,7 @@ def observability_dashboard(session_id: str = "default_session"):
     </div>
 
     <script>
-        const sessionId = "{session_id}";
+        const sessionId = {safe_session_js};
         let globalLineageMap = {{}};
 
         async function loadAnalytics() {{
