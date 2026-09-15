@@ -21,7 +21,16 @@
     "type": "git",
     "url": "git+https://github.com/RobynAwesome/Introduction-to-MCP.git"
   },
-  "keywords": ["mcp", "multi-agent", "orchestration", "kopano", "ai", "llm", "south-africa", "kasilink"],
+  "keywords": [
+    "mcp",
+    "multi-agent",
+    "orchestration",
+    "kopano",
+    "ai",
+    "llm",
+    "south-africa",
+    "kasilink"
+  ],
   "author": "RobynAwesome <rkholofelo@gmail.com>",
   "license": "MIT",
   "type": "commonjs",
@@ -30,6 +39,9 @@
   },
   "homepage": "https://github.com/RobynAwesome/Introduction-to-MCP#readme",
   "overrides": {
-    "browserslist": ">=4.28.7"
+    "browserslist": ">=4.28.7",
+    "fast-uri": "3.1.6",
+    "brace-expansion": "5.0.9",
+    "qs": "6.16.0"
   }
 }
