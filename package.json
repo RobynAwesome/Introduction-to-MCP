@@ -12,7 +12,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sim": "cd kopano-core/studio && npm run sim",
+    "sim:ui": "cd kopano-core/studio && set VITE_KC_API_BASE_URL=http://127.0.0.1:8001&& npm run dev -- --open /#/sovereign-sim",
+    "sim:api": "cd kopano-core && python -c \"import uvicorn; from kopano.api import app; uvicorn.run(app, host='127.0.0.1', port=8001)\""
   },
   "repository": {
     "type": "git",

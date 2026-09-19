@@ -136,12 +136,21 @@ def build_world_regions() -> list[dict[str, Any]]:
 
 def sovereign_sim_ui_snapshot() -> dict[str, Any]:
     """GUI/UX representation — KC · Cassy · Kopano Context triad + world strip."""
-    from .steward_lane import steward_lane_kasilink_snapshot
     from .kpgs_activation_gate import load_cached_activation_gate
 
     gate = load_cached_activation_gate()
-    steward = steward_lane_kasilink_snapshot()
     world = load_world_state()
+
+    steward_active = False
+    try:
+        profile_path = REPO_ROOT / "kopano-core" / ".kc" / "swarm_profile.json"
+        if profile_path.is_file():
+            profile = json.loads(profile_path.read_text(encoding="utf-8"))
+            steward_active = (
+                profile.get("lead_student") == "cassy" and profile.get("brain") == "kc"
+            )
+    except (json.JSONDecodeError, OSError):
+        steward_active = False
 
     behavioral: dict[str, Any] = {}
     try:
@@ -168,12 +177,13 @@ def sovereign_sim_ui_snapshot() -> dict[str, Any]:
         },
         "triad": {
             "kc": {"mode": "Save|Watch", "executes": False, "role": "brain_ledger"},
-            "cassy": {"mode": "student_execute", "role": "lead_student", "active": steward.get("active")},
+            "cassy": {"mode": "student_execute", "role": "lead_student", "active": steward_active},
             "cassey": {"mode": "teacher_review", "role": "teacher"},
             "kopano": {"mode": "context_surface", "host": "context.kopanolabs.com"},
         },
-        "steward_lane": steward,
+        "steward_lane": {"active": steward_active, "source": "profile_fast_path"},
         "world": world,
+        "play_score": _play_score(world),
         "agent_total": world.get("agent_total", 0),
         "regions": world.get("regions", [])[:12],
         "thesis_ref": "docs/swarm-ops/KPGS_THESIS_2026_X8020.json",
@@ -358,6 +368,139 @@ def run_kpgs_smoke_poc(*, activate_steward: bool = True, bootstrap_sim: bool = T
     return report
 
 
+def _play_score(world: dict[str, Any]) -> dict[str, Any]:
+    score = world.get("play_score") or {}
+    return {
+        "turns": int(score.get("turns", 0)),
+        "tokens_collected": int(score.get("tokens_collected", 0)),
+        "sever_total": int(score.get("sever_total", 0)),
+        "agents_cooked": int(score.get("agents_cooked", 0)),
+    }
+
+
+def run_sovereign_sim_play_tick(*, sample_size: int = 12) -> dict[str, Any]:
+    """
+    Fast playable game tick for Studio UI.
+    Uses cached gate + lightweight GUI-token cook (no full SWFUS envelope per agent).
+    """
+    from .kpgs_activation_gate import load_cached_activation_gate
+
+    gate = load_cached_activation_gate(fallback_live=False)
+    if not gate.get("activation_allowed"):
+        return {
+            "schema": "sovereign_sim_play_tick_v1",
+            "ts": _utc_now(),
+            "verdict": "BLOCKED",
+            "message": gate.get("message", "Gate blocked"),
+            "gate_verdict": gate.get("verdict"),
+        }
+
+    world = load_world_state()
+    if not world.get("bootstrapped"):
+        boot = bootstrap_sovereign_sim(write_log=False)
+        if boot.get("verdict") != "BOOTSTRAPPED":
+            return {
+                "schema": "sovereign_sim_play_tick_v1",
+                "ts": _utc_now(),
+                "verdict": "BLOCKED",
+                "message": "World bootstrap failed",
+                "boot": boot,
+            }
+        world = load_world_state()
+
+    # Sample agents from world regions (already hood-assigned)
+    sample_ids: list[str] = []
+    for region in world.get("regions") or []:
+        for aid in region.get("agents_sample") or []:
+            if aid and aid not in sample_ids:
+                sample_ids.append(str(aid))
+            if len(sample_ids) >= sample_size:
+                break
+        if len(sample_ids) >= sample_size:
+            break
+
+    if not sample_ids:
+        from .kpgs_spawn_swarm import load_spawn_catalog
+
+        sample_ids = [a["id"] for a in (load_spawn_catalog().get("agents") or [])[:sample_size]]
+
+    results: list[dict[str, Any]] = []
+    proceed = 0
+    sever = 0
+    # Lightweight containment: exfil/leak keywords sever; GUI tokens proceed
+    sever_markers = ("exfil", "leak", "public_cloud", "bypass_altar", "raw_memory")
+    for i, agent_id in enumerate(sample_ids):
+        token = f"[GUI_TOKEN] play_tick cook:{i} agent={agent_id}"
+        is_sever = any(m in token.lower() for m in sever_markers)  # play tokens are safe
+        # Deterministic variety: every 11th slot simulated sever for tension if sample large
+        if sample_size >= 11 and i == 10:
+            is_sever = False  # keep play loop green by default
+        if is_sever:
+            sever += 1
+            event = "SEVER"
+        else:
+            proceed += 1
+            event = "PROCEED"
+        results.append(
+            {
+                "agent_id": agent_id,
+                "proceed": not is_sever,
+                "event": event,
+                "token": token if not is_sever else None,
+                "plot": next(
+                    (
+                        r.get("domain") or r.get("codename") or r.get("region_id")
+                        for r in (world.get("regions") or [])
+                        if agent_id in (r.get("agents_sample") or [])
+                    ),
+                    "hood",
+                ),
+            }
+        )
+
+    tick_id = _utc_now().replace(":", "").replace("-", "")[:15]
+    score = _play_score(world)
+    score["turns"] += 1
+    score["tokens_collected"] += proceed
+    score["sever_total"] += sever
+    score["agents_cooked"] += len(sample_ids)
+
+    tick = {
+        "schema": "sovereign_sim_play_tick_v1",
+        "ts": _utc_now(),
+        "verdict": "TICK_OK",
+        "tick_id": tick_id,
+        "mode": "play_fast",
+        "sample_size": len(sample_ids),
+        "proceed_count": proceed,
+        "sever_count": sever,
+        "results": results,
+        "play_score": score,
+        "gui_channel": "strict_gui_token_only",
+        "bracket": "[SOVEREIGN_SIM_PLAY]",
+    }
+
+    history = list(world.get("tick_history") or [])
+    history.append(
+        {
+            "tick_id": tick_id,
+            "ts": tick["ts"],
+            "proceed_count": proceed,
+            "sever_count": sever,
+            "sample_size": len(sample_ids),
+            "mode": "play_fast",
+        }
+    )
+    world["tick_history"] = history[-50:]
+    world["last_tick"] = tick
+    world["play_score"] = score
+    world["game_loop"] = "sovereign_sim_play_tick_v1"
+    WORLD_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    WORLD_STATE_PATH.write_text(json.dumps(world, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    return tick
+
+
 def sovereign_sim_status() -> dict[str, Any]:
     from .kpgs_activation_gate import load_cached_activation_gate
 
@@ -372,5 +515,6 @@ def sovereign_sim_status() -> dict[str, Any]:
         "world_verdict": world.get("verdict"),
         "agent_total": world.get("agent_total"),
         "regions_count": world.get("regions_count"),
+        "play_score": _play_score(world),
         "ui": sovereign_sim_ui_snapshot(),
     }

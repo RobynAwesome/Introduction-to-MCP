@@ -32,6 +32,7 @@ const ForgePage = lazy(async () => ({ default: (await import('./pages/ForgePage'
 const ConsolePage = lazy(async () => ({ default: (await import('./pages/ConsolePage')).ConsolePage }));
 const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage')).AdminPage }));
 const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
+const SovereignSimPage = lazy(async () => ({ default: (await import('./pages/SovereignSimPage')).SovereignSimPage }));
 
 const apiBase = getApiBase();
 /** Cassey = teacher; cassy/kopano = KC student lanes (Cassy lead). */
@@ -45,6 +46,7 @@ const pageHeadlines: Record<PageId, string> = {
   labs: 'Labs',
   forge: 'Forge',
   console: 'Swarm Console',
+  'sovereign-sim': 'Sovereign SIM',
   admin: 'Admin',
 };
 
@@ -58,6 +60,9 @@ const readPageFromHash = (): PageId => {
   }
 
   const raw = window.location.hash.replace(/^#\/?/, '').trim().toLowerCase();
+  if (raw === 'sovereign-sim' || raw === 'sim') {
+    return 'sovereign-sim';
+  }
   if (raw === 'training' || raw === 'labs' || raw === 'forge' || raw === 'console' || raw === 'admin' || raw === 'council') {
     return raw;
   }
@@ -712,6 +717,10 @@ const App = () => {
                     onSend={() => { void sendConsoleMessage(); }}
                     onStream={() => { void streamConsoleMessage(); }}
                   />
+                )}
+
+                {page === 'sovereign-sim' && (
+                  <SovereignSimPage />
                 )}
 
                 {page === 'admin' && (

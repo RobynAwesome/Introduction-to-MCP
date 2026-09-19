@@ -273,6 +273,12 @@ def _extract_verbs(action: str) -> set[str]:
     return tokens | compounds
 
 
+DEPARTMENT_ALIASES: dict[str, str] = {
+    "kopano_labs_experimentation": "DEPT-GOV",
+    "ama_phu_creativity": "DEPT-PRODUCT",
+}
+
+
 def enforce_boundary(
     department_id: str,
     action: str,
@@ -287,7 +293,8 @@ def enforce_boundary(
     Returns:
         BoundaryResult with allowed=True (proceed) or allowed=False (BREACH)
     """
-    contract = CONTRACTS.get(department_id)
+    resolved_id = DEPARTMENT_ALIASES.get(department_id, department_id)
+    contract = CONTRACTS.get(resolved_id)
 
     # ── Unknown department → BLOCK ──────────────────────────
     if contract is None:

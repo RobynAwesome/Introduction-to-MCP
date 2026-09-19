@@ -2477,3 +2477,164 @@ input[type='range'] {
     grid-template-columns: 1fr;
   }
 }
+
+/* Sovereign SIM play surface */
+.sovereign-play {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0 2rem;
+}
+
+.sovereign-play-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.25rem;
+  align-items: flex-end;
+}
+
+.sovereign-play-hero h2 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.sovereign-play-hero p {
+  max-width: 38rem;
+  margin: 0;
+  opacity: 0.85;
+  line-height: 1.45;
+}
+
+.sovereign-scoreboard {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+.sovereign-scoreboard div {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.sovereign-scoreboard strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.sovereign-scoreboard span {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.sovereign-play-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.sovereign-flash {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(100, 220, 140, 0.12);
+  border: 1px solid rgba(100, 220, 140, 0.3);
+}
+
+.sovereign-play-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 12px;
+}
+
+.sovereign-feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.sovereign-feed li {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sovereign-feed li.proceed {
+  border-left: 3px solid rgba(100, 220, 140, 0.85);
+}
+
+.sovereign-feed li.sever {
+  border-left: 3px solid rgba(255, 120, 100, 0.85);
+}
+
+.sovereign-feed li.empty {
+  opacity: 0.6;
+  display: block;
+}
+
+.sovereign-region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.sovereign-region-card {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+
+.sovereign-region-card.thesis {
+  border-color: rgba(120, 200, 140, 0.35);
+}
+
+.sovereign-region-card.plot.active {
+  border-color: rgba(100, 160, 255, 0.45);
+}
+
+.sovereign-region-card.plot.parked {
+  opacity: 0.6;
+}
+
+.sovereign-region-card p {
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.3;
+}
+
+.sovereign-play-footnote {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 980px) {
+  .sovereign-play-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sovereign-scoreboard {
+    width: 100%;
+  }
+}

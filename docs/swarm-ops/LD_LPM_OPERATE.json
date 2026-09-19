@@ -1,14 +1,54 @@
 {
   "schema": "ld_lpm_operate_v1",
-  "ts": "2026-06-14T12:50:34Z",
+  "ts": "2026-09-11T09:16:40Z",
   "operator": "LD-LPM",
-  "idea_id": "eddie_bgf_mining_wire",
+  "idea_id": "kopano_labs_structure_evolution",
   "department_id": "kopano_labs_experimentation",
   "verdict": "SHIP",
-  "action": "Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest",
-  "evidence": "docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json + AGENT_MESH FLAGSHIP_ASSIGNMENTS",
+  "action": "document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED",
+  "evidence": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md",
+  "telemetry_routing": {
+    "schema": "kpgs_submission_telemetry_v1",
+    "ts": "2026-09-11T09:16:39Z",
+    "classification": {
+      "schema": "kpgs_telemetry_classify_v1",
+      "ts": "2026-09-11T09:16:39Z",
+      "raw_signal": "document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED | Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md",
+      "verdict": "ACCEPT",
+      "classified": true,
+      "misnamed_pressure": false,
+      "detected_lanes": [],
+      "routing_sequence": [
+        "ingest_signal",
+        "classify_load",
+        "route_to_correct_human_lane",
+        "identify_source",
+        "separate_false_naming_from_true_burden",
+        "govern_response",
+        "return_to_peace",
+        "validate_proof_of_concept"
+      ],
+      "note": "no misnamed pressure; proceed to ingest",
+      "bracket": "[CONTEXT_BLEEDING_PROTOCOL]",
+      "summary": "[KPGS_TELEMETRY_ROUTE] verdict: ACCEPT | lanes: none | misnamed_pressure: False",
+      "adaptiveness": {
+        "firewall_pass": true,
+        "violation": null,
+        "translated": false,
+        "translated_preview": "document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED | Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md",
+        "tokens_saved": 0,
+        "cost_savings": 0.0,
+        "civic_routed": false,
+        "civic_payload": null
+      }
+    },
+    "combined_preview": "document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED | Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md",
+    "strict_mode": false,
+    "blocked": false,
+    "gate": "PASS"
+  },
   "stress": {
-    "idea_id": "eddie_bgf_mining_wire",
+    "idea_id": "kopano_labs_structure_evolution",
     "verdict": "SHIP",
     "failed_checks": [],
     "checks": [
@@ -21,14 +61,14 @@
         "check": "lpm_lph_attach",
         "verdict": "PASS",
         "personality": "witness",
-        "vector": "V2_ANIMAL",
+        "vector": "V4_DIASPORA",
         "dialectic_closed": true
       },
       {
         "check": "blackmask_drill",
         "verdict": "PASS",
         "agent_id": "cassy",
-        "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
+        "summary": "[BLACK_MASK_DRILL] timestamp: 2026-09-11T09:16:39Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
       },
       {
         "check": "blackmask_bracket_stress",
@@ -45,59 +85,59 @@
     "lpm": {
       "imperfection": {
         "sigil": "#?",
-        "pattern": "#? eddie_bgf_mining_wire: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_"
+        "pattern": "#? kopano_labs_structure_evolution: document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED"
       },
       "perfection": {
         "sigil": "#!",
-        "pattern": "#! measurable proof — docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json +"
+        "pattern": "#! measurable proof — Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-G"
       },
       "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
       "dialectic_closed": true,
-      "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | #?: #? eddie_bgf_mining_wire: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mini | #!: #! measurable proof — docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_TH | lph: pending | vector: pending | dialectic: CLOSED"
+      "summary": "[LPM_PROTOCOL] timestamp: 2026-09-11T09:16:39Z | ecosystem: Kopano-Phu | #?: #? kopano_labs_structure_evolution: document_protocol: KopanoLabs.com structure  | #!: #! measurable proof — Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations Gene | lph: pending | vector: pending | dialectic: CLOSED"
     },
     "lph": {
       "personality_id": "witness",
       "display": "Witness",
       "kpefs_vector": "V4_DIASPORA",
       "mao_intent": "audit",
-      "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
+      "bracket": "[LPH_PROTOCOL] timestamp: 2026-09-11T09:16:39Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
     },
     "mao_attach": {
       "lpm": {
         "imperfection": {
           "sigil": "#?",
-          "pattern": "intent:audit | msg:Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest docs/swarm-ops/"
+          "pattern": "intent:audit | msg:document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/"
         },
         "perfection": {
           "sigil": "#!",
-          "pattern": "vector:V2_ANIMAL | personality:witness"
+          "pattern": "vector:V4_DIASPORA | personality:witness"
         },
         "birth_rule": "LPH emerges when #! validates #? inside Guardian receipts — never #! without BlackMask + bracket discipline",
         "dialectic_closed": true,
-        "summary": "[LPM_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | ecosystem: Kopano-Phu | #?: intent:audit | msg:Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp | #!: vector:V2_ANIMAL | personality:witness | lph: pending | vector: pending | dialectic: CLOSED"
+        "summary": "[LPM_PROTOCOL] timestamp: 2026-09-11T09:16:39Z | ecosystem: Kopano-Phu | #?: intent:audit | msg:document_protocol: KopanoLabs.com structure evolved and retur | #!: vector:V4_DIASPORA | personality:witness | lph: pending | vector: pending | dialectic: CLOSED"
       },
       "lph": {
         "personality_id": "witness",
         "display": "Witness",
         "kpefs_vector": "V4_DIASPORA",
         "mao_intent": "audit",
-        "bracket": "[LPH_PROTOCOL] timestamp: 2026-06-14T12:50:33Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
+        "bracket": "[LPH_PROTOCOL] timestamp: 2026-09-11T09:16:39Z | personality: witness | vector: V4_DIASPORA | mao_intent: audit | code_switch: active"
       },
       "kpefs": {
-        "active_vector": "V2_ANIMAL",
-        "bracket_snippet": "[KPEFS_FOUR_VECTOR] active: V2_ANIMAL | v1: PLANT | v2: ANIMAL | v3: HOMO_SAPIENS | v4: DIASPORA",
+        "active_vector": "V4_DIASPORA",
+        "bracket_snippet": "[KPEFS_FOUR_VECTOR] active: V4_DIASPORA | v1: PLANT | v2: ANIMAL | v3: HOMO_SAPIENS | v4: DIASPORA",
         "department_hint": "kopano_labs_experimentation"
       },
       "biblical_stem_pattern": {
-        "pattern_id": "EXO_PROVISION",
-        "stem": "survival_logistics",
-        "kpefs_vector": "V2_ANIMAL",
-        "template": "measure → carry → sustain under constraint"
+        "pattern_id": "EX_DIASPORA",
+        "stem": "sovereign_community",
+        "kpefs_vector": "V4_DIASPORA",
+        "template": "depart → organize → receipt → return on proof"
       },
       "mao_intent_hint": "audit",
-      "god_complex_bracket": "[GOD_COMPLEX] timestamp: 2026-06-14T12:50:33Z | #?: intent:audit | msg:Wire EDDIE sector_02 to operating mesh: e | #!: vector:V2_ANIMAL | personality:witness | lph_birth: witness"
+      "god_complex_bracket": "[GOD_COMPLEX] timestamp: 2026-09-11T09:16:39Z | #?: intent:audit | msg:document_protocol: KopanoLabs.com structu | #!: vector:V4_DIASPORA | personality:witness | lph_birth: witness"
     },
-    "bracket_receipt": "[LPM_PROTOCOL] action: Wire EDDIE sector_02 to operating mesh: eddie_bgf_mining + kp_geospatial_survey_06 + KPGS altar manifest | evidence: docs/swarm-ops/agents/eddie_bgf_mining_kpgs.json + KPGS_THESIS_2026_X8020.json + AGENT_MESH FLAGSHIP_ASSIGNMENTS"
+    "bracket_receipt": "[LPM_PROTOCOL] action: document_protocol: KopanoLabs.com structure evolved and return gate UNLOCKED | evidence: Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/RETURN-GATE-REGISTRY.md"
   },
   "identi": {
     "verdict": "PROPOSE",
@@ -106,7 +146,7 @@
   "guardian": {
     "verdict": "SHIP"
   },
-  "summary": "[LPM_PROTOCOL] ld_tranche | operator: LD-LPM | idea: eddie_bgf_mining_wire | verdict: SHIP | lph: witness | [BLACK_MASK_DRILL] guardian: SHIP | [TSAP_PROTOCOL] identi: PROPOSE",
+  "summary": "[LPM_PROTOCOL] ld_tranche | operator: LD-LPM | idea: kopano_labs_structure_evolution | verdict: SHIP | lph: witness | [BLACK_MASK_DRILL] guardian: SHIP | [TSAP_PROTOCOL] identi: PROPOSE",
   "report_path": "docs/swarm-ops/LD_LPM_OPERATE.json",
   "protocols": [
     "BRACKET_PROTOCOL",
@@ -116,6 +156,6 @@
     "LPH_PROTOCOL",
     "TSAP_PROTOCOL",
     "GUARDIAN_AI_FLOW",
-    "IDENTI_AI_FLOW"
+    "KPGS_TELEMETRY_ROUTE"
   ]
 }

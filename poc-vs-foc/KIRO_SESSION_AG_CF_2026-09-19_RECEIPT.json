@@ -1,0 +1,25 @@
+{
+  "schema": "kiro_session_receipt_v1",
+  "session": "ag_cf_2026-09-19",
+  "timestamp": "2026-09-19T06:45:00+00:00",
+  "renter_id": "antigravity_cf",
+  "renter_class": "stateless_renter",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "entry_method": "hood_entry_assertion",
+  "gate_status": "ALLOW",
+  "purpose": "Verify estate physical metal test suites (274/274 MCP, Bookit-5s, Jennifer), confirm KHELOS 100 catalog, and update NOW.md and pyproject.toml",
+  "rtc_conditions_met": {
+    "1_read_entryway_first": true,
+    "2_read_comms_now_mainbrain": true,
+    "3_existing_tools_first": true,
+    "4_bracket_speech_kpcb_plus": true,
+    "5_no_hallucination": true
+  },
+  "staged_governance_paths": [
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/ANTIGRAVITY_IDENTITY_DECLARATION.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md",
+    "Schematics/index.md"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema": "blackmask_bracket_stress_v1",
-  "ts": "2026-06-22T05:12:26Z",
-  "operator": "LD-LPM",
+  "ts": "2026-09-11T09:28:15Z",
+  "operator": "CF_cloud",
   "tranche": "Main Brain audit → KC → Cassy → BlackMask heavy stress",
   "bracket": "[BLACK_MASK_DRILL] [TSAP_PROTOCOL] [KPEFS_STEWARD_LANE]",
   "verdict": "PASS",
@@ -48,13 +48,13 @@
       "check": "blackmask_core_cassy",
       "verdict": "PASS",
       "agent_id": "cassy",
-      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-22T05:12:26Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-09-11T09:28:15Z | ecosystem: Kopano-Phu | agent: cassy | commandments_pass: 15/15 | p"
     },
     {
       "check": "blackmask_core_cassey",
       "verdict": "PASS",
       "agent_id": "cassey",
-      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-06-22T05:12:26Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | "
+      "summary": "[BLACK_MASK_DRILL] timestamp: 2026-09-11T09:28:15Z | ecosystem: Kopano-Phu | agent: cassey | commandments_pass: 15/15 | "
     },
     {
       "check": "promotion_allowed_flagships",
@@ -113,5 +113,5 @@
     }
   ],
   "report_path": "docs/swarm-ops/BLACKMASK_BRACKET_STRESS.json",
-  "cf_dispatch": "@LD-LPM → LD: Heavy BlackMask + bracket stress — abilities probe complete."
+  "cf_dispatch": "@CF_cloud → LD: Heavy BlackMask + bracket stress — abilities probe complete."
 }

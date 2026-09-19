@@ -1,0 +1,129 @@
+name: KPGS vNext Contract Gate
+
+on:
+  push:
+    paths:
+      - "governance/kpgs-vnext/**"
+      - "kopano-core/kopano/swfus_engine.py"
+      - "kopano-core/kopano/kessa_mmao_api.py"
+      - "kopano-core/kopano/skill_runtime.py"
+      - "scripts/ci/validate_skill_registry.py"
+      - "scripts/ci/manage_skill_package.py"
+      - "tests/test_swfus_progressive_updates.py"
+      - "tests/test_capability_lease_runtime.py"
+      - "tests/test_sovereign_estate_registry.py"
+      - "tests/test_evidence_bundles.py"
+      - "tests/test_canonical_skill_runtime.py"
+      - "tests/test_skill_package_workflow.py"
+      - "tests/test_evaluation_reward_loop.py"
+      - "CONTRIBUTING.md"
+      - "THIRD_PARTY_NOTICES.md"
+      - "LICENSE"
+      - ".github/workflows/kpgs-vnext-phase0-gate.yml"
+  pull_request:
+    paths:
+      - "governance/kpgs-vnext/**"
+      - "kopano-core/kopano/swfus_engine.py"
+      - "kopano-core/kopano/kessa_mmao_api.py"
+      - "kopano-core/kopano/skill_runtime.py"
+      - "scripts/ci/validate_skill_registry.py"
+      - "scripts/ci/manage_skill_package.py"
+      - "tests/test_swfus_progressive_updates.py"
+      - "tests/test_capability_lease_runtime.py"
+      - "tests/test_sovereign_estate_registry.py"
+      - "tests/test_evidence_bundles.py"
+      - "tests/test_canonical_skill_runtime.py"
+      - "tests/test_skill_package_workflow.py"
+      - "tests/test_evaluation_reward_loop.py"
+      - "CONTRIBUTING.md"
+      - "THIRD_PARTY_NOTICES.md"
+      - "LICENSE"
+      - ".github/workflows/kpgs-vnext-phase0-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kpgs-vnext-contracts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  truth-contracts:
+    name: Validate KPGS truth and governance contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate Phase 0 truth contracts
+        run: python governance/kpgs-vnext/validate_phase0.py
+
+      - name: Validate governance substrate contracts
+        run: python governance/kpgs-vnext/validate_contracts.py
+
+      - name: Validate license and provenance policy
+        run: python governance/kpgs-vnext/licensing/validate_license_policy.py
+
+      - name: Validate APU progressive CRUD SWFUS contract
+        run: python governance/kpgs-vnext/progressive-updates/validate.py
+
+      - name: Prove SWFUS runtime conformance
+        run: python -m unittest discover -s tests -p 'test_swfus_progressive_updates.py' -v
+
+      - name: Validate capability lease authority contract
+        run: python governance/kpgs-vnext/security/validate_capability_lease.py
+
+      - name: Prove capability lease runtime conformance
+        run: python -m unittest discover -s tests -p 'test_capability_lease_runtime.py' -v
+
+      - name: Validate sovereign estate registry contract
+        run: python governance/kpgs-vnext/estate-registry/validate_registry.py
+
+      - name: Prove sovereign estate registry conformance
+        run: python -m unittest discover -s tests -p 'test_sovereign_estate_registry.py' -v
+
+      - name: Validate evidence bundle and scorecard contract
+        run: python governance/kpgs-vnext/evidence/validate_evidence.py
+
+      - name: Prove evidence bundle runtime conformance
+        run: python -m unittest discover -s tests -p 'test_evidence_bundles.py' -v
+
+      - name: Validate canonical skill registry
+        run: python scripts/ci/validate_skill_registry.py
+
+      - name: Prove canonical skill execution membrane
+        run: python -m unittest discover -s tests -p 'test_canonical_skill_runtime.py' -v
+
+      - name: Prove canonical skill package developer workflow
+        run: python -m unittest discover -s tests -p 'test_skill_package_workflow.py' -v
+
+      - name: Prove evaluation score promote observe rollback loop
+        run: python -m unittest discover -s tests -p 'test_evaluation_reward_loop.py' -v
+
+      - name: Compile validators and governed runtimes
+        run: >-
+          python -m py_compile
+          governance/kpgs-vnext/validate_phase0.py
+          governance/kpgs-vnext/validate_contracts.py
+          governance/kpgs-vnext/licensing/validate_license_policy.py
+          governance/kpgs-vnext/progressive-updates/validate.py
+          governance/kpgs-vnext/security/validate_capability_lease.py
+          governance/kpgs-vnext/security/capability_lease.py
+          governance/kpgs-vnext/estate-registry/validate_registry.py
+          governance/kpgs-vnext/estate-registry/registry.py
+          governance/kpgs-vnext/evidence/validate_evidence.py
+          governance/kpgs-vnext/evidence/evidence.py
+          governance/kpgs-vnext/evaluation/evaluation.py
+          kopano-core/kopano/swfus_engine.py
+          kopano-core/kopano/kessa_mmao_api.py
+          kopano-core/kopano/skill_runtime.py
+          scripts/ci/validate_skill_registry.py
+          scripts/ci/manage_skill_package.py

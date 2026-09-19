@@ -56,6 +56,7 @@ from .kpgs_behavioral_poc import run_kpgs_behavioral_poc, run_sovereign_sim_tick
 from .sovereign_sim import (
     bootstrap_sovereign_sim,
     run_kpgs_smoke_poc,
+    run_sovereign_sim_play_tick,
     sovereign_sim_status,
     sovereign_sim_ui_snapshot,
 )
@@ -560,7 +561,20 @@ def post_sovereign_sim_tick(body: dict | None = None) -> dict:
     sample = 12
     if body and body.get("sample_size"):
         sample = int(body["sample_size"])
-    return run_sovereign_sim_tick(sample_size=sample, write_world=True)
+    # Default to fast play path so Studio stays interactive
+    mode = (body or {}).get("mode") or "play"
+    if mode == "governance":
+        return run_sovereign_sim_tick(sample_size=sample, write_world=True)
+    return run_sovereign_sim_play_tick(sample_size=sample)
+
+
+@router.post("/sovereign-sim/play")
+def post_sovereign_sim_play(body: dict | None = None) -> dict:
+    """Fast playable turn — cook sampled agents, return GUI tokens + score."""
+    sample = 12
+    if body and body.get("sample_size"):
+        sample = int(body["sample_size"])
+    return run_sovereign_sim_play_tick(sample_size=sample)
 
 
 @router.get("/sovereign-sim/status")

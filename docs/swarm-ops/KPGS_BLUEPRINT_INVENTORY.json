@@ -1,6 +1,6 @@
 {
   "schema": "kpgs_blueprint_inventory_v1",
-  "ts": "2026-06-14T15:15:12Z",
+  "ts": "2026-09-11T07:53:19Z",
   "title": "KPGS 300 Blueprint Inventory \u2014 billing / decentralization proof",
   "catalog_ref": "docs/swarm-ops/agents/KPGS_SPAWN_300_AGENTS.json",
   "totals": {
@@ -61,10 +61,10 @@
   "ledger": {
     "exists": true,
     "tables": {
-      "altar_blocks": 281,
+      "altar_blocks": 14254,
       "sqlite_sequence": 3,
-      "swarm_checkpoints": 741,
-      "severed_agents": 291
+      "swarm_checkpoints": 38132,
+      "severed_agents": 14324
     }
   },
   "agents": [

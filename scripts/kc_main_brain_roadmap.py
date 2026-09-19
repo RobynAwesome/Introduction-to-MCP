@@ -34,7 +34,10 @@ def _main_brain_kinds(path: Path | None = None) -> set[str]:
         line = line.strip()
         if not line:
             continue
-        row = json.loads(line)
+        try:
+            row = json.loads(line)
+        except Exception:
+            continue
         k = row.get("kind")
         if k:
             kinds.add(str(k))

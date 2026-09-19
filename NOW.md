@@ -1,4 +1,98 @@
-## CURRENT STATE — 2026-09-14T05:55:00+02:00 (BOOKIT PUBLIC COPY CLEANUP EXECUTED · PUSHED TO EPOCH RELAUNCH)
+## CURRENT STATE — 2026-09-19T06:45:00+02:00 (CROSS-ESTATE VERIFICATION GREEN · 274/274 MCP TESTS PASS · BOOKIT & JENNIFER VERIFIED · KHELOS 100 CONFIRMED)
+
+- **WHO:** AG (Antigravity), Chief Facilitator (CF) / Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **MATERIAL WORK COMPLETED ACROSS ESTATE ON PHYSICAL METAL:**
+  1. **Introduction to MCP Test Suite 100% Green (274/274 PASS):**
+     - Diagnosed and resolved test failures:
+       - `test_agent_build_poc_validate.py`: Required `mcp>=1.28,<2` due to `FastMCP` import in `CLI/mao_server.py`. Added to `pyproject.toml`.
+       - `test_simulator.py`: Required `pytest-asyncio` for async test loop. Added to `pyproject.toml`.
+       - `test_database_tool.py`: Required `tabulate` for formatted DB table outputs. Added to `pyproject.toml`.
+     - Executed full test suite on Windows physical metal: **274 passed, 0 failed in 406.47s (100% GREEN)**.
+     - Verified clean standalone test invocation `uv run pytest tests/test_simulator.py tests/test_database_tool.py tests/test_agent_build_poc_validate.py`: **7 passed in 80.98s**.
+  2. **KHELOS 100-Agent Catalog Confirmed:**
+     - Verified `scripts/generate_kpgs_khelos_100.py` generation: exactly 100 agents (20 Sense, 20 Witness, 20 Frame, 20 Understand, 20 Stream) in `docs/swarm-ops/agents/KPGS_KHELOS_100_AGENTS.json` (185,318 bytes).
+  3. **Bookit-5s-Arena Physical Metal Verification (100% GREEN):**
+     - Fixed syntax error in `playwright.organism.config.ts` (removed duplicate `command` property).
+     - `validate:court-contract` -> **PASS** (canonical persisted price field: `price_per_hour`; legacy aliases accepted only at normalization boundary: `pricePerHour`, `images`).
+     - `validate:organism` -> **PASS** (`Living organism proof: PASS`).
+     - `test:tactics` -> **PASS** (2/2 passing).
+     - `test:apu` -> **PASS** (15/15 progressive update invariants passing).
+     - `npm run typecheck` (`tsc --noEmit`) -> **PASS** (0 TypeScript errors).
+  4. **Project-Jennifer Sprint A2 Pre-Flight & Integrity Verification:**
+     - `node tools/verify-companion-assets.mjs` -> **PASS** (32 renderable assets checked; 3 manifest receipts verified).
+     - `node tools/verify-ffp.mjs` -> **PASS** (scene modes: cloud, healing, mission, work; 5 asset entries; canon mutation blocked).
+     - `node tools/ceep-jennifer-city-gate.mjs` -> **PASS** (CEEP product-gate PASS, 84% dual-membrane on-route composite).
+     - `node tools/smoke-love-loop-reliability.mjs` -> **PASS** (12/12 Sprint B Reliability bowl local-first Continue checks passing).
+     - Verified hosting guidelines in `docs/HOSTING.md` (`apps/web` root directory for Vercel, CORS origin alignment for API).
+- **NEXT ADMISSIBLE ACTION:** 
+  1. Commit `pyproject.toml` in `Introduction to MCP` and `playwright.organism.config.ts` in `Bookit-5s-Arena`.
+  2. Proceed to Sprint 2C (execute live human playtest loop for Project Jennifer or deploy web/API).
+  3. Advance 4-Organ Smart Ledger Convergence charter alignment.
+
+---
+
+## PRIOR STATE — 2026-09-15T04:12:00+02:00 (SECURE PR INTAKE COMPLETE · OPEN QUEUE EMPTY · 39 MERGED · 2 CLOSED/HOLD)
+
+- **WHO:** Cursor (CF), security-gated PR intake. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **MATERIAL WORK COMPLETED (`RobynAwesome/Introduction-to-MCP` pulls):**
+  1. **Inventory:** 41 open PRs at start (5 human + 36 Dependabot). Default branch `master`.
+  2. **Security gates applied per PR (no rubber-stamp):**
+     - Required: no failed named CI checks; GitGuardian `SUCCESS`; CodeQL not `FAILURE`.
+     - Extra: OSV.dev queries on major-bump targets → **0 known vulns** for queried versions.
+     - Manual review of #162 (FEP fail-closed ADK/model gating) and #168 (zero-trust read-only gate: `contents:read`, no secrets/OIDC, no `pull_request_target`).
+     - Draft #168 marked ready after gate + review, then squash-merged.
+     - Sonatype MCP auth flaky this session; Aikido MCP still needs browser sign-in (URL issued) — not used as sole gate.
+  3. **Merged (39):** human #162 #164 #165 #166 #168; Dependabot #126 #128–#133 #135–#151 #153–#155 #171–#177 (incl. GH Actions majors checkout/setup-node/setup-python/setup-dotnet/azure-login; openai 3.x; gunicorn 26; websockets 17; rich 15; litellm 1.100.1).
+  4. **Closed / HOLD:**
+     - **#152 CLOSED** — typescript 5→7 peer conflict (`typescript-eslint` requires `<6`); `gui-check` failed. Do not reopen without coordinated tooling bump.
+     - **#178 CLOSED by Dependabot** — “dependencies up-to-date” after #176 landed react-dom/@types path.
+  5. **Open queue now:** `[]` (empty).
+  6. **Residual security debt (not fixed by these PRs):** open Dependabot alerts remain for `js-yaml`, `fast-uri`, `qs`, `nltk`, `cryptography`, `aiohttp`, `brace-expansion`, etc. — need dedicated vulnerability PRs. Secret scanning API still disabled on repo. Vercel preview quota exhausted (non-blocking ghost checks).
+- **NEXT ADMISSIBLE ACTION:** (1) Complete Aikido MCP sign-in if feed scans desired; (2) open/merge dedicated Dependabot security-alert PRs for high CVEs; (3) optionally enable secret scanning; (4) resume estate sprint after `/learn` feedback if still pending.
+
+---
+
+## PRIOR STATE — 2026-09-14T13:17:00+02:00 (CANONICAL BMP/BMNP/UBMP/UBMNP BOUND · 3-TURN FEEDBACK LOOP CONVERGED · 112/112 PASS · PUSHED · /learn PROPOSAL ISSUED)
+
+- **WHO:** AG (Antigravity), Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **MATERIAL WORK COMPLETED (LEFA-AI & GSMB PROTOCOL BINDING):**
+  1. Bound canonical BMP/BMNP/UBMP/UBMNP; ran 3-turn feedback loop to `POC_VALIDATED_CONVERGED`; 112/112 tests; pushed `7c4576f` to `lefa-ai:main`; `/learn` proposal issued.
+- **NEXT ADMISSIBLE ACTION (historical):** Await `/learn` feedback / Sprint 2C.
+
+---
+
+## PRIOR STATE — 2026-09-14T13:02:00+02:00 (SPRINT 2B EXECUTED · KPGS 8-STAGE EVIDENCE CHAIN OPERATIONAL ON METAL · 106/106 PASS · PUSHED)
+
+- **WHO:** AG (Antigravity), Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+- **MATERIAL WORK COMPLETED (SPRINT 2B — ROBYNAWESOME/LEFA-AI):**
+  1. **Core Evidence Engine Implemented:** Created [`src/lefa/evidence_chain.py`](file:///C:/Users/rkhol/lefa-ai/src/lefa/evidence_chain.py) with all 8 canonical stages:
+     - `stage_1_witness` (T0): Alpaca underlying quote, Greeks, IV/RV ratio (≤60s freshness gate; stale > 60s -> `HOLD`).
+     - `stage_2_observation` (T0): Speechmatics voice audio transcript & intent (confidence < 0.70 or empty -> `HOLD`).
+     - `stage_3_validation` (T1): Deterministic `RiskPolicy` math (max loss > 3% equity or drawdown > 5% -> `REJECT`).
+     - `stage_4_attestation` (T1): Featherless AI advisory model rationale (Cassey) without execution authority.
+     - `stage_5_canonicalization` (T2): Dual-axis financial and sovereign consensus gate.
+     - `stage_6_ledgering` (T2): Immutable Ark append-only commit hashing (`ark_ledger.jsonl`).
+     - `stage_7_time` (T3): Defined-risk DTE horizon (7–21 days) & quote freshness boundary.
+     - `stage_8_reveal` (T3): Alpaca paper order execution ID verification.
+     - Composite Chain Root Hash: $H_{\text{root}} = \text{SHA256}(T_{\text{UTC}} \parallel \bigparallel_{i=1}^8 (S_i \parallel M_i \parallel E_i))$.
+  2. **Architecture Documentation Mirrored:** Authored [`docs/KPGS-8-Stage-Evidence-Backed-Chain.md`](file:///C:/Users/rkhol/lefa-ai/docs/KPGS-8-Stage-Evidence-Backed-Chain.md).
+  3. **Bridge Verification Endpoints Exposed:** Added `GET /api/bridge/chain/verify` and `POST /api/bridge/chain/verify` in [`src/lefa/bridge_api.py`](file:///C:/Users/rkhol/lefa-ai/src/lefa/bridge_api.py).
+  4. **Automated Unit & Estate Test Suite:**
+     - Created [`tests/test_evidence_chain.py`](file:///C:/Users/rkhol/lefa-ai/tests/test_evidence_chain.py): **13/13 PASSED (100%)**.
+     - Ran full `lefa-ai` repository test suite: **106/106 PASSED (0 failures)**.
+     - Ran `ruff check` and `ruff format --check`: **0 errors, 0 warnings (Clean)**.
+  5. **Remote Rebase & Provenance Push:**
+     - Rebased on top of Master's incoming commits (`c9aa285`, `680fe20`, `09e3b6d`).
+     - Committed as `d82bfc5` (`feat(governance): implement KPGS 8-Stage Evidence-Backed Chain Architecture`).
+     - Cleanly pushed to remote `RobynAwesome/lefa-ai:main` (`c9aa285..d82bfc5`).
+  6. **GSMB RTC Ratification & C.L.E.A.R Membrane Sealed:**
+     - Ratified and sealed in [`Schematics/24-RTC Learning/POCvsFOC Groups/RTC_8_STAGE_EVIDENCE_CHAIN_PLENARY_RATIFICATION.md`](file:///c:/Users/rkhol/OneDrive/Documents/Anthropic/Introduction%20to%20MCP/Schematics/24-RTC%20Learning/POCvsFOC%20Groups/RTC_8_STAGE_EVIDENCE_CHAIN_PLENARY_RATIFICATION.md).
+     - Scored **91.8% (PASS)** on OpenAI C.L.E.A.R membrane (Cost: 94%, Latency: 90%, Efficacy: 92%, Assurance: 95%, Reliability: 88%).
+- **NEXT ADMISSIBLE ACTION:** Proceed to Sprint 2C (Project Jennifer hosted stranger playtest) or Master's next estate priority.
+
+---
+
+## PRIOR STATE — 2026-09-14T05:55:00+02:00 (BOOKIT PUBLIC COPY CLEANUP EXECUTED · PUSHED TO EPOCH RELAUNCH)
 
 - **WHO:** AG (Antigravity), Lead Developer (LD). `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
 - **MATERIAL WORK COMPLETED:**
@@ -16,6 +110,7 @@
 - **NEXT ADMISSIBLE ACTION:** Proceed to Sprint 2B (lefa-ai Alpaca paper trading bridge verification) or Master's next priority.
 
 ---
+
 
 ## PRIOR STATE — 2026-09-14T05:46:30+02:00 (CONCURRENT NOW RECONCILE · CLEAR-VQA + AG SPRINT 2A)
 

@@ -153,8 +153,9 @@ def run_sovereign_sim_tick(*, sample_size: int = 12, write_world: bool = True) -
     from .kpgs_spawn_swarm import dispatch_spawn_event, load_spawn_catalog
     from .sovereign_sim import WORLD_STATE_PATH, load_world_state
 
-    gate_from = __import__("kopano.kpgs_activation_gate", fromlist=["check_kpgs_activation_gate"])
-    gate = gate_from.check_kpgs_activation_gate()
+    from .kpgs_activation_gate import load_cached_activation_gate
+
+    gate = load_cached_activation_gate(fallback_live=True)
     if not gate.get("activation_allowed"):
         return {
             "schema": "sovereign_sim_tick_v1",

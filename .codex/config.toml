@@ -1,0 +1,7 @@
+[mcp_servers.mao]
+command = "python"
+args = ['C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\CLI\mao_server.py']
+
+[mcp_servers.tsap]
+command = "python"
+args = ['C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\CLI\tsap_mcp_server.py']

@@ -447,3 +447,921 @@ Hash: `9a99b182a8d58a62`
 `AUTO-LOGGED — 2026-06-23T18:43:57Z`
 
 ---
+
+## AUTO-BREACH-074355 — 2026-09-05T07:43:55Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 105225.0 min exceeds 30 min threshold.
+Hash: `db6d076ea93448d7`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 105225.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-05T07:43:55Z`
+
+---
+
+## AUTO-BREACH-152848 — 2026-09-05T15:28:48Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 64.9 min exceeds 30 min threshold.
+Hash: `ca4e0d3c6e8f40a7`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 64.9 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-05T15:28:48Z`
+
+---
+
+## AUTO-BREACH-220854 — 2026-09-05T22:08:54Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 40.0 min exceeds 30 min threshold.
+Hash: `b7e1a6cdddfd4a17`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 40.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-05T22:08:54Z`
+
+---
+
+## AUTO-BREACH-012234 — 2026-09-06T01:22:34Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 33.6 min exceeds 30 min threshold.
+Hash: `245ba8b2ea2945cd`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 33.6 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T01:22:34Z`
+
+---
+
+## AUTO-BREACH-071855 — 2026-09-06T07:18:55Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 265.0 min exceeds 30 min threshold.
+Hash: `a0d20cf103cb4cb4`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 265.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T07:18:55Z`
+
+---
+
+## AUTO-BREACH-133004 — 2026-09-06T13:30:04Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 36.1 min exceeds 30 min threshold.
+Hash: `7fca4e0c808b0b15`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 36.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T13:30:04Z`
+
+---
+
+## AUTO-BREACH-143714 — 2026-09-06T14:37:14Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 53.3 min exceeds 30 min threshold.
+Hash: `169471b456fceb62`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 53.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T14:37:14Z`
+
+---
+
+## AUTO-BREACH-194619 — 2026-09-06T19:46:19Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 287.4 min exceeds 30 min threshold.
+Hash: `35fa018125bd1901`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 287.4 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T19:46:19Z`
+
+---
+
+## AUTO-BREACH-211356 — 2026-09-06T21:13:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.0 min exceeds 30 min threshold.
+Hash: `4c9137393de5873a`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T21:13:56Z`
+
+---
+
+## AUTO-BREACH-234404 — 2026-09-06T23:44:04Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 48.4 min exceeds 30 min threshold.
+Hash: `6db38d65e7cfbf4d`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 48.4 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-06T23:44:04Z`
+
+---
+
+## AUTO-BREACH-014857 — 2026-09-07T01:48:57Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 100.0 min exceeds 30 min threshold.
+Hash: `d66b706007b2790f`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 100.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T01:48:57Z`
+
+---
+
+## AUTO-BREACH-052345 — 2026-09-07T05:23:45Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 139.8 min exceeds 30 min threshold.
+Hash: `7dbae820d7eacc0f`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 139.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T05:23:45Z`
+
+---
+
+## AUTO-BREACH-100628 — 2026-09-07T10:06:28Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 72.5 min exceeds 30 min threshold.
+Hash: `037e9aa11db2cdd3`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 72.5 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T10:06:28Z`
+
+---
+
+## AUTO-BREACH-105826 — 2026-09-07T10:58:26Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 49.5 min exceeds 30 min threshold.
+Hash: `1b70666609dda5c3`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 49.5 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T10:58:26Z`
+
+---
+
+## AUTO-BREACH-132547 — 2026-09-07T13:25:47Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 146.5 min exceeds 30 min threshold.
+Hash: `3e5fa62cb6cdfa62`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 146.5 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T13:25:47Z`
+
+---
+
+## AUTO-BREACH-173124 — 2026-09-07T17:31:24Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 167.5 min exceeds 30 min threshold.
+Hash: `714a174e55a04863`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 167.5 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T17:31:24Z`
+
+---
+
+## AUTO-BREACH-191903 — 2026-09-07T19:19:03Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.1 min exceeds 30 min threshold.
+Hash: `c171f417553abf9b`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T19:19:03Z`
+
+---
+
+## AUTO-BREACH-223856 — 2026-09-07T22:38:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 100.0 min exceeds 30 min threshold.
+Hash: `73f64c230a5c7729`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 100.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T22:38:56Z`
+
+---
+
+## AUTO-BREACH-232900 — 2026-09-07T23:29:00Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.1 min exceeds 30 min threshold.
+Hash: `d0c31692cbdeda6d`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-07T23:29:00Z`
+
+---
+
+## AUTO-BREACH-041051 — 2026-09-08T04:10:51Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 256.9 min exceeds 30 min threshold.
+Hash: `86cbd0b44645a49b`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 256.9 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-08T04:10:51Z`
+
+---
+
+## AUTO-BREACH-051248 — 2026-09-08T05:12:48Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 62.0 min exceeds 30 min threshold.
+Hash: `e72719ae480dacfe`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 62.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-08T05:12:48Z`
+
+---
+
+## AUTO-BREACH-204253 — 2026-09-08T20:42:53Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 799.0 min exceeds 30 min threshold.
+Hash: `0777cf441b3a4309`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 799.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-08T20:42:53Z`
+
+---
+
+## AUTO-BREACH-221413 — 2026-09-08T22:14:13Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 40.3 min exceeds 30 min threshold.
+Hash: `2e374c9bb58b6903`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 40.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-08T22:14:13Z`
+
+---
+
+## AUTO-BREACH-023355 — 2026-09-09T02:33:55Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 100.0 min exceeds 30 min threshold.
+Hash: `3b0e7e9913b87b54`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 100.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T02:33:55Z`
+
+---
+
+## AUTO-BREACH-061152 — 2026-09-09T06:11:52Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 42.9 min exceeds 30 min threshold.
+Hash: `e3ed014e3748adc7`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 42.9 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T06:11:52Z`
+
+---
+
+## AUTO-BREACH-075444 — 2026-09-09T07:54:44Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 45.8 min exceeds 30 min threshold.
+Hash: `3d7cd9ece161caf0`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 45.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T07:54:44Z`
+
+---
+
+## AUTO-BREACH-084856 — 2026-09-09T08:48:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.0 min exceeds 30 min threshold.
+Hash: `76aa782cccb823d1`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T08:48:56Z`
+
+---
+
+## AUTO-BREACH-104114 — 2026-09-09T10:41:14Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 62.3 min exceeds 30 min threshold.
+Hash: `d30cfe60618c9091`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 62.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T10:41:14Z`
+
+---
+
+## AUTO-BREACH-114401 — 2026-09-09T11:44:01Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 62.8 min exceeds 30 min threshold.
+Hash: `7722d501d4b7b3ae`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 62.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T11:44:01Z`
+
+---
+
+## AUTO-BREACH-162726 — 2026-09-09T16:27:26Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 258.3 min exceeds 30 min threshold.
+Hash: `354b1fcb670837c5`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 258.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T16:27:26Z`
+
+---
+
+## AUTO-BREACH-220900 — 2026-09-09T22:09:00Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 75.1 min exceeds 30 min threshold.
+Hash: `e7a978215040032c`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 75.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-09T22:09:00Z`
+
+---
+
+## AUTO-BREACH-060446 — 2026-09-10T06:04:46Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 399.8 min exceeds 30 min threshold.
+Hash: `c17028fd08e3ec06`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 399.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-10T06:04:46Z`
+
+---
+
+## AUTO-BREACH-084135 — 2026-09-10T08:41:35Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 32.6 min exceeds 30 min threshold.
+Hash: `6a499041e91d3fa3`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 32.6 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-10T08:41:35Z`
+
+---
+
+## AUTO-BREACH-135855 — 2026-09-10T13:58:55Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 75.0 min exceeds 30 min threshold.
+Hash: `06a20cde0067d67d`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 75.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-10T13:58:55Z`
+
+---
+
+## AUTO-BREACH-190612 — 2026-09-10T19:06:12Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 57.3 min exceeds 30 min threshold.
+Hash: `d4a14b4c6da000c7`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 57.3 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-10T19:06:12Z`
+
+---
+
+## AUTO-BREACH-203855 — 2026-09-10T20:38:55Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 48.0 min exceeds 30 min threshold.
+Hash: `b7014ed729883dc2`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 48.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-10T20:38:55Z`
+
+---
+
+## AUTO-BREACH-002122 — 2026-09-11T00:21:22Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 47.4 min exceeds 30 min threshold.
+Hash: `37500d29e789dd24`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 47.4 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-11T00:21:22Z`
+
+---
+
+## AUTO-BREACH-123754 — 2026-09-11T12:37:54Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 183.9 min exceeds 30 min threshold.
+Hash: `6682338ba04f5a74`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 183.9 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-11T12:37:54Z`
+
+---
+
+## AUTO-BREACH-183837 — 2026-09-11T18:38:37Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 169.7 min exceeds 30 min threshold.
+Hash: `1917aa8138a64601`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 169.7 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-11T18:38:37Z`
+
+---
+
+## AUTO-BREACH-161838 — 2026-09-12T16:18:38Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 169.7 min exceeds 30 min threshold.
+Hash: `e6afb17528743fca`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 169.7 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-12T16:18:38Z`
+
+---
+
+## AUTO-BREACH-224408 — 2026-09-12T22:44:08Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 30.2 min exceeds 30 min threshold.
+Hash: `2582f2a2844ca777`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 30.2 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-12T22:44:08Z`
+
+---
+
+## AUTO-BREACH-032744 — 2026-09-13T03:27:44Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 163.8 min exceeds 30 min threshold.
+Hash: `61577fcb57d64772`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 163.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T03:27:44Z`
+
+---
+
+## AUTO-BREACH-115904 — 2026-09-13T11:59:04Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 275.1 min exceeds 30 min threshold.
+Hash: `6abf8604ff86e47a`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 275.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T11:59:04Z`
+
+---
+
+## AUTO-BREACH-131359 — 2026-09-13T13:13:59Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.0 min exceeds 30 min threshold.
+Hash: `fdc9816957ba0fe4`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T13:13:59Z`
+
+---
+
+## AUTO-BREACH-142857 — 2026-09-13T14:28:57Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 75.0 min exceeds 30 min threshold.
+Hash: `3a47e1a28de0d20c`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 75.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T14:28:57Z`
+
+---
+
+## AUTO-BREACH-160007 — 2026-09-13T16:00:07Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 41.2 min exceeds 30 min threshold.
+Hash: `96e2c528343a483f`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 41.2 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T16:00:07Z`
+
+---
+
+## AUTO-BREACH-174909 — 2026-09-13T17:49:09Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 100.2 min exceeds 30 min threshold.
+Hash: `1ef27e5cc0b50e27`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 100.2 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T17:49:09Z`
+
+---
+
+## AUTO-BREACH-204427 — 2026-09-13T20:44:27Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 125.5 min exceeds 30 min threshold.
+Hash: `e2ac90c24ed9f59d`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 125.5 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-13T20:44:27Z`
+
+---
+
+## AUTO-BREACH-020457 — 2026-09-14T02:04:57Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 96.0 min exceeds 30 min threshold.
+Hash: `b002468ec67217d5`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 96.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T02:04:57Z`
+
+---
+
+## AUTO-BREACH-030550 — 2026-09-14T03:05:50Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 31.8 min exceeds 30 min threshold.
+Hash: `d3565821799f1b99`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 31.8 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T03:05:50Z`
+
+---
+
+## AUTO-BREACH-043856 — 2026-09-14T04:38:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 49.7 min exceeds 30 min threshold.
+Hash: `ec97b1400e674588`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 49.7 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T04:38:56Z`
+
+---
+
+## AUTO-BREACH-055401 — 2026-09-14T05:54:01Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 50.1 min exceeds 30 min threshold.
+Hash: `eabb0087597bec91`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 50.1 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T05:54:01Z`
+
+---
+
+## AUTO-BREACH-101356 — 2026-09-14T10:13:56Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 160.0 min exceeds 30 min threshold.
+Hash: `a63890c33cbd1b79`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 160.0 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T10:13:56Z`
+
+---
+
+## AUTO-BREACH-125908 — 2026-09-14T12:59:08Z — ALP IDLE BREACH (AUTO-DETECTED)
+
+### Classification
+`FOC_FLAGGED` — Idle gap 100.2 min exceeds 30 min threshold.
+Hash: `8b245e210b576d31`
+
+### 4Ws
+- **WHO:** gsmb_auto_runner.py — autonomous governance loop
+- **WHAT:** ALP tick detected 100.2 min idle gap between runner activations
+- **WHERE:** GSMB governance boundary — ALP monitoring layer
+- **WHY:** Threshold exceeded. Auto-logged. No human action required — runner continues.
+
+### Status
+`AUTO-LOGGED — 2026-09-14T12:59:08Z`
+
+---

@@ -3,6 +3,8 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/KasiLink" vcs="" />
+    <mapping directory="$PROJECT_DIR$/Money-managing-app" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/SUB-BRAIN/Starfall Salvage (Sub-Brain)" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/public/CrisisConnect" vcs="Git" />
   </component>
-</project> 
+</project>

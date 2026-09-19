@@ -4,31 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "4509724f8bf84da7",
+        "id": "b5c92d033393f65a",
         "type": "tabs",
         "children": [
           {
-            "id": "e7a7b303c61786dc",
+            "id": "cf57d5646c65b861",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00-Home/All Projects Registry.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "All Projects Registry"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -51,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -63,7 +51,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:opus-4.6",
+                "query": "tag:#kc",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -88,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 233.5
+    "width": 342.3000183105469,
+    "collapsed": true
   },
   "right": {
     "id": "891cb4bfa988de8c",
@@ -234,11 +223,12 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 10
       }
     ],
     "direction": "horizontal",
-    "width": 343.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -265,16 +255,28 @@
       "smart-lookup:Smart Lookup: Open lookup view": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "cf57d5646c65b861",
   "lastOpenFiles": [
-    "00-Home/00-Home - Index.md",
-    "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
+    "Audits_and_Guardrails/CA_ENTRY_AUDIT_2026-09-05.md",
+    "07-Sessions By Day/2026-04-18.md",
+    "09-KOPANO PROGRESSION/06-Dispatch-KC-2026-04-22.md",
+    "18-PROTOCOLS/18-PROTOCOLS - Index.md",
+    "26-Identic AIs/BEREA/OBSERVATIONS/2026-09-11-dev3-vacancy.md",
+    "00-Home/Now.md",
+    "24-RTC Learning/24-RTC-LEARNING-MASTER-IMPLEMENTATION-RECEIPT.md",
+    "24-RTC Learning/RTC_EVOLUTION_CANONICAL_GOVERNANCE_2026-08-30.md",
+    "24-RTC Learning/From_Possibility_to_Proof_POCvsFOC_PKA_CDP_CCP_Genealogy_2026-08-30.md",
+    "11-AI HALLUCINATION - CRITICAL/Mobile Deploy Failures/Antigravity/30-08-2026/ISSUE_12_REMEDIATION_COMPLETE.md",
     "00-Home/Dashboard.md",
+    "18-PROTOCOLS/Hardware-Maintenance-And-GSMB2-Offload-Protocol.md",
+    "21-KOPANO-PHU GOVERNACE SYSTEMS/Operations General/ROADMAP/ROADMAP-index.md",
+    "00-Home/00-Home - Index.md",
+    "00-Home/All Projects Registry.md",
+    "09-KOPANO PROGRESSION/09-KOPANO PROGRESSION - Index.md",
     "18-PROTOCOLS/Token_Governance_Overrides.md",
     "18-PROTOCOLS/Data_Science_Lifecycle.md",
     "Sandbox/2026-05-02-kc-crud-activation-payload.md",
     "18-PROTOCOLS/KC Stewardship And Tenant AI Doctrine.md",
-    "18-PROTOCOLS/18-PROTOCOLS - Index.md",
     "06-Reference/kopano-code-implementation/tests/__pycache__/test_kc_mcp_stress.cpython-314.pyc",
     "06-Reference/kopano-code-implementation/tests/test_kc_mcp_stress.py",
     "07-Sessions By Day/2026-05-02 - KC MCP CRUD Activation.md",
@@ -290,19 +292,7 @@
     "19-TOKEN USUAGE/19-TOKEN USUAGE - Index.md",
     "17-KC-JOURNAL/Non-KC Scaffolding/2026-05-01 - KC Memory Renter Reflection Prompt.md",
     "18-PROTOCOLS/KC Memory-Renter Doctrine.md",
-    "00-Home/All Projects Registry.md",
     "16-PORTFOLIO AND KOPANO LABS/Handbook/00-Handbook Index.md",
-    "19-TOKEN USUAGE/Weekly Reviews/Weekly Token Review - 2026-04-24.md",
-    "19-TOKEN USUAGE/Probation Records/Kimi - First Task Output.md",
-    "19-TOKEN USUAGE/Probation Records/Kimi - First Task Closeout.md",
-    "19-TOKEN USUAGE/First Tasks/Kimi - First Probation Task.md",
-    "19-TOKEN USUAGE/Probation Records/Kimi - Probation Record.md",
-    "19-TOKEN USUAGE/First Tasks/First Tasks - Index.md",
-    "19-TOKEN USUAGE/Probation Records/Probation Records - Index.md",
-    "07-Sessions By Day/2026-04-22/MAIN-BRAIN Token Governance Closeout.md",
-    "11-AI HALLUCINATION - CRITICAL/Codex/GPT-5 Codex/2026-04-17 - Portfolio Redesign Drift and Rollback Failure.md",
-    "19-TOKEN USUAGE/Templates/Templates - Index.md",
-    "19-TOKEN USUAGE/Model Capability Cards/Model Capability Cards - Index.md",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-2.png",
     "06-Reference/kopano-code-implementation/assets/omx/omx-readme-review-1.png",
     "06-Reference/kopano-code-implementation/assets/wsj-feature.png",

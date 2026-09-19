@@ -7,6 +7,7 @@ const pageLabels: Array<{ id: PageId; label: string; short: string }> = [
   { id: 'labs', label: 'Kopano Labs', short: 'Labs' },
   { id: 'forge', label: 'Forge', short: 'Forge' },
   { id: 'console', label: 'Swarm Console', short: 'Swarm' },
+  { id: 'sovereign-sim', label: 'Sovereign SIM', short: 'SIM' },
   { id: 'admin', label: 'Admin', short: 'Admin' },
 ];
 
