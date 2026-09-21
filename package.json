@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.125.0",
+    "@anthropic-ai/sdk": "^0.127.0",
     "braintrust": "^3.32.0",
     "mongodb": "^7.6.0"
   },
