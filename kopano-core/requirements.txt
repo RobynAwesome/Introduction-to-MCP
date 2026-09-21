@@ -8,7 +8,7 @@ pydantic-settings==2.14.2
 python-dotenv==1.2.3
 azure-monitor-opentelemetry==1.8.9
 litellm==1.100.1
-sqlalchemy==2.0.52
+sqlalchemy==2.0.54
 google-generativeai==0.8.6
 openai==3.8.0
 httpx==0.28.1
