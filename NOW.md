@@ -17,9 +17,9 @@
 >
 > **Patch state:** ALP now blocks when unavailable, throwing, or malformed; agent + spawn manifests carry the canonical renter ACK and validators HOLD when it is absent/invalid; `AGENTS.md` now binds future material execution to Prompting → renter ingress → KPEFS → Bracket/BlackMask → PKA/PvF → SWFUS → Emoji when applicable → C.L.E.A.R. → receipt-before-closure.
 >
-> **Evidence state:** `PATCH_LANDED_UNVERIFIED`. Unit/CI/BlackMask evidence still required before promotion.
+> **Evidence state:** First exact-head CI at `6a2a98568bbb1a2aca23029ff5a94dd054e4e4eb` correctly returned HOLD: Python 3.11 reported 2 failed / 1051 passed because `validate_kpgs_agent()` classified missing/wrong renter ACK as `REJECT` instead of the governed `HOLD` state. Runtime verdict logic was corrected in commit `dd08e9c83b76ac9bb199c8c47c8784775d510923`. Fresh exact-head proof is required.
 >
-> **Next admissible action:** Run exact-head tests and governed CI. Apply C.L.E.A.R. only after receipts exist. Do not call this fixed until the exact branch head is green.
+> **Next admissible action:** Re-run exact-head tests and governed CI on the corrected head. Apply C.L.E.A.R. only after receipts exist. Do not call this fixed until the corrected exact head is green.
 
 ---
 
