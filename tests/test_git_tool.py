@@ -24,8 +24,19 @@ class TestGitTool(unittest.TestCase):
         
         def on_error(func, path, exc_info):
             import stat
-            os.chmod(path, stat.S_IWRITE)
-            func(path)
+
+            # Git may remove transient lock files (for example
+            # .git/objects/maintenance.lock) between shutil's failed unlink
+            # and this callback. Treat that race as successful cleanup rather
+            # than failing the test teardown.
+            if isinstance(exc_info[1], FileNotFoundError):
+                return
+
+            try:
+                os.chmod(path, stat.S_IWRITE)
+                func(path)
+            except FileNotFoundError:
+                return
             
         shutil.rmtree(self.test_dir, onerror=on_error)
 
