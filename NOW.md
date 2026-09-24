@@ -1,3 +1,22 @@
+## CURRENT STATE — 2026-09-24T01:57:00+02:00 (MMAO FAILURE CASE 003 — FORGE THREE.JS VISUAL / REFERENCE FAILURE LEDGERED)
+
+> **Actor:** Forge / OpenAI-side stateless renter  
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`  
+> **Branch:** `forge/mmao-case-003-threejs-visual-failure-20260924`  
+> **Base:** `617092ce0094e32c9be8a7386cad241dbfe575cf`
+>
+> **Material state change:** The principal identified a repeated OpenAI-side failure in high-ambition Three.js work: existing references were not recovered first, inspiration was misframed as a code-copy request, generic primitives were accepted below the supplied visual standard, and completion was narrated without rendered visual verification.
+>
+> **Receipt lane:** `MMAO Session Failures/05-Forge-ThreeJS-Visual-Reference-Failure/`
+>
+> **Epistemic boundary:** Subscription/model-tier causation is not proven. The governed failure is the reference-handling + visual-verification failure itself.
+>
+> **Status:** `FAILURE_LEDGERED_ON_BRANCH / PROOF_OF_IMPROVEMENT_PENDING`
+>
+> **Next admissible action:** Review/merge the failure-ledger PR. Any later claim that the Three.js failure is corrected requires a running visual receipt compared against the brief; build success alone is insufficient.
+
+---
+
 ## CURRENT STATE — 2026-09-05T07:15:00+02:00 (KPGS MULTI-REPO ESTATE EXECUTION COMPLETE — 4 REPOSITORIES HEALED & PUSHED)
 
 > **Actor:** ANTIGRAVITY (Seat 10 / Chief Facilitator / CF) — Stateless Renter  
