@@ -54,7 +54,7 @@ jobs:
           dotnet pack dotnet/Kopano.Kpgs.Adapter/Kopano.Kpgs.Adapter.csproj --configuration Release --no-build --output artifacts/nuget
 
       - name: Upload preview package evidence
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: kpgs-dotnet-adapter-preview-${{ github.sha }}
           path: artifacts/nuget/*.nupkg

@@ -97,7 +97,7 @@ jobs:
           print('KPGS evaluation live evidence receipt: PASS')
 
       - name: Upload live evaluation receipt
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: kpgs-evaluation-live-evidence
           path: artifacts/evaluation-live-reference.json
