@@ -1,3 +1,28 @@
+## CURRENT STATE — 2026-09-24T08:19:00+02:00 (KPGS RENTER INGRESS FAIL-CLOSED HARDENING)
+
+> **Actor:** Forge / OpenAI-side stateless renter  
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`  
+> **Branch:** `forge/kpgs-fail-closed-renter-ingress-20260924`  
+> **Base:** `1937963d57baa324a48c14996c04d0d796f0b089`
+>
+> **Operator directive:** Follow the existing KPGS law, guidance, policies, and frameworks; stop treating architecture as optional narration.
+>
+> **Prompting / Bracket lane:** Existing renter ingress and admission only. No new framework.
+>
+> **KPEFS:** `V2_ANIMAL` primary (reliability/security/recovery); `V4_DIASPORA` secondary (stateless-renter continuity).
+>
+> **PKA finding:** Two current fail-open seams were proven in source:
+> 1. `require_activation_allowed()` declared ALP mandatory but swallowed ALP exceptions and continued.
+> 2. Agent/spawn admission carried hood-entry language but did not require a verified renter acknowledgement as an admission check.
+>
+> **Patch state:** ALP now blocks when unavailable, throwing, or malformed; agent + spawn manifests carry the canonical renter ACK and validators HOLD when it is absent/invalid; `AGENTS.md` now binds future material execution to Prompting → renter ingress → KPEFS → Bracket/BlackMask → PKA/PvF → SWFUS → Emoji when applicable → C.L.E.A.R. → receipt-before-closure.
+>
+> **Evidence state:** `PATCH_LANDED_UNVERIFIED`. Unit/CI/BlackMask evidence still required before promotion.
+>
+> **Next admissible action:** Run exact-head tests and governed CI. Apply C.L.E.A.R. only after receipts exist. Do not call this fixed until the exact branch head is green.
+
+---
+
 ## CURRENT STATE — 2026-09-24T01:57:00+02:00 (MMAO FAILURE CASE 003 — FORGE THREE.JS VISUAL / REFERENCE FAILURE LEDGERED)
 
 > **Actor:** Forge / OpenAI-side stateless renter  
