@@ -97,6 +97,13 @@ Defines the concrete behavior changes Forge must make so the same failure is not
 
 - [`FORGE_IMPROVEMENT_PLAN.md`](./03-Improvement-Plan/FORGE_IMPROVEMENT_PLAN.md)
 
+
+### `05-Forge-ThreeJS-Visual-Reference-Failure/`
+Records Case 003: Forge's Three.js visual-ambition and reference-handling failure. The case separates reference/inspiration from copying, forbids declaring spatial work complete from build/code evidence alone, and requires rendered visual acceptance receipts.
+
+- [`FORGE_THREEJS_VISUAL_REFERENCE_FAILURE_2026-09-24.md`](./05-Forge-ThreeJS-Visual-Reference-Failure/FORGE_THREEJS_VISUAL_REFERENCE_FAILURE_2026-09-24.md)
+- [`POST_SEED_RECEIPT.md`](./05-Forge-ThreeJS-Visual-Reference-Failure/POST_SEED_RECEIPT.md)
+
 ---
 
 ## Failure classification
@@ -164,3 +171,6 @@ Each case must separate **what happened**, **why the available capabilities were
 **Case 002 — LEFA-AI Featherless Auth + Over-Explanation:** LEDGERED ON `master` under `04-LEFA-Featherless-Auth-OverExplain/` (seed commits `93494da`, `de9def9`; fix `8acd8f9` in `RobynAwesome/lefa-ai@robynawesome-fix-backend-seed`, 57/57 pytest PASS). Latent placeholder credential shipped as real + debug detail narrated to a non-technical user — studied, fixed, receipted.
 
 This index is the required starting file for the failure ledger.
+
+
+**Case 003 — Forge Three.js Visual Ambition + Reference Misuse:** STAGED on branch `forge/mmao-case-003-threejs-visual-failure-20260924`. References were misclassified as copy requests, existing evidence was not recovered first, generic Three.js primitives were accepted below the supplied bar, and completion was narrated without rendered visual proof. Plan-tier causation remains UNKNOWN; proof of improvement requires a future runtime visual receipt.

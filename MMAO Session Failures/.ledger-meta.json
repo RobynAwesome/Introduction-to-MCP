@@ -23,6 +23,17 @@
       "status": "FAILURE_LEDGER_APPENDED",
       "proof_of_improvement": "WITNESSED_LIVE_AUTH_RECEIPT_PENDING",
       "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+    },
+    {
+      "ledger_id": "MMAO-SESSION-FAILURES",
+      "case_id": "CASE-003-FORGE-THREEJS-VISUAL-REFERENCE-FAILURE",
+      "actor_accountable": "Forge / OpenAI-side stateless renter",
+      "date_opened": "2026-09-24",
+      "branch": "forge/mmao-case-003-threejs-visual-failure-20260924",
+      "case_folder": "MMAO Session Failures/05-Forge-ThreeJS-Visual-Reference-Failure",
+      "status": "FAILURE_LEDGER_APPENDED_ON_BRANCH",
+      "proof_of_improvement": "PENDING_FUTURE_RUNTIME_VISUAL_RECEIPT",
+      "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
     }
   ],
   "ledger_id": "MMAO-SESSION-FAILURES"
