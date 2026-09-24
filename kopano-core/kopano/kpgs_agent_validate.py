@@ -423,7 +423,14 @@ def validate_kpgs_agent(
 
     failed = [c["check"] for c in checks if c.get("verdict") == "FAIL"]
     if failed:
-        verdict = "REJECT" if pil_ok and cmd_ok and route_ok and block_ok else "HOLD"
+        # Missing/invalid mandatory admission evidence is HOLD, not a softer
+        # non-blocking disposition. Only a structurally admitted renter may
+        # reach a later REJECT/HOLD decision from downstream proof gates.
+        verdict = (
+            "REJECT"
+            if pil_ok and cmd_ok and route_ok and block_ok and ack_ok
+            else "HOLD"
+        )
         if any(c["check"] == "black_mask_drill" and c["verdict"] == "FAIL" for c in checks):
             verdict = "HOLD"
     else:
