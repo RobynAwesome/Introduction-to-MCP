@@ -560,7 +560,7 @@ def _cohort_kpgs_ok(agent: dict[str, Any]) -> bool:
 
 def synthesize_spawn_manifest(agent_id: str) -> dict[str, Any]:
     from .kpgs_agent_validate import synthesize_agent_manifest
-    from .kpgs_renter_entry import synthesize_block_holder_manifest
+    from .kpgs_renter_entry import HOOD_ACK_LITERAL, synthesize_block_holder_manifest
 
     agent = spawn_agent_by_id(agent_id)
     if not agent:
@@ -591,6 +591,12 @@ def synthesize_spawn_manifest(agent_id: str) -> dict[str, Any]:
         "kpgs": agent.get("kpgs", {}),
         "governance_chain": agent.get("governance_chain", []),
         "block_holder": holder,
+        "renter_entry": {
+            "renter_id": agent_id,
+            "renter_class": "spawn_agent",
+            "hood_ack": HOOD_ACK_LITERAL,
+            "ts": _utc_now(),
+        },
         "pillars": base.get("pillars") or _default_spawn_pillars(agent),
         "bracket_receipt": (
             f"[KPGS_SPAWN] slot={agent.get('spawn_slot')} | cohort={agent.get('cohort')} | "
@@ -624,6 +630,7 @@ def _default_spawn_pillars(agent: dict[str, Any]) -> dict[str, Any]:
 
 def validate_spawn_agent(agent_id: str) -> dict[str, Any]:
     from .kpgs_agent_validate import load_kpgs_doctrine, verify_block_holder
+    from .kpgs_renter_entry import verify_hood_ack
 
     agent = spawn_agent_by_id(agent_id)
     if not agent:
@@ -658,6 +665,7 @@ def validate_spawn_agent(agent_id: str) -> dict[str, Any]:
                 pil_errs.append(f"missing shard pillar: {pid}")
 
     block_ok, block_errs = verify_block_holder(manifest)
+    ack_ok, ack_errs = verify_hood_ack(manifest.get("renter_entry") or {})
     kpgs_ok = _cohort_kpgs_ok(agent)
 
     failed: list[str] = []
@@ -665,6 +673,8 @@ def validate_spawn_agent(agent_id: str) -> dict[str, Any]:
         failed.append("five_pillars")
     if not block_ok:
         failed.append("block_holder")
+    if not ack_ok:
+        failed.append("renter_hood_ack")
     if not kpgs_ok:
         failed.append("cohort_kpgs_shard")
 
@@ -681,6 +691,7 @@ def validate_spawn_agent(agent_id: str) -> dict[str, Any]:
         "failed": failed,
         "pillar_errors": pil_errs,
         "block_errors": block_errs,
+        "renter_ack_errors": ack_errs,
         "manifest": manifest,
         "summary": (
             f"[KPGS_SPAWN] slot={agent.get('spawn_slot')} | cohort={agent.get('cohort')} | "
