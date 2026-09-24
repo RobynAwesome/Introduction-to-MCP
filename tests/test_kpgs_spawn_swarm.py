@@ -147,3 +147,25 @@ def test_spawn_status():
     assert "identic_ai" in out.get("altar_layers", [])
     assert len(out.get("forensic_lenses", [])) == 3
     assert out.get("catalog_counts", {}).get("telemetry_cohort") == 100
+
+
+def test_spawn_manifest_carries_renter_ack():
+    out = validate_spawn_agent("mirror_warden")
+    assert out["manifest"]["renter_entry"]["hood_ack"] == "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+
+
+def test_spawn_validation_holds_when_renter_ack_missing(monkeypatch):
+    from kopano import kpgs_spawn_swarm as mod
+
+    original = mod.synthesize_spawn_manifest
+
+    def missing_ack(agent_id: str):
+        manifest = original(agent_id)
+        manifest.pop("renter_entry", None)
+        return manifest
+
+    monkeypatch.setattr(mod, "synthesize_spawn_manifest", missing_ack)
+    out = mod.validate_spawn_agent("mirror_warden")
+    assert out["verdict"] == "HOLD"
+    assert "renter_hood_ack" in out["failed"]
+    assert out["renter_ack_errors"]

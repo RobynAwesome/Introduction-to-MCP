@@ -32,6 +32,7 @@ def _good_manifest(agent_id: str = "test_agent") -> dict:
         "kc_executes": False,
         "pillars": base["pillars"],
         "telemetry_routing": synthesize_telemetry_routing(agent_id),
+        "renter_entry": base.get("renter_entry"),
         "execution": {"uses_public_api": False},
         "evidence": {"proof_artifact_path": proof},
         "block_holder": base.get("block_holder"),
@@ -107,3 +108,28 @@ def test_validate_kpgs_agent_block_holder_gate():
     r = validate_kpgs_agent("eddie_bgf_mining", manifest=m)
     block_check = next(c for c in r["checks"] if c["check"] == "kpgs_block_holder_brief")
     assert block_check["verdict"] == "PASS"
+
+
+def test_validate_rejects_missing_renter_ack():
+    m = _good_manifest("missing_ack_agent")
+    m.pop("renter_entry", None)
+    out = validate_kpgs_agent("missing_ack_agent", manifest=m, run_blackmask=False)
+    ack_check = next(c for c in out["checks"] if c["check"] == "renter_hood_ack")
+    assert ack_check["verdict"] == "FAIL"
+    assert "renter_hood_ack" in out["failed_checks"]
+    assert out["verdict"] == "HOLD"
+
+
+def test_validate_rejects_wrong_renter_ack():
+    m = _good_manifest("wrong_ack_agent")
+    m["renter_entry"]["hood_ack"] = "I_AM_THE_LANDLORD"
+    out = validate_kpgs_agent("wrong_ack_agent", manifest=m, run_blackmask=False)
+    ack_check = next(c for c in out["checks"] if c["check"] == "renter_hood_ack")
+    assert ack_check["verdict"] == "FAIL"
+    assert any("hood_ack must be literal" in e for e in ack_check["errors"])
+    assert out["verdict"] == "HOLD"
+
+
+def test_synthesized_manifest_carries_renter_ack():
+    m = synthesize_agent_manifest("eddie_bgf_mining")
+    assert m["renter_entry"]["hood_ack"] == "I_AM_STATELESS_RENTER_NOT_LANDLORD"
