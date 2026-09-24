@@ -1,3 +1,24 @@
+## CURRENT STATE — 2026-09-24T10:50:00+02:00 (AZURE PRODUCTION DEPLOY CREDENTIAL HOLD)
+
+> **Actor:** Forge / OpenAI-side stateless renter  
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`  
+> **Issue:** #211 — Azure production deploy missing OIDC credential secrets  
+> **Branch:** `forge/azure-deploy-credential-preflight-20260924`
+>
+> **Evidence:** PR #210 merged at `2eef051477174439267d248b26cb4da711c68199`. Post-merge KPGS Branch Proof, RTC Learning, CodeQL, Kopano CI, Zero-Trust, and Vercel checks passed. The separate **Kopano Context: Production Hardening Deployment** run `35965659617` failed at `azure/login@v3` because required GitHub Actions secrets resolved empty: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_SUBSCRIPTION_ID`.
+>
+> **Proven provenance:** This is not caused by PR #210. Production deployment runs `35467851912` (2026-09-19) and `34922709877` (2026-09-15) failed at the same Azure login step. Recent successful deployment-workflow runs for non-production changes skipped the deploy job.
+>
+> **Invariant:** `FAILURE_SURFACED_BY_CALL != FAILURE_CAUSED_BY_CHANGE`.
+>
+> **Patch lane:** Add an explicit `[KPGS_DEPLOY_HOLD]` credential preflight before `azure/login@v3`. Missing credentials remain a hard failure; the patch improves failure provenance and does **not** claim Azure deployment success.
+>
+> **Status:** `PRODUCTION_AZURE_DEPLOY_HOLD / INGRESS_HARDENING_MERGED_AND_GREEN`.
+>
+> **Closure requirement:** Restore/configure the Azure OIDC repository/environment secret contract, verify federated identity scope, then produce an authorized deployment receipt with Azure login PASS and `azd up --no-prompt` PASS. Until then, Vercel success is not Azure deployment proof.
+
+---
+
 ## CURRENT STATE — 2026-09-24T08:19:00+02:00 (KPGS RENTER INGRESS FAIL-CLOSED HARDENING)
 
 > **Actor:** Forge / OpenAI-side stateless renter  
