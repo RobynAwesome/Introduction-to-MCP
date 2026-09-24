@@ -147,6 +147,23 @@ def verify_hood_ack(body: dict[str, Any]) -> tuple[bool, list[str]]:
     return not errors, errors
 
 
+def require_hood_ack(body: dict[str, Any]) -> dict[str, Any]:
+    """Fail closed unless the renter presents the canonical hood acknowledgement."""
+    ok, errors = verify_hood_ack(body)
+    if not ok:
+        detail = "; ".join(errors) if errors else "unknown hood acknowledgement failure"
+        raise ValueError(f"[KPGS_HOOD_ENTRY] BLOCK — {detail}")
+    return {
+        "schema": "kpgs_hood_ack_receipt_v1",
+        "ts": body.get("ts") or _utc_now(),
+        "renter_id": body.get("renter_id"),
+        "renter_class": body.get("renter_class"),
+        "hood_ack": body.get("hood_ack"),
+        "verdict": "ACKNOWLEDGED",
+        "constraint": HOOD_ACK_LITERAL,
+    }
+
+
 def entryway_ack_schema() -> dict[str, Any]:
     entryway = load_renter_entryway()
     return entryway.get("ack_schema") or {
