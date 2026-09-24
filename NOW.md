@@ -17,9 +17,26 @@
 >
 > **Patch state:** ALP now blocks when unavailable, throwing, or malformed; agent + spawn manifests carry the canonical renter ACK and validators HOLD when it is absent/invalid; `AGENTS.md` now binds future material execution to Prompting → renter ingress → KPEFS → Bracket/BlackMask → PKA/PvF → SWFUS → Emoji when applicable → C.L.E.A.R. → receipt-before-closure.
 >
-> **Evidence state:** First exact-head CI at `6a2a98568bbb1a2aca23029ff5a94dd054e4e4eb` correctly returned HOLD: Python 3.11 reported 2 failed / 1051 passed because `validate_kpgs_agent()` classified missing/wrong renter ACK as `REJECT` instead of the governed `HOLD` state. Runtime verdict logic was corrected in commit `dd08e9c83b76ac9bb199c8c47c8784775d510923`. Fresh exact-head proof is required.
+> **Evidence state:** The first exact-head CI at `6a2a98568bbb1a2aca23029ff5a94dd054e4e4eb` correctly returned HOLD: Python 3.11 reported 2 failed / 1051 passed because `validate_kpgs_agent()` classified missing/wrong renter ACK as `REJECT` instead of the governed `HOLD` state. Runtime verdict logic was corrected in `dd08e9c83b76ac9bb199c8c47c8784775d510923`. Corrected code-state head `3ab4bd482eba82358b6f3f676c990523a484bf15` then passed:
+> - Kopano CI Pipeline run `35964848912`: PASS; Python 3.11 = 1053 passed / 13 deselected / 8 subtests; Python 3.12 = 1053 passed / 13 deselected / 8 subtests.
+> - Agent build PoC in the same run: `governance=POC_VALIDATED execution=SUCCESS ci=PASS`, RAW `20/20`; `blackmask_cassy_ship` PASS; KPEFS full gate PASS; focused proof lane 20 passed.
+> - 24-RTC Learning Proof Gate `35964848952`: PASS.
+> - KPGS Zero-Trust Admission Gate `35964849040`: PASS.
+> - KPGS Branch Proof Gate `35964849052`: PASS.
+> - CodeQL run `35964849055`: Python, Actions, and JavaScript/TypeScript PASS. Rust analysis is a repository-wide unrelated matrix leg and is not used as proof for this Python/governance change.
 >
-> **Next admissible action:** Re-run exact-head tests and governed CI on the corrected head. Apply C.L.E.A.R. only after receipts exist. Do not call this fixed until the corrected exact head is green.
+> **C.L.E.A.R. review of the intervention:**
+> - **Complete — PASS:** normal-agent, spawn-agent, ALP ingress, tests, continuity instructions, and exact-head receipts are present for the corrected code state.
+> - **Logical — PASS:** a gate declared mandatory now fails closed; missing/invalid renter acknowledgement becomes HOLD rather than continuing through admission.
+> - **Evidence — PASS:** the first red run is retained; the corrected SHA has exact workflow/job/test receipts and BlackMask/KPEFS proof.
+> - **Audience — PASS:** `AGENTS.md` binds future repository renters while runtime validators cover normal and spawn execution paths.
+> - **Relevant — PASS:** the change directly addresses the observed failure class: architecture present in doctrine but bypassable during execution.
+>
+> **Promotion boundary:** `CLEAR_PASS != POC_VALIDATED`. POC evidence is supplied separately by the Agent build PoC / BlackMask / KPEFS gates above.
+>
+> **Status:** `CODE_STATE_POC_VALIDATED / FINAL_RECEIPT_HEAD_REVALIDATION_REQUIRED`. This NOW receipt changes the branch head, so its own exact head must pass the same governed gates before merge.
+>
+> **Next admissible action:** Run final exact-head CI on this receipt-bearing head; merge only if core CI, RTC, zero-trust, branch-proof, Agent build PoC/BlackMask/KPEFS, and relevant CodeQL remain green.
 
 ---
 
