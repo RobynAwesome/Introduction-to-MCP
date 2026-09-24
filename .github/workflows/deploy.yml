@@ -78,6 +78,38 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: KPGS Azure credential preflight
+        shell: bash
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          missing=()
+          for name in AZURE_CLIENT_ID AZURE_TENANT_ID AZURE_SUBSCRIPTION_ID; do
+            if [[ -z "${!name:-}" ]]; then
+              missing+=("$name")
+            fi
+          done
+
+          if (( ${#missing[@]} > 0 )); then
+            joined="$(IFS=,; echo "${missing[*]}")"
+            echo "::error title=KPGS_DEPLOY_HOLD::Missing required GitHub Actions secrets: $joined"
+            {
+              echo "### [KPGS_DEPLOY_HOLD] Azure production credentials unavailable"
+              echo "- missing secrets: $joined"
+              echo "- invariant: REQUIRED_DEPLOY_CREDENTIAL_MISSING -> HOLD"
+              echo "- evidence: see Issue #211"
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+
+          {
+            echo "### [KPGS_DEPLOY_PREFLIGHT] Azure credential contract present"
+            echo "- required secret names: present"
+            echo "- next gate: azure/login@v3"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Log in to Azure
         uses: azure/login@v3
         with:
