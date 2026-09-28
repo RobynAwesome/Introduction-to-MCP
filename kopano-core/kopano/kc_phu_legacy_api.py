@@ -132,29 +132,29 @@ class PhuPopulateBody(KpgsRenterAdmissionBody):
     sync_vault_logs: bool = Field(default=True)
 
 
-class TsapStudentBody(BaseModel):
+class TsapStudentBody(KpgsRenterAdmissionBody):
     department_id: str
     action: str
     evidence: str
     student_agent: str = "cassy"
 
 
-class TsapTeacherBody(BaseModel):
+class TsapTeacherBody(KpgsRenterAdmissionBody):
     department_id: str
     approve: bool
     teacher_note: str = ""
     teacher_agent: str = "cassey"
 
 
-class TsapBlackMaskBody(BaseModel):
+class TsapBlackMaskBody(KpgsRenterAdmissionBody):
     agent_id: str
 
 
-class TsapBeginBody(BaseModel):
+class TsapBeginBody(KpgsRenterAdmissionBody):
     run_blackmask: bool = True
 
 
-class GuardianFlowBody(BaseModel):
+class GuardianFlowBody(KpgsRenterAdmissionBody):
     department_id: str
     action: str
     evidence: str
@@ -164,7 +164,7 @@ class GuardianFlowBody(BaseModel):
     teacher_note: str = ""
 
 
-class IdentiFlowBody(BaseModel):
+class IdentiFlowBody(KpgsRenterAdmissionBody):
     department_id: str
     action: str
     evidence: str
@@ -274,36 +274,72 @@ def get_apprenticeship_status() -> dict:
 
 
 @router.post("/apprenticeship/begin-students")
-def post_begin_students(body: TsapBeginBody) -> dict:
+def post_begin_students(
+    body: TsapBeginBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Begin student operation in all Kopano-Phu departments."""
-    return begin_department_students(run_blackmask=body.run_blackmask)
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_apprenticeship_begin_students")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **begin_department_students(run_blackmask=body.run_blackmask),
+    }
 
 
 @router.post("/apprenticeship/student-submit")
-def post_student_submit(body: TsapStudentBody) -> dict:
-    return student_submit(
-        department_id=body.department_id,
-        student_agent=body.student_agent,
-        action=body.action,
-        evidence=body.evidence,
-        lane="api",
-    )
+def post_student_submit(
+    body: TsapStudentBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_apprenticeship_student_submit")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **student_submit(
+            department_id=body.department_id,
+            student_agent=body.student_agent,
+            action=body.action,
+            evidence=body.evidence,
+            lane="api",
+        ),
+    }
 
 
 @router.post("/apprenticeship/teacher-review")
-def post_teacher_review(body: TsapTeacherBody) -> dict:
-    return teacher_review(
-        department_id=body.department_id,
-        teacher_agent=body.teacher_agent,
-        approve=body.approve,
-        teacher_note=body.teacher_note,
-        lane="api",
-    )
+def post_teacher_review(
+    body: TsapTeacherBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_apprenticeship_teacher_review")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **teacher_review(
+            department_id=body.department_id,
+            teacher_agent=body.teacher_agent,
+            approve=body.approve,
+            teacher_note=body.teacher_note,
+            lane="api",
+        ),
+    }
 
 
 @router.post("/apprenticeship/blackmask-drill")
-def post_blackmask_drill(body: TsapBlackMaskBody) -> dict:
-    return blackmask_drill(body.agent_id)
+def post_blackmask_drill(
+    body: TsapBlackMaskBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_apprenticeship_blackmask_drill")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **blackmask_drill(body.agent_id),
+    }
 
 
 @router.get("/poc/guide")
@@ -454,31 +490,49 @@ def get_ai_flow_status() -> dict:
 
 
 @router.post("/ai-flow/guardian")
-def post_guardian_flow(body: GuardianFlowBody) -> dict:
+def post_guardian_flow(
+    body: GuardianFlowBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Guardian AI Flow — KC+Cassy+Cassey with BlackMask + TSAP."""
-    return operate_guardian_flow(
-        department_id=body.department_id,
-        action=body.action,
-        evidence=body.evidence,
-        student_agent=body.student_agent,
-        run_blackmask=body.run_blackmask,
-        teacher_approve=body.teacher_approve,
-        teacher_note=body.teacher_note,
-    )
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_ai_flow_guardian")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **operate_guardian_flow(
+            department_id=body.department_id,
+            action=body.action,
+            evidence=body.evidence,
+            student_agent=body.student_agent,
+            run_blackmask=body.run_blackmask,
+            teacher_approve=body.teacher_approve,
+            teacher_note=body.teacher_note,
+        ),
+    }
 
 
 @router.post("/ai-flow/identi")
-def post_identi_flow(body: IdentiFlowBody) -> dict:
+def post_identi_flow(
+    body: IdentiFlowBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Identi AI Flow — LPM #?/#! + LPH code-switch → handoff to Guardian."""
-    return operate_identi_flow(
-        department_id=body.department_id,
-        action=body.action,
-        evidence=body.evidence,
-        imperfect_pattern=body.imperfect_pattern,
-        perfect_pattern=body.perfect_pattern,
-        identi_agent=body.identi_agent,
-        submit_to_guardian=body.submit_to_guardian,
-    )
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_ai_flow_identi")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **operate_identi_flow(
+            department_id=body.department_id,
+            action=body.action,
+            evidence=body.evidence,
+            imperfect_pattern=body.imperfect_pattern,
+            perfect_pattern=body.perfect_pattern,
+            identi_agent=body.identi_agent,
+            submit_to_guardian=body.submit_to_guardian,
+        ),
+    }
 
 
 @router.post("/lpm/dialectic")

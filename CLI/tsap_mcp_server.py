@@ -45,15 +45,26 @@ def tsap_student_submit(
     action: str = Field(description="What the student did or proposes"),
     evidence: str = Field(description="Proof path, exit code, or URL"),
     student_agent: str = Field(default="cassy", description="Student agent id"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import student_submit
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_student_submit",
+    )
     return student_submit(
         department_id=_str(department_id),
         student_agent=_str(student_agent, "cassy"),
         action=_str(action),
         evidence=_str(evidence),
         lane="mcp",
-    )
+    ) | admission
 
 
 @mcp.tool(
@@ -65,15 +76,26 @@ def tsap_teacher_review(
     approve: bool = Field(description="True = APPROVE, False = RETRY"),
     teacher_note: str = Field(default="", description="Teacher review note"),
     teacher_agent: str = Field(default="cassey", description="Teacher agent id"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import teacher_review
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_teacher_review",
+    )
     return teacher_review(
         department_id=_str(department_id),
         teacher_agent=_str(teacher_agent, "cassey"),
         approve=approve,
         teacher_note=_str(teacher_note),
         lane="mcp",
-    )
+    ) | admission
 
 
 @mcp.tool(
@@ -90,13 +112,24 @@ def tsap_blackmask_drill(
         default_factory=list,
         description="Pillar ids acknowledged (PIL-01..PIL-05). Empty = all pass.",
     ),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import blackmask_drill
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_blackmask_drill",
+    )
     return blackmask_drill(
         _str(agent_id),
         commandments_ack=commandments_ack or None,
         pillars_ack=pillars_ack or None,
-    )
+    ) | admission
 
 
 @mcp.tool(
@@ -105,9 +138,20 @@ def tsap_blackmask_drill(
 )
 def tsap_begin_department_students(
     run_blackmask: bool = Field(default=True, description="Run BlackMask drill per student agent"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import begin_department_students
-    return begin_department_students(run_blackmask=run_blackmask)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_begin_department_students",
+    )
+    return begin_department_students(run_blackmask=run_blackmask) | admission
 
 
 @mcp.tool(
@@ -379,8 +423,19 @@ def tsap_guardian_flow(
     run_blackmask: bool = Field(default=True),
     teacher_approve: bool | None = Field(default=None, description="Set to run teacher_review"),
     teacher_note: str = Field(default=""),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.lpm_lph_engine import operate_guardian_flow
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_guardian_flow",
+    )
     return operate_guardian_flow(
         department_id=_str(department_id),
         action=_str(action),
@@ -389,7 +444,7 @@ def tsap_guardian_flow(
         run_blackmask=run_blackmask,
         teacher_approve=teacher_approve,
         teacher_note=_str(teacher_note),
-    )
+    ) | admission
 
 
 @mcp.tool(
@@ -404,8 +459,19 @@ def tsap_identi_flow(
     perfect_pattern: str = Field(default="", description="#! target pattern"),
     identi_agent: str = Field(default="identi_cursor"),
     submit_to_guardian: bool = Field(default=True),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.lpm_lph_engine import operate_identi_flow
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_identi_flow",
+    )
     return operate_identi_flow(
         department_id=_str(department_id),
         action=_str(action),
@@ -414,7 +480,7 @@ def tsap_identi_flow(
         perfect_pattern=_str(perfect_pattern),
         identi_agent=_str(identi_agent, "identi_cursor"),
         submit_to_guardian=submit_to_guardian,
-    )
+    ) | admission
 
 
 @mcp.tool(

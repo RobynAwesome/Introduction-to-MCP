@@ -196,19 +196,6 @@ def blackmask_dry_run(*, agent_ids: list[str] | None = None) -> dict[str, Any]:
         "all_ship": hold == 0,
         "results": results,
     }
-    state = _load_boot_state()
-    state["last_blackmask_dry_run"] = {
-        "at": _utc_now(),
-        "ship": ship,
-        "hold": hold,
-        "agents_total": len(results),
-    }
-    _save_boot_state(state)
-    _append_main_brain(
-        f"[KOPANO_PHU_STUDENT_TEACHER_MAO_BOOT_v1] BlackMask dry run | "
-        f"agents: {len(results)} | SHIP: {ship} | HOLD: {hold}",
-        "blackmask_dry_run",
-    )
     return payload
 
 
@@ -284,9 +271,9 @@ def mesh_summary() -> dict[str, Any]:
 def boot_status() -> dict[str, Any]:
     kpgs: dict[str, Any] = {}
     try:
-        from .kpgs_governance import governance_status
+        from .kpgs_governance import governance_status_snapshot
 
-        kpgs = governance_status()
+        kpgs = governance_status_snapshot()
     except ImportError:
         kpgs = {"error": "kpgs_governance_unavailable"}
 

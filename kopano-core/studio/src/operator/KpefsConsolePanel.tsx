@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { getApiBase } from '../apiBase';
+import { useOperator } from './OperatorProvider';
+
+const HOOD_ACK = 'I_AM_STATELESS_RENTER_NOT_LANDLORD';
 
 interface VectorRow {
   id: string;
@@ -58,6 +61,7 @@ const BLASPHEMY_HINT =
   'Sacred caps forbidden for blasphemy register — use oNE_wORLD_oRDER, elon_mask, je, silcon_valley (no honorific caps in brackets).';
 
 export function KpefsConsolePanel() {
+  const { isGodMode, token } = useOperator();
   const apiRoot = getApiBase();
   const [kpefs, setKpefs] = useState<KpefsStatus | null>(null);
   const [aiFlow, setAiFlow] = useState<AiFlowStatus | null>(null);
@@ -123,9 +127,15 @@ export function KpefsConsolePanel() {
   });
 
   const postKpgsMutation = async (path: string, note: string) => {
+    if (!isGodMode || !token) {
+      throw new Error('Sign in through the operator dock before running KPGS actions.');
+    }
     const response = await fetch(`${apiRoot}${path}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(renterAdmission(note)),
     });
     const result = await response.json();
@@ -261,7 +271,7 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button ghost"
-          disabled={promoting || !renterId.trim() || !hoodAck.trim()}
+          disabled={promoting || !isGodMode || !token || !renterId.trim() || hoodAck !== HOOD_ACK}
           onClick={() => {
             setPromoting(true);
             postKpgsMutation('/api/kc/phu/operating-mesh/promote-all', 'Studio operating mesh promotion')
@@ -274,7 +284,7 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button ghost"
-          disabled={trusting || !renterId.trim() || !hoodAck.trim()}
+          disabled={trusting || !isGodMode || !token || !renterId.trim() || hoodAck !== HOOD_ACK}
           onClick={() => {
             setTrusting(true);
             postKpgsMutation('/api/kc/phu/graduation-bar/steward-trust', 'Studio steward trust — KC Cassey students')
@@ -287,7 +297,7 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button primary"
-          disabled={activating || !renterId.trim() || !hoodAck.trim()}
+          disabled={activating || !isGodMode || !token || !renterId.trim() || hoodAck !== HOOD_ACK}
           onClick={() => {
             setActivating(true);
             postKpgsMutation('/api/kc/phu/steward-lane/activate', 'KC+Cassy steward lane — lead dev run')

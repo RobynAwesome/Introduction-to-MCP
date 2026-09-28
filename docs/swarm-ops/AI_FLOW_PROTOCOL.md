@@ -50,7 +50,7 @@ Patterns in [LPM_LPH_GOD_COMPLEX_DOCTRINE.json](./LPM_LPH_GOD_COMPLEX_DOCTRINE.j
 | Surface | Tools |
 |---------|--------|
 | HTTP | `GET /api/kc/phu/ai-flow/status`, `POST .../guardian`, `POST .../identi` |
-| CLI | `python scripts/kc_ai_flow_operate.py guardian|identi|status` |
+| CLI | `python scripts/kc_ai_flow_operate.py status`; mutation commands `guardian` and `identi` require `--renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD`. |
 | TSAP MCP | `tsap_guardian_flow`, `tsap_identi_flow`, `tsap_lpm_dialectic`, `tsap_ai_flow_status`, `tsap_agent_build_poc_validate` |
 | MAO MCP | `mao_lpm_attach`, `mao_agent_build_poc_validate` |
 

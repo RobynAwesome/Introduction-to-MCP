@@ -11,6 +11,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "kopano-core"))
 
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 from kopano.lpm_lph_engine import (  # noqa: E402
     ai_flow_status,
     lpm_dialectic,
@@ -34,6 +35,9 @@ def main() -> int:
     g.add_argument("--approve", action="store_true")
     g.add_argument("--retry", action="store_true")
     g.add_argument("--teacher-note", default="")
+    g.add_argument("--renter-id", required=True, help="Stateless renter identity")
+    g.add_argument("--renter-class", default="stateless_renter")
+    g.add_argument("--hood-ack", required=True, help="Type the exact canonical renter acknowledgement")
 
     i = sub.add_parser("identi", help="Identi flow (Cursor agent → Guardian)")
     i.add_argument("--department", required=True)
@@ -43,6 +47,9 @@ def main() -> int:
     i.add_argument("--perfect", default="")
     i.add_argument("--agent", default="identi_cursor")
     i.add_argument("--no-handoff", action="store_true")
+    i.add_argument("--renter-id", required=True, help="Stateless renter identity")
+    i.add_argument("--renter-class", default="stateless_renter")
+    i.add_argument("--hood-ack", required=True, help="Type the exact canonical renter acknowledgement")
 
     d = sub.add_parser("dialectic", help="LPM #? / #! only")
     d.add_argument("--imperfect", required=True)
@@ -58,6 +65,12 @@ def main() -> int:
         return 0
 
     if args.cmd == "guardian":
+        admission = admit_cli_renter(
+            renter_id=args.renter_id,
+            renter_class=args.renter_class,
+            hood_ack=args.hood_ack,
+            operation="cli:kc_ai_flow_operate_guardian",
+        )
         approve = None
         if args.approve:
             approve = True
@@ -71,10 +84,17 @@ def main() -> int:
             teacher_approve=approve,
             teacher_note=args.teacher_note,
         )
+        out = {**out, **admission}
         print(json.dumps(out, indent=2))
         return 0 if out.get("verdict") not in ("HOLD", "ERROR") else 1
 
     if args.cmd == "identi":
+        admission = admit_cli_renter(
+            renter_id=args.renter_id,
+            renter_class=args.renter_class,
+            hood_ack=args.hood_ack,
+            operation="cli:kc_ai_flow_operate_identi",
+        )
         out = operate_identi_flow(
             department_id=args.department,
             action=args.action,
@@ -84,6 +104,7 @@ def main() -> int:
             identi_agent=args.agent,
             submit_to_guardian=not args.no_handoff,
         )
+        out = {**out, **admission}
         print(json.dumps(out, indent=2))
         return 0 if out.get("verdict") != "BRACKET_REJECT" else 1
 

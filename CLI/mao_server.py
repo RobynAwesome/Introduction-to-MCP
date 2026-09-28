@@ -468,10 +468,20 @@ def mao_tsap_student_turn(
     department_id: str = Field(description="kopano_labs_experimentation | ama_phu_creativity"),
     message: str = Field(description="Student task message"),
     intent: str = Field(default="execute", description="MAO routing intent"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import student_submit
     from kopano.mao_dispatch import execute_task
 
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_tsap_student_turn",
+    )
     dept_id = _tsap_str(department_id)
     msg = _tsap_str(message)
     exec_result = execute_task(_tsap_str(intent, "execute"), msg)
@@ -482,7 +492,7 @@ def mao_tsap_student_turn(
         evidence=f"mao_execute:{exec_result.get('execution_mode')}",
         lane="mao",
     )
-    return {"execute": exec_result, "tsap_submit": submit}
+    return {"execute": exec_result, "tsap_submit": submit, **admission}
 
 
 @mcp.tool(
@@ -493,10 +503,20 @@ def mao_tsap_teacher_turn(
     department_id: str = Field(description="Department id"),
     approve: bool = Field(description="Approve student work"),
     teacher_note: str = Field(default="", description="Teacher note"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import departments_from_config, teacher_review
     from kopano.mao_dispatch import execute_task
 
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_tsap_teacher_turn",
+    )
     dept = next((d for d in departments_from_config() if d["id"] == _tsap_str(department_id)), None)
     teacher_id = (dept or {}).get("mao_teacher", "cassey")
     intent = "teach" if approve else "review"
@@ -508,7 +528,7 @@ def mao_tsap_teacher_turn(
         teacher_note=_tsap_str(teacher_note),
         lane="mao",
     )
-    return {"execute": exec_result, "tsap_review": review}
+    return {"execute": exec_result, "tsap_review": review, **admission}
 
 
 @mcp.tool(
@@ -517,9 +537,20 @@ def mao_tsap_teacher_turn(
 )
 def mao_blackmask_drill(
     agent_id: str = Field(description="Agent to drill"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import blackmask_drill
-    return blackmask_drill(_tsap_str(agent_id))
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_blackmask_drill",
+    )
+    return {**blackmask_drill(_tsap_str(agent_id)), **admission}
 
 
 @mcp.tool(
@@ -537,9 +568,20 @@ def mao_department_status() -> dict[str, Any]:
 )
 def mao_begin_department_students(
     run_blackmask: bool = Field(default=True, description="Run BlackMask per student"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.phu_apprenticeship import begin_department_students
-    return begin_department_students(run_blackmask=run_blackmask)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_begin_department_students",
+    )
+    return {**begin_department_students(run_blackmask=run_blackmask), **admission}
 
 
 @mcp.tool(
@@ -686,9 +728,20 @@ def mao_guardian_flow(
     run_blackmask: bool = Field(default=True),
     teacher_approve: bool | None = Field(default=None),
     teacher_note: str = Field(default=""),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.lpm_lph_engine import operate_guardian_flow
-    return operate_guardian_flow(
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_guardian_flow",
+    )
+    result = operate_guardian_flow(
         department_id=_tsap_str(department_id),
         action=_tsap_str(action),
         evidence=_tsap_str(evidence),
@@ -696,6 +749,7 @@ def mao_guardian_flow(
         teacher_approve=teacher_approve,
         teacher_note=_tsap_str(teacher_note),
     )
+    return {**result, **admission}
 
 
 @mcp.tool(
@@ -707,14 +761,26 @@ def mao_identi_flow(
     action: str = Field(description="Action"),
     evidence: str = Field(description="Evidence"),
     identi_agent: str = Field(default="identi_cursor"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.lpm_lph_engine import operate_identi_flow
-    return operate_identi_flow(
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_identi_flow",
+    )
+    result = operate_identi_flow(
         department_id=_tsap_str(department_id),
         action=_tsap_str(action),
         evidence=_tsap_str(evidence),
         identi_agent=_tsap_str(identi_agent, "identi_cursor"),
     )
+    return {**result, **admission}
 
 
 @mcp.tool(

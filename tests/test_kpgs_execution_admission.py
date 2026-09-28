@@ -89,6 +89,44 @@ def test_api_status_routes_only_read_cached_or_source_state(monkeypatch, tmp_pat
     assert not (tmp_path / "missing-behavior.json").exists()
 
 
+def test_phu_boot_status_uses_source_snapshot_without_compiling_or_writing(monkeypatch, tmp_path):
+    from kopano import kpgs_governance, phu_boot_governance
+
+    state_path = tmp_path / "boot-state.json"
+    monkeypatch.setattr(phu_boot_governance, "STATE_PATH", state_path)
+    monkeypatch.setattr(
+        kpgs_governance,
+        "compile_kpgs_governance",
+        lambda **_: (_ for _ in ()).throw(AssertionError("status compiled governance")),
+    )
+
+    result = phu_boot_governance.boot_status()
+
+    assert result["kpgs_governance"]["source"] == "source_snapshot"
+    assert result["kpgs_governance"]["compile_verdict"] == "UNKNOWN"
+    assert not state_path.exists()
+
+
+def test_kpgs_mesh_no_write_validation_skips_persistent_blackmask(monkeypatch, tmp_path):
+    from kopano import kpgs_agent_validate, phu_apprenticeship, phu_boot_governance
+
+    state_path = tmp_path / "apprenticeship.json"
+    log_path = tmp_path / "main-brain.jsonl"
+    report_path = REPO / ".pytest-no-write" / "mesh.json"
+    monkeypatch.setattr(kpgs_agent_validate, "REPORT_PATH", report_path)
+    monkeypatch.setattr(kpgs_agent_validate, "MAIN_BRAIN_LOG", log_path)
+    monkeypatch.setattr(phu_boot_governance, "mesh_agent_ids", lambda: ["cassy"])
+    monkeypatch.setattr(phu_apprenticeship, "STATE_PATH", state_path)
+    monkeypatch.setattr(phu_apprenticeship, "MAIN_BRAIN_LOG", log_path)
+
+    result = kpgs_agent_validate.validate_kpgs_mesh(write_report=False)
+
+    assert result["agents_total"] == 1
+    assert not report_path.exists()
+    assert not log_path.exists()
+    assert not state_path.exists()
+
+
 def test_api_blocks_unadmitted_execution_before_operation(monkeypatch, tmp_path):
     entry_log = tmp_path / "entry.jsonl"
     monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", entry_log)
@@ -360,6 +398,189 @@ def test_mcp_poc_and_mesh_mutations_require_renter_admission(monkeypatch):
         "mcp:tsap_steward_lane_activate",
     ]
     assert all(call["hood_ack"] == kpgs_renter_entry.HOOD_ACK_LITERAL for call in calls)
+
+
+def test_tsap_and_ai_flow_api_mutations_require_operator_and_renter_ack(monkeypatch, tmp_path):
+    entry_log = tmp_path / "entry.jsonl"
+    monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", entry_log)
+    fail_if_called = lambda *_args, **_kwargs: (_ for _ in ()).throw(
+        AssertionError("mutation ran before admission")
+    )
+    for name in (
+        "begin_department_students",
+        "student_submit",
+        "teacher_review",
+        "blackmask_drill",
+        "operate_guardian_flow",
+        "operate_identi_flow",
+    ):
+        monkeypatch.setattr(kc_phu_legacy_api, name, fail_if_called)
+
+    client = TestClient(app)
+    routes = [
+        ("/api/kc/phu/apprenticeship/begin-students", {**_admission_body(), "run_blackmask": False}),
+        (
+            "/api/kc/phu/apprenticeship/student-submit",
+            {**_admission_body(), "department_id": "dept", "action": "submit", "evidence": "test"},
+        ),
+        (
+            "/api/kc/phu/apprenticeship/teacher-review",
+            {**_admission_body(), "department_id": "dept", "approve": True},
+        ),
+        ("/api/kc/phu/apprenticeship/blackmask-drill", {**_admission_body(), "agent_id": "cassy"}),
+        (
+            "/api/kc/phu/ai-flow/guardian",
+            {**_admission_body(), "department_id": "dept", "action": "review", "evidence": "test"},
+        ),
+        (
+            "/api/kc/phu/ai-flow/identi",
+            {**_admission_body(), "department_id": "dept", "action": "review", "evidence": "test"},
+        ),
+    ]
+    headers = _god_headers()
+    for path, body in routes:
+        assert client.post(path, json=body).status_code == 401
+        assert client.post(path, json={**body, "hood_ack": "WRONG"}, headers=headers).status_code == 422
+    assert not entry_log.exists()
+
+
+def test_tsap_and_ai_flow_api_mutations_return_admission_receipts(monkeypatch, tmp_path):
+    entry_log = tmp_path / "entry.jsonl"
+    monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", entry_log)
+    alp_receipt = {"schema": "alp_receipt_v1", "consistency_hash": "tsap-test"}
+    monkeypatch.setattr(kc_phu_legacy_api, "require_alp_receipt", lambda: alp_receipt)
+    operations: list[str] = []
+
+    def record(name: str):
+        def run(*_args, **_kwargs):
+            operations.append(name)
+            return {"verdict": "RECORDED"}
+
+        return run
+
+    for name in (
+        "begin_department_students",
+        "student_submit",
+        "teacher_review",
+        "blackmask_drill",
+        "operate_guardian_flow",
+        "operate_identi_flow",
+    ):
+        monkeypatch.setattr(kc_phu_legacy_api, name, record(name))
+
+    routes = [
+        ("/api/kc/phu/apprenticeship/begin-students", {**_admission_body(), "run_blackmask": False}, "phu_apprenticeship_begin_students", "begin_department_students"),
+        ("/api/kc/phu/apprenticeship/student-submit", {**_admission_body(), "department_id": "dept", "action": "submit", "evidence": "test"}, "phu_apprenticeship_student_submit", "student_submit"),
+        ("/api/kc/phu/apprenticeship/teacher-review", {**_admission_body(), "department_id": "dept", "approve": True}, "phu_apprenticeship_teacher_review", "teacher_review"),
+        ("/api/kc/phu/apprenticeship/blackmask-drill", {**_admission_body(), "agent_id": "cassy"}, "phu_apprenticeship_blackmask_drill", "blackmask_drill"),
+        ("/api/kc/phu/ai-flow/guardian", {**_admission_body(), "department_id": "dept", "action": "review", "evidence": "test"}, "phu_ai_flow_guardian", "operate_guardian_flow"),
+        ("/api/kc/phu/ai-flow/identi", {**_admission_body(), "department_id": "dept", "action": "review", "evidence": "test"}, "phu_ai_flow_identi", "operate_identi_flow"),
+    ]
+    client = TestClient(app)
+    headers = _god_headers()
+    for path, body, operation, side_effect in routes:
+        response = client.post(path, json=body, headers=headers)
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["hood_entry"]["operation"] == operation
+        assert payload["hood_entry"]["ack_verified"] is True
+        assert payload["alp_receipt"] == alp_receipt
+        assert payload["verdict"] == "RECORDED"
+        assert operations[-1] == side_effect
+    assert len(operations) == len(routes)
+    assert [json.loads(line)["operation"] for line in entry_log.read_text(encoding="utf-8").splitlines()] == [
+        route[2] for route in routes
+    ]
+
+
+def test_mao_and_tsap_mcp_mutations_admit_before_any_execution(monkeypatch):
+    import pytest
+
+    from CLI import mao_server, tsap_mcp_server
+    from kopano import kpgs_cli_admission, lpm_lph_engine, mao_dispatch, phu_apprenticeship
+
+    calls: list[str] = []
+
+    def admit(*, renter_id: str, renter_class: str, hood_ack: str, operation: str):
+        calls.append(f"admit:{operation}")
+        if hood_ack != kpgs_renter_entry.HOOD_ACK_LITERAL:
+            raise ValueError("invalid renter acknowledgement")
+        return {"hood_entry": {"operation": operation}, "alp_receipt": {"schema": "alp_receipt_v1"}}
+
+    monkeypatch.setattr(kpgs_cli_admission, "admit_cli_renter", admit)
+    for name in ("student_submit", "teacher_review", "begin_department_students"):
+        monkeypatch.setattr(phu_apprenticeship, name, lambda **_: {"status": "RECORDED"})
+    monkeypatch.setattr(phu_apprenticeship, "blackmask_drill", lambda *_args, **_: {"verdict": "SHIP"})
+    monkeypatch.setattr(
+        phu_apprenticeship,
+        "departments_from_config",
+        lambda: [{"id": "dept", "mao_teacher": "cassey"}],
+    )
+    monkeypatch.setattr(lpm_lph_engine, "operate_guardian_flow", lambda **_: {"verdict": "RECORDED"})
+    monkeypatch.setattr(lpm_lph_engine, "operate_identi_flow", lambda **_: {"verdict": "RECORDED"})
+    monkeypatch.setattr(mao_dispatch, "execute_task", lambda *_: calls.append("execute") or {"execution_mode": "test"})
+
+    common = {
+        "renter_id": "mcp_test",
+        "renter_class": "stateless_renter",
+        "hood_ack": kpgs_renter_entry.HOOD_ACK_LITERAL,
+    }
+    routes = [
+        (tsap_mcp_server.tsap_student_submit, {"department_id": "dept", "action": "submit", "evidence": "test"}, "mcp:tsap_student_submit"),
+        (tsap_mcp_server.tsap_teacher_review, {"department_id": "dept", "approve": True}, "mcp:tsap_teacher_review"),
+        (tsap_mcp_server.tsap_blackmask_drill, {"agent_id": "cassy"}, "mcp:tsap_blackmask_drill"),
+        (tsap_mcp_server.tsap_begin_department_students, {}, "mcp:tsap_begin_department_students"),
+        (tsap_mcp_server.tsap_guardian_flow, {"department_id": "dept", "action": "review", "evidence": "test"}, "mcp:tsap_guardian_flow"),
+        (tsap_mcp_server.tsap_identi_flow, {"department_id": "dept", "action": "review", "evidence": "test"}, "mcp:tsap_identi_flow"),
+        (mao_server.mao_tsap_student_turn, {"department_id": "dept", "message": "submit"}, "mcp:mao_tsap_student_turn"),
+        (mao_server.mao_tsap_teacher_turn, {"department_id": "dept", "approve": True}, "mcp:mao_tsap_teacher_turn"),
+        (mao_server.mao_blackmask_drill, {"agent_id": "cassy"}, "mcp:mao_blackmask_drill"),
+        (mao_server.mao_begin_department_students, {}, "mcp:mao_begin_department_students"),
+        (mao_server.mao_guardian_flow, {"department_id": "dept", "action": "review", "evidence": "test"}, "mcp:mao_guardian_flow"),
+        (mao_server.mao_identi_flow, {"department_id": "dept", "action": "review", "evidence": "test"}, "mcp:mao_identi_flow"),
+    ]
+    for tool, arguments, expected_operation in routes:
+        calls.clear()
+        result = tool(**arguments, **common)
+        assert calls[0] == f"admit:{expected_operation}"
+        assert result["hood_entry"]["operation"] == expected_operation
+        assert result["alp_receipt"]["schema"] == "alp_receipt_v1"
+
+    calls.clear()
+    with pytest.raises(ValueError, match="invalid renter acknowledgement"):
+        mao_server.mao_tsap_student_turn(
+            department_id="dept",
+            message="must not execute",
+            renter_id="mcp_test",
+            renter_class="stateless_renter",
+            hood_ack="WRONG",
+        )
+    assert calls == ["admit:mcp:mao_tsap_student_turn"]
+
+
+def test_tsap_and_ai_flow_mutation_clis_require_explicit_renter_fields():
+    invocations = [
+        ("kc_phu_department_students_begin.py", ["--drill-agent", "cassy"]),
+        (
+            "kc_ai_flow_operate.py",
+            ["guardian", "--department", "dept", "--action", "review", "--evidence", "test"],
+        ),
+        (
+            "kc_ai_flow_operate.py",
+            ["identi", "--department", "dept", "--action", "review", "--evidence", "test"],
+        ),
+    ]
+    for script, arguments in invocations:
+        proc = subprocess.run(
+            [sys.executable, str(REPO / "scripts" / script), *arguments],
+            cwd=REPO,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert proc.returncode == 2
+        assert "--renter-id" in proc.stderr
+        assert "--hood-ack" in proc.stderr
 
 
 def test_false_breathing_cycle_cannot_emit_gsmb_pass(monkeypatch, tmp_path):

@@ -128,6 +128,7 @@ def blackmask_drill(
     *,
     commandments_ack: list[str] | None = None,
     pillars_ack: list[str] | None = None,
+    persist: bool = True,
 ) -> dict[str, Any]:
     """Drill agent against 15 Commandments + 5 Pillars. All must be acknowledged to SHIP."""
     doctrine = load_black_mask_doctrine()
@@ -152,29 +153,30 @@ def blackmask_drill(
     summary = _bracket_blackmask(
         agent_id, cmd_pass, len(commandments), pil_pass, len(pillars), verdict
     )
-    _append_jsonl(
-        MAIN_BRAIN_LOG,
-        {
-            "ts": _utc_now(),
-            "kind": "black_mask_drill",
-            "agent_id": agent_id,
-            "summary": summary,
-            "verdict": verdict,
-        },
-    )
+    if persist:
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "black_mask_drill",
+                "agent_id": agent_id,
+                "summary": summary,
+                "verdict": verdict,
+            },
+        )
 
-    state = _load_state()
-    agents = state.setdefault("agents", {})
-    agents[agent_id] = {
-        **agents.get(agent_id, {}),
-        "black_mask": {
-            "verdict": verdict,
-            "commandments_pass": cmd_pass,
-            "pillars_pass": pil_pass,
-            "drilled_at": _utc_now(),
-        },
-    }
-    _save_state(state)
+        state = _load_state()
+        agents = state.setdefault("agents", {})
+        agents[agent_id] = {
+            **agents.get(agent_id, {}),
+            "black_mask": {
+                "verdict": verdict,
+                "commandments_pass": cmd_pass,
+                "pillars_pass": pil_pass,
+                "drilled_at": _utc_now(),
+            },
+        }
+        _save_state(state)
 
     return {
         "agent_id": agent_id,
@@ -183,6 +185,7 @@ def blackmask_drill(
         "pillars": pil_results,
         "summary": summary,
         "drill_complete": all_pass,
+        "persisted": persist,
     }
 
 
@@ -193,6 +196,7 @@ def student_submit(
     action: str,
     evidence: str,
     lane: str = "mcp",
+    persist: bool = True,
 ) -> dict[str, Any]:
     """Student proposes work — logs to Review Log + TSAP bracket."""
     dept = next((d for d in departments_from_config() if d["id"] == department_id), None)
@@ -243,15 +247,17 @@ def student_submit(
     except ImportError:
         pass
 
-    _append_jsonl(REVIEW_LOG, review_row)
+    if persist:
+        _append_jsonl(REVIEW_LOG, review_row)
 
-    state = _load_state()
-    pending = state.setdefault("pending_reviews", [])
-    pending.append(review_row)
-    _save_state(state)
+        state = _load_state()
+        pending = state.setdefault("pending_reviews", [])
+        pending.append(review_row)
+        _save_state(state)
 
     return {
-        "status": "submitted",
+        "status": "submitted" if persist else "dry_run",
+        "persisted": persist,
         "department": department_id,
         "student": student_agent,
         "summary": summary,
@@ -267,6 +273,7 @@ def teacher_review(
     approve: bool,
     teacher_note: str = "",
     lane: str = "mcp",
+    persist: bool = True,
 ) -> dict[str, Any]:
     """Teacher validates latest student work for department."""
     dept = next((d for d in departments_from_config() if d["id"] == department_id), None)
@@ -284,32 +291,34 @@ def teacher_review(
         extra=f"note: {teacher_note[:160]}",
     )
 
-    _append_jsonl(
-        MAIN_BRAIN_LOG,
-        {
-            "ts": _utc_now(),
-            "kind": "teacher_review",
-            "department": department_id,
-            "teacher": teacher_agent,
-            "verdict": verdict,
-            "summary": summary,
-            "teacher_note": teacher_note,
-        },
-    )
-
-    kc_opinion: dict[str, Any] = {}
-    try:
-        from .phu_boot_governance import record_kc_teacher_review, tsap_to_kc_opinion
-
-        kc_opinion = record_kc_teacher_review(
-            opinion=tsap_to_kc_opinion(approve, teacher_note),
-            ref=f"tsap:{department_id}:{verdict}",
-            department=department_id,
+    kc_opinion: dict[str, Any] = {"skipped": "dry_run"}
+    if persist:
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "teacher_review",
+                "department": department_id,
+                "teacher": teacher_agent,
+                "verdict": verdict,
+                "summary": summary,
+                "teacher_note": teacher_note,
+            },
         )
-    except ImportError:
-        kc_opinion = {"skipped": "phu_boot_governance not loaded"}
 
-    if approve:
+        kc_opinion = {}
+        try:
+            from .phu_boot_governance import record_kc_teacher_review, tsap_to_kc_opinion
+
+            kc_opinion = record_kc_teacher_review(
+                opinion=tsap_to_kc_opinion(approve, teacher_note),
+                ref=f"tsap:{department_id}:{verdict}",
+                department=department_id,
+            )
+        except ImportError:
+            kc_opinion = {"skipped": "phu_boot_governance not loaded"}
+
+    if persist and approve:
         proc = subprocess.run(
             [
                 PY,
@@ -332,17 +341,18 @@ def teacher_review(
         exit_code = 0
 
     return {
-        "status": "reviewed",
+        "status": "reviewed" if persist else "dry_run",
+        "persisted": persist,
         "department": department_id,
         "teacher": teacher_agent,
         "verdict": verdict,
         "summary": summary,
-        "main_brain_exit_code": exit_code,
+        "main_brain_exit_code": exit_code if persist and approve else None,
         "kc_teacher_review": kc_opinion,
     }
 
 
-def begin_department_students(*, run_blackmask: bool = True) -> dict[str, Any]:
+def begin_department_students(*, run_blackmask: bool = True, persist: bool = True) -> dict[str, Any]:
     """Begin student operation in each Kopano-Phu department."""
     cfg = load_ecosystem_config()
     departments = departments_from_config()
@@ -357,7 +367,7 @@ def begin_department_students(*, run_blackmask: bool = True) -> dict[str, Any]:
         for sid in student_ids:
             agent_state: dict[str, Any] = {"department": dept_id, "status": "active", "started_at": _utc_now()}
             if run_blackmask:
-                drill = blackmask_drill(sid)
+                drill = blackmask_drill(sid, persist=persist)
                 agent_state["black_mask"] = drill
                 drills.append({"agent_id": sid, "verdict": drill["verdict"]})
             state.setdefault("agents", {})[sid] = agent_state
@@ -374,7 +384,7 @@ def begin_department_students(*, run_blackmask: bool = True) -> dict[str, Any]:
             "mao_teacher": dept.get("mao_teacher", "operational_general"),
             "mao_student": dept.get("mao_student", "cassy"),
             "blackmask_drills": drills,
-            "status": "operating",
+            "status": "operating" if persist else "dry_run",
             "started_at": _utc_now(),
         }
         state.setdefault("departments", {})[dept_id] = dept_entry
@@ -387,20 +397,22 @@ def begin_department_students(*, run_blackmask: bool = True) -> dict[str, Any]:
             verdict="BEGIN",
             extra=f"students: {len(student_ids)} | blackmask: {run_blackmask}",
         )
-        _append_jsonl(
-            MAIN_BRAIN_LOG,
-            {
-                "ts": _utc_now(),
-                "kind": "department_students_begin",
-                "department": dept_id,
-                "summary": tsap_summary,
-            },
-        )
+        if persist:
+            _append_jsonl(
+                MAIN_BRAIN_LOG,
+                {
+                    "ts": _utc_now(),
+                    "kind": "department_students_begin",
+                    "department": dept_id,
+                    "summary": tsap_summary,
+                },
+            )
 
     state["last_begin"] = _utc_now()
     state["protocol"] = "TEACHER_STUDENT_APPRENTICESHIP_PROTOCOL"
     state["ecosystem"] = cfg.get("title", "Kopano-Phu Ecosystem")
-    _save_state(state)
+    if persist:
+        _save_state(state)
 
     sub_brains = merge_sub_brain_rows()
     return {
@@ -412,6 +424,7 @@ def begin_department_students(*, run_blackmask: bool = True) -> dict[str, Any]:
         "sub_brains_attached": sum(1 for r in sub_brains if r.get("attachment") == "attached"),
         "sub_brains_total": len(sub_brains),
         "state_path": str(STATE_PATH.relative_to(REPO_ROOT)),
+        "persisted": persist,
     }
 
 

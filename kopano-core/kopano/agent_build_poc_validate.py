@@ -45,8 +45,11 @@ def _run_script(args: list[str], timeout: int = 120) -> tuple[int, str]:
     return proc.returncode, out.strip()
 
 
-def _ensure_boot_applied() -> None:
-    """Fresh clones / CI: BOOT v1 must be active before mesh checks."""
+def _ensure_boot_applied(*, persist: bool) -> None:
+    """Apply BOOT only for a persisted run; no-write validation skips activation."""
+    if not persist:
+        return
+
     from .phu_boot_governance import apply_boot, boot_status
 
     rs = boot_status().get("runtime_state") or {}
@@ -55,7 +58,8 @@ def _ensure_boot_applied() -> None:
 
 
 def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
-    _ensure_boot_applied()
+    """Validate the agent-building path; write_report=False is fully non-persistent."""
+    _ensure_boot_applied(persist=write_report)
     checks: list[dict[str, Any]] = []
 
     # 1 — Bracket protocol
@@ -138,11 +142,13 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             imperfect_pattern="#? PoC unproven",
             perfect_pattern="#! PoC validated",
             submit_to_guardian=True,
+            persist=write_report,
         )
+        expected_identi_verdict = "HANDOFF_SUBMITTED" if write_report else "HANDOFF_DRY_RUN"
         checks.append(
             _check(
                 "identi_flow_handoff",
-                identi.get("verdict") == "HANDOFF_SUBMITTED",
+                identi.get("verdict") == expected_identi_verdict,
                 identi.get("verdict", ""),
                 identi.get("guardian_handoff", {}).get("status"),
             )
@@ -163,7 +169,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     try:
         from .phu_apprenticeship import blackmask_drill
 
-        bm = blackmask_drill("cassy")
+        bm = blackmask_drill("cassy", persist=write_report)
         checks.append(
             _check(
                 "blackmask_cassy_ship",
@@ -184,11 +190,13 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             run_blackmask=False,
             teacher_approve=True,
             teacher_note="Save — PoC validation run",
+            persist=write_report,
         )
+        expected_guardian_verdicts = ("SHIP", "SUBMITTED") if write_report else ("DRY_RUN",)
         checks.append(
             _check(
                 "guardian_flow_teacher_kc",
-                g.get("verdict") in ("SHIP", "SUBMITTED"),
+                g.get("verdict") in expected_guardian_verdicts,
                 g.get("verdict", ""),
                 (g.get("steps", [])[-1] if g.get("steps") else {}),
             )
@@ -198,7 +206,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
 
     # 6 — BOOT mesh BlackMask
     try:
-        from .phu_boot_governance import blackmask_dry_run, boot_status
+        from .phu_boot_governance import _load_boot_state, blackmask_dry_run, boot_status
 
         dry = blackmask_dry_run()
         ship = dry.get("ship", 0)
@@ -211,7 +219,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
                 dry,
             )
         )
-        rs = boot_status().get("runtime_state") or {}
+        rs = _load_boot_state() if not write_report else boot_status().get("runtime_state") or {}
         checks.append(
             _check(
                 "boot_v1_status",
@@ -326,6 +334,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     report = {
         "schema": "agent_build_poc_validation_v1",
         "ts": _utc_now(),
+        "persisted": write_report,
         "verdict": overall,
         "passed": passed,
         "total": len(checks),
