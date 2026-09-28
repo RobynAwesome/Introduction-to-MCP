@@ -1,4 +1,4 @@
-## CURRENT STATE — 2026-09-28T16:47:47+02:00 (HOME-FIRST GSMB AUDIT — CENTRAL SEAT HANDOFF)
+## CURRENT STATE — 2026-09-28T17:31:05+02:00 (PR #213 CHECK BLOCKED — EXTERNAL BILLING HOLD)
 
 > **Actor:** Codex Forge — stateless renter / Chief Architect seat, operating only within Robyn's explicit task scope
 > **Human authority:** Robyn Kholofelo Rababalela retains approval and canonical decision authority.
@@ -9,6 +9,14 @@
 ### Active objective
 
 Robyn asked to continue the 00-Home-first GSMB audit and repair work, set instructions for centralized seats while model-token capacity is limited through 2026-09-30, and then commit, deploy, and finish the relevant issues and pull requests. This is a live handoff, not a claim that every folder, issue, pull request, or deployment is complete.
+
+### PR #213 and repository backlog status — 2026-09-28
+
+- Commit `1d47e133369667522bd23fc826f7bc3691a86ec5` is pushed on `codex/gsmb-home-first-final-sep24`; PR [#213](https://github.com/RobynAwesome/Introduction-to-MCP/pull/213) is OPEN against `master` at `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`.
+- Hosted checks at that exact head did not execute. GitHub annotations for RTC, CodeQL, dependency firewall, provenance, zero-trust, and swarm jobs say: `The job was not started because your account is locked due to a billing issue.` Every affected job has `runner_id=0` and no steps. Treat the checks as `BLOCKED / NOT TESTED`, not code failures or passes. Re-run after the repository owner resolves the billing lock.
+- Vercel preview checks passed; they are preview receipts only. Azure production remains `HOLD` under issue #211 because the OIDC credential/federation contract and authorized deployment receipt are absent. No production deployment was performed.
+- Local evidence remains: focused renter/admission suites 11 passed; Python compileall and tracked pre-commit KHELOS gate passed; Studio build and lint exited successfully with the warnings recorded below. ChatGPT-5.6 Sol Forge has been asked to review the exact PR diff; its response is pending.
+- Live GitHub inventory at this observation: 20 open pull requests (PR #213 and 19 Dependabot upgrades) and 16 open issues. Issue #205 governs the dependency admission sequence; #207 requires repository-settings enforcement evidence; #211 remains a deployment HOLD. The remaining backlog items have distinct acceptance criteria and are not closed by PR #213. Do not merge dependency changes or close incidents/audit issues based on this branch.
 
 ### Central seat instructions for this task
 
@@ -43,13 +51,13 @@ Every seat that acts must identify its actor/model/interface, the one assigned s
 - Home-first navigation is in place in `AGENTS.md`, `Schematics/00-Home/00-Home - Index.md`, Dashboard, Home Now, Schematics index, and Schematics session guidance. Older dashboard/home claims are scoped as dated context; root NOW remains the current authority.
 - Runtime fixes cover HTTP admission and status behavior, ALP-gated execution, renter acknowledgement, blocking world-write paths, GSMB false-PASS prevention, UI admission, and the direct governance/smoke/GSMB/continuous-runner CLIs. CLI acknowledgements are no longer prefilled; diagnostic gate/status paths are read-only.
 - Test-generated JSONL receipt rows were removed from this review worktree before commit preparation. Confirm the tracked diff remains free of test output before staging.
-- Pre-commit renter ingress was performed through `scripts/kc_kpgs_governance.py entry --assert`; its exact operation and acknowledgement are recorded in `poc-vs-foc/CODEX_GSMB_HOME_AUDIT_2026-09-28_CLOSE.json` and the Main Brain JSONL ledger. The tracked KHELOS gate must still be run from this worktree before commit.
-- The existing ChatGPT-5.6 Sol review did not inspect this final diff. The branch still needs an exact-diff independent review and GitHub CI before any merge decision.
+- Pre-commit renter ingress was performed through `scripts/kc_kpgs_governance.py entry --renter-id codex_forge --renter-class stateless_renter --assert --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD` at `2026-09-28T15:31:05Z`, operation `cli:kpgs_governance_entry_assert`; the ACKNOWLEDGED row is in `docs/swarm-ops/logs/KC Main Brain Log.jsonl`. The tracked KHELOS pre-commit gate and `git diff --check` both passed for this handoff update.
+- The existing ChatGPT-5.6 Sol review did not inspect this final diff. A new exact-diff review request has been sent; its result is pending. GitHub CI has not run because of the external billing lock, so merge remains blocked.
 - The original task asked for a complete house audit and repair plan. The saved first-party semantic coverage remains only 536 of 2,046 locally inventoried first-party text files, with 755 media/binaries, unnumbered files, local-only material, and most non-Schematics repository code not fully reviewed. These figures are the audit snapshot, not proof that every scope is still unchanged.
 
 ### Next admissible action
 
-Finish the focused source review, commit only the intended audit/runtime changes on this branch, push it and open a reviewable PR. Ask Sol Forge to review that exact PR head and wait for repository checks. Keep the Azure deployment HOLD intact, then continue the broader audit and per-item issue/PR work from the saved records. Do not call the full audit, all issues, all PRs, or production deployment finished until their separate evidence exists.
+Wait for the repository owner to resolve the GitHub Actions billing lock; then re-run required checks on PR #213's latest head and obtain the pending exact-diff Sol review before a merge decision. Keep Azure deployment on HOLD until its OIDC/federation contract is configured and an authorized production receipt exists. Continue folder coverage from 00-Home and handle remaining issues/PRs against their own current acceptance criteria. Do not call the full audit, all issues, all PRs, or production deployment finished until their separate evidence exists.
 
 ---
 
