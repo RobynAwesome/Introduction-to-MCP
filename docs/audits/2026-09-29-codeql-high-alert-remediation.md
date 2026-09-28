@@ -1,28 +1,28 @@
 # 2026-09-29 CodeQL High-Alert Remediation Receipt
 
-## Scope and evidence
+## Scope and local verification
 
-The isolated branch `codex/security-high-alert-remediation` is based on `RobynAwesome/Introduction-to-MCP` master at `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`. The repository alert snapshot showed CodeQL high alert #15 (`py/path-injection`) in `kopano-core/kopano/eco_poc_validate.py` and high alert #25 (`py/polynomial-redos`) in `scripts/kc_bracket_lint.py`. PR #213's CodeQL merge check reported four findings on changed code, including two high and two medium.
+The isolated branch `codex/security-high-alert-remediation` is based on `RobynAwesome/Introduction-to-MCP` master at `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`. Commit `acbf68f657702063d5bfb673c9f980e1f31b997f` constrains ECO evidence-file checks to repository-relative paths, rejects traversal and paths resolving outside the repository, and replaces the bracket linter's backtracking regular expression with a one-pass parser.
 
-## Local changes
-
-- Evidence references are accepted only as repository-relative paths. Absolute paths, drive-qualified paths, parent traversal, and resolved paths escaping the repository root are rejected before a file-existence check.
-- The bracket linter now scans bracket tags in one pass instead of applying the previous regular expression to untrusted text.
-- Regression tests cover valid repository evidence, preserved JSONL marker behavior, traversal and absolute-path rejection, normal and malformed tags, and long unclosed input.
-
-## Local verification
+Validation passed:
 
 - `python -m pytest -q tests/test_security_high_alert_remediation.py`: 7 passed.
 - `python scripts/kc_bracket_lint.py --self-test`: all 6 self-tests passed.
 - `python -m ruff check kopano-core/kopano/eco_poc_validate.py scripts/kc_bracket_lint.py tests/test_security_high_alert_remediation.py`: passed.
-- `git diff --cached --check`: passed for the exact five staged files.
+- `git diff --cached --check`: passed for the committed files.
 
-## Provider and incident status
+## Provider verification
 
-No GitHub CodeQL scan has run on this branch yet. The two alert records are not claimed closed until GitHub rescans and confirms that result. Other high CodeQL alerts and Dependabot alert #96 (NLTK 3.10.3 / GHSA-8mgp-746c-j5xp) remain unresolved. The security settings and merge checks are enforcement evidence; they do not establish that exploitation occurred or that none occurred. No breach is confirmed by the evidence reviewed here, and this receipt does not claim an absence of historical exposure.
+PR #233 is open at the commit above. All required checks passed for source-fix commit acbf68f, including all four CodeQL Advanced language jobs (Actions, JavaScript/TypeScript, Python, Rust), Python 3.11/3.12 tests, GitGuardian, the governance gates, and both Vercel previews. This receipt-only update changes no source; GitHub will refresh checks for the updated PR tip. The GitHub CodeQL PR check reports “No new alerts in code changed by this pull request.” Queries for `refs/pull/233/merge` show alert IDs #15 (`py/path-injection`) and #25 (`py/polynomial-redos`) absent from the PR ref; both remain open on `master` until an approved merge and default-branch rescan. The PR is blocked pending independent review.
 
-P0 governance issue #121 remains open. Seat 10 remains suspended and recused. This code change does not implement runtime recusal, seat re-entry enforcement, or incident closure. No production deployment occurred.
+At the reviewed `master` snapshot, 34 high CodeQL alerts were open. This patch addresses only the two findings above. High Dependabot alert #96 (NLTK) remains open.
 
-## Next admissible action
+## Secret and incident status
 
-Publish this branch and open a review PR. Confirm the GitHub CodeQL rescan result and all required checks. Request independent review before merge. Keep unresolved alerts and issue #121 open until their separate evidence and closure criteria are met.
+GitHub reports secret scanning, provider-pattern push protection, and Dependabot security updates enabled, with zero open secret-scanning alerts at the snapshot. The PR GitGuardian check passed. Non-provider secret patterns are disabled; these results do not establish comprehensive coverage or prove absence of past exposure. No exploitation or credential breach is established by the evidence reviewed here.
+
+P0 issue #121 remains open. Seat 10 remains suspended and recused. This patch does not implement runtime recusal/self-adjudication enforcement or re-entry gates and does not close the separately documented governance/tool-route incident.
+
+## Deployment status and next action
+
+Both Vercel PR preview deployments completed. Neither PR has merged and no production deployment occurred. Obtain independent review, merge only after the enforced gates pass, then verify the default-branch CodeQL alert state and the production deployment receipt. Keep issue #121 open until its own exit criteria have independent evidence.
