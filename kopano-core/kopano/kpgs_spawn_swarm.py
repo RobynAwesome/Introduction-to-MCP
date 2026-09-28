@@ -452,6 +452,7 @@ def dispatch_spawn_event(
     agent_id: str,
     message: str,
     intent: str = "execute",
+    persist: bool = True,
 ) -> dict[str, Any]:
     """
     State-machine event bus — SWFUS → Jethro → WWJD → sever or proceed.
@@ -466,14 +467,30 @@ def dispatch_spawn_event(
     wwjd = swfus.get("wwjd_firewall") or wwjd_firewall(action=message)
 
     if jethro.get("severity") == "RED" or wwjd.get("verdict") == "HOLD":
-        sever = sever_and_archive(
-            agent_id=agent_id,
-            reason=f"jethro={jethro.get('severity')} wwjd={wwjd.get('verdict')}",
-            context={"swfus": swfus, "intent": intent, "message_preview": message[:300]},
-        )
+        reason = f"jethro={jethro.get('severity')} wwjd={wwjd.get('verdict')}"
+        if persist:
+            sever = sever_and_archive(
+                agent_id=agent_id,
+                reason=reason,
+                context={"swfus": swfus, "intent": intent, "message_preview": message[:300]},
+            )
+            event = "SEVER"
+        else:
+            sever = {
+                "verdict": "WOULD_SEVER",
+                "agent_id": agent_id,
+                "reason": reason,
+                "persisted": False,
+                "summary": (
+                    f"[RIGHTEOUS_SEVERANCE_DRY_RUN] agent={agent_id} | "
+                    f"reason={reason[:80]}"
+                ),
+            }
+            event = "DRY_RUN_SEVER"
         return {
-            "event": "SEVER",
+            "event": event,
             "proceed": False,
+            "persisted": persist,
             "swfus": swfus,
             "jethro": jethro,
             "wwjd": wwjd,

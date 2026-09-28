@@ -38,7 +38,7 @@ def test_agent_build_poc_logic_proven_list() -> None:
 
 
 def test_agent_build_read_only_validation_does_not_persist_nested_poc_receipt(monkeypatch, tmp_path) -> None:
-    from kopano import phu_apprenticeship, phu_boot_governance, lpm_lph_engine
+    from kopano import mao_dispatch, phu_apprenticeship, phu_boot_governance, lpm_lph_engine
 
     state_path = tmp_path / "eco-poc-state.json"
     log_path = tmp_path / "main-brain.jsonl"
@@ -55,6 +55,16 @@ def test_agent_build_read_only_validation_does_not_persist_nested_poc_receipt(mo
     monkeypatch.setattr(lpm_lph_engine, "STATE_PATH", flow_state)
     monkeypatch.setattr(phu_boot_governance, "MAIN_BRAIN_LOG", log_path)
     monkeypatch.setattr(phu_boot_governance, "STATE_PATH", boot_state)
+    spawn_persistence_modes: list[bool] = []
+    original_attach_spawn = mao_dispatch._attach_spawn_swfus
+
+    def observe_spawn_persistence(route_payload, *, agent_id, message, persist=True):
+        spawn_persistence_modes.append(persist)
+        return original_attach_spawn(
+            route_payload, agent_id=agent_id, message=message, persist=persist
+        )
+
+    monkeypatch.setattr(mao_dispatch, "_attach_spawn_swfus", observe_spawn_persistence)
 
     report = validate_agent_build_poc(write_report=False)
 
@@ -63,6 +73,7 @@ def test_agent_build_read_only_validation_does_not_persist_nested_poc_receipt(mo
     checks = {check["check"]: check for check in report["checks"]}
     assert checks["identi_flow_handoff"]["detail"] == "HANDOFF_DRY_RUN"
     assert checks["guardian_flow_teacher_kc"]["detail"] == "DRY_RUN"
+    assert spawn_persistence_modes == [False]
     assert not any(
         path.exists()
         for path in (state_path, log_path, review_log, apprenticeship_state, flow_state, boot_state)

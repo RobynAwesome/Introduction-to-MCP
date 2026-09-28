@@ -234,7 +234,9 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     try:
         from .mao_dispatch import route_task
 
-        rt = route_task("audit", "diaspora offline apprenticeship LPM proof")
+        rt = route_task(
+            "audit", "diaspora offline apprenticeship LPM proof", persist=write_report
+        )
         checks.append(
             _check(
                 "mao_route_lpm_kpefs",

@@ -187,30 +187,35 @@ def _attach_kpefs(route_payload: dict[str, Any], message: str, intent: str = "ex
     return route_payload
 
 
-def _attach_spawn_swfus(route_payload: dict[str, Any], *, agent_id: str, message: str) -> dict[str, Any]:
+def _attach_spawn_swfus(
+    route_payload: dict[str, Any], *, agent_id: str, message: str, persist: bool = True
+) -> dict[str, Any]:
     try:
         from .kpgs_spawn_swarm import dispatch_spawn_event, spawn_agent_by_id
 
         if spawn_agent_by_id(agent_id):
-            event = dispatch_spawn_event(agent_id=agent_id, message=message)
+            event = dispatch_spawn_event(agent_id=agent_id, message=message, persist=persist)
             route_payload["spawn_event"] = event
             route_payload["swfus"] = event.get("swfus")
             if not event.get("proceed"):
-                route_payload["severed"] = True
+                if persist:
+                    route_payload["severed"] = True
+                else:
+                    route_payload["would_sever"] = True
                 route_payload["severance"] = event.get("severance")
     except Exception:
         route_payload["swfus"] = None
     return route_payload
 
 
-def route_task(intent: str, message: str) -> dict[str, Any]:
+def route_task(intent: str, message: str, *, persist: bool = True) -> dict[str, Any]:
     from .kpgs_renter_entry import attach_hood_entry
 
     mao = _load_mao_module()
     payload = mao.mao_route(intent=intent, message=message)
     payload = _attach_kpefs(payload, message, intent=intent)
     routed = (payload.get("routed_agent") or {}).get("agent_id", "anonymous")
-    payload = _attach_spawn_swfus(payload, agent_id=routed, message=message)
+    payload = _attach_spawn_swfus(payload, agent_id=routed, message=message, persist=persist)
     return attach_hood_entry(payload, renter_id=f"mao_route:{routed}")
 
 

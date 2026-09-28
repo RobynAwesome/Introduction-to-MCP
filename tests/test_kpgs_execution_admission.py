@@ -634,6 +634,10 @@ def test_mutating_kpgs_clis_require_explicit_renter_ack_before_execution():
         [sys.executable, "scripts/kc_phu_graduation_bar.py", "steward-trust", "--renter-id", "cli_test"],
         [sys.executable, "scripts/kc_steward_lane_run.py", "activate", "--renter-id", "cli_test"],
         [sys.executable, "scripts/kc_phu_boot_v1.py", "apply", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_kpgs_agent_validate.py", "mesh"],
+        [sys.executable, "scripts/kc_kpgs_agent_validate.py", "thesis"],
+        [sys.executable, "scripts/kc_kpgs_agent_validate.py", "black-beast"],
+        [sys.executable, "scripts/kc_kpgs_agent_validate.py", "validate", "cassy"],
     ]
     env = {**os.environ, "PYTHONPATH": str(REPO / "kopano-core")}
 
@@ -641,6 +645,32 @@ def test_mutating_kpgs_clis_require_explicit_renter_ack_before_execution():
         result = subprocess.run(command, cwd=REPO, env=env, capture_output=True, text=True, check=False)
         assert result.returncode == 2
         assert "--hood-ack" in result.stderr
+
+
+def test_kpgs_agent_validator_rejects_wrong_ack_before_persisting():
+    main_brain_log = REPO / "docs" / "swarm-ops" / "logs" / "KC Main Brain Log.jsonl"
+    before = main_brain_log.read_bytes() if main_brain_log.exists() else None
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/kc_kpgs_agent_validate.py",
+            "mesh",
+            "--renter-id",
+            "cli_test",
+            "--hood-ack",
+            "WRONG_ACK",
+        ],
+        cwd=REPO,
+        env={**os.environ, "PYTHONPATH": str(REPO / "kopano-core")},
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    assert "hood_ack must be literal" in result.stderr
+    after = main_brain_log.read_bytes() if main_brain_log.exists() else None
+    assert after == before
 
 
 def test_monorepo_phu_actions_require_confirmation_and_forward_renter_ack(monkeypatch):
