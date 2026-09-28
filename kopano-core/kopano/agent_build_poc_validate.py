@@ -257,6 +257,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             exit_code=0,
             livelihood_ids=["LIV-01", "LIV-04"],
             anticipated_delta="checks_pass_ratio rises from 0% to 100%",
+            persist_receipt=write_report,
         )
         checks.append(
             _check(

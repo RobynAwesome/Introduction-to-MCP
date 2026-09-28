@@ -97,11 +97,38 @@ from .phu_ecosystem import (
 router = APIRouter(prefix="/api/kc/phu", tags=["kopano-phu-legacy"])
 
 
-class PhuReattachBody(BaseModel):
+class KpgsRenterAdmissionBody(BaseModel):
+    """Renter admission fields for the consequential PHU/KPEFS routes gated here."""
+
+    renter_id: str = Field(min_length=1)
+    renter_class: str = Field(default="linguistic_actor", min_length=1)
+    hood_ack: str
+    ts: str = Field(min_length=1)
+
+
+class StewardTrustBody(KpgsRenterAdmissionBody):
+    note: str = ""
+
+
+class StewardLaneActivationBody(KpgsRenterAdmissionBody):
+    note: str = ""
+    department_id: str = "kopano_labs_experimentation"
+    run_identi: bool = True
+    run_guardian: bool = True
+    teacher_approve: bool = True
+    action: str | None = None
+    evidence: str | None = None
+
+
+class BootApplyBody(KpgsRenterAdmissionBody):
+    pass
+
+
+class PhuReattachBody(KpgsRenterAdmissionBody):
     dry_run: bool = Field(default=False)
 
 
-class PhuPopulateBody(BaseModel):
+class PhuPopulateBody(KpgsRenterAdmissionBody):
     sync_vault_logs: bool = Field(default=True)
 
 
@@ -152,7 +179,7 @@ class LpmDialecticBody(BaseModel):
     perfect_pattern: str
 
 
-class EcoPocValidateBody(BaseModel):
+class EcoPocValidateBody(KpgsRenterAdmissionBody):
     agent_id: str
     claim: str
     model: str
@@ -165,15 +192,6 @@ class EcoPocValidateBody(BaseModel):
     exit_code: int | None = None
     anticipated_delta: str = ""
     livelihood_ids: list[str] = Field(default_factory=list)
-
-
-class KpgsRenterAdmissionBody(BaseModel):
-    """The existing renter acknowledgement required for consequential KPGS API work."""
-
-    renter_id: str = Field(min_length=1)
-    renter_class: str = Field(default="linguistic_actor", min_length=1)
-    hood_ack: str
-    ts: str = Field(min_length=1)
 
 
 class SovereignSimTickBody(KpgsRenterAdmissionBody):
@@ -244,8 +262,9 @@ def post_reattach(
     operator: dict = Depends(_require_god),
 ) -> dict:
     """Reattach unused/detached sub-brains to Cassy legacy lane."""
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_reattach_subbrains")
     result = reattach_detached_subbrains(dry_run=body.dry_run)
-    return {"operator": operator["email"], **result}
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **result}
 
 
 @router.get("/apprenticeship/status")
@@ -319,18 +338,27 @@ def get_operating_mesh_status() -> dict:
 
 @router.post("/operating-mesh/promote-all")
 def post_operating_mesh_promote_all(
+    body: KpgsRenterAdmissionBody,
     operator: dict = Depends(_require_god),
 ) -> dict:
     """Promote all flagships with live BlackMask + teacher APPROVE + PoC (god mode)."""
-    return {"operator": operator["email"], **promote_all_flagships()}
+    entry, alp = _admit_kpgs_preparation(body, operation="operating_mesh_promote_all")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **promote_all_flagships()}
 
 
 @router.post("/operating-mesh/promote/{sub_brain_id}")
 def post_operating_mesh_promote_one(
     sub_brain_id: str,
+    body: KpgsRenterAdmissionBody,
     operator: dict = Depends(_require_god),
 ) -> dict:
-    return {"operator": operator["email"], **promote_flagship(sub_brain_id, skip_if_operating=False)}
+    entry, alp = _admit_kpgs_preparation(body, operation="operating_mesh_promote_one")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **promote_flagship(sub_brain_id, skip_if_operating=False),
+    }
 
 
 @router.get("/graduation-bar/status")
@@ -346,11 +374,16 @@ def post_graduation_check_claim(body: dict) -> dict:
 
 @router.post("/graduation-bar/steward-trust")
 def post_graduation_steward_trust(
-    body: dict | None = None,
+    body: StewardTrustBody,
     operator: dict = Depends(_require_god),
 ) -> dict:
-    note = str((body or {}).get("note", ""))
-    return {"operator": operator["email"], **record_steward_trust(note=note)}
+    entry, alp = _admit_kpgs_preparation(body, operation="graduation_steward_trust")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **record_steward_trust(note=body.note),
+    }
 
 
 @router.get("/steward-lane/status")
@@ -369,21 +402,23 @@ def get_steward_lane_kasilink_snapshot() -> dict:
 
 @router.post("/steward-lane/activate")
 def post_steward_lane_activate(
-    body: dict | None = None,
+    body: StewardLaneActivationBody,
     operator: dict = Depends(_require_god),
 ) -> dict:
     """Activate Cassy profile, steward trust, Identi → Guardian (Cassey approve)."""
-    b = body or {}
+    entry, alp = _admit_kpgs_preparation(body, operation="steward_lane_activate")
     return {
         "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
         **run_steward_lane_activate(
-            note=str(b.get("note", "Studio steward lane activate")),
-            department_id=str(b.get("department_id", "kopano_labs_experimentation")),
-            run_identi=bool(b.get("run_identi", True)),
-            run_guardian=bool(b.get("run_guardian", True)),
-            teacher_approve=bool(b.get("teacher_approve", True)),
-            action=str(b["action"]) if b.get("action") else None,
-            evidence=str(b["evidence"]) if b.get("evidence") else None,
+            note=body.note or "Studio steward lane activate",
+            department_id=body.department_id,
+            run_identi=body.run_identi,
+            run_guardian=body.run_guardian,
+            teacher_approve=body.teacher_approve,
+            action=body.action,
+            evidence=body.evidence,
         ),
     }
 
@@ -470,8 +505,9 @@ def get_boot_v1() -> dict:
 
 
 @router.post("/boot/v1/apply")
-def post_boot_v1_apply() -> dict:
-    return apply_boot()
+def post_boot_v1_apply(body: BootApplyBody, operator: dict = Depends(_require_god)) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_boot_apply")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **apply_boot()}
 
 
 @router.post("/boot/v1/blackmask-dry-run")
@@ -707,22 +743,31 @@ def get_promotion_check(agent_id: str) -> dict:
 
 
 @router.post("/poc/validate")
-def post_poc_validate(body: EcoPocValidateBody) -> dict:
+def post_poc_validate(
+    body: EcoPocValidateBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Validate PoC with Rosen (M,R) + measurable Δ + livelihood signals."""
-    return validate_eco_poc(
-        agent_id=body.agent_id,
-        claim=body.claim,
-        model=body.model,
-        relation=body.relation,
-        baseline=body.baseline,
-        observed=body.observed,
-        unit=body.unit,
-        instrument=body.instrument,
-        evidence=body.evidence,
-        exit_code=body.exit_code,
-        livelihood_ids=body.livelihood_ids or None,
-        anticipated_delta=body.anticipated_delta,
-    )
+    entry, alp = _admit_kpgs_preparation(body, operation="eco_poc_validate")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **validate_eco_poc(
+            agent_id=body.agent_id,
+            claim=body.claim,
+            model=body.model,
+            relation=body.relation,
+            baseline=body.baseline,
+            observed=body.observed,
+            unit=body.unit,
+            instrument=body.instrument,
+            evidence=body.evidence,
+            exit_code=body.exit_code,
+            livelihood_ids=body.livelihood_ids or None,
+            anticipated_delta=body.anticipated_delta,
+        ),
+    }
 
 
 @router.post("/populate-main-brain")
@@ -734,8 +779,9 @@ def post_populate(
     Populate Main Brain from Schematics: sync logs, reattach sub-brains,
     append Bracket Protocol receipt.
     """
+    entry, alp = _admit_kpgs_preparation(body, operation="phu_populate_main_brain")
     try:
         result = populate_main_brain(sync_vault_logs=body.sync_vault_logs)
     except OSError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
-    return {"operator": operator["email"], **result}
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **result}

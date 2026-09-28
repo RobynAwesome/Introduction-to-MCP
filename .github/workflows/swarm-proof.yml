@@ -88,10 +88,10 @@ jobs:
         run: python scripts/kc_ci_bootstrap_operating_mesh.py
 
       - name: Agent build PoC validate
-        run: python scripts/kc_agent_build_poc_validate.py
+        run: python scripts/kc_agent_build_poc_validate.py --no-write --json-only > docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json
 
       - name: KPEFS full gate
-        run: python scripts/kc_kpefs_full_gate.py
+        run: python scripts/kc_kpefs_full_gate.py --no-write
 
       - name: Pytest swarm tools
         run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py tests/test_swarm_console_api.py tests/test_agent_build_poc_validate.py tests/test_operating_mesh.py tests/test_graduation_bar.py tests/test_external_swarm_lane.py -q

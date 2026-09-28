@@ -544,11 +544,23 @@ def mao_begin_department_students(
 
 @mcp.tool(
     name="mao_agent_build_poc_validate",
-    description="Run 19-gate agent-building PoC proof (same as CI job agent-build-poc).",
+    description="Persist the 19-gate agent-building PoC receipt after explicit stateless renter admission.",
 )
-def mao_agent_build_poc_validate() -> dict[str, Any]:
+def mao_agent_build_poc_validate(
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
+) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.agent_build_poc_validate import validate_agent_build_poc
-    return validate_agent_build_poc(write_report=True)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_agent_build_poc_validate",
+    )
+    return {**validate_agent_build_poc(write_report=True), **admission}
 
 
 @mcp.tool(
@@ -594,9 +606,20 @@ def mao_steward_lane_status() -> dict[str, Any]:
 def mao_steward_lane_activate(
     note: str = Field(default="", description="Optional steward trust note"),
     department_id: str = Field(default="kopano_labs_experimentation"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.steward_lane import run_steward_lane_activate
-    return run_steward_lane_activate(note=note, department_id=department_id)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_steward_lane_activate",
+    )
+    return {**run_steward_lane_activate(note=note, department_id=department_id), **admission}
 
 
 @mcp.tool(
@@ -628,7 +651,7 @@ def mao_kpefs_full_gate() -> dict[str, Any]:
 
     root = Path(__file__).resolve().parents[1]
     proc = subprocess.run(
-        [sys.executable, str(root / "scripts" / "kc_kpefs_full_gate.py"), "--json"],
+        [sys.executable, str(root / "scripts" / "kc_kpefs_full_gate.py"), "--no-write", "--json"],
         cwd=root,
         capture_output=True,
         text=True,
@@ -718,9 +741,20 @@ def mao_eco_poc_validate(
     evidence: str = Field(default="", description="Receipt path or jsonl"),
     anticipated_delta: str = Field(default="", description="Rosen Δ tip — state before run"),
     livelihood_ids: list[str] = Field(default_factory=list),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.eco_poc_validate import validate_eco_poc
-    return validate_eco_poc(
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:mao_eco_poc_validate",
+    )
+    result = validate_eco_poc(
         agent_id=_tsap_str(agent_id),
         claim=_tsap_str(claim),
         model=_tsap_str(model),
@@ -732,6 +766,7 @@ def mao_eco_poc_validate(
         anticipated_delta=_tsap_str(anticipated_delta),
         livelihood_ids=livelihood_ids or None,
     )
+    return {**result, **admission}
 
 
 # ─── MCP RESOURCES ───────────────────────────────────────────────────────────

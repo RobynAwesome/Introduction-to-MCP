@@ -60,6 +60,8 @@ PoC **passes** when a teacher can sign a receipt that links **model → measurem
 ```bash
 # Validate a PoC submission (internal oracles)
 python scripts/kc_eco_poc_validate.py \
+  --renter-id <actor-id> --renter-class stateless_renter \
+  --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD \
   --agent-id kp_agri_soil_01 \
   --claim "Field pH map for lime prescription" \
   --model "Grid sample every 50m; probe calibrated daily" \
@@ -71,10 +73,13 @@ python scripts/kc_eco_poc_validate.py \
 
 # API
 POST /api/kc/phu/poc/validate
+Body must carry `renter_id`, `renter_class`, `hood_ack`, and `ts`; the operator and ALP gates run before the PoC receipt is persisted.
 
 # MCP (TSAP server)
-eco_poc_validate
+eco_poc_validate(renter_id=<actor-id>, renter_class="stateless_renter", hood_ack="I_AM_STATELESS_RENTER_NOT_LANDLORD")
 ```
+
+The persisted MAO/TSAP PoC and agent-build tools also require an explicit renter ID and the typed acknowledgement. Read-only KPEFS status/full-gate tools do not persist those reports.
 
 State: `kopano-core/.kc/eco_poc_records.json`
 

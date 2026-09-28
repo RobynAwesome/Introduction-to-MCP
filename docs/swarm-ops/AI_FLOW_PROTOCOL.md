@@ -54,15 +54,17 @@ Patterns in [LPM_LPH_GOD_COMPLEX_DOCTRINE.json](./LPM_LPH_GOD_COMPLEX_DOCTRINE.j
 | TSAP MCP | `tsap_guardian_flow`, `tsap_identi_flow`, `tsap_lpm_dialectic`, `tsap_ai_flow_status`, `tsap_agent_build_poc_validate` |
 | MAO MCP | `mao_lpm_attach`, `mao_agent_build_poc_validate` |
 
+Persisted MAO/TSAP agent-build and PoC validation tools require `renter_id`, `renter_class`, and a caller-supplied `hood_ack`. The same renter admission applies to TSAP operating-mesh promotion and steward-lane activation before their receipts or state are written.
+
 ## CI gate
 
 Job `agent-build-poc` in `.github/workflows/ci.yml` (and swarm-proof on doctrine paths):
 
 ```bash
-python scripts/kc_agent_build_poc_validate.py
+python scripts/kc_agent_build_poc_validate.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
-Uploads `docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json`. Fails the pipeline if any of 17 checks fail.
+For a local persisted run, supply the current renter ID and exact acknowledgement shown above. CI uses `--no-write --json-only` and does not append a Main Brain row. Fails the pipeline if any of 17 checks fail.
 
 ## Sequence (Guardian)
 

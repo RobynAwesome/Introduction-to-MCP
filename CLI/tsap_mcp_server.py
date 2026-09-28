@@ -157,9 +157,20 @@ def eco_poc_validate(
         default_factory=list,
         description="LIV-01..LIV-05 under unemployment doctrine",
     ),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.eco_poc_validate import validate_eco_poc
-    return validate_eco_poc(
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_eco_poc_validate",
+    )
+    result = validate_eco_poc(
         agent_id=_str(agent_id),
         claim=_str(claim),
         model=_str(model),
@@ -173,15 +184,28 @@ def eco_poc_validate(
         livelihood_ids=livelihood_ids or None,
         anticipated_delta=_str(anticipated_delta),
     )
+    return {**result, **admission}
 
 
 @mcp.tool(
     name="tsap_agent_build_poc_validate",
-    description="Prove agent-building PoC — Bracket, BlackMask, Guardian/Identi, LPM/LPH, MAO, KPEFS, mesh, graduation (19 checks).",
+    description="Persist agent-building PoC proof after explicit stateless renter admission.",
 )
-def tsap_agent_build_poc_validate() -> dict[str, Any]:
+def tsap_agent_build_poc_validate(
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
+) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.agent_build_poc_validate import validate_agent_build_poc
-    return validate_agent_build_poc(write_report=True)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_agent_build_poc_validate",
+    )
+    return {**validate_agent_build_poc(write_report=True), **admission}
 
 
 @mcp.tool(
@@ -230,9 +254,20 @@ def tsap_operating_mesh_status() -> dict[str, Any]:
 )
 def tsap_operating_mesh_promote_all(
     force: bool = Field(default=False, description="Re-run even if already operating"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.operating_mesh import promote_all_flagships
-    return promote_all_flagships(skip_if_operating=not force)
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_operating_mesh_promote_all",
+    )
+    return {**promote_all_flagships(skip_if_operating=not force), **admission}
 
 
 @mcp.tool(
@@ -270,7 +305,7 @@ def tsap_kpefs_full_gate() -> dict[str, Any]:
     import subprocess
 
     proc = subprocess.run(
-        [sys.executable, str(REPO_ROOT / "scripts" / "kc_kpefs_full_gate.py"), "--json"],
+        [sys.executable, str(REPO_ROOT / "scripts" / "kc_kpefs_full_gate.py"), "--no-write", "--json"],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
@@ -312,12 +347,24 @@ def tsap_steward_lane_status() -> dict[str, Any]:
 def tsap_steward_lane_activate(
     note: str = Field(default="", description="Optional note on steward trust receipt"),
     department_id: str = Field(default="kopano_labs_experimentation"),
+    renter_id: str = Field(description="Stateless renter identity"),
+    renter_class: str = Field(default="stateless_renter"),
+    hood_ack: str = Field(description="Type the exact canonical renter acknowledgement"),
 ) -> dict[str, Any]:
+    from kopano.kpgs_cli_admission import admit_cli_renter
     from kopano.steward_lane import run_steward_lane_activate
-    return run_steward_lane_activate(
+
+    admission = admit_cli_renter(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        hood_ack=hood_ack,
+        operation="mcp:tsap_steward_lane_activate",
+    )
+    result = run_steward_lane_activate(
         note=_str(note),
         department_id=_str(department_id, "kopano_labs_experimentation"),
     )
+    return {**result, **admission}
 
 
 @mcp.tool(

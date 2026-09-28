@@ -12,6 +12,7 @@ sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
 
 from kopano.agent_build_poc_validate import validate_agent_build_poc  # noqa: E402
 from kopano.ci_verdict_semantics import classify_agent_build_ci  # noqa: E402
+from kopano import eco_poc_validate  # noqa: E402
 
 
 @pytest.mark.integration
@@ -34,6 +35,19 @@ def test_agent_build_poc_logic_proven_list() -> None:
     assert any("Identi" in x for x in proven)
     assert any("Operating mesh" in x for x in proven)
     assert any("Graduation bar" in x for x in proven)
+
+
+def test_agent_build_read_only_validation_does_not_persist_nested_poc_receipt(monkeypatch, tmp_path) -> None:
+    state_path = tmp_path / "eco-poc-state.json"
+    log_path = tmp_path / "main-brain.jsonl"
+    monkeypatch.setattr(eco_poc_validate, "STATE_PATH", state_path)
+    monkeypatch.setattr(eco_poc_validate, "MAIN_BRAIN_LOG", log_path)
+
+    report = validate_agent_build_poc(write_report=False)
+
+    assert report["verdict"] in {"PASS", "FAIL"}
+    assert not state_path.exists()
+    assert not log_path.exists()
 
 
 def test_expected_foc_decline_is_green_ci() -> None:

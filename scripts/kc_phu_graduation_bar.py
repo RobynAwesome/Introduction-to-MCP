@@ -17,6 +17,7 @@ from kopano.graduation_bar import (  # noqa: E402
     record_steward_trust,
     run_guard_verified_production,
 )
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 
 def main() -> int:
@@ -30,7 +31,26 @@ def main() -> int:
     p.add_argument("--claim", default="", help="Claim text for check-claim")
     p.add_argument("--note", default="", help="Optional note for steward-trust")
     p.add_argument("--json", action="store_true")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for steward-trust")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
+
+    admission: dict | None = None
+    if args.command == "steward-trust":
+        if not args.renter_id:
+            p.error("steward-trust requires --renter-id")
+        if not args.hood_ack:
+            p.error("steward-trust requires --hood-ack")
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation="cli:graduation_steward_trust",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
 
     if args.command == "status":
         out = graduation_bar_status()
@@ -40,6 +60,7 @@ def main() -> int:
         out = graduation_claim_allowed(claim=args.claim)
     else:
         out = record_steward_trust(note=args.note)
+        out.update(admission or {})
 
     if args.json:
         print(json.dumps(out, indent=2))

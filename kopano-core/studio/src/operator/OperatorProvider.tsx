@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { GuiUser } from '../types';
+import type { RenterAdmissionInput } from './operatorApi';
 import {
   clearOperator,
   fetchGodOverview,
@@ -36,7 +37,7 @@ interface OperatorContextValue {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => void;
   refreshOverview: () => Promise<void>;
-  runAction: (action: string, confirm?: boolean) => Promise<void>;
+  runAction: (action: string, confirm?: boolean, renterAdmission?: RenterAdmissionInput) => Promise<void>;
   runGit: (action: string, confirm?: boolean) => Promise<void>;
 }
 
@@ -118,14 +119,14 @@ export function OperatorProvider({ children }: { children: ReactNode }) {
     setError(null);
   }, []);
 
-  const runAction = useCallback(async (action: string, confirm = false) => {
+  const runAction = useCallback(async (action: string, confirm = false, renterAdmission?: RenterAdmissionInput) => {
     if (!token) {
       return;
     }
     setBusy(true);
     setError(null);
     try {
-      const result = await runGodAction(token, action, confirm);
+      const result = await runGodAction(token, action, confirm, renterAdmission);
       setLastOutput(result.tail ?? JSON.stringify(result, null, 2));
       await refreshOverview();
     } catch (err: unknown) {

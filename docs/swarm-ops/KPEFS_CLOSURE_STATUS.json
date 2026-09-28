@@ -41,7 +41,7 @@
         "python scripts/kc_external_swarm_lane.py validate-url --url <URL>",
         "python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --evidence-url <URL> --strict-proof",
         "python scripts/kc_guard.py doctrine-swarm-ack",
-        "python scripts/kc_kpefs_full_gate.py"
+        "python scripts/kc_kpefs_full_gate.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD"
       ],
       "cli_template": "python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --evidence-url \"https://<durable-external-artifact>\" --strict-proof",
       "guard_unlock": "python scripts/kc_guard.py all --require-swarm-ack"
@@ -49,5 +49,5 @@
   },
   "next_human_step": "Log real kimi_ack with external evidence URL (see external_swarm.guide)",
   "ts": "2026-06-14T12:28:37Z",
-  "when_back_command": "python scripts/kc_kpefs_run_snapshot.py"
+  "when_back_command": "python scripts/kc_kpefs_run_snapshot.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD"
 }

@@ -20,13 +20,38 @@ def main() -> int:
     p.add_argument("--json", action="store_true")
     p.add_argument("--append-main-brain", action="store_true")
     p.add_argument("--skip-gate", action="store_true", help="Only refresh closure snapshot")
+    p.add_argument("--no-write", action="store_true", help="Report current closure without persisting reports or receipts")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for persisted snapshot")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
+
+    if args.no_write and args.append_main_brain:
+        p.error("--append-main-brain cannot be combined with --no-write")
+
+    admission: dict | None = None
+    if not args.no_write:
+        if not args.renter_id:
+            p.error("persisted KPEFS snapshot requires --renter-id")
+        if not args.hood_ack:
+            p.error("persisted KPEFS snapshot requires --hood-ack")
+        from kopano.kpgs_cli_admission import admit_cli_renter
+
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation="cli:kpefs_run_snapshot",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
 
     gate_exit = 0
     gate_out = ""
     if not args.skip_gate:
         proc = subprocess.run(
-            [PY, str(REPO / "scripts" / "kc_kpefs_full_gate.py"), "--json"],
+            [PY, str(REPO / "scripts" / "kc_kpefs_full_gate.py"), "--no-write", "--json"],
             cwd=REPO,
             capture_output=True,
             text=True,
@@ -35,9 +60,13 @@ def main() -> int:
         gate_exit = proc.returncode
         gate_out = proc.stdout or proc.stderr
 
-    from kopano.external_swarm_lane import write_closure_snapshot
+    from kopano.external_swarm_lane import kpefs_closure_status, write_closure_snapshot
 
-    closure = write_closure_snapshot(append_main_brain=args.append_main_brain)
+    closure = (
+        kpefs_closure_status()
+        if args.no_write
+        else write_closure_snapshot(append_main_brain=args.append_main_brain)
+    )
 
     payload = {
         "schema": "kpefs_run_snapshot_v1",
@@ -45,6 +74,8 @@ def main() -> int:
         "full_gate_verdict": None,
         "closure": closure,
     }
+    if admission is not None:
+        payload.update(admission)
     if gate_out.strip():
         try:
             gate_json = json.loads(gate_out)

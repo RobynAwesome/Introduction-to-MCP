@@ -130,6 +130,7 @@ def validate_eco_poc(
     livelihood_ids: list[str] | None = None,
     anticipated_delta: str = "",
     reject_world_oracle_text: str = "",
+    persist_receipt: bool = True,
 ) -> dict[str, Any]:
     """
     Validate PoC against internal oracles. World acceptance is not an input — only receipts.
@@ -282,10 +283,11 @@ def validate_eco_poc(
         "validated_at": _utc_now(),
     }
 
-    state = _load_state()
-    state.setdefault("records", []).append(record)
-    _save_state(state)
-    _append_main_brain(summary, record)
+    if persist_receipt:
+        state = _load_state()
+        state.setdefault("records", []).append(record)
+        _save_state(state)
+        _append_main_brain(summary, record)
 
     return record
 

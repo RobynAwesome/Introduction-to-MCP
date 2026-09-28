@@ -12,6 +12,7 @@ REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "kopano-core"))
 
 from kopano.eco_poc_validate import poc_doctrine_payload, validate_eco_poc  # noqa: E402
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 
 def main() -> int:
@@ -29,6 +30,9 @@ def main() -> int:
     p.add_argument("--exit-code", type=int, default=None)
     p.add_argument("--anticipated-delta", default="")
     p.add_argument("--livelihood", default="", help="Comma-separated LIV-01..LIV-05")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for persisted validation")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
 
     if args.guide:
@@ -40,6 +44,20 @@ def main() -> int:
         return 2
 
     liv = [x.strip() for x in args.livelihood.split(",") if x.strip()]
+    if not args.renter_id:
+        p.error("persisted PoC validation requires --renter-id")
+    if not args.hood_ack:
+        p.error("persisted PoC validation requires --hood-ack")
+    try:
+        admission = admit_cli_renter(
+            renter_id=args.renter_id,
+            renter_class=args.renter_class,
+            hood_ack=args.hood_ack,
+            operation="cli:eco_poc_validate",
+        )
+    except ValueError as exc:
+        p.error(str(exc))
+
     result = validate_eco_poc(
         agent_id=args.agent_id,
         claim=args.claim,
@@ -54,6 +72,7 @@ def main() -> int:
         livelihood_ids=liv or None,
         anticipated_delta=args.anticipated_delta,
     )
+    result.update(admission)
     print(json.dumps(result, indent=2))
     return 0 if result.get("verdict") == "PASS" else 1
 

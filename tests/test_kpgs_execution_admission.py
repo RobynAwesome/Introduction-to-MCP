@@ -47,6 +47,15 @@ def _god_headers() -> dict[str, str]:
     return {"Authorization": f"Bearer {token}"}
 
 
+def _eco_poc_body(*, ack: str = kpgs_renter_entry.HOOD_ACK_LITERAL) -> dict:
+    return {
+        **_admission_body(ack=ack),
+        "agent_id": "cassy_test",
+        "claim": "a bounded test claim",
+        "model": "test-model",
+    }
+
+
 def test_missing_alp_blocks_all_traced_world_entrypoints_before_world_write(monkeypatch, tmp_path):
     world_path = tmp_path / "world.json"
     monkeypatch.setattr(kpgs_activation_gate, "_ALP_AVAILABLE", False)
@@ -106,6 +115,253 @@ def test_api_blocks_unadmitted_execution_before_operation(monkeypatch, tmp_path)
     assert not (tmp_path / "world.json").exists()
 
 
+def test_consequential_phu_mutation_routes_require_operator_and_valid_renter_ack(monkeypatch, tmp_path):
+    entry_log = tmp_path / "entry.jsonl"
+    monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", entry_log)
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "validate_eco_poc",
+        lambda **_: (_ for _ in ()).throw(AssertionError("PoC validation ran before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "populate_main_brain",
+        lambda **_: (_ for _ in ()).throw(AssertionError("Main Brain population ran before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "reattach_detached_subbrains",
+        lambda **_: (_ for _ in ()).throw(AssertionError("Sub-brains were reattached before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "promote_all_flagships",
+        lambda **_: (_ for _ in ()).throw(AssertionError("Operating mesh promoted before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "promote_flagship",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("Flagship promoted before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "record_steward_trust",
+        lambda **_: (_ for _ in ()).throw(AssertionError("Steward trust recorded before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "run_steward_lane_activate",
+        lambda **_: (_ for _ in ()).throw(AssertionError("Steward lane activated before admission")),
+    )
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "apply_boot",
+        lambda: (_ for _ in ()).throw(AssertionError("PHU boot applied before admission")),
+    )
+    client = TestClient(app)
+    routes = [
+        ("/api/kc/phu/poc/validate", _eco_poc_body()),
+        ("/api/kc/phu/populate-main-brain", {**_admission_body(), "sync_vault_logs": False}),
+        ("/api/kc/phu/reattach-subbrains", {**_admission_body(), "dry_run": True}),
+        ("/api/kc/phu/operating-mesh/promote-all", _admission_body()),
+        ("/api/kc/phu/operating-mesh/promote/subbrain-test", _admission_body()),
+        ("/api/kc/phu/graduation-bar/steward-trust", _admission_body()),
+        ("/api/kc/phu/steward-lane/activate", _admission_body()),
+        ("/api/kc/phu/boot/v1/apply", _admission_body()),
+    ]
+
+    for path, body in routes:
+        assert client.post(path, json=body).status_code == 401
+        assert client.post(path, json={**body, "hood_ack": "WRONG"}, headers=_god_headers()).status_code == 422
+
+    assert not entry_log.exists()
+
+
+def test_consequential_phu_mutation_routes_require_alp_and_bind_admission_receipts(monkeypatch, tmp_path):
+    entry_log = tmp_path / "entry.jsonl"
+    monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", entry_log)
+    side_effects: list[str] = []
+
+    def validate_poc(**_):
+        side_effects.append("poc")
+        return {"schema": "eco_poc_test_v1", "verdict": "RECORDED"}
+
+    def populate_brain(**_):
+        side_effects.append("populate")
+        return {"schema": "populate_main_brain_test_v1", "verdict": "RECORDED"}
+
+    def reattach_sub_brains(**_):
+        side_effects.append("reattach")
+        return {"schema": "reattach_subbrains_test_v1", "verdict": "RECORDED"}
+
+    def promote_all(**_):
+        side_effects.append("promote_all")
+        return {"schema": "operating_mesh_promote_all_test_v1", "verdict": "RECORDED"}
+
+    def promote_one(*_args, **_kwargs):
+        side_effects.append("promote_one")
+        return {"schema": "operating_mesh_promote_one_test_v1", "verdict": "RECORDED"}
+
+    def record_trust(**_):
+        side_effects.append("steward_trust")
+        return {"schema": "steward_trust_test_v1", "verdict": "RECORDED"}
+
+    def activate_steward(**_):
+        side_effects.append("steward_activate")
+        return {"schema": "steward_activate_test_v1", "verdict": "RECORDED"}
+
+    def apply_boot():
+        side_effects.append("boot_apply")
+        return {"schema": "boot_apply_test_v1", "verdict": "RECORDED"}
+
+    monkeypatch.setattr(kc_phu_legacy_api, "validate_eco_poc", validate_poc)
+    monkeypatch.setattr(kc_phu_legacy_api, "populate_main_brain", populate_brain)
+    monkeypatch.setattr(kc_phu_legacy_api, "reattach_detached_subbrains", reattach_sub_brains)
+    monkeypatch.setattr(kc_phu_legacy_api, "promote_all_flagships", promote_all)
+    monkeypatch.setattr(kc_phu_legacy_api, "promote_flagship", promote_one)
+    monkeypatch.setattr(kc_phu_legacy_api, "record_steward_trust", record_trust)
+    monkeypatch.setattr(kc_phu_legacy_api, "run_steward_lane_activate", activate_steward)
+    monkeypatch.setattr(kc_phu_legacy_api, "apply_boot", apply_boot)
+    monkeypatch.setattr(
+        kc_phu_legacy_api,
+        "require_alp_receipt",
+        lambda: (_ for _ in ()).throw(ValueError("ALP unavailable")),
+    )
+    client = TestClient(app)
+    routes = [
+        ("/api/kc/phu/poc/validate", _eco_poc_body(), "eco_poc_validate"),
+        (
+            "/api/kc/phu/populate-main-brain",
+            {**_admission_body(), "sync_vault_logs": False},
+            "phu_populate_main_brain",
+        ),
+        (
+            "/api/kc/phu/reattach-subbrains",
+            {**_admission_body(), "dry_run": True},
+            "phu_reattach_subbrains",
+        ),
+        (
+            "/api/kc/phu/operating-mesh/promote-all",
+            _admission_body(),
+            "operating_mesh_promote_all",
+        ),
+        (
+            "/api/kc/phu/operating-mesh/promote/subbrain-test",
+            _admission_body(),
+            "operating_mesh_promote_one",
+        ),
+        (
+            "/api/kc/phu/graduation-bar/steward-trust",
+            {**_admission_body(), "note": "test"},
+            "graduation_steward_trust",
+        ),
+        (
+            "/api/kc/phu/steward-lane/activate",
+            {**_admission_body(), "note": "test"},
+            "steward_lane_activate",
+        ),
+        (
+            "/api/kc/phu/boot/v1/apply",
+            _admission_body(),
+            "phu_boot_apply",
+        ),
+    ]
+    headers = _god_headers()
+
+    for path, body, _operation in routes:
+        assert client.post(path, json=body, headers=headers).status_code == 409
+
+    assert side_effects == []
+    log_rows = [json.loads(line) for line in entry_log.read_text(encoding="utf-8").splitlines()]
+    assert [row["operation"] for row in log_rows] == [
+        "eco_poc_validate",
+        "phu_populate_main_brain",
+        "phu_reattach_subbrains",
+        "operating_mesh_promote_all",
+        "operating_mesh_promote_one",
+        "graduation_steward_trust",
+        "steward_lane_activate",
+        "phu_boot_apply",
+    ]
+    assert all(
+        row["ack_verified"] is True and row["ack_receipt"]["verdict"] == "ACKNOWLEDGED"
+        for row in log_rows
+    )
+
+    alp_receipt = {"schema": "alp_receipt_v1", "consistency_hash": "testhash"}
+    monkeypatch.setattr(kc_phu_legacy_api, "require_alp_receipt", lambda: alp_receipt)
+    for path, body, operation in routes:
+        response = client.post(path, json=body, headers=headers)
+        assert response.status_code == 200
+        payload = response.json()
+        assert payload["operator"] == "test-operator@local.invalid"
+        assert payload["hood_entry"]["operation"] == operation
+        assert payload["hood_entry"]["ack_verified"] is True
+        assert payload["alp_receipt"] == alp_receipt
+
+    assert side_effects == [
+        "poc",
+        "populate",
+        "reattach",
+        "promote_all",
+        "promote_one",
+        "steward_trust",
+        "steward_activate",
+        "boot_apply",
+    ]
+
+
+def test_mcp_poc_and_mesh_mutations_require_renter_admission(monkeypatch):
+    from CLI import mao_server, tsap_mcp_server
+    from kopano import (
+        agent_build_poc_validate,
+        eco_poc_validate,
+        kpgs_cli_admission,
+        operating_mesh,
+        steward_lane,
+    )
+
+    calls: list[dict] = []
+
+    def admit(**kwargs):
+        calls.append(kwargs)
+        return {"hood_entry": {"operation": kwargs["operation"]}, "alp_receipt": {"schema": "alp_receipt_v1"}}
+
+    monkeypatch.setattr(kpgs_cli_admission, "admit_cli_renter", admit)
+    monkeypatch.setattr(
+        agent_build_poc_validate,
+        "validate_agent_build_poc",
+        lambda *, write_report: {"verdict": "PASS", "write_report": write_report},
+    )
+    monkeypatch.setattr(eco_poc_validate, "validate_eco_poc", lambda **_: {"verdict": "PASS"})
+    monkeypatch.setattr(operating_mesh, "promote_all_flagships", lambda **_: {"verdict": "PASS"})
+    monkeypatch.setattr(steward_lane, "run_steward_lane_activate", lambda **_: {"verdict": "ACTIVE"})
+
+    common = {
+        "renter_id": "mcp_test",
+        "renter_class": "stateless_renter",
+        "hood_ack": kpgs_renter_entry.HOOD_ACK_LITERAL,
+    }
+    mao_server.mao_agent_build_poc_validate(**common)
+    mao_server.mao_eco_poc_validate(agent_id="agent", claim="claim", model="model", **common)
+    tsap_mcp_server.tsap_agent_build_poc_validate(**common)
+    tsap_mcp_server.eco_poc_validate(agent_id="agent", claim="claim", model="model", **common)
+    tsap_mcp_server.tsap_operating_mesh_promote_all(**common)
+    mao_server.mao_steward_lane_activate(**common)
+    tsap_mcp_server.tsap_steward_lane_activate(**common)
+
+    assert [call["operation"] for call in calls] == [
+        "mcp:mao_agent_build_poc_validate",
+        "mcp:mao_eco_poc_validate",
+        "mcp:tsap_agent_build_poc_validate",
+        "mcp:tsap_eco_poc_validate",
+        "mcp:tsap_operating_mesh_promote_all",
+        "mcp:mao_steward_lane_activate",
+        "mcp:tsap_steward_lane_activate",
+    ]
+    assert all(call["hood_ack"] == kpgs_renter_entry.HOOD_ACK_LITERAL for call in calls)
+
+
 def test_false_breathing_cycle_cannot_emit_gsmb_pass(monkeypatch, tmp_path):
     from kopano import protocols, telemetry_breathing_flow
 
@@ -147,6 +403,16 @@ def test_mutating_kpgs_clis_require_explicit_renter_ack_before_execution():
         [sys.executable, "scripts/kc_kpgs_smoke_poc.py", "smoke", "--renter-id", "cli_test"],
         [sys.executable, "-m", "kopano.gsmb_poc"],
         [sys.executable, "kopano-core/kopano/continuous_gsmb_runner.py"],
+        [sys.executable, "scripts/kc_eco_poc_validate.py", "--renter-id", "cli_test", "--claim", "test", "--model", "test"],
+        [sys.executable, "scripts/kc_phu_populate_main_brain.py", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_phu_reattach_subbrains.py", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_agent_build_poc_validate.py", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_kpefs_full_gate.py", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_kpefs_run_snapshot.py", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_phu_operating_mesh.py", "promote-all", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_phu_graduation_bar.py", "steward-trust", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_steward_lane_run.py", "activate", "--renter-id", "cli_test"],
+        [sys.executable, "scripts/kc_phu_boot_v1.py", "apply", "--renter-id", "cli_test"],
     ]
     env = {**os.environ, "PYTHONPATH": str(REPO / "kopano-core")}
 
@@ -154,3 +420,54 @@ def test_mutating_kpgs_clis_require_explicit_renter_ack_before_execution():
         result = subprocess.run(command, cwd=REPO, env=env, capture_output=True, text=True, check=False)
         assert result.returncode == 2
         assert "--hood-ack" in result.stderr
+
+
+def test_monorepo_phu_actions_require_confirmation_and_forward_renter_ack(monkeypatch):
+    from kopano import monorepo_control
+
+    calls: list[tuple[str, list[str]]] = []
+    monkeypatch.setattr(
+        monorepo_control,
+        "run_script",
+        lambda script, args: (calls.append((script, args)) or (0, "ok")),
+    )
+
+    try:
+        monorepo_control.execute_script_action("phu_populate_main_brain", confirm=True)
+    except ValueError as exc:
+        assert "renter_id and hood_ack" in str(exc)
+    else:
+        raise AssertionError("PHU populate accepted missing renter admission")
+
+    try:
+        monorepo_control.execute_script_action(
+            "phu_reattach_subbrains",
+            renter_id="cli_test",
+            hood_ack=kpgs_renter_entry.HOOD_ACK_LITERAL,
+        )
+    except ValueError as exc:
+        assert "confirm=true" in str(exc)
+    else:
+        raise AssertionError("PHU reattachment accepted missing confirmation")
+
+    result = monorepo_control.execute_script_action(
+        "phu_reattach_subbrains",
+        confirm=True,
+        renter_id="cli_test",
+        renter_class="stateless_renter",
+        hood_ack=kpgs_renter_entry.HOOD_ACK_LITERAL,
+    )
+    assert result["ok"] is True
+    assert calls == [
+        (
+            "kc_phu_reattach_subbrains.py",
+            [
+                "--renter-id",
+                "cli_test",
+                "--renter-class",
+                "stateless_renter",
+                "--hood-ack",
+                kpgs_renter_entry.HOOD_ACK_LITERAL,
+            ],
+        )
+    ]

@@ -4,6 +4,12 @@ import type { GuiUser } from '../types';
 const TOKEN_KEY = 'kopano-operator-token';
 const USER_KEY = 'kopano-operator-user';
 
+export interface RenterAdmissionInput {
+  renterId: string;
+  renterClass: string;
+  hoodAck: string;
+}
+
 export function readStoredOperator(): { token: string; user: GuiUser } | null {
   const token = window.localStorage.getItem(TOKEN_KEY);
   const rawUser = window.localStorage.getItem(USER_KEY);
@@ -79,10 +85,23 @@ export async function fetchGodOverview(token: string) {
   return response.json();
 }
 
-export async function runGodAction(token: string, action: string, confirm = false) {
+export async function runGodAction(
+  token: string,
+  action: string,
+  confirm = false,
+  renterAdmission?: RenterAdmissionInput,
+) {
   const response = await godFetch('/api/kc/god/actions/run', token, {
     method: 'POST',
-    body: JSON.stringify({ action, confirm }),
+    body: JSON.stringify({
+      action,
+      confirm,
+      ...(renterAdmission && {
+        renter_id: renterAdmission.renterId,
+        renter_class: renterAdmission.renterClass,
+        hood_ack: renterAdmission.hoodAck,
+      }),
+    }),
   });
   const data = await response.json();
   if (!response.ok) {

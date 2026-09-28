@@ -69,6 +69,8 @@ export function KpefsConsolePanel() {
   const [trusting, setTrusting] = useState(false);
   const [activating, setActivating] = useState(false);
   const [closure, setClosure] = useState<ClosureStatus | null>(null);
+  const [renterId, setRenterId] = useState('');
+  const [hoodAck, setHoodAck] = useState('');
 
   const refresh = useCallback(async () => {
     try {
@@ -112,6 +114,27 @@ export function KpefsConsolePanel() {
     await runRoute();
   };
 
+  const renterAdmission = (note: string) => ({
+    renter_id: renterId,
+    renter_class: 'stateless_renter',
+    hood_ack: hoodAck,
+    ts: new Date().toISOString(),
+    note,
+  });
+
+  const postKpgsMutation = async (path: string, note: string) => {
+    const response = await fetch(`${apiRoot}${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(renterAdmission(note)),
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.detail ?? 'KPGS action failed');
+    }
+    await refresh();
+  };
+
   const vectors = kpefs?.vectors?.vectors ?? [];
   const mesh = kpefs?.operating_mesh;
   const grad = kpefs?.graduation_bar;
@@ -144,7 +167,7 @@ export function KpefsConsolePanel() {
         <p className="swarm-footnote">
           {mesh?.phase3_exit_met
             ? 'All flagships operating with PoC PASS.'
-            : 'Promote via god mode or CLI: python scripts/kc_phu_operating_mesh.py promote-all'}
+            : 'Promotion requires God mode and an explicit renter entry. CLI: python scripts/kc_phu_operating_mesh.py promote-all --renter-id <actor-id> --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD'}
         </p>
         <ul className="swarm-checklist">
           {(mesh?.flagships ?? []).map((f) => (
@@ -206,6 +229,17 @@ export function KpefsConsolePanel() {
         <textarea rows={4} value={draft} onChange={(e) => setDraft(e.target.value)} />
       </label>
       <p className="swarm-footnote">{BLASPHEMY_HINT}</p>
+      <section className="swarm-panel" style={{ marginBottom: '1rem' }}>
+        <p className="swarm-footnote">State-changing KPEFS actions require an explicit renter entry. Type the acknowledgement exactly; it is not prefilled.</p>
+        <label className="field-shell">
+          <span>Renter ID</span>
+          <input value={renterId} autoComplete="off" onChange={(e) => setRenterId(e.target.value)} />
+        </label>
+        <label className="field-shell">
+          <span>Type exactly: I_AM_STATELESS_RENTER_NOT_LANDLORD</span>
+          <input value={hoodAck} autoComplete="off" spellCheck={false} onChange={(e) => setHoodAck(e.target.value)} />
+        </label>
+      </section>
       {lint && (
         <p className={`swarm-footnote ${lint.ok ? '' : 'warn'}`}>
           Bracket lint: {lint.ok ? 'OK' : (lint.violations ?? []).join('; ')}
@@ -227,12 +261,10 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button ghost"
-          disabled={promoting}
+          disabled={promoting || !renterId.trim() || !hoodAck.trim()}
           onClick={() => {
             setPromoting(true);
-            fetch(`${apiRoot}/api/kc/phu/operating-mesh/promote-all`, { method: 'POST' })
-              .then((r) => r.json())
-              .then(() => { void refresh(); })
+            postKpgsMutation('/api/kc/phu/operating-mesh/promote-all', 'Studio operating mesh promotion')
               .catch((err) => setError(String(err)))
               .finally(() => setPromoting(false));
           }}
@@ -242,16 +274,10 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button ghost"
-          disabled={trusting}
+          disabled={trusting || !renterId.trim() || !hoodAck.trim()}
           onClick={() => {
             setTrusting(true);
-            fetch(`${apiRoot}/api/kc/phu/graduation-bar/steward-trust`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ note: 'Studio steward trust — KC Cassey students' }),
-            })
-              .then((r) => r.json())
-              .then(() => { void refresh(); })
+            postKpgsMutation('/api/kc/phu/graduation-bar/steward-trust', 'Studio steward trust — KC Cassey students')
               .catch((err) => setError(String(err)))
               .finally(() => setTrusting(false));
           }}
@@ -261,18 +287,10 @@ export function KpefsConsolePanel() {
         <button
           type="button"
           className="action-button primary"
-          disabled={activating}
+          disabled={activating || !renterId.trim() || !hoodAck.trim()}
           onClick={() => {
             setActivating(true);
-            fetch(`${apiRoot}/api/kc/phu/steward-lane/activate`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                note: 'KC+Cassy steward lane — lead dev run',
-              }),
-            })
-              .then((r) => r.json())
-              .then(() => { void refresh(); })
+            postKpgsMutation('/api/kc/phu/steward-lane/activate', 'KC+Cassy steward lane — lead dev run')
               .catch((err) => setError(String(err)))
               .finally(() => setActivating(false));
           }}

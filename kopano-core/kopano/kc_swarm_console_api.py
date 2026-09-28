@@ -286,6 +286,9 @@ class OperatorLoginBody(BaseModel):
 class SwarmActionRequest(BaseModel):
     action: str = Field(description="Allowlisted script action id")
     confirm: bool = Field(default=False, description="Required for destructive git/steward actions")
+    renter_id: str = Field(default="", description="Required by PHU Main Brain mutation actions")
+    renter_class: str = Field(default="stateless_renter")
+    hood_ack: str = Field(default="", description="Exact canonical renter acknowledgement")
 
 
 _SWARM_ACTIONS = SCRIPT_ACTIONS
@@ -325,7 +328,13 @@ def run_swarm_action(
     operator: dict = Depends(_require_god),
 ) -> dict:
     try:
-        result = execute_script_action(body.action, confirm=body.confirm)
+        result = execute_script_action(
+            body.action,
+            confirm=body.confirm,
+            renter_id=body.renter_id,
+            renter_class=body.renter_class,
+            hood_ack=body.hood_ack,
+        )
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {

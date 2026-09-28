@@ -194,14 +194,14 @@ jobs:
         run: python scripts/kc_ci_bootstrap_operating_mesh.py
 
       - name: Agent build PoC validate
-        run: python scripts/kc_agent_build_poc_validate.py
+        run: python scripts/kc_agent_build_poc_validate.py --no-write --json-only > docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json
 
       - name: KPEFS full gate (Phases 0-5)
-        run: python scripts/kc_kpefs_full_gate.py
+        run: python scripts/kc_kpefs_full_gate.py --no-write
 
       - name: KPEFS snapshot + focused pytest lane
         run: |
-          python scripts/kc_kpefs_run_snapshot.py --skip-gate
+          python scripts/kc_kpefs_run_snapshot.py --skip-gate --no-write --json > docs/swarm-ops/KPEFS_CLOSURE_STATUS.json
           python -m pytest tests/test_operating_mesh.py tests/test_graduation_bar.py tests/test_external_swarm_lane.py tests/test_agent_build_poc_validate.py -q
 
       - name: Upload PoC diagnostics

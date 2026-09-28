@@ -74,6 +74,7 @@ def hood_entry_assertion(
     renter_class: str = "linguistic_actor",
     operation: str | None = None,
     write_log: bool = False,
+    ack_receipt: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Identity card issued at hood entry, including the parent Legacy purpose."""
     entryway = load_renter_entryway()
@@ -119,21 +120,27 @@ def hood_entry_assertion(
         ),
     }
     if write_log:
-        _append_jsonl(
-            MAIN_BRAIN_LOG,
-            {
-                "schema": "kc_main_brain_log_v1",
-                "ts": out["ts"],
-                "kind": "kpgs_hood_entry",
-                "renter_id": renter_id,
-                "renter_class": renter_class,
-                "operation": operation,
-                "legacy": legacy,
-                "legacy_precedence": legacy_precedence,
-                "summary": out["summary"],
-                "exit_code": 0,
-            },
-        )
+        log_row = {
+            "schema": "kc_main_brain_log_v1",
+            "ts": out["ts"],
+            "kind": "kpgs_hood_entry",
+            "renter_id": renter_id,
+            "renter_class": renter_class,
+            "operation": operation,
+            "legacy": legacy,
+            "legacy_precedence": legacy_precedence,
+            "summary": out["summary"],
+            "exit_code": 0,
+        }
+        if ack_receipt is not None:
+            log_row.update(
+                {
+                    "ack_verified": True,
+                    "ack_receipt": ack_receipt,
+                    "verdict": "ACKNOWLEDGED",
+                }
+            )
+        _append_jsonl(MAIN_BRAIN_LOG, log_row)
     return out
 
 
@@ -198,6 +205,7 @@ def assert_and_log_entry(
         renter_class=renter_class,
         operation=operation,
         write_log=True,
+        ack_receipt=ack_receipt,
     )
     assertion["operation"] = operation
     assertion["ack_verified"] = True

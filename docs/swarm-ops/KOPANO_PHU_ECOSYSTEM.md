@@ -24,11 +24,13 @@ Runtime state (reattach receipts) is stored at `kopano-core/.kc/phu_subbrains.js
 ## CLI
 
 ```bash
-python scripts/kc_phu_reattach_subbrains.py
-python scripts/kc_phu_populate_main_brain.py
+python scripts/kc_phu_reattach_subbrains.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_phu_populate_main_brain.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
-God dock / monorepo actions: `phu_reattach_subbrains`, `phu_populate_main_brain`.
+God dock / monorepo actions: `phu_reattach_subbrains`, `phu_populate_main_brain`; both require explicit confirmation and renter admission.
+
+The `/poc/validate`, operating-mesh promotion, steward-trust, steward-lane activation, and BOOT apply routes require an operator plus renter ID, exact `hood_ack`, and ALP admission before persistence. Their CLI and Studio entrypoints send those same fields; acknowledgements are not prefilled.
 
 ## Config
 
