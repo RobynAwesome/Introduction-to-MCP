@@ -860,6 +860,37 @@ def spawn_swarm_status() -> dict[str, Any]:
     }
 
 
+def spawn_swarm_status_snapshot() -> dict[str, Any]:
+    """Read catalog and last saved validation without checkpointing the swarm."""
+    catalog = load_spawn_catalog()
+    doctrine = load_spawn_doctrine()
+    report: dict[str, Any] = {}
+    if SPAWN_REPORT_PATH.is_file():
+        try:
+            candidate = json.loads(SPAWN_REPORT_PATH.read_text(encoding="utf-8"))
+            if candidate.get("schema") == "kpgs_spawn_swarm_report_v2":
+                report = candidate
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {
+        "schema": "kpgs_spawn_swarm_status_v2",
+        "ts": _utc_now(),
+        "source": "cached_report" if report else "source_snapshot",
+        "junior_agent_count": catalog.get("counts", {}).get("total"),
+        "sharding": catalog.get("cohorts", {}),
+        "catalog_path": catalog.get("_source"),
+        "catalog_counts": catalog.get("counts", {}),
+        "doctrine_path": doctrine.get("_source"),
+        "sample_validation": {
+            "verdict": report.get("verdict", "UNKNOWN"),
+            "ship": report.get("ship"),
+            "hold": report.get("hold"),
+        },
+        "report_ts": report.get("ts"),
+        "message": "Validation requires an admitted run; cached results may be stale.",
+    }
+
+
 def compile_spawn_swarm(*, write_log: bool = True) -> dict[str, Any]:
     import sys
     is_testing = "pytest" in sys.modules or "unittest" in sys.modules

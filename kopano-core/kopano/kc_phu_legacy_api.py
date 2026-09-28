@@ -34,12 +34,16 @@ from .lpm_lph_engine import (
     select_lph_personality,
 )
 from .steward_lane import run_steward_lane_activate, steward_lane_status
-from .kpgs_governance import compile_kpgs_governance, governance_status, propagate_governance_marker
+from .kpgs_governance import (
+    compile_kpgs_governance,
+    governance_status_snapshot,
+    propagate_governance_marker,
+)
 from .kpgs_renter_entry import assert_and_log_entry, hood_entry_assertion, load_renter_entryway
 from .kpgs_spawn_swarm import (
     compile_spawn_swarm,
     forensic_sociology_classify,
-    spawn_swarm_status,
+    spawn_swarm_status_snapshot,
     swfus_envelope,
     validate_spawn_swarm,
 )
@@ -51,8 +55,16 @@ from .infinite_hood_cloud import (
     load_domain_grid,
     outer_api_surface,
 )
-from .kpgs_activation_gate import check_kpgs_activation_gate
-from .kpgs_behavioral_poc import run_kpgs_behavioral_poc, run_sovereign_sim_tick
+from .kpgs_activation_gate import (
+    activation_gate_for_execution,
+    load_cached_activation_gate,
+    require_alp_receipt,
+)
+from .kpgs_behavioral_poc import (
+    load_kpgs_behavioral_poc_report,
+    run_kpgs_behavioral_poc,
+    run_sovereign_sim_tick,
+)
 from .sovereign_sim import (
     bootstrap_sovereign_sim,
     run_kpgs_smoke_poc,
@@ -155,10 +167,54 @@ class EcoPocValidateBody(BaseModel):
     livelihood_ids: list[str] = Field(default_factory=list)
 
 
+class KpgsRenterAdmissionBody(BaseModel):
+    """The existing renter acknowledgement required for consequential KPGS API work."""
+
+    renter_id: str = Field(min_length=1)
+    renter_class: str = Field(default="linguistic_actor", min_length=1)
+    hood_ack: str
+    ts: str = Field(min_length=1)
+
+
+class SovereignSimTickBody(KpgsRenterAdmissionBody):
+    sample_size: int = Field(default=12, ge=1, le=300)
+
+
+class KpgsHoodDispatchBody(KpgsRenterAdmissionBody):
+    plot_id: str = Field(default="plot_kopano_context", min_length=1)
+    message: str = Field(min_length=1)
+    agent_id: str = ""
+
+
 def _require_god(
     authorization: str | None = Header(default=None, alias="Authorization"),
 ) -> dict:
     return require_operator(authorization, god_only=True)
+
+
+def _admit_kpgs_renter(body: KpgsRenterAdmissionBody, *, operation: str) -> dict:
+    """Bind an admitted renter entry to a consequential API operation."""
+    try:
+        entry = assert_and_log_entry(
+            renter_id=body.renter_id,
+            renter_class=body.renter_class,
+            hood_ack=body.hood_ack,
+            operation=operation,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    entry["operation"] = operation
+    return entry
+
+
+def _admit_kpgs_preparation(body: KpgsRenterAdmissionBody, *, operation: str) -> tuple[dict, dict]:
+    """Require the existing ACK and ALP before compiling KPGS source state."""
+    entry = _admit_kpgs_renter(body, operation=operation)
+    try:
+        alp_receipt = require_alp_receipt()
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    return entry, alp_receipt
 
 
 @router.get("/ecosystem")
@@ -435,45 +491,62 @@ def get_kpgs_hood_entry() -> dict:
 
 
 @router.post("/kpgs/entry/assert")
-def post_kpgs_hood_entry_assert(body: dict) -> dict:
+def post_kpgs_hood_entry_assert(body: KpgsRenterAdmissionBody) -> dict:
     """Log hood entry with renter ack."""
-    return assert_and_log_entry(
-        renter_id=str(body.get("renter_id", "anonymous")),
-        renter_class=str(body.get("renter_class", "linguistic_actor")),
-        hood_ack=str(body.get("hood_ack", "")),
-    )
+    return _admit_kpgs_renter(body, operation="hood_entry_assert")
 
 
 @router.get("/kpgs/governance")
 def get_kpgs_governance() -> dict:
-    """Schematics MAIN BRAIN governance status."""
-    return governance_status()
+    """Read Schematics MAIN BRAIN governance source without compiling it."""
+    return governance_status_snapshot()
 
 
 @router.post("/kpgs/governance/compile")
-def post_kpgs_governance_compile() -> dict:
-    return compile_kpgs_governance()
+def post_kpgs_governance_compile(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="kpgs_governance_compile")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **compile_kpgs_governance()}
 
 
 @router.post("/kpgs/governance/propagate")
-def post_kpgs_governance_propagate() -> dict:
-    return propagate_governance_marker()
+def post_kpgs_governance_propagate(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="kpgs_governance_propagate")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **propagate_governance_marker()}
 
 
 @router.get("/kpgs/spawn/status")
 def get_kpgs_spawn_status() -> dict:
-    """300-agent spawn swarm status — altar layers, forensic lenses, SWFUS."""
-    return spawn_swarm_status()
+    """Read catalog and cached validation without checkpointing the swarm."""
+    return spawn_swarm_status_snapshot()
 
 
 @router.post("/kpgs/spawn/compile")
-def post_kpgs_spawn_compile() -> dict:
-    return compile_spawn_swarm()
+def post_kpgs_spawn_compile(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="kpgs_spawn_compile")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **compile_spawn_swarm()}
 
 
 @router.post("/kpgs/spawn/validate")
-def post_kpgs_spawn_validate() -> dict:
-    return validate_spawn_swarm(write_report=True)
+def post_kpgs_spawn_validate(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="kpgs_spawn_validate")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "alp_receipt": alp,
+        **validate_spawn_swarm(write_report=True),
+    }
 
 
 @router.post("/kpgs/spawn/swfus")
@@ -522,45 +595,90 @@ def get_infinite_hood_outer_api() -> dict:
 
 
 @router.post("/kpgs/hood/compile")
-def post_infinite_hood_compile() -> dict:
-    return compile_infinite_hood()
+def post_infinite_hood_compile(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry, alp = _admit_kpgs_preparation(body, operation="kpgs_hood_compile")
+    return {"operator": operator["email"], "hood_entry": entry, "alp_receipt": alp, **compile_infinite_hood()}
 
 
 @router.post("/kpgs/hood/dispatch")
-def post_infinite_hood_dispatch(body: dict) -> dict:
+def post_infinite_hood_dispatch(
+    body: KpgsHoodDispatchBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Client ingress dispatch — plot → landlord agent → SWFUS event bus."""
-    return hood_dispatch_for_plot(
-        plot_id=str(body.get("plot_id", "plot_kopano_context")),
-        message=str(body.get("message", "")),
-        agent_id=str(body.get("agent_id", "")),
-    )
+    entry = _admit_kpgs_renter(body, operation="kpgs_hood_dispatch")
+    gate = activation_gate_for_execution(write_report=True)
+    if not gate.get("activation_allowed"):
+        return {
+            "verdict": "BLOCKED",
+            "operator": operator["email"],
+            "hood_entry": entry,
+            "gate": gate,
+            "message": gate.get("message"),
+        }
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        "gate": gate,
+        **hood_dispatch_for_plot(
+            plot_id=body.plot_id,
+            message=body.message,
+            agent_id=body.agent_id,
+        ),
+    }
 
 
 @router.get("/kpgs/gate")
 def get_kpgs_activation_gate() -> dict:
-    """Automated gate — 300 agents SHIP required before sovereign sim."""
-    return check_kpgs_activation_gate(write_report=True)
+    """Read-only activation status — does not create an execution receipt."""
+    return load_cached_activation_gate(fallback_live=False)
 
 
 @router.post("/kpgs/smoke-poc")
-def post_kpgs_smoke_poc() -> dict:
+def post_kpgs_smoke_poc(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """Full KPGS smoke PoC: gate → governance → steward → behavioral → sim → receipt."""
-    return run_kpgs_smoke_poc()
+    entry = _admit_kpgs_renter(body, operation="kpgs_smoke_poc")
+    return {"operator": operator["email"], "hood_entry": entry, **run_kpgs_smoke_poc()}
 
 
 @router.get("/kpgs/behavioral-poc")
 def get_kpgs_behavioral_poc() -> dict:
-    """Mechanical KPGS proofs — hood dispatch, context bleed, sim tick."""
-    return run_kpgs_behavioral_poc(write_report=True)
+    """Read the last behavioral receipt without executing the PoC."""
+    return load_kpgs_behavioral_poc_report()
+
+
+@router.post("/kpgs/behavioral-poc")
+def post_kpgs_behavioral_poc(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    """Execute mechanical KPGS proofs after renter and operator admission."""
+    entry = _admit_kpgs_renter(body, operation="kpgs_behavioral_poc")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        **run_kpgs_behavioral_poc(write_report=True),
+    }
 
 
 @router.post("/sovereign-sim/tick")
-def post_sovereign_sim_tick(body: dict | None = None) -> dict:
+def post_sovereign_sim_tick(
+    body: SovereignSimTickBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
     """One sovereign sim game tick — sample hood agents, GUI-token dispatch."""
-    sample = 12
-    if body and body.get("sample_size"):
-        sample = int(body["sample_size"])
-    return run_sovereign_sim_tick(sample_size=sample, write_world=True)
+    entry = _admit_kpgs_renter(body, operation="sovereign_sim_tick")
+    return {
+        "operator": operator["email"],
+        "hood_entry": entry,
+        **run_sovereign_sim_tick(sample_size=body.sample_size, write_world=True),
+    }
 
 
 @router.get("/sovereign-sim/status")
@@ -575,8 +693,12 @@ def get_sovereign_sim_ui() -> dict:
 
 
 @router.post("/sovereign-sim/bootstrap")
-def post_sovereign_sim_bootstrap() -> dict:
-    return bootstrap_sovereign_sim()
+def post_sovereign_sim_bootstrap(
+    body: KpgsRenterAdmissionBody,
+    operator: dict = Depends(_require_god),
+) -> dict:
+    entry = _admit_kpgs_renter(body, operation="sovereign_sim_bootstrap")
+    return {"operator": operator["email"], "hood_entry": entry, **bootstrap_sovereign_sim()}
 
 
 @router.get("/boot/v1/promotion-check/{agent_id}")

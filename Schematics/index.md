@@ -40,21 +40,24 @@ status: active
 
 ## Read First
 
-1. [Kopano Context Master Protocol Ledger And Sovereign Architecture](18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md)
-2. [Dashboard](00-Home/Dashboard.md)
-3. [Now](00-Home/Now.md)
-4. [All Projects Registry](00-Home/All%20Projects%20Registry.md)
-5. [Sub-Brain Hierarchy](00-Home/Sub-Brain%20Hierarchy.md)
-6. [Cassy Core Initialization And Hierarchy Lock](01-Mission/Cassy%20Core%20Initialization%20And%20Hierarchy%20Lock.md)
-7. [Project Status](04-Updates/Project%20Status.md)
-8. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
-9. [19-TOKEN USAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md)
-10. [Cursor Onboarding Directive - 2026-05-09](18-PROTOCOLS/Cursor%20Onboarding%20Directive%20-%202026-05-09.md)
+1. [00-Home Index](00-Home/00-Home%20-%20Index.md) — start at the house front door.
+2. [Dashboard](00-Home/Dashboard.md) — orient to the vault map and its domains.
+3. [Home Now](00-Home/Now.md) — read Home-scoped context.
+4. [Repository-root NOW](../NOW.md) — recover active repository objectives, blockers, receipts, and handoffs.
+5. [Legacy](21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/Legacy.md) — recover the durable purpose boundary.
+6. [Renter Entryway](21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md) — recover the detailed execution contract.
+7. `00-Home/All Projects Registry.md` — present in the local OneDrive snapshot, absent from this Git snapshot pending reconciliation.
+8. `00-Home/Sub-Brain Hierarchy.md` — present in the local OneDrive snapshot, absent from this Git snapshot pending reconciliation.
+9. [Cassy Core Initialization And Hierarchy Lock](01-Mission/Cassy%20Core%20Initialization%20And%20Hierarchy%20Lock.md)
+10. [Project Status](04-Updates/Project%20Status.md)
+11. [18-PROTOCOLS](18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
+12. [19-TOKEN USAGE](19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md)
+13. [Cursor Onboarding Directive - 2026-05-09](18-PROTOCOLS/Cursor%20Onboarding%20Directive%20-%202026-05-09.md)
 
 ## Audit Doctrine
 
-- `AUDIT MAIN-BRAIN` starts at [Dashboard](00-Home/Dashboard.md).
-- Read `CLAUDE.md` for scope handoff, then route into the front door and protocol layer.
+- `AUDIT MAIN-BRAIN` starts at [00-Home Index](00-Home/00-Home%20-%20Index.md), then follows the Home front door to orient before reading deeper doctrine.
+- After the Home front door and repository-root `NOW.md`, read `CLAUDE.md` for scope handoff, then follow the relevant folder indexes and protocol layer.
 - Audit levels are now:
   - `Quick Audit` for one bounded question or one folder
   - `Standard Audit` for governance, multi-folder work, and role work

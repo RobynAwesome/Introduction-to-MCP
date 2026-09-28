@@ -44,6 +44,15 @@ def _check(name: str, ok: bool, detail: str, **extra: Any) -> dict[str, Any]:
     return {"check": name, "ok": ok, "detail": detail, **extra}
 
 
+def _write_gate_report(report: dict[str, Any]) -> None:
+    """Persist a gate receipt only when a caller explicitly requests one."""
+    GATE_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    GATE_REPORT_PATH.write_text(
+        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    report["report_path"] = _repo_rel(GATE_REPORT_PATH)
+
+
 def check_kpgs_activation_gate(*, write_report: bool = False) -> dict[str, Any]:
     """
     Automated gate for KPGS guild completion + governance readiness.
@@ -152,9 +161,7 @@ def check_kpgs_activation_gate(*, write_report: bool = False) -> dict[str, Any]:
     }
 
     if write_report:
-        GATE_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
-        GATE_REPORT_PATH.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        report["report_path"] = _repo_rel(GATE_REPORT_PATH)
+        _write_gate_report(report)
 
     return report
 
@@ -181,12 +188,8 @@ def load_cached_activation_gate(*, fallback_live: bool = False) -> dict[str, Any
     }
 
 
-def require_activation_allowed() -> dict[str, Any]:
-    """
-    Return gate report; raises ValueError if blocked.
-    ALP MANDATORY: every stateless renter entry fires alp_activate().
-    This is the architectural fix for BREACH-001.
-    """
+def require_alp_receipt() -> dict[str, Any]:
+    """Require the existing mandatory ALP receipt before renter execution."""
     # [AUTO LPM PROTOCOL] ALP — fires BEFORE gate evaluation.
     # BREACH-002 law is fail-closed: a mandatory renter activation receipt
     # cannot silently degrade into optional telemetry when the protocol is
@@ -216,8 +219,42 @@ def require_activation_allowed() -> dict[str, Any]:
             "receipt or HOLD"
         )
 
+    return alp_receipt
+
+
+def require_activation_allowed() -> dict[str, Any]:
+    """Require ALP, then the KPGS world-activation gate, or raise on HOLD."""
+    alp_receipt = require_alp_receipt()
     gate = check_kpgs_activation_gate()
     gate["alp_receipt"] = alp_receipt
     if not gate.get("activation_allowed"):
         raise ValueError(gate.get("message", "KPGS activation gate BLOCK"))
     return gate
+
+
+def activation_gate_for_execution(*, write_report: bool = False) -> dict[str, Any]:
+    """Return an ALP-admitted gate report for a consequential operation.
+
+    ``check_kpgs_activation_gate`` remains a status check. Execution callers use
+    this adapter so a missing, failed, malformed, or blocked mandatory ALP
+    admission becomes a normal ``BLOCK`` result before the requested KPGS
+    operation starts. ALP and the gate itself may write their own receipts.
+    It composes the existing ALP and activation-gate rules; it does not create a
+    new governance process.
+    """
+    try:
+        report = require_activation_allowed()
+    except ValueError as exc:
+        report = {
+            "schema": "kpgs_activation_gate_v1",
+            "ts": _utc_now(),
+            "activation_allowed": False,
+            "verdict": "BLOCK",
+            "gate_mode": "execution_admission",
+            "message": str(exc),
+            "source": "require_activation_allowed",
+        }
+
+    if write_report:
+        _write_gate_report(report)
+    return report

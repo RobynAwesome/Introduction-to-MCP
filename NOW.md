@@ -1,3 +1,87 @@
+## CURRENT STATE — 2026-09-28T16:47:47+02:00 (HOME-FIRST GSMB AUDIT — CENTRAL SEAT HANDOFF)
+
+> **Actor:** Codex Forge — stateless renter / Chief Architect seat, operating only within Robyn's explicit task scope
+> **Human authority:** Robyn Kholofelo Rababalela retains approval and canonical decision authority.
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `codex/gsmb-home-first-final-sep24` at base `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`
+> **Preservation:** Original `ZCode-Work` checkout at `e24b1aa0874a637477e6d436c032646cfa236aed` remains untouched.
+
+### Active objective
+
+Robyn asked to continue the 00-Home-first GSMB audit and repair work, set instructions for centralized seats while model-token capacity is limited through 2026-09-30, and then commit, deploy, and finish the relevant issues and pull requests. This is a live handoff, not a claim that every folder, issue, pull request, or deployment is complete.
+
+### Central seat instructions for this task
+
+These are task-scoped routing notes using the existing seat definitions and current MMAO/MAO authority contract. They do not change seat titles, acronym meanings, or the structural-maintenance allowlist.
+
+| Existing seat / actor | Assignment for this task | Boundary |
+|---|---|---|
+| Robyn / human operator | Decide unresolved canon, approve production credentials and deployment, retain merge authority | No AI seat may self-ratify a HOLD or claim human approval |
+| Codex Forge / Chief Architect | Own the clean review branch, finish the admitted Home/runtime repairs, maintain this NOW handoff, prepare exact review evidence | Work only in `codex/gsmb-home-first-final-sep24`; do not alter the preserved checkout |
+| APEX / Seat 6 / MMAO | Sequence bounded work and consolidate receipts when available | Coordination does not grant a new structural seat or deploy authority |
+| THARI / Seat 7 / MAO | Review safety, dignity, and consequence boundaries for the assigned audit scope | Preserve `UNKNOWN` and `HOLD`; no unsupported promotion |
+| KHELOS / Seat 8 | Independently check exact code paths, tests, and audit coverage records | Report evidence and gaps; do not author the builder's verdict |
+| ANCHOR / Seat 9 | Review perimeter and credential-handling findings within assigned scope | Do not access billing/provider configuration or secrets |
+| ANTIGRAVITY / Seat 10 / Chief Facilitator | Execute only an exact bounded task explicitly routed by the human or Codex | No scope expansion, self-approval, direct master mutation, or deployment |
+| Cursor / Lead Developer | Implementation support only if separately assigned | Task scope does not imply estate-wide permission |
+| ChatGPT-5.6 Sol Forge | Independent review of the exact branch diff and evidence when the current branch is available | Prior MAO review used source descriptions and is not a direct review of this branch |
+
+Every seat that acts must identify its actor/model/interface, the one assigned scope, exact repository head, evidence produced, unknowns, and next handoff. Keep one shared task record here; do not duplicate the entire history in each seat response. A seat that has not actually reviewed or executed must not be listed as complete.
+
+### Order and evidence rules through 2026-09-30
+
+1. Resume through [00-Home Index](Schematics/00-Home/00-Home%20-%20Index.md), [Home Now](Schematics/00-Home/Now.md), this root `NOW.md`, then the existing Legacy and renter-entry doctrine. Folder coverage continues from `00-Home` in order; Folder 21 is not the entry point.
+2. Finish and review the current renter-admission/runtime repair on this branch before staging. The 2026-09-28 focused renter-entry and admission suites are **11 passed**; Python `compileall` passed. Studio `npm ci`, `npm run build`, and `npm run lint` passed (lint reports five React effect warnings; build reports a 565 kB main chunk). `npm ci` reports 6 dependency vulnerabilities (1 low, 5 high), which need separate Dependabot/security triage.
+3. Record each folder/file as semantically read, mechanically inventoried, media-not-reviewed, missing from this Git snapshot, or otherwise held. Inventory and extracted text do not count as semantic review. The coverage evidence from the audit helpers remains partial; no full-house audit claim is admitted.
+4. Continue the user's named source lanes after the current admission patch: recurring KPGS Estate Watch failures and why they repeat; the Care and Affection Response architecture; Projects context with emphasis on RTC Evolution. Read the source and receipts for each lane before proposing changes.
+5. For GitHub backlog work, check one issue/PR's current head, acceptance conditions, required checks, and dependency/security implications at a time. As observed on 2026-09-28, this repository had 20 open pull requests and 16 open issues. Do not bulk-merge or close them to satisfy a count; unresolved security, incident, product, and credential Holds stay open until their evidence-based closure criteria are met.
+6. Azure production remains `HOLD` under issue #211: the required OIDC secrets are still reported missing. Do not dispatch a production deployment until the credential contract and federation scope are verified and a real deployment receipt can be captured. A Vercel preview or skipped deployment job is not Azure proof.
+7. Conserve the user's reported limited token runway through 2026-09-30: reuse the saved coverage matrices and review reports, read only source needed for the next bounded item, avoid repeated whole-repository scans, and write concise receipts here after each material state change. No system token quota was measured.
+
+### Current repair and remaining work
+
+- Home-first navigation is in place in `AGENTS.md`, `Schematics/00-Home/00-Home - Index.md`, Dashboard, Home Now, Schematics index, and Schematics session guidance. Older dashboard/home claims are scoped as dated context; root NOW remains the current authority.
+- Runtime fixes cover HTTP admission and status behavior, ALP-gated execution, renter acknowledgement, blocking world-write paths, GSMB false-PASS prevention, UI admission, and the direct governance/smoke/GSMB/continuous-runner CLIs. CLI acknowledgements are no longer prefilled; diagnostic gate/status paths are read-only.
+- Test-generated JSONL receipt rows were removed from this review worktree before commit preparation. Confirm the tracked diff remains free of test output before staging.
+- Pre-commit renter ingress was performed through `scripts/kc_kpgs_governance.py entry --assert`; its exact operation and acknowledgement are recorded in `poc-vs-foc/CODEX_GSMB_HOME_AUDIT_2026-09-28_CLOSE.json` and the Main Brain JSONL ledger. The tracked KHELOS gate must still be run from this worktree before commit.
+- The existing ChatGPT-5.6 Sol review did not inspect this final diff. The branch still needs an exact-diff independent review and GitHub CI before any merge decision.
+- The original task asked for a complete house audit and repair plan. The saved first-party semantic coverage remains only 536 of 2,046 locally inventoried first-party text files, with 755 media/binaries, unnumbered files, local-only material, and most non-Schematics repository code not fully reviewed. These figures are the audit snapshot, not proof that every scope is still unchanged.
+
+### Next admissible action
+
+Finish the focused source review, commit only the intended audit/runtime changes on this branch, push it and open a reviewable PR. Ask Sol Forge to review that exact PR head and wait for repository checks. Keep the Azure deployment HOLD intact, then continue the broader audit and per-item issue/PR work from the saved records. Do not call the full audit, all issues, all PRs, or production deployment finished until their separate evidence exists.
+
+---
+
+## CURRENT STATE — 2026-09-24T20:23:43+02:00 (GSMB HOUSE AUDIT — HOME-FIRST EXECUTION)
+
+> **Actor:** Codex Forge — stateless renter
+> **Authority:** Robyn Kholofelo Rababalela retains human authority.
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Review branch:** `codex/gsmb-home-first-final-sep24`, based on `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`.
+
+### Active objective
+
+Robyn directed a 00-Home-first review of the GSMB house, through folders and files, followed by a full evidence-based audit and repair package. This entry records the live checkpoint for that work. It does not certify the estate as fully audited or repaired.
+
+### Current evidence and boundaries
+
+- Current GitHub `master` was read-only verified at `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e` on 2026-09-24. Since the earlier audit base `2eef051`, upstream added PR #212's Azure credential HOLD and deployment-preflight workflow. The Azure production credential HOLD below remains active.
+- The original OneDrive checkout remains separately at `e24b1aa0874a637477e6d436c032646cfa236aed` on `ZCode-Work` with existing dirty files. It remains a preservation source and has not been changed by this review branch.
+- The Home-first repair is in the current clean review branch. It supplies the missing 00-Home index; routes Home orientation to root `NOW.md`, then durable purpose and renter entry; scopes old Home/Dashboard state claims as historical; and keeps local-only Home material out of the Git snapshot.
+- ChatGPT-5.6 Sol Forge completed a bounded MAO review in the existing `Analyze Gemini Failure` task. It confirms that Home-first navigation is compatible with the PR #210 execution preflight if Home remains Prompting/context recovery and renter ingress remains mandatory before material execution. Its direct access was limited to source descriptions, not this local worktree; it is review support, not direct diff attestation.
+- Source trace found a remaining enforcement question: `require_activation_allowed()` and `require_hood_ack()` have helper-level tests, but the previously inspected production paths called `check_kpgs_activation_gate()` directly and did not invoke the ALP helper. The generated agent/spawn manifests prefill the canonical acknowledgement. Treat end-to-end renter admission enforcement as UNPROVEN until actual callable entrypoints and side effects are traced.
+- Saved section reports remain partial. Mechanical inventory, text extraction, historical status prose, and a green CI receipt do not each establish semantic content review, current runtime behavior, or production state.
+
+### Next admissible work
+
+1. Finish the coverage-led audit from the saved per-file records, distinguishing reviewed first-party content from generated/dependency material and uninspected documents/media.
+2. Trace recurring Estate Watch failures through cause, existing control, runtime reachability, enforcement point, receipt, and later recurrence.
+3. Trace each consequential runtime admission path and either repair the proven bypass or narrow this finding with direct evidence.
+4. Consolidate confirmed findings, unresolved evidence, and bounded repair candidates before any promotion, merge, deployment, or production claim.
+
+---
+
 ## CURRENT STATE — 2026-09-24T10:50:00+02:00 (AZURE PRODUCTION DEPLOY CREDENTIAL HOLD)
 
 > **Actor:** Forge / OpenAI-side stateless renter  

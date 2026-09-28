@@ -18,8 +18,10 @@ node_modules/
 # KC local apprenticeship store (manifest is tracked; seeded JSON is local)
 kopano-core/.kc/
 
-# Second Brain (Obsidian vault — local only; removed from git index so .obsidian/.smart-env do not dirty status)
-Schematics/
+# Second Brain source notes are versioned. Keep only local app/plugin state out
+# of Git so reviewed human-facing notes can be admitted intentionally.
+Schematics/.obsidian/
+Schematics/.smart-env/
 
 
 docs/swarm-ops/logs/KPGS_SEVER_FORENSIC.jsonl

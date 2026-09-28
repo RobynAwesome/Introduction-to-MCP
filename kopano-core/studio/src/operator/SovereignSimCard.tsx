@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 import { getApiBase } from '../apiBase';
+import { useOperator } from './OperatorProvider';
+
+const HOOD_ACK = 'I_AM_STATELESS_RENTER_NOT_LANDLORD';
 
 interface TriadActor {
   mode?: string;
@@ -40,9 +43,13 @@ interface SovereignSimUi {
 }
 
 export function SovereignSimCard() {
+  const { isGodMode, token } = useOperator();
   const [ui, setUi] = useState<SovereignSimUi | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [booting, setBooting] = useState(false);
+  const [renterId, setRenterId] = useState('cassy');
+  const [hoodAck, setHoodAck] = useState('');
+  const [lastVerdict, setLastVerdict] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     try {
@@ -62,12 +69,31 @@ export function SovereignSimCard() {
   }, [refresh]);
 
   const runSmoke = async () => {
+    if (!isGodMode || !token || !renterId.trim() || hoodAck !== HOOD_ACK) {
+      setError('Sign in and enter the exact renter acknowledgement before running the smoke PoC.');
+      return;
+    }
     setBooting(true);
+    setError(null);
     try {
-      const res = await fetch(`${getApiBase()}/api/kc/phu/kpgs/smoke-poc`, { method: 'POST' });
+      const res = await fetch(`${getApiBase()}/api/kc/phu/kpgs/smoke-poc`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          renter_id: renterId.trim(),
+          renter_class: 'linguistic_actor',
+          hood_ack: hoodAck,
+          ts: new Date().toISOString(),
+        }),
+      });
       if (!res.ok) {
         throw new Error(await res.text());
       }
+      const report = await res.json();
+      setLastVerdict(report.verdict ?? 'UNKNOWN');
       await refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Smoke PoC failed');
@@ -124,14 +150,34 @@ export function SovereignSimCard() {
         <button type="button" className="action-button ghost" onClick={() => { void refresh(); }}>
           Refresh sim
         </button>
+      </div>
+      <div className="swarm-sim-admission">
+        <label className="field-shell">
+          <span>Renter ID for this run</span>
+          <input value={renterId} onChange={(event) => setRenterId(event.target.value)} />
+        </label>
+        <label className="field-shell">
+          <span>Renter acknowledgement</span>
+          <input
+            value={hoodAck}
+            onChange={(event) => setHoodAck(event.target.value)}
+            placeholder={HOOD_ACK}
+            autoComplete="off"
+          />
+        </label>
+        <p className="swarm-footnote">
+          Enter the exact acknowledgement for the named renter. This runs a local PoC and writes local receipts.
+        </p>
+        {!isGodMode && <p className="swarm-footnote">Sign in through the operator dock to run this test.</p>}
         <button
           type="button"
           className="action-button primary"
-          disabled={booting}
+          disabled={booting || !isGodMode || !token || !renterId.trim() || hoodAck !== HOOD_ACK}
           onClick={() => { void runSmoke(); }}
         >
           {booting ? 'Running smoke…' : 'KPGS smoke PoC'}
         </button>
+        {lastVerdict && <p className="swarm-footnote" role="status">Last local run: {lastVerdict}</p>}
       </div>
       {error && <p className="god-dock-error">{error}</p>}
     </motion.div>

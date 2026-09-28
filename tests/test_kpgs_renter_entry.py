@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -51,14 +52,22 @@ def test_hood_ack_verification():
     assert bad_errs
 
 
-def test_assert_and_log_entry_acknowledged():
+def test_assert_and_log_entry_acknowledged(monkeypatch, tmp_path):
+    from kopano import kpgs_renter_entry
+
+    log_path = tmp_path / "main-brain.jsonl"
+    monkeypatch.setattr(kpgs_renter_entry, "MAIN_BRAIN_LOG", log_path)
     out = assert_and_log_entry(
         renter_id="test_renter",
+        operation="test:kpgs_renter_entry",
         renter_class="linguistic_actor",
         hood_ack=HOOD_ACK_LITERAL,
     )
     assert out["verdict"] == "ACKNOWLEDGED"
     assert out["ack_verified"] is True
+    assert out["operation"] == "test:kpgs_renter_entry"
+    assert out["ack_receipt"]["operation"] == "test:kpgs_renter_entry"
+    assert json.loads(log_path.read_text(encoding="utf-8"))["operation"] == "test:kpgs_renter_entry"
 
 
 def test_require_hood_ack_fails_closed():

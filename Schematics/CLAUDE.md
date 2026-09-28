@@ -1,6 +1,6 @@
 # Schematics Vault — Agent Instructions
 
-> Read this file first before touching anything in the vault.
+> Start at `00-Home/00-Home - Index.md`, then follow the current-state and purpose-boundary routes before using this file for scope handoff.
 > This is the canonical instruction set for any AI agent operating inside Schematics.
 > **UPDATED 2026-04-17:** Master's personal preferences integrated. Every model MUST honour these verbatim — no paraphrasing, no fabrication.
 
@@ -20,23 +20,24 @@ Absolute operating law:
 - Protocol 13 Save/Kill applies at logical boundaries and below the 80 percent optimal threshold. Save state. Isolate failure. Never silently fix.
 - Owner-proof remains separate from local proof, AI rehearsal, CLI output, `.exe` launch, or agent-to-agent confirmation.
 
-All future sub-brain work must route through this root node first, then local instructions.
+After 00-Home orientation and current-state recovery, all future sub-brain work must route through this root node before local domain instructions.
 
 ## SESSION-OPEN CHECKLIST (MANDATORY — COMPLETE BEFORE ANY TASK)
 
 > Every AI. Every session. No exceptions.
 
-- [ ] 1. Read this file (`CLAUDE.md`)
-- [ ] 2. Read `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` ← ROOT NODE
-- [ ] 3. Read `18-PROTOCOLS/Universal AI Command Protocol.md`
-- [ ] 4. Read `10-SESSION IMPROVEMENTS/Standing Orders.md`
-- [ ] 5. Read `00-Home/Dashboard.md` ← FRONT DOOR
-- [ ] 6. Read `00-Home/Now.md` ← CURRENT STATE
-- [ ] 7. Confirm role for this session
-- [ ] 7a. **If model is Opus 4.6 or 4.7:** also read `18-PROTOCOLS/Opus Self-Handling Protocol.md` and `18-PROTOCOLS/Opus Watch Protocol.md` before step 8. State the four escalation-to-chat triggers in your first message alongside "Ready."
-- [ ] 8. First message to Master: **"Ready. What is the mission for this session?"**
+- [ ] 1. Read `00-Home/00-Home - Index.md` and `00-Home/Dashboard.md` ← HOUSE FRONT DOOR
+- [ ] 2. Read `00-Home/Now.md` and repository-root `../NOW.md` ← HOME CONTEXT AND REPOSITORY CURRENT STATE
+- [ ] 3. Read `21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` and `STATELESS_RENTER_ENTRYWAY.md` ← PURPOSE AND RENTER CONTRACT
+- [ ] 4. Read this file (`CLAUDE.md`) for scope and identity
+- [ ] 5. Read `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` ← ROOT NODE
+- [ ] 6. Read `18-PROTOCOLS/Universal AI Command Protocol.md`
+- [ ] 7. Read `10-SESSION IMPROVEMENTS/Standing Orders.md`
+- [ ] 8. Confirm role for this session
+- [ ] 8a. **If model is Opus 4.6 or 4.7:** also read `18-PROTOCOLS/Opus Self-Handling Protocol.md` and `18-PROTOCOLS/Opus Watch Protocol.md` before step 9. State the four escalation-to-chat triggers in your first message alongside "Ready."
+- [ ] 9. First message to Master: **"Ready. What is the mission for this session?"**
 
-**Do not skip any step. Do not infer the mission. Do not begin work before step 7.**
+**Do not skip any step. Do not infer the mission. Do not begin work before step 8.**
 Full protocol: `18-PROTOCOLS/Universal AI Command Protocol.md`
 
 ## HARD CONSTRAINTS (READ BEFORE IDENTITY — HIGHEST PRIORITY)
@@ -253,12 +254,11 @@ Opus 4.7 incident 2026-04-17: denied DEV_1 and KC existed despite being in SUB-B
 
 ## Read Order (every session)
 
-1. This file (`CLAUDE.md`)
-2. `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` — root node above `CLAUDE.md`
-3. `00-Home/Now.md` — current state
-4. `00-Home/Dashboard.md` — full MOC
-5. Relevant folder `[FolderName] - Index.md` for your task
-6. Project SUB-BRAIN if working on a specific repo
+1. Start at `00-Home/00-Home - Index.md`, then read `00-Home/Dashboard.md` to orient within the house.
+2. Read `00-Home/Now.md` for Home-scoped context, then repository-root `../NOW.md` for active repository objectives, blockers, receipts, and handoffs.
+3. Read `21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary and `STATELESS_RENTER_ENTRYWAY.md` for the renter contract.
+4. Read this file (`CLAUDE.md`) for scope handoff and then the relevant canonical protocols, folder index, and project SUB-BRAIN.
+5. Where the task crosses folders, follow the required brother-folder order and read all current contents required by the applicable audit protocol.
 
 ### Scope Handoff For MAIN-BRAIN Audits
 
@@ -268,18 +268,19 @@ Opus 4.7 incident 2026-04-17: denied DEV_1 and KC existed despite being in SUB-B
 
 ## AUDIT AND SESSION FRONT-DOOR (MANDATORY)
 
-Any session that opens this vault or any sub-brain MUST begin here:
-`C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics\00-Home\Dashboard.md`
+Any session that opens this vault or any sub-brain MUST begin at the `00-Home` front door:
+`00-Home/00-Home - Index.md`, followed by `00-Home/Dashboard.md`.
 
 Read sequence (no skipping):
-1. `CLAUDE.md` — scope and identity (this file)
-2. `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` — root node
-3. `index.md` — root vault map
-4. `00-Home/Dashboard.md` — canonical audit gate ← THIS IS THE FRONT DOOR
-5. `00-Home/Now.md` — current state
-6. `00-Home/All Projects Registry.md`
-7. `00-Home/Sub-Brain Hierarchy.md`
-8. Relevant top-level folder `index.md` for the task area
+1. `00-Home/00-Home - Index.md` — required house front door
+2. `00-Home/Dashboard.md` — orientation and audit gate
+3. `00-Home/Now.md` — Home-scoped context
+4. `../NOW.md` — repository-wide current state and active lane
+5. `21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` — durable purpose boundary
+6. `21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md` — detailed renter contract
+7. `18-PROTOCOLS/Kopano Context Master Protocol Ledger And Sovereign Architecture.md` — canonical root protocol
+8. This file (`CLAUDE.md`) — scope handoff and identity
+9. `index.md` — Schematics map; then the relevant folder index and required sources
 
 Do NOT begin any task, audit, or sub-brain work before completing this read sequence.
 When the full MAIN-BRAIN audit protocol is built (Codex deliverable in `18-PROTOCOLS/`), this clause defers to it.
