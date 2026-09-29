@@ -1,3 +1,19 @@
+## CURRENT STATE — 2026-09-29T05:20:05Z (PR #213 CODEQL HIGHS PORTED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `codex/gsmb-home-first-final-sep24`
+> **Prior head:** `e7894143616538b87f30618f5daa7c86da9b432d`
+
+- **Failure:** CodeQL on the prior head reported two highs: path injection in `kopano-core/kopano/eco_poc_validate.py` (`Path(evidence).is_file()`) and polynomial ReDoS in `scripts/kc_bracket_lint.py` (`BRACKET_TAG`). Two medium warnings traced `str(exc)` from `activation_gate_for_execution` into the hood-dispatch returns.
+- **Change:** Evidence files and `.jsonl` references must be repo-relative. Absolute, drive, and `..` paths are rejected. Bracket tags are scanned in one pass. The execution-admission report returns a fixed string for known ALP blocks and `KPGS activation gate BLOCK` for any other `ValueError`. `persist_receipt` and the dry-run boot proof stay.
+- **Local proof:** `PYTHONPATH=kopano-core python3 -m pytest tests/test_security_high_alert_remediation.py tests/test_kpgs_activation_gate.py -q` → **16 passed** in 2.88s.
+- **Unknown:** hosted CodeQL on this new head has not run yet. This does not merge the PR. Issue #121, Azure #211, and the KasiLink gitlink HOLD stay open. PR #233 carries the same path and bracket guards; the second of #213 and #233 to merge may conflict on `eco_poc_validate.py` and `NOW.md`.
+
+**Next admissible action:** read the new CodeQL result on this head. Do not admin-merge.
+
+---
+
 ## CURRENT STATE — 2026-09-29T05:04:57Z (PR #213 UPDATED ONTO MASTER · DRY-RUN BOOT CHECK REPAIRED)
 
 > **Actor:** Cursor cloud renter (Grok 4.7) — stateless

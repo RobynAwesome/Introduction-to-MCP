@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -115,6 +115,35 @@ def _parse_float(s: str) -> float | None:
         return None
 
 
+def _repo_relative_evidence_candidate(evidence: str) -> Path | None:
+    """Return a repo-relative candidate only; absolute and parent paths are not evidence."""
+    if not evidence:
+        return None
+
+    posix_path = PurePosixPath(evidence.replace("\\", "/"))
+    windows_path = PureWindowsPath(evidence)
+    if posix_path.is_absolute() or windows_path.is_absolute() or windows_path.drive:
+        return None
+
+    parts = posix_path.parts
+    if not parts or any(part == ".." for part in parts):
+        return None
+    return REPO_ROOT.joinpath(*parts)
+
+
+def _evidence_file_exists(candidate: Path | None) -> bool:
+    if candidate is None:
+        return False
+
+    try:
+        repo_root = REPO_ROOT.resolve(strict=True)
+        resolved = candidate.resolve(strict=True)
+        resolved.relative_to(repo_root)
+    except (OSError, RuntimeError, ValueError):
+        return False
+    return resolved.is_file()
+
+
 def validate_eco_poc(
     *,
     agent_id: str,
@@ -161,7 +190,7 @@ def validate_eco_poc(
             "id": "rosen_R",
             "name": "Relation to reality",
             "passed": len(relation.strip()) >= 10,
-            "note": "Instrument, log, or artifact path required.",
+            "note": "Instrument, repo-relative log, or artifact reference required.",
         }
     )
     # Anticipation
@@ -200,18 +229,18 @@ def validate_eco_poc(
             "passed": unit_ok,
         }
     )
-    # Receipt
-    evidence_path = Path(evidence) if evidence else None
+    # Receipt: local files and JSONL references must stay within the repository.
+    evidence_candidate = _repo_relative_evidence_candidate(evidence)
     evidence_ok = (
-        (evidence_path is not None and evidence_path.is_file())
+        _evidence_file_exists(evidence_candidate)
         or (exit_code is not None and exit_code == 0)
         or (evidence.startswith("http") and len(evidence) > 12)
-        or evidence.endswith(".jsonl")
+        or (evidence.endswith(".jsonl") and evidence_candidate is not None)
     )
     oracles.append(
         {
             "id": "receipt_stack",
-            "name": "Receipt (file, exit 0, or JSONL)",
+            "name": "Receipt (repo file, exit 0, URL, or repo-relative JSONL)",
             "passed": evidence_ok,
             "evidence": evidence,
             "exit_code": exit_code,

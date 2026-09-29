@@ -188,6 +188,26 @@ def load_cached_activation_gate(*, fallback_live: bool = False) -> dict[str, Any
     }
 
 
+_ALP_UNAVAILABLE = (
+    "[KPGS_GATE] BLOCK — mandatory ALP unavailable; "
+    "stateless renter activation receipt cannot be proven"
+)
+_ALP_FAILED = "[KPGS_GATE] BLOCK — mandatory ALP activation failed; receipt or HOLD"
+_ALP_INVALID = "[KPGS_GATE] BLOCK — mandatory ALP receipt invalid; receipt or HOLD"
+_GATE_BLOCK = "KPGS activation gate BLOCK"
+
+
+def _execution_block_message(reason: str) -> str:
+    """Map a known admission failure to a fixed string. Do not echo arbitrary exception text."""
+    if reason == _ALP_UNAVAILABLE:
+        return _ALP_UNAVAILABLE
+    if reason == _ALP_FAILED:
+        return _ALP_FAILED
+    if reason == _ALP_INVALID:
+        return _ALP_INVALID
+    return _GATE_BLOCK
+
+
 def require_alp_receipt() -> dict[str, Any]:
     """Require the existing mandatory ALP receipt before renter execution."""
     # [AUTO LPM PROTOCOL] ALP — fires BEFORE gate evaluation.
@@ -195,18 +215,12 @@ def require_alp_receipt() -> dict[str, Any]:
     # cannot silently degrade into optional telemetry when the protocol is
     # missing, throws, or returns an invalid receipt.
     if not _ALP_AVAILABLE:
-        raise ValueError(
-            "[KPGS_GATE] BLOCK — mandatory ALP unavailable; "
-            "stateless renter activation receipt cannot be proven"
-        )
+        raise ValueError(_ALP_UNAVAILABLE)
 
     try:
         alp_receipt = _alp_activate(context="kpgs_activation_gate_entry")
     except Exception as _alp_err:
-        raise ValueError(
-            "[KPGS_GATE] BLOCK — mandatory ALP activation failed; "
-            "receipt or HOLD"
-        ) from _alp_err
+        raise ValueError(_ALP_FAILED) from _alp_err
 
     if (
         not isinstance(alp_receipt, dict)
@@ -214,10 +228,7 @@ def require_alp_receipt() -> dict[str, Any]:
         or alp_receipt.get("constraint") != "I_AM_STATELESS_RENTER_NOT_LANDLORD"
         or not alp_receipt.get("consistency_hash")
     ):
-        raise ValueError(
-            "[KPGS_GATE] BLOCK — mandatory ALP receipt invalid; "
-            "receipt or HOLD"
-        )
+        raise ValueError(_ALP_INVALID)
 
     return alp_receipt
 
@@ -228,7 +239,7 @@ def require_activation_allowed() -> dict[str, Any]:
     gate = check_kpgs_activation_gate()
     gate["alp_receipt"] = alp_receipt
     if not gate.get("activation_allowed"):
-        raise ValueError(gate.get("message", "KPGS activation gate BLOCK"))
+        raise ValueError(gate.get("message", _GATE_BLOCK))
     return gate
 
 
@@ -251,7 +262,7 @@ def activation_gate_for_execution(*, write_report: bool = False) -> dict[str, An
             "activation_allowed": False,
             "verdict": "BLOCK",
             "gate_mode": "execution_admission",
-            "message": str(exc),
+            "message": _execution_block_message(str(exc)),
             "source": "require_activation_allowed",
         }
 
