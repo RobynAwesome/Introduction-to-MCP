@@ -187,17 +187,37 @@ def require_activation_allowed() -> dict[str, Any]:
     ALP MANDATORY: every stateless renter entry fires alp_activate().
     This is the architectural fix for BREACH-001.
     """
-    # [AUTO LPM PROTOCOL] ALP — fires BEFORE gate evaluation
-    # Every stateless renter must declare its idle gap and receive a receipt.
-    alp_receipt = None
-    if _ALP_AVAILABLE:
-        try:
-            alp_receipt = _alp_activate(context="kpgs_activation_gate_entry")
-        except Exception as _alp_err:
-            pass  # ALP failure must never block the gate
+    # [AUTO LPM PROTOCOL] ALP — fires BEFORE gate evaluation.
+    # BREACH-002 law is fail-closed: a mandatory renter activation receipt
+    # cannot silently degrade into optional telemetry when the protocol is
+    # missing, throws, or returns an invalid receipt.
+    if not _ALP_AVAILABLE:
+        raise ValueError(
+            "[KPGS_GATE] BLOCK — mandatory ALP unavailable; "
+            "stateless renter activation receipt cannot be proven"
+        )
+
+    try:
+        alp_receipt = _alp_activate(context="kpgs_activation_gate_entry")
+    except Exception as _alp_err:
+        raise ValueError(
+            "[KPGS_GATE] BLOCK — mandatory ALP activation failed; "
+            "receipt or HOLD"
+        ) from _alp_err
+
+    if (
+        not isinstance(alp_receipt, dict)
+        or alp_receipt.get("schema") != "alp_receipt_v1"
+        or alp_receipt.get("constraint") != "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+        or not alp_receipt.get("consistency_hash")
+    ):
+        raise ValueError(
+            "[KPGS_GATE] BLOCK — mandatory ALP receipt invalid; "
+            "receipt or HOLD"
+        )
 
     gate = check_kpgs_activation_gate()
-    gate["alp_receipt"] = alp_receipt  # Receipt embedded in gate report
+    gate["alp_receipt"] = alp_receipt
     if not gate.get("activation_allowed"):
         raise ValueError(gate.get("message", "KPGS activation gate BLOCK"))
     return gate
