@@ -207,7 +207,7 @@ jobs:
       - name: Upload PoC diagnostics
         if: always()
         continue-on-error: true
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: agent-build-poc-validation-${{ github.sha }}
           path: |
