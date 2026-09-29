@@ -5,6 +5,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "kopano-core"))
 
@@ -13,6 +15,7 @@ from kopano.kpgs_renter_entry import (  # noqa: E402
     assert_and_log_entry,
     hood_entry_assertion,
     load_renter_entryway,
+    require_hood_ack,
     verify_hood_ack,
 )
 
@@ -56,3 +59,28 @@ def test_assert_and_log_entry_acknowledged():
     )
     assert out["verdict"] == "ACKNOWLEDGED"
     assert out["ack_verified"] is True
+
+
+def test_require_hood_ack_fails_closed():
+    with pytest.raises(ValueError, match="KPGS_HOOD_ENTRY.*BLOCK"):
+        require_hood_ack(
+            {
+                "renter_id": "forge",
+                "renter_class": "linguistic_actor",
+                "hood_ack": "I_AM_THE_LANDLORD",
+                "ts": "2026-09-24T00:00:00Z",
+            }
+        )
+
+
+def test_require_hood_ack_returns_receipt():
+    out = require_hood_ack(
+        {
+            "renter_id": "forge",
+            "renter_class": "linguistic_actor",
+            "hood_ack": HOOD_ACK_LITERAL,
+            "ts": "2026-09-24T00:00:00Z",
+        }
+    )
+    assert out["verdict"] == "ACKNOWLEDGED"
+    assert out["constraint"] == HOOD_ACK_LITERAL
