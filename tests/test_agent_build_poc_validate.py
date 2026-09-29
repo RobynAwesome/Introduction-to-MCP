@@ -73,6 +73,8 @@ def test_agent_build_read_only_validation_does_not_persist_nested_poc_receipt(mo
     checks = {check["check"]: check for check in report["checks"]}
     assert checks["identi_flow_handoff"]["detail"] == "HANDOFF_DRY_RUN"
     assert checks["guardian_flow_teacher_kc"]["detail"] == "DRY_RUN"
+    assert checks["boot_v1_status"]["verdict"] == "PASS"
+    assert str(checks["boot_v1_status"]["detail"]).startswith("active=doctrine")
     assert spawn_persistence_modes == [False]
     assert not any(
         path.exists()

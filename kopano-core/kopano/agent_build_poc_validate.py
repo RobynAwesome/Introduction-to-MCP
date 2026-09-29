@@ -57,6 +57,32 @@ def _ensure_boot_applied(*, persist: bool) -> None:
         apply_boot()
 
 
+def _boot_v1_observable(*, write_report: bool) -> tuple[bool, str]:
+    """Prove BOOT v1 without inventing a runtime flag the dry-run refuses to write.
+
+    CI calls this validator with write_report=False. That path must not create
+    kopano-core/.kc/phu_boot_v1.json, so the check reads the committed boot
+    contract. A persisted run still requires the runtime activation flag.
+    """
+    from .phu_boot_governance import boot_status
+
+    status = boot_status()
+    if write_report:
+        runtime = status.get("runtime_state") or {}
+        active = runtime.get("active")
+        return bool(active or runtime.get("applied_at")), f"active={active}"
+
+    boot = status.get("boot") or {}
+    bindings = (status.get("role_bindings") or {}).get("bindings") or {}
+    agent_count = int((status.get("mesh_summary") or {}).get("blackmask_agent_count") or 0)
+    doctrine_ok = (
+        boot.get("schema") == "kopano_phu_student_teacher_mao_boot_v1"
+        and {"cassy", "kc", "mao"}.issubset(bindings)
+        and agent_count >= 1
+    )
+    return doctrine_ok, f"active=doctrine agents={agent_count}"
+
+
 def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     """Validate the agent-building path; write_report=False is fully non-persistent."""
     _ensure_boot_applied(persist=write_report)
@@ -206,7 +232,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
 
     # 6 — BOOT mesh BlackMask
     try:
-        from .phu_boot_governance import _load_boot_state, blackmask_dry_run, boot_status
+        from .phu_boot_governance import blackmask_dry_run, boot_status
 
         dry = blackmask_dry_run()
         ship = dry.get("ship", 0)
@@ -219,14 +245,8 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
                 dry,
             )
         )
-        rs = _load_boot_state() if not write_report else boot_status().get("runtime_state") or {}
-        checks.append(
-            _check(
-                "boot_v1_status",
-                bool(rs.get("active") or rs.get("applied_at")),
-                f"active={rs.get('active')}",
-            )
-        )
+        boot_ok, boot_detail = _boot_v1_observable(write_report=write_report)
+        checks.append(_check("boot_v1_status", boot_ok, boot_detail))
     except Exception as exc:
         checks.append(_check("boot_governance", False, str(exc)))
 
