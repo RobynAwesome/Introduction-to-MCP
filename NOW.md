@@ -1,3 +1,21 @@
+## CURRENT STATE — 2026-09-29T06:19:12Z (OPEN PR HEADS MERGED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela asked to merge, pull, and complete issues.
+
+- **Master:** `a469ebbe74285d215d1c73f55f2acb01bc4cc2c4` — `Merge pull request #213 from RobynAwesome/codex/gsmb-home-first-final-sep24` at 2026-09-29T06:19:12Z.
+- **Landed head:** `1a529b55f99641bd44cd85386f386a2d620ad3ef`. A direct push of that commit to `master` was rejected until CodeQL and the 14 required checks existed. Those checks passed on PR #213, and the merge made every listed pull-request head an ancestor of `master`.
+- **Merged:** #184, #186, #193, #197, #199, #200, #202, #203, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #223, #224, #225, #226, #227, #228, #229. Open pull-request count after that merge: 0.
+- **Hosted proof on `1a529b55`:** Kopano CI [36529562075](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/36529562075) passed, including dependency firewall, `gui-check`, `lint-and-test` on Python 3.11 and 3.12, and Agent build PoC. CodeQL [36529562054](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/36529562054) passed for actions, JavaScript/TypeScript, Python, and Rust. The CodeQL check passed.
+- **Local pull:** local `master` fast-forwarded to `a469ebbe`.
+- **Issue #205:** the ESLint 10 + `@eslint/js` 10 studio lock is on this master, with the local studio proof in the section below and the hosted `gui-check` above. #204 stays closed unmerged and superseded. A separate manual artifact download for #202 was not performed; the workflow files on this master use `actions/upload-artifact@v7`, and the required checks that ran those workflows passed.
+- **Still open:** #231, #211, #207, #183, #167, #163, #158, #122, #121, #116, #115, #110, #107, #103, #102, #94. Azure production remains HOLD on #211. Seat 10 remains suspended on #121. The KasiLink gitlink still has no `.gitmodules` URL.
+
+**Next admissible action:** do not reopen the merged dependency pull requests. Do not close the HOLD issues above without their own evidence.
+
+---
+
 ## CURRENT STATE — 2026-09-29T06:07:31Z (OPEN PR HEADS COMBINED FOR LANDING)
 
 > **Actor:** Cursor cloud renter (Grok 4.7)
