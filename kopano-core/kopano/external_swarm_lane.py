@@ -53,7 +53,7 @@ def external_swarm_guide() -> dict[str, Any]:
             "python scripts/kc_external_swarm_lane.py validate-url --url <URL>",
             "python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KIMI_300_ACTIVATION.md --status acknowledged --evidence-url <URL> --strict-proof",
             "python scripts/kc_guard.py doctrine-swarm-ack",
-            "python scripts/kc_kpefs_full_gate.py",
+            "python scripts/kc_kpefs_full_gate.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD",
         ],
         "cli_template": (
             "python scripts/kc_log_append.py kimi-ack "
@@ -149,7 +149,10 @@ def write_closure_snapshot(*, append_main_brain: bool = False) -> dict[str, Any]
     """Persist closure JSON for operators returning from a run / CI artifact."""
     status = kpefs_closure_status()
     status["ts"] = _utc_now()
-    status["when_back_command"] = "python scripts/kc_kpefs_run_snapshot.py"
+    status["when_back_command"] = (
+        "python scripts/kc_kpefs_run_snapshot.py --renter-id <actor-id> "
+        "--renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD"
+    )
     CLOSURE_SNAPSHOT_PATH.parent.mkdir(parents=True, exist_ok=True)
     CLOSURE_SNAPSHOT_PATH.write_text(
         json.dumps(status, indent=2, ensure_ascii=False) + "\n",

@@ -99,3 +99,27 @@ def test_absolute_external_evidence_file_is_rejected(tmp_path: Path, monkeypatch
     result = _validate_evidence(monkeypatch, repo_root, str(external_file))
     receipt = next(item for item in result["oracles"] if item["id"] == "receipt_stack")
     assert receipt["passed"] is False
+
+
+def test_execution_gate_does_not_echo_foreign_exception_text(monkeypatch: pytest.MonkeyPatch):
+    from kopano import kpgs_activation_gate as gate
+
+    def foreign():
+        raise ValueError("secret-stack-trace-token")
+
+    monkeypatch.setattr(gate, "require_activation_allowed", foreign)
+    report = gate.activation_gate_for_execution(write_report=False)
+    assert report["verdict"] == "BLOCK"
+    assert report["message"] == "KPGS activation gate BLOCK"
+    assert "secret-stack-trace-token" not in report["message"]
+
+
+def test_execution_gate_keeps_known_alp_block_text(monkeypatch: pytest.MonkeyPatch):
+    from kopano import kpgs_activation_gate as gate
+
+    def known():
+        raise ValueError(gate._ALP_UNAVAILABLE)
+
+    monkeypatch.setattr(gate, "require_activation_allowed", known)
+    report = gate.activation_gate_for_execution(write_report=False)
+    assert report["message"] == gate._ALP_UNAVAILABLE

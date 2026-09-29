@@ -228,6 +228,7 @@ def operate_guardian_flow(
     run_blackmask: bool = True,
     teacher_approve: bool | None = None,
     teacher_note: str = "",
+    persist: bool = True,
 ) -> dict[str, Any]:
     """
     Guardian flow: Boundary → BlackMask (Cassy) → student_submit → optional teacher_review → KC opinion.
@@ -248,21 +249,23 @@ def operate_guardian_flow(
             f"dept: {department_id} | verb: {boundary.breached_verb} | "
             f"gate: {boundary.wwjd_gate} | {boundary.reason[:120]}",
         )
-        _append_jsonl(
-            MAIN_BRAIN_LOG,
-            {
-                "ts": _utc_now(),
-                "kind": "guardian_ai_flow",
-                "department": department_id,
-                "summary": summary,
-                "verdict": "BOUNDARY_BREACH",
-                "breached_verb": boundary.breached_verb,
-                "escalation": boundary.escalation,
-            },
-        )
+        if persist:
+            _append_jsonl(
+                MAIN_BRAIN_LOG,
+                {
+                    "ts": _utc_now(),
+                    "kind": "guardian_ai_flow",
+                    "department": department_id,
+                    "summary": summary,
+                    "verdict": "BOUNDARY_BREACH",
+                    "breached_verb": boundary.breached_verb,
+                    "escalation": boundary.escalation,
+                },
+            )
         return {
             "flow": "guardian",
             "verdict": "BOUNDARY_BREACH",
+            "persisted": persist,
             "reason": boundary.reason,
             "contract_boundary": boundary.contract_boundary,
             "wwjd_gate": boundary.wwjd_gate,
@@ -279,17 +282,19 @@ def operate_guardian_flow(
         {"step": "block_holder_brief", "result": block_holder},
     ]
     if run_blackmask:
-        drill = blackmask_drill(student_agent)
+        drill = blackmask_drill(student_agent, persist=persist)
         steps.append({"step": "blackmask", "result": drill})
         if drill.get("verdict") != "SHIP":
             summary = _bracket_flow("guardian", "HOLD", f"blackmask: {student_agent}")
-            _append_jsonl(
-                MAIN_BRAIN_LOG,
-                {"ts": _utc_now(), "kind": "guardian_ai_flow", "summary": summary, "verdict": "HOLD"},
-            )
+            if persist:
+                _append_jsonl(
+                    MAIN_BRAIN_LOG,
+                    {"ts": _utc_now(), "kind": "guardian_ai_flow", "summary": summary, "verdict": "HOLD"},
+                )
             return {
                 "flow": "guardian",
                 "verdict": "HOLD",
+                "persisted": persist,
                 "reason": "blackmask_not_ship",
                 "steps": steps,
                 "summary": summary,
@@ -301,6 +306,7 @@ def operate_guardian_flow(
         action=action,
         evidence=evidence,
         lane="mcp",
+        persist=persist,
     )
     steps.append({"step": "student_submit", "result": submit})
     if submit.get("error"):
@@ -313,11 +319,12 @@ def operate_guardian_flow(
             approve=teacher_approve,
             teacher_note=teacher_note,
             lane="mcp",
+            persist=persist,
         )
         steps.append({"step": "teacher_review", "result": review})
-        verdict = "SHIP" if teacher_approve else "RETRY"
+        verdict = ("SHIP" if teacher_approve else "RETRY") if persist else "DRY_RUN"
     else:
-        verdict = "SUBMITTED"
+        verdict = "SUBMITTED" if persist else "DRY_RUN"
 
     lph = select_lph_personality(f"{action} {evidence}")
     summary = _bracket_flow(
@@ -325,28 +332,30 @@ def operate_guardian_flow(
         verdict,
         f"department: {department_id} | student: {student_agent} | lph: {lph['personality_id']}",
     )
-    _append_jsonl(
-        MAIN_BRAIN_LOG,
-        {
-            "ts": _utc_now(),
-            "kind": "guardian_ai_flow",
-            "department": department_id,
-            "summary": summary,
-            "verdict": verdict,
-        },
-    )
+    if persist:
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "guardian_ai_flow",
+                "department": department_id,
+                "summary": summary,
+                "verdict": verdict,
+            },
+        )
 
-    state = _load_state()
-    state.setdefault("flows", {})["guardian"] = {
-        "last_at": _utc_now(),
-        "verdict": verdict,
-        "department": department_id,
-    }
-    _save_state(state)
+        state = _load_state()
+        state.setdefault("flows", {})["guardian"] = {
+            "last_at": _utc_now(),
+            "verdict": verdict,
+            "department": department_id,
+        }
+        _save_state(state)
 
     return {
         "flow": "guardian",
         "verdict": verdict,
+        "persisted": persist,
         "steps": steps,
         "lph": lph,
         "summary": summary,
@@ -364,6 +373,7 @@ def operate_identi_flow(
     perfect_pattern: str = "",
     identi_agent: str = "identi_cursor",
     submit_to_guardian: bool = True,
+    persist: bool = True,
 ) -> dict[str, Any]:
     """
     Identi flow: Boundary → LPM dialectic + LPH switch + bracket lint → hand off to Guardian.
@@ -384,21 +394,23 @@ def operate_identi_flow(
             f"dept: {department_id} | verb: {boundary.breached_verb} | "
             f"gate: {boundary.wwjd_gate} | {boundary.reason[:120]}",
         )
-        _append_jsonl(
-            MAIN_BRAIN_LOG,
-            {
-                "ts": _utc_now(),
-                "kind": "identi_ai_flow",
-                "department": department_id,
-                "summary": summary,
-                "verdict": "BOUNDARY_BREACH",
-                "breached_verb": boundary.breached_verb,
-                "escalation": boundary.escalation,
-            },
-        )
+        if persist:
+            _append_jsonl(
+                MAIN_BRAIN_LOG,
+                {
+                    "ts": _utc_now(),
+                    "kind": "identi_ai_flow",
+                    "department": department_id,
+                    "summary": summary,
+                    "verdict": "BOUNDARY_BREACH",
+                    "breached_verb": boundary.breached_verb,
+                    "escalation": boundary.escalation,
+                },
+            )
         return {
             "flow": "identi",
             "verdict": "BOUNDARY_BREACH",
+            "persisted": persist,
             "reason": boundary.reason,
             "contract_boundary": boundary.contract_boundary,
             "wwjd_gate": boundary.wwjd_gate,
@@ -449,42 +461,49 @@ def operate_identi_flow(
             action=f"[identi:{identi_agent}] {action}",
             evidence=evidence,
             lane="mcp",
+            persist=persist,
         )
         result["guardian_handoff"] = submit
         if submit.get("error"):
             result["verdict"] = "HANDOFF_ERROR"
         else:
-            result["verdict"] = "HANDOFF_SUBMITTED"
-            result["next"] = "Cassey teacher_review + KC Save|Watch via Guardian"
+            result["verdict"] = "HANDOFF_SUBMITTED" if persist else "HANDOFF_DRY_RUN"
+            result["next"] = (
+                "Cassey teacher_review + KC Save|Watch via Guardian"
+                if persist
+                else "No-write validation only; no Guardian submission was persisted"
+            )
 
-    _append_jsonl(
-        MAIN_BRAIN_LOG,
-        {
-            "ts": _utc_now(),
-            "kind": "identi_ai_flow",
-            "agent": identi_agent,
-            "summary": combined[:500],
+    if persist:
+        _append_jsonl(
+            MAIN_BRAIN_LOG,
+            {
+                "ts": _utc_now(),
+                "kind": "identi_ai_flow",
+                "agent": identi_agent,
+                "summary": combined[:500],
+                "verdict": result["verdict"],
+            },
+        )
+
+        state = _load_state()
+        state.setdefault("flows", {})["identi"] = {
+            "last_at": _utc_now(),
             "verdict": result["verdict"],
-        },
-    )
-
-    state = _load_state()
-    state.setdefault("flows", {})["identi"] = {
-        "last_at": _utc_now(),
-        "verdict": result["verdict"],
-        "personality": lph["personality_id"],
-    }
-    cycles = state.setdefault("cycles", [])
-    cycles.append(
-        {
-            "at": _utc_now(),
-            "imperfect": imp,
-            "perfect": perf,
-            "lph": lph["personality_id"],
+            "personality": lph["personality_id"],
         }
-    )
-    state["cycles"] = cycles[-50:]
-    _save_state(state)
+        cycles = state.setdefault("cycles", [])
+        cycles.append(
+            {
+                "at": _utc_now(),
+                "imperfect": imp,
+                "perfect": perf,
+                "lph": lph["personality_id"],
+            }
+        )
+        state["cycles"] = cycles[-50:]
+        _save_state(state)
+    result["persisted"] = persist
 
     return result
 

@@ -31,7 +31,32 @@ def main() -> int:
     p = argparse.ArgumentParser(description="KPEFS Phases 0-5 full gate")
     p.add_argument("--json", action="store_true")
     p.add_argument("--append-main-brain", action="store_true", help="Log kpefs_full_gate receipt")
+    p.add_argument("--no-write", action="store_true", help="Run diagnostics without persisting reports or receipts")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for persisted validation")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
+
+    if args.no_write and args.append_main_brain:
+        p.error("--append-main-brain cannot be combined with --no-write")
+
+    admission: dict | None = None
+    if not args.no_write:
+        if not args.renter_id:
+            p.error("persisted KPEFS validation requires --renter-id")
+        if not args.hood_ack:
+            p.error("persisted KPEFS validation requires --hood-ack")
+        from kopano.kpgs_cli_admission import admit_cli_renter
+
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation="cli:kpefs_full_gate",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
 
     from kopano.external_swarm_lane import kpefs_closure_status
     from kopano.graduation_bar import graduation_bar_status, lock_kpefs_phases_3_5, record_steward_trust
@@ -63,7 +88,7 @@ def main() -> int:
         }
     )
 
-    poc = validate_agent_build_poc(write_report=True)
+    poc = validate_agent_build_poc(write_report=not args.no_write)
     steps.append(
         {
             "step": "agent_build_poc",
@@ -100,8 +125,10 @@ def main() -> int:
         "poc_report": poc.get("report_path"),
         "closure": closure,
     }
+    if admission is not None:
+        payload.update(admission)
 
-    if overall_ok:
+    if overall_ok and not args.no_write:
         try:
             from kopano.external_swarm_lane import write_closure_snapshot
 

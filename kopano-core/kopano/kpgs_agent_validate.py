@@ -320,6 +320,7 @@ def validate_kpgs_agent(
     manifest: dict[str, Any] | None = None,
     manifest_path: str | Path | None = None,
     run_blackmask: bool = True,
+    persist: bool = True,
 ) -> dict[str, Any]:
     """Single-agent KPGS altar gate."""
     from .kpgs_renter_entry import hood_entry_assertion, verify_hood_ack
@@ -404,7 +405,7 @@ def validate_kpgs_agent(
     )
 
     if run_blackmask and not data.get("exempt"):
-        drill = blackmask_drill(aid)
+        drill = blackmask_drill(aid, persist=persist)
         checks.append(
             {
                 "check": "black_mask_drill",
@@ -448,6 +449,7 @@ def validate_kpgs_agent(
         "ts": _utc_now(),
         "agent_id": aid,
         "verdict": verdict,
+        "persisted": persist,
         "hood_entry": hood,
         "failed_checks": failed,
         "checks": checks,
@@ -463,7 +465,7 @@ def validate_kpgs_mesh(*, write_report: bool = True) -> dict[str, Any]:
     agents = mesh_agent_ids()
     results: list[dict[str, Any]] = []
     for aid in agents:
-        results.append(validate_kpgs_agent(aid))
+        results.append(validate_kpgs_agent(aid, persist=write_report))
 
     ship = sum(1 for r in results if r.get("verdict") == "SHIP")
     reject = sum(1 for r in results if r.get("verdict") == "REJECT")

@@ -45,8 +45,11 @@ def _run_script(args: list[str], timeout: int = 120) -> tuple[int, str]:
     return proc.returncode, out.strip()
 
 
-def _ensure_boot_applied() -> None:
-    """Fresh clones / CI: BOOT v1 must be active before mesh checks."""
+def _ensure_boot_applied(*, persist: bool) -> None:
+    """Apply BOOT only for a persisted run; no-write validation skips activation."""
+    if not persist:
+        return
+
     from .phu_boot_governance import apply_boot, boot_status
 
     rs = boot_status().get("runtime_state") or {}
@@ -54,8 +57,35 @@ def _ensure_boot_applied() -> None:
         apply_boot()
 
 
+def _boot_v1_observable(*, write_report: bool) -> tuple[bool, str]:
+    """Prove BOOT v1 without inventing a runtime flag the dry-run refuses to write.
+
+    CI calls this validator with write_report=False. That path must not create
+    kopano-core/.kc/phu_boot_v1.json, so the check reads the committed boot
+    contract. A persisted run still requires the runtime activation flag.
+    """
+    from .phu_boot_governance import boot_status
+
+    status = boot_status()
+    if write_report:
+        runtime = status.get("runtime_state") or {}
+        active = runtime.get("active")
+        return bool(active or runtime.get("applied_at")), f"active={active}"
+
+    boot = status.get("boot") or {}
+    bindings = (status.get("role_bindings") or {}).get("bindings") or {}
+    agent_count = int((status.get("mesh_summary") or {}).get("blackmask_agent_count") or 0)
+    doctrine_ok = (
+        boot.get("schema") == "kopano_phu_student_teacher_mao_boot_v1"
+        and {"cassy", "kc", "mao"}.issubset(bindings)
+        and agent_count >= 1
+    )
+    return doctrine_ok, f"active=doctrine agents={agent_count}"
+
+
 def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
-    _ensure_boot_applied()
+    """Validate the agent-building path; write_report=False is fully non-persistent."""
+    _ensure_boot_applied(persist=write_report)
     checks: list[dict[str, Any]] = []
 
     # 1 — Bracket protocol
@@ -138,11 +168,13 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             imperfect_pattern="#? PoC unproven",
             perfect_pattern="#! PoC validated",
             submit_to_guardian=True,
+            persist=write_report,
         )
+        expected_identi_verdict = "HANDOFF_SUBMITTED" if write_report else "HANDOFF_DRY_RUN"
         checks.append(
             _check(
                 "identi_flow_handoff",
-                identi.get("verdict") == "HANDOFF_SUBMITTED",
+                identi.get("verdict") == expected_identi_verdict,
                 identi.get("verdict", ""),
                 identi.get("guardian_handoff", {}).get("status"),
             )
@@ -163,7 +195,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     try:
         from .phu_apprenticeship import blackmask_drill
 
-        bm = blackmask_drill("cassy")
+        bm = blackmask_drill("cassy", persist=write_report)
         checks.append(
             _check(
                 "blackmask_cassy_ship",
@@ -184,11 +216,13 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             run_blackmask=False,
             teacher_approve=True,
             teacher_note="Save — PoC validation run",
+            persist=write_report,
         )
+        expected_guardian_verdicts = ("SHIP", "SUBMITTED") if write_report else ("DRY_RUN",)
         checks.append(
             _check(
                 "guardian_flow_teacher_kc",
-                g.get("verdict") in ("SHIP", "SUBMITTED"),
+                g.get("verdict") in expected_guardian_verdicts,
                 g.get("verdict", ""),
                 (g.get("steps", [])[-1] if g.get("steps") else {}),
             )
@@ -211,14 +245,8 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
                 dry,
             )
         )
-        rs = boot_status().get("runtime_state") or {}
-        checks.append(
-            _check(
-                "boot_v1_status",
-                bool(rs.get("active") or rs.get("applied_at")),
-                f"active={rs.get('active')}",
-            )
-        )
+        boot_ok, boot_detail = _boot_v1_observable(write_report=write_report)
+        checks.append(_check("boot_v1_status", boot_ok, boot_detail))
     except Exception as exc:
         checks.append(_check("boot_governance", False, str(exc)))
 
@@ -226,7 +254,9 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     try:
         from .mao_dispatch import route_task
 
-        rt = route_task("audit", "diaspora offline apprenticeship LPM proof")
+        rt = route_task(
+            "audit", "diaspora offline apprenticeship LPM proof", persist=write_report
+        )
         checks.append(
             _check(
                 "mao_route_lpm_kpefs",
@@ -257,6 +287,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
             exit_code=0,
             livelihood_ids=["LIV-01", "LIV-04"],
             anticipated_delta="checks_pass_ratio rises from 0% to 100%",
+            persist_receipt=write_report,
         )
         checks.append(
             _check(
@@ -325,6 +356,7 @@ def validate_agent_build_poc(*, write_report: bool = True) -> dict[str, Any]:
     report = {
         "schema": "agent_build_poc_validation_v1",
         "ts": _utc_now(),
+        "persisted": write_report,
         "verdict": overall,
         "passed": passed,
         "total": len(checks),

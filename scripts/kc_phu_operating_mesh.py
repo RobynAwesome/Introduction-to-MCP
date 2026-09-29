@@ -16,6 +16,7 @@ from kopano.operating_mesh import (  # noqa: E402
     promote_flagship,
     operating_mesh_status,
 )
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 
 def main() -> int:
@@ -29,18 +30,38 @@ def main() -> int:
     p.add_argument("--agent-id", help="Sub-brain id for promote-one")
     p.add_argument("--force", action="store_true", help="Re-run promotion even if operating")
     p.add_argument("--json", action="store_true")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for promotion")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
 
     skip = not args.force
+    admission: dict | None = None
     if args.command == "status":
         out = operating_mesh_status()
-    elif args.command == "promote-all":
-        out = promote_all_flagships(skip_if_operating=skip)
     else:
-        if not args.agent_id:
-            print("promote-one requires --agent-id", file=sys.stderr)
-            return 2
-        out = promote_flagship(args.agent_id, skip_if_operating=skip)
+        if args.command == "promote-one" and not args.agent_id:
+            p.error("promote-one requires --agent-id")
+        if not args.renter_id:
+            p.error(f"{args.command} requires --renter-id")
+        if not args.hood_ack:
+            p.error(f"{args.command} requires --hood-ack")
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation=f"cli:phu_operating_mesh_{args.command.replace('-', '_')}",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
+
+        if args.command == "promote-all":
+            out = promote_all_flagships(skip_if_operating=skip)
+        else:
+            out = promote_flagship(args.agent_id, skip_if_operating=skip)
+
+        out.update(admission)
 
     if args.json:
         print(json.dumps(out, indent=2))

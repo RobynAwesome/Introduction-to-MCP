@@ -106,8 +106,8 @@ Mapped to Black Mask `CMD-01`…`CMD-15` in `KPGS_THESIS_2026_X8020.json` (`KPGS
 | Mesh PoC report | `docs/swarm-ops/KPGS_AGENT_VALIDATION.json` |
 
 ```powershell
-python scripts/kc_kpgs_agent_validate.py thesis   # compile check
-python scripts/kc_kpgs_agent_validate.py mesh     # 18-agent altar gate
+python scripts/kc_kpgs_agent_validate.py thesis --renter-id YOUR_ID --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD  # compile check
+python scripts/kc_kpgs_agent_validate.py mesh --renter-id YOUR_ID --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD    # 18-agent altar gate
 ```
 
 ---

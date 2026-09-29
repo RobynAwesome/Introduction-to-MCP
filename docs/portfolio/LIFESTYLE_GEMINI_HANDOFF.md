@@ -14,7 +14,7 @@ Use this in Gemini 3.5 Flash **lifestyle window only**. It does not include pass
 | **Main Brain** | `Schematics/` vault (override: `KOPANO_SCHEMATICS_ROOT`) |
 | **Breaking point** | Bracket Protocol — sub-brains reattached; receipt in Main Brain log |
 | **Local APIs** | `GET /api/kc/phu/ecosystem`, `GET /api/kc/phu/bracket-protocol` |
-| **CLI** | `python scripts/kc_phu_reattach_subbrains.py`, `python scripts/kc_phu_populate_main_brain.py` |
+| **CLI** | `python scripts/kc_phu_reattach_subbrains.py --renter-id <actor-id> --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD`; `python scripts/kc_phu_populate_main_brain.py --renter-id <actor-id> --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD` |
 | **Desktop** | `KopanoContext.exe` — API + Studio + Admin; DB `%LOCALAPPDATA%\KopanoContext\` |
 | **Branch** | `codex/kc-sovereign-gui-full-dev` (Cassy rebrand + desktop fix + Phu layer uncommitted) |
 

@@ -12,6 +12,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 REGISTER = REPO / "docs" / "swarm-ops" / "BRACKET_BLASPHEMY_REGISTER.json"
+
 def _iter_bracket_tags(text: str) -> Iterator[str]:
     """Yield bracket payloads in one pass, without backtracking on untrusted text."""
     start: int | None = None

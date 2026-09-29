@@ -9,7 +9,7 @@ cd "C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP"
 python scripts/kc_guard.py all
 
 # Refresh Main Brain + sub-brain attachment from Schematics
-python scripts/kc_phu_populate_main_brain.py
+python scripts/kc_phu_populate_main_brain.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 # Studio build if shipping context UI
 cd kopano-core\studio

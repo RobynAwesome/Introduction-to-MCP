@@ -452,6 +452,7 @@ def dispatch_spawn_event(
     agent_id: str,
     message: str,
     intent: str = "execute",
+    persist: bool = True,
 ) -> dict[str, Any]:
     """
     State-machine event bus — SWFUS → Jethro → WWJD → sever or proceed.
@@ -466,14 +467,30 @@ def dispatch_spawn_event(
     wwjd = swfus.get("wwjd_firewall") or wwjd_firewall(action=message)
 
     if jethro.get("severity") == "RED" or wwjd.get("verdict") == "HOLD":
-        sever = sever_and_archive(
-            agent_id=agent_id,
-            reason=f"jethro={jethro.get('severity')} wwjd={wwjd.get('verdict')}",
-            context={"swfus": swfus, "intent": intent, "message_preview": message[:300]},
-        )
+        reason = f"jethro={jethro.get('severity')} wwjd={wwjd.get('verdict')}"
+        if persist:
+            sever = sever_and_archive(
+                agent_id=agent_id,
+                reason=reason,
+                context={"swfus": swfus, "intent": intent, "message_preview": message[:300]},
+            )
+            event = "SEVER"
+        else:
+            sever = {
+                "verdict": "WOULD_SEVER",
+                "agent_id": agent_id,
+                "reason": reason,
+                "persisted": False,
+                "summary": (
+                    f"[RIGHTEOUS_SEVERANCE_DRY_RUN] agent={agent_id} | "
+                    f"reason={reason[:80]}"
+                ),
+            }
+            event = "DRY_RUN_SEVER"
         return {
-            "event": "SEVER",
+            "event": event,
             "proceed": False,
+            "persisted": persist,
             "swfus": swfus,
             "jethro": jethro,
             "wwjd": wwjd,
@@ -857,6 +874,37 @@ def spawn_swarm_status() -> dict[str, Any]:
             "hold": validation.get("hold"),
         },
         "by_cohort": validation.get("by_cohort"),
+    }
+
+
+def spawn_swarm_status_snapshot() -> dict[str, Any]:
+    """Read catalog and last saved validation without checkpointing the swarm."""
+    catalog = load_spawn_catalog()
+    doctrine = load_spawn_doctrine()
+    report: dict[str, Any] = {}
+    if SPAWN_REPORT_PATH.is_file():
+        try:
+            candidate = json.loads(SPAWN_REPORT_PATH.read_text(encoding="utf-8"))
+            if candidate.get("schema") == "kpgs_spawn_swarm_report_v2":
+                report = candidate
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {
+        "schema": "kpgs_spawn_swarm_status_v2",
+        "ts": _utc_now(),
+        "source": "cached_report" if report else "source_snapshot",
+        "junior_agent_count": catalog.get("counts", {}).get("total"),
+        "sharding": catalog.get("cohorts", {}),
+        "catalog_path": catalog.get("_source"),
+        "catalog_counts": catalog.get("counts", {}),
+        "doctrine_path": doctrine.get("_source"),
+        "sample_validation": {
+            "verdict": report.get("verdict", "UNKNOWN"),
+            "ship": report.get("ship"),
+            "hold": report.get("hold"),
+        },
+        "report_ts": report.get("ts"),
+        "message": "Validation requires an admitted run; cached results may be stale.",
     }
 
 

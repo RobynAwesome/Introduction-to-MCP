@@ -25,6 +25,8 @@ export function GodModeDock() {
   const [open, setOpen] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [renterId, setRenterId] = useState('');
+  const [hoodAck, setHoodAck] = useState('');
 
   if (!isGodMode && !open) {
     return (
@@ -105,14 +107,29 @@ export function GodModeDock() {
 
           <section className="god-dock-panel">
             <h4>Kopano-Phu · Bracket Protocol</h4>
+            <p>Persisted PHU actions require an explicit renter entry. Type the acknowledgement exactly; it is not prefilled.</p>
+            <label className="field-shell">
+              <span>Renter ID</span>
+              <input value={renterId} autoComplete="off" onChange={(e) => setRenterId(e.target.value)} />
+            </label>
+            <label className="field-shell">
+              <span>Type exactly: I_AM_STATELESS_RENTER_NOT_LANDLORD</span>
+              <input value={hoodAck} autoComplete="off" spellCheck={false} onChange={(e) => setHoodAck(e.target.value)} />
+            </label>
             <div className="god-dock-actions">
               {PHU_ACTIONS.map((id) => (
                 <button
                   key={id}
                   type="button"
                   className="action-button primary"
-                  disabled={busy}
-                  onClick={() => { void runAction(id, id === 'phu_populate_main_brain'); }}
+                  disabled={busy || !renterId.trim() || !hoodAck.trim()}
+                  onClick={() => {
+                    void runAction(id, true, {
+                      renterId,
+                      renterClass: 'stateless_renter',
+                      hoodAck,
+                    });
+                  }}
                 >
                   {id}
                 </button>

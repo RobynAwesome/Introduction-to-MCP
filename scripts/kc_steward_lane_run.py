@@ -15,6 +15,7 @@ from kopano.steward_lane import (  # noqa: E402
     run_steward_lane_activate,
     steward_lane_status,
 )
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 
 def main() -> int:
@@ -35,12 +36,29 @@ def main() -> int:
     act.add_argument("--no-identi", action="store_true")
     act.add_argument("--no-guardian", action="store_true")
     act.add_argument("--no-teacher-approve", action="store_true")
+    act.add_argument("--renter-id", default="", help="Stateless renter identity")
+    act.add_argument("--renter-class", default="stateless_renter")
+    act.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
 
     args = p.parse_args()
 
     if args.cmd == "status":
         print(json.dumps(steward_lane_status(), indent=2))
         return 0
+
+    if not args.renter_id:
+        act.error("activate requires --renter-id")
+    if not args.hood_ack:
+        act.error("activate requires --hood-ack")
+    try:
+        admission = admit_cli_renter(
+            renter_id=args.renter_id,
+            renter_class=args.renter_class,
+            hood_ack=args.hood_ack,
+            operation="cli:steward_lane_activate",
+        )
+    except ValueError as exc:
+        act.error(str(exc))
 
     out = run_steward_lane_activate(
         note=args.note,
@@ -51,6 +69,7 @@ def main() -> int:
         action=args.action or None,
         evidence=args.evidence or None,
     )
+    out.update(admission)
     print(json.dumps(out, indent=2))
     return 0 if out.get("verdict") == "ACTIVE" else 1
 

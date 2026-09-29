@@ -11,25 +11,37 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "kopano-core"))
 
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 from kopano.phu_apprenticeship import apprenticeship_status, begin_department_students, blackmask_drill  # noqa: E402
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Begin Kopano-Phu department students (TSAP)")
+    parser.add_argument("--renter-id", required=True, help="Stateless renter identity")
+    parser.add_argument("--renter-class", default="stateless_renter")
+    parser.add_argument("--hood-ack", required=True, help="Type the exact canonical renter acknowledgement")
     parser.add_argument("--no-blackmask", action="store_true", help="Skip BlackMask drill per agent")
     parser.add_argument("--drill-agent", default="", help="Drill single agent only (no begin)")
     parser.add_argument("--json", action="store_true", help="Print JSON only")
     args = parser.parse_args()
 
+    admission = admit_cli_renter(
+        renter_id=args.renter_id,
+        renter_class=args.renter_class,
+        hood_ack=args.hood_ack,
+        operation="cli:kc_phu_department_students_begin",
+    )
     if args.drill_agent:
         result = blackmask_drill(args.drill_agent)
     else:
         result = begin_department_students(run_blackmask=not args.no_blackmask)
+    result = {**result, **admission}
 
     if args.json:
         print(json.dumps(result, indent=2))
     else:
         print("=== Kopano-Phu TSAP — Department Students ===\n")
+        print("Renter admission: ACKNOWLEDGED; ALP receipt recorded")
         if args.drill_agent:
             print(f"Agent: {args.drill_agent}")
             print(f"Verdict: {result.get('verdict')}")

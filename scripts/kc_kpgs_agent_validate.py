@@ -13,7 +13,6 @@ sys.path.insert(0, str(REPO / "kopano-core"))
 
 from kopano.kpgs_agent_validate import (  # noqa: E402
     compile_kpgs_thesis,
-    execute_altar_gate,
     synthesize_agent_manifest,
     validate_kpgs_agent,
     validate_kpgs_mesh,
@@ -22,6 +21,15 @@ from kopano.kpgs_telemetry_route import (  # noqa: E402
     classify_telemetry_signal,
     compile_black_beast_thesis,
 )
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
+
+
+def _add_renter_admission_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--renter-id", required=True, help="Stateless renter identity")
+    parser.add_argument("--renter-class", default="stateless_renter")
+    parser.add_argument(
+        "--hood-ack", required=True, help="Exact canonical renter acknowledgement"
+    )
 
 
 def main() -> int:
@@ -30,12 +38,15 @@ def main() -> int:
 
     m = sub.add_parser("mesh", help="PoC — validate full boot mesh against KPGS core")
     m.add_argument("--json", action="store_true")
+    _add_renter_admission_arguments(m)
 
     t = sub.add_parser("thesis", help="Compile-check KPGS thesis payload X8020")
     t.add_argument("--json", action="store_true")
+    _add_renter_admission_arguments(t)
 
     b = sub.add_parser("black-beast", help="Compile-check Black Beast thesis payload V1")
     b.add_argument("--json", action="store_true")
+    _add_renter_admission_arguments(b)
 
     c = sub.add_parser("classify", help="Classify raw signal before interpretation")
     c.add_argument("signal", help="Raw telemetry text to route")
@@ -45,11 +56,24 @@ def main() -> int:
     v.add_argument("agent_id")
     v.add_argument("payload_path", nargs="?", help="Optional kpgs manifest JSON path")
     v.add_argument("--synthetic", action="store_true", help="Use synthesized mesh manifest")
+    _add_renter_admission_arguments(v)
 
     s = sub.add_parser("synthesize", help="Print default manifest for agent_id")
     s.add_argument("agent_id")
 
     args = p.parse_args()
+
+    admission = None
+    if args.cmd in {"mesh", "thesis", "black-beast", "validate"}:
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation=f"cli:kc_kpgs_agent_validate:{args.cmd}",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
 
     if args.cmd == "black-beast":
         out = compile_black_beast_thesis()
@@ -84,6 +108,7 @@ def main() -> int:
 
     if args.cmd == "mesh":
         report = validate_kpgs_mesh()
+        report["renter_admission"] = admission
         if args.json:
             print(json.dumps(report, indent=2))
         else:
@@ -99,9 +124,9 @@ def main() -> int:
     if args.synthetic or not args.payload_path:
         out = validate_kpgs_agent(args.agent_id)
     else:
-        status = execute_altar_gate(args.agent_id, args.payload_path)
         out = validate_kpgs_agent(args.agent_id, manifest_path=args.payload_path)
-        print(f"STATUS: {status}")
+    out["renter_admission"] = admission
+    print(f"STATUS: {out.get('verdict', 'HOLD')}")
 
     print(json.dumps(out, indent=2))
     return 0 if out.get("verdict") == "SHIP" else 1

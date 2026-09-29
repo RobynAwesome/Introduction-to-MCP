@@ -153,16 +153,46 @@ def run_sovereign_sim_tick(*, sample_size: int = 12, write_world: bool = True) -
     from .kpgs_spawn_swarm import dispatch_spawn_event, load_spawn_catalog
     from .sovereign_sim import WORLD_STATE_PATH, load_world_state
 
-    gate_from = __import__("kopano.kpgs_activation_gate", fromlist=["check_kpgs_activation_gate"])
-    gate = gate_from.check_kpgs_activation_gate()
+    from .kpgs_activation_gate import activation_gate_for_execution
+
+    gate = activation_gate_for_execution(write_report=False)
     if not gate.get("activation_allowed"):
         return {
             "schema": "sovereign_sim_tick_v1",
             "ts": _utc_now(),
             "verdict": "BLOCKED",
+            "activation_allowed": False,
             "gate": gate,
             "message": gate.get("message"),
         }
+
+    world: dict[str, Any] | None = None
+    if write_world:
+        world = load_world_state()
+        if not world.get("bootstrapped"):
+            from .sovereign_sim import bootstrap_sovereign_sim
+
+            bootstrap = bootstrap_sovereign_sim(write_log=False)
+            if bootstrap.get("verdict") != "BOOTSTRAPPED":
+                return {
+                    "schema": "sovereign_sim_tick_v1",
+                    "ts": _utc_now(),
+                    "verdict": "BLOCKED",
+                    "activation_allowed": False,
+                    "gate": bootstrap.get("gate", gate),
+                    "message": bootstrap.get("message", "World bootstrap did not complete."),
+                    "bootstrap": bootstrap,
+                }
+            world = load_world_state()
+            if not world.get("bootstrapped"):
+                return {
+                    "schema": "sovereign_sim_tick_v1",
+                    "ts": _utc_now(),
+                    "verdict": "BLOCKED",
+                    "activation_allowed": False,
+                    "gate": gate,
+                    "message": "World bootstrap returned without a bootstrapped state.",
+                }
 
     manifest = load_deployment_manifest()
     assignments = manifest.get("assignments") or []
@@ -217,12 +247,7 @@ def run_sovereign_sim_tick(*, sample_size: int = 12, write_world: bool = True) -
     }
 
     if write_world:
-        world = load_world_state()
-        if not world.get("bootstrapped"):
-            from .sovereign_sim import bootstrap_sovereign_sim
-
-            bootstrap_sovereign_sim(write_log=False)
-            world = load_world_state()
+        assert world is not None
         history = list(world.get("tick_history") or [])
         history.append(
             {
@@ -265,9 +290,9 @@ def run_kpgs_behavioral_poc(*, write_report: bool = True) -> dict[str, Any]:
     Execute all mechanical proofs. PASS only when every proof ok.
     Requires activation gate ALLOW (300 guilded SHIP).
     """
-    from .kpgs_activation_gate import check_kpgs_activation_gate
+    from .kpgs_activation_gate import activation_gate_for_execution
 
-    gate = check_kpgs_activation_gate(write_report=False)
+    gate = activation_gate_for_execution(write_report=False)
     if not gate.get("activation_allowed"):
         report = {
             "schema": "kpgs_behavioral_poc_v1",
@@ -278,6 +303,7 @@ def run_kpgs_behavioral_poc(*, write_report: bool = True) -> dict[str, Any]:
             "message": gate.get("message"),
         }
         if write_report:
+            BEHAVIORAL_REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
             BEHAVIORAL_REPORT_PATH.write_text(
                 json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
             )
@@ -347,3 +373,22 @@ def run_kpgs_behavioral_poc(*, write_report: bool = True) -> dict[str, Any]:
         )
 
     return report
+
+
+def load_kpgs_behavioral_poc_report() -> dict[str, Any]:
+    """Read the last behavioral receipt without running the side-effecting PoC."""
+    if BEHAVIORAL_REPORT_PATH.is_file():
+        try:
+            report = json.loads(BEHAVIORAL_REPORT_PATH.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            report = {}
+        if report.get("schema") == "kpgs_behavioral_poc_v1":
+            report["source"] = "cached_report"
+            return report
+    return {
+        "schema": "kpgs_behavioral_poc_v1",
+        "ts": _utc_now(),
+        "verdict": "UNKNOWN",
+        "source": "missing_cache",
+        "message": "Run the admitted behavioral PoC to create a receipt.",
+    }

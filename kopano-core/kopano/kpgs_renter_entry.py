@@ -72,7 +72,9 @@ def hood_entry_assertion(
     *,
     renter_id: str = "anonymous_stateless_renter",
     renter_class: str = "linguistic_actor",
+    operation: str | None = None,
     write_log: bool = False,
+    ack_receipt: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Identity card issued at hood entry, including the parent Legacy purpose."""
     entryway = load_renter_entryway()
@@ -118,20 +120,27 @@ def hood_entry_assertion(
         ),
     }
     if write_log:
-        _append_jsonl(
-            MAIN_BRAIN_LOG,
-            {
-                "schema": "kc_main_brain_log_v1",
-                "ts": out["ts"],
-                "kind": "kpgs_hood_entry",
-                "renter_id": renter_id,
-                "renter_class": renter_class,
-                "legacy": legacy,
-                "legacy_precedence": legacy_precedence,
-                "summary": out["summary"],
-                "exit_code": 0,
-            },
-        )
+        log_row = {
+            "schema": "kc_main_brain_log_v1",
+            "ts": out["ts"],
+            "kind": "kpgs_hood_entry",
+            "renter_id": renter_id,
+            "renter_class": renter_class,
+            "operation": operation,
+            "legacy": legacy,
+            "legacy_precedence": legacy_precedence,
+            "summary": out["summary"],
+            "exit_code": 0,
+        }
+        if ack_receipt is not None:
+            log_row.update(
+                {
+                    "ack_verified": True,
+                    "ack_receipt": ack_receipt,
+                    "verdict": "ACKNOWLEDGED",
+                }
+            )
+        _append_jsonl(MAIN_BRAIN_LOG, log_row)
     return out
 
 
@@ -159,6 +168,7 @@ def require_hood_ack(body: dict[str, Any]) -> dict[str, Any]:
         "renter_id": body.get("renter_id"),
         "renter_class": body.get("renter_class"),
         "hood_ack": body.get("hood_ack"),
+        "operation": body.get("operation"),
         "verdict": "ACKNOWLEDGED",
         "constraint": HOOD_ACK_LITERAL,
     }
@@ -175,27 +185,33 @@ def entryway_ack_schema() -> dict[str, Any]:
 def assert_and_log_entry(
     *,
     renter_id: str,
+    operation: str,
     renter_class: str = "linguistic_actor",
     hood_ack: str = "",
 ) -> dict[str, Any]:
-    """Full entry ceremony — assertion + optional ack verification + log."""
-    assertion = hood_entry_assertion(
-        renter_id=renter_id,
-        renter_class=renter_class,
-        write_log=True,
-    )
+    """Log a full entry only after the canonical acknowledgement is valid."""
+    if not operation.strip():
+        raise ValueError("[KPGS_HOOD_ENTRY] BLOCK — operation reference is required")
     body = {
         "renter_id": renter_id,
         "renter_class": renter_class,
         "hood_ack": hood_ack,
+        "operation": operation,
         "ts": _utc_now(),
     }
-    ok, errors = verify_hood_ack(body) if hood_ack else (False, ["hood_ack not provided"])
-    assertion["ack_verified"] = ok
-    assertion["ack_errors"] = errors if not ok else []
-    assertion["verdict"] = "ENTERED" if ok else "ASSERTION_ONLY"
-    if ok:
-        assertion["verdict"] = "ACKNOWLEDGED"
+    ack_receipt = require_hood_ack(body)
+    assertion = hood_entry_assertion(
+        renter_id=renter_id,
+        renter_class=renter_class,
+        operation=operation,
+        write_log=True,
+        ack_receipt=ack_receipt,
+    )
+    assertion["operation"] = operation
+    assertion["ack_verified"] = True
+    assertion["ack_errors"] = []
+    assertion["ack_receipt"] = ack_receipt
+    assertion["verdict"] = "ACKNOWLEDGED"
     return assertion
 
 

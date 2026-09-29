@@ -15,6 +15,8 @@ status: active
 
 # KasiLink + Kopano Context Integration Plan
 
+> **Historical April 2026 plan.** For the later source-repository and split-host observation, see [KasiLink Runtime Source + DNS Truth Lock](KasiLink%20Runtime%20Source%20DNS%20Truth%20Lock%202026-08-18.md). Its observations are dated, not a live deployment check.
+
 > Kopano Context as a subsidiary AI feature within KasiLink — powering AI capabilities without replacing KasiLink's objective.
 > See also: [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md), [Microsoft Contract Strategy](Microsoft%20Contract%20Strategy.md), [SA Startup Week Demo](../Microsoft%20Demo%20Day!/SA%20Startup%20Week%20Demo.md)
 

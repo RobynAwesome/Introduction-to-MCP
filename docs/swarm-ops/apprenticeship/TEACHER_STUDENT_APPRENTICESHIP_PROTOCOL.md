@@ -47,8 +47,8 @@ Before any agent operates in a department, run **Black Mask drill**:
 - All **5 Pillars** — Grit, Realism, Aesthetics, Sovereignty, Apprenticeship
 
 ```bash
-python scripts/kc_phu_department_students_begin.py
-python scripts/kc_phu_department_students_begin.py --drill-agent mirror_warden
+python scripts/kc_phu_department_students_begin.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_phu_department_students_begin.py --drill-agent mirror_warden --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
 MCP: `tsap_blackmask_drill`  
@@ -65,7 +65,7 @@ MAO: `mao_blackmask_drill`
 
 ```bash
 # Begin all department students + BlackMask gate
-python scripts/kc_phu_department_students_begin.py
+python scripts/kc_phu_department_students_begin.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 # API (public status)
 GET /api/kc/phu/apprenticeship/status

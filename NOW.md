@@ -1,3 +1,44 @@
+## CURRENT STATE — 2026-09-29T05:20:05Z (PR #213 CODEQL HIGHS PORTED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `codex/gsmb-home-first-final-sep24`
+> **Prior head:** `e7894143616538b87f30618f5daa7c86da9b432d`
+
+- **Failure:** CodeQL on the prior head reported two highs: path injection in `kopano-core/kopano/eco_poc_validate.py` (`Path(evidence).is_file()`) and polynomial ReDoS in `scripts/kc_bracket_lint.py` (`BRACKET_TAG`). Two medium warnings traced `str(exc)` from `activation_gate_for_execution` into the hood-dispatch returns.
+- **Change:** Evidence files and `.jsonl` references must be repo-relative. Absolute, drive, and `..` paths are rejected. Bracket tags are scanned in one pass. The execution-admission report returns a fixed string for known ALP blocks and `KPGS activation gate BLOCK` for any other `ValueError`. `persist_receipt` and the dry-run boot proof stay.
+- **Local proof:** `PYTHONPATH=kopano-core python3 -m pytest tests/test_security_high_alert_remediation.py tests/test_kpgs_activation_gate.py -q` → **16 passed** in 2.88s.
+- **Unknown:** hosted CodeQL on this new head has not run yet. This does not merge the PR. Issue #121, Azure #211, and the KasiLink gitlink HOLD stay open. PR #233 carries the same path and bracket guards; the second of #213 and #233 to merge may conflict on `eco_poc_validate.py` and `NOW.md`.
+
+**Next admissible action:** read the new CodeQL result on this head. Do not admin-merge.
+
+---
+
+## CURRENT STATE — 2026-09-29T05:04:57Z (PR #213 UPDATED ONTO MASTER · DRY-RUN BOOT CHECK REPAIRED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7) — stateless
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela merged #232 and directed repair of open pull requests from the oldest.
+> **Branch:** `codex/gsmb-home-first-final-sep24` updated onto `master` `0208002ab8231e62773872c6161be82d5bfc7c46`
+
+### What changed
+
+- Open dependabot pull requests #186, #184, #193, #197, #199, #200, #202, #203, and #214–#230 were merged with `master` `0208002a` and pushed. GitHub now reports each of those 25 pull requests `MERGEABLE`. Hosted check results after those pushes are **UNKNOWN** until the runs finish. They still overlap on lockfiles, so they cannot all merge in one batch.
+- PR #213's only merge conflict was root `NOW.md`. Both the 2026-09-29 field-kit receipt and the 2026-09-28 #213 receipts are kept below.
+- The Agent build PoC failure `boot_v1_status active=None` came from the dry-run path. `write_report=False` refuses to create `kopano-core/.kc/phu_boot_v1.json`, and the check still required that file's `active` flag. The dry-run check now reads the committed BOOT v1 contract (`schema`, role bindings `cassy`/`kc`/`mao`, mesh agent count). A persisted run still requires `active` or `applied_at`.
+
+### Local evidence
+
+- `PYTHONPATH=kopano-core python3 -m pytest tests/test_agent_build_poc_validate.py -q` → **9 passed** in 4.83s, with `mcp>=1.28,<2` installed.
+- `PYTHONPATH=kopano-core python3 scripts/kc_agent_build_poc_validate.py --no-write --json-only` → exit 0. Raw verdict FAIL 19/20 with only `operating_mesh_phase3` failed. CI adapter: `ci_status=PASS`, `governance_verdict=POC_VALIDATED`, `blocking_failures=[]`, `held_external_evidence=['operating_mesh_phase3']`. `boot_v1_status` detail: `active=doctrine agents=19`.
+- Hosted GitHub Actions on this new head have **not** run yet. This receipt does not claim the pull request is green or merged. Azure production remains HOLD on issue #211. Issue #121 stays open. The KasiLink gitlink still has no `.gitmodules` URL; that cleanup warning is unchanged.
+
+### Next admissible action
+
+Push this head to PR #213 and read the new hosted checks. Then resolve PR #233 (`codex/security-high-alert-remediation`), which is still `CONFLICTING` against `master`. Do not admin-merge. Do not close HOLD issues to shrink the count.
+
+---
+
 ## CURRENT STATE — 2026-09-29T05:10:00Z (PR #233 UPDATED ONTO MASTER AFTER #232)
 
 > **Actor:** Cursor cloud renter (Grok 4.7) — stateless

@@ -110,9 +110,9 @@ def graduation_bar_status() -> dict[str, Any]:
 
     kpgs: dict[str, Any] = {}
     try:
-        from .kpgs_governance import governance_status
+        from .kpgs_governance import governance_status_snapshot
 
-        kpgs = governance_status()
+        kpgs = governance_status_snapshot()
     except ImportError:
         kpgs = {"error": "kpgs_governance_unavailable"}
 
