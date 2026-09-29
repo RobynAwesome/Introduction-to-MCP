@@ -1,3 +1,38 @@
+## CURRENT STATE — 2026-09-29T06:07:31Z (OPEN PR HEADS COMBINED FOR LANDING)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela asked to merge, pull, and complete issues.
+> **Base:** `origin/master` `7397c6581931dc034eed88cdbdf6f52fef231a03` (already contains #232, #233, and #230 / litellm 1.102.1)
+> **Integration parent:** `5da30e4172711b03a1e2002491e088351672bba0`
+
+### What this commit contains
+
+No-ff merges of the still-open pull requests, then a lockfile refresh. Each of these heads is an ancestor of this commit:
+
+#184, #186, #193, #197, #199, #200, #202, #203, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #223, #224, #225, #226, #227, #228, #229.
+
+Kept pins: `pydantic-settings==2.15.0`, `azure-monitor-opentelemetry==1.8.10`, `litellm==1.102.1`, `sqlalchemy==2.1.1`, `openai==3.19.2`, `uvicorn==0.54.0`, studio `eslint ^10.11.0` with `@eslint/js ^10.0.1`, `typescript-eslint ^8.70.1`, `vite ^8.3.1`, `framer-motion ^13.4.4`, dashboard `three ^0.186.1`, root `@anthropic-ai/sdk ^0.128.0` and `braintrust ^3.35.0`, browser MCP `@modelcontextprotocol/server 2.1.0`, `puppeteer-core 25.12.0`, `zod 4.6.5`. #213 path, bracket, and activation-gate guards stay with the #233 tests.
+
+### Local proof on this tree
+
+- `kopano-core/studio`: `npm ci --ignore-scripts` then `npm run lint` → exit 0, 0 errors, 5 existing `react-hooks/set-state-in-effect` warnings. `npm run build` (`tsc -b && vite build`) → exit 0, vite 8.3.1.
+- `python3 scripts/kc_dependency_firewall_gate.py` → `FIREWALL PASS` (3 lockfiles).
+- `PYTHONPATH=kopano-core python3 -m pytest tests/test_security_high_alert_remediation.py tests/test_kpgs_activation_gate.py tests/test_agent_build_poc_validate.py -q` → **25 passed** in 8.23s. Pytest side-effect logs were restored and are not in this commit.
+- Studio audit reported 1 low severity advisory. Root audit reported 1 high severity advisory. Neither was changed with `npm audit fix`.
+
+### Not proven
+
+Hosted GitHub Actions and CodeQL on this commit are **UNKNOWN** until the commit is on `master` and those runs finish. This receipt does not claim production deploy, Azure OIDC, or Seat 10 re-entry. `CLI/uv.lock` still contains March 2026 conflict markers from `e0aac64cc`; this landing did not touch that file.
+
+### Issues
+
+#205 can close only after this commit is the `master` tip, because the ESLint 10 + `@eslint/js` 10 lock and the local studio proof are then on the default branch. #204 was closed unmerged and is superseded by that pair. These stay open: #231, #211, #207, #183, #167, #163, #158, #122, #121, #116, #115, #110, #107, #103, #102, #94.
+
+**Next admissible action:** push this commit to `master`. If branch protection rejects the push, fast-forward `codex/gsmb-home-first-final-sep24` to this commit so PR #213 can run the required checks. Do not close HOLD issues to shrink the count.
+
+---
+
 ## CURRENT STATE — 2026-09-29T05:20:05Z (PR #213 CODEQL HIGHS PORTED)
 
 > **Actor:** Cursor cloud renter (Grok 4.7)
