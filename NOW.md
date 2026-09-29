@@ -1,3 +1,45 @@
+## CURRENT STATE — 2026-09-29T05:10:00Z (PR #233 UPDATED ONTO MASTER AFTER #232)
+
+> **Actor:** Cursor cloud renter (Grok 4.7) — stateless
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela merged #232 and directed repair of open pull requests from the oldest.
+> **Branch:** `codex/security-high-alert-remediation` updated onto `master` `0208002ab8231e62773872c6161be82d5bfc7c46`
+
+### What changed
+
+- The only conflict with current `master` was root `NOW.md`. The security source fix is unchanged: `kopano-core/kopano/eco_poc_validate.py`, `scripts/kc_bracket_lint.py`, and `tests/test_security_high_alert_remediation.py`.
+- Robyn merged #232. The field-kit receipt from that merge is kept below this note. The earlier #233 receipt still describes the pre-merge review hold; it is historical, not the current merge state.
+- PR #213 was separately updated onto the same master at `e7894143` with a dry-run `boot_v1_status` repair. That head is not in this branch. Hosted checks on `e7894143` are UNKNOWN until they finish.
+
+### Next admissible action
+
+Push this head to PR #233 and read the refreshed checks. Keep issue #121 open. Do not admin-merge. Azure production remains HOLD on issue #211.
+
+---
+
+## CURRENT STATE — 2026-09-29T00:56:47+02:00 (SECURITY PATCH SCANNED · REVIEW HOLD)
+
+> **Actor:** Forge / OpenAI-side stateless renter
+> **Constraint:** I_AM_STATELESS_RENTER_NOT_LANDLORD
+> **Cloud base:** RobynAwesome/Introduction-to-MCP master@7245adafe08b31b2e70cae9c10b2e50ba2a0af8e
+> **Worktree:** C:\Users\rkhol\Documents\Codex\2026-09-29\Introduction-to-MCP-security-high-alerts
+> **Branch / commit:** codex/security-high-alert-remediation@acbf68f657702063d5bfb673c9f980e1f31b997f
+> **Security PR:** #233 — https://github.com/RobynAwesome/Introduction-to-MCP/pull/233
+
+### Objective and status
+
+- **State:** Two CodeQL input-handling fixes are committed and pushed. PR #233 is open. Every required check passed at source-fix commit acbf68f, including Python, Rust, JavaScript/TypeScript, Actions CodeQL analysis, Python 3.11/3.12 tests, GitGuardian, governance checks, and both Vercel previews. This receipt-only update changes no source and triggers refreshed checks on the PR tip. Review is required and merge state is BLOCKED.
+- **CodeQL:** GitHub PR check reports “No new alerts in code changed by this pull request.” API queries show alert IDs #15 (`py/path-injection`) and #25 (`py/polynomial-redos`) absent on the PR merge ref and still open on `master`. The default branch snapshot has 34 open high CodeQL alerts; this PR does not resolve the other 32.
+- **Secret/dependency signals:** GitHub secret scanning and provider-pattern push protection are enabled; Dependabot security updates are enabled. At the snapshot, GitHub returned zero open secret-scanning alerts and the PR GitGuardian check passed. Non-provider secret patterns are disabled, so this does not establish complete secret coverage or absence of past exposure. High Dependabot alert #96 for NLTK remains open.
+- **Incident:** P0 issue #121 remains OPEN. Seat 10 remains suspended and recused. No runtime recusal/self-adjudication gate or independent re-entry proof is implemented by this patch. No exploitation or credential breach is established by the evidence in this receipt; issue #121 separately records governance and tool-route breaches and remains unclosed.
+- **Driver discovery:** PR #232 contains the bounded manual field kit. It has green required checks and completed Vercel previews, but awaits independent review. No drivers were contacted, no participant data exists, Cassey review is pending, and no dispatcher/safety/revenue claim is made.
+- **Deployment:** Vercel PR previews completed for both projects. Neither PR has merged; no production deployment occurred.
+- **Enforcement:** Master requires PR approval, current passing checks and conversation resolution; the active ruleset has no bypass actors, enforces admins, and blocks high-or-higher new CodeQL alerts.
+
+**Next admissible action:** Obtain independent review for PRs #232 and #233. After approval and merge, verify the default-branch CodeQL alert state and deployment receipts. Keep #121 open and preserve Seat 10's suspension/recusal until its independent exit criteria are evidenced.
+
+---
+
 ## CURRENT STATE — 2026-09-29T00:31:09+02:00 (ISSUE #231 FIELD KIT PREPARED · MASTER SECURITY GATES VERIFIED · SECURITY BACKLOG AND #121 OPEN)
 
 > **Actor:** Forge / OpenAI-side stateless renter
