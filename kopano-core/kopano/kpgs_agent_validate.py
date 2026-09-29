@@ -166,7 +166,11 @@ def synthesize_agent_manifest(agent_id: str, *, proof_path: str | None = None) -
         "sector_01_freddy" if agent_id == "freddy_nw_alfalfa" else "sovereign_mesh"
     )
     from .kpgs_telemetry_route import synthesize_telemetry_routing
-    from .kpgs_renter_entry import block_holder_brief, synthesize_block_holder_manifest
+    from .kpgs_renter_entry import (
+        HOOD_ACK_LITERAL,
+        block_holder_brief,
+        synthesize_block_holder_manifest,
+    )
 
     altar_layer = None
     if agent_id == "pipeline_drone":
@@ -208,6 +212,12 @@ def synthesize_agent_manifest(agent_id: str, *, proof_path: str | None = None) -
                 "supervisor_node": supervisor,
                 "runtime_closure_gate": "guardian_ai_flow",
             },
+        },
+        "renter_entry": {
+            "renter_id": agent_id,
+            "renter_class": "mesh_agent",
+            "hood_ack": HOOD_ACK_LITERAL,
+            "ts": _utc_now(),
         },
         "execution": {
             "uses_public_api": False,
@@ -312,7 +322,7 @@ def validate_kpgs_agent(
     run_blackmask: bool = True,
 ) -> dict[str, Any]:
     """Single-agent KPGS altar gate."""
-    from .kpgs_renter_entry import hood_entry_assertion
+    from .kpgs_renter_entry import hood_entry_assertion, verify_hood_ack
     from .phu_apprenticeship import blackmask_drill, load_black_mask_doctrine
 
     hood = hood_entry_assertion(renter_id=f"agent:{agent_id}", renter_class="mesh_agent")
@@ -324,12 +334,22 @@ def validate_kpgs_agent(
         data = synthesize_agent_manifest(agent_id)
 
     aid = str(data.get("agent_id") or agent_id)
+    if data.get("exempt"):
+        ack_ok, ack_errs = True, []
+    else:
+        ack_ok, ack_errs = verify_hood_ack(data.get("renter_entry") or {})
+
     checks: list[dict[str, Any]] = [
         {
             "check": "hood_entry_assertion",
             "verdict": "PASS" if hood.get("you_are_fucking_with") else "FAIL",
             "entry_assertion": hood.get("entry_assertion", "")[:200],
-        }
+        },
+        {
+            "check": "renter_hood_ack",
+            "verdict": "PASS" if ack_ok else "FAIL",
+            "errors": ack_errs,
+        },
     ]
 
     pil_ok, pil_errs = verify_five_pillars(data)
@@ -403,7 +423,14 @@ def validate_kpgs_agent(
 
     failed = [c["check"] for c in checks if c.get("verdict") == "FAIL"]
     if failed:
-        verdict = "REJECT" if pil_ok and cmd_ok and route_ok and block_ok else "HOLD"
+        # Missing/invalid mandatory admission evidence is HOLD, not a softer
+        # non-blocking disposition. Only a structurally admitted renter may
+        # reach a later REJECT/HOLD decision from downstream proof gates.
+        verdict = (
+            "REJECT"
+            if pil_ok and cmd_ok and route_ok and block_ok and ack_ok
+            else "HOLD"
+        )
         if any(c["check"] == "black_mask_drill" and c["verdict"] == "FAIL" for c in checks):
             verdict = "HOLD"
     else:
