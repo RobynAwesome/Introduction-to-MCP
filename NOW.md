@@ -38,6 +38,21 @@ Push this head to PR #233 and read the refreshed checks. Keep issue #121 open. D
 
 **Next admissible action:** Obtain independent review for PRs #232 and #233. After approval and merge, verify the default-branch CodeQL alert state and deployment receipts. Keep #121 open and preserve Seat 10's suspension/recusal until its independent exit criteria are evidenced.
 
+## CURRENT STATE — 2026-09-29T05:12:46Z (PR #200 STUDIO ESLINT PEER ALIGNED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `dependabot/npm_and_yarn/kopano-core/studio/eslint/js-10.0.1`
+> **Prior head:** `4089a9b65b39fae4753742a7b79c096c03c7314f`
+
+- **Failure:** gui-check on run `36524031922` / job `109263180922` died at `npm ci` in `kopano-core/studio`. `@eslint/js@10.0.1` peer-requires `eslint@^10`; the branch still declared `eslint@^9.39.4`.
+- **Change:** `kopano-core/studio/package.json` now declares `eslint@^10.11.0` beside `@eslint/js@^10.0.1`. `typescript-eslint@8.69.0` already peers `eslint@^10`, so it stays. Lockfile resolves `eslint@10.11.0` and `@eslint/js@10.0.1`.
+- **Local proof:** `npm ci`, `npm run lint` (0 errors, 5 existing `react-hooks/set-state-in-effect` warnings), and `npm run build` (`tsc -b && vite build`) exited 0 on Node `v22.14.0`.
+- **Unknown:** hosted gui-check on the new head has not run yet. This does not merge the PR and does not close #121, #211, or the KasiLink gitlink HOLD.
+- **Sibling:** PR #227 only raises eslint and leaves `@eslint/js` at 9. After this head lands, that eslint range is already satisfied here.
+
+**Next admissible action:** wait for the new gui-check on this head. Do not batch-merge overlapping studio lockfile PRs.
+
 ---
 
 ## CURRENT STATE — 2026-09-29T00:31:09+02:00 (ISSUE #231 FIELD KIT PREPARED · MASTER SECURITY GATES VERIFIED · SECURITY BACKLOG AND #121 OPEN)
