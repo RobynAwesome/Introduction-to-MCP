@@ -1,3 +1,40 @@
+## CURRENT STATE — 2026-09-29T00:31:09+02:00 (ISSUE #231 FIELD KIT PREPARED · MASTER SECURITY GATES VERIFIED · SECURITY BACKLOG AND #121 OPEN)
+
+> **Actor:** Forge / OpenAI-side stateless renter
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Cloud base:** `RobynAwesome/Introduction-to-MCP master@7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`
+> **Local path:** `C:\Users\rkhol\Documents\Codex\2026-09-29\Introduction-to-MCP-issue231` (clean shallow clone from cloud; original dirty preservation checkout untouched)
+
+### Driver test — issue #231
+
+- **State:** PREPARATION ONLY. The public issue #231 remains open. No driver recruitment, consent, shift estimates, observation windows, participant receipts, or Cassey approval are recorded.
+- **Material:** Added an operator field kit, event/denominator rules, arithmetic unit handling, Codex peer review, and a pending Cassey review handoff under `docs/product-discovery/issue-231/`.
+- **Privacy:** The private ledger is excluded from Git by `private-ledger/.gitignore`. No participant data was collected or copied. The field kit’s 14-day deletion wording is a proposed operational commitment; Robyn must be able to perform it before sending that version.
+- **Test boundary:** One-to-one manual WhatsApp only. No bot, route/demand/safety capability, measured savings, lead conversion or buyer conclusion is claimed. Literal second contacts and independent requests for another check are recorded separately.
+- **Evidence:** Live issue #231; direct testimony as captured in the issue; synthetic arithmetic examples only; separate read-only Codex measurement review.
+
+### Security controls — live GitHub settings
+
+- **Branch protection:** Before change, `GET /branches/master/protection` returned 404 (unprotected). It now requires one approving review, most-recent-push approval, stale-review dismissal, review-thread resolution, up-to-date branches, and 14 named GitHub Actions/GitGuardian checks. Administrators are included. Force pushes and branch deletion are disabled. GitHub API readback confirmed these settings.
+- **Code scanning merge gate:** Active ruleset `24144685`, with no bypass actors, targets only `refs/heads/master` and blocks new CodeQL high-or-higher security findings on changed lines. GitHub API readback confirmed the rule.
+- **Secret/dependency controls:** Secret scanning, push protection and Dependabot security updates are enabled. The current API snapshot reports zero open secret alerts; non-provider secret patterns remain disabled.
+- **Open security backlog:** At cloud head `7245ada`, 34 high-severity CodeQL alerts remain open. Dependabot high alert #96 remains open for NLTK 3.10.3; the reviewed advisory has no patched version. These controls do not clear old alerts.
+
+### Breach and CI boundaries
+
+- P0 issue #121 remains OPEN. Seat 10 stays suspended and recused until independent re-entry evidence or a separate Tier-0 decommission decision. The new GitHub review gate does not implement a runtime recusal check or establish re-entry.
+- PR #213 remains OPEN and blocked pending required checks and approval. After Robyn fixed billing, the same-head rerun passed the governance gates, both Python versions, JavaScript/Python/Actions CodeQL, CLI and GUI checks. The swarm proof and Agent build PoC failed; its artifact reports 19/20 checks, with boot_v1_status failing as active=None and governance_verdict UNRESOLVED. Rust CodeQL was still running at this receipt snapshot. A separate post-job cleanup reported no URL for submodule path KasiLink in .gitmodules. Review and remediate those results on #213; they do not validate or invalidate this docs-only branch.
+- No application deployment occurred. The issue #231 artifact is documentation for a human-operated experiment, not a deployed product.
+
+### Delivery CLEAR / KPGS state
+
+- This score applies only to repository-control configuration and document preparation, not a driver outcome, legal review, or production/runtime promotion: **C 100 · L 100 · E 90 · A 90 · R 80 = 92%**. API readbacks passed; runtime recusal, merge-block negative testing, complete CodeQL remediation, field delivery and Cassey review remain unverified.
+- Status: **CONTROL SETTINGS VERIFIED / FIELD EXPERIMENT NOT STARTED / P0 #121 OPEN / SECURITY BACKLOG OPEN / PRODUCTION NOT DEPLOYED**.
+
+**Next admissible action:** Advance this packet through a review PR and merge only after all required checks and an independent human approval. Cassey separately reviews wording and field evidence when receipts exist. Keep #121 open. Review PR #213 reruns on its exact head, then address actual CI or code findings. Triage CodeQL/NLTK on bounded, evidence-backed lanes.
+
+---
+
 ## CURRENT STATE — 2026-09-24T10:50:00+02:00 (AZURE PRODUCTION DEPLOY CREDENTIAL HOLD)
 
 > **Actor:** Forge / OpenAI-side stateless renter  
