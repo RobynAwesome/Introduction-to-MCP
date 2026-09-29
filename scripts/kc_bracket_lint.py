@@ -7,11 +7,23 @@ import argparse
 import json
 import re
 import sys
+from collections.abc import Iterator
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 REGISTER = REPO / "docs" / "swarm-ops" / "BRACKET_BLASPHEMY_REGISTER.json"
-BRACKET_TAG = re.compile(r"\[([^\]]+)\]")
+def _iter_bracket_tags(text: str) -> Iterator[str]:
+    """Yield bracket payloads in one pass, without backtracking on untrusted text."""
+    start: int | None = None
+    for index, char in enumerate(text):
+        if start is None:
+            if char == "[":
+                start = index + 1
+            continue
+        if char == "]":
+            if index > start:
+                yield text[start:index]
+            start = None
 
 
 def load_register() -> dict:
@@ -25,8 +37,7 @@ def lint_brackets(text: str, reg: dict | None = None) -> list[str]:
     canonical_set = {e["bracket"] for e in reg.get("canonical_bracket_forms", [])}
     errors: list[str] = []
 
-    for match in BRACKET_TAG.finditer(text):
-        inner = match.group(1)
+    for inner in _iter_bracket_tags(text):
         if inner in canonical_set:
             continue
         # Exact sacred forbidden string as whole bracket (e.g. ONE_WORLD_ORDER)
