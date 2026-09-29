@@ -17,6 +17,8 @@ status: draft
 
 # KasiLink Immersive Revamp — Work Before Words
 
+> **Dated source correction (2026-08-18):** [KasiLink Runtime Source + DNS Truth Lock](KasiLink%20Runtime%20Source%20DNS%20Truth%20Lock%202026-08-18.md) supersedes this draft's source-repository UNKNOWN. It identifies `Kopano-Labs/KasiLink:main` as the application source. Write access, preview, and domain gates remain separate in that record; verify current state before execution.
+
 > **Objective:** turn KasiLink.com from a context-heavy product brochure into a fast, immersive work surface where a South African user can understand the value and act within seconds.
 >
 > **Governing rule:** the homepage is not a report about unemployment. It is an instrument for reducing the friction between a person and nearby work.
@@ -504,7 +506,7 @@ The revamp may move from `draft/unknown` to `poc` only when all are evidenced:
 
 ## 19. UNKNOWN / unresolved
 
-- Actual source repository behind the current `KasiLink/` gitlink: **UNKNOWN**.
+- Source repository: **historical UNKNOWN in this draft; superseded by the dated truth lock above**.
 - Production location/geocoding provider: **UNKNOWN**.
 - Production marketplace API contract: **UNKNOWN** from the parent repo.
 - Production authentication implementation after source restoration: **UNKNOWN**.

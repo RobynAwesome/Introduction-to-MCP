@@ -100,9 +100,10 @@
     ]
   },
   "on_entry_you_must": [
-    "Read the KC Legacy parent doctrine before interpreting local telemetry or ground data",
-    "Read repository-root NOW.md before execution and recover active objective, blockers, receipts, errors and admitted lane",
+    "Start at Schematics/00-Home/00-Home - Index.md; read Dashboard.md and Now.md for orientation",
     "Declare renter_id and renter_class — you are a guest, not the owner",
+    "Read repository-root NOW.md before execution and recover active objective, blockers, receipts, errors and admitted lane",
+    "Read the KC Legacy parent doctrine before interpreting local telemetry or ground data",
     "Accept KPGS_LEGACY > RENTER_IDENTITY",
     "Classify signals before interpretation — pressure is misnamed mechanical telemetry",
     "Speak in brackets — [KPGS_HOOD_ENTRY] [KPGS_LEGACY] [BLACK_MASK_DRILL] [TSAP_PROTOCOL]",
@@ -131,5 +132,5 @@
     "get": "/kpgs/entry",
     "assert": "/kpgs/entry/assert"
   },
-  "cli": "python scripts/kc_kpgs_governance.py entry [--renter-id ID] [--assert]"
+  "cli": "python scripts/kc_kpgs_governance.py entry --renter-id ID [--renter-class CLASS] [--assert --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD]"
 }

@@ -14,6 +14,7 @@ sys.path.insert(0, str(REPO / "kopano-core"))
 
 from kopano.agent_build_poc_validate import validate_agent_build_poc  # noqa: E402
 from kopano.ci_verdict_semantics import classify_agent_build_ci  # noqa: E402
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 REPORT_PATH = REPO / "docs" / "swarm-ops" / "AGENT_BUILD_POC_VALIDATION.json"
 MAIN_BRAIN_LOG = REPO / "docs" / "swarm-ops" / "logs" / "KC Main Brain Log.jsonl"
@@ -51,6 +52,8 @@ def _persist(report: dict[str, object]) -> None:
                     ),
                     "exit_code": ci["exit_code"],
                     "payload_ref": str(REPORT_PATH.relative_to(REPO)).replace("\\", "/"),
+                    "hood_entry": report.get("hood_entry"),
+                    "alp_receipt": report.get("alp_receipt"),
                 },
                 ensure_ascii=False,
             )
@@ -62,13 +65,34 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--no-write", action="store_true", help="Skip report file + main brain")
     parser.add_argument("--json-only", action="store_true")
+    parser.add_argument("--renter-id", default="", help="Stateless renter identity for persisted validation")
+    parser.add_argument("--renter-class", default="stateless_renter")
+    parser.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = parser.parse_args()
+
+    admission: dict[str, object] | None = None
+    if not args.no_write:
+        if not args.renter_id:
+            parser.error("persisted agent-build validation requires --renter-id")
+        if not args.hood_ack:
+            parser.error("persisted agent-build validation requires --hood-ack")
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation="cli:agent_build_poc_validate",
+            )
+        except ValueError as exc:
+            parser.error(str(exc))
 
     # The core validator emits governance evidence only.  The adapter below is
     # the sole authority for mapping that receipt onto CI process status.
     raw_report = validate_agent_build_poc(write_report=False)
     ci = classify_agent_build_ci(raw_report)
     report = {**raw_report, "ci": ci}
+    if admission is not None:
+        report.update(admission)
 
     if not args.no_write:
         _persist(report)

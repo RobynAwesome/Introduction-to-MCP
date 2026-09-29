@@ -192,9 +192,9 @@ def load_world_state() -> dict[str, Any]:
 
 def bootstrap_sovereign_sim(*, write_log: bool = True) -> dict[str, Any]:
     """Build world from thesis + hood — only when activation gate ALLOW."""
-    from .kpgs_activation_gate import check_kpgs_activation_gate
+    from .kpgs_activation_gate import activation_gate_for_execution
 
-    gate = check_kpgs_activation_gate(write_report=True)
+    gate = activation_gate_for_execution(write_report=True)
     if not gate.get("activation_allowed"):
         return _gate_block_response(gate)
 
@@ -254,14 +254,14 @@ def run_kpgs_smoke_poc(*, activate_steward: bool = True, bootstrap_sim: bool = T
     PASS requires behavioral mechanical proofs, not catalog self-count.
     """
     from .eco_poc_validate import validate_eco_poc
-    from .kpgs_activation_gate import check_kpgs_activation_gate
+    from .kpgs_activation_gate import activation_gate_for_execution
     from .kpgs_behavioral_poc import run_kpgs_behavioral_poc
     from .kpgs_governance import compile_kpgs_governance
     from .steward_lane import run_steward_lane_activate
 
     steps: list[dict[str, Any]] = []
 
-    gate = check_kpgs_activation_gate(write_report=True)
+    gate = activation_gate_for_execution(write_report=True)
     steps.append({"step": "activation_gate", "result": gate})
     if not gate.get("activation_allowed"):
         report = {

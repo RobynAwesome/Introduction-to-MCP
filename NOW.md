@@ -1,3 +1,79 @@
+## CURRENT STATE — 2026-09-29T06:07:31Z (OPEN PR HEADS COMBINED FOR LANDING)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela asked to merge, pull, and complete issues.
+> **Base:** `origin/master` `7397c6581931dc034eed88cdbdf6f52fef231a03` (already contains #232, #233, and #230 / litellm 1.102.1)
+> **Integration parent:** `5da30e4172711b03a1e2002491e088351672bba0`
+
+### What this commit contains
+
+No-ff merges of the still-open pull requests, then a lockfile refresh. Each of these heads is an ancestor of this commit:
+
+#184, #186, #193, #197, #199, #200, #202, #203, #213, #214, #215, #216, #217, #218, #219, #220, #221, #222, #223, #224, #225, #226, #227, #228, #229.
+
+Kept pins: `pydantic-settings==2.15.0`, `azure-monitor-opentelemetry==1.8.10`, `litellm==1.102.1`, `sqlalchemy==2.1.1`, `openai==3.19.2`, `uvicorn==0.54.0`, studio `eslint ^10.11.0` with `@eslint/js ^10.0.1`, `typescript-eslint ^8.70.1`, `vite ^8.3.1`, `framer-motion ^13.4.4`, dashboard `three ^0.186.1`, root `@anthropic-ai/sdk ^0.128.0` and `braintrust ^3.35.0`, browser MCP `@modelcontextprotocol/server 2.1.0`, `puppeteer-core 25.12.0`, `zod 4.6.5`. #213 path, bracket, and activation-gate guards stay with the #233 tests.
+
+### Local proof on this tree
+
+- `kopano-core/studio`: `npm ci --ignore-scripts` then `npm run lint` → exit 0, 0 errors, 5 existing `react-hooks/set-state-in-effect` warnings. `npm run build` (`tsc -b && vite build`) → exit 0, vite 8.3.1.
+- `python3 scripts/kc_dependency_firewall_gate.py` → `FIREWALL PASS` (3 lockfiles).
+- `PYTHONPATH=kopano-core python3 -m pytest tests/test_security_high_alert_remediation.py tests/test_kpgs_activation_gate.py tests/test_agent_build_poc_validate.py -q` → **25 passed** in 8.23s. Pytest side-effect logs were restored and are not in this commit.
+- Studio audit reported 1 low severity advisory. Root audit reported 1 high severity advisory. Neither was changed with `npm audit fix`.
+
+### Not proven
+
+Hosted GitHub Actions and CodeQL on this commit are **UNKNOWN** until the commit is on `master` and those runs finish. This receipt does not claim production deploy, Azure OIDC, or Seat 10 re-entry. `CLI/uv.lock` still contains March 2026 conflict markers from `e0aac64cc`; this landing did not touch that file.
+
+### Issues
+
+#205 can close only after this commit is the `master` tip, because the ESLint 10 + `@eslint/js` 10 lock and the local studio proof are then on the default branch. #204 was closed unmerged and is superseded by that pair. These stay open: #231, #211, #207, #183, #167, #163, #158, #122, #121, #116, #115, #110, #107, #103, #102, #94.
+
+**Next admissible action:** push this commit to `master`. If branch protection rejects the push, fast-forward `codex/gsmb-home-first-final-sep24` to this commit so PR #213 can run the required checks. Do not close HOLD issues to shrink the count.
+
+---
+
+## CURRENT STATE — 2026-09-29T05:20:05Z (PR #213 CODEQL HIGHS PORTED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `codex/gsmb-home-first-final-sep24`
+> **Prior head:** `e7894143616538b87f30618f5daa7c86da9b432d`
+
+- **Failure:** CodeQL on the prior head reported two highs: path injection in `kopano-core/kopano/eco_poc_validate.py` (`Path(evidence).is_file()`) and polynomial ReDoS in `scripts/kc_bracket_lint.py` (`BRACKET_TAG`). Two medium warnings traced `str(exc)` from `activation_gate_for_execution` into the hood-dispatch returns.
+- **Change:** Evidence files and `.jsonl` references must be repo-relative. Absolute, drive, and `..` paths are rejected. Bracket tags are scanned in one pass. The execution-admission report returns a fixed string for known ALP blocks and `KPGS activation gate BLOCK` for any other `ValueError`. `persist_receipt` and the dry-run boot proof stay.
+- **Local proof:** `PYTHONPATH=kopano-core python3 -m pytest tests/test_security_high_alert_remediation.py tests/test_kpgs_activation_gate.py -q` → **16 passed** in 2.88s.
+- **Unknown:** hosted CodeQL on this new head has not run yet. This does not merge the PR. Issue #121, Azure #211, and the KasiLink gitlink HOLD stay open. PR #233 carries the same path and bracket guards; the second of #213 and #233 to merge may conflict on `eco_poc_validate.py` and `NOW.md`.
+
+**Next admissible action:** read the new CodeQL result on this head. Do not admin-merge.
+
+---
+
+## CURRENT STATE — 2026-09-29T05:04:57Z (PR #213 UPDATED ONTO MASTER · DRY-RUN BOOT CHECK REPAIRED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7) — stateless
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Human authority:** Robyn Kholofelo Rababalela merged #232 and directed repair of open pull requests from the oldest.
+> **Branch:** `codex/gsmb-home-first-final-sep24` updated onto `master` `0208002ab8231e62773872c6161be82d5bfc7c46`
+
+### What changed
+
+- Open dependabot pull requests #186, #184, #193, #197, #199, #200, #202, #203, and #214–#230 were merged with `master` `0208002a` and pushed. GitHub now reports each of those 25 pull requests `MERGEABLE`. Hosted check results after those pushes are **UNKNOWN** until the runs finish. They still overlap on lockfiles, so they cannot all merge in one batch.
+- PR #213's only merge conflict was root `NOW.md`. Both the 2026-09-29 field-kit receipt and the 2026-09-28 #213 receipts are kept below.
+- The Agent build PoC failure `boot_v1_status active=None` came from the dry-run path. `write_report=False` refuses to create `kopano-core/.kc/phu_boot_v1.json`, and the check still required that file's `active` flag. The dry-run check now reads the committed BOOT v1 contract (`schema`, role bindings `cassy`/`kc`/`mao`, mesh agent count). A persisted run still requires `active` or `applied_at`.
+
+### Local evidence
+
+- `PYTHONPATH=kopano-core python3 -m pytest tests/test_agent_build_poc_validate.py -q` → **9 passed** in 4.83s, with `mcp>=1.28,<2` installed.
+- `PYTHONPATH=kopano-core python3 scripts/kc_agent_build_poc_validate.py --no-write --json-only` → exit 0. Raw verdict FAIL 19/20 with only `operating_mesh_phase3` failed. CI adapter: `ci_status=PASS`, `governance_verdict=POC_VALIDATED`, `blocking_failures=[]`, `held_external_evidence=['operating_mesh_phase3']`. `boot_v1_status` detail: `active=doctrine agents=19`.
+- Hosted GitHub Actions on this new head have **not** run yet. This receipt does not claim the pull request is green or merged. Azure production remains HOLD on issue #211. Issue #121 stays open. The KasiLink gitlink still has no `.gitmodules` URL; that cleanup warning is unchanged.
+
+### Next admissible action
+
+Push this head to PR #213 and read the new hosted checks. Then resolve PR #233 (`codex/security-high-alert-remediation`), which is still `CONFLICTING` against `master`. Do not admin-merge. Do not close HOLD issues to shrink the count.
+
+---
+
 ## CURRENT STATE — 2026-09-29T05:10:00Z (PR #233 UPDATED ONTO MASTER AFTER #232)
 
 > **Actor:** Cursor cloud renter (Grok 4.7) — stateless
@@ -37,6 +113,21 @@ Push this head to PR #233 and read the refreshed checks. Keep issue #121 open. D
 - **Enforcement:** Master requires PR approval, current passing checks and conversation resolution; the active ruleset has no bypass actors, enforces admins, and blocks high-or-higher new CodeQL alerts.
 
 **Next admissible action:** Obtain independent review for PRs #232 and #233. After approval and merge, verify the default-branch CodeQL alert state and deployment receipts. Keep #121 open and preserve Seat 10's suspension/recusal until its independent exit criteria are evidenced.
+
+## CURRENT STATE — 2026-09-29T05:12:46Z (PR #200 STUDIO ESLINT PEER ALIGNED)
+
+> **Actor:** Cursor cloud renter (Grok 4.7)
+> **Constraint:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+> **Branch:** `dependabot/npm_and_yarn/kopano-core/studio/eslint/js-10.0.1`
+> **Prior head:** `4089a9b65b39fae4753742a7b79c096c03c7314f`
+
+- **Failure:** gui-check on run `36524031922` / job `109263180922` died at `npm ci` in `kopano-core/studio`. `@eslint/js@10.0.1` peer-requires `eslint@^10`; the branch still declared `eslint@^9.39.4`.
+- **Change:** `kopano-core/studio/package.json` now declares `eslint@^10.11.0` beside `@eslint/js@^10.0.1`. `typescript-eslint@8.69.0` already peers `eslint@^10`, so it stays. Lockfile resolves `eslint@10.11.0` and `@eslint/js@10.0.1`.
+- **Local proof:** `npm ci`, `npm run lint` (0 errors, 5 existing `react-hooks/set-state-in-effect` warnings), and `npm run build` (`tsc -b && vite build`) exited 0 on Node `v22.14.0`.
+- **Unknown:** hosted gui-check on the new head has not run yet. This does not merge the PR and does not close #121, #211, or the KasiLink gitlink HOLD.
+- **Sibling:** PR #227 only raises eslint and leaves `@eslint/js` at 9. After this head lands, that eslint range is already satisfied here.
+
+**Next admissible action:** wait for the new gui-check on this head. Do not batch-merge overlapping studio lockfile PRs.
 
 ---
 

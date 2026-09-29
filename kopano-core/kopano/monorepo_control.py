@@ -26,8 +26,10 @@ SCRIPT_ACTIONS: dict[str, tuple[str, list[str], bool]] = {
     "apprenticeship_promote": ("kc_apprenticeship_steward.py", ["--promote"], True),
     "cf_comms_activate": ("kc_cf_comms_activate.py", ["--prepend-vault"], True),
     "phu_populate_main_brain": ("kc_phu_populate_main_brain.py", [], True),
-    "phu_reattach_subbrains": ("kc_phu_reattach_subbrains.py", [], False),
+    "phu_reattach_subbrains": ("kc_phu_reattach_subbrains.py", [], True),
 }
+
+RENTER_ADMISSION_ACTIONS = frozenset({"phu_populate_main_brain", "phu_reattach_subbrains"})
 
 GIT_ACTIONS: dict[str, list[str]] = {
     "git_status": ["status", "-sb"],
@@ -112,14 +114,35 @@ def run_script(script: str, args: list[str]) -> tuple[int, str]:
     return proc.returncode if proc.returncode is not None else 1, tail
 
 
-def execute_script_action(action: str, *, confirm: bool = False) -> dict:
+def execute_script_action(
+    action: str,
+    *,
+    confirm: bool = False,
+    renter_id: str = "",
+    renter_class: str = "stateless_renter",
+    hood_ack: str = "",
+) -> dict:
     spec = SCRIPT_ACTIONS.get(action)
     if not spec:
         raise ValueError(f"Unknown action: {action}")
     script, args, needs_confirm = spec
     if needs_confirm and not confirm:
         raise ValueError(f"Action '{action}' requires confirm=true.")
-    code, tail = run_script(script, args)
+    script_args = list(args)
+    if action in RENTER_ADMISSION_ACTIONS:
+        if not renter_id.strip() or not hood_ack:
+            raise ValueError(f"Action '{action}' requires renter_id and hood_ack.")
+        script_args.extend(
+            [
+                "--renter-id",
+                renter_id,
+                "--renter-class",
+                renter_class,
+                "--hood-ack",
+                hood_ack,
+            ]
+        )
+    code, tail = run_script(script, script_args)
     return {
         "action": action,
         "lane": "cassy" if action in CASSY_ACTION_IDS else "monorepo",
@@ -152,7 +175,11 @@ def capabilities_payload() -> dict:
         "persona": "Cassy (lead student) · Cassey (teacher) · KC (ledger)",
         "repo_root": str(REPO_ROOT),
         "script_actions": {
-            k: {"requires_confirm": v[2], "cassy_lane": k in CASSY_ACTION_IDS}
+            k: {
+                "requires_confirm": v[2],
+                "requires_renter_admission": k in RENTER_ADMISSION_ACTIONS,
+                "cassy_lane": k in CASSY_ACTION_IDS,
+            }
             for k, v in SCRIPT_ACTIONS.items()
         },
         "git_actions": list(GIT_ACTIONS.keys()),

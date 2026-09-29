@@ -17,19 +17,38 @@ from kopano.phu_boot_governance import (  # noqa: E402
     boot_status,
     mesh_summary,
 )
+from kopano.kpgs_cli_admission import admit_cli_renter  # noqa: E402
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description="Kopano-Phu BOOT v1 governance")
     p.add_argument("command", choices=["status", "apply", "blackmask-dry-run", "mesh"], nargs="?")
     p.add_argument("--json", action="store_true")
+    p.add_argument("--renter-id", default="", help="Stateless renter identity for apply")
+    p.add_argument("--renter-class", default="stateless_renter")
+    p.add_argument("--hood-ack", default="", help="Exact canonical renter acknowledgement")
     args = p.parse_args()
     cmd = args.command or "status"
+    admission: dict | None = None
 
     if cmd == "status":
         out = boot_status()
     elif cmd == "apply":
+        if not args.renter_id:
+            p.error("apply requires --renter-id")
+        if not args.hood_ack:
+            p.error("apply requires --hood-ack")
+        try:
+            admission = admit_cli_renter(
+                renter_id=args.renter_id,
+                renter_class=args.renter_class,
+                hood_ack=args.hood_ack,
+                operation="cli:phu_boot_apply",
+            )
+        except ValueError as exc:
+            p.error(str(exc))
         out = apply_boot()
+        out.update(admission)
     elif cmd == "blackmask-dry-run":
         out = blackmask_dry_run()
     else:

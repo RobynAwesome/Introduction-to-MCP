@@ -76,6 +76,48 @@ def test_dispatch_spawn_event_severs_judas():
     assert out.get("swfus", {}).get("verdict") in ("SWFUS_SEVER", "SWFUS_HOLD")
 
 
+def test_no_write_route_dry_runs_sever_without_forensic_or_sqlite_writes(monkeypatch, tmp_path):
+    from types import SimpleNamespace
+
+    from kopano import kpgs_spawn_swarm, mao_dispatch
+
+    forensic_log = tmp_path / "forensic.jsonl"
+    ledger_db = tmp_path / "spawn-ledger.sqlite"
+    monkeypatch.setattr(kpgs_spawn_swarm, "FORENSIC_SEVER_LOG", forensic_log)
+    monkeypatch.setattr(kpgs_spawn_swarm, "SQLITE_PATH", ledger_db)
+    monkeypatch.setattr(
+        kpgs_spawn_swarm,
+        "wwjd_firewall",
+        lambda **_: {"verdict": "HOLD", "summary": "test hold"},
+    )
+    monkeypatch.setattr(
+        mao_dispatch,
+        "_load_mao_module",
+        lambda: SimpleNamespace(
+            mao_route=lambda **_: {"routed_agent": {"agent_id": "spawn_telemetry_050"}}
+        ),
+    )
+    monkeypatch.setattr(
+        mao_dispatch,
+        "_attach_kpefs",
+        lambda payload, message, intent="execute": {
+            **payload,
+            "lpm": {"attached": True},
+            "kpefs": {"active_vector": "V2_ANIMAL"},
+        },
+    )
+
+    result = mao_dispatch.route_task("audit", "dry-run only", persist=False)
+
+    assert result["spawn_event"]["event"] == "DRY_RUN_SEVER"
+    assert result["spawn_event"]["persisted"] is False
+    assert result["would_sever"] is True
+    assert "severed" not in result
+    assert result["severance"]["verdict"] == "WOULD_SEVER"
+    assert not forensic_log.exists()
+    assert not ledger_db.exists()
+
+
 def test_guardian_only_ledger_commit():
     ok = commit_altar_block(agent_id="mirror_warden", payload={"action": "test_commit"})
     bad = commit_altar_block(agent_id="spawn_telemetry_050", payload={"action": "forbidden"})

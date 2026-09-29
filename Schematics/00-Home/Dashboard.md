@@ -15,30 +15,36 @@ status: active
 
 # Kopano Context — Dashboard
 
+## Start Here — 00-Home First
+
+Begin with the [00-Home Index](00-Home%20-%20Index.md), then use this dashboard to orient to the house. Read [Home Now](Now.md), repository-root [NOW](../../NOW.md), the durable [Legacy purpose boundary](../21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/Legacy.md), and the [stateless renter entryway](../21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md) before acting. Continue through the [Schematics map](../index.md) and each relevant folder's own index.
+
+> The dashboard content below is a preserved 2026-05-09 snapshot. Its project status, roster, roles, readiness, and links are historical leads until revalidated. Repository-root `NOW.md` remains the current-state authority; `00-Home/Now.md` is Home-scoped context.
+
 > Central knowledge base for the **Kopano Context** multi-agent orchestration system and its integration with KasiLink.
 > Primary alias: **Cassy**.
 > Root node above `CLAUDE.md`: [Kopano Context Master Protocol Ledger And Sovereign Architecture](../18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md).
 > **Ecosystem:** Kopano Context · Kopano CLI · Kopano Studio · Kopano Mesh · Kopano Labs · Kopano SafeSkill
 > Owner: [Kholofelo Robyn Rababalela](../05-Training/Owner%20Profile.md) · GitHub Org: Kopano-Labs
-> Current operating mode: `demo hardening` across Phase 6, Phase 7, Phase 8, and Phase 9.
-> Current truth anchor: [Now](Now.md) → [Project Status](../04-Updates/Project%20Status.md) → [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) → [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md)
+> Historical operating mode (2026-05-09): `demo hardening` across Phase 6, Phase 7, Phase 8, and Phase 9.
+> Historical truth-anchor chain (2026-05-09): [Home Now](Now.md) → [Project Status](../04-Updates/Project%20Status.md) → [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) → [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md). Check repository-root [NOW](../../NOW.md) first for current state.
 > **Audit gate:** `AUDIT MAIN-BRAIN` begins here.
 
-## Front-Door Truth
+## Front-Door Truth — 2026-05-09 snapshot
 
 - Root ledger is the highest written protocol in MAIN-BRAIN; it loads above `CLAUDE.md`, sub-brain instructions, agent playbooks, skills, tools, and connectors
 - KC/Cassy sits above all agentic frameworks; durable movement is CRUD-only: Create, Read, Update, Delete
 - Cursor is onboarded as a local IDE execution surface only; it inherits KC/Cassy CRUD law and does not outrank the root ledger
-- KC owner delivery is still blocked until Robyn directly uses `https://context.kopanolabs.com`
-- KC primary alias is `Cassy`; Cassy is MAIN-BRAIN's active context identity and central hub
-- current command posture is Chief Architect -> AG -> Hippocampus/Gemini -> Cassy -> Codex/Claude
+- At this snapshot, KC owner delivery was blocked until Robyn directly used `https://context.kopanolabs.com`; verify the later owner-proof record before reuse.
+- At this snapshot, KC primary alias was `Cassy` and Cassy was described as MAIN-BRAIN's context identity and central hub.
+- Historical command posture: Chief Architect -> AG -> Hippocampus/Gemini -> Cassy -> Codex/Claude.
 - local, `.exe`, CLI, and AI-rehearsal proofs are secondary only
-- if a note conflicts with the owner-proof stack, defer to `Now`, `Operational Truth Register`, and the `Owner Access Gate`
+- For current conflicts, begin at repository-root [NOW](../../NOW.md), then reconcile the dated owner-proof stack in `Operational Truth Register` and `Owner Access Gate`.
 
 ## Standing Session Routing
 
 - Owner: `RobynAwesome`
-- Live command roster belongs in [Now](Now.md) and [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md)
+- The dated command roster was tracked in [Home Now](Now.md) and [07-Sessions By Day](../07-Sessions%20By%20Day/07-Sessions%20By%20Day%20-%20Index.md); verify current assignment against root [NOW](../../NOW.md).
 - Cassy is the MAIN-BRAIN hub; Codex is metal/execution; Claude is swarm command; Gemini is Hippocampus payload generation
 - Cursor is the local IDE execution surface for bare-metal implementation, local proof capture, and offline-first handoffs under KC/Cassy
 - Standing multi-dev bench: `Germini`, `Nother`, `Meither`, `Cicero`
@@ -46,20 +52,20 @@ status: active
 
 ---
 
-## Active Right Now
+## Active Right Now — 2026-05-09 snapshot, verify before use
 
 | Priority | Note                     | Status               |
 | -------- | ------------------------ | -------------------- |
 | ROOT | [Kopano Context Master Protocol Ledger And Sovereign Architecture](../18-PROTOCOLS/Kopano%20Context%20Master%20Protocol%20Ledger%20And%20Sovereign%20Architecture.md) | Highest-priority root node above `CLAUDE.md` |
-| CRITICAL | [Now](Now.md) | Canonical one-note snapshot |
-| CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Current phase and delivery truth |
+| CRITICAL | [Now](Now.md) | Historical Home snapshot; not repository-wide current truth |
+| CRITICAL | [Project Status](../04-Updates/Project%20Status.md) | Dated phase and delivery source; verify current state |
 | CRITICAL | [Operational Truth Register](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/Operational%20Truth%20Register.md) | Production-hardening truth and proof-lane register |
 | CRITICAL | [KC Delivery Ledger](../14-PRODUCTION%20HARDENING%20%28PHASE%2010%29/KC%20Delivery%20Ledger.md) | Internal scaffolding vs owner-visible KC reality |
-| CRITICAL | [Open Issues](../06-Reference/Open%20Issues.md) | Current blocker ledger and containment rules |
+| CRITICAL | [Open Issues](../06-Reference/Open%20Issues.md) | Dated blocker ledger and containment rules |
 | CRITICAL | [19-TOKEN USAGE](../19-TOKEN%20USUAGE/19-TOKEN%20USUAGE%20-%20Index.md) | Token discipline, Monday review, and machine-readable closeout law |
 | HIGH | [Microsoft Demo Day!](../Microsoft%20Demo%20Day!/Microsoft%20Demo%20Day%21%20-%20Index.md) | Demo hub, owner checklist, and Azure path |
 | HIGH | [Demo Countdown - April 8-15, 2026](../Microsoft%20Demo%20Day!/Demo%20Countdown%20-%20April%208-15,%202026.md) | Demo timeline and blockers |
-| HIGH     | [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) | Safe live route |
+| HIGH     | [Kopano Demo Script - 2026-04-09](../Microsoft%20Demo%20Day!/Kopano%20Demo%20Script%20-%202026-04-09.md) | Historical demo route; revalidate before use |
 | HIGH     | [Schematics Root Index](../index.md) | Whole-vault map and standing second-brain rules |
 | HIGH     | [Training Index](../05-Training/05-Training%20-%20Index.md) | Profiling and orchestration corpus |
 | CRITICAL | [Cassy Core Initialization And Hierarchy Lock](../01-Mission/Cassy%20Core%20Initialization%20And%20Hierarchy%20Lock.md) | KC alias, persona seed, learning protocol, and mobile hierarchy lock |
@@ -70,7 +76,7 @@ status: active
 
 ## 00 — Operating Constitution
 
-- Lead assignment is session-specific; use [Now](Now.md) for live role truth
+- Lead assignment is session-specific; use repository-root [NOW](../../NOW.md) and current assignment evidence for live role truth.
 - Approved lead bench: `Codex`, `Claude`, `Germini`
 - Standing dev bench: `Germini (Google AI)`, `Nother`, `Meither`, `Cicero`
 - DEV_2: `Nother`
@@ -78,7 +84,7 @@ status: active
 - DEV_4: `Cicero`
 - Multi-dev sessions start with the standing dev roster on standby and 20-task boards visible in [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md).
 - Before any task begins, Lead checks current dev progress, live diffs, and the latest [comms-log](../04-Updates/comms-log.md).
-- All current sessions are `pre-sessions` and training data for Kopano Context.
+- At this snapshot, sessions were described as `pre-sessions` and training data for Kopano Context.
 - Lead may be explicitly assigned from the approved lead bench.
 - Lead target: `60% management / 40% coding`.
 - Token-saving mode is mandatory outside Plan Mode and outside Lead-only sessions with Master.
@@ -90,17 +96,17 @@ For `AUDIT MAIN-BRAIN`, the audit level must be declared first:
 
 ### Quick Audit
 
-1. `CLAUDE.md` for scope handoff only
-2. [Schematics Root Index](../index.md)
-3. this note
-4. [Now](Now.md)
-5. target folder index
+1. [00-Home Index](00-Home%20-%20Index.md) and this dashboard for front-door orientation
+2. [Now](Now.md), then repository-root [NOW](../../NOW.md) for Home context and repository current state
+3. [Legacy purpose boundary](../21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/Legacy.md) and the renter entryway
+4. `CLAUDE.md` for scope handoff only
+5. [Schematics Root Index](../index.md), then the target folder index
 
 ### Standard Audit
 
 1. everything in quick audit
-2. [All Projects Registry](All%20Projects%20Registry.md)
-3. [Sub-Brain Hierarchy](Sub-Brain%20Hierarchy.md)
+2. `All Projects Registry.md` — available in the local OneDrive snapshot; absent from this Git snapshot pending reconciliation.
+3. `Sub-Brain Hierarchy.md` — available in the local OneDrive snapshot; absent from this Git snapshot pending reconciliation.
 4. [18-PROTOCOLS](../18-PROTOCOLS/18-PROTOCOLS%20-%20Index.md)
 5. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
 6. [13-REWARD SYSTEM](../13-REWARD%20SYSTEM/13-REWARD%20SYSTEM%20-%20Index.md)
@@ -186,8 +192,8 @@ How Kopano Context is built.
 
 Active project coordination and status tracking.
 
-- [Project Status](../04-Updates/Project%20Status.md) — current phase stack, capability truth, and demo-hardening status.
-- [Now](Now.md) — current one-note snapshot.
+- [Project Status](../04-Updates/Project%20Status.md) — dated phase stack, capability and demo-hardening source.
+- [Home Now](Now.md) — historical Home snapshot with a current Home audit pointer at the top.
 - [Implementation Plan](../04-Updates/Implementation%20Plan.md) — Full engineering plan with Labs and accessibility phases.
 - [Phase 1 Walkthrough](../04-Updates/Phase%201%20Walkthrough.md) — Completed Phase 1 tutorial and reference.
 - [Updates Index](../04-Updates/04-Updates%20-%20Index.md) — Hub for coordination files.
@@ -226,7 +232,7 @@ Code samples and archived source files.
 
 - [Schematics Root Index](../index.md) — whole-vault map and standing rules.
 - [Repo Documents Index](../06-Reference/Repo%20Documents%20Index.md) — map of loose root docs and why they stay at repo root.
-- [Open Issues](../06-Reference/Open%20Issues.md) — current blocker ledger.
+- [Open Issues](../06-Reference/Open%20Issues.md) — dated blocker ledger; reconcile with root [NOW](../../NOW.md).
 - `06-Reference/` — `ci.yml`, `filesystem.py`, `search.py`, `write_file.py`
 - `06-Reference/Archive/` — Original source .txt/.md/.docx files before vault conversion
 - `06-Reference/kopano-code-implementation/` — Reference codebase (Rust + Python)
@@ -246,7 +252,7 @@ Code samples and archived source files.
 9. [10-SESSION IMPROVEMENTS](../10-SESSION%20IMPROVEMENTS/10-SESSION%20IMPROVEMENTS%20-%20Index.md)
 10. [11-AI HALLUCINATION - CRITICAL](../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md)
 11. [12-PLAN MODE SESSIONS](../12-PLAN%20MODE%20SESSIONS/12-PLAN%20MODE%20SESSIONS%20-%20Index.md)
-12. [Sub-Brain Truth Sync Matrix - 2026-04-18](Sub-Brain%20Truth%20Sync%20Matrix%20-%202026-04-18.md)
+12. `Sub-Brain Truth Sync Matrix - 2026-04-18.md` — present in the local OneDrive snapshot; absent from this Git snapshot pending reconciliation.
 13. [Training Index](../05-Training/05-Training%20-%20Index.md)
 
 ---
@@ -273,7 +279,7 @@ Code samples and archived source files.
 ## Quick Links
 
 - KC domain-first target: https://context.kopanolabs.com
-- KasiLink live: https://kasilink.com
+- KasiLink public URL at this snapshot: https://kasilink.com; verify current hosting and runtime separately.
 - Kopano Context repo: https://github.com/RobynAwesome/Introduction-to-MCP
 - KasiLink repo: https://github.com/Kopano-Labs/KasiLink
 - Portfolio: https://kholofelorababalela.vercel.app

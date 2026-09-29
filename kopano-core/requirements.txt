@@ -4,16 +4,16 @@
 # Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 typer[all]==0.27.2
 rich==15.0.0
-pydantic-settings==2.14.2
+pydantic-settings==2.15.0
 python-dotenv==1.2.3
-azure-monitor-opentelemetry==1.8.9
+azure-monitor-opentelemetry==1.8.10
 litellm==1.102.1
-sqlalchemy==2.0.52
+sqlalchemy==2.1.1
 google-generativeai==0.8.6
-openai==3.8.0
+openai==3.19.2
 httpx==0.28.1
 fastapi==0.141.1
-uvicorn==0.42.0
+uvicorn==0.54.0
 gunicorn==26.2.0
 websockets==17.1
 pywebview==6.2.1

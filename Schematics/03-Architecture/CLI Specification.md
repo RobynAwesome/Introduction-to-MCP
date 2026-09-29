@@ -13,6 +13,8 @@ status: active
 
 # Kopano Context CLI Specification
 
+> **Historical command design (April 2026).** The package entry point is `kopano` in `kopano-core/pyproject.toml`. Check `kopano-core/kopano/cli.py` and CLI help before treating the command list below as runnable.
+
 > POSIX-style CLI for orchestrating multi-agent AI simulations.
 > See also: [Kopano Context Blueprint](../01-Mission/Kopano Context%20Blueprint.md), [Implementation Plan](../04-Updates/Implementation%20Plan.md), [Phase 1 Walkthrough](../04-Updates/Phase%201%20Walkthrough.md)
 

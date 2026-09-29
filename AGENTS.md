@@ -12,12 +12,13 @@ Every agent, model, tool-driven worker, and stateless renter entering this repos
 Canonical entry order:
 
 1. Assert `I_AM_STATELESS_RENTER_NOT_LANDLORD` and identify the renter/actor.
-2. Read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary.
-3. **Read repository-root `NOW.md` before execution.** `NOW.md` is the volatile/current-state authority for active objectives, blockers, receipts, errors, pauses, and handoffs.
-4. Classify telemetry/evidence before interpretation.
-5. Recover the currently admitted lane and execute only within its authority.
-6. Produce receipts for material work; chat narration is not proof.
-7. Before handoff/exit, update repository-root `NOW.md` when material state changed, including status, evidence, uncertainty, and the next admissible action.
+2. Start at `Schematics/00-Home/00-Home - Index.md`, then read its `Dashboard.md` and `Now.md` pointers to orient within the house.
+3. **Read repository-root `NOW.md` before execution.** It is the volatile/current-state authority for active objectives, blockers, receipts, errors, pauses, and handoffs; the Home notes do not replace it.
+4. Read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary and `STATELESS_RENTER_ENTRYWAY.md` for the detailed renter contract.
+5. Classify telemetry/evidence before interpretation.
+6. Recover the currently admitted lane and execute only within its authority, applying the existing governed execution preflight below for material execution.
+7. Produce receipts for material work; chat narration is not proof.
+8. Before handoff/exit, update repository-root `NOW.md` when material state changed, including status, evidence, uncertainty, and the next admissible action.
 
 ### Governed execution preflight
 
@@ -40,7 +41,7 @@ RECEIPT_MISSING_OR_INVALID -> HOLD
 MANDATORY_GATE_FAILURE != CONTINUE_WITH_WARNING
 ```
 
-Persistent doctrine, model memory, `Schematics/00-Home/Now.md`, personal vault files, or prior conversation state may inform a renter, but **none substitutes for repository-root `NOW.md` as current-state truth**.
+The 00-Home front door is the required first navigation step; repository-root `NOW.md` remains the current-state authority. Persistent doctrine, model memory, personal vault files, or prior conversation state may inform a renter, but **none substitutes for repository-root `NOW.md` as current-state truth**.
 
 Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md`.
 

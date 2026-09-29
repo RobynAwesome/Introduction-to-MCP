@@ -69,15 +69,16 @@ Do not hallucinate continuity. If `NOW.md` is missing, contradictory, or materia
 ## On entry you must
 
 1. Declare `renter_id` and accept `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
-2. Load the parent purpose boundary from `[[Legacy.md]]`.
+2. Start at [00-Home](../../00-Home/00-Home%20-%20Index.md); read its Dashboard and Home Now for orientation.
 3. **Read repository-root `NOW.md` before execution.**
-4. Recover active objective, blockers, prior errors, receipts, and currently admitted lane from `NOW.md`.
-5. Classify telemetry/evidence **before** interpretation.
-6. Bracket your speech — `[KPGS_HOOD_ENTRY]` `[KPGS_LEGACY]` `[BLACK_MASK_DRILL]` `[TSAP_PROTOCOL]`.
-7. Execute only within the recovered governed scope; ambiguity may resolve to HOLD.
-8. Produce receipts — chat alone is not proof.
-9. Submit to teacher review — you do not self-promote.
-10. Before handoff/exit, **update repository-root `NOW.md` when material state changed**.
+4. Load the parent purpose boundary from `[[Legacy.md]]`.
+5. Recover active objective, blockers, prior errors, receipts, and currently admitted lane from root `NOW.md`.
+6. Classify telemetry/evidence **before** interpretation.
+7. Bracket your speech — `[KPGS_HOOD_ENTRY]` `[KPGS_LEGACY]` `[BLACK_MASK_DRILL]` `[TSAP_PROTOCOL]`.
+8. Execute only within the recovered governed scope; ambiguity may resolve to HOLD.
+9. Produce receipts — chat alone is not proof.
+10. Submit to teacher review — you do not self-promote.
+11. Before handoff/exit, **update repository-root `NOW.md` when material state changed**.
 
 A material `NOW.md` handoff records at minimum:
 
@@ -107,8 +108,8 @@ next admissible action
 ## Runtime
 
 ```powershell
-python scripts/kc_kpgs_governance.py entry
-python scripts/kc_kpgs_governance.py entry --renter-id openai_chatgpt --assert
+python scripts/kc_kpgs_governance.py entry --renter-id openai_chatgpt
+python scripts/kc_kpgs_governance.py entry --renter-id openai_chatgpt --renter-class stateless_renter --assert --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
 API: `GET /kpgs/entry` · `POST /kpgs/entry/assert`

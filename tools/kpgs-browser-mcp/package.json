@@ -12,12 +12,12 @@
     "check": "npm run test"
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "2.0.0",
-    "puppeteer-core": "25.10.0",
-    "zod": "4.6.2"
+    "@modelcontextprotocol/server": "2.1.0",
+    "puppeteer-core": "25.12.0",
+    "zod": "4.6.5"
   },
   "devDependencies": {
-    "@types/node": "26.5.1",
+    "@types/node": "26.6.2",
     "typescript": "7.0.2"
   },
   "engines": {

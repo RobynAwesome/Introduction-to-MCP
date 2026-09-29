@@ -44,11 +44,7 @@ WHATSAPP_RECIPIENT=1234567890@s.whatsapp.net
 
 ## 4. Launch the Gateway
 
-Run a simulation and add the `-w` flag:
-
-```bash
-python -m Kopano Context.cli serve launch --topic "Artificial General Intelligence" --agents "grok" --max-rounds 2 --whatsapp
-```
+The launch example previously shown here used an invalid module name and a `--whatsapp` flag absent from the current `serve launch` command. The current CLI exposes a separate `kopano whatsapp test` command. An integrated simulation-to-WhatsApp launch remains planned until the bridge and its runtime receipt are verified.
 
 > [!TIP]
 > **Groups**: You can also send to a WhatsApp Group by finding its **Group JID** (e.g., `1234567890@g.us`) and putting it in the `WHATSAPP_RECIPIENT` field!

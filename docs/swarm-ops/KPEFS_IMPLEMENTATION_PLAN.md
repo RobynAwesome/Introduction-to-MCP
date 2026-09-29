@@ -70,7 +70,7 @@
 | CLI | `scripts/kc_phu_operating_mesh.py` | yes |
 | API | `GET /operating-mesh/status`, `POST promote-all` | yes |
 
-**Exit:** 9 sub-brains + 1 APE hub have `operating` + PoC PASS — run `python scripts/kc_phu_operating_mesh.py promote-all`.
+**Exit:** 9 sub-brains + 1 APE hub have `operating` + PoC PASS — run `python scripts/kc_phu_operating_mesh.py promote-all --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD`.
 
 ---
 
@@ -133,19 +133,23 @@ flowchart LR
 ## Commands (operator)
 
 ```powershell
-python scripts/kc_phu_boot_v1.py apply
+python scripts/kc_phu_boot_v1.py apply --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 python scripts/kc_bracket_lint.py --self-test
 python scripts/kc_phu_boot_v1.py blackmask-dry-run
 python scripts/kc_eco_poc_validate.py --guide
 python scripts/kc_phu_operating_mesh.py status
 python scripts/kc_phu_graduation_bar.py status
-python scripts/kc_agent_build_poc_validate.py
-python scripts/kc_kpefs_full_gate.py
-python scripts/kc_kpefs_full_gate.py --append-main-brain
-python scripts/kc_kpefs_run_snapshot.py --append-main-brain
+python scripts/kc_agent_build_poc_validate.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_kpefs_full_gate.py --no-write
+python scripts/kc_kpefs_run_snapshot.py --no-write
+python scripts/kc_kpefs_full_gate.py --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_kpefs_full_gate.py --append-main-brain --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_kpefs_run_snapshot.py --append-main-brain --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_phu_graduation_bar.py steward-trust --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+python scripts/kc_steward_lane_run.py activate --renter-id <actor-id> --renter-class stateless_renter --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
 ```
 
-When you return from a run: `python scripts/kc_kpefs_run_snapshot.py` — refreshes `docs/swarm-ops/KPEFS_CLOSURE_STATUS.json`.
+`--no-write` is for diagnostics and CI. Persisting a report or closure snapshot requires a real renter ID and an explicitly typed `I_AM_STATELESS_RENTER_NOT_LANDLORD` acknowledgement. When you return from a run, use the renter-admitted `kc_kpefs_run_snapshot.py` form above to refresh `docs/swarm-ops/KPEFS_CLOSURE_STATUS.json`.
 
 ## MCP (TSAP / MAO)
 
@@ -176,13 +180,13 @@ python scripts/kc_log_append.py kimi-ack --payload-ref docs/swarm-ops/PAYLOAD_KI
 
 KPEFS Phases 0–5 implemented. **CMD-03 external swarm** is a separate human lane — see `external_swarm_lane.py` and `python scripts/kc_external_swarm_lane.py closure`.
 
-Maintain via `python scripts/kc_kpefs_full_gate.py` + `kc_guard.py all --require-verified-production 10`.
+Maintain via `python scripts/kc_kpefs_full_gate.py --no-write` for diagnostics; use the renter-admitted form above when a persisted receipt is required, plus `kc_guard.py all --require-verified-production 10`.
 
 ## CI — agent build PoC gate
 
 | Workflow | Job | Command |
 |----------|-----|---------|
-| `.github/workflows/ci.yml` | `agent-build-poc` | `python scripts/kc_agent_build_poc_validate.py` |
+| `.github/workflows/ci.yml` | `agent-build-poc` | `python scripts/kc_agent_build_poc_validate.py --no-write --json-only` |
 | `.github/workflows/swarm-proof.yml` | (swarm paths) | same + pytest `tests/test_agent_build_poc_validate.py` |
 
 Report artifact: `docs/swarm-ops/AGENT_BUILD_POC_VALIDATION.json` (uploaded on CI failure/success).

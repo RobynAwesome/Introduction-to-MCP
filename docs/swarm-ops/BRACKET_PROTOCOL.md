@@ -8,7 +8,7 @@ The **Bracket Protocol** is the Kopano-Phu handshake that marks when the Main Br
 [BRACKET_PROTOCOL] timestamp: 2026-05-21T12:00:00Z | ecosystem: Kopano-Phu | status: breaking_point | main_brain_ratio: 0.92 | attached: 9
 ```
 
-Written to `docs/swarm-ops/logs/KC Main Brain Log.jsonl` with `kind: bracket_protocol` via `kc_phu_populate_main_brain.py` or `POST /api/kc/phu/populate-main-brain`.
+Written to `docs/swarm-ops/logs/KC Main Brain Log.jsonl` with `kind: bracket_protocol` via `kc_phu_populate_main_brain.py` (explicit renter ID and ACK required) or `POST /api/kc/phu/populate-main-brain` (operator, renter ACK, and ALP required).
 
 ## Breaking Point (all true)
 

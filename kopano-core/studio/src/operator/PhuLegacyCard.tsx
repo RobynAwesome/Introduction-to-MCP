@@ -28,6 +28,8 @@ export function PhuLegacyCard() {
   const { isGodMode, runAction } = useOperator();
   const [phu, setPhu] = useState<PhuStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [renterId, setRenterId] = useState('');
+  const [hoodAck, setHoodAck] = useState('');
 
   const refresh = useCallback(async () => {
     try {
@@ -75,25 +77,50 @@ export function PhuLegacyCard() {
         <button type="button" className="action-button ghost" onClick={() => { void refresh(); }}>
           Refresh Phu
         </button>
-        {isGodMode && (
-          <>
+      </div>
+      {isGodMode && (
+        <div className="god-dock-panel">
+          <p>Persisted PHU actions require an explicit renter entry. Type the acknowledgement exactly; it is not prefilled.</p>
+          <label className="field-shell">
+            <span>Renter ID</span>
+            <input value={renterId} autoComplete="off" onChange={(e) => setRenterId(e.target.value)} />
+          </label>
+          <label className="field-shell">
+            <span>Type exactly: I_AM_STATELESS_RENTER_NOT_LANDLORD</span>
+            <input value={hoodAck} autoComplete="off" spellCheck={false} onChange={(e) => setHoodAck(e.target.value)} />
+          </label>
+          <div className="god-dock-actions">
             <button
               type="button"
               className="action-button primary"
-              onClick={() => { void runAction('phu_reattach_subbrains'); }}
+              disabled={!renterId.trim() || !hoodAck.trim()}
+              onClick={() => {
+                void runAction('phu_reattach_subbrains', true, {
+                  renterId,
+                  renterClass: 'stateless_renter',
+                  hoodAck,
+                });
+              }}
             >
               Reattach sub-brains
             </button>
             <button
               type="button"
               className="action-button primary"
-              onClick={() => { void runAction('phu_populate_main_brain', true); }}
+              disabled={!renterId.trim() || !hoodAck.trim()}
+              onClick={() => {
+                void runAction('phu_populate_main_brain', true, {
+                  renterId,
+                  renterClass: 'stateless_renter',
+                  hoodAck,
+                });
+              }}
             >
               Populate Main Brain
             </button>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
       {error && <p className="god-dock-error">{error}</p>}
     </motion.div>
   );

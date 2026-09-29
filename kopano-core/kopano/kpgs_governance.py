@@ -192,6 +192,31 @@ def governance_status() -> dict[str, Any]:
     }
 
 
+def governance_status_snapshot() -> dict[str, Any]:
+    """Read source doctrine for status without compiling or writing checkpoints."""
+    from .kpgs_renter_entry import load_renter_entryway
+
+    registry = load_main_brain_governance()
+    entryway = load_renter_entryway()
+    return {
+        "schema": "kpgs_governance_status_v1",
+        "ts": _utc_now(),
+        "source": "source_snapshot",
+        "authority": registry.get("authority", "Schematics MAIN BRAIN"),
+        "registry_present": "error" not in registry,
+        "registry_path": str(MAIN_BRAIN_GOVERNANCE_JSON.relative_to(REPO_ROOT)),
+        "renter_entryway": {
+            "document_id": entryway.get("document_id"),
+            "bracket": entryway.get("bracket"),
+            "entryway_path": entryway.get("_source"),
+        },
+        "compile_verdict": "UNKNOWN",
+        "gates": registry.get("gates"),
+        "sectors": registry.get("sectors"),
+        "message": "Source doctrine loaded; compile result requires an admitted run.",
+    }
+
+
 def append_schematics_comms(*, title: str, body: str) -> None:
     """Append a dated entry to Schematics comms-log (MAIN BRAIN human ledger)."""
     if not SCHEMATICS_COMMS_LOG.parent.is_dir():

@@ -1182,6 +1182,16 @@ button {
   margin: 10px 0;
 }
 
+.swarm-sim-admission {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.swarm-sim-admission .field-shell {
+  min-width: 0;
+}
+
 .admin-error {
   padding: 12px 14px;
   border-radius: 16px;
