@@ -19,6 +19,27 @@ Canonical entry order:
 6. Produce receipts for material work; chat narration is not proof.
 7. Before handoff/exit, update repository-root `NOW.md` when material state changed, including status, evidence, uncertainty, and the next admissible action.
 
+### Governed execution preflight
+
+The renter assertion is a semantic invariant, not a banner. For material execution, apply the existing KPGS stack in authority order:
+
+1. **Prompting Protocols** — resolve the current operator directive, scope, hierarchy, and purpose.
+2. **Renter ingress** — present and verify `I_AM_STATELESS_RENTER_NOT_LANDLORD`; missing/invalid mandatory ingress evidence is `HOLD/BLOCK`, not a warning.
+3. **KPEFS routing** — declare the primary execution vector and any secondary vector.
+4. **Bracket / BlackMask containment** — classify the lane, run applicable proof/commandment gates, and preserve `UNKNOWN/MAYBE`.
+5. **PKA / POC-vs-FOC** — do not promote a claim beyond its evidence.
+6. **SWFUS / execution membrane** — execute only after the prior containment/admission gates pass.
+7. **Emoji/life-pattern protocols** — only after Prompting + Bracket containment when applicable.
+8. **C.L.E.A.R. review** — before promotion/closure, check Complete · Logical · Evidence · Audience · Relevant. `CLEAR_PASS != POC_VALIDATED`.
+9. **Receipt before closure** — exact-head/runtime evidence precedes `fixed`, `done`, `green`, `passed`, or equivalent claims.
+
+If a mandatory gate cannot run, cannot be verified, or returns malformed evidence:
+
+```text
+RECEIPT_MISSING_OR_INVALID -> HOLD
+MANDATORY_GATE_FAILURE != CONTINUE_WITH_WARNING
+```
+
 Persistent doctrine, model memory, `Schematics/00-Home/Now.md`, personal vault files, or prior conversation state may inform a renter, but **none substitutes for repository-root `NOW.md` as current-state truth**.
 
 Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md`.

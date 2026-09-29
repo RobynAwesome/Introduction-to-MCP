@@ -1,0 +1,55 @@
+name: KPGS Branch Proof Gate
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: kpgs-branch-proof-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  branch-proof:
+    name: Require PR provenance
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Admit reviewable pull-request revisions
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "BRANCH_PROOF_PASS: pull_request #${{ github.event.pull_request.number }} targets master"
+          echo "head=${{ github.event.pull_request.head.sha }}"
+          echo "base=${{ github.event.pull_request.base.sha }}"
+
+      - name: Prove master push came from a merged pull request
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          count="$(
+            gh api               -H "Accept: application/vnd.github+json"               "repos/$REPO/commits/$SHA/pulls"               --jq '[.[] | select(.merged_at != null and .base.ref == "master")] | length'
+          )"
+
+          if [ "$count" -lt 1 ]; then
+            echo "::error::BRANCH_PROOF_FAIL: master SHA $SHA has no associated merged PR targeting master."
+            echo "Direct-to-master mutation is outside the reviewable branch/PR proof path."
+            exit 1
+          fi
+
+          echo "BRANCH_PROOF_PASS: master SHA $SHA is associated with a merged PR targeting master."
+
+      - name: Manual diagnostic
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "BRANCH_PROOF_DIAGNOSTIC: workflow wiring is callable."
+          echo "Enforcement still requires repository branch protection/ruleset configuration."
