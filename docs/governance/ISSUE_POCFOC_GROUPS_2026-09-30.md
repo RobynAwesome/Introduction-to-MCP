@@ -33,11 +33,11 @@ The repository uses FOC in three senses (ledger O-14): Field of Concepts (consti
 | FOC-G03 SemanticDriftLeak | Invariance shift check | none | none |
 | FOC-G04 GhostExecutionLoop | Run-time resource scan | #183 (problem statement targets ghost and orphan execution) | context |
 | FOC-G05 ContextCorruptionBreach | Unauthorized context wiping | none asserted | none |
-| FOC-G06 NarrativeSubstitutionLoop | Explanation exists while the corrective artifact or receipt does not | #122 (cites a receipt file absent from master); #167 (required RTC deliverable absent) | partial |
+| FOC-G06 NarrativeSubstitutionLoop | Explanation exists while the corrective artifact or receipt does not | #122 (cites a receipt file absent from master) | partial |
 | FOC-G07 ValidationAudienceInversion | Internal validation displaces public user value | #158 (same estate as the 2026-09-14 corrections) | context |
 | FOC-G08 UnverifiedPublicClaimPromotion | Stale or weak claim promoted as public truth | #158 (same estate) | context |
 
-Result: 0 issues classified under an existing group as an actor failure; 2 partial matches; 3 context-only. `partial` means the pattern's wording fits an observed gap, not that any actor is classified.
+Result: 0 issues classified under an existing group as an actor failure; 1 partial match (#122); 3 issues with context-only mentions (#121, #183, #158). `partial` means the pattern's wording fits an observed gap, not that any actor is classified.
 
 ## Candidate group (proposed, not added to the index)
 
@@ -45,7 +45,7 @@ Result: 0 issues classified under an existing group as an actor failure; 2 parti
 
 **Pattern:** a repository or provider control recorded as enforced is later found absent or bypassed, removal attribution is unknown, and no drift detector exists.
 
-**Evidence (ledger F-1):** `NOW.md` records an approving-review requirement as restored on 2026-09-30; afterwards PR #236 merged with no review and PRs #237 and #238 report `CLEAN` with no review decision; protection is unreadable to the observing token.
+**Evidence (ledger F-1):** `NOW.md` records an approving-review requirement as restored on 2026-09-30; afterwards PR #236 (through the Cursor GitHub App) and the owner's own PR #237 merged with no review, and open PR #238 reports `CLEAN` with no review decision; the approving-review rule and admin enforcement are not observable with the observing token.
 
 **Near-matches and why they fall short:** G06 requires explanation without an artifact, but the original readback was a real artifact at its time; the gap is temporal validity. G08 covers public surfaces; `NOW.md` is internal.
 
@@ -88,7 +88,7 @@ Result: 0 issues classified under an existing group as an actor failure; 2 parti
 | #122 | POC_PENDING | HOLD | G06 partial (comment cites a receipt path absent from master); not an actor classification |
 | #158 | HOLD_HUMAN | HOLD | G07/G08 context only (same estate as the 2026-09-14 public-surface corrections) |
 | #163 | POC_VALIDATED | ALLOW/PROPOSE (named claim only) | none asserted |
-| #167 | HOLD_HUMAN | HOLD | G06 partial (required deliverable absent while narrative exists); the underlying offense classification is RTC question 1 and is NOT made here |
+| #167 | HOLD_HUMAN | HOLD | none asserted (the absent inquest is an open requirement, not a claim-to-artifact delta); the underlying offense classification is RTC question 1 and is NOT made here |
 | #183 | POC_PENDING | HOLD | G04 context only (problem statement targets ghost and orphan execution); no classification of any actor |
 | #205 | POC_VALIDATED | ALLOW/PROPOSE (named claim only) | none asserted |
 | #207 | HOLD_HUMAN | HOLD | candidate ControlStateDrift (proposed, see groups doc); G06 and G08 near-matches insufficient |
