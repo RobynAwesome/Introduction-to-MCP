@@ -12,7 +12,7 @@
     {
       "seq": 1,
       "entry_id": "ILR-2026-09-30-E001",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "genesis",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -25,7 +25,7 @@
       "payload": {
         "ledger_id": "ILR-2026-09-30",
         "base_sha": "8c6d22f22dbc600a38b52daf3b2887940b8841fb",
-        "observation_window": "live reads 2026-09-30T22:15Z to 2026-09-30T23:05Z; inputs from earlier in the session are dated where used (issue dump 21:36Z, PR #236 merge 21:05:03Z)",
+        "observation_window": "live reads 2026-09-30T22:15Z to 2026-09-30T23:11Z; inputs from earlier in the session are dated where used (issue dump 21:36Z, PR #236 merge 21:05:03Z)",
         "authority": "Robyn approval message 2026-09-30T22:14Z (E1)",
         "doctrine": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
         "boundaries": [
@@ -40,12 +40,12 @@
         "note": "Wave 0 append. Observation only; no issue, setting, dependency or runtime changed."
       },
       "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-      "hash": "867aed40e256fd4473160fce5a68e210684a13a910303dc0eb10d529625b7a81"
+      "hash": "ff54f7a21c86eddc7764864f58bedf5299b55cc910755726429e44757fd5871f"
     },
     {
       "seq": 2,
       "entry_id": "ILR-2026-09-30-E002",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "role_packet",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -78,13 +78,13 @@
         },
         "mission_line": "Legacy.md: convert local context into validated human capability, economic participation and capability multiplication; survives founder, model, tool, institution change. Mission target, not a completion claim."
       },
-      "prev_hash": "867aed40e256fd4473160fce5a68e210684a13a910303dc0eb10d529625b7a81",
-      "hash": "ef7b12571cb6e5a8190b57e9ec5859b21ea2438359edc8724898637ae8845738"
+      "prev_hash": "ff54f7a21c86eddc7764864f58bedf5299b55cc910755726429e44757fd5871f",
+      "hash": "0ce83ebc584699c02498cf19fe88881ce112adeea83384d6f43ae390f74f82ae"
     },
     {
       "seq": 3,
       "entry_id": "ILR-2026-09-30-E003",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "observations",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -263,16 +263,24 @@
             "result": "After one run, three tracked files were modified: db/datalake.db (binary, same size), docs/swarm-ops/logs/KC Main Brain Log.jsonl (+10 lines) and docs/swarm-ops/logs/OZ_LATTICE_AUDIT.jsonl (+17 lines; key-shaped pattern hits rose from 32 to 34). The run reported 228 tests, 206 passing; the other 22 (3 failures, 19 errors) all trace to optional modules missing from this VM (fastapi, pandas, typer, litellm, matplotlib, bs4, bandit). The worktree was restored to the committed state afterwards.",
             "eclass": "E2",
             "uncertainty": "This VM lacks dependencies that CI installs, so CI on the PR head is the gate. The writes show the suite is not no-write, which matters for issue #115's dry-run acceptance (no writes through SQLite, JSONL, forensic, Main Brain and handoff paths)."
+          },
+          {
+            "id": "O-22",
+            "what": "Merge and review record of PRs #213 and #232-#237",
+            "how": "gh pr view <n> --json mergedAt,mergedBy,reviews,reviewDecision",
+            "result": "#213 merged 2026-09-29T06:19:12Z by app/cursor, 1 review (COMMENTED). #232 merged 2026-09-29T04:55:43Z by RobynAwesome, no review. #233 merged 2026-09-29T05:43:16Z by RobynAwesome, no review. #234 merged 2026-09-29T06:30:25Z by app/cursor, no review. #235 merged 2026-09-30T09:32:22Z by RobynAwesome, no review; it carries the Forge block that records the review rule as restored at 2026-09-30T08:33:10+02:00. #236 merged 2026-09-30T21:05:03Z by app/cursor, no review. #237 merged 2026-09-30T22:32:09Z by RobynAwesome, no review. reviewDecision is empty on all seven.",
+            "eclass": "E2",
+            "uncertainty": "Shows reviews were absent, not why. The restoration timestamp is attributed to Forge's block; the readback behind it is local and unavailable."
           }
         ]
       },
-      "prev_hash": "ef7b12571cb6e5a8190b57e9ec5859b21ea2438359edc8724898637ae8845738",
-      "hash": "b79da4880cfc453e42d8a3640fc225b2748fc658fa84b7cf83ae24f5191e7e1d"
+      "prev_hash": "0ce83ebc584699c02498cf19fe88881ce112adeea83384d6f43ae390f74f82ae",
+      "hash": "ed7fcefde631340a40d010c25558a33c5089c2e8b86a73169e3671841ddb3bc6"
     },
     {
       "seq": 4,
       "entry_id": "ILR-2026-09-30-E004",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "findings",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -287,7 +295,7 @@
           {
             "id": "F-1",
             "title": "The approving-review requirement is not observably in force (recurrence)",
-            "body": "NOW.md@8c6d22f2:L56 records that at recovery required_pull_request_reviews was null, that Forge restored one approving review on 2026-09-30, and that removal attribution is UNKNOWN. Afterwards two different actors merged with no review: PR #236 at 21:05:03Z through the Cursor GitHub App (`app/cursor`; this renter's earlier session performed that merge, self-attested) (O-04), and the owner's own merge of PR #237 at 22:32:09Z (O-20). Open PR #238 reports CLEAN with no review decision (O-03). The 14 required status checks are observable and enforced for everyone (O-05, O-06); the approving-review rule and admin enforcement are not observable with this token (the branch summary has no such fields and the detailed endpoint returns 403), so the current setting is UNKNOWN while the PR metadata shows no approving review gating merges. Two instructions now point different ways: NOW.md tells every agent to preserve the review requirement, and the owner, who is final authority, merged without one. This ledger records both and resolves neither. Hypothesis H1 (E3): PRs #233-#236 are authored as RobynAwesome (O-19) and GitHub does not let an author approve their own PR, so a one-approval rule may be unsatisfiable in this repo without a second approver identity, which would explain why it keeps lapsing.",
+            "body": "NOW.md@8c6d22f2:L56 records that at recovery required_pull_request_reviews was null, that Forge restored one approving review on 2026-09-30, and that removal attribution is UNKNOWN. Afterwards three merges had no review: PR #235 at 09:32:22Z, merged by the owner (it is the PR that carries the restoration note), PR #236 at 21:05:03Z through the Cursor GitHub App (`app/cursor`; this renter's earlier session performed that merge, self-attested), and PR #237 at 22:32:09Z, merged by the owner (O-22, O-04, O-20). Across the seven merges of #213 and #232-#237 the only review of any kind is one COMMENTED review on #213 (O-22). Open PR #238 reports CLEAN with no review decision (O-03). The 14 required status checks are observable and enforced for everyone (O-05, O-06); the approving-review rule and admin enforcement are not observable with this token (the branch summary has no such fields and the detailed endpoint returns 403), so the current setting is UNKNOWN while the PR metadata shows no approving review gating merges. Two instructions now point different ways: NOW.md tells every agent to preserve the review requirement, and the owner, who is final authority, merged without one. This ledger records both and resolves neither. Hypothesis H1 (E3): PRs #233-#236 are authored as RobynAwesome (O-19) and GitHub does not let an author approve their own PR, so a one-approval rule may be unsatisfiable in this repo without a second approver identity, which would explain why it keeps lapsing.",
             "action": "Forge/Robyn: read protection with an admin-scope token now; state whether the requirement is intended and, if so, who can satisfy it (second approver identity, bot approver, or a PR-required rule with zero approvals plus required checks); decide whether to log the lapse in poc-vs-foc/BREACH_LOG.md; update the NOW.md instruction to match the decision. Renter made no setting change."
           },
           {
@@ -346,13 +354,13 @@
           }
         ]
       },
-      "prev_hash": "b79da4880cfc453e42d8a3640fc225b2748fc658fa84b7cf83ae24f5191e7e1d",
-      "hash": "641f21b45e5ecf235b4a8cbbee2f3e3fa19577ef469133ca01fbe8d57280e956"
+      "prev_hash": "ed7fcefde631340a40d010c25558a33c5089c2e8b86a73169e3671841ddb3bc6",
+      "hash": "4289cfbd2cd9a9eb0eb7960a03f3db370047d75ef076f5c6c43da263794631ae"
     },
     {
       "seq": 5,
       "entry_id": "ILR-2026-09-30-E005",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -414,13 +422,13 @@
           }
         ]
       },
-      "prev_hash": "641f21b45e5ecf235b4a8cbbee2f3e3fa19577ef469133ca01fbe8d57280e956",
-      "hash": "51e27507f2123915f29c893c402a873b4062adee7407c6ef4c1e34f49b48c128"
+      "prev_hash": "4289cfbd2cd9a9eb0eb7960a03f3db370047d75ef076f5c6c43da263794631ae",
+      "hash": "5a1529368a83962b76382567edd1cfc849c0de525b130e2a0411d9cceafb3c39"
     },
     {
       "seq": 6,
       "entry_id": "ILR-2026-09-30-E006",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -484,13 +492,13 @@
           }
         ]
       },
-      "prev_hash": "51e27507f2123915f29c893c402a873b4062adee7407c6ef4c1e34f49b48c128",
-      "hash": "22179336e5b86fad79cba1141152e1ae87a6b017307f8903a672b8c64ffcd900"
+      "prev_hash": "5a1529368a83962b76382567edd1cfc849c0de525b130e2a0411d9cceafb3c39",
+      "hash": "3a057ca5712029e246f1c4e8879fe80ff0cb1c31022b8c476a40d76901cbd904"
     },
     {
       "seq": 7,
       "entry_id": "ILR-2026-09-30-E007",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -554,13 +562,13 @@
           }
         ]
       },
-      "prev_hash": "22179336e5b86fad79cba1141152e1ae87a6b017307f8903a672b8c64ffcd900",
-      "hash": "1a8fa1e607b5f409decf99cb095435a6bb028f9140514562aa16a40afe213fee"
+      "prev_hash": "3a057ca5712029e246f1c4e8879fe80ff0cb1c31022b8c476a40d76901cbd904",
+      "hash": "b0033f9900cf805f0149d8571250264ade7f3db795fa4908406cab25a8dfcfa3"
     },
     {
       "seq": 8,
       "entry_id": "ILR-2026-09-30-E008",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -635,13 +643,13 @@
           }
         ]
       },
-      "prev_hash": "1a8fa1e607b5f409decf99cb095435a6bb028f9140514562aa16a40afe213fee",
-      "hash": "45152db103256b765167d104b782253523faa0facbc9047fbbb1e6cce2fe919b"
+      "prev_hash": "b0033f9900cf805f0149d8571250264ade7f3db795fa4908406cab25a8dfcfa3",
+      "hash": "2cb004ef566d366b9d0ece38fd01642ec9585e036bb6750dea011a89d9ebc9a6"
     },
     {
       "seq": 9,
       "entry_id": "ILR-2026-09-30-E009",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -702,13 +710,13 @@
           }
         ]
       },
-      "prev_hash": "45152db103256b765167d104b782253523faa0facbc9047fbbb1e6cce2fe919b",
-      "hash": "96d87494b92763f13f9d47bc297171f2272d31ff1105f0d29082055a9c5468ed"
+      "prev_hash": "2cb004ef566d366b9d0ece38fd01642ec9585e036bb6750dea011a89d9ebc9a6",
+      "hash": "b75146669c3137e89dd937edf61b8f0ef1546bc86e360b535fae6c7495643ea5"
     },
     {
       "seq": 10,
       "entry_id": "ILR-2026-09-30-E010",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -771,13 +779,13 @@
           }
         ]
       },
-      "prev_hash": "96d87494b92763f13f9d47bc297171f2272d31ff1105f0d29082055a9c5468ed",
-      "hash": "848f67197a8412a55fe2749f2750f3098c71713fcfff14d60024d4dc325b5c7a"
+      "prev_hash": "b75146669c3137e89dd937edf61b8f0ef1546bc86e360b535fae6c7495643ea5",
+      "hash": "a32a6a1e2a70bb78b67444d10e60da3e05627bdac465e2884aa084280d317c2c"
     },
     {
       "seq": 11,
       "entry_id": "ILR-2026-09-30-E011",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -827,13 +835,13 @@
           }
         ]
       },
-      "prev_hash": "848f67197a8412a55fe2749f2750f3098c71713fcfff14d60024d4dc325b5c7a",
-      "hash": "f5d9b2125473f2232c0e73d3af05e423f547b9cf2f6288e338b28264db8e4e3c"
+      "prev_hash": "a32a6a1e2a70bb78b67444d10e60da3e05627bdac465e2884aa084280d317c2c",
+      "hash": "6c639df7715b7d07035285d3792d19372671c36226c6e5ed0c626b40de0dddc0"
     },
     {
       "seq": 12,
       "entry_id": "ILR-2026-09-30-E012",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -883,13 +891,13 @@
           }
         ]
       },
-      "prev_hash": "f5d9b2125473f2232c0e73d3af05e423f547b9cf2f6288e338b28264db8e4e3c",
-      "hash": "22d823fe04c0b6b6ef0735171ae7a3a01e977394f583ccb9d0dd3eba10e0c4ca"
+      "prev_hash": "6c639df7715b7d07035285d3792d19372671c36226c6e5ed0c626b40de0dddc0",
+      "hash": "b59d57f41bc3716a98e9226de6e0f15ea13c32e567893b48699ac065a9821e74"
     },
     {
       "seq": 13,
       "entry_id": "ILR-2026-09-30-E013",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -952,13 +960,13 @@
           }
         ]
       },
-      "prev_hash": "22d823fe04c0b6b6ef0735171ae7a3a01e977394f583ccb9d0dd3eba10e0c4ca",
-      "hash": "d3053e1121b00dbd731f730eca4ac5424590ca261a9b0129110799d381f46608"
+      "prev_hash": "b59d57f41bc3716a98e9226de6e0f15ea13c32e567893b48699ac065a9821e74",
+      "hash": "a672c4158d57343f8bf3a5e7c43b714d9d6561101666023706e37d98f4f070d2"
     },
     {
       "seq": 14,
       "entry_id": "ILR-2026-09-30-E014",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1020,13 +1028,13 @@
           }
         ]
       },
-      "prev_hash": "d3053e1121b00dbd731f730eca4ac5424590ca261a9b0129110799d381f46608",
-      "hash": "ddb899adc20dcb3edbd9a59dc5dffc1da7b52c64f505eca97d3ad0fc1dec8272"
+      "prev_hash": "a672c4158d57343f8bf3a5e7c43b714d9d6561101666023706e37d98f4f070d2",
+      "hash": "a728d799726d7422a75305e9c2cfebc1ffded8ac98999a8fd64e300ce9927278"
     },
     {
       "seq": 15,
       "entry_id": "ILR-2026-09-30-E015",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1090,13 +1098,13 @@
           }
         ]
       },
-      "prev_hash": "ddb899adc20dcb3edbd9a59dc5dffc1da7b52c64f505eca97d3ad0fc1dec8272",
-      "hash": "74f838289953f6a3e40fd4347396280c1cbca393345a09458e83b153ae2449ba"
+      "prev_hash": "a728d799726d7422a75305e9c2cfebc1ffded8ac98999a8fd64e300ce9927278",
+      "hash": "76916ee1a5aa0777e29616e386766e4923724ad413e9105730b40dc87abf78d7"
     },
     {
       "seq": 16,
       "entry_id": "ILR-2026-09-30-E016",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1172,13 +1180,13 @@
           }
         ]
       },
-      "prev_hash": "74f838289953f6a3e40fd4347396280c1cbca393345a09458e83b153ae2449ba",
-      "hash": "6583d379a586e5a2eb3381ad0af56deb2c6ff5d9a5dcf6fbbd5ebada9cd6246c"
+      "prev_hash": "76916ee1a5aa0777e29616e386766e4923724ad413e9105730b40dc87abf78d7",
+      "hash": "cbe6305ace1acc271be76eab800062fa2d3d00db29fb7c2d52495e68394d0855"
     },
     {
       "seq": 17,
       "entry_id": "ILR-2026-09-30-E017",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1242,13 +1250,13 @@
           }
         ]
       },
-      "prev_hash": "6583d379a586e5a2eb3381ad0af56deb2c6ff5d9a5dcf6fbbd5ebada9cd6246c",
-      "hash": "ffba7d2e3aea888437a619f6a5335d7e4baa811c63d10d93c389aa84e2816425"
+      "prev_hash": "cbe6305ace1acc271be76eab800062fa2d3d00db29fb7c2d52495e68394d0855",
+      "hash": "e6c795ce0cb8b9b709d49fa6cd0229923eaf35c61973ee74355962490951018f"
     },
     {
       "seq": 18,
       "entry_id": "ILR-2026-09-30-E018",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1324,13 +1332,13 @@
           }
         ]
       },
-      "prev_hash": "ffba7d2e3aea888437a619f6a5335d7e4baa811c63d10d93c389aa84e2816425",
-      "hash": "b9aca880b990c9300b387ae29f3ba4c5ea70b38c65eb00df6a36ad40b97bf278"
+      "prev_hash": "e6c795ce0cb8b9b709d49fa6cd0229923eaf35c61973ee74355962490951018f",
+      "hash": "56bc46ff5dc0d7a4a0e50d977f4b3474002bd012345cb2c537776adbdebfd2cc"
     },
     {
       "seq": 19,
       "entry_id": "ILR-2026-09-30-E019",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1410,13 +1418,13 @@
           }
         ]
       },
-      "prev_hash": "b9aca880b990c9300b387ae29f3ba4c5ea70b38c65eb00df6a36ad40b97bf278",
-      "hash": "2c897ba6268f04c2ad5d9be04e125daee4ea08f2a4c0d95f1b81a20c64e5f447"
+      "prev_hash": "56bc46ff5dc0d7a4a0e50d977f4b3474002bd012345cb2c537776adbdebfd2cc",
+      "hash": "34e819dfb6ad1ec2eed75a1f2435c6390bbdcd4386b7fda641810bf1c8d46ef7"
     },
     {
       "seq": 20,
       "entry_id": "ILR-2026-09-30-E020",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1477,13 +1485,13 @@
           }
         ]
       },
-      "prev_hash": "2c897ba6268f04c2ad5d9be04e125daee4ea08f2a4c0d95f1b81a20c64e5f447",
-      "hash": "af9abb47f2939fd6fabfcfcb353bc9cae432ee18ba771497faaa25580009e3b0"
+      "prev_hash": "34e819dfb6ad1ec2eed75a1f2435c6390bbdcd4386b7fda641810bf1c8d46ef7",
+      "hash": "c00607ac4e61576f12eb3bfa6e7645eff58f05f8e1b59baab3c0af315239212c"
     },
     {
       "seq": 21,
       "entry_id": "ILR-2026-09-30-E021",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "issue_disposition",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1545,13 +1553,13 @@
           }
         ]
       },
-      "prev_hash": "af9abb47f2939fd6fabfcfcb353bc9cae432ee18ba771497faaa25580009e3b0",
-      "hash": "c4a7c09ce025ccdf07228443a9009e5dff8ab2b2eae4de0a8059822cd04d8ee2"
+      "prev_hash": "c00607ac4e61576f12eb3bfa6e7645eff58f05f8e1b59baab3c0af315239212c",
+      "hash": "aaa0b11a5f2c9e1a7c45f7875be6b6180b110d76bfdf8416970081520b4f822d"
     },
     {
       "seq": 22,
       "entry_id": "ILR-2026-09-30-E022",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "cluster_map",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1614,13 +1622,13 @@
           }
         ]
       },
-      "prev_hash": "c4a7c09ce025ccdf07228443a9009e5dff8ab2b2eae4de0a8059822cd04d8ee2",
-      "hash": "64150c55170d82102525662e8f08541ea4f7af5c160109a08032f47bcc3653f8"
+      "prev_hash": "aaa0b11a5f2c9e1a7c45f7875be6b6180b110d76bfdf8416970081520b4f822d",
+      "hash": "27fedb1bf51963426c62b790cf3377dcdd2fe6d2790c1a8284d1e1075b362ab4"
     },
     {
       "seq": 23,
       "entry_id": "ILR-2026-09-30-E023",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "local_source_recovery",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1694,13 +1702,13 @@
           }
         ]
       },
-      "prev_hash": "64150c55170d82102525662e8f08541ea4f7af5c160109a08032f47bcc3653f8",
-      "hash": "065ca628929ca66855a41444cb3b9320f43813bdeddea4250529d888a1b8774c"
+      "prev_hash": "27fedb1bf51963426c62b790cf3377dcdd2fe6d2790c1a8284d1e1075b362ab4",
+      "hash": "f4993d86ee37134a53fa8472320267b1f236ddf3031b8afc18ed7ee3060c339c"
     },
     {
       "seq": 24,
       "entry_id": "ILR-2026-09-30-E024",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "doctrine_gaps_and_proposed_vocabulary",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1757,13 +1765,13 @@
         },
         "status": "PROPOSED; RTC admission UNRECORDED"
       },
-      "prev_hash": "065ca628929ca66855a41444cb3b9320f43813bdeddea4250529d888a1b8774c",
-      "hash": "a6feec2ed570a8cca72b4473ee2d8c88be9baf3f794ed346b4132e101c20d0d5"
+      "prev_hash": "f4993d86ee37134a53fa8472320267b1f236ddf3031b8afc18ed7ee3060c339c",
+      "hash": "318cad9496be16dcb8ce6430a6a444e541048a8328341c0274f5580e12ace0c0"
     },
     {
       "seq": 25,
       "entry_id": "ILR-2026-09-30-E025",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "admission_state",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1833,13 +1841,13 @@
         ],
         "state_vocabulary": "LEARN | HOLD | TEST | READY_FOR_POC"
       },
-      "prev_hash": "a6feec2ed570a8cca72b4473ee2d8c88be9baf3f794ed346b4132e101c20d0d5",
-      "hash": "5ac9a33c6b5ded2a9f8fa001be113aff7463015752cc8b413bcd545f77bc71ff"
+      "prev_hash": "318cad9496be16dcb8ce6430a6a444e541048a8328341c0274f5580e12ace0c0",
+      "hash": "7f2351243c27a7420f42062c5e5b16c4d5c28d57cc1c86224dfbcc977439dd09"
     },
     {
       "seq": 26,
       "entry_id": "ILR-2026-09-30-E026",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "audit_coverage_pointer",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1854,13 +1862,13 @@
         "local_population": "UNAVAILABLE (coverage.csv on owner machine)",
         "full_audit_status": "INCOMPLETE (root NOW.md keeps this status)"
       },
-      "prev_hash": "5ac9a33c6b5ded2a9f8fa001be113aff7463015752cc8b413bcd545f77bc71ff",
-      "hash": "a1b350555d1f6bd98032a77efdfa90833e7b9920f22e363e4849ff49be57e953"
+      "prev_hash": "7f2351243c27a7420f42062c5e5b16c4d5c28d57cc1c86224dfbcc977439dd09",
+      "hash": "ddb85e80e090d195ffa7e862d25a9b59255ff3692d39a201cff43550a79e17a4"
     },
     {
       "seq": 27,
       "entry_id": "ILR-2026-09-30-E027",
-      "recorded_at": "2026-09-30T23:05:54Z",
+      "recorded_at": "2026-09-30T23:11:40Z",
       "entry_kind": "human_queue",
       "actor": {
         "actor": "Cursor cloud agent (stateless renter)",
@@ -1914,8 +1922,8 @@
           }
         ]
       },
-      "prev_hash": "a1b350555d1f6bd98032a77efdfa90833e7b9920f22e363e4849ff49be57e953",
-      "hash": "b02972f624a46c13a6c1dc3633b94f1d4c7687fbbf8c8d57a835e2f1642d3956"
+      "prev_hash": "ddb85e80e090d195ffa7e862d25a9b59255ff3692d39a201cff43550a79e17a4",
+      "hash": "1e1e5786b984645f3ef7ac5189c959aed94366f711889b052054d1441a559d33"
     }
   ]
 }

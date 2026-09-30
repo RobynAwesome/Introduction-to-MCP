@@ -45,7 +45,7 @@ Result: 0 issues classified under an existing group as an actor failure; 1 parti
 
 **Pattern:** a repository or provider control recorded as enforced is later found absent or bypassed, removal attribution is unknown, and no drift detector exists.
 
-**Evidence (ledger F-1):** `NOW.md` records an approving-review requirement as restored on 2026-09-30; afterwards PR #236 (through the Cursor GitHub App) and the owner's own PR #237 merged with no review, and open PR #238 reports `CLEAN` with no review decision; the approving-review rule and admin enforcement are not observable with the observing token.
+**Evidence (ledger F-1):** `NOW.md` records an approving-review requirement as restored on 2026-09-30; afterwards PRs #235, #236 (through the Cursor GitHub App) and #237 merged with no review (#235 is the PR that carries the restoration note), and open PR #238 reports `CLEAN` with no review decision; the approving-review rule and admin enforcement are not observable with the observing token.
 
 **Near-matches and why they fall short:** G06 requires explanation without an artifact, but the original readback was a real artifact at its time; the gap is temporal validity. G08 covers public surfaces; `NOW.md` is internal.
 
