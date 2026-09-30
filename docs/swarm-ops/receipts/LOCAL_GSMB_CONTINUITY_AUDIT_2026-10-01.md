@@ -10,10 +10,10 @@ The local Legacy mission source is `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/M
 
 ## Source populations
 
-- Cloud source comparison began at master@65975a125cad2954aa51cdf8b888ce6523839fd5, commit time 2026-09-30T21:05:02Z. At 2026-09-30T23:27:15Z, origin/master was refreshed to 8c6d22f22dbc600a38b52daf3b2887940b8841fb via PR #237; the compared range changes only uv.lock. This branch will be rebased onto that refreshed head before publication.
+- Cloud source comparison began at master@65975a125cad2954aa51cdf8b888ce6523839fd5, commit time 2026-09-30T21:05:02Z. At 2026-09-30T23:27:15Z, origin/master was refreshed to 8c6d22f22dbc600a38b52daf3b2887940b8841fb via PR #237; that range changed only uv.lock. At 2026-09-30T23:41:06Z, origin/master advanced to 1e152dce3559276c4826fa34d4834f7a2d47f2bb via Cursor's PR #240, which updated root NOW.md and added the Wave 0 issue ledger, POC/FOC group files, and cloud house-audit coverage. The integrating-writer proposal in that NOW block remains pending Forge CA acceptance; this branch does not accept or change it. This CA branch will be rebased onto 1e152dce before publication and adds no diff to PR #240's files.
 - Preserved OneDrive checkout: codex/kc-sovereign-gui-full-dev@e24b1aa0874a637477e6d436c032646cfa236aed. It showed 30 visible Git status paths, including root NOW, Home Now, runtime/log/database and governance state. The exact status capture is in the external audit bundle. This audit made no source-file changes in that checkout; its pre-existing dirty state was left as-is.
 - The local `.gitignore` has a `Schematics/` pattern at line 22. Git still tracks selected Schematics files that are already in the index, while untracked local-only Schematics artifacts matching the pattern are hidden from ordinary status. The preserved OneDrive checkout therefore contains tracked files and ignored local-only files; a clean Git worktree is not a complete representation of the local Schematics estate. Local and cloud observations are separate evidence populations.
-- A clean cloud worktree was created from the verified cloud comparison base. This branch changes Dashboard and the historical Session 3 pointer and adds this receipt. Root NOW, Home Now, local-only files, and the issue ledger are untouched.
+- A clean cloud worktree was created from the verified cloud comparison base. This branch changes Dashboard and the historical Session 3 pointer and adds this receipt. It adds no edits to root NOW, Home Now, local-only files, the issue ledger, or the files added by PR #240.
 
 ## Findings
 
