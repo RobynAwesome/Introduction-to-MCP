@@ -1,3 +1,18 @@
+## CURRENT STATE — 2026-09-30T20:58:00Z (SECURITY BACKLOG · FAST-URI 3.1.7 · CLI LOCK REPAIRED)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Assigned lane:** "Security backlog" row of the coordination table below. **Human authority:** Robyn: "PROCEED WHERE YOU LEFT OFF".
+> **Base:** `master@2fae148012d072ec2df28ed3c8ca804629254247`. **Branch:** `cursor/security-backlog-fast-uri-cli-lock-4e71`.
+
+- **fast-uri (Dependabot #108/#109):** root `package.json` `overrides.fast-uri` pinned the vulnerable `3.1.6`; raised to `3.1.7`, the first patched version for GHSA-qw65-cvwx-89v3 and GHSA-58mr-gqgx-xq4g on the 3.x line. `package-lock.json` now resolves `node_modules/fast-uri@3.1.7` (only consumer: `ajv@8.20.0`). Studio and dashboard lockfiles do not contain `fast-uri`. `python3 scripts/kc_dependency_firewall_gate.py` → `FIREWALL PASS` (3 lockfiles).
+- **NLTK (Dependabot #96):** root `uv.lock` already holds `nltk==3.10.3` (since `7284d067`), the first patched version for GHSA-w3v8-gmh9-3wv7, GHSA-3gq4-3j92-5w49 and GHSA-p4rw-rvv2-7xwr. No other tracked manifest pins nltk. The alert's manifest could not be read here (Dependabot and code-scanning APIs return 403 for this app token); if #96 is still open, it is stale or points at an untracked manifest — owner readback required.
+- **`CLI/uv.lock`:** carried `<<<<<<< HEAD` / `>>>>>>> c352556` markers since `e0aac64c` and failed `uv lock` TOML parsing. Regenerated from `CLI/pyproject.toml` with `uv lock --python 3.11` (keeps `requires-python = ">=3.11"`): 49 packages, `mcp==1.30.0` inside the `<2` bound, `cryptography==50.0.2`. `uv sync --frozen` then `import mcp_server, mao_server, mcp_client` → all OK on CPython 3.11.16.
+- **Not proven:** hosted checks on this head are UNKNOWN until the PR runs them. 32 open high CodeQL alerts were not triaged in this pass (API unreadable by this token; needs a human-supplied alert export or a token with `security_events:read`). #121, #211, #231 and the other HOLD issues are untouched.
+
+**Next admissible action:** let required checks and independent review run on this PR; do not weaken protection. For the CodeQL backlog, supply the alert list (rule id + path:line) to a renter, or grant read scope.
+
+---
+
 ## CURRENT COORDINATION — 2026-09-30T08:33:10+02:00 (FORGE CA · ALL-AGENT INSTRUCTIONS · CLOUD RECEIPTS RECOVERED)
 
 > **Actor:** Codex Forge, Chief Architect (CA), stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
