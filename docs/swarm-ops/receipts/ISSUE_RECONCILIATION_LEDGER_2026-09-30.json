@@ -1,0 +1,1911 @@
+{
+  "schema": "kpgs.issue_reconciliation_ledger.v1",
+  "ledger_id": "ILR-2026-09-30",
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "append_only": true,
+  "base_sha": "8c6d22f22dbc600a38b52daf3b2887940b8841fb",
+  "hash_algorithm": "sha256",
+  "canonicalization": "json.dumps(entry_without_hash, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False) encoded as UTF-8; sha256 hex",
+  "genesis_prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "markdown_twin": "docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.md",
+  "entries": [
+    {
+      "seq": 1,
+      "entry_id": "ILR-2026-09-30-E001",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "genesis",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "ledger_id": "ILR-2026-09-30",
+        "base_sha": "8c6d22f22dbc600a38b52daf3b2887940b8841fb",
+        "observation_window": "2026-09-30T22:15Z to 2026-09-30T22:48Z",
+        "authority": "Robyn approval message 2026-09-30T22:14Z (E1)",
+        "doctrine": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+        "boundaries": [
+          "CLEAR_PASS != POC_VALIDATED",
+          "WRITTEN_INSTRUCTION != RUNTIME_ENFORCEMENT"
+        ],
+        "tiers": {
+          "cloud": "this file on master once merged",
+          "local": "UNKNOWN",
+          "google_drive": "UNKNOWN until owner receipt"
+        },
+        "note": "Wave 0 append. Observation only; no issue, setting, dependency or runtime changed."
+      },
+      "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "442473d416386f8f5f8790e9b2be7fba6573e99818ef5ade437449f597944a66"
+    },
+    {
+      "seq": 2,
+      "entry_id": "ILR-2026-09-30-E002",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "role_packet",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "hierarchy": [
+          "Robyn (final human authority)",
+          "RTC",
+          "Forge CA",
+          "Cursor CF",
+          "admitted lanes"
+        ],
+        "recorded_separately": {
+          "actor": "Cursor cloud agent (stateless renter)",
+          "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+          "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+          "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+          "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+        },
+        "rank_vs_seat": "Operational rank is not an RTC identity seat; incident, recusal, suspension and identity-admission gates stay attached to #121 and #167.",
+        "integrating_writer": {
+          "proposed": "Cursor CF",
+          "scope": "root NOW.md, this ledger, closeout records (Waves 0-3)",
+          "status": "PROPOSED; Forge CA acceptance unrecorded"
+        },
+        "mission_line": "Legacy.md: convert local context into validated human capability, economic participation and capability multiplication; survives founder, model, tool, institution change. Mission target, not a completion claim."
+      },
+      "prev_hash": "442473d416386f8f5f8790e9b2be7fba6573e99818ef5ade437449f597944a66",
+      "hash": "66cd26d8c970d5806ccc2fc78106afb3f2eaf20e21438023c48c47962dd5885a"
+    },
+    {
+      "seq": 3,
+      "entry_id": "ILR-2026-09-30-E003",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "observations",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "observations": [
+          {
+            "id": "O-01",
+            "what": "Cloud head of master",
+            "how": "git fetch origin master; git rev-parse origin/master (twice)",
+            "result": "Observation began at 65975a125cad2954aa51cdf8b888ce6523839fd5 (merge of PR #236, 2026-09-30T21:05:03Z). During the session master advanced to 8c6d22f22dbc600a38b52daf3b2887940b8841fb (merge of Dependabot PR #237, 2026-09-30T22:32:09Z, merged by RobynAwesome; it changes only uv.lock). This receipt is based on 8c6d22f2. Root NOW.md and the studio lockfile have identical blobs at both heads.",
+            "eclass": "E2",
+            "uncertainty": "Master can advance again before merge; the publishing branch is rebased and re-checked at merge time."
+          },
+          {
+            "id": "O-02",
+            "what": "Open issues",
+            "how": "gh issue list --state open",
+            "result": "17 open: #94 #102 #103 #107 #110 #115 #116 #121 #122 #158 #163 #167 #183 #205 #207 #211 #231. Latest updatedAt among them is 2026-09-28; none changed since the issue dump used here.",
+            "eclass": "E2",
+            "uncertainty": "Comment bodies were read from a dump taken 2026-09-30T21:36Z; issue updatedAt values show no later activity."
+          },
+          {
+            "id": "O-03",
+            "what": "Open pull requests (new since last read)",
+            "how": "gh pr list --state open; gh pr view 238 239 (re-read 2026-09-30T22:42Z)",
+            "result": "#238 pyjwt 2.13.0->2.15.0 changes only uv.lock: mergeStateStatus=CLEAN, reviewDecision=''. #239 litellm 1.89.0->1.89.7 changes kopano-core/requirements.txt and uv.lock: mergeStateStatus=BLOCKED while reviewDecision='' (so whatever blocks it is not a review requirement). #237 urllib3 was open earlier and is now merged (O-20).",
+            "eclass": "E2",
+            "uncertainty": "Outside the approved plan; not acted on. Dependency-firewall and scoped review belong to the Security backlog lane."
+          },
+          {
+            "id": "O-04",
+            "what": "Merge record of PR #236 (this renter's prior merge)",
+            "how": "gh pr view 236 --json mergedBy,reviews,reviewDecision,mergedAt",
+            "result": "mergedAt 2026-09-30T21:05:03Z, mergedBy app/cursor, reviews=[], reviewDecision=''.",
+            "eclass": "E2",
+            "uncertainty": "Shows GitHub permitted the merge with no recorded approving review. Does not show why."
+          },
+          {
+            "id": "O-05",
+            "what": "Protection and ruleset readability",
+            "how": "gh api branches/master/protection; rulesets; rules/branches/master",
+            "result": "GET /branches/master/protection -> 403 for this token. Rulesets: 24144685 (active, 'Block new high-severity CodeQL findings on master') and 19244487 (disabled, Copilot review). rules/branches/master returns one rule type: code_scanning.",
+            "eclass": "E2",
+            "uncertainty": "Classic branch protection is unreadable here. The rules API lists ruleset rules only, so it neither confirms nor denies classic protection."
+          },
+          {
+            "id": "O-06",
+            "what": "Checks that ran on the PR #236 head",
+            "how": "gh pr checks 236",
+            "result": "18 entries. Inferred required set of 14 = 24-RTC Learning gate, Agent build PoC, Analyze (actions/javascript-typescript/python/rust), Dependency firewall, GitGuardian, Require PR provenance, zero-trust admission, cli-package-check, gui-check, lint-and-test (3.11/3.12). Vercel checks and the skipped CodeQL entry are excluded.",
+            "eclass": "E3",
+            "uncertainty": "Inference: the required list itself is unreadable. NOW.md@8c6d22f2 says 14 named checks."
+          },
+          {
+            "id": "O-07",
+            "what": "Production deploy workflow on the latest master push",
+            "how": "gh run list --workflow deploy.yml; gh run view 36777088537 --json jobs; --log-failed",
+            "result": "Run 36777088537 on 65975a12 (2026-09-30T21:05Z) and run 36786135007 on 8c6d22f2 (2026-09-30T22:32Z): 'Authorize production invocation' success; 'Deploy authorized production change' FAILED at step 'KPGS Azure credential preflight' both times. The step checks AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID and emits the KPGS_DEPLOY_HOLD error path; in run 36777088537 its env block shows AZURE_CLIENT_ID and AZURE_TENANT_ID empty. Earlier: 2fae1480 success, d6126890 success, a469ebbe failure.",
+            "eclass": "E2",
+            "uncertainty": "AZURE_SUBSCRIPTION_ID value state was not captured. The failure is upstream of any code deployment, so it is not caused by the #236 or #237 content (FAILURE_SURFACED_BY_CALL != FAILURE_CAUSED_BY_CHANGE)."
+          },
+          {
+            "id": "O-08",
+            "what": "PR provenance gate behavior on the latest master push",
+            "how": "gh run list --workflow kpgs-branch-proof-gate.yml",
+            "result": "Push runs for 65975a12 (2026-09-30T21:05Z) and 8c6d22f2 (2026-09-30T22:32Z) success; pull_request runs for c4ce3140, 46b04d40, c45e5bb0, 9827ae7b, ac45bd31 success. Workflow text states enforcement still requires protection or ruleset settings.",
+            "eclass": "E2",
+            "uncertainty": "Proves detection behavior only."
+          },
+          {
+            "id": "O-09",
+            "what": "Cross-repository reads (read-only)",
+            "how": "gh api repos/<owner>/<repo>/issues|pulls/<n>",
+            "result": "KMEC#15 -> 403 (not accessible). PKA#18 -> 404 (not accessible). Project-Jennifer#78 closed 2026-09-13T14:46:16Z. Project-Jennifer#82 merged 2026-09-11T20:48:35Z, merge commit 425710670f8f5c0242f8fc3879967b91f39bf6fc, and apps/api/src/server.ts at that commit has blob 3d341f26507219a8e76fb4f2bfcffd9fdff2f66e. Kopano-Labs-Interns#12 open. KasiLink#15 open. Bookit-5s-Arena#33 open draft, mergeable=CONFLICTING, mergeStateStatus=DIRTY, updated 2026-09-09; Bookit #39 #40 #41 #44 merged; #43 open draft.",
+            "eclass": "E2",
+            "uncertainty": "403/404 mean UNKNOWN, not absent."
+          },
+          {
+            "id": "O-10",
+            "what": "Repository visibility and tracked-file inventory",
+            "how": "gh repo view; git ls-files",
+            "result": "Repository visibility PUBLIC. 5,660 tracked files. .CLI_Project/ holds 3,419 (60.4%) and contains a tracked Python virtual environment (site-packages). Schematics/.smart-env (437) and Schematics/.obsidian (84) are tool-generated. Reviewable doctrine and implementation population is about 1,720 files.",
+            "eclass": "E2",
+            "uncertainty": "Classification by path pattern; the generated directories were not opened."
+          },
+          {
+            "id": "O-11",
+            "what": "Protected-material flag: tracked file named like credential backups (metadata only)",
+            "how": "git ls-files; git cat-file -s; git log -- <path>",
+            "result": "Structure/discord_backup_codes.txt is tracked on master (221 bytes), added in commit a44d3fb8 on 2026-08-30 by RobynAwesome, in a PUBLIC repository. Content NOT opened (issue #122 hard exclusion). No open issue tracks it.",
+            "eclass": "E2",
+            "uncertainty": "Content unknown; the name and size are consistent with a set of account backup codes. If real, they have been public since 2026-08-30. Owner action recommended below; no renter action taken."
+          },
+          {
+            "id": "O-12",
+            "what": "Content-blind credential-pattern scan of tracked non-generated files",
+            "how": "git grep -I -l -E <provider token patterns> (paths only; matched text never printed; excludes .CLI_Project and the file in O-11)",
+            "result": "3 files matched: Schematics/.obsidian/plugins/obsidian-excalidraw-plugin/main.js (third-party bundle, 3 matches of one Google-key-shaped pattern), docs/swarm-ops/logs/OZ_LATTICE_AUDIT.jsonl (32 matches of one sk- shaped pattern), tests/test_oz_lattice_protocol.py (2 matches of the same pattern; the test file defines test_api_key_exposure_detected).",
+            "eclass": "E3",
+            "uncertainty": "Pattern hits are not proof of a live credential; the test-name evidence suggests synthetic fixtures but that is unverified. GitHub reported zero open secret-scanning alerts (NOW.md@8c6d22f2), which does not cover non-provider patterns or history."
+          },
+          {
+            "id": "O-13",
+            "what": "Acronym and term collisions with issue proposals",
+            "how": "rg/git grep over tracked files",
+            "result": "'SAP' already means Spawn Agent Protocol (kopano-core/kopano/sap_spawn_agent_protocol.py, poc-vs-foc/sap_spawn_log.jsonl, poc-vs-foc/alp_protocol/KPCB_OVERRIDE_LOG_RTCP.md, docs/BPSP_GSPMB_ARCHITECTURE.md); issue #183 defines SAP as Structured Agency Protocol. 'Orchard' already appears as MMAO = Mobile Multi-Agent Orchard (KPGS_THESIS_MMAO.md), 'MMAO Orchard' and KHELOS 'Orchard witness'; issue #115 proposes a Forge Orchard Protocol that no file defines.",
+            "eclass": "E2",
+            "uncertainty": "Collision means the name needs RTC resolution before adoption; it does not show either usage is wrong (LEARNING_SPEC: protocol-name conflicts are resolved from GSMB)."
+          },
+          {
+            "id": "O-14",
+            "what": "Vocabulary variances inside canon",
+            "how": "rg over docs/, kopano-core/, Schematics/",
+            "result": "PKA verdict enum appears as ALLOW|HOLD|BLOCK (pka_kmec_jennifer_bridge.py, 4-organ charter, flagship charter) and PROPOSE|HOLD|BLOCK (constitution, 7-vector charter). Admission state appears as READY_FOR_POC (Temporal Data testament) and READY_FOR_BOUNDED_TEST (issue #231). GSMB expands to 'Governance System Main Brain' (SSE lock, KPGS_CHEAT_SHEET, JIRO retrospective) and to 'Governance Smart Model Brain' (GSMB-Issues/index.md line 2). FOC has three senses in use: Field of Concepts (constitution), Failure of Concept (FOC_CLASSIFICATION_INDEX and SSE lock), Full Operational Capability (GSMB-Issues fork scores).",
+            "eclass": "E2",
+            "uncertainty": "No sealed file reconciles these; this ledger cites them and does not choose."
+          },
+          {
+            "id": "O-15",
+            "what": "Seat 10 / Chief Facilitator records, in date order",
+            "how": "read poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json, issue #121, LEARNING_SPEC_PIPELINE, PR #166",
+            "result": "2026-06-23 BREACH-008 (FOC_CRITICAL, FOC_UNANIMOUS_10_OF_10): AntiGravity demoted CF -> DEV, seat_10_status OPEN_VACANT. 2026-09-05 issue #121: Seat 10 CF authority suspended/quarantined, no self-reinstatement. 2026-09-11 learning spec: orchestration chain Forge CA, Cursor CF, AntiGravity Lead Developer. 2026-09-15 PR #166 merged ('promote Cursor to CF'). Issue #167 question 3 asked whether #166 should be blocked; no RTC answer artifact exists on master.",
+            "eclass": "E2",
+            "uncertainty": "Records conflict on Seat 10 state. No adjudication is made here. Current human direction (Forge CA brief relayed 2026-09-30) places Forge CA and Cursor CF as operational ranks, not RTC identity seats."
+          },
+          {
+            "id": "O-16",
+            "what": "Artifacts named by issues or sources that are absent from master",
+            "how": "git ls-files; rg",
+            "result": "Absent: docs/governance/CA_ESTATE_AUDIT_2026-09-07_VERCEL_HTTP.md (cited by #122); RTC_INQUEST_2026-09-11_FORGE_PROJECT_JENNIFER (required by #167); Schematics/24-RTC Learning/PROMOTION_PROTOCOL.md (#115); Forge Orchard Protocol definition (#115). Present: poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json, docs/swarm-ops/incidents/FORGE_LEAD_NODE_TRUTH_FAILURE_2026-09-11.{md,json}, governance/kpgs-vnext/mzansi-language/ (4 schemas + README).",
+            "eclass": "E2",
+            "uncertainty": "Search-bound negatives; absence from this checkout is not absence everywhere."
+          },
+          {
+            "id": "O-17",
+            "what": "Mzansi PR1 schemas re-validated",
+            "how": "jsonschema check_schema on governance/kpgs-vnext/mzansi-language/*.schema.json",
+            "result": "All four schemas pass Draft 2020-12 check_schema.",
+            "eclass": "E2",
+            "uncertainty": "Structure only; no dataset, model, or runtime claim."
+          },
+          {
+            "id": "O-18",
+            "what": "Who closed the ESLint-adjacent Dependabot PRs",
+            "how": "gh api issues/<n>/events",
+            "result": "#198, #201 and #204 were each closed by dependabot[bot] on 2026-09-28 (18:16:24Z, 18:16:27Z, 18:16:31Z). #199 #200 #202 #203 merged 2026-09-29T06:19:15Z with the integration PR #213.",
+            "eclass": "E2",
+            "uncertainty": "Dependabot's reason for closing is not recorded in the issue."
+          },
+          {
+            "id": "O-19",
+            "what": "Who authors agent pull requests",
+            "how": "gh pr list --state all --json author",
+            "result": "PRs #233, #234, #235 and #236 show author RobynAwesome; Dependabot PRs show app/dependabot.",
+            "eclass": "E2",
+            "uncertainty": "Used only for hypothesis H1 in finding F-1."
+          },
+          {
+            "id": "O-20",
+            "what": "Owner merge of Dependabot PR #237 with no approving review",
+            "how": "gh pr view 237 --json mergedBy,reviews,reviewDecision; gh api issues/237/events",
+            "result": "Merged 2026-09-30T22:32:09Z by RobynAwesome (the human owner), merge commit 8c6d22f2. reviews=[], reviewDecision=''. Events: labeled, two Vercel deployments, merged, closed, head ref deleted by dependabot[bot]. No approval event.",
+            "eclass": "E2",
+            "uncertainty": "Does not show whether the owner used a bypass right or whether no review rule applied. Together with O-04 it means two different actors merged without a review within 90 minutes."
+          }
+        ]
+      },
+      "prev_hash": "66cd26d8c970d5806ccc2fc78106afb3f2eaf20e21438023c48c47962dd5885a",
+      "hash": "94468116420fb555510ac282f78ce1d65ece99b41e8ce295582cb56bc6c60d4f"
+    },
+    {
+      "seq": 4,
+      "entry_id": "ILR-2026-09-30-E004",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "findings",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "findings": [
+          {
+            "id": "F-1",
+            "title": "The approving-review requirement is not observably in force (recurrence)",
+            "body": "NOW.md@8c6d22f2:L56 records that at recovery required_pull_request_reviews was null, that Forge restored one approving review on 2026-09-30, and that removal attribution is UNKNOWN. Afterwards two different actors merged with no review: this renter's PR #236 at 21:05:03Z (O-04) and the owner's own merge of PR #237 at 22:32:09Z (O-20). Open PR #238 reports CLEAN with no review decision, and open PR #239 is BLOCKED while its review decision is also empty, so what blocks it is not a review requirement (O-03). Protection is unreadable here (O-05), so the current setting is UNKNOWN; the PR metadata says no approving review is gating merges. Two instructions now point different ways: NOW.md tells every agent to preserve the review requirement, and the owner, who is final authority, merged without one. This ledger records both and resolves neither. Hypothesis H1 (E3): PRs #233-#236 are authored as RobynAwesome (O-19) and GitHub does not let an author approve their own PR, so a one-approval rule may be unsatisfiable in this repo without a second approver identity, which would explain why it keeps lapsing.",
+            "action": "Forge/Robyn: read protection with an admin-scope token now; state whether the requirement is intended and, if so, who can satisfy it (second approver identity, bot approver, or a PR-required rule with zero approvals plus required checks); decide whether to log the lapse in poc-vs-foc/BREACH_LOG.md; update the NOW.md instruction to match the decision. Renter made no setting change."
+          },
+          {
+            "id": "F-2",
+            "title": "Protected-material flag: tracked Structure/discord_backup_codes.txt in a public repository",
+            "body": "Observed by metadata only (O-11). Content was not opened. No issue tracks it and GitHub secret scanning would not recognise this kind of value.",
+            "action": "Robyn: regenerate the account's backup codes now, treating the old set as exposed if the file is what its name suggests. Then decide on removal from HEAD and on history remediation (a force-push to protected master is outside renter authority)."
+          },
+          {
+            "id": "F-3",
+            "title": "#207 is not ready to close; owner-closeable set is #205 only",
+            "body": "Detection behavior is validated (O-08). Settings-level prevention is HOLD: the recorded direct-push rejection (NOW.md@8c6d22f2:L74) is consistent with ruleset 24144685's code_scanning rule, and GH013 is the repository-rule-violation family, so it does not by itself show PR-required or review-required enforcement (O-05). The plan listed #205, #207, #163 and #122 as closeable; evidence supports #205 only.",
+            "action": "Owner decision per issue; see register."
+          },
+          {
+            "id": "F-4",
+            "title": "#163 artifact is delivered but its own status is OPEN with no exit criteria",
+            "body": "Commit 1219c994 (#164) put the .md and .json on master. Both say status OPEN / OPEN INCIDENT; a search of the artifact for exit, closure, or re-entry terms found none.",
+            "action": "RTC/owner: define incident exit criteria or decide that the tracker issue may close while the artifact stays OPEN."
+          },
+          {
+            "id": "F-5",
+            "title": "#183's link to #121/#167 is an inference, and its acronym collides",
+            "body": "#183's text contains no reference to #121, #167, recusal, NSO-001, Seat 10, quarantine, or suspension. #167 question 6 asks RTC how NSO-001 should be enforced mechanically and is unanswered. Separately SAP already means Spawn Agent Protocol in this repo (O-13); existing authority_scope string fields exist in callable_artifact_registry.py and pka_kmec_jennifer_bridge.py and should be reused or extended, not duplicated.",
+            "action": "RTC Design Review: decide the name, whether SAP is a candidate mechanism for #167 question 6, and reuse of authority_scope."
+          },
+          {
+            "id": "F-6",
+            "title": "#211 HOLD persists after the latest merge",
+            "body": "Runs 36777088537 (65975a12) and 36786135007 (8c6d22f2) both failed at the Azure credential preflight (O-07). Same boundary as the 2026-09-15 and 2026-09-19 failures in the issue. Every production-affecting merge, including the owner's own #237, now produces a red deploy run until the secrets exist.",
+            "action": "Robyn: provide AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID to GitHub Actions secrets and verify the federated identity (issue #211 steps 1-4)."
+          },
+          {
+            "id": "F-7",
+            "title": "#158's pull request is stale and its direction may be superseded",
+            "body": "Bookit PR #33 is open draft, CONFLICTING/DIRTY (O-09). Customer-first public-surface work merged after it (Bookit #39 and #40 and #41 on 2026-09-14, #44 on 2026-09-28).",
+            "action": "Robyn: decide whether the epoch relaunch is still intended; if yes, rebase is required before inspection."
+          },
+          {
+            "id": "F-8",
+            "title": "#122's cited receipt is absent and it is the declared parent audit of eight issues",
+            "body": "docs/governance/CA_ESTATE_AUDIT_2026-09-07_VERCEL_HTTP.md is not on master (O-16). #94, #102, #103, #107, #110, #115, #116 and #121 each carry a 2026-09-07 comment 'Parent audit: #122'. Its 22-repo list includes cars4mars-landingpage, which the Kopano-Labs-Website AGENTS.md calls retired (as supplied in the session instructions; that file was not re-read from disk).",
+            "action": "Owner: keep #122 open as umbrella until an owner-local census exists; the cloud-subset observation in Wave 2 is additive."
+          },
+          {
+            "id": "F-9",
+            "title": "#167 question 3 was open when PR #166 merged",
+            "body": "PR #166 merged 2026-09-15T01:41:25Z. No RTC answer artifact exists on master (O-15, O-16). Current CF assignment therefore rests on Robyn's current direction and #166, as an operational rank only.",
+            "action": "RTC/Robyn: record disposition of #167 questions 1-7. This ledger does not adjudicate them."
+          },
+          {
+            "id": "F-10",
+            "title": "Third-party and generated material dominates the tracked tree",
+            "body": "69.6% of tracked files (3,940 of 5,660) are a committed virtual environment or tool-generated (O-10). They are classified third_party_generated in the coverage CSV and are not counted as reviewed doctrine.",
+            "action": "Owner decision on untracking; not attempted."
+          }
+        ]
+      },
+      "prev_hash": "94468116420fb555510ac282f78ce1d65ece99b41e8ce295582cb56bc6c60d4f",
+      "hash": "00deef4ceb05e6c41691835b7cd2a1b7121ba123f977bb441d55c080bd88558e"
+    },
+    {
+      "seq": 5,
+      "entry_id": "ILR-2026-09-30-E005",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 94,
+        "title": "[Routing] Resolve external skill registries beyond AwesomeSkills",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/94",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-C child of #122; CL-E owner-gated",
+        "baseline_2026_09_07": "MAYBE / OPEN; own triage: not closable",
+        "delta_vs_baseline": "Unchanged; no activity since 2026-09-07.",
+        "proposed_tag": "UNKNOWN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No (issue says it is not closable)",
+        "next_actor": "Robyn (names the registry) or renter (Wave 2 bounded repo-scoped re-search)",
+        "next_admissible_action": "Robyn supplies the second registry name or URL; otherwise Wave 2 records what a bounded search of RobynAwesome/Skills finds. A miss is not negative proof.",
+        "admission_state": "Observation only; no admission needed.",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "Single ask; accounted as UNKNOWN. Low current priority.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-94-1",
+            "text": "A second external skill registry with fuller Project Jennifer / PKA presence exists.",
+            "family": "Declarative",
+            "eclass": "E1",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "issue #94 body (testimony as recorded)",
+              "issue #94 comment 2026-09-07: no second registry proven"
+            ],
+            "limits": "Testimony proves the statement was made, not that the registry exists.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-94-2",
+            "text": "RobynAwesome/Skills is not the second registry.",
+            "family": "Empirical",
+            "eclass": "E4",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "issue #94 body: must not be assumed"
+            ],
+            "limits": "Wave 2 re-search is bounded and cannot close the issue.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "00deef4ceb05e6c41691835b7cd2a1b7121ba123f977bb441d55c080bd88558e",
+      "hash": "042a68ce6d222deb3c975b4662f84ab79931cf30b7646f4763f2e385236fe89d"
+    },
+    {
+      "seq": 6,
+      "entry_id": "ILR-2026-09-30-E006",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 102,
+        "title": "[Estate Ops] 2026-08-24 live DNS cutover + admission receipts",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/102",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-C child of #122; related KasiLink#15",
+        "baseline_2026_09_07": "Witness slice POC_VALIDATED; remainder HOLD",
+        "delta_vs_baseline": "Unchanged in the cloud record. Runtime not re-observed in Wave 0. KasiLink#15 still open.",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Robyn / provider-domain owner; renter for read-only re-observation",
+        "next_admissible_action": "Wave 2 re-observes public HTTP read-only. KasiLink#15 runtime repair, apex/www convergence, and the Starfall rollback drill remain human or provider gated. No domain mutation.",
+        "admission_state": "Observation only; provider mutation stays separately gated.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "8 boxes accounted as two groups. Runtime evidence is dated.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-102-1",
+            "text": "Starfall Salvage public DNS, Vercel ownership, READY deployment and rollback candidates were witnessed on 2026-08-24.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "issue #102 body",
+              "issue #122 table classifies this slice POC_VALIDATED (2026-09-07)",
+              "cited receipt file absent from master (O-16)"
+            ],
+            "limits": "Attributed and dated; receipt not on master; not re-observed here.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-102-2",
+            "text": "KasiLink apex/www remain split and its three data routes returned HTTP 500 (6 of 6 on 2026-09-07).",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #102 comment 2026-09-07",
+              "KasiLink#15 open (O-09)"
+            ],
+            "limits": "A public 500 does not prove the Atlas auth cause.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "042a68ce6d222deb3c975b4662f84ab79931cf30b7646f4763f2e385236fe89d",
+      "hash": "b30dc23c2852f84d5020ec3a1ac68a1f6b95d64ee2943c210ccadd530364352d"
+    },
+    {
+      "seq": 7,
+      "entry_id": "ILR-2026-09-30-E007",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 103,
+        "title": "Phase 7 Truth Lock - Sociolinguistic Inference AI",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/103",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-F implementation; child of #122",
+        "baseline_2026_09_07": "PR1 merged; PR2 not started",
+        "delta_vs_baseline": "Unchanged. Mzansi directory still holds only the 4 schemas and README.",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Renter (bounded PR2 slice after teach-back) ; Forge/RTC for admission confirmation",
+        "next_admissible_action": "Wave 2: confirm admission basis, then PR2 = record persistence plus provenance, consent and validation state plus synthetic fixtures. No real data, no TTS, no multi-language expansion.",
+        "admission_state": "ADMITTED_BY_ISSUE_RECORD (next admissible slice named 2026-08-24, reaffirmed 2026-09-07). RTC decision not recorded in cloud.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "10 phase boxes accounted as a group; only PR1/PR2 boundaries assessed.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-103-1",
+            "text": "PR1 contracts are on master: four JSON Schemas (Draft 2020-12) and a README under governance/kpgs-vnext/mzansi-language/.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "PR #105 merge b994272453d7... per issue #103 comment 2026-08-24",
+              "5 tracked files (O-16)",
+              "check_schema OK x4 re-run 2026-09-30 (O-17)"
+            ],
+            "limits": "CLAIM VALIDATED: contract structure and persistence only. No dataset, model, speech, native-speaker, or runtime claim.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-103-2",
+            "text": "PR2 (Mzansi Data Engine foundation) has not started.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #103 comment 2026-09-07",
+              "no engine or persistence file under mzansi paths (O-16)"
+            ],
+            "limits": "Search-bound negative.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "b30dc23c2852f84d5020ec3a1ac68a1f6b95d64ee2943c210ccadd530364352d",
+      "hash": "61c45522752852746bd2817ee2db0be3091e1433a7604226c2b2e7cbcee3f935"
+    },
+    {
+      "seq": 8,
+      "entry_id": "ILR-2026-09-30-E008",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 107,
+        "title": "KMEC Data-Science Observation Engine - Parser + Smart Ledger + PKA",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/107",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-F implementation; child of #122; cross-repo KMEC#15, PKA#18, Jennifer#78",
+        "baseline_2026_09_07": "Architecture capture only; PR1-PR7 unbuilt",
+        "delta_vs_baseline": "Jennifer#78 closed 2026-09-13 (after baseline). KMEC#15 and PKA#18 unreadable here. Adjacent assets exist on master.",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Forge CA / RTC Design Review; then renter",
+        "next_admissible_action": "Wave 2: Design Review packet with an overlap audit first, because PR1 (contracts and fixtures) overlaps existing assets and the unreadable PKA/KMEC lanes. No schema code before the contract owner is named.",
+        "admission_state": "DESIGN_REVIEW_REQUIRED (sequence is labeled 'Proposed'; cross-repo contract ownership unresolved). Decision state unrecorded.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "13 boxes and 7 PRs accounted as a group. Cross-repo lanes unreadable.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-107-1",
+            "text": "The observation engine itself (parser, box and scatter reasoning, Dask) is unbuilt on master.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #107 comment 2026-09-07",
+              "name search finds kmec_trace_adapter.py, pka_kmec_jennifer_bridge.py and two test files, FEP_POC_003 and KMEC convergence docs, but no engine"
+            ],
+            "limits": "Adjacent assets exist and must be reused, not duplicated. Search-bound.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-107-2",
+            "text": "PR1 (contracts plus DNS/backend fixtures) is an admitted slice.",
+            "family": "Declarative",
+            "eclass": "E2",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #107 body 'Proposed implementation sequence'"
+            ],
+            "limits": "Labeled proposed in the issue; not admitted.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-107-3",
+            "text": "Cross-repo lanes KMEC#15 and PKA#18 are open and carry the parser and Smart Ledger contracts.",
+            "family": "Empirical",
+            "eclass": "E4",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "KMEC#15 -> 403; PKA#18 -> 404 (O-09)",
+              "Project-Jennifer#78 closed 2026-09-13 (O-09)"
+            ],
+            "limits": "Unreadable is not absent.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "61c45522752852746bd2817ee2db0be3091e1433a7604226c2b2e7cbcee3f935",
+      "hash": "578a97558e71d5723eb5c253c691e82ce9aefe158f654c244761c68123c4e166"
+    },
+    {
+      "seq": 9,
+      "entry_id": "ILR-2026-09-30-E009",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 110,
+        "title": "[KC GUI] Reconcile Structure/UI-UX plans with current Studio",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/110",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-F implementation; child of #122",
+        "baseline_2026_09_07": "Pointer retired; branch dirty local; Studio QA open",
+        "delta_vs_baseline": "Unchanged. Pointer repair re-read on master.",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Renter (audit document) ; owner or browser-capable lane (QA)",
+        "next_admissible_action": "Wave 2: Studio-versus-plan audit document classifying each plan item implemented / stale / blocked / actionable. Browser QA and UX fixes stay separate runtime lanes.",
+        "admission_state": "Observation only for the audit; UX fixes are separate bounded PRs.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "8 boxes: 1 evidenced, 7 open; accounted as two groups.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-110-1",
+            "text": "The stale codex/kc-sovereign-gui-full-dev open-PR pointer was removed from canonical navigation.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "docs/swarm-ops/NAVIGATION.md line 22 (Issue #110 pointer) and line 43 (branch is historical testimony only)"
+            ],
+            "limits": "CLAIM VALIDATED: documentation pointer repair only. The other seven boxes are open.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-110-2",
+            "text": "Studio-versus-plan audit, browser QA and bounded UX fixes.",
+            "family": "Empirical",
+            "eclass": "E4",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #110 comment 2026-09-07: starts from master"
+            ],
+            "limits": "Runtime QA needs a running Studio.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "578a97558e71d5723eb5c253c691e82ce9aefe158f654c244761c68123c4e166",
+      "hash": "37ce3fb940f373017e1d8aa0b4c7da6f2c3feb3d0ed8417ed0ea0276c95f0065"
+    },
+    {
+      "seq": 10,
+      "entry_id": "ILR-2026-09-30-E010",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 115,
+        "title": "feat(24-RTC Learning): Forge Orchard Protocol",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/115",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-B Classroom; child of #122; consumer boundary Interns#12",
+        "baseline_2026_09_07": "LEARNING / not ratified; protocol undefined on cloud head",
+        "delta_vs_baseline": "Unchanged. PROMOTION_PROTOCOL.md absent. 'Orchard' collides with MMAO.",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Renter (Task 1 audit) ; RTC (Tasks 2-5 admission)",
+        "next_admissible_action": "Wave 2: Task 1 only (overlap table over cloud-head promotion surfaces) plus an admission packet for Tasks 2-5. Do not reconstruct section 24 from local narratives (issue triage rule).",
+        "admission_state": "Task 1: no new admission (observation, cloud-head only). Tasks 2-5: LEARN, decision state unrecorded (HOLD).",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "5 tasks: Task 1 sliced, Tasks 2-5 held.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-115-1",
+            "text": "Task 1 (audit of current promotion surfaces into an overlap table) can be done from cloud head without new vocabulary.",
+            "family": "Empirical",
+            "eclass": "E3",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #115 Task 1 text",
+              "issue #115 triage 2026-09-07: cloud-head section 24 must not be reconstructed from local narratives"
+            ],
+            "limits": "Audit only; it must not create a second owner for governed concepts.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-115-2",
+            "text": "Tasks 2-5 (PROMOTION_PROTOCOL.md, export receipt schema, consumer gates, promotion dry-run) are admissible now.",
+            "family": "Declarative",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #115 triage: Forge Orchard Protocol is not ratified",
+              "PROMOTION_PROTOCOL.md absent (O-16)"
+            ],
+            "limits": "Needs RTC admission; the dry-run must prove no writes through SQLite, JSONL, forensic, Main Brain and handoff paths.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "37ce3fb940f373017e1d8aa0b4c7da6f2c3feb3d0ed8417ed0ea0276c95f0065",
+      "hash": "b6872926fa1eeb34bbecf5506b77bb0668ea5fec54b34766e5485f9651459f94"
+    },
+    {
+      "seq": 11,
+      "entry_id": "ILR-2026-09-30-E011",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 116,
+        "title": "feat(24-RTC Learning): Temporal Data - Testament of Time, Manhole Retrieval",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/116",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-B Classroom; child of #122",
+        "baseline_2026_09_07": "LEARNING / not ratified; RTC discussion",
+        "delta_vs_baseline": "Unchanged.",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "RTC seats (independent positions) ; Forge CA (disagreement map) ; Cursor CF (source packet)",
+        "next_admissible_action": "Wave 2: Cursor CF assembles the RTC discussion source packet only. No seat opinion is written by the renter; unavailable seats stay recorded as unavailable.",
+        "admission_state": "LEARN / RTC_DISCUSSION; decision state unrecorded (HOLD).",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Discussion-only issue; disposition matches its own status.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-116-1",
+            "text": "A Temporal Manhole POC is admitted.",
+            "family": "Declarative",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #116 status: LEARNING / RTC DISCUSSION CANDIDATE - NOT RATIFIED",
+              "issue #116 triage 2026-09-07: no POC admitted"
+            ],
+            "limits": "Discussion before metal.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "b6872926fa1eeb34bbecf5506b77bb0668ea5fec54b34766e5485f9651459f94",
+      "hash": "e87dda5d04bf525cb1b8c228553fa29bd747e08519623b4b509fb955e7a84995"
+    },
+    {
+      "seq": 12,
+      "entry_id": "ILR-2026-09-30-E012",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 121,
+        "title": "[P0][RTC] Quarantine AntiGravity Seat 10",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/121",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-A RTC incident; child of #122",
+        "baseline_2026_09_07": "P0 OPEN; quarantined until independent re-entry or decommission",
+        "delta_vs_baseline": "Unchanged. Seat-state records conflict (O-15).",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "G02 context only (issue history cites context bleed); no classification made",
+        "owner_closeable": "No",
+        "next_actor": "RTC and Robyn (Tier 0)",
+        "next_admissible_action": "Gate A (independent re-entry receipts) or gate B (Tier-0 decommission). Renter records sources and dates only.",
+        "admission_state": "Not applicable; incident gate stays attached to its subject.",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "State record; timeline spans four sources, no adjudication.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-121-1",
+            "text": "Seat 10 Chief Facilitator authority is suspended; exit is gate A or gate B; no self-clearing.",
+            "family": "Declarative",
+            "eclass": "E1",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #121 comment 2026-09-07",
+              "issue #121 body status"
+            ],
+            "limits": "Not adjudicated here.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "e87dda5d04bf525cb1b8c228553fa29bd747e08519623b4b509fb955e7a84995",
+      "hash": "e95a8c70d8f3e6c13b85ef1749742289a20175b6b8a346a35ee16129732a7f84"
+    },
+    {
+      "seq": 13,
+      "entry_id": "ILR-2026-09-30-E013",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 122,
+        "title": "[Estate Audit] 2026-09-07 fresh 22-repo identity, local, CI, and Vercel witness refresh",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/122",
+        "issue_last_updated": "2026-09-07",
+        "clusters": "CL-C parent audit of #94 #102 #103 #107 #110 #115 #116 #121",
+        "baseline_2026_09_07": "Dated umbrella audit; 0 of 7 acceptance boxes checked",
+        "delta_vs_baseline": "Cited receipt file absent from master. Local census and Vercel alias cannot be done from cloud.",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "G06 partial (comment cites a receipt path absent from master); not an actor classification",
+        "owner_closeable": "No (recommend keep open as umbrella)",
+        "next_actor": "Renter (cloud subset) ; Robyn (local census, Vercel alias)",
+        "next_admissible_action": "Wave 2: fresh read-only cloud-subset receipt (GitHub identities, default-branch SHAs, open PRs, CI-at-head for the 22 repos, unreadable rows marked UNKNOWN). Boxes 3 and 4 remain human or provider gated. Owner decides close versus keep.",
+        "admission_state": "Observation only.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "7 boxes: cloud subset sliced, rest held. Dated.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-122-1",
+            "text": "The cloud-verifiable subset of the 22-repo audit can be refreshed read-only.",
+            "family": "Empirical",
+            "eclass": "E3",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "issue #122 body acceptance list",
+              "cross-repo reads partially 403/404 (O-09)"
+            ],
+            "limits": "Local census and Vercel alias re-proof are not cloud-verifiable.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-122-2",
+            "text": "The 2026-09-07 Vercel/HTTP receipt file exists.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "issue #122 last comment cites docs/governance/CA_ESTATE_AUDIT_2026-09-07_VERCEL_HTTP.md",
+              "absent from master (O-16)"
+            ],
+            "limits": "The 09-07 HTTP and Vercel statements are attributed only.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "e95a8c70d8f3e6c13b85ef1749742289a20175b6b8a346a35ee16129732a7f84",
+      "hash": "a68a941e814fde31746d7ddd9154d3313ae90119b6359d8a6e1ed308357f7fa8"
+    },
+    {
+      "seq": 14,
+      "entry_id": "ILR-2026-09-30-E014",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 158,
+        "title": "[EPOCH][FivesArena] Park public surface + run KPGSTHREE relaunch experiment",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/158",
+        "issue_last_updated": "2026-09-09",
+        "clusters": "CL-E owner-gated; Bookit-5s-Arena",
+        "baseline_2026_09_07": "Not in the 09-07 table; receipt 2026-09-09 (draft PR #33)",
+        "delta_vs_baseline": "PR #33 now CONFLICTING/DIRTY; customer-first Bookit PRs merged since.",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "G07/G08 context only (same estate as the 2026-09-14 public-surface corrections)",
+        "owner_closeable": "No",
+        "next_actor": "Robyn",
+        "next_admissible_action": "Decide whether the epoch relaunch is still intended. If yes, rebase PR #33 before owner inspection. No merge or deploy by a renter.",
+        "admission_state": "Not applicable; owner inspection gate.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "10 boxes accounted as a group. Cross-repo results not re-run.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-158-1",
+            "text": "PR #33 implements the neutral relaunch; 10/10 epoch tests, tsc clean and build pass (2026-09-09).",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "issue #158 comment 2026-09-09",
+              "Bookit #33 open draft CONFLICTING/DIRTY (O-09)"
+            ],
+            "limits": "Attributed; not re-run here; base has moved.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-158-2",
+            "text": "The park-and-relaunch direction is still the intended public-surface direction.",
+            "family": "Declarative",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "Bookit #39 #40 #41 (2026-09-14) and #44 (2026-09-28) merged (O-09)"
+            ],
+            "limits": "Owner decision.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "a68a941e814fde31746d7ddd9154d3313ae90119b6359d8a6e1ed308357f7fa8",
+      "hash": "8da50034c63fb12b62d5a74a74efae8b0a445903e95b68d29f001ba6325db4af"
+    },
+    {
+      "seq": 15,
+      "entry_id": "ILR-2026-09-30-E015",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 163,
+        "title": "[CRITICAL INCIDENT] Forge lead-node truth/provenance failure - 2026-09-11",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/163",
+        "issue_last_updated": "2026-09-11",
+        "clusters": "CL-A RTC incident",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-11)",
+        "delta_vs_baseline": "Artifacts landed via #164 (2026-09-15).",
+        "proposed_tag": "POC_VALIDATED",
+        "proposed_pka": "ALLOW/PROPOSE (named claim only)",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "Owner/RTC decision; not recommended while the artifact says OPEN",
+        "next_actor": "RTC / Robyn",
+        "next_admissible_action": "Define incident exit criteria, or decide the tracker issue may close while the artifact stays OPEN. Renter does not adjudicate.",
+        "admission_state": "Not applicable; incident gate stays attached to its subject.",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Ask was artifact visibility to GSMB; delivered. Closure is a separate question.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-163-1",
+            "text": "The incident artifacts (md and json) are on master and preserve history.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "commit 1219c994 (2026-09-15) 'incident: record Forge lead-node truth/provenance failure (#164)'",
+              "blob fd822648d9186a62c9f39fd816c2431c7453f5da (md)",
+              "blob 80548ac7abd46514edc971bda5bc83040c7b076d (json)",
+              "json: status OPEN, downstream_709_agent_propagation_confirmed false, repository_net_file_damage_after_cleanup none_known"
+            ],
+            "limits": "CLAIM VALIDATED: artifact delivery only. It does not validate incident closure, corrected behavior, or propagation extent.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-163-2",
+            "text": "Incident exit criteria are defined.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "search of the .md for exit/closure/re-entry terms found none (F-4)"
+            ],
+            "limits": "Search-bound negative.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "8da50034c63fb12b62d5a74a74efae8b0a445903e95b68d29f001ba6325db4af",
+      "hash": "3a2ea7368c328115918f72f05a1915cc8f19bfbfb597eb7d417805ea3d640be4"
+    },
+    {
+      "seq": 16,
+      "entry_id": "ILR-2026-09-30-E016",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 167,
+        "title": "[P0][RTC] Forge second governance offense - Project Jennifer authority bypass + NSO-001",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/167",
+        "issue_last_updated": "2026-09-11",
+        "clusters": "CL-A RTC incident; related PR #166",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-11)",
+        "delta_vs_baseline": "PR #166 merged 2026-09-15 while question 3 was open. Inquest deliverable still absent.",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "G06 partial (required deliverable absent while narrative exists); the underlying offense classification is RTC question 1 and is NOT made here",
+        "owner_closeable": "No",
+        "next_actor": "RTC seats; Robyn (Tier 0)",
+        "next_admissible_action": "RTC produces RTC_INQUEST_2026-09-11_FORGE_PROJECT_JENNIFER and answers questions 1-7. Forge may not self-adjudicate; Cursor may not either.",
+        "admission_state": "Not applicable; incident gate.",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "All 7 RTC questions enumerated as unanswered in the cloud record.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-167-1",
+            "text": "The required RTC inquest deliverable exists.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "name search over tracked files returns nothing (O-16)"
+            ],
+            "limits": "Search-bound negative.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-167-2",
+            "text": "Project Jennifer recovery PR #82 restored the pre-Arena server.ts.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "Project-Jennifer PR #82 merged 2026-09-11T20:48:35Z, merge commit 425710670f8f5c0242f8fc3879967b91f39bf6fc",
+              "apps/api/src/server.ts blob 3d341f26507219a8e76fb4f2bfcffd9fdff2f66e at that commit (O-09)"
+            ],
+            "limits": "CLAIM VALIDATED: recovery merge and file blob only. It does not clear the offense or assert Jennifer production state.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-167-3",
+            "text": "Question 3 (should #166 be blocked, amended or superseded) was answered before #166 merged.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "PR #166 merged 2026-09-15T01:41:25Z",
+              "no answer artifact on master (O-15, O-16)"
+            ],
+            "limits": "Absence from master is not absence of an RTC answer elsewhere.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "3a2ea7368c328115918f72f05a1915cc8f19bfbfb597eb7d417805ea3d640be4",
+      "hash": "4676aa0a369bd7c62def0f80b28ae92bc94d3e5a4fd0a23a118166fdfb5820f7"
+    },
+    {
+      "seq": 17,
+      "entry_id": "ILR-2026-09-30-E017",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 183,
+        "title": "[KPGS ADK] Structured Agency Protocol (SAP) + RUNE authority verification + GSMB/FEP/RTC runtime",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/183",
+        "issue_last_updated": "2026-09-19",
+        "clusters": "CL-G authority runtime; candidate link to CL-A (inference)",
+        "baseline_2026_09_07": "Status PROPOSED / POC-FIRST; 0 comments; 35 boxes unchecked",
+        "delta_vs_baseline": "n/a (not in the 09-07 table).",
+        "proposed_tag": "POC_PENDING",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "G04 context only (problem statement targets ghost and orphan execution); no classification of any actor",
+        "owner_closeable": "No",
+        "next_actor": "RTC Design Review; Forge CA (evidence and disagreement map); then renter",
+        "next_admissible_action": "Wave 2: Design Review admission packet (teach-back, doctrine trace, acronym-collision decision, authority_scope reuse, acceptance checks, rollback boundary). Code for POC steps 1-4 only after READY_FOR_POC or stronger.",
+        "admission_state": "DESIGN_REVIEW_REQUIRED (new architecture; status PROPOSED; acronym collision). Decision state unrecorded.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "35 boxes accounted as a group; POC steps 1-4 identified as the first slice.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-183-1",
+            "text": "SAP runtime law (AuthorityScope over AnyIO) exists.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_PENDING",
+            "receipts": [
+              "no AuthorityScope class found; authority_scope is a string field in callable_artifact_registry.py and pka_kmec_jennifer_bridge.py",
+              "anyio appears only inside the tracked third-party virtual environment (O-10)",
+              "SAP already means Spawn Agent Protocol (O-13)"
+            ],
+            "limits": "Search-bound negative.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-183-2",
+            "text": "SAP is the mechanism for #121/#167 recusal and NSO-001 enforcement.",
+            "family": "Declarative",
+            "eclass": "E3",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "#183 text contains no reference to #121, #167, recusal, NSO-001 or Seat 10 (F-5)",
+              "#167 question 6 unanswered"
+            ],
+            "limits": "Candidate link by Cursor CF inference. Not an admitted dependency.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "4676aa0a369bd7c62def0f80b28ae92bc94d3e5a4fd0a23a118166fdfb5820f7",
+      "hash": "f11859fa43dd9757e0f53d02226a238b9c2d2198c7d787425280dcfe9ade3059"
+    },
+    {
+      "seq": 18,
+      "entry_id": "ILR-2026-09-30-E018",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 205,
+        "title": "Dependency admission receipt: reconcile NOW and pair ESLint 10 PRs #200/#204",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/205",
+        "issue_last_updated": "2026-09-23",
+        "clusters": "CL-D repository boundary / deploy",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-23)",
+        "delta_vs_baseline": "ESLint 10 pair landed; PRs dispositioned.",
+        "proposed_tag": "POC_VALIDATED",
+        "proposed_pka": "ALLOW/PROPOSE (named claim only)",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "Yes: owner may close after reading claims C-205-1 to C-205-3",
+        "next_actor": "Robyn (close) ",
+        "next_admissible_action": "Owner may close. Limits to read first: #198 and #201 and #204 were closed by Dependabot without a recorded rationale; #202's upload/download and runner-fleet check was not performed. New Dependabot PRs #237 and #238 are outside this issue.",
+        "admission_state": "Observation only.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Steps 4-5 partially evidenced (#202 verification not performed).",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-205-1",
+            "text": "The ESLint 10 pair migration landed with a regenerated studio lockfile.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "kopano-core/studio/package-lock.json at 8c6d22f2 (blob ad46697a9e20..., same at 65975a12): eslint 10.11.0, @eslint/js 10.0.1",
+              "PR #200 merged 2026-09-29T06:19:15Z",
+              "NOW.md 2026-09-29 block: local studio proof and hosted gui-check"
+            ],
+            "limits": "CLAIM VALIDATED: dependency repair in the studio lockfile. Root and apps/kc-dashboard locks carry no eslint entries.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-205-2",
+            "text": "Dispositions of #198-#204: merged #199 #200 #202 #203; closed unmerged #198 #201 #204.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "gh pr view 198..204 (O-18)",
+              "#198 #201 #204 closed by dependabot[bot] 2026-09-28"
+            ],
+            "limits": "CLAIM VALIDATED: PR disposition record. Rationale for the three Dependabot closures is not recorded.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-205-3",
+            "text": "#202's actions/upload-artifact 4 -> 7 was verified by an actual artifact upload/download and runner-fleet check.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "UNKNOWN",
+            "receipts": [
+              "NOW.md@8c6d22f2 2026-09-29 block: a separate manual artifact download was not performed; required checks that run upload-artifact@v7 passed"
+            ],
+            "limits": "Upload paths exercised in CI; download and runner-fleet compatibility not exercised.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "f11859fa43dd9757e0f53d02226a238b9c2d2198c7d787425280dcfe9ade3059",
+      "hash": "0d9436293a5e74aa59936666bdd38414874085c9a12c428406358fe844ed563a"
+    },
+    {
+      "seq": 19,
+      "entry_id": "ILR-2026-09-30-E019",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 207,
+        "title": "[Governance] Enforce branch/PR proof at the repository boundary",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/207",
+        "issue_last_updated": "2026-09-24",
+        "clusters": "CL-D repository boundary / deploy",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-24); DETECTION_GATE POC_VALIDATED_ON_MASTER; SETTINGS_LEVEL_PREVENTION HOLD",
+        "delta_vs_baseline": "Review requirement restored 2026-09-30 then not observably in force (F-1).",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "candidate ControlStateDrift (proposed, see groups doc); G06 and G08 near-matches insufficient",
+        "owner_closeable": "No",
+        "next_actor": "Forge CA and Robyn (admin-scope readback and decision)",
+        "next_admissible_action": "Read protection and all rulesets with an admin-scope token; decide whether the approving-review rule is intended and who can satisfy it; decide on a drift check (new governance mechanism: RTC admission). Renter changed no setting.",
+        "admission_state": "Any drift-check mechanism is new governance: DESIGN_REVIEW_REQUIRED. Readback is observation.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "7 checklist items: 3 evidenced, rest HOLD. Settings unreadable.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-207-1",
+            "text": "The Require PR provenance gate behaves as designed.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              ".github/workflows/kpgs-branch-proof-gate.yml",
+              "issue #207 production receipt 2026-09-24",
+              "push runs on 65975a12 and 8c6d22f2 success (O-08)",
+              "check 'Require PR provenance' pass on PR #236 (O-06)"
+            ],
+            "limits": "CLAIM VALIDATED: detection behavior. It detects; it does not prevent.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-207-2",
+            "text": "Direct pushes to master are prevented at the settings boundary.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "NOW.md@8c6d22f2:L74: a direct push was rejected until CodeQL and the 14 required checks existed",
+              "ruleset 24144685 active with a code_scanning rule (O-05)",
+              "branch protection unreadable (403)"
+            ],
+            "limits": "GH013 is the repository-rule-violation family; the rejection is consistent with the code_scanning rule and does not alone show PR-required enforcement. Rejection text not preserved in the cloud record.",
+            "pka": "HOLD"
+          },
+          {
+            "id": "C-207-3",
+            "text": "Master requires one approving review before merge (restored by Forge on 2026-09-30).",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "FOC_RISK",
+            "receipts": [
+              "NOW.md@8c6d22f2:L56 and L235 (attributed to Forge readback)",
+              "contradicting observations: O-04 (#236 merged with no review), O-20 (#237 merged by the owner with no review), O-03 (#238 CLEAN and #239 BLOCKED, both with no review decision)"
+            ],
+            "limits": "Protection is unreadable here; inference from PR metadata only; includes this renter's own merge of #236. The owner's merge shows the requirement is not binding in practice, not that it was removed on purpose.",
+            "pka": "BLOCK (promotion of the over-claim)"
+          }
+        ]
+      },
+      "prev_hash": "0d9436293a5e74aa59936666bdd38414874085c9a12c428406358fe844ed563a",
+      "hash": "e7df496b39699e07c1c9e071bbe7d8da653fbca20e6692bea2b72aabe778026f"
+    },
+    {
+      "seq": 20,
+      "entry_id": "ILR-2026-09-30-E020",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 211,
+        "title": "[HOLD] Azure production deploy missing OIDC credential secrets",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/211",
+        "issue_last_updated": "2026-09-24",
+        "clusters": "CL-D repository boundary / deploy",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-24)",
+        "delta_vs_baseline": "Failure reproduced on the latest master push (O-07).",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Robyn (secrets and federated identity)",
+        "next_admissible_action": "Provide AZURE_CLIENT_ID, AZURE_TENANT_ID and AZURE_SUBSCRIPTION_ID to GitHub Actions secrets, verify the federated identity, re-run an authorized deploy, and require a run receipt with Azure login PASS and azd up PASS. Renter does not handle secret values.",
+        "admission_state": "Not applicable; owner-held secrets.",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "All four closure steps are human-held.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-211-1",
+            "text": "The production deploy still fails at the Azure credential contract.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "run 36777088537 on 65975a12 and run 36786135007 on 8c6d22f2: 'Deploy authorized production change' failed at 'KPGS Azure credential preflight' (O-07)"
+            ],
+            "limits": "CLAIM VALIDATED: failure persistence only. It is the HOLD condition, not a fix. Not caused by the #236 or #237 content.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-211-2",
+            "text": "Required closure (secrets restored, identity verified, authorized deploy run, azd up PASS).",
+            "family": "Declarative",
+            "eclass": "E1",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #211 'Required closure' steps 1-4"
+            ],
+            "limits": "Owner-held.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "e7df496b39699e07c1c9e071bbe7d8da653fbca20e6692bea2b72aabe778026f",
+      "hash": "2b3e820f7f56b35df1ca4faea00b9b590f372a6f1ccf47a53d280b1008f81868"
+    },
+    {
+      "seq": 21,
+      "entry_id": "ILR-2026-09-30-E021",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "issue_disposition",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 231,
+        "title": "[FEP][Driver discovery] Test a driver-owned WhatsApp shift receipt before dispatcher claims",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/231",
+        "issue_last_updated": "2026-09-28",
+        "clusters": "CL-E owner-gated",
+        "baseline_2026_09_07": "Not in the 09-07 table (opened 2026-09-28); state LEARN -> READY_FOR_BOUNDED_TEST",
+        "delta_vs_baseline": "Field kit merged via PR #232.",
+        "proposed_tag": "HOLD_HUMAN",
+        "proposed_pka": "HOLD",
+        "foc_group_xref": "none asserted",
+        "owner_closeable": "No",
+        "next_actor": "Robyn (consenting-driver field lane); Cassey (separate review)",
+        "next_admissible_action": "Run the bounded field lane only when authorized; preserve denominator, declines, corrections and seven-day second-contact outcomes. No agent contacts drivers.",
+        "admission_state": "READY_FOR_BOUNDED_TEST recorded in the issue (Forge); field completion unproved.",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "5 field boxes accounted as a group.",
+        "tier_location": "Cloud GSMB (this ledger); Local and Drive UNKNOWN",
+        "claims": [
+          {
+            "id": "C-231-1",
+            "text": "The operator field kit is on master.",
+            "family": "Empirical",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "receipts": [
+              "docs/product-discovery/issue-231/: FIELD-KIT.md, PEER-REVIEW.md, PREPARATION-RECEIPT.md, README.md, TEACHER-REVIEW.md, private-ledger/",
+              "PR #232 merged per NOW.md@8c6d22f2"
+            ],
+            "limits": "CLAIM VALIDATED: artifact delivery only. No driver outcome, consent, or field completion is asserted.",
+            "pka": "ALLOW/PROPOSE (named claim only)"
+          },
+          {
+            "id": "C-231-2",
+            "text": "A driver-owned WhatsApp shift receipt test was run.",
+            "family": "Empirical",
+            "eclass": "E1",
+            "tag": "HOLD_HUMAN",
+            "receipts": [
+              "issue #231 boxes 0 of 5 checked"
+            ],
+            "limits": "Human field lane; needs consent.",
+            "pka": "HOLD"
+          }
+        ]
+      },
+      "prev_hash": "2b3e820f7f56b35df1ca4faea00b9b590f372a6f1ccf47a53d280b1008f81868",
+      "hash": "6f5784f599c06fa437d98d0acd2b69497fb5696f308524824c606656f967c749"
+    },
+    {
+      "seq": 22,
+      "entry_id": "ILR-2026-09-30-E022",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "cluster_map",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "clusters": [
+          {
+            "id": "CL-A",
+            "name": "RTC incident",
+            "members": "#163 #167 #121",
+            "strength": "textual",
+            "link": "#167 cites #163/#164 and #121 in its body; #121 names #122 as parent audit."
+          },
+          {
+            "id": "CL-B",
+            "name": "Classroom / 24-RTC Learning",
+            "members": "#115 #116 Interns#12",
+            "strength": "artifact",
+            "link": "Both issues live in Schematics/24-RTC Learning; #115 names Kopano-Labs-Interns as a consumer; candidate dry-run artifact for #115 Task 5 is the Temporal Data testament that #116 discusses (inference, RTC to choose)."
+          },
+          {
+            "id": "CL-C",
+            "name": "Estate observation umbrella",
+            "members": "#122 (parent) of #94 #102 #103 #107 #110 #115 #116 #121",
+            "strength": "textual",
+            "link": "Each of the eight carries 'Parent audit: #122' in a 2026-09-07 comment; #122's body table also classifies #94 #102 #103 #107 #110 #115 #116 #121."
+          },
+          {
+            "id": "CL-D",
+            "name": "Repository boundary / deploy",
+            "members": "#205 #207 #211",
+            "strength": "thematic",
+            "link": "#205 and #207 share base SHA 617092ce and the stale-NOW reconcile item (textual); #211 is the same control surface one step later (a merge triggers the deploy workflow)."
+          },
+          {
+            "id": "CL-E",
+            "name": "Owner-gated external lanes",
+            "members": "#158 #231 #94",
+            "strength": "thematic",
+            "link": "Each next step is held by the owner, a provider, or a consenting human; none is renter evidence."
+          },
+          {
+            "id": "CL-F",
+            "name": "Implementation lanes",
+            "members": "#103 #107 #110",
+            "strength": "textual",
+            "link": "Each issue defines its own bounded next slice; #107 is tied to KMEC#15, PKA#18, Jennifer#78."
+          },
+          {
+            "id": "CL-G",
+            "name": "Authority runtime",
+            "members": "#183 (candidate link to CL-A)",
+            "strength": "inference",
+            "link": "#183 text has no reference to #121/#167. Only hook: #167 question 6 (mechanical NSO-001 enforcement), unanswered."
+          }
+        ]
+      },
+      "prev_hash": "6f5784f599c06fa437d98d0acd2b69497fb5696f308524824c606656f967c749",
+      "hash": "fdcec9035d36f7ab21cebd79cd33072571d475af39a7fc2e95939bd8a0949ab3"
+    },
+    {
+      "seq": 23,
+      "entry_id": "ILR-2026-09-30-E023",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "local_source_recovery",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "sources": [
+          {
+            "src": "docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md (cloud mirror)",
+            "cloud": "PRESENT, blob ee42cc468ea8...; line 5 carries the 'Repository Mirror' reference",
+            "local": "Brief: canonical-local copy differs by that added line",
+            "treatment": "MIRROR_DIVERGENT_BY_ONE_REFERENCE_LINE (Forge-attested). Parity UNKNOWN until the local hash is supplied."
+          },
+          {
+            "src": "Schematics/24-RTC Learning/POCvsFOC Groups/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md (canonical-local path)",
+            "cloud": "ABSENT",
+            "local": "Brief: present locally",
+            "treatment": "LOCAL_PRESENT / CLOUD_ABSENT."
+          },
+          {
+            "src": "Hardware Maintenance & GSMB2 Offload Protocol",
+            "cloud": "ABSENT (name search finds nothing)",
+            "local": "Brief: present locally",
+            "treatment": "LOCAL_PRESENT / CLOUD_ABSENT. Documentary context only; hardware maintenance is a separate lane."
+          },
+          {
+            "src": "Schematics/19-TOKEN USAGE/AI Session Closeout Protocol.md",
+            "cloud": "ABSENT",
+            "local": "Brief and NOW.md@8c6d22f2 say inspected locally",
+            "treatment": "Field list taken from NOW.md@8c6d22f2 (present in cloud); comms-log.md fallback stays permitted."
+          },
+          {
+            "src": "OpenAI Academy C.L.E.A.R. card (image)",
+            "cloud": "ABSENT",
+            "local": "Brief: visually confirms Complete, Logical, Evidence, Audience, Relevant",
+            "treatment": "LEARNING_SPEC_PIPELINE (present) carries the five terms. Academy review and delivery review are kept distinct."
+          },
+          {
+            "src": "MAIN-BRAIN/CURSOR_CF_IDENTITY_DECLARATION.md",
+            "cloud": "ABSENT",
+            "local": "Brief: records CF responsibility and separates operational rank from RTC identity seat",
+            "treatment": "Role packet rests on the brief, PR #166 and Robyn's current direction; declaration not cited as read."
+          },
+          {
+            "src": "Schematics/24-RTC Learning/WORKFLOWS.md",
+            "cloud": "ABSENT",
+            "local": "Brief: Classroom, Round Table, Design Review, Post-Incident workflows",
+            "treatment": "Workflow names used as brief-attested until published."
+          },
+          {
+            "src": "Schematics/24-RTC Learning/PROMOTION_PROTOCOL.md",
+            "cloud": "ABSENT",
+            "local": "Brief: absent at the checked local path too",
+            "treatment": "Issue #115 deliverable stands."
+          },
+          {
+            "src": "C:/Users/rkhol/Documents/Codex/2026-09-19/gsmb-house-audit/coverage.csv",
+            "cloud": "n/a",
+            "local": "Brief: saved audit coverage; full audit recorded incomplete in root NOW",
+            "treatment": "UNAVAILABLE to this runtime. Cloud coverage CSV starts a parallel population with a compatible superset of columns."
+          },
+          {
+            "src": "C:/Users/rkhol/Documents/Codex/2026-09-30/agent-coordination-receipts/",
+            "cloud": "n/a",
+            "local": "NOW.md@8c6d22f2: protection before/after readbacks and NOW backups",
+            "treatment": "UNAVAILABLE. It is the source of the protection readback attributed to Forge."
+          }
+        ]
+      },
+      "prev_hash": "fdcec9035d36f7ab21cebd79cd33072571d475af39a7fc2e95939bd8a0949ab3",
+      "hash": "8e5c5fd347f77a5dc57b8ec60d23c54df1dfb2fa155a6521c42d0c35ce0da312"
+    },
+    {
+      "seq": 24,
+      "entry_id": "ILR-2026-09-30-E024",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "doctrine_gaps_and_proposed_vocabulary",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "observed": [
+          "O-13",
+          "O-14"
+        ],
+        "proposed_vocabulary": [
+          {
+            "item": "Five working tags",
+            "proposal": "POC_VALIDATED / POC_PENDING / HOLD_HUMAN / FOC_RISK / UNKNOWN, applied per claim and summarised per issue. Prior art: the 2026-09-07 table in #122 (MAYBE, witness-slice POC_VALIDATED plus HOLD remainder, architecture capture only, LEARNING not ratified)."
+          },
+          {
+            "item": "PKA mapping",
+            "proposal": "POC_VALIDATED -> ALLOW/PROPOSE for the named claim only; POC_PENDING, HOLD_HUMAN, UNKNOWN -> HOLD; FOC_RISK -> BLOCK on promoting the over-claim. The enum itself varies in canon (O-14)."
+          },
+          {
+            "item": "HOLD_HUMAN definition",
+            "proposal": "Gate held by human authority or RTC, not by renter evidence. Wider than the plan's 'owner-only'."
+          },
+          {
+            "item": "Issue-class vocabulary",
+            "proposal": "No doctrine file defines GitHub-issue classes. This ledger writes them as proposed only."
+          },
+          {
+            "item": "Candidate FOC group",
+            "proposal": "ControlStateDrift (see groups doc). Not added to FOC_CLASSIFICATION_INDEX.md."
+          },
+          {
+            "item": "Integrating writer",
+            "proposal": "Cursor CF for NOW.md, the ledger and closeout records during Waves 0-3, pending Forge CA acceptance."
+          }
+        ],
+        "tags": {
+          "POC_VALIDATED": "Evidence for the NAMED claim exists on master or was re-observed in this run, with a pointer. Says nothing about any wider claim.",
+          "POC_PENDING": "A bounded slice is defined and executable; its claim is not yet evidenced.",
+          "HOLD_HUMAN": "The next step is gated by human authority or RTC, not by renter evidence.",
+          "FOC_RISK": "A claim recorded in an issue or NOW.md exceeds what current evidence supports.",
+          "UNKNOWN": "Evidence absent, unreadable by this token, or dated and not re-observed."
+        },
+        "pka_mapping": {
+          "POC_VALIDATED": "ALLOW/PROPOSE (named claim only)",
+          "POC_PENDING": "HOLD",
+          "HOLD_HUMAN": "HOLD",
+          "FOC_RISK": "BLOCK (promotion of the over-claim)",
+          "UNKNOWN": "HOLD"
+        },
+        "status": "PROPOSED; RTC admission UNRECORDED"
+      },
+      "prev_hash": "8e5c5fd347f77a5dc57b8ec60d23c54df1dfb2fa155a6521c42d0c35ce0da312",
+      "hash": "11877c90919ffe67af996caf65bb1695775c0bf082836fc27509526b46e9b26e"
+    },
+    {
+      "seq": 25,
+      "entry_id": "ILR-2026-09-30-E025",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "admission_state",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "slices": [
+          {
+            "slice": "Wave 1a repo-boundary receipt",
+            "needs": "none (observation)",
+            "state": "not applicable"
+          },
+          {
+            "slice": "Wave 1b RTC-cluster receipt",
+            "needs": "none (observation; no adjudication)",
+            "state": "not applicable"
+          },
+          {
+            "slice": "#115 Task 1 overlap audit",
+            "needs": "none (cloud-head observation)",
+            "state": "not applicable"
+          },
+          {
+            "slice": "#115 Tasks 2-5 and PROMOTION_PROTOCOL.md",
+            "needs": "RTC Classroom / Round Table (governance vocabulary)",
+            "state": "LEARN; decision UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#116 discussion",
+            "needs": "RTC independent positions",
+            "state": "LEARN / RTC_DISCUSSION; UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#107 PR1",
+            "needs": "Design Review (cross-repo contract ownership)",
+            "state": "UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#103 PR2",
+            "needs": "Confirm admission basis",
+            "state": "ADMITTED_BY_ISSUE_RECORD; RTC decision not recorded"
+          },
+          {
+            "slice": "#183 POC steps 1-4",
+            "needs": "Design Review (new architecture, acronym collision)",
+            "state": "UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#110 audit document; #122 cloud-subset receipt; #94 re-search",
+            "needs": "none (observation)",
+            "state": "not applicable"
+          },
+          {
+            "slice": "Five working tags, PKA mapping, issue-class vocabulary, ControlStateDrift candidate",
+            "needs": "RTC (governance vocabulary)",
+            "state": "PROPOSED; UNRECORDED"
+          },
+          {
+            "slice": "Cursor CF as integrating writer for NOW.md and the ledger",
+            "needs": "Forge CA acceptance",
+            "state": "PROPOSED; UNRECORDED"
+          }
+        ],
+        "state_vocabulary": "LEARN | HOLD | TEST | READY_FOR_POC"
+      },
+      "prev_hash": "11877c90919ffe67af996caf65bb1695775c0bf082836fc27509526b46e9b26e",
+      "hash": "b5f8806e9f6608ea0f506fb1964ddf4e8f3189cf132f976a358b03714bbe1787"
+    },
+    {
+      "seq": 26,
+      "entry_id": "ILR-2026-09-30-E026",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "audit_coverage_pointer",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "csv": "docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv",
+        "local_population": "UNAVAILABLE (coverage.csv on owner machine)",
+        "full_audit_status": "INCOMPLETE (root NOW.md keeps this status)"
+      },
+      "prev_hash": "b5f8806e9f6608ea0f506fb1964ddf4e8f3189cf132f976a358b03714bbe1787",
+      "hash": "9ef5a007d2131bd92a445d6a15ca827a28968069eae768046ccc06742b3d7343"
+    },
+    {
+      "seq": 27,
+      "entry_id": "ILR-2026-09-30-E027",
+      "recorded_at": "2026-09-30T22:48:05Z",
+      "entry_kind": "human_queue",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "queue": [
+          {
+            "actor": "Robyn",
+            "action": "Regenerate the account's Discord backup codes now (F-2), then decide removal from HEAD and history remediation."
+          },
+          {
+            "actor": "Forge CA / Robyn",
+            "action": "Admin-scope readback of branch protection and every ruleset; decide the review-requirement question (F-1) and whether to log it."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Provide the three Azure OIDC secret values and verify the federated identity (#211)."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Decide whether Bookit PR #33's epoch relaunch is still intended (#158); close #205 if satisfied with C-205-1 to C-205-3."
+          },
+          {
+            "actor": "RTC / Forge CA",
+            "action": "Convene Design Review for #183 and #107, Classroom admission for #115 Tasks 2-5, discussion for #116, and disposition for #167 questions 1-7 and #121 gates."
+          },
+          {
+            "actor": "RTC / Forge CA",
+            "action": "Decide SAP naming, the five working tags, PKA mapping, issue-class vocabulary, and the ControlStateDrift candidate."
+          },
+          {
+            "actor": "Forge CA",
+            "action": "Accept or amend the integrating-writer assignment for NOW.md and the ledger."
+          },
+          {
+            "actor": "Robyn / Forge CA",
+            "action": "Publish or hash-attest the local-only sources in section 10 via a PR from the local checkout; supply the local coverage.csv header."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Name the second skill registry (#94); supply a Google Drive mirror receipt (Drive is UNKNOWN)."
+          },
+          {
+            "actor": "Robyn / Forge CA",
+            "action": "Choose the independent-review mechanism for this repo (see F-1 hypothesis H1); until then renter PRs carry a separate-context review record and no GitHub approval."
+          }
+        ]
+      },
+      "prev_hash": "9ef5a007d2131bd92a445d6a15ca827a28968069eae768046ccc06742b3d7343",
+      "hash": "5427b8db415c503ea8f4feb29613e2cfd09fccfa1a75dcef6d09c498831350e7"
+    }
+  ]
+}
