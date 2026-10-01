@@ -1,0 +1,21 @@
+{
+  "schema": "kpgs_hood_ack_receipt_v1",
+  "timestamp": "2026-09-30T23:01:59Z",
+  "ts": "2026-09-30T23:01:59Z",
+  "renter_id": "codex_forge",
+  "renter_class": "stateless_renter",
+  "hood_ack": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "operation": "cli:kpgs_governance_entry_assert",
+  "verdict": "ACKNOWLEDGED",
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "rtc_conditions_met": {
+    "2_read_comms_now_mainbrain": true
+  },
+  "evidence_refs": [
+    "AGENTS.md",
+    "NOW.md",
+    "Schematics/04-Updates/comms-log.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md"
+  ]
+}

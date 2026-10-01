@@ -2,7 +2,7 @@
 
 > [!important]
 > Historical Session 3 entrypoint preserved for audit trail.
-> For current live truth use [Now](Now.md), [Project Status](../04-Updates/Project%20Status.md), [task-board](../04-Updates/task-board.md), and [Open Issues](../06-Reference/Open%20Issues.md).
+> This archive’s Session 3 pointers are historical. For repository-wide current state and handoff, read [repository-root NOW](../../NOW.md), then reconcile its claims with primary receipts; HOLD if they conflict. [Home Now](Now.md) is scoped to 00-Home. Recheck project-status and issue pointers before treating them as current.
 
 > [!info]
 > This note is the Session 3 archive entrypoint for anyone reviewing that work now.
