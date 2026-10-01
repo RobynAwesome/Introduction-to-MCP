@@ -440,3 +440,163 @@ Expected at publication: `chain ok 27 f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae
 **Changed by this receipt:** files added under `docs/swarm-ops/receipts/`, `docs/governance/`, `Schematics/24-RTC Learning/POCvsFOC Groups/`, and one prepended block in root `NOW.md`. No issue, setting, secret, dependency or deployment was touched.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 19. Wave 3 append boundary (2026-10-01)
+
+Sections 0-18 above are the Wave 0 publication and are unchanged. This append was written by the same renter lane on branch `cursor/reconciliation-closeout-4e71` from `master@2b8a58dad9415a305365e88512947af0ec39c91f`. JSON twin entries `E028`-`E052` were appended at `2026-10-01T02:54:34Z`; `E028.prev_hash` is the Wave 0 tip `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`. Wave 0 rows were not edited; the section 16 snippet now ends with the section 28 line.
+
+Integrating writer: Cursor CF (PROPOSED). Forge CA acceptance is UNRECORDED; this append and the root `NOW.md` POST-SEED were written under the proposal, not under a recorded acceptance.
+
+## 20. Wave outcomes (E028)
+
+| Wave | PR | Landed | Status | Artifacts |
+|---|---|---|---|---|
+| 0 | #240 | `1e152dce` 2026-09-30T23:34:37Z | MERGED | ledger .md/.json, POCvsFOC groups doc + mirror, coverage CSV, `NOW.md` PRE-SEED |
+| 1a | #241 | `4a316bbb` 23:41:30Z | MERGED | `REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md` |
+| 1b | #242 | `f533ba22` 2026-10-01T00:05:19Z | MERGED | `incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md` |
+| Forge CA | #243 | `49987673` 00:12:11Z | MERGED | `LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md`; `poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json` |
+| 2 | #244 | `f9ca1694` 00:46:06Z | MERGED | `CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md` |
+| 2 | #245 | `84182ed2` 00:54:10Z | MERGED | `MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md`; `governance/kpgs-vnext/mzansi-language/*`; `tests/test_mzansi_data_engine.py`; gate +10 lines |
+| 2 | #246 | `2b8a58da` 01:11:27Z | MERGED | `KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md` |
+| 2 | #247 | head `e6266651` | OPEN DRAFT, unmerged, no review (02:42:59Z) | `SAP_183_ADMISSION_PACKET_2026-09-30.md` |
+| 2 | #248 | head `7357ecc8` | OPEN DRAFT, unmerged, no review (02:42:59Z) | `ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md`; `SKILLS_RESEARCH_94_2026-10-01.md`; `STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md` |
+| 3 | this PR | head recorded by GitHub | this append | ledger append; CSV rows; closeout YAML; `NOW.md` POST-SEED |
+
+Non-wave merges in the window: Dependabot #238 `d882b22e` (pyjwt 2.15.0) and #239 `34ead442` (litellm 1.89.7).
+
+Review observation (02:23:59Z): all nine merges #238-#246 landed with `reviewDecision` empty and no APPROVED review; renter PRs #242-#246 carry one COMMENTED review each (separate-context record per F-1 interim rule), #240 and #241 none. This strengthens C-207-3 without moving it.
+
+Issues closed by the owner in the window: #205 (2026-09-30T23:41:32Z). Issues closed by a renter: none.
+
+Three Wave 2 receipts (SAP #183; estate #122; skills #94; studio #110) sit on unmerged PR heads. Every row below that cites them carries the limit: *evidence pointer is a PR-head blob; the master pointer is pending merge; if the PR closes unmerged a later entry reverts the move.*
+
+## 21. Issue outcome register (E029-E045)
+
+Live states read 2026-10-01T02:23:59Z (#205 re-read 02:42:59Z). Tags are the working labels of section 3; RTC admission of the vocabulary stays UNRECORDED.
+
+| Issue | Tag: Wave 0 -> Wave 3 | PKA | Live | Owner-closeable now | Next admissible action (actor) | Entry |
+|---|---|---|---|---|---|---|
+| #94 | UNKNOWN -> UNKNOWN | HOLD | OPEN | No (issue says not closable) | Robyn confirms or rejects SkillsMP as the second registry or names another; no further renter re-search of `RobynAwesome/Skills`; merge or close #248. | E029 |
+| #102 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | KasiLink#15 repair, apex/www convergence, Starfall rollback drill stay human/provider gated; no domain mutation (Robyn / provider). | E030 |
+| #103 | POC_PENDING -> POC_PENDING | HOLD | OPEN | No (open for PR3+) | Re-read the #103 phase record for PR3 and confirm its admission basis before any code; record the master gate result when read (renter; Forge/RTC). | E031 |
+| #107 | POC_PENDING -> HOLD_HUMAN | HOLD | OPEN | No | Record admission conditions 6.1-6.7 as an RTC/Design Review entry or owner comment; no schema or parser code before then (RTC / Forge CA). | E032 |
+| #110 | POC_PENDING -> POC_PENDING | HOLD | OPEN | No | Owner names the A4 file, decides A2/A3, names the A1a compare target; then one bounded PR per residue; browser QA pending; merge or close #248 (Robyn; renter). | E033 |
+| #115 | POC_PENDING -> HOLD_HUMAN | HOLD | OPEN | No | RTC admits vocabularies and names the seat registry; owner reads `Structure/07-Agents/PROMOTION_LAW.json` and decides F-W2-2/F-W2-3; specification per task before READY_FOR_POC; no code (RTC; Robyn). | E034 |
+| #116 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Ten independent seat opinions on cloud against packet section 6; owners named for four E4 concepts; renter writes no opinion (RTC seats; Robyn). | E035 |
+| #121 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Gate A (independent re-entry receipts) or gate B (Tier-0 decommission); renter records sources and dates only (RTC; Robyn). | E036 |
+| #122 | POC_PENDING -> HOLD_HUMAN | HOLD | OPEN | Owner's choice after #248 merges: (a) close as superseded with a new owner-local issue for boxes 3-4, or (b) keep as umbrella. No preference stated. | Choose (a) or (b) after #248 merges; boxes 3 and 4 stay owner/provider gated; no renter closes (Robyn). | E037 |
+| #158 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Decide whether the epoch relaunch is still intended; if yes rebase PR #33 before owner inspection; no merge or deploy by a renter (Robyn). | E038 |
+| #163 | POC_VALIDATED -> POC_VALIDATED | ALLOW/PROPOSE (named claim only) | OPEN | Owner/RTC decision; not recommended while the artifact says OPEN | Define exit criteria (RTC packet section 8, P1-P3) or decide the tracker may close while the artifact stays OPEN; renter does not adjudicate (RTC / Robyn). | E039 |
+| #167 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | RTC produces the inquest and answers questions 1-7; Forge and Cursor may not self-adjudicate (RTC seats; Robyn). | E040 |
+| #183 | POC_PENDING -> HOLD_HUMAN | HOLD | OPEN | No | Record D1-D5 (D6 if taken); HOLD on code until then; then POC steps 1-4 READY_FOR_POC under packet sections 10-11 with a slice receipt owed; merge or close #247 (RTC / Forge CA). | E041 |
+| #205 | POC_VALIDATED -> POC_VALIDATED | ALLOW/PROPOSE (named claim only) | CLOSED 2026-09-30T23:41:32Z | Done (owner) | None. C-205-3 (#202 runner-fleet check) remains an open limit tracked here. | E042 |
+| #207 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Admin-scope readback of protection and rulesets; decide the approving-review rule; decide a drift check (new governance: RTC admission) (Forge CA; Robyn). | E043 |
+| #211 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Provide the three Azure OIDC secrets, verify federated identity, authorized re-run with Azure login PASS and azd up PASS receipt; renter handles no secret (Robyn). | E044 |
+| #231 | HOLD_HUMAN -> HOLD_HUMAN | HOLD | OPEN | No | Bounded field lane only when authorized; preserve denominator, declines, corrections, seven-day outcomes; no agent contacts drivers (Robyn; Cassey). | E045 |
+
+Per-issue observations recorded in the JSON entries and not repeated here: #102 HTTP probe (13x200, 1x404, 9 unresolved, 3 KasiLink API 500s at 01:40Z; `HTTP_200 != SERVING_SHA_PROVEN`); #110 residues A1-A4; #115 packet enumerates Tasks 2-6 where Wave 0 wrote 2-5; #122 box states 1 DONE, 2 EVIDENCED, 3-4 UNKNOWN, 5 EVIDENCED (cloud), 6 OPEN until merge, 7 EVIDENCED; #158 Bookit APWA Proof Gate failing at head (observed, not interpreted); #211 "Production Hardening Deployment ... success" at `2b8a58da` not checked against the Azure preflight workflow (UNKNOWN, not inferred).
+
+## 22. Claim moves, new claim, supersession (E029-E046)
+
+| Claim | Issue | From -> To | Class | Receipt | Limits |
+|---|---|---|---|---|---|
+| C-94-2 | #94 | UNKNOWN -> POC_VALIDATED | E4 -> E2 | `SKILLS_RESEARCH_94_2026-10-01.md` blob `5cd1c7d7` on #248 head | Negative content read of one clone at `00f43435` (128 SKILL.md, 1 incidental Jennifer URL, 0 PKA). `MISS != NEGATIVE_PROOF` elsewhere. PR-head limit. |
+| C-103-2 | #103 | POC_PENDING -> POC_VALIDATED | E2 | `MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md` blob `1f384acb`, merged `84182ed2` | Restated: PR2 merged (`data_engine.py` 752, `validate.py` 244, two synthetic fixtures, 29 tests OK locally 00:30Z, gate +10). Placeholder fixtures only; no linguistic/model/TTS claim; no APPROVED review; master gate run not re-read. |
+| C-107-2 | #107 | POC_PENDING -> HOLD_HUMAN | E2 | `KMEC_..._107_ADMISSION_PACKET` blob `fe3ee2c6`, merged `2b8a58da` | No named contract owner per surface; three lifecycle vocabularies; conditions 6.1-6.7 open. |
+| C-115-1 | #115 | POC_PENDING -> POC_VALIDATED | E3 -> E2 | `CLASSROOM_ADMISSION_PACKET_115_116` blob `ffe06a64`, merged `f9ca1694` | 23-row overlap table; audit only, admits nothing. |
+| C-122-1 | #122 | POC_PENDING -> POC_VALIDATED | E3 -> E2 | `ESTATE_OBSERVATION_RECEIPT_122` blob `9ee8cec7` on #248 head | Cloud subset: 21/22 read, PKA UNKNOWN; 11/3/7 run states; local and Vercel alias boxes owner/provider gated. PR-head limit. |
+| **C-110-3 (new)** | #110 | - -> POC_VALIDATED | E2 | `STUDIO_VS_PLAN_AUDIT_110` blob `1116a327` on #248 head | Audit exists (boxes 2 and 4; `LINT_EXIT=0`, 5 react-hooks warnings, 568.83 kB); A1-A4 listed, none fixed. `BUILD_GREEN != BROWSER_QA_PASSED`. C-110-2 stays POC_PENDING for browser QA and UX fixes. PR-head limit. |
+
+C-94-1 stays UNKNOWN with a named candidate (SkillsMP; `INDEXED != REGISTERED_BY_OWNER`). The receipt's `MAYBE / CANDIDATE_FOUND` label is outside the five working tags and is recorded as UNKNOWN. All other claims are unchanged.
+
+Supersession (E046): entries E029, E031, E032, E033, E034, E037, E041, E042 supersede their Wave 0 rows for the named claim ids and fields only (tag, next actor, next action, admission state, owner-closeable). Receipts and limits of the superseded rows stay valid as of their observed time. Dispositions for #102 #116 #121 #158 #163 #167 #207 #211 #231 are unchanged (`supersedes: null`).
+
+## 23. Admission states reached (E047)
+
+| Slice | Admission needed | Recorded state |
+|---|---|---|
+| Wave 1a / 1b receipts; #115 Task 1 | none (observation) | done; merged `4a316bbb`, `f533ba22`, `f9ca1694` |
+| #115 Tasks 2-6 and `PROMOTION_PROTOCOL.md` | RTC Classroom / Round Table; owner read of `PROMOTION_LAW.json`; F-W2-2/F-W2-3 | LEARN; packet filed; UNRECORDED -> HOLD |
+| #116 discussion | RTC independent positions; owners for four E4 concepts | LEARN / RTC_DISCUSSION; packet filed; UNRECORDED -> HOLD |
+| #107 PR1 | Design Review (contract ownership; 6.1-6.7) | HOLD; packet filed `2b8a58da`; UNRECORDED |
+| #103 PR2 | confirm admission basis | ADMITTED_BY_ISSUE_RECORD; delivered and merged `84182ed2` |
+| #103 PR3+ | re-read phase record | UNKNOWN (not re-read) |
+| #183 POC steps 1-4 | Design Review (D1-D5; D6) | HOLD; packet on #247 head; UNRECORDED |
+| #110 audit; #122 cloud receipt; #94 re-search | none (observation) | done on #248 head; master pointer pending |
+| Five tags, PKA mapping, issue-class vocabulary, ControlStateDrift | RTC | PROPOSED; UNRECORDED; used as working labels only |
+| Cursor CF as integrating writer | Forge CA acceptance | PROPOSED; acceptance UNRECORDED |
+| RUNE pin update (SAP section 7 item 2 -> `656ae46c`) | owner or Design Review | queued; not admitted; no code |
+| #110 residues A1-A4 | owner decisions; one bounded PR each | queued; not admitted; no code |
+
+## 24. Local source recovery update (E048)
+
+Forge CA hash-attested local-only files in PR #243 (`LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md` blob `60deddd2`; close receipt `poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json` blob `bbf54e26`, schema `kpgs_hood_ack_receipt_v1`, verdict `ACKNOWLEDGED`, ts 2026-09-30T23:01:59Z). Treatment: **HASH_ATTESTED_IN_CLOUD**. The hashes are E1 testimony recorded in a merged E2 artifact; a hash is not the content, which stays unreadable from this runtime. Twelve attested files are listed in E048 with their cloud counterparts (present / ABSENT / not checked).
+
+**CRLF finding (E2, computed in this run).** Two "cloud" values in the Forge audit do not match master's bytes but match exactly after LF -> CRLF conversion:
+
+| File | master LF sha256 | CRLF sha256 | Forge-reported |
+|---|---|---|---|
+| `docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md` | `38f2f2315ec62ce3169789181e07981658c14db9f47d4da1f5f928ba4d58c0bf` | `cc1799cb57e9c7b589fb95bf00a96ca290be5a0bc9b6b5ae33b6efbd679cc1ac` | `cc1799cb57e9c7b589fb95bf00a96ca290be5a0bc9b6b5ae33b6efbd679cc1ac` (match) |
+| `hooks/pre-commit-kpgs-gate.py` | `884191623a2744609c3a90321be6b1fa057a673c745a53ee5386fc3be5f19699` | `227d96d7ef3aa52eb023396e583876c7c5926537745583fdaa73b344bbcd9eed` | `227d96d7ef3aa52eb023396e583876c7c5926537745583fdaa73b344bbcd9eed` (match) |
+
+The divergence is line-ending normalization in the Forge worktree, not content. This explains the two cloud-side mismatches only; the E023 row 0 treatment (`MIRROR_DIVERGENT_BY_ONE_REFERENCE_LINE`, local vs cloud) stands as Forge-attested because the local constitution hash `ea024af3...` differs from both cloud values.
+
+Still open from E023: `WORKFLOWS.md` not hashed or supplied; `PROMOTION_PROTOCOL.md` absent on both tiers; local `coverage.csv` header not supplied; local agent-coordination-receipts directory UNAVAILABLE. Google Drive: UNKNOWN (no receipt in the window).
+
+## 25. Audit coverage progress (E049)
+
+Rows appended to `GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv` for the seven master receipts (#241-#246, two from #243) and the four PR-head receipts (#247, #248; notes say unmerged), `source_population=cloud_clean_worktree@2b8a58da`. Per-row refinement of E049: the four PR-head rows carry `source_population=pr_head@e6266651` or `pr_head@7357ecc8` and `tracked_files=0`, because their blobs are not in the master tree at `2b8a58da`; E049 names the batch population, the CSV names the per-row one. Blob SHAs in the rows were read with `git rev-parse <commit>:<path>`; inbound counts come from the working tree at `observed_at` and include this Wave 3 ledger append. Local population: UNAVAILABLE. Full audit status: **INCOMPLETE** (root `NOW.md` keeps this status).
+
+## 26. Google Drive mirror checklist (E050)
+
+Drive is UNKNOWN until an owner receipt names the folder and lists the uploaded files with sizes or hashes. Upload from a master checkout at or after this PR merges: the ledger `.md` and `.json`; the coverage CSV; `SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml`; `NOW.md`; the seven master receipts in section 20; the Wave 0 groups doc and mirror (section 10 paths). After #247 and #248 merge: the SAP, estate, skills and studio receipts. The renter cannot read or write Drive.
+
+## 27. Updated human, Forge and RTC queue (E051)
+
+Section 17 rows with status at Wave 3:
+
+| # | Actor | Action (section 17) | Status |
+|---|---|---|---|
+| 1 | Robyn | Discord backup codes (F-2) | OPEN; renter never opened the file |
+| 2 | Forge CA / Robyn | Admin-scope readback; F-1 | OPEN; see #207 nine-merge observation |
+| 3 | Robyn | Azure OIDC secrets (#211) | OPEN; preflight not re-observed on `2b8a58da` |
+| 4 | Robyn | Bookit PR #33 (#158); close #205 | PARTIAL; #205 closed 23:41:32Z, PR #33 open |
+| 5 | RTC / Forge CA | Design Review #183/#107; Classroom #115; #116; #167 Q1-7; #121 gates | OPEN; packets filed, no decision recorded |
+| 6 | RTC / Forge CA | SAP naming, tags, PKA, vocabulary, ControlStateDrift | OPEN; working labels only |
+| 7 | Forge CA | Integrating-writer acceptance | OPEN; UNRECORDED |
+| 8 | Robyn / Forge CA | Publish or hash-attest local sources; coverage.csv header | PARTIAL; twelve files hash-attested (#243); `WORKFLOWS.md` and header not supplied |
+| 9 | Robyn | Second registry (#94); Drive receipt | PARTIAL; SkillsMP candidate named (unmerged #248); Drive UNKNOWN |
+| 10 | Robyn / Forge CA | Independent-review mechanism (H1) | OPEN; nine merges with no APPROVED review |
+
+Added at Wave 3:
+
+| Actor | Action |
+|---|---|
+| Robyn | Review, merge or close #247 and #248; closing unmerged triggers reverting entries for the moves that cite their blobs. |
+| Robyn | Review and merge this Wave 3 close-out PR. |
+| RTC / Forge CA | Record #107 conditions 6.1-6.7 and #183 decisions D1-D5 (D6 if taken); code stays on HOLD until then. |
+| RTC / Robyn | Classroom: admit vocabularies, name the seat registry; owner reads `PROMOTION_LAW.json`, decides F-W2-2/F-W2-3; specifications for #115 Tasks 2-6; ten seat opinions and four E4 owners for #116. |
+| Robyn | #163 exit criteria P1-P3, or decide the tracker may close while the artifact stays OPEN. |
+| Robyn | #122 after #248 merges: (a) close as superseded or (b) keep as umbrella. |
+| Robyn | #110: A4 file name; A2/A3 decision; A1a compare target; then one bounded PR per residue. |
+| Robyn / Design Review | Admit or decline the RUNE pin update (`656ae46c`). |
+| Renter (after confirmation) | #103 PR3: re-read the phase record and confirm the admission basis before code. |
+| Robyn | Google Drive mirror receipt (section 26). |
+
+Renter non-actions in the window: no issue closed or commented; no protection, alias, deploy, Bookit PR #33 or driver action; no secret handled; protected paths not opened; `codex/kc-sovereign-gui-full-dev` not touched; no ledger history rewritten.
+
+## 28. Verification after Wave 3
+
+The section 16 snippet, unchanged, now prints: `chain ok 52 61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`. Entry 27 still hashes to `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`.
+
+## 29. Receipt boundary (Wave 3)
+
+**Proved by this append:** the merge commits, PR heads, blob SHAs and live issue states named in sections 20-22 at their stated read times; the CRLF reproduction in section 24; the hash chain through entry 52.
+
+**Not proved:** any RTC or Forge decision; the branch-protection setting; Azure production health after `8c6d22f2`; Bookit, KasiLink or Jennifer runtime; the content of any local-only or protected file; Drive state; that #247 or #248 will merge; adoption of any proposed vocabulary; that the owner read the #205 limits before closing.
+
+**Changed by this append:** entries appended to the JSON twin; sections 19-29 appended to this file; rows appended to the coverage CSV; one new closeout YAML; one block prepended to root `NOW.md`. No issue, setting, secret, dependency, deployment or Wave 0 row was touched.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
