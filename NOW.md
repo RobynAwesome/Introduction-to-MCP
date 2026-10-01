@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-01T05:12:29Z (ISSUE RECONCILIATION · TIER READ CORRECTION)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. This turn's system prompt names Grok 4.7. The Wave 3 block recorded Claude Fable 5.1 and Wave 0 recorded Claude Sonnet 5.5. Not reconciled.
+> **Human authority:** Owner message naming the local GSMB as `C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics` and stating Google Drive is reachable via MCP, while reviewing the Wave 3 PR.
+> **Branch:** `cursor/reconciliation-closeout-4e71`. Ledger entry E053 appended. E001-E052 unchanged.
+
+- **Local GSMB:** location is that Schematics path, owner-stated, and already the MAIN-BRAIN path in the cloud docs. This VM cannot open it (`/mnt/c/Users/rkhol` is absent). Bytes unread here. The earlier "UNKNOWN" label was the wrong word for the location.
+- **Google Drive:** read via MCP at 2026-10-01T05:12:29Z. My Drive root `0AHpObaoLPsWcUk9PVA`, 14 folders, none titled Schematics, GSMB, or Introduction to MCP. No `00-Home`, `WORKFLOWS`, or `coverage.csv`. Closest full-text hit is the 2026-08-10 pitch deck, not a vault. Folder `Kopano Labs` (`1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI`) is notes and decks. Nothing from this reconciliation run is mirrored there. No Drive write was made. E050's upload checklist remains; its "cannot read Drive" sentence does not.
+- **Chain:** `chain ok 53 0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb`.
+
+**Next admissible action:** unchanged for the review (merge or close this PR, then #247 and #248). A Drive mirror still needs a named folder before any upload. The local Schematics bytes still need a machine that can read that Windows path.
+
+---
+
 ## CURRENT STATE — 2026-10-01T03:12:50Z (ISSUE RECONCILIATION · WAVE 3 POST-SEED)
 
 > **Actor:** Cursor cloud renter, stateless, operational rank Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: the Wave 0 block recorded Claude Sonnet 5.5 from the system prompt visible then; the system prompt visible at this POST-SEED names Claude Fable 5.1; Forge's brief names Fable; not reconciled.

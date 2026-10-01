@@ -3918,6 +3918,73 @@
       },
       "prev_hash": "ff77ffd90a9ead2b80990177028e958ff0b134b9cb431a0ec839f66228d14bcd",
       "hash": "61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c"
+    },
+    {
+      "seq": 53,
+      "entry_id": "ILR-2026-09-30-E053",
+      "entry_kind": "tier_read_correction",
+      "recorded_at": "2026-10-01T05:12:29Z",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "This turn's system prompt names Grok 4.7. Entries E001-E052 recorded Claude Sonnet 5.5 and a later POST-SEED recorded Claude Fable 5.1; Forge's brief names Fable. Not reconciled.",
+        "interface": "Cursor cloud agent (Linux VM) plus Google Drive MCP read",
+        "human_authority": "Owner message 2026-10-01 naming the local GSMB path and stating Google Drive is reachable via MCP, while reviewing the Wave 3 PR"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E050",
+        "fields": [
+          "state",
+          "owner_action"
+        ],
+        "also_corrects": {
+          "entry_id": "ILR-2026-09-30-E052",
+          "fields": [
+            "tier_state.local",
+            "tier_state.google_drive"
+          ]
+        },
+        "scope": "The unread / cannot-read claims only. E050's upload checklist stays. E048's Forge hashes stay. No prior row is edited."
+      },
+      "payload": {
+        "why": "E050 said the renter cannot read or write Drive, and E052 called both the local tier and Drive UNKNOWN. The owner corrected both. This entry records the reads that were then actually run.",
+        "local_gsmb": {
+          "path_named_by_owner": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\Schematics",
+          "already_in_cloud_docs": "LOCAL_VS_CLOUD_RECONCILIATION.md names the parent checkout as the canonical GSMB checkout; Schematics is the MAIN-BRAIN under it.",
+          "vm_probe": {
+            "command": "ls of that path via /mnt/c/Users/rkhol/... and a depth-limited search for a OneDrive directory",
+            "result": "No such file or directory. No OneDrive directory under /mnt, /media, /home, /opt, or /tmp at depth <= 4."
+          },
+          "state": "LOCATION_OWNER_STATED. Bytes UNREAD from this VM. Calling the location UNKNOWN was wrong. A byte comparison against master was not computed here.",
+          "not_done": "Did not merge the OneDrive tree into this worktree. Did not open protected paths."
+        },
+        "google_drive": {
+          "access": "Google Drive MCP namespace status ready. search_files and list_recent_files returned the authenticated My Drive. No file was created, updated, copied, shared, or trashed.",
+          "root_parent_id": "0AHpObaoLPsWcUk9PVA",
+          "root_folder_census": "14 folders across two pages. None titled Schematics, GSMB, or Introduction to MCP.",
+          "empty_queries": [
+            "title contains 'Schematics' and mimeType = folder",
+            "title contains 'GSMB'",
+            "title contains 'Introduction'",
+            "title contains '00-Home' or 'MAIN-BRAIN' or 'WORKFLOWS' or 'coverage.csv'",
+            "fullText contains 'GSMB' and mimeType = folder"
+          ],
+          "hits_that_are_not_the_vault": [
+            "fullText 'Schematics' includes 'Kopano Labs - Master Visual Pitch Deck (With Embedded Schematics).pptx' (id 1rRZLJiXcH8vR0Qt86-Hwf-RSR3kpouWF, modified 2026-08-10) and unrelated files",
+            "fullText of the renter assertion hits existing Google Docs (weekly orientation docs and a job-fire handoff). Those are converted documents, not a byte mirror of this ledger.",
+            "Folder 'Kopano Labs' (id 1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI, created 2026-04-23) was listed to the end. Children are project notes and decks, not the Schematics tree."
+          ],
+          "state": "READ. No Schematics vault and no issue-reconciliation receipt set from this run are in this Drive. E050's 'UNKNOWN until an owner receipt' is replaced for the read: the mirror is absent as of this query, not unread.",
+          "write": "Not attempted. create_file exists on the connector. Uploading while the owner is reviewing the PR, into a Drive that has no named GSMB folder, was not done."
+        },
+        "corrected_tier_state": {
+          "cloud": "unchanged: branch cursor/reconciliation-closeout-4e71",
+          "local": "path owner-stated; bytes unread from this VM",
+          "google_drive": "read via MCP; Schematics mirror absent"
+        }
+      },
+      "prev_hash": "61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c",
+      "hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb"
     }
   ]
 }

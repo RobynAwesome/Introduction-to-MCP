@@ -600,3 +600,12 @@ The section 16 snippet, unchanged, now prints: `chain ok 52 61e3e124968190bc9662
 **Changed by this append:** entries appended to the JSON twin; sections 19-29 appended to this file; rows appended to the coverage CSV; one new closeout YAML; one block prepended to root `NOW.md`. No issue, setting, secret, dependency, deployment or Wave 0 row was touched.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+## 30. Tier read correction (E053, 2026-10-01T05:12:29Z)
+
+Appended after the owner named the local GSMB and pointed at Google Drive MCP. Sections 0-29 are unchanged. Entry 52 still hashes to `61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`. Chain tip after E053: `0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb`.
+
+**Local.** The owner named `C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics` as the local GSMB. That location is already the MAIN-BRAIN path in the cloud docs. This Linux VM has no mount of it (`/mnt/c/Users/rkhol/...` does not exist; no OneDrive directory under the searched roots). The location is owner-stated. The bytes are unread from this VM. "UNKNOWN" was the wrong word for the location. No OneDrive tree was merged into this worktree.
+
+**Google Drive.** The Drive MCP answered. My Drive root `0AHpObaoLPsWcUk9PVA` has 14 folders. None is titled Schematics, GSMB, or Introduction to MCP. Title queries for those names, for `00-Home`, `MAIN-BRAIN`, `WORKFLOWS`, and `coverage.csv`, returned nothing. A full-text "Schematics" hit is the 2026-08-10 pitch deck `Kopano Labs - Master Visual Pitch Deck (With Embedded Schematics).pptx` (`1rRZLJiXcH8vR0Qt86-Hwf-RSR3kpouWF`), not a vault. The folder `Kopano Labs` (`1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI`) was listed to the end; its children are notes and decks, not the Schematics tree. The renter assertion appears inside existing Google Docs. Those are not a byte mirror of this ledger. No Drive file was created or changed. E050's upload list still stands. Its sentence that the renter cannot read Drive does not.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
