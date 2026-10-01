@@ -1,0 +1,143 @@
+{
+  "schema": "kpgs.mzansi.data-engine.fixture-set.v1",
+  "fixture_set_id": "mzansi-invalid-001",
+  "purpose": "Records that MUST be refused by linguistic-record.schema.json. Each case names the first error path the validator is expected to report.",
+  "non_canonical": true,
+  "cases": [
+    {
+      "case_id": "missing-evidence-block",
+      "expected_error_contains": "$: missing required property 'evidence'",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0001",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "evidence-class-outside-enum",
+      "expected_error_contains": "$.evidence.class: value 'HUMAN_GUESSED' not in enum",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0002",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "HUMAN_GUESSED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "consent-as-string-not-boolean",
+      "expected_error_contains": "$.evidence.speaker_consent: expected type boolean",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0003",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": "yes", "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "undeclared-top-level-property",
+      "expected_error_contains": "$: undeclared property 'model_confidence'",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0004",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "AI_GENERATED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00",
+        "model_confidence": 0.99
+      }
+    },
+    {
+      "case_id": "wrong-schema-constant",
+      "expected_error_contains": "$.schema: expected const 'kpgs.mzansi.linguistic-record.v1'",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v2",
+        "record_id": "fx-invalid-0005",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "bad-language-tag",
+      "expected_error_contains": "$.source.language_tag: does not match pattern",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0006",
+        "source": {"language_tag": "Sepedi", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "duplicate-validator-ids",
+      "expected_error_contains": "$.validation.validator_ids: items are not unique",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0007",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "validated", "validator_ids": ["v1", "v1"], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    },
+    {
+      "case_id": "created-at-not-date-time",
+      "expected_error_contains": "$.created_at: not an RFC 3339 date-time",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0008",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER", "register": "formal"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": false, "segments": []},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "30 September 2026"
+      }
+    },
+    {
+      "case_id": "code-switch-segment-missing-language",
+      "expected_error_contains": "$.code_switch.segments[0]: missing required property 'language_tag'",
+      "record": {
+        "schema": "kpgs.mzansi.linguistic-record.v1",
+        "record_id": "fx-invalid-0009",
+        "source": {"language_tag": "nso", "text": "FIXTURE_PLACEHOLDER X", "register": "mixed"},
+        "aligned_forms": {"formal": null, "conversational": null, "street": null, "mxit": null, "semantic_gloss": null},
+        "code_switch": {"present": true, "segments": [{"start_char": 20, "end_char": 21, "text": "X"}]},
+        "speaker_context": {"context_source": "none", "region": null, "age_band": null},
+        "evidence": {"class": "UNVERIFIED", "provenance_uri": null, "speaker_consent": true, "license": null, "synthetic": true},
+        "validation": {"status": "pending", "validator_ids": [], "notes": null},
+        "created_at": "2026-09-30T00:00:00+02:00"
+      }
+    }
+  ]
+}

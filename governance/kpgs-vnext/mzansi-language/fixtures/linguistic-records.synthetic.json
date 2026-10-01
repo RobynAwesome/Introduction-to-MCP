@@ -1,0 +1,249 @@
+{
+  "schema": "kpgs.mzansi.data-engine.fixture-set.v1",
+  "fixture_set_id": "mzansi-synthetic-001",
+  "purpose": "Deterministic test material for the Mzansi Data Engine (RobynAwesome/Introduction-to-MCP#103 PR2). Placeholders only.",
+  "non_canonical": true,
+  "notes": [
+    "Every text field is a placeholder token, never a real Sepedi utterance. Nothing here is linguistic evidence.",
+    "Every record is synthetic: true. The HUMAN_* classes below exercise the lifecycle rules only; they are not claims that a human spoke or validated anything.",
+    "provenance_uri values use the fixture:// scheme so they can never be mistaken for real recordings, consent files or licenses.",
+    "license values are fixture-only and forbid training or downstream use."
+  ],
+  "records": [
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0001-unverified",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0001",
+        "register": "formal"
+      },
+      "aligned_forms": {
+        "formal": "FIXTURE_PLACEHOLDER_FORMAL_0001",
+        "conversational": null,
+        "street": null,
+        "mxit": null,
+        "semantic_gloss": "FIXTURE_PLACEHOLDER_GLOSS_0001"
+      },
+      "code_switch": {
+        "present": false,
+        "segments": []
+      },
+      "speaker_context": {
+        "context_source": "none",
+        "region": null,
+        "age_band": null
+      },
+      "evidence": {
+        "class": "UNVERIFIED",
+        "provenance_uri": "fixture://mzansi/synthetic-001/0001",
+        "speaker_consent": true,
+        "license": "fixture-only; no training; no redistribution",
+        "synthetic": true
+      },
+      "validation": {
+        "status": "pending",
+        "validator_ids": [],
+        "notes": null
+      },
+      "created_at": "2026-09-30T00:00:00+02:00"
+    },
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0002-human-recorded",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0002",
+        "register": "conversational"
+      },
+      "aligned_forms": {
+        "formal": "FIXTURE_PLACEHOLDER_FORMAL_0002",
+        "conversational": "FIXTURE_PLACEHOLDER_CONVERSATIONAL_0002",
+        "street": null,
+        "mxit": null,
+        "semantic_gloss": "FIXTURE_PLACEHOLDER_GLOSS_0002"
+      },
+      "code_switch": {
+        "present": false,
+        "segments": []
+      },
+      "speaker_context": {
+        "context_source": "speaker_declared",
+        "region": "FIXTURE_REGION_A",
+        "age_band": "adult"
+      },
+      "evidence": {
+        "class": "HUMAN_RECORDED",
+        "provenance_uri": "fixture://mzansi/synthetic-001/0002",
+        "speaker_consent": true,
+        "license": "fixture-only; no training; no redistribution",
+        "synthetic": true
+      },
+      "validation": {
+        "status": "pending",
+        "validator_ids": [],
+        "notes": null
+      },
+      "created_at": "2026-09-30T00:00:01+02:00"
+    },
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0003-ai-generated-codeswitch",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0003 FIXTURE_EN_SEGMENT_0003",
+        "register": "mixed"
+      },
+      "aligned_forms": {
+        "formal": null,
+        "conversational": null,
+        "street": "FIXTURE_PLACEHOLDER_STREET_0003",
+        "mxit": null,
+        "semantic_gloss": "FIXTURE_PLACEHOLDER_GLOSS_0003"
+      },
+      "code_switch": {
+        "present": true,
+        "segments": [
+          {
+            "start_char": 32,
+            "end_char": 55,
+            "language_tag": "en-ZA",
+            "text": "FIXTURE_EN_SEGMENT_0003"
+          }
+        ]
+      },
+      "speaker_context": {
+        "context_source": "user_supplied",
+        "region": "FIXTURE_REGION_B",
+        "age_band": "youth"
+      },
+      "evidence": {
+        "class": "AI_GENERATED",
+        "provenance_uri": "fixture://mzansi/synthetic-001/0003",
+        "speaker_consent": true,
+        "license": "fixture-only; no training; no redistribution",
+        "synthetic": true
+      },
+      "validation": {
+        "status": "pending",
+        "validator_ids": [],
+        "notes": null
+      },
+      "created_at": "2026-09-30T00:00:02+02:00"
+    },
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0004-ai-transformed-mxit",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0004",
+        "register": "mxit"
+      },
+      "aligned_forms": {
+        "formal": "FIXTURE_PLACEHOLDER_FORMAL_0004",
+        "conversational": null,
+        "street": null,
+        "mxit": "FIXTURE_PLACEHOLDER_MXIT_0004",
+        "semantic_gloss": "FIXTURE_PLACEHOLDER_GLOSS_0004"
+      },
+      "code_switch": {
+        "present": false,
+        "segments": []
+      },
+      "speaker_context": {
+        "context_source": "annotator_declared",
+        "region": null,
+        "age_band": "unknown"
+      },
+      "evidence": {
+        "class": "AI_TRANSFORMED",
+        "provenance_uri": "fixture://mzansi/synthetic-001/0004",
+        "speaker_consent": true,
+        "license": "fixture-only; no training; no redistribution",
+        "synthetic": true
+      },
+      "validation": {
+        "status": "pending",
+        "validator_ids": [],
+        "notes": null
+      },
+      "created_at": "2026-09-30T00:00:03+02:00"
+    },
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0005-no-consent",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0005",
+        "register": "street"
+      },
+      "aligned_forms": {
+        "formal": null,
+        "conversational": null,
+        "street": "FIXTURE_PLACEHOLDER_STREET_0005",
+        "mxit": null,
+        "semantic_gloss": null
+      },
+      "code_switch": {
+        "present": false,
+        "segments": []
+      },
+      "speaker_context": {
+        "context_source": "none",
+        "region": null,
+        "age_band": null
+      },
+      "evidence": {
+        "class": "HUMAN_RECORDED",
+        "provenance_uri": "fixture://mzansi/synthetic-001/0005",
+        "speaker_consent": false,
+        "license": null,
+        "synthetic": true
+      },
+      "validation": {
+        "status": "pending",
+        "validator_ids": [],
+        "notes": null
+      },
+      "created_at": "2026-09-30T00:00:04+02:00"
+    },
+    {
+      "schema": "kpgs.mzansi.linguistic-record.v1",
+      "record_id": "fx-nso-0006-rejected",
+      "source": {
+        "language_tag": "nso",
+        "text": "FIXTURE_PLACEHOLDER_SOURCE_0006",
+        "register": "unknown"
+      },
+      "aligned_forms": {
+        "formal": null,
+        "conversational": null,
+        "street": null,
+        "mxit": null,
+        "semantic_gloss": null
+      },
+      "code_switch": {
+        "present": false,
+        "segments": []
+      },
+      "speaker_context": {
+        "context_source": "none",
+        "region": null,
+        "age_band": null
+      },
+      "evidence": {
+        "class": "REJECTED",
+        "provenance_uri": null,
+        "speaker_consent": false,
+        "license": null,
+        "synthetic": true
+      },
+      "validation": {
+        "status": "rejected",
+        "validator_ids": ["fixture-validator-0"],
+        "notes": "FIXTURE: rejected at intake; kept so the failure stays in the evidence trail"
+      },
+      "created_at": "2026-09-30T00:00:05+02:00"
+    }
+  ]
+}
