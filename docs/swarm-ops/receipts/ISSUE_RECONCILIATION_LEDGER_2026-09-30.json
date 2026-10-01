@@ -1924,6 +1924,2123 @@
       },
       "prev_hash": "321f468f70672117e78cf3f296e2437303fd03efb51e0a6ddc54ec01734fe389",
       "hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788"
+    },
+    {
+      "seq": 28,
+      "entry_id": "ILR-2026-09-30-E028",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "wave_outcome_summary",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "waves": [
+          {
+            "wave": "0",
+            "pr": 240,
+            "merge_commit": "1e152dce3559276c4826fa34d4834f7a2d47f2bb",
+            "merged_at": "2026-09-30T23:34:37Z",
+            "status": "MERGED",
+            "artifacts": [
+              "ledger .md and .json",
+              "POCvsFOC groups doc and mirror",
+              "GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv",
+              "NOW.md PRE-SEED"
+            ]
+          },
+          {
+            "wave": "1a",
+            "pr": 241,
+            "merge_commit": "4a316bbb1c2c237a0ecc3569642dd146c8c13536",
+            "merged_at": "2026-09-30T23:41:30Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md"
+            ]
+          },
+          {
+            "wave": "1b",
+            "pr": 242,
+            "merge_commit": "f533ba22306f08212ed11f16b2f5b83cc80762c0",
+            "merged_at": "2026-10-01T00:05:19Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md"
+            ]
+          },
+          {
+            "wave": "Forge CA (local GSMB)",
+            "pr": 243,
+            "merge_commit": "499876734183011de590668c0b2deabad07e4660",
+            "merged_at": "2026-10-01T00:12:11Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md",
+              "poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json"
+            ]
+          },
+          {
+            "wave": "2",
+            "pr": 244,
+            "merge_commit": "f9ca1694ed23dffe61488ec3e40eb3235c50c3f0",
+            "merged_at": "2026-10-01T00:46:06Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md"
+            ]
+          },
+          {
+            "wave": "2",
+            "pr": 245,
+            "merge_commit": "84182ed26c88bc775dadc2ae49fbcafe6724b689",
+            "merged_at": "2026-10-01T00:54:10Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md",
+              "governance/kpgs-vnext/mzansi-language/{README.md,data_engine.py,validate.py,fixtures/*}",
+              "tests/test_mzansi_data_engine.py",
+              ".github/workflows/kpgs-vnext-phase0-gate.yml (+10)"
+            ]
+          },
+          {
+            "wave": "2",
+            "pr": 246,
+            "merge_commit": "2b8a58dad9415a305365e88512947af0ec39c91f",
+            "merged_at": "2026-10-01T01:11:27Z",
+            "status": "MERGED",
+            "artifacts": [
+              "docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md"
+            ]
+          },
+          {
+            "wave": "2",
+            "pr": 247,
+            "pr_head": "e62666511e75742535b8cfe001b37e070315670d",
+            "status": "OPEN DRAFT, UNMERGED, no review (observed 2026-10-01T02:42:59Z)",
+            "artifacts": [
+              "docs/swarm-ops/receipts/SAP_183_ADMISSION_PACKET_2026-09-30.md"
+            ]
+          },
+          {
+            "wave": "2",
+            "pr": 248,
+            "pr_head": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "status": "OPEN DRAFT, UNMERGED, no review (observed 2026-10-01T02:42:59Z)",
+            "artifacts": [
+              "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+              "docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md",
+              "docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md"
+            ]
+          },
+          {
+            "wave": "3",
+            "pr": "unknown at write time (opened after this commit)",
+            "branch": "cursor/reconciliation-closeout-4e71",
+            "base": "2b8a58dad9415a305365e88512947af0ec39c91f",
+            "status": "THIS ENTRY; head SHA recorded by GitHub, not by this file",
+            "artifacts": [
+              "ledger append E028-E052 (.json) and sections 19+ (.md)",
+              "GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv rows",
+              "docs/swarm-ops/receipts/SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml",
+              "NOW.md POST-SEED"
+            ]
+          }
+        ],
+        "non_wave_merges_in_window": [
+          {
+            "pr": 238,
+            "merge_commit": "d882b22e2eab33bdba4e565c80652c8f66a5e7ea",
+            "author": "dependabot",
+            "subject": "pyjwt 2.15.0"
+          },
+          {
+            "pr": 239,
+            "merge_commit": "34ead442a21304c445aeb46624ecedb3c0f6e5cf",
+            "author": "dependabot",
+            "subject": "litellm 1.89.7"
+          }
+        ],
+        "review_observation": "All nine merges #238-#246 landed with reviewDecision empty and no APPROVED review; renter PRs #242-#246 each carry one COMMENTED review (separate-context review record per F-1 interim rule); #240 and #241 carry none. Observed 2026-10-01T02:23:59Z. Strengthens C-207-3 (FOC_RISK) without changing it.",
+        "issues_closed_by_owner_in_window": [
+          205
+        ],
+        "issues_closed_by_renter": [],
+        "observation_window": {
+          "start_sha": "65975a125cad2954aa51cdf8b888ce6523839fd5",
+          "wave0_base_sha": "8c6d22f22dbc600a38b52daf3b2887940b8841fb",
+          "end_sha": "2b8a58dad9415a305365e88512947af0ec39c91f"
+        },
+        "pending_master_pointers": "Three Wave 2 receipts (SAP #183; estate #122; skills #94; studio #110) sit on unmerged PR heads #247 and #248. Entries below that cite them carry the PR-head limit verbatim."
+      },
+      "prev_hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788",
+      "hash": "9ed7731d3bd5379e5eabbf111e25423452040952b373c30bbf5cb831ce17a89f"
+    },
+    {
+      "seq": 29,
+      "entry_id": "ILR-2026-09-30-E029",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E005",
+        "claim_ids": [
+          "C-94-2"
+        ],
+        "fields": [
+          "next_actor",
+          "next_admissible_action"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 94,
+        "title": "[Routing] Resolve external skill registries beyond AwesomeSkills",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/94",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:51Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E005",
+        "wave0_tag": "UNKNOWN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "UNKNOWN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [
+          {
+            "claim": "C-94-2",
+            "from": "UNKNOWN",
+            "to": "POC_VALIDATED",
+            "eclass_from": "E4",
+            "eclass": "E2",
+            "pka": "ALLOW/PROPOSE (named claim only)",
+            "receipt": {
+              "path": "docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md",
+              "blob_sha": "5cd1c7d73ac72af5983d98c0032ee939fa483689",
+              "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+              "landed_kind": "pr_head",
+              "pr": 248,
+              "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+            },
+            "limits": "Negative content read of RobynAwesome/Skills at clone HEAD 00f43435d15e2297b2d32f19bc33ddb80fc89cfc: 128 SKILL.md files, 1 incidental Project Jennifer URL, 0 PKA references. MISS != NEGATIVE_PROOF for registries outside that clone. Evidence pointer is a PR-head blob; the master pointer is pending merge of the PR. If the PR closes unmerged, a later entry reverts this move; the receipt text stays as observed at its own time."
+          }
+        ],
+        "new_claims": [],
+        "observations": [
+          "C-94-1 stays UNKNOWN with a named candidate: SkillsMP indexes /creators/robynawesome/project-jennifer (200, 33 slugs) and /creators/robynawesome/introduction-to-mcp (200, 14 slugs, 6 of them skills-pka-*), probed 2026-10-01T01:41:08Z-01:42:25Z (receipt section 4.4).",
+          "The receipt labels this 'MAYBE / CANDIDATE_FOUND'; that label is outside the five working tags, so this ledger records UNKNOWN with the candidate named. INDEXED != REGISTERED_BY_OWNER; registration on SkillsMP is NOT CLAIMED (receipt section 5).",
+          "Issue #94 stays OPEN per its own text; the renter does not close."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md",
+            "blob_sha": "5cd1c7d73ac72af5983d98c0032ee939fa483689",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No (issue says it is not closable)",
+        "next_actor": "Robyn (confirms or rejects SkillsMP as the second registry, or names another); renter only after #248 merges or closes",
+        "next_admissible_action": "Robyn confirms or rejects SkillsMP as the intended second registry, or names another registry or URL. No further renter re-search of RobynAwesome/Skills is admissible without a new target. Review, merge or close #248 so the master pointer resolves.",
+        "admission_state": "Observation only; no admission needed. Registry decision is owner-gated.",
+        "decision_state": "not applicable",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "Relevance partial until the owner names the registry; candidate found, not confirmed."
+      },
+      "prev_hash": "9ed7731d3bd5379e5eabbf111e25423452040952b373c30bbf5cb831ce17a89f",
+      "hash": "e7cb076c6dc86b12e569e7496531780c8495b257a8d277c233d2a97098943d22"
+    },
+    {
+      "seq": 30,
+      "entry_id": "ILR-2026-09-30-E030",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 102,
+        "title": "[Estate Ops] 2026-08-24 live DNS cutover + admission receipts",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/102",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T01:38:08Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E006",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "Estate receipt section 3 (2026-10-01T01:40Z, E2): 13 hosts return 200 (kopanolabs.com, www, context., starfallsalvage.kopanolabs.com, crisisconnect., kasilink.com, www.kasilink.com, kasi-link.vercel.app, fivesarena.com, blog.fivesarena.com, lefa-core-live.vercel.app, kopano-context-studio.vercel.app, starfall-salvage-beryl.vercel.app); 1 returns 404 (kholofelorababalela.vercel.app); 9 did not resolve from this runtime; 3 KasiLink API routes return 500 on GET (/api/incidents, /api/water-alerts, /api/gigs).",
+          "HTTP_200 != SERVING_SHA_PROVEN; NXDOMAIN_FROM_ONE_RESOLVER != ALIAS_ABSENT. No KasiLink Atlas health inference is made; the 500s are recorded as observed status codes only.",
+          "The 'Wave 2 re-observes public HTTP read-only' clause of the Wave 0 next action is completed by that receipt (on an unmerged PR head); the human and provider gated clauses are unchanged."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+            "blob_sha": "9ee8cec72c9d8bf3e15a279a71036aca51513e37",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Robyn / provider-domain owner; renter for read-only re-observation",
+        "next_admissible_action": "KasiLink#15 runtime repair, apex/www convergence, and the Starfall rollback drill remain human or provider gated. No domain mutation by a renter. Re-observation is admissible again only on request or after a provider change.",
+        "admission_state": "Observation only; provider mutation stays separately gated.",
+        "decision_state": "not applicable",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "8 boxes accounted as two groups. Runtime evidence is dated."
+      },
+      "prev_hash": "e7cb076c6dc86b12e569e7496531780c8495b257a8d277c233d2a97098943d22",
+      "hash": "b37a58ccbaf8d9a8d4155c4525e8875f0213265b837f5a33e646ba275896909d"
+    },
+    {
+      "seq": 31,
+      "entry_id": "ILR-2026-09-30-E031",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E007",
+        "claim_ids": [
+          "C-103-2"
+        ],
+        "fields": [
+          "next_actor",
+          "next_admissible_action",
+          "admission_state"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 103,
+        "title": "Phase 7 Truth Lock - Sociolinguistic Inference AI",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/103",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:54Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E007",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "POC_PENDING",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [
+          {
+            "claim": "C-103-2",
+            "from": "POC_PENDING",
+            "to": "POC_VALIDATED",
+            "eclass_from": "E2",
+            "eclass": "E2",
+            "pka": "ALLOW/PROPOSE (named claim only)",
+            "receipt": {
+              "path": "docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md",
+              "blob_sha": "1f384acbf1c43847d187c364079d2f3c4720aa1b",
+              "landed": "84182ed26c88bc775dadc2ae49fbcafe6724b689",
+              "landed_kind": "master_merge_commit",
+              "pr": 245,
+              "status": "MERGED"
+            },
+            "limits": "Persistence and lifecycle governance over placeholder fixtures only; no linguistic, model, TTS or multi-language claim. Merge carried no APPROVED review (reviewDecision empty). Hosted gate green on PR head 106604f9; the gate run on master after merge was not re-read by this entry (UNKNOWN).",
+            "restated_text": "PR2 (Mzansi Data Engine foundation) merged to master at 84182ed26c88bc775dadc2ae49fbcafe6724b689 (#245, 2026-10-01T00:54:10Z): governance/kpgs-vnext/mzansi-language/data_engine.py (752 lines), validate.py (244), two synthetic fixture files, tests/test_mzansi_data_engine.py (29 tests OK locally, Python 3.12.3, 2026-10-01T00:30Z), gate wired in .github/workflows/kpgs-vnext-phase0-gate.yml (+10 lines); hosted checks SUCCESS on PR head 106604f9."
+          }
+        ],
+        "new_claims": [],
+        "observations": [
+          "C-103-1 unchanged (POC_VALIDATED).",
+          "Issue tag stays POC_PENDING because #103 remains open for PR3+ and the PR3 admission basis was not re-read in this run (UNKNOWN).",
+          "Receipt section 5 wording honoured: 'supports POC_VALIDATED for persistence and lifecycle governance over placeholder fixtures only'."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md",
+            "blob_sha": "1f384acbf1c43847d187c364079d2f3c4720aa1b",
+            "landed": "84182ed26c88bc775dadc2ae49fbcafe6724b689",
+            "landed_kind": "master_merge_commit",
+            "pr": 245,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Renter (re-read of #103 phase record for PR3, then bounded slice only after admission basis is confirmed); Forge/RTC for admission confirmation",
+        "next_admissible_action": "Re-read the #103 phase record for the PR3 slice; confirm its admission basis the same way PR2's was confirmed before any code. No real data, no TTS, no multi-language expansion. Record the hosted gate result on master as a separate observation when read.",
+        "admission_state": "PR2: ADMITTED_BY_ISSUE_RECORD, delivered and merged (84182ed2). PR3+: UNKNOWN (not re-read). RTC decision still not recorded in cloud.",
+        "decision_state": "UNRECORDED (RTC); issue-record admission used for PR2 only",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Completeness partial: PR3+ scope not re-read."
+      },
+      "prev_hash": "b37a58ccbaf8d9a8d4155c4525e8875f0213265b837f5a33e646ba275896909d",
+      "hash": "1a331e50de1f6939b5ddc70e83f362defa32b50f6d8247d8e58ed92e0edda26a"
+    },
+    {
+      "seq": 32,
+      "entry_id": "ILR-2026-09-30-E032",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E008",
+        "claim_ids": [
+          "C-107-2"
+        ],
+        "fields": [
+          "proposed_tag",
+          "next_actor",
+          "next_admissible_action",
+          "admission_state"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 107,
+        "title": "KMEC Data-Science Observation Engine - Parser + Smart Ledger + PKA",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/107",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:56Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E008",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": true,
+        "claim_moves": [
+          {
+            "claim": "C-107-2",
+            "from": "POC_PENDING",
+            "to": "HOLD_HUMAN",
+            "eclass_from": "E2",
+            "eclass": "E2",
+            "pka": "HOLD",
+            "receipt": {
+              "path": "docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md",
+              "blob_sha": "fe3ee2c6b280e75c69bf62e33520aef5335343d4",
+              "landed": "2b8a58dad9415a305365e88512947af0ec39c91f",
+              "landed_kind": "master_merge_commit",
+              "pr": 246,
+              "status": "MERGED"
+            },
+            "limits": "Packet sections 2, 4 and 6: no named contract owner per surface (section 4.1 blocking gap); three lifecycle vocabularies in play (section 4.3); admission conditions 6.1-6.7 open. HOLD on PR1 implementation (packet line 3)."
+          }
+        ],
+        "new_claims": [],
+        "observations": [
+          "C-107-1 unchanged (POC_PENDING).",
+          "C-107-3 stays UNKNOWN with a partial read (packet section 3, 2026-10-01T00:41Z): KMEC main bf9988ab readable; Jennifer#78 lane closed with a receipt; PKA#18 returns 404 under both owners (UNREADABLE != ABSENT).",
+          "Packet merged to master at 2b8a58da (#246). Packet line 151 named this append: '#107 PR1 -> HOLD packet filed <sha>; admission conditions 6.1-6.7 open'."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md",
+            "blob_sha": "fe3ee2c6b280e75c69bf62e33520aef5335343d4",
+            "landed": "2b8a58dad9415a305365e88512947af0ec39c91f",
+            "landed_kind": "master_merge_commit",
+            "pr": 246,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC Design Review / Forge CA (record decisions on 6.1-6.7); owner comment acceptable; renter only after a recorded decision",
+        "next_admissible_action": "Record admission conditions 6.1-6.7 as an RTC or Design Review entry or an owner comment on #107. No schema or parser code before then. Renter does not pick contract owners.",
+        "admission_state": "DESIGN_REVIEW_REQUIRED; packet filed 2b8a58da; decision UNRECORDED -> HOLD.",
+        "decision_state": "HOLD",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "13 boxes and 7 PRs accounted as a group. Cross-repo lanes unreadable."
+      },
+      "prev_hash": "1a331e50de1f6939b5ddc70e83f362defa32b50f6d8247d8e58ed92e0edda26a",
+      "hash": "7ad91ca8982e50e1108935458c8faf207331f98a97f5857ac73d4fff64413789"
+    },
+    {
+      "seq": 33,
+      "entry_id": "ILR-2026-09-30-E033",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E009",
+        "claim_ids": [],
+        "fields": [
+          "next_actor",
+          "next_admissible_action"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 110,
+        "title": "[KC GUI] Reconcile Structure/UI-UX plans with current Studio",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/110",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:51Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E009",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "POC_PENDING",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [
+          {
+            "id": "C-110-3",
+            "text": "A Studio-versus-plan audit document exists: boxes 2 and 4 evidenced (LINT_EXIT=0; five react-hooks/set-state-in-effect warnings; main bundle 568.83 kB; build log /tmp/studio_build_110.log at 2026-10-01T01:23Z, not committed); residues A1-A4 listed, none fixed.",
+            "family": "Textual",
+            "eclass": "E2",
+            "tag": "POC_VALIDATED",
+            "pka": "ALLOW/PROPOSE (named claim only)",
+            "receipts": [
+              {
+                "path": "docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md",
+                "blob_sha": "1116a327f977e2084331cd3e5cbb9af091135745",
+                "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+                "landed_kind": "pr_head",
+                "pr": 248,
+                "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+              }
+            ],
+            "limits": "Audit exists; it proves no runtime behaviour. BUILD_GREEN != BROWSER_QA_PASSED. Evidence pointer is a PR-head blob; the master pointer is pending merge of the PR. If the PR closes unmerged, a later entry reverts this move; the receipt text stays as observed at its own time."
+          }
+        ],
+        "observations": [
+          "C-110-1 unchanged (POC_VALIDATED). C-110-2 stays POC_PENDING, narrowed to browser QA and bounded UX fixes (the audit half is now C-110-3).",
+          "Residues recorded, not fixed: A1 retired branch name live outside NAVIGATION (kc_swarm_console_api.py, phu_ecosystem.py, swarm-proof.yml, docs, 11 scripts); A2 five react-hooks warnings; A3 bundle 568.83 kB; A4 owner-interface target file in Main Brain not locatable from cloud (box 3 UNKNOWN).",
+          "Receipt line 167 named this append: '#110 -> audit receipt filed <sha>; boxes 2, 4 evidenced; A1-A4 open; C-110-2 POC_VALIDATED (audit exists), browser QA POC_PENDING'. This ledger implements that as a new claim C-110-3 rather than retagging C-110-2, to keep the browser-QA half visibly pending."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md",
+            "blob_sha": "1116a327f977e2084331cd3e5cbb9af091135745",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Robyn (A4 file name; A2/A3 decision; A1a compare target); renter for one bounded PR per residue after that; browser-capable lane for QA",
+        "next_admissible_action": "Owner names the Main Brain owner-interface file (A4), decides whether A2 and A3 are worth fixing, and names the compare target for A1a. Then one bounded PR per residue. Browser QA stays POC_PENDING until a browser-capable lane records it. Review, merge or close #248.",
+        "admission_state": "Observation only for the audit; UX fixes are separate bounded PRs (not admitted yet).",
+        "decision_state": "not applicable",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "8 boxes: 1 evidenced, 7 open; accounted as two groups."
+      },
+      "prev_hash": "7ad91ca8982e50e1108935458c8faf207331f98a97f5857ac73d4fff64413789",
+      "hash": "7d0da33bb98b8365712979cc781a59611843ec5466feaeb327225314ac107c65"
+    },
+    {
+      "seq": 34,
+      "entry_id": "ILR-2026-09-30-E034",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E010",
+        "claim_ids": [
+          "C-115-1"
+        ],
+        "fields": [
+          "proposed_tag",
+          "next_actor",
+          "next_admissible_action",
+          "admission_state"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 115,
+        "title": "feat(24-RTC Learning): Forge Orchard Protocol",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/115",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:53Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E010",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": true,
+        "claim_moves": [
+          {
+            "claim": "C-115-1",
+            "from": "POC_PENDING",
+            "to": "POC_VALIDATED",
+            "eclass_from": "E3",
+            "eclass": "E2",
+            "pka": "ALLOW/PROPOSE (named claim only)",
+            "receipt": {
+              "path": "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md",
+              "blob_sha": "ffe06a644792d54db545f2b883067295317a8633",
+              "landed": "f9ca1694ed23dffe61488ec3e40eb3235c50c3f0",
+              "landed_kind": "master_merge_commit",
+              "pr": 244,
+              "status": "MERGED"
+            },
+            "limits": "Classroom packet section 3: 23-row overlap table against cloud head; merged f9ca1694. Overlap audit only; it admits nothing."
+          }
+        ],
+        "new_claims": [],
+        "observations": [
+          "C-115-2 unchanged (HOLD_HUMAN).",
+          "Packet enumerates Tasks 2-6 (Task 6 = Forge compression receipt) per its section 5, where Wave 0 wrote Tasks 2-5; the extra task is a packet refinement, not a scope expansion by this ledger.",
+          "Packet line 6 records 'LEARN for #115 Tasks 2-6'. Prerequisites to TEST / READY_FOR_POC (packet section 9): RTC admits vocabularies and names the seat registry; owner reads Structure/07-Agents/PROMOTION_LAW.json (renter may not open it); F-W2-2 / F-W2-3 decision; a specification per task in the SPECIFICATION.md shape."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md",
+            "blob_sha": "ffe06a644792d54db545f2b883067295317a8633",
+            "landed": "f9ca1694ed23dffe61488ec3e40eb3235c50c3f0",
+            "landed_kind": "master_merge_commit",
+            "pr": 244,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC (vocabularies, seat registry); Robyn (PROMOTION_LAW.json read, F-W2-2/F-W2-3); renter only after READY_FOR_POC",
+        "next_admissible_action": "RTC admits the vocabularies and names the seat registry; owner reads Structure/07-Agents/PROMOTION_LAW.json and decides F-W2-2 / F-W2-3; a specification per task is written before any task reaches READY_FOR_POC. No code.",
+        "admission_state": "Task 1 done (observation). Tasks 2-6 and PROMOTION_PROTOCOL.md: LEARN; decision UNRECORDED -> HOLD.",
+        "decision_state": "LEARN",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "6 tasks: Task 1 done, Tasks 2-6 held at LEARN."
+      },
+      "prev_hash": "7d0da33bb98b8365712979cc781a59611843ec5466feaeb327225314ac107c65",
+      "hash": "5cf1ce8e5e7b5635122ff4df3077e357d363277ba5bb453e19919d0047c0bf16"
+    },
+    {
+      "seq": 35,
+      "entry_id": "ILR-2026-09-30-E035",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 116,
+        "title": "feat(24-RTC Learning): Temporal Data - Testament of Time, Manhole Retrieval",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/116",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:54Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E011",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "Source packet filed (Classroom packet section 6): 15 questions with sources; four E4 concepts need named owners before discussion can be grounded.",
+          "No seat opinion was written by the renter; unavailable seats are recorded as unavailable."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md",
+            "blob_sha": "ffe06a644792d54db545f2b883067295317a8633",
+            "landed": "f9ca1694ed23dffe61488ec3e40eb3235c50c3f0",
+            "landed_kind": "master_merge_commit",
+            "pr": 244,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC seats (ten independent positions on cloud); Robyn (owners for the four E4 concepts); Forge CA (disagreement map)",
+        "next_admissible_action": "Ten independent seat opinions recorded on cloud against the section 6 questions; owners named for the four E4 concepts. Renter writes no seat opinion.",
+        "admission_state": "LEARN / RTC_DISCUSSION; source packet filed f9ca1694; decision UNRECORDED -> HOLD.",
+        "decision_state": "LEARN / HOLD",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Discussion-only issue; disposition matches its own status."
+      },
+      "prev_hash": "5cf1ce8e5e7b5635122ff4df3077e357d363277ba5bb453e19919d0047c0bf16",
+      "hash": "cab226c88d018c85c3615ec23be00a152a7885786892c402fd545afc4c07d14a"
+    },
+    {
+      "seq": 36,
+      "entry_id": "ILR-2026-09-30-E036",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 121,
+        "title": "[P0][RTC] Quarantine AntiGravity Seat 10",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/121",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T00:42:56Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E012",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "RTC incident cluster source packet filed f533ba22 (#242): section 2 dated record, section 3 stale/disagree map, section 4 open questions. No adjudication; no gate A or gate B evidence was produced by any wave."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+            "blob_sha": "81ad7d7ca2f15ab2d46376ee3a5b562bdfdcd396",
+            "landed": "f533ba22306f08212ed11f16b2f5b83cc80762c0",
+            "landed_kind": "master_merge_commit",
+            "pr": 242,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC and Robyn (Tier 0)",
+        "next_admissible_action": "Gate A (independent re-entry receipts) or gate B (Tier-0 decommission). Renter records sources and dates only.",
+        "admission_state": "Not applicable; incident gate stays attached to its subject.",
+        "decision_state": "not applicable (incident gate attached to its subject)",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "State record; timeline spans four sources, no adjudication."
+      },
+      "prev_hash": "cab226c88d018c85c3615ec23be00a152a7885786892c402fd545afc4c07d14a",
+      "hash": "2a7780c69f9d3e6d8f7dcee14d6bb90725510af5974b3d493581205d3e4e00ba"
+    },
+    {
+      "seq": 37,
+      "entry_id": "ILR-2026-09-30-E037",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E013",
+        "claim_ids": [
+          "C-122-1"
+        ],
+        "fields": [
+          "proposed_tag",
+          "owner_closeable",
+          "next_actor",
+          "next_admissible_action"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 122,
+        "title": "[Estate Audit] 2026-09-07 fresh 22-repo identity, local, CI, and Vercel witness refresh",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/122",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-07T01:38:06Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E013",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": true,
+        "claim_moves": [
+          {
+            "claim": "C-122-1",
+            "from": "POC_PENDING",
+            "to": "POC_VALIDATED",
+            "eclass_from": "E3",
+            "eclass": "E2",
+            "pka": "ALLOW/PROPOSE (named claim only)",
+            "receipt": {
+              "path": "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+              "blob_sha": "9ee8cec72c9d8bf3e15a279a71036aca51513e37",
+              "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+              "landed_kind": "pr_head",
+              "pr": 248,
+              "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+            },
+            "limits": "Cloud subset only: 21 of 22 repos read (PKA 404 under both owners -> UNKNOWN); 11 success / 3 failure / 7 no-run at head (section 2); HTTP probe section 3. Local census and Vercel alias boxes stay owner or provider gated. Evidence pointer is a PR-head blob; the master pointer is pending merge of the PR. If the PR closes unmerged, a later entry reverts this move; the receipt text stays as observed at its own time."
+          }
+        ],
+        "new_claims": [],
+        "observations": [
+          "C-122-2 stays UNKNOWN: the 2026-09-07 receipt files cited by the issue comment are still absent from master at 2b8a58da.",
+          "Box states per estate receipt section 6: 1 DONE (cloud); 2 EVIDENCED; 3 UNKNOWN (owner); 4 UNKNOWN (provider); 5 EVIDENCED (cloud); 6 OPEN until Wave 3 - the cloud half is satisfied by this entry and the POST-SEED on this branch, and stays OPEN until this PR and #248 merge; 7 EVIDENCED.",
+          "Receipt section 7 offers (a) close-as-superseded with a new owner-local issue for boxes 3-4, or (b) keep-as-umbrella; the receipt states no preference and neither does this ledger. Eight child issues cite #122 as parent (#94 #102 #103 #107 #110 #115 #116 #121).",
+          "Receipt line 172 named this append: '#122 -> cloud census receipt filed <sha>; 21/22 read, 1 UNKNOWN; boxes 2, 5-cloud, 7 evidenced; 3, 4 owner/provider gated; C-122-1 POC_VALIDATED (cloud subset), C-122-2 UNKNOWN unchanged'."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+            "blob_sha": "9ee8cec72c9d8bf3e15a279a71036aca51513e37",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "Owner's choice per receipt section 7 (a) or (b); admissible only after #248 merges so the receipt has a master pointer. Renter does not close.",
+        "next_actor": "Robyn (choose (a) or (b) after #248 merges; local census; Vercel alias)",
+        "next_admissible_action": "After #248 merges, choose (a) close-as-superseded with a new owner-local issue for boxes 3-4, or (b) keep #122 open as umbrella. Boxes 3 and 4 stay owner and provider gated. No renter closes.",
+        "admission_state": "Observation only.",
+        "decision_state": "not applicable",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "7 boxes: cloud subset sliced, rest held. Dated."
+      },
+      "prev_hash": "2a7780c69f9d3e6d8f7dcee14d6bb90725510af5974b3d493581205d3e4e00ba",
+      "hash": "ce886eb74169404320092e5f2b8d238e9473e4ac15b73b0399fb464b485353f9"
+    },
+    {
+      "seq": 38,
+      "entry_id": "ILR-2026-09-30-E038",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 158,
+        "title": "[EPOCH][FivesArena] Park public surface + run KPGSTHREE relaunch experiment",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/158",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-09T03:35:39Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E014",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "No wave touched #158. The paired queue item (E027 row 3) is half done: #205 closed by owner 2026-09-30T23:41:32Z; the Bookit PR #33 decision is open.",
+          "Estate receipt section 2 (unmerged #248) records a failing 'APWA Proof Gate' at head on Kopano-Labs/Bookit-5s-Arena; recorded as observed, not interpreted."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+            "blob_sha": "9ee8cec72c9d8bf3e15a279a71036aca51513e37",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Robyn",
+        "next_admissible_action": "Decide whether the epoch relaunch is still intended. If yes, rebase PR #33 before owner inspection. No merge or deploy by a renter.",
+        "admission_state": "Not applicable; owner inspection gate.",
+        "decision_state": "not applicable (owner inspection gate)",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "P"
+        },
+        "clear_note": "10 boxes accounted as a group. Cross-repo results not re-run."
+      },
+      "prev_hash": "ce886eb74169404320092e5f2b8d238e9473e4ac15b73b0399fb464b485353f9",
+      "hash": "0e0bbe73c698c29efc7be75af163536d23b7965153781a4f37922eb68ff21625"
+    },
+    {
+      "seq": 39,
+      "entry_id": "ILR-2026-09-30-E039",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 163,
+        "title": "[CRITICAL INCIDENT] Forge lead-node truth/provenance failure - 2026-09-11",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/163",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-11T09:59:48Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E015",
+        "wave0_tag": "POC_VALIDATED",
+        "wave0_pka": "ALLOW/PROPOSE (named claim only)",
+        "outcome_tag": "POC_VALIDATED",
+        "outcome_pka": "ALLOW/PROPOSE (named claim only)",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "RTC incident cluster source packet filed f533ba22 (#242). Its section 8 puts the exit-criteria question (P1-P3) to Robyn; the renter did not answer it.",
+          "Claims C-163-1 (POC_VALIDATED) and C-163-2 (HOLD_HUMAN) unchanged. The incident artifact still says OPEN; closeable text unchanged."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+            "blob_sha": "81ad7d7ca2f15ab2d46376ee3a5b562bdfdcd396",
+            "landed": "f533ba22306f08212ed11f16b2f5b83cc80762c0",
+            "landed_kind": "master_merge_commit",
+            "pr": 242,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "Owner/RTC decision; not recommended while the artifact says OPEN",
+        "next_actor": "RTC / Robyn",
+        "next_admissible_action": "Define incident exit criteria, or decide the tracker issue may close while the artifact stays OPEN. Renter does not adjudicate.",
+        "admission_state": "Not applicable; incident gate stays attached to its subject.",
+        "decision_state": "not applicable (incident gate attached to its subject)",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Ask was artifact visibility to GSMB; delivered. Closure is a separate question."
+      },
+      "prev_hash": "0e0bbe73c698c29efc7be75af163536d23b7965153781a4f37922eb68ff21625",
+      "hash": "36544b5b820129b1342cd3ce1314cf6d3c9d1ce0d8047b92d23ead230f982a64"
+    },
+    {
+      "seq": 40,
+      "entry_id": "ILR-2026-09-30-E040",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 167,
+        "title": "[P0][RTC] Forge second governance offense - Project Jennifer authority bypass + NSO-001",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/167",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-11T20:54:00Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E016",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "RTC packet sections 3 and 4 enumerate questions 1-7 with their sources. No inquest document was written; no adjudication by Forge or Cursor.",
+          "Claims C-167-1, C-167-2, C-167-3 unchanged."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+            "blob_sha": "81ad7d7ca2f15ab2d46376ee3a5b562bdfdcd396",
+            "landed": "f533ba22306f08212ed11f16b2f5b83cc80762c0",
+            "landed_kind": "master_merge_commit",
+            "pr": 242,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC seats; Robyn (Tier 0)",
+        "next_admissible_action": "RTC produces RTC_INQUEST_2026-09-11_FORGE_PROJECT_JENNIFER and answers questions 1-7. Forge may not self-adjudicate; Cursor may not either.",
+        "admission_state": "Not applicable; incident gate.",
+        "decision_state": "not applicable (incident gate)",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "All 7 RTC questions enumerated as unanswered in the cloud record."
+      },
+      "prev_hash": "36544b5b820129b1342cd3ce1314cf6d3c9d1ce0d8047b92d23ead230f982a64",
+      "hash": "e75eda509dcc020adfcc8909f66c4f9fbb727a853fdfcf3ef6a6be73f88cdefd"
+    },
+    {
+      "seq": 41,
+      "entry_id": "ILR-2026-09-30-E041",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E017",
+        "claim_ids": [],
+        "fields": [
+          "proposed_tag",
+          "next_actor",
+          "next_admissible_action",
+          "admission_state"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 183,
+        "title": "[KPGS ADK] Structured Agency Protocol (SAP) + RUNE authority verification + GSMB/FEP/RTC runtime",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/183",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-19T20:59:31Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E017",
+        "wave0_tag": "POC_PENDING",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": true,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "Claims C-183-1 (POC_PENDING) and C-183-2 (UNKNOWN) unchanged.",
+          "SAP admission packet on #247 head e6266651 (unmerged): section 2 teach-back, 3 doctrine trace, 4 overlap at master@84182ed2, 5 acronym collision, 7 RUNE boundary, 9 35-box map, 10 acceptance checks, 11 rollback, 12 admission conditions, 15 decisions D1-D6. Packet line 295: 'Until D1-D5 are recorded: HOLD. Once recorded: POC steps 1-4 are READY_FOR_POC under sections 10-11'.",
+          "RUNE pin hygiene (packet section 7 item 2: three files -> 656ae46c1fdb00c13744655fa2e62a7cbb6e3a57) is queued, not performed by any wave."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/SAP_183_ADMISSION_PACKET_2026-09-30.md",
+            "blob_sha": "89b6f6141cad95d5af447c7e68e4fc4005a238d1",
+            "landed": "e62666511e75742535b8cfe001b37e070315670d",
+            "landed_kind": "pr_head",
+            "pr": 247,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "RTC Design Review / Forge CA (record D1-D5, D6 if taken); owner comment acceptable; renter only after a recorded decision",
+        "next_admissible_action": "Record D1-D5 (and D6 if taken) as an RTC or Design Review entry or an owner comment on #183. HOLD on code until then. After that, POC steps 1-4 are READY_FOR_POC under packet sections 10-11 and owe a slice receipt. Review, merge or close #247.",
+        "admission_state": "DESIGN_REVIEW_REQUIRED; packet filed on PR head (unmerged); decision UNRECORDED -> HOLD.",
+        "decision_state": "HOLD",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "35 boxes accounted as a group; POC steps 1-4 identified as the first slice."
+      },
+      "prev_hash": "e75eda509dcc020adfcc8909f66c4f9fbb727a853fdfcf3ef6a6be73f88cdefd",
+      "hash": "2d53d1a0dbc5eee3ee4b470a62d4ad886bae7e454ea96b3fd00e9310712ada1b"
+    },
+    {
+      "seq": 42,
+      "entry_id": "ILR-2026-09-30-E042",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E018",
+        "claim_ids": [],
+        "fields": [
+          "owner_closeable",
+          "next_actor",
+          "next_admissible_action"
+        ],
+        "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+      },
+      "payload": {
+        "issue": 205,
+        "title": "Dependency admission receipt: reconcile NOW and pair ESLint 10 PRs #200/#204",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/205",
+        "live_state": "CLOSED",
+        "live_updated_at": "2026-09-30T23:41:32Z",
+        "observed_at": "2026-10-01T02:42:59Z",
+        "wave0_entry": "ILR-2026-09-30-E018",
+        "wave0_tag": "POC_VALIDATED",
+        "wave0_pka": "ALLOW/PROPOSE (named claim only)",
+        "outcome_tag": "POC_VALIDATED",
+        "outcome_pka": "ALLOW/PROPOSE (named claim only)",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "Live state CLOSED by owner at 2026-09-30T23:41:32Z (E2, gh issue view at 2026-10-01T02:42:59Z). Whether the owner read limits C-205-1 to C-205-3 before closing is E4.",
+          "C-205-3 stays UNKNOWN: the #202 upload/download and runner-fleet check was not performed; it is tracked only in this ledger now that the issue is closed.",
+          "Receipt: repo-boundary enforcement receipt section 2, merged 4a316bbb (#241)."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md",
+            "blob_sha": "cbbca685149f48a830cdc383aab1641b02acd19a",
+            "landed": "4a316bbb1c2c237a0ecc3569642dd146c8c13536",
+            "landed_kind": "master_merge_commit",
+            "pr": 241,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "Done: closed by owner 2026-09-30T23:41:32Z.",
+        "next_actor": "none",
+        "next_admissible_action": "none for this issue. C-205-3 (runner-fleet check) remains an open limit tracked by this ledger.",
+        "admission_state": "Observation only.",
+        "decision_state": "not applicable",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "Steps 4-5 partially evidenced (#202 verification not performed)."
+      },
+      "prev_hash": "2d53d1a0dbc5eee3ee4b470a62d4ad886bae7e454ea96b3fd00e9310712ada1b",
+      "hash": "1a0c33a49dc4cd76f2f7b44d27f971bf03e7556f4e7920945d5b8c6042f27403"
+    },
+    {
+      "seq": 43,
+      "entry_id": "ILR-2026-09-30-E043",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 207,
+        "title": "[Governance] Enforce branch/PR proof at the repository boundary",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/207",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-24T00:42:26Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E019",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "New observation (E2, 2026-10-01T02:23:59Z): seven renter-lane merges #240-#246 (2026-09-30T23:34:37Z to 2026-10-01T01:11:27Z) plus Dependabot #238/#239 landed with reviewDecision empty and no APPROVED review. The protection setting itself stays UNKNOWN to this token; the pattern is consistent with, but does not prove, the absence of an enforced approving-review rule.",
+          "Renter PRs carried separate-context COMMENTED review records and no GitHub approval, per the F-1 interim rule.",
+          "Claims C-207-1 (POC_VALIDATED), C-207-2 (HOLD_HUMAN), C-207-3 (FOC_RISK) unchanged; the observation strengthens C-207-3 without moving it."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md",
+            "blob_sha": "cbbca685149f48a830cdc383aab1641b02acd19a",
+            "landed": "4a316bbb1c2c237a0ecc3569642dd146c8c13536",
+            "landed_kind": "master_merge_commit",
+            "pr": 241,
+            "status": "MERGED"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Forge CA and Robyn (admin-scope readback and decision)",
+        "next_admissible_action": "Read protection and all rulesets with an admin-scope token; decide whether the approving-review rule is intended and who can satisfy it; decide on a drift check (new governance mechanism: RTC admission). Renter changed no setting.",
+        "admission_state": "Any drift-check mechanism is new governance: DESIGN_REVIEW_REQUIRED. Readback is observation.",
+        "decision_state": "DESIGN_REVIEW_REQUIRED for any drift check; UNRECORDED -> HOLD",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "P",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "7 checklist items: 3 evidenced, rest HOLD. Settings unreadable."
+      },
+      "prev_hash": "1a0c33a49dc4cd76f2f7b44d27f971bf03e7556f4e7920945d5b8c6042f27403",
+      "hash": "5d44da09feeafe3a1c24f2d8e97f56002f0a863de4987baa555e021131cd0b76"
+    },
+    {
+      "seq": 44,
+      "entry_id": "ILR-2026-09-30-E044",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 211,
+        "title": "[HOLD] Azure production deploy missing OIDC credential secrets",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/211",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-24T08:54:23Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E020",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "Repo-boundary receipt section 4 (merged 4a316bbb) records the Azure preflight failure observed on 65975a12 and 8c6d22f2 in Wave 0. It was not re-observed on 2b8a58da by this entry (UNKNOWN).",
+          "Estate receipt section 2 row 1 (unmerged #248) lists 'Kopano Context Production Hardening Deployment ... success' at 2b8a58da. Whether that is the same workflow that failed the Azure preflight was NOT checked; recorded as UNKNOWN, not inferred either way.",
+          "HOLD unchanged because the secret-side closure steps (three secret values, federated identity, authorized re-run with Azure login PASS and azd up PASS) are unperformed. Renter handled no secret value."
+        ],
+        "receipts": [
+          {
+            "path": "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md",
+            "blob_sha": "cbbca685149f48a830cdc383aab1641b02acd19a",
+            "landed": "4a316bbb1c2c237a0ecc3569642dd146c8c13536",
+            "landed_kind": "master_merge_commit",
+            "pr": 241,
+            "status": "MERGED"
+          },
+          {
+            "path": "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+            "blob_sha": "9ee8cec72c9d8bf3e15a279a71036aca51513e37",
+            "landed": "7357ecc8c61dcffb0bbf23b834ac349aa761f2f2",
+            "landed_kind": "pr_head",
+            "pr": 248,
+            "status": "UNMERGED (open draft, no review, observed 2026-10-01T02:42:59Z)"
+          }
+        ],
+        "owner_closeable_now": "No",
+        "next_actor": "Robyn (secrets and federated identity)",
+        "next_admissible_action": "Provide AZURE_CLIENT_ID, AZURE_TENANT_ID and AZURE_SUBSCRIPTION_ID to GitHub Actions secrets, verify the federated identity, re-run an authorized deploy, and require a run receipt with Azure login PASS and azd up PASS. Renter does not handle secret values.",
+        "admission_state": "Not applicable; owner-held secrets.",
+        "decision_state": "not applicable (owner-held secrets)",
+        "clear": {
+          "C": "Y",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "All four closure steps are human-held."
+      },
+      "prev_hash": "5d44da09feeafe3a1c24f2d8e97f56002f0a863de4987baa555e021131cd0b76",
+      "hash": "afe7ae000829a6b9010be7f4ec2216d876d74afa6d0736b94b6c3e8605edd835"
+    },
+    {
+      "seq": 45,
+      "entry_id": "ILR-2026-09-30-E045",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "issue_outcome",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "issue": 231,
+        "title": "[FEP][Driver discovery] Test a driver-owned WhatsApp shift receipt before dispatcher claims",
+        "url": "https://github.com/RobynAwesome/Introduction-to-MCP/issues/231",
+        "live_state": "OPEN",
+        "live_updated_at": "2026-09-28T20:06:57Z",
+        "observed_at": "2026-10-01T02:23:59Z",
+        "wave0_entry": "ILR-2026-09-30-E021",
+        "wave0_tag": "HOLD_HUMAN",
+        "wave0_pka": "HOLD",
+        "outcome_tag": "HOLD_HUMAN",
+        "outcome_pka": "HOLD",
+        "tag_moved": false,
+        "claim_moves": [],
+        "new_claims": [],
+        "observations": [
+          "No wave touched #231. Claims C-231-1 and C-231-2 unchanged. No agent contacted a driver."
+        ],
+        "receipts": [],
+        "owner_closeable_now": "No",
+        "next_actor": "Robyn (consenting-driver field lane); Cassey (separate review)",
+        "next_admissible_action": "Run the bounded field lane only when authorized; preserve denominator, declines, corrections and seven-day second-contact outcomes. No agent contacts drivers.",
+        "admission_state": "READY_FOR_BOUNDED_TEST recorded in the issue (Forge); field completion unproved.",
+        "decision_state": "READY_FOR_BOUNDED_TEST recorded in the issue (Forge); field completion unproved",
+        "clear": {
+          "C": "P",
+          "L": "Y",
+          "E": "Y",
+          "A": "Y",
+          "R": "Y"
+        },
+        "clear_note": "5 field boxes accounted as a group."
+      },
+      "prev_hash": "afe7ae000829a6b9010be7f4ec2216d876d74afa6d0736b94b6c3e8605edd835",
+      "hash": "4e317f9d3d20fd8b053d955d0d77048750974da57284b620941341a129969510"
+    },
+    {
+      "seq": 46,
+      "entry_id": "ILR-2026-09-30-E046",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "supersession_index",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "rule": "A superseding entry narrows or replaces only the named claim_ids and fields of the named Wave 0 entry. Receipts and limits recorded in the superseded row remain valid as of their observed time. Wave 0 rows are never edited.",
+        "index": [
+          {
+            "new_entry": "ILR-2026-09-30-E029",
+            "issue": 94,
+            "entry_id": "ILR-2026-09-30-E005",
+            "claim_ids": [
+              "C-94-2"
+            ],
+            "fields": [
+              "next_actor",
+              "next_admissible_action"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E031",
+            "issue": 103,
+            "entry_id": "ILR-2026-09-30-E007",
+            "claim_ids": [
+              "C-103-2"
+            ],
+            "fields": [
+              "next_actor",
+              "next_admissible_action",
+              "admission_state"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E032",
+            "issue": 107,
+            "entry_id": "ILR-2026-09-30-E008",
+            "claim_ids": [
+              "C-107-2"
+            ],
+            "fields": [
+              "proposed_tag",
+              "next_actor",
+              "next_admissible_action",
+              "admission_state"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E033",
+            "issue": 110,
+            "entry_id": "ILR-2026-09-30-E009",
+            "claim_ids": [],
+            "fields": [
+              "next_actor",
+              "next_admissible_action"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E034",
+            "issue": 115,
+            "entry_id": "ILR-2026-09-30-E010",
+            "claim_ids": [
+              "C-115-1"
+            ],
+            "fields": [
+              "proposed_tag",
+              "next_actor",
+              "next_admissible_action",
+              "admission_state"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E037",
+            "issue": 122,
+            "entry_id": "ILR-2026-09-30-E013",
+            "claim_ids": [
+              "C-122-1"
+            ],
+            "fields": [
+              "proposed_tag",
+              "owner_closeable",
+              "next_actor",
+              "next_admissible_action"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E041",
+            "issue": 183,
+            "entry_id": "ILR-2026-09-30-E017",
+            "claim_ids": [],
+            "fields": [
+              "proposed_tag",
+              "next_actor",
+              "next_admissible_action",
+              "admission_state"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          },
+          {
+            "new_entry": "ILR-2026-09-30-E042",
+            "issue": 205,
+            "entry_id": "ILR-2026-09-30-E018",
+            "claim_ids": [],
+            "fields": [
+              "owner_closeable",
+              "next_actor",
+              "next_admissible_action"
+            ],
+            "scope": "tag_and_next_action_only; receipts and limits of the superseded row stay valid as of their observed time"
+          }
+        ],
+        "unchanged_dispositions": [
+          102,
+          116,
+          121,
+          158,
+          163,
+          167,
+          207,
+          211,
+          231
+        ]
+      },
+      "prev_hash": "4e317f9d3d20fd8b053d955d0d77048750974da57284b620941341a129969510",
+      "hash": "16b1800f7ead1aa2fb3a0c3b67f338d1199f2784f5b04caf7117523a7c6d4807"
+    },
+    {
+      "seq": 47,
+      "entry_id": "ILR-2026-09-30-E047",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "admission_state",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "slices": [
+          {
+            "slice": "Wave 1a repo-boundary receipt",
+            "needs": "none (observation)",
+            "state": "done; merged 4a316bbb (#241)"
+          },
+          {
+            "slice": "Wave 1b RTC-cluster receipt",
+            "needs": "none (observation; no adjudication)",
+            "state": "done; merged f533ba22 (#242)"
+          },
+          {
+            "slice": "#115 Task 1 overlap audit",
+            "needs": "none (cloud-head observation)",
+            "state": "done; merged f9ca1694 (#244)"
+          },
+          {
+            "slice": "#115 Tasks 2-6 and PROMOTION_PROTOCOL.md",
+            "needs": "RTC Classroom / Round Table (governance vocabulary); owner read of Structure/07-Agents/PROMOTION_LAW.json; F-W2-2 / F-W2-3",
+            "state": "LEARN; packet filed f9ca1694; decision UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#116 discussion",
+            "needs": "RTC independent positions; owners for four E4 concepts",
+            "state": "LEARN / RTC_DISCUSSION; source packet filed f9ca1694; UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#107 PR1",
+            "needs": "Design Review (contract ownership per surface; conditions 6.1-6.7)",
+            "state": "HOLD; packet filed 2b8a58da (#246); UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#103 PR2",
+            "needs": "Confirm admission basis",
+            "state": "ADMITTED_BY_ISSUE_RECORD; delivered and merged 84182ed2 (#245)"
+          },
+          {
+            "slice": "#103 PR3+",
+            "needs": "Re-read phase record; confirm admission basis",
+            "state": "UNKNOWN (not re-read)"
+          },
+          {
+            "slice": "#183 POC steps 1-4",
+            "needs": "Design Review (D1-D5; D6 if taken)",
+            "state": "HOLD; packet on #247 head (unmerged); UNRECORDED -> HOLD"
+          },
+          {
+            "slice": "#110 audit document; #122 cloud-subset receipt; #94 re-search",
+            "needs": "none (observation)",
+            "state": "done on #248 head (unmerged); master pointer pending"
+          },
+          {
+            "slice": "Five working tags, PKA mapping, issue-class vocabulary, ControlStateDrift candidate",
+            "needs": "RTC (governance vocabulary)",
+            "state": "PROPOSED; UNRECORDED. Used as working labels in Waves 0-3 only."
+          },
+          {
+            "slice": "Cursor CF as integrating writer for NOW.md and the ledger",
+            "needs": "Forge CA acceptance",
+            "state": "PROPOSED; acceptance UNRECORDED. This POST-SEED and append were written under the proposal, not under a recorded acceptance."
+          },
+          {
+            "slice": "RUNE pin update (SAP packet section 7 item 2; three files -> 656ae46c1fdb00c13744655fa2e62a7cbb6e3a57)",
+            "needs": "owner or Design Review admission",
+            "state": "queued; not admitted; no code"
+          },
+          {
+            "slice": "#110 residues A1-A4 (bounded UX fixes)",
+            "needs": "owner decisions (A4 file, A2/A3, A1a target); one bounded PR per residue",
+            "state": "queued; not admitted; no code"
+          }
+        ],
+        "state_vocabulary": "LEARN | HOLD | TEST | READY_FOR_POC"
+      },
+      "prev_hash": "16b1800f7ead1aa2fb3a0c3b67f338d1199f2784f5b04caf7117523a7c6d4807",
+      "hash": "437892cd2fcacdf0fb43cf0f0f90b4b198b6ee11c703b70b43c4b32f64c3beaa"
+    },
+    {
+      "seq": 48,
+      "entry_id": "ILR-2026-09-30-E048",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "local_source_recovery",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "update_of": "ILR-2026-09-30-E023",
+        "forge_attestation": {
+          "receipt": {
+            "path": "docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md",
+            "blob_sha": "60deddd21783f9938fe3a13838977cfdff813732",
+            "landed": "499876734183011de590668c0b2deabad07e4660",
+            "landed_kind": "master_merge_commit",
+            "pr": 243,
+            "status": "MERGED"
+          },
+          "close_receipt": {
+            "path": "poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json",
+            "blob_sha": "bbf54e26060643315b9e8c9b77c2e64057a1618b",
+            "landed": "499876734183011de590668c0b2deabad07e4660",
+            "landed_kind": "master_merge_commit",
+            "pr": 243,
+            "status": "MERGED"
+          },
+          "close_receipt_fields": {
+            "schema": "kpgs_hood_ack_receipt_v1",
+            "ts": "2026-09-30T23:01:59Z",
+            "renter_id": "codex_forge",
+            "verdict": "ACKNOWLEDGED"
+          },
+          "treatment": "HASH_ATTESTED_IN_CLOUD (Forge CA, PR #243 merged 49987673). Content of local-only files is still unreadable from this runtime; the hashes are E1 testimony recorded in a merged E2 artifact. A hash is not the content.",
+          "sources": [
+            {
+              "src": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md (local)",
+              "sha256": "0e48ded57216342c56d9733d5f30462fa869ce852c771eb3f5285e115e674e29",
+              "cloud_counterpart": "present on master (not byte-compared by this entry)"
+            },
+            {
+              "src": "Schematics/00-Home/Dashboard.md (local)",
+              "sha256": "23bbf91e3a04276eac7882fa9a95556116f47aa7479a445d327e83262b078d65",
+              "cloud_counterpart": "Forge-reported cloud pre-image 79108b5f1e8fe0f11fa244b638444cb4e46f1c7350f1107628c2ba03b0e99741 (not recomputed here)"
+            },
+            {
+              "src": "FOC-vs-POC constitution (local canonical path)",
+              "sha256": "ea024af309b06bdab6bbc78fe01be8bc571671222b8ad7816444e60696a832e4",
+              "cloud_counterpart": "cloud mirror LF 38f2f2315ec62ce3169789181e07981658c14db9f47d4da1f5f928ba4d58c0bf; Forge's 'cloud' value is the CRLF hash (see crlf_finding). Local value differs from both; E023 row 0 treatment (MIRROR_DIVERGENT_BY_ONE_REFERENCE_LINE) stands as Forge-attested."
+            },
+            {
+              "src": "Hardware Maintenance & GSMB2 Offload Protocol (local)",
+              "sha256": "24176375297be9d75245012a22cdd973344b17deba83d9913074077b85aa92ca",
+              "cloud_counterpart": "ABSENT on master"
+            },
+            {
+              "src": "Schematics/19-TOKEN USAGE/AI Session Closeout Protocol.md (local)",
+              "sha256": "dc2ac23f0b90d1eaeb14d4f26f9214e4ba5a5299bf8824c7c4abbc9cb89fd22f",
+              "cloud_counterpart": "ABSENT on master; field list in NOW.md"
+            },
+            {
+              "src": "OpenAI Academy C.L.E.A.R. card (local image)",
+              "sha256": "6476ea7d229440c3495753f900afaa10798f88eb10b4a6dea03856143158fdb3",
+              "cloud_counterpart": "ABSENT on master"
+            },
+            {
+              "src": "scratch/generate_gsmb_5_contracts.py (local)",
+              "sha256": "0f30cffaa4a96074c23ee2fb0a3ec00c405720815b46200492a0d97a37f510c7",
+              "cloud_counterpart": "not checked by this entry (UNKNOWN)"
+            },
+            {
+              "src": "Schematics/24-RTC Learning/00-BEGIN-HERE/RTC_Learning_Reality_to_Cloud_Workflow_Charter_2026-08-30.md (local)",
+              "sha256": "e3faa6c0f156355434e45503a338d6228f98986e783211f96069ce80d7c5fd2b",
+              "cloud_counterpart": "ABSENT on master (path checked)"
+            },
+            {
+              "src": "hooks/pre-commit-kpgs-gate.py (local)",
+              "sha256": "227d96d7ef3aa52eb023396e583876c7c5926537745583fdaa73b344bbcd9eed",
+              "cloud_counterpart": "master LF 884191623a2744609c3a90321be6b1fa057a673c745a53ee5386fc3be5f19699; Forge's value is the CRLF hash of the same bytes (see crlf_finding): content identical"
+            },
+            {
+              "src": "Schematics/18-PROTOCOLS/The-Altar/Black-Mass-Protocol.md (local)",
+              "sha256": "95ff0d60e6b896c6b0f3de32a61d36e7af57a76a276bae79785cd2b22eca43f8",
+              "cloud_counterpart": "not checked by this entry (UNKNOWN)"
+            },
+            {
+              "src": "MAIN-BRAIN/CURSOR_CF_IDENTITY_DECLARATION.md (local)",
+              "sha256": "d963d53e353790417f14c3595e1591c2db44bf4c3748b5a64f4784174f35840e",
+              "cloud_counterpart": "ABSENT on master"
+            },
+            {
+              "src": "Sept-11 MAO NOW record (local)",
+              "sha256": "b0ad396990fbedb6da818bc35412e6b80772395cdef960f1013c7fec1e46059c",
+              "cloud_counterpart": "not checked by this entry (UNKNOWN)"
+            }
+          ]
+        },
+        "crlf_finding": {
+          "finding": "Two 'cloud' SHA-256 values in the Forge local audit do not match master's LF bytes but match exactly after converting LF to CRLF. The divergence is line-ending normalization in the Forge worktree, not content.",
+          "evidence_class": "E2 (computed in this run from the clean worktree at 2b8a58dad9415a305365e88512947af0ec39c91f)",
+          "files": [
+            {
+              "path": "docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md",
+              "master_lf_sha256": "38f2f2315ec62ce3169789181e07981658c14db9f47d4da1f5f928ba4d58c0bf",
+              "crlf_sha256": "cc1799cb57e9c7b589fb95bf00a96ca290be5a0bc9b6b5ae33b6efbd679cc1ac",
+              "forge_reported_cloud_mirror_sha256": "cc1799cb57e9c7b589fb95bf00a96ca290be5a0bc9b6b5ae33b6efbd679cc1ac",
+              "crlf_matches_forge": true
+            },
+            {
+              "path": "hooks/pre-commit-kpgs-gate.py",
+              "master_lf_sha256": "884191623a2744609c3a90321be6b1fa057a673c745a53ee5386fc3be5f19699",
+              "crlf_sha256": "227d96d7ef3aa52eb023396e583876c7c5926537745583fdaa73b344bbcd9eed",
+              "forge_reported_sha256": "227d96d7ef3aa52eb023396e583876c7c5926537745583fdaa73b344bbcd9eed",
+              "crlf_matches_forge": true
+            }
+          ],
+          "limits": "This explains the two cloud-side mismatches only. It says nothing about the local-only files' content, which stays unreadable from this runtime."
+        },
+        "still_open_from_E023": [
+          "Schematics/24-RTC Learning/WORKFLOWS.md: not hashed, not supplied.",
+          "Schematics/24-RTC Learning/PROMOTION_PROTOCOL.md: absent on cloud and (per brief) locally; #115 deliverable stands.",
+          "Local coverage.csv header: not supplied; local population still UNAVAILABLE.",
+          "Local agent-coordination-receipts directory: UNAVAILABLE; protection readback attestations remain E1."
+        ],
+        "google_drive": "UNKNOWN. No Drive receipt was supplied in the window. See drive_mirror_checklist entry.",
+        "treatment_rule": "LOCAL_EVIDENCE_REPORTED_BY_FORGE_CA_BRIEF rows in the coverage CSV stay 'unavailable' from this runtime; the Forge hash attestation is recorded here, not written into those rows."
+      },
+      "prev_hash": "437892cd2fcacdf0fb43cf0f0f90b4b198b6ee11c703b70b43c4b32f64c3beaa",
+      "hash": "1df5fb6f8c8da7421867f036ffe24528e3916af8e99ee0d84cb440e1e0a314b6"
+    },
+    {
+      "seq": 49,
+      "entry_id": "ILR-2026-09-30-E049",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "audit_coverage_pointer",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "update_of": "ILR-2026-09-30-E026",
+        "csv": "docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv",
+        "rows_appended_in_wave3": {
+          "master_receipts": [
+            "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md",
+            "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+            "docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md",
+            "poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json",
+            "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md",
+            "docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md",
+            "docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md"
+          ],
+          "pr_head_receipts_marked_unmerged": [
+            "docs/swarm-ops/receipts/SAP_183_ADMISSION_PACKET_2026-09-30.md",
+            "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+            "docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md",
+            "docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md"
+          ],
+          "source_population": "cloud_clean_worktree@2b8a58da"
+        },
+        "local_population": "UNAVAILABLE (coverage.csv on owner machine; header not supplied)",
+        "full_audit_status": "INCOMPLETE (root NOW.md keeps this status)"
+      },
+      "prev_hash": "1df5fb6f8c8da7421867f036ffe24528e3916af8e99ee0d84cb440e1e0a314b6",
+      "hash": "7a445d50f670504b43eb823a98067e7a989726f95a7218c5f421d253f17b2cbc"
+    },
+    {
+      "seq": 50,
+      "entry_id": "ILR-2026-09-30-E050",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "drive_mirror_checklist",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "tier": "Google Drive GSMB",
+        "state": "UNKNOWN until an owner receipt names the Drive folder and lists uploaded files with sizes or hashes.",
+        "owner_action": "Upload the files below from a master checkout at or after the merge of this PR; reply with a receipt (folder link or ID, file list, upload time). The renter cannot read or write Drive.",
+        "files_to_upload": [
+          "docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.md",
+          "docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.json",
+          "docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv",
+          "docs/swarm-ops/receipts/SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml",
+          "NOW.md",
+          "docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md",
+          "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+          "docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md",
+          "poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json",
+          "docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md",
+          "docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md",
+          "docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md"
+        ],
+        "files_to_upload_after_their_prs_merge": [
+          "docs/swarm-ops/receipts/SAP_183_ADMISSION_PACKET_2026-09-30.md",
+          "docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md",
+          "docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md",
+          "docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md"
+        ],
+        "groups_doc_note": "The POCvsFOC groups doc and its mirror from Wave 0 (#240) belong in the same upload; paths are listed in the Wave 0 ledger section 10."
+      },
+      "prev_hash": "7a445d50f670504b43eb823a98067e7a989726f95a7218c5f421d253f17b2cbc",
+      "hash": "cc3c325d25c31ed2d0b39ff6fef8a8cba076f4dd3b2304d8fe8d1cab74acc7ba"
+    },
+    {
+      "seq": 51,
+      "entry_id": "ILR-2026-09-30-E051",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "human_queue",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "update_of": "ILR-2026-09-30-E027",
+        "carried_forward": [
+          {
+            "actor": "Robyn",
+            "action": "Regenerate the account's Discord backup codes now (F-2), then decide removal from HEAD and history remediation.",
+            "status_at_wave3": "OPEN. Renter never opened the file; no evidence of regeneration in cloud."
+          },
+          {
+            "actor": "Forge CA / Robyn",
+            "action": "Admin-scope readback of branch protection and every ruleset; decide the review-requirement question (F-1) and whether to log it.",
+            "status_at_wave3": "OPEN. No admin-scope readback recorded in cloud; see #207 outcome for the nine-merge observation."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Provide the three Azure OIDC secret values and verify the federated identity (#211).",
+            "status_at_wave3": "OPEN. No secret values handled; preflight failure not re-observed on 2b8a58da (UNKNOWN)."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Decide whether Bookit PR #33's epoch relaunch is still intended (#158); close #205 if satisfied with C-205-1 to C-205-3.",
+            "status_at_wave3": "PARTIAL. #205 closed by owner 2026-09-30T23:41:32Z. Bookit PR #33 decision open."
+          },
+          {
+            "actor": "RTC / Forge CA",
+            "action": "Convene Design Review for #183 and #107, Classroom admission for #115 Tasks 2-5, discussion for #116, and disposition for #167 questions 1-7 and #121 gates.",
+            "status_at_wave3": "OPEN. Packets filed for #183 (unmerged #247), #107 (2b8a58da), #115/#116 (f9ca1694), #167/#121 (f533ba22); no decision recorded."
+          },
+          {
+            "actor": "RTC / Forge CA",
+            "action": "Decide SAP naming, the five working tags, PKA mapping, issue-class vocabulary, and the ControlStateDrift candidate.",
+            "status_at_wave3": "OPEN. Vocabulary used as working labels in Waves 0-3; no RTC record."
+          },
+          {
+            "actor": "Forge CA",
+            "action": "Accept or amend the integrating-writer assignment for NOW.md and the ledger.",
+            "status_at_wave3": "OPEN. Acceptance UNRECORDED; this POST-SEED written under the proposal."
+          },
+          {
+            "actor": "Robyn / Forge CA",
+            "action": "Publish or hash-attest the local-only sources in section 10 via a PR from the local checkout; supply the local coverage.csv header.",
+            "status_at_wave3": "PARTIAL. Forge hash-attested twelve local files in PR #243 (E048). WORKFLOWS.md and the local coverage.csv header not supplied."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Name the second skill registry (#94); supply a Google Drive mirror receipt (Drive is UNKNOWN).",
+            "status_at_wave3": "PARTIAL. Renter named SkillsMP as a candidate (unmerged #248); owner confirmation pending. Drive receipt not supplied (UNKNOWN)."
+          },
+          {
+            "actor": "Robyn / Forge CA",
+            "action": "Choose the independent-review mechanism for this repo (see F-1 hypothesis H1); until then renter PRs carry a separate-context review record and no GitHub approval.",
+            "status_at_wave3": "OPEN. Nine merges in the window landed with no APPROVED review; mechanism still unchosen."
+          }
+        ],
+        "added_in_wave3": [
+          {
+            "actor": "Robyn",
+            "action": "Review, merge or close draft PRs #247 (SAP #183 packet) and #248 (#110 audit, #122 estate receipt, #94 skills receipt). If either closes unmerged, a later ledger entry reverts the moves that cite its PR-head blobs."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Review and merge this Wave 3 close-out PR (ledger append, CSV rows, closeout YAML, NOW.md POST-SEED)."
+          },
+          {
+            "actor": "RTC / Forge CA",
+            "action": "Record decisions on #107 admission conditions 6.1-6.7 and #183 decisions D1-D5 (D6 if taken) as RTC or Design Review entries or owner comments. Code stays on HOLD until then."
+          },
+          {
+            "actor": "RTC / Robyn",
+            "action": "Classroom: admit vocabularies and name the seat registry; owner reads Structure/07-Agents/PROMOTION_LAW.json and decides F-W2-2 / F-W2-3; specifications per task for #115 Tasks 2-6. Record ten seat opinions for #116 and name owners for its four E4 concepts."
+          },
+          {
+            "actor": "Robyn",
+            "action": "#163: answer the exit-criteria question P1-P3 in the RTC packet section 8, or decide the tracker may close while the artifact stays OPEN."
+          },
+          {
+            "actor": "Robyn",
+            "action": "#122: after #248 merges, choose (a) close-as-superseded with a new owner-local issue for boxes 3-4, or (b) keep open as umbrella."
+          },
+          {
+            "actor": "Robyn",
+            "action": "#110: name the Main Brain owner-interface file (A4); decide whether A2 (react-hooks warnings) and A3 (bundle 568.83 kB) are worth fixing; name the A1a compare target. Then one bounded PR per residue."
+          },
+          {
+            "actor": "Robyn / Design Review",
+            "action": "Admit or decline the RUNE pin update (SAP packet section 7 item 2; three files -> 656ae46c1fdb00c13744655fa2e62a7cbb6e3a57). Queued, no code."
+          },
+          {
+            "actor": "Renter (after confirmation)",
+            "action": "#103: re-read the phase record for PR3 and confirm its admission basis before any code."
+          },
+          {
+            "actor": "Robyn",
+            "action": "Supply a Google Drive mirror receipt for the files in the drive_mirror_checklist entry; Drive stays UNKNOWN until then."
+          }
+        ],
+        "renter_non_actions_in_window": [
+          "No issue closed by a renter; no issue comment posted by a renter.",
+          "No branch-protection, alias, deploy, Bookit PR #33, or driver-contact action.",
+          "No secret value handled; Structure/discord_backup_codes.txt, Structure/07-Agents and .env files not opened.",
+          "codex/kc-sovereign-gui-full-dev not fetched, merged, reset or pushed.",
+          "Ledger history not rewritten; Wave 0 rows unchanged (chain tip f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788 preserved as prev_hash of E028)."
+        ]
+      },
+      "prev_hash": "cc3c325d25c31ed2d0b39ff6fef8a8cba076f4dd3b2304d8fe8d1cab74acc7ba",
+      "hash": "ff77ffd90a9ead2b80990177028e958ff0b134b9cb431a0ec839f66228d14bcd"
+    },
+    {
+      "seq": 52,
+      "entry_id": "ILR-2026-09-30-E052",
+      "recorded_at": "2026-10-01T02:54:34Z",
+      "entry_kind": "wave3_closeout",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "Claude Sonnet 5.5 per session system prompt; Forge brief names Fable; not reconciled",
+        "interface": "Cursor cloud agent (Linux VM, GitHub App token cursor)",
+        "human_authority": "Robyn approval message 2026-09-30T22:14Z (E1)"
+      },
+      "supersedes": null,
+      "payload": {
+        "branch": "cursor/reconciliation-closeout-4e71",
+        "base": "2b8a58dad9415a305365e88512947af0ec39c91f",
+        "worktree": "/tmp/worktrees/imcp-w3-close (clean at base before this append)",
+        "head_sha": "recorded by GitHub on push, not by this file (a file cannot carry its own commit SHA)",
+        "artifacts_on_this_branch": [
+          "docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.json (entries E028-E052 appended; E001-E027 unchanged)",
+          "docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.md (sections 19+ appended; sections 0-18 unchanged)",
+          "docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv (rows appended)",
+          "docs/swarm-ops/receipts/SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml (new)",
+          "NOW.md (POST-SEED block prepended)"
+        ],
+        "owner_closeable_summary": {
+          "closed_in_window": [
+            205
+          ],
+          "owner_or_rtc_decision": [
+            163
+          ],
+          "owner_choice_after_pr_merge": [
+            122
+          ],
+          "not_closeable": [
+            94,
+            102,
+            103,
+            107,
+            110,
+            115,
+            116,
+            121,
+            158,
+            167,
+            183,
+            207,
+            211,
+            231
+          ]
+        },
+        "tier_state": {
+          "cloud": "this branch; master at 2b8a58dad9415a305365e88512947af0ec39c91f before merge",
+          "local": "UNKNOWN from this runtime; Forge hash attestation recorded in E048",
+          "google_drive": "UNKNOWN; checklist in E050"
+        },
+        "integrating_writer": "Cursor CF (PROPOSED). Forge CA acceptance UNRECORDED. Written under the proposal.",
+        "next_admissible_action": "Owner reviews and merges this PR, then #247 and #248 (or closes them, triggering reverting entries). Renters take no further reconciliation action until a decision in the human queue is recorded.",
+        "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+      },
+      "prev_hash": "ff77ffd90a9ead2b80990177028e958ff0b134b9cb431a0ec839f66228d14bcd",
+      "hash": "61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c"
+    },
+    {
+      "seq": 53,
+      "entry_id": "ILR-2026-09-30-E053",
+      "entry_kind": "tier_read_correction",
+      "recorded_at": "2026-10-01T05:12:29Z",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "This turn's system prompt names Grok 4.7. Entries E001-E052 recorded Claude Sonnet 5.5 and a later POST-SEED recorded Claude Fable 5.1; Forge's brief names Fable. Not reconciled.",
+        "interface": "Cursor cloud agent (Linux VM) plus Google Drive MCP read",
+        "human_authority": "Owner message 2026-10-01 naming the local GSMB path and stating Google Drive is reachable via MCP, while reviewing the Wave 3 PR"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E050",
+        "fields": [
+          "state",
+          "owner_action"
+        ],
+        "also_corrects": {
+          "entry_id": "ILR-2026-09-30-E052",
+          "fields": [
+            "tier_state.local",
+            "tier_state.google_drive"
+          ]
+        },
+        "scope": "The unread / cannot-read claims only. E050's upload checklist stays. E048's Forge hashes stay. No prior row is edited."
+      },
+      "payload": {
+        "why": "E050 said the renter cannot read or write Drive, and E052 called both the local tier and Drive UNKNOWN. The owner corrected both. This entry records the reads that were then actually run.",
+        "local_gsmb": {
+          "path_named_by_owner": "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\Schematics",
+          "already_in_cloud_docs": "LOCAL_VS_CLOUD_RECONCILIATION.md names the parent checkout as the canonical GSMB checkout; Schematics is the MAIN-BRAIN under it.",
+          "vm_probe": {
+            "command": "ls of that path via /mnt/c/Users/rkhol/... and a depth-limited search for a OneDrive directory",
+            "result": "No such file or directory. No OneDrive directory under /mnt, /media, /home, /opt, or /tmp at depth <= 4."
+          },
+          "state": "LOCATION_OWNER_STATED. Bytes UNREAD from this VM. Calling the location UNKNOWN was wrong. A byte comparison against master was not computed here.",
+          "not_done": "Did not merge the OneDrive tree into this worktree. Did not open protected paths."
+        },
+        "google_drive": {
+          "access": "Google Drive MCP namespace status ready. search_files and list_recent_files returned the authenticated My Drive. No file was created, updated, copied, shared, or trashed.",
+          "root_parent_id": "0AHpObaoLPsWcUk9PVA",
+          "root_folder_census": "14 folders across two pages. None titled Schematics, GSMB, or Introduction to MCP.",
+          "empty_queries": [
+            "title contains 'Schematics' and mimeType = folder",
+            "title contains 'GSMB'",
+            "title contains 'Introduction'",
+            "title contains '00-Home' or 'MAIN-BRAIN' or 'WORKFLOWS' or 'coverage.csv'",
+            "fullText contains 'GSMB' and mimeType = folder"
+          ],
+          "hits_that_are_not_the_vault": [
+            "fullText 'Schematics' includes 'Kopano Labs - Master Visual Pitch Deck (With Embedded Schematics).pptx' (id 1rRZLJiXcH8vR0Qt86-Hwf-RSR3kpouWF, modified 2026-08-10) and unrelated files",
+            "fullText of the renter assertion hits existing Google Docs (weekly orientation docs and a job-fire handoff). Those are converted documents, not a byte mirror of this ledger.",
+            "Folder 'Kopano Labs' (id 1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI, created 2026-04-23) was listed to the end. Children are project notes and decks, not the Schematics tree."
+          ],
+          "state": "READ. No Schematics vault and no issue-reconciliation receipt set from this run are in this Drive. E050's 'UNKNOWN until an owner receipt' is replaced for the read: the mirror is absent as of this query, not unread.",
+          "write": "Not attempted. create_file exists on the connector. Uploading while the owner is reviewing the PR, into a Drive that has no named GSMB folder, was not done."
+        },
+        "corrected_tier_state": {
+          "cloud": "unchanged: branch cursor/reconciliation-closeout-4e71",
+          "local": "path owner-stated; bytes unread from this VM",
+          "google_drive": "read via MCP; Schematics mirror absent"
+        }
+      },
+      "prev_hash": "61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c",
+      "hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb"
+    },
+    {
+      "seq": 54,
+      "entry_id": "ILR-2026-09-30-E054",
+      "entry_kind": "drive_gsmb_doctrine",
+      "recorded_at": "2026-10-01T06:59:55Z",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "This turn's system prompt names Grok 4.7; earlier entries recorded other names. Not reconciled.",
+        "interface": "Cursor cloud agent; Google Drive MCP read earlier in the session",
+        "human_authority": "Owner teaching turn: Drive GSMB is the human-in-the-loop MMAO/MAO membrane, not a Schematics clone; update the GSMBs so other agents stop confusing it; one step at a time, no rush"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E050",
+        "fields": [
+          "state",
+          "owner_action",
+          "tier framing"
+        ],
+        "also_corrects": {
+          "entry_ids": [
+            "ILR-2026-09-30-E052",
+            "ILR-2026-09-30-E053"
+          ],
+          "fields": [
+            "tier_state.google_drive framing"
+          ]
+        },
+        "scope": "Replaces the 'Drive is a missing mirror / UNKNOWN until upload receipt' framing with the owner doctrine that Drive is the human orchestration membrane. The optional upload checklist of cloud receipts to Drive remains optional and still needs a named folder before any write. Prior rows are not edited."
+      },
+      "payload": {
+        "receipt_path": "docs/swarm-ops/receipts/DRIVE_GSMB_HUMAN_MEMBRANE_2026-10-01.md",
+        "doctrine": {
+          "drive_gsmb": "Human-in-the-loop orchestration membrane (MMAO + MAO). Owner-authored and owner-kept Google Docs/files. Centric surface for mobile and desktop agent orchestration.",
+          "not": "A byte-for-byte Schematics vault or GitHub checkout under a folder titled GSMB.",
+          "cloud_gsmb": "GitHub: code, CI, NOW.md, PR/issue receipts.",
+          "local_gsmb": "OneDrive Schematics / Obsidian lab: MAIN-BRAIN and raw incubation.",
+          "evidence": "Drive docs are human operating intent (E1/E2 as authored/kept). They do not replace GitHub SHAs for code/runtime proof."
+        },
+        "owner_context_recorded": [
+          "Other agents confuse Drive the same way; the cloud GSMB must carry the correction.",
+          "Drive is where the owner operates much of MMAO + MAO as a heavy human-in-the-loop, often on mobile, also on desktop when building.",
+          "Codex commits have been rearranging GSMB so membranes connect; connection does not help if the human layer does not make sense.",
+          "Obsidian lost children and stale formats exist; fix one step at a time; no rush; do not rebuild everything in one pass."
+        ],
+        "renter_rules": [
+          "Read living KPGS Drive docs (Charter, Hub, current Weekly Orientation, fossils) for human state.",
+          "Do not require a folder named GSMB or Schematics before admitting Drive GSMB exists.",
+          "Do not dig personal space.",
+          "Do not upload cloud receipt trees without a named Drive folder.",
+          "One step at a time."
+        ]
+      },
+      "prev_hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb",
+      "hash": "0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12"
     }
   ]
 }
