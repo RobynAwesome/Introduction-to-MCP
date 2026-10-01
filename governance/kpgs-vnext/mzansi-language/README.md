@@ -1,6 +1,6 @@
 # Mzansi Language Contracts — Phase 7
 
-Status: **PR1 contract slice** for `RobynAwesome/Introduction-to-MCP#103`.
+Status: **PR1 contract slice merged** (`b994272`); **PR2 Data Engine foundation** under review for `RobynAwesome/Introduction-to-MCP#103`.
 
 This directory defines the first governed boundary for KPGS sociolinguistic inference. It does **not** claim a trained Sepedi model, production TTS quality, or native-speaker validation.
 
@@ -84,9 +84,64 @@ The first runtime slice should remain limited to Sepedi (`nso`) until receipts s
 
 The placeholder source text is deliberate: this contracts PR must not invent Sepedi examples and then accidentally canonize unvalidated linguistic content.
 
+## PR2 — Data Engine foundation
+
+Admitted scope (owner comment on #103, 2026-08-24, restated 2026-09-07): *record persistence + provenance/consent/validation state and fixtures*. Not in scope: multi-language expansion, production TTS, any dataset, speech, model, or runtime claim.
+
+| File | Role |
+| --- | --- |
+| `data_engine.py` | Standard-library-only runtime: schema-driven record validation, hash-linked append-only JSONL ledger, rule-table lifecycle transitions, admissible-set computation. |
+| `fixtures/linguistic-records.synthetic.json` | Six placeholder records (`synthetic: true`, `FIXTURE_PLACEHOLDER_*` text, `fixture://` provenance) covering every evidence class. **Non-canonical. Contains no Sepedi.** |
+| `fixtures/linguistic-records.invalid.json` | Nine records that must be refused, each with the error substring the validator must report. |
+| `validate.py` | Gate script. Prints `KPGS-MZANSI-DATA-ENGINE PASS` or `FAIL` and exits non-zero on failure. |
+| `../../../tests/test_mzansi_data_engine.py` | Unit tests for admission, transitions, consent, admissibility, persistence and tamper detection. |
+
+### What the engine does
+
+- **Validates** every record against `linguistic-record.schema.json` with a small Draft 2020-12 subset evaluator that reads the schema file itself. An unsupported keyword in the schema is a load-time error, so the evaluator cannot silently skip a constraint.
+- **Persists** one entry per governed event to a JSONL ledger. Each entry carries `prev_hash` and `entry_hash` (`sha256(prev_hash + canonical_json(entry))`), so the file is tamper-evident; reload re-verifies the chain and refuses a broken one.
+- **Replays** idempotently: re-admitting an identical record appends nothing; re-admitting a changed record with the same `record_id` appends a `record_conflict` entry and leaves the head untouched.
+- **Computes admissibility** from data-plane fields only: class `HUMAN_VALIDATED`, status `validated`, `speaker_consent: true`, non-null `license`, and `synthetic: false` unless the caller explicitly asks for synthetic records.
+
+### Lifecycle rule tables
+
+Validation status:
+
+| From | Allowed to | Gate |
+| --- | --- | --- |
+| `pending` | `validated`, `rejected`, `disputed` | `validated` needs ≥1 `validator_id` and `speaker_consent: true`; `rejected`/`disputed` need `notes` |
+| `disputed` | `validated`, `rejected` | same gates |
+| `validated` | `disputed` | `notes` required |
+| `rejected` | — | terminal |
+
+Evidence class (no edge leads back into `AI_*` or `UNVERIFIED`):
+
+| From | To | Gate |
+| --- | --- | --- |
+| `UNVERIFIED` | `HUMAN_RECORDED` | `provenance_uri` present and `speaker_consent: true` |
+| `HUMAN_RECORDED`, `AI_GENERATED`, `AI_TRANSFORMED` | `HUMAN_VALIDATED` | status already `validated`, ≥1 validator, consent `true` |
+| any non-terminal class | `REJECTED` | `reason` required; status becomes `rejected` |
+
+Consent withdrawal is one-way (`true → false`); a `validated` record becomes `disputed` on withdrawal. The `synthetic` flag never changes across any transition, so a synthetic record that reaches `HUMAN_VALIDATED` remains excluded from the default admissible set.
+
+### Running the gate
+
+```bash
+python governance/kpgs-vnext/mzansi-language/validate.py
+python -m unittest discover -s tests -p 'test_mzansi_data_engine.py' -v
+```
+
+Both run in `.github/workflows/kpgs-vnext-phase0-gate.yml`.
+
+### What PR2 does not claim
+
+- No linguistic data: fixtures are placeholders and are marked `non_canonical`.
+- No model, TTS, translation, routing, or native-speaker validation.
+- No claim that the promotion gate below is met. The engine is the place where the gate's evidence can be recorded; it does not satisfy the gate.
+
 ## Promotion gate
 
-Before PR2 (Data Engine) can claim POC:
+Before the Data Engine can claim POC on real evidence:
 
 - collect meaning-aligned examples with provenance;
 - record speaker consent/licensing;
