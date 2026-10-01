@@ -62,6 +62,8 @@ Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STAT
 
 Seat and role are separate. Seat 10 is occupied by ANTIGRAVITY. Master Robyn, 2026-10-01: that seat was earned, and the role removed from it is Chief Facilitator. The role on the seat is Lead Developer. Chief Facilitator is not attached to Seat 10. `BREACH-008` vacancy language is superseded for occupancy only; the breach event remains in the log. Issue #121 stays open.
 
+Seat 10 stays occupied. Files that contain an earlier suspension sentence stay. They are not deleted. They are not the current order.
+
 ## Pillars Covered
 
 - **SPIRIT**

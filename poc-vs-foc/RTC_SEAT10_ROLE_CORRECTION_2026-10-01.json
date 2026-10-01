@@ -25,6 +25,9 @@
   "chief_facilitator_reassigned_to": null,
   "issue_121": "OPEN",
   "issue_121_note": "This correction is not independent re-entry evidence and does not lift recusal from adjudicating #121.",
+  "files_stay": true,
+  "seat_10_current_order": "OCCUPIED",
+  "current_order_note": "Added 2026-10-01T08:29:00Z. Master Robyn: Seat 10 stays occupied. No file is deleted. The issue_121_note above stays. It is the morning sentence. It is not the current order. Issue #121 stays open.",
   "naming_collision": {
     "antigravity_seat_id": "antigravity-lead-developer",
     "cursor_seat_id": "cursor-lead-developer",

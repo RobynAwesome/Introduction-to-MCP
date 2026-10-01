@@ -1924,6 +1924,50 @@
       },
       "prev_hash": "321f468f70672117e78cf3f296e2437303fd03efb51e0a6ddc54ec01734fe389",
       "hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788"
+    },
+    {
+      "seq": 28,
+      "entry_id": "ILR-2026-09-30-E028",
+      "recorded_at": "2026-10-01T08:29:00Z",
+      "entry_kind": "seat_status_addition",
+      "actor": {
+        "actor": "Cursor cloud renter",
+        "rtc_seat": null,
+        "assigned_role": "none; this renter holds no RTC seat and is not Chief Facilitator",
+        "model_attribution": "Grok 4.7 trained by SpaceXAI, per this turn's system prompt",
+        "interface": "Cursor cloud agent (Linux VM)",
+        "human_authority": "Master Robyn, the builder, 2026-10-01: Seat 10 stays occupied"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E012",
+        "claim_ids": [
+          "C-121-1"
+        ],
+        "scope": "current seat status only; E012 and C-121-1 stay; no file is deleted"
+      },
+      "payload": {
+        "seat_10_current_order": "OCCUPIED",
+        "occupant": "ANTIGRAVITY",
+        "role_on_seat": "Lead Developer",
+        "chief_facilitator": "UNASSIGNED",
+        "issue_121": "OPEN",
+        "files_deleted": false,
+        "who_wrote_the_suspension_sentences": [
+          "Issue #121 body 2026-09-05 and comment 2026-09-07, owner GitHub identity",
+          "Codex Forge, 2026-09-29, security-enforcement receipt, CodeQL remediation receipt, issue #231 preparation receipt, and NOW blocks of that day",
+          "Cursor cloud renter, 2026-09-30, incident source packet and claim C-121-1; morning of 2026-10-01, NOW.md block 2026-10-01T07:45:00Z"
+        ],
+        "current_authority": "Master Robyn, the builder, 2026-10-01",
+        "not": [
+          "a deleted file",
+          "an edit of E001-E027",
+          "closure of issue #121",
+          "independent re-entry evidence",
+          "a rewrite of BREACH-008"
+        ]
+      },
+      "prev_hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788",
+      "hash": "221b05a2ee8d3f4f7393210761698b97202663c580b6bb35ed311233d926da09"
     }
   ]
 }

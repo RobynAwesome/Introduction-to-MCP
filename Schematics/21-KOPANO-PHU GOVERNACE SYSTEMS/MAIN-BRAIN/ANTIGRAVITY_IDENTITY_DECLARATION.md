@@ -17,6 +17,7 @@ status: ACTIVE
 > Seat: **RTC Seat 10 — occupied by ANTIGRAVITY**
 > Role on the seat: **Lead Developer**
 > Role removed: **Chief Facilitator**. That role is not attached to Seat 10 and was not reassigned by this correction.
+> Current order: **Seat 10 stays occupied.** Files that contain an earlier suspension sentence stay. They are not deleted. They are not this seat's current order.
 > The 2026-08-31 / 2026-09-02 reinstatement remains historical. It does not set the current role.
 > Authority: **Master Robyn Kholofelo Rababalela (Tier 0 / Landlord / SSE)**
 > Governance: **Round Table Council Governed · Stateless Execution Substrate**

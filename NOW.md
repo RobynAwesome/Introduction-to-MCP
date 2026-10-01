@@ -1,3 +1,21 @@
+## CURRENT STATE — 2026-10-01T08:29:00Z (SEAT 10 STAYS OCCUPIED · FILES STAY)
+
+> **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat and is not Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
+> **Human authority:** Master Robyn, the builder, 2026-10-01. Seat 10 stays occupied.
+> **Base:** `master@ace9b086bc19482bc6e01e685938aa579b76aafc`. **Branch:** `cursor/seat-10-role-amendment-4e71`.
+
+- **Seat 10 stays occupied** by ANTIGRAVITY. The role on the seat is Lead Developer. Chief Facilitator is unassigned. This renter is not Chief Facilitator.
+- **No file is deleted.** The sentences that say Seat 10 was suspended or recused stay in the files that wrote them. This block does not remove those sentences and does not remove those files.
+- **Who wrote those sentences.** Issue #121 (2026-09-05) and the 2026-09-07 comment, under the owner GitHub identity, are the cloud record of the earlier "CF authority suspended" text. Codex Forge restated it on 2026-09-29 in `docs/audits/2026-09-29-security-enforcement-receipt.md`, `docs/audits/2026-09-29-codeql-high-alert-remediation.md`, `docs/product-discovery/issue-231/PREPARATION-RECEIPT.md`, and the NOW blocks of that day. This Cursor renter copied it on 2026-09-30 into `docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md` and ledger claim `C-121-1`, and on the morning of 2026-10-01 wrote, in the block below, that the role correction did not lift recusal. That morning sentence stays in that block. It is not the current order.
+- **Current order.** Master Robyn is the authority. Seat 10 stays occupied. Issue #121 stays OPEN as an incident file. Opening the file is not an order to delete it.
+- **Not a council session.** No synthetic RTC position was written.
+
+**Next admissible action:** Chief Facilitator stays unassigned until Master Robyn names a holder. The two Lead Developer titles stay as recorded until Master Robyn splits them. Do not delete the files that contain the earlier sentences.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT STATE — 2026-10-01T07:45:00Z (SEAT 10 ROLE · OWNER CORRECTION)
 
 > **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.

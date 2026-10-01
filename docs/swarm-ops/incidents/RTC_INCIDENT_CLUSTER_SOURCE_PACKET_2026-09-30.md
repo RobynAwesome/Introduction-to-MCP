@@ -10,6 +10,8 @@
 **Base:** `master@8c6d22f22dbc600a38b52daf3b2887940b8841fb` · **Read:** 2026-09-30T22:15Z to 23:30Z · **Ledger:** `ILR-2026-09-30` (pull request #240).
 **Doctrine:** `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Operational rank is not an RTC identity seat. Incident, recusal, suspension and identity-admission gates stay attached to their subjects.
 
+> **Added 2026-10-01. This file is not deleted.** Master Robyn, the builder: Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. Chief Facilitator is unassigned. Issue #121 stays OPEN. The rows below stay as what each source said on that date, including the suspension and recusal sentences. Those sentences were written by the owner GitHub identity on 2026-09-05 and 2026-09-07, restated by Codex Forge on 2026-09-29, and copied into this packet by a Cursor renter on 2026-09-30. They are not the current order. This box is not an RTC position and it does not close #121.
+
 ---
 
 ## 1. Purpose and limits
@@ -37,6 +39,7 @@ All rows are cloud evidence (class E2) unless marked. "Authority named" is what 
 | 2026-09-15T01:41:25Z | PR #166 | Merged 77 seconds after #164; no review; no RTC answer to #167 question 3 exists on master. `Schematics/13-REWARD SYSTEM/Model Operating Status Board.md` now reads: Forge "MAO Session Lead / Chief Architect direction ... explicitly user-granted"; Cursor "Chief Facilitator / CF ... Promoted by explicit Master directive on 2026-09-11"; AntiGravity "Lead Developer / LD ... reassigned from CF ... Former CF authority is superseded for the current session ... no silent role self-restoration"; Codex "Historical Chief Architect / prior structural-maintenance authority" with state "reward-recognized / historical-current-status-needs-reconciliation" | owner GitHub identity |
 | 2026-09-29 | `docs/audits/2026-09-29-security-enforcement-receipt.md`; root `NOW.md` | #121 open; "Seat 10 suspended and recused"; the runtime recusal gate is recorded as not implemented | Forge CA block and receipts (attributed) |
 | 2026-09-30 | Forge CA brief, relayed in the task thread (attributed, not a repository file) | Forge CA first after RTC, Cursor CF second; operational rank is not an RTC identity seat; existing gates stay attached to their subjects | Forge CA; Robyn's current direction |
+| 2026-10-01 | Master Robyn in the task thread; root `NOW.md` block `2026-10-01T08:29:00Z` | Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. No file in this packet is deleted. Earlier rows stay. | Master Robyn (Tier 0 / builder) |
 
 ## 3. Records that are stale or disagree (map only)
 

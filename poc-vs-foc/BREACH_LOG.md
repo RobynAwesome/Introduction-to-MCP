@@ -469,3 +469,24 @@ Actor recording this append: Cursor cloud renter, stateless, no RTC seat. `I_AM_
 
 ### Status
 `RECORDED — 2026-10-01 | SUPERSEDES VACANCY AND DEV-BELOW-LEAD-DEV FOR CURRENT READING ONLY | BREACH-008 BODY UNCHANGED`
+
+---
+
+## TIER-0 ADDITION — 2026-10-01T08:29:00Z — SEAT 10 STAYS OCCUPIED · FILES STAY
+
+This addition does not delete BREACH-008, the section above, or any other file.
+
+Master Robyn, the builder: Seat 10 stays occupied by ANTIGRAVITY. The role is Lead Developer. Chief Facilitator is unassigned. Issue #121 stays open.
+
+The bullet above that says the morning correction "does not lift the earlier recusal" stays in this file. This Cursor renter wrote it on the morning of 2026-10-01. It is not the current order.
+
+Who wrote the earlier suspension sentences, which also stay in their files:
+
+1. Issue #121, 2026-09-05, and the 2026-09-07 comment, under the owner GitHub identity.
+2. Codex Forge, 2026-09-29, in the security-enforcement receipt, the CodeQL remediation receipt, and the issue #231 preparation receipt.
+3. This Cursor renter, 2026-09-30, in the incident source packet and ledger claim `C-121-1`.
+
+Actor recording this addition: Cursor cloud renter, stateless, no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+
+### Status
+`RECORDED — 2026-10-01T08:29:00Z | NO FILE DELETED | SEAT 10 STAYS OCCUPIED | BREACH-008 BODY UNCHANGED`
