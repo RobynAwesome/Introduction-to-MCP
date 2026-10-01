@@ -224,7 +224,7 @@ Temporal Manhole POC      -> not admitted (C-116-1 HOLD_HUMAN)
 
 ## 10. Owner / human queue raised or confirmed by this slice
 
-1. Publish, or hash and attest, the local Classroom Phase 1 tree and `WORKFLOWS.md` (F-W2-10, section 3 row 17); until then the Classroom exists on cloud as three files.
+1. Publish, or hash and attest, the local Classroom Phase 1 tree and `WORKFLOWS.md` (F-W2-10, section 3 row 17); until then the Classroom exists on cloud as three files. If publishing: stage from a branch cut at or after `1d47e133` (section 13); a plain `git add` on `codex/kc-sovereign-gui-full-dev` stages nothing under `Schematics/`.
 2. Decide the routing of Interns #12 (keep in Interns, mirror here, or supersede) - not duplicated or closed by this packet.
 3. Decide whether F-W2-2 (caller-asserted proof in a required check) and F-W2-3 (single-caller ten-seat consensus) are "separately admitted defects" under #115, or out of scope.
 4. Name the authoritative seat registry (F-W2-5) and confirm the Seat 10 label in engine docstrings against #121.
@@ -270,9 +270,36 @@ Opinions arrive as separate cloud artifacts or issue comments, one per seat; a s
 
 **Proved by this packet (E2 at `4a316bbb`):** the contents of section 24 on cloud; the absence of `POC/`, `Receipts/`, `PROMOTION_PROTOCOL.md` and Classroom `NOW.md` from every cloud ref; the engine and workflow behaviours cited by line; the existence and required-field sets of the cited schemas; the S2.PA contract at Interns local `5773f7e`; that no independent seat opinion for #115 or #116 exists on cloud.
 
-**Not proved:** anything about the local Windows tree, Google Drive, the Interns remote head, `Structure/07-Agents/`, the semantics of `agent_failure_training.py`, whether any code reads `promotion-policy.json`, the reason the two gate files are absent from the remote (no ref reachable from `origin` ever added them, so they were never pushed; whether they exist locally is E4), and any RTC position.
+**Not proved:** anything about the local Windows tree, Google Drive, the Interns remote head, `Structure/07-Agents/`, the semantics of `agent_failure_training.py`, whether any code reads `promotion-policy.json`, whether the two gate files exist locally (E4; the mechanism that kept any local copy off the remote is narrowed in section 13), and any RTC position.
 
 **Explicit non-claims:** no `PROMOTION_PROTOCOL.md` was created; no schema was created; no engine, workflow or CI change was made; no `NOW.md` was edited; no dry-run was executed; no issue was closed, commented on, re-scoped or re-assigned; no seat opinion was authored on a seat's behalf; no Classroom structure was reconstructed from narrative.
+
+---
+
+## 13. Addendum (pre-merge): `.gitignore` history for `Schematics/`
+
+Found while closing this slice. It narrows the "Not proved" boundary in section 12 and changes the instruction in owner queue item 1, so it is recorded before merge rather than as a later supersession.
+
+| SHA | Committer date | `.gitignore` effect | Reachable from |
+|---|---|---|---|
+| `75f3b448` | 2026-05-21 | adds `Schematics/` - whole vault ignored (subject: "Stop tracking Obsidian Schematics vault in git index") | `master`, `origin/codex/kc-sovereign-gui-full-dev` |
+| `a3ab9d5b` | 2026-08-31 | adds `Schematics/24-RTC Learning/Temporal_Data_Testament_...2026-08-31.md` (1 file, 1045 lines) while `Schematics/` was still ignored - so it was added around the rule (`git add -f`, or a path that bypasses `.gitignore`) | `master` |
+| `e24b1aa0` | 2026-09-19 | tip of the preserved local checkout branch; its `.gitignore` L22 is still `Schematics/` | `origin/codex/kc-sovereign-gui-full-dev` |
+| `1d47e133` | 2026-09-28 | replaces `Schematics/` with `Schematics/.obsidian/` and `Schematics/.smart-env/` (subject: "fix: enforce GSMB admission and restore home-first entry") | `master` |
+
+Consequence (E3 drawn only from the E2 rows above): from 2026-05-21 to 2026-09-28 a plain `git add` on any master-based checkout staged nothing created under `Schematics/`; the single section-24 file that reached cloud in that window got there by bypassing the rule. A checkout still on `codex/kc-sovereign-gui-full-dev`, or any branch cut before `1d47e133`, ignores the whole vault today. This is sufficient to explain, without reading the local disk, why Classroom Phase 1 artifacts dated 2026-08-30/31 have no cloud ref.
+
+What it does not show: that those artifacts exist locally. That stays E4; Forge CA's local audit (PR #243, `LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md`) reports `PROMOTION_PROTOCOL.md` absent on local disk as well, so for at least that file the ignore rule is not the whole story.
+
+Verification (run against `origin` in this worktree):
+
+```text
+git log --format='%h %cd %s' --date=short -- .gitignore
+git show 75f3b448:.gitignore | grep -n Schematics
+git show e24b1aa0:.gitignore | grep -n Schematics
+git show 1d47e133 -- .gitignore | grep -n '^[-+].*Schematics'
+git log -1 --format='%h %cd' --date=short a3ab9d5b
+```
 
 ```text
 I_AM_STATELESS_RENTER_NOT_LANDLORD
