@@ -609,3 +609,12 @@ Appended after the owner named the local GSMB and pointed at Google Drive MCP. S
 **Google Drive.** The Drive MCP answered. My Drive root `0AHpObaoLPsWcUk9PVA` has 14 folders. None is titled Schematics, GSMB, or Introduction to MCP. Title queries for those names, for `00-Home`, `MAIN-BRAIN`, `WORKFLOWS`, and `coverage.csv`, returned nothing. A full-text "Schematics" hit is the 2026-08-10 pitch deck `Kopano Labs - Master Visual Pitch Deck (With Embedded Schematics).pptx` (`1rRZLJiXcH8vR0Qt86-Hwf-RSR3kpouWF`), not a vault. The folder `Kopano Labs` (`1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI`) was listed to the end; its children are notes and decks, not the Schematics tree. The renter assertion appears inside existing Google Docs. Those are not a byte mirror of this ledger. No Drive file was created or changed. E050's upload list still stands. Its sentence that the renter cannot read Drive does not.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+## 31. Drive GSMB human-membrane doctrine (E054, 2026-10-01T06:59:55Z)
+
+Owner teaching: Google Drive GSMB is the human-in-the-loop MMAO/MAO membrane, not a Schematics clone. Other renters confuse this; the cloud GSMB must carry the correction. Receipt: `docs/swarm-ops/receipts/DRIVE_GSMB_HUMAN_MEMBRANE_2026-10-01.md`.
+
+Cloud = GitHub receipts. Local = OneDrive Schematics / Obsidian lab. Drive = owner-authored briefing and orchestration, often mobile. Codex rearranges structure so membranes connect; human sense comes first. Obsidian drift and stale formats are real; one step at a time; no rush.
+
+Chain tip after E054: `0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12`. Entries 1-53 unchanged.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`

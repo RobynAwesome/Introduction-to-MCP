@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-01T06:59:55Z (DRIVE GSMB · HUMAN MEMBRANE DOCTRINE)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Owner teaching turn — Drive GSMB is the HITL MMAO/MAO membrane; write it into the GSMBs so other agents stop treating Drive as a missing Schematics clone; one step at a time; no rush.
+> **Branch:** `cursor/reconciliation-closeout-4e71`. Ledger E054 + receipt `DRIVE_GSMB_HUMAN_MEMBRANE_2026-10-01.md`.
+
+- **Doctrine recorded for all renters:** Cloud = GitHub. Local = OneDrive Schematics / Obsidian. Drive = human briefing and orchestration (docs the owner makes or keeps), often mobile. Same KPGS spirit; different shape. A miss on a folder titled `GSMB` or `Schematics` is not “Drive UNKNOWN.”
+- **Not done this turn:** no Drive upload; no Obsidian cleanup; no membrane rebuild. Those wait for a named next step.
+- **Chain:** `chain ok 54 0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12`.
+
+**Next admissible action:** Owner continues review of this PR. Renters reading “Google Drive GSMB” load the human-membrane receipt before inventing a mirror requirement.
+
+---
+
 ## CURRENT STATE — 2026-10-01T05:12:29Z (ISSUE RECONCILIATION · TIER READ CORRECTION)
 
 > **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. This turn's system prompt names Grok 4.7. The Wave 3 block recorded Claude Fable 5.1 and Wave 0 recorded Claude Sonnet 5.5. Not reconciled.

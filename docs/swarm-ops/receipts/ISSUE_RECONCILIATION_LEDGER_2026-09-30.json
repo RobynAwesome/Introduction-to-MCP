@@ -3985,6 +3985,62 @@
       },
       "prev_hash": "61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c",
       "hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb"
+    },
+    {
+      "seq": 54,
+      "entry_id": "ILR-2026-09-30-E054",
+      "entry_kind": "drive_gsmb_doctrine",
+      "recorded_at": "2026-10-01T06:59:55Z",
+      "actor": {
+        "actor": "Cursor cloud agent (stateless renter)",
+        "assigned_role": "Chief Facilitator (operational rank, not an RTC identity seat)",
+        "model_attribution": "This turn's system prompt names Grok 4.7; earlier entries recorded other names. Not reconciled.",
+        "interface": "Cursor cloud agent; Google Drive MCP read earlier in the session",
+        "human_authority": "Owner teaching turn: Drive GSMB is the human-in-the-loop MMAO/MAO membrane, not a Schematics clone; update the GSMBs so other agents stop confusing it; one step at a time, no rush"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E050",
+        "fields": [
+          "state",
+          "owner_action",
+          "tier framing"
+        ],
+        "also_corrects": {
+          "entry_ids": [
+            "ILR-2026-09-30-E052",
+            "ILR-2026-09-30-E053"
+          ],
+          "fields": [
+            "tier_state.google_drive framing"
+          ]
+        },
+        "scope": "Replaces the 'Drive is a missing mirror / UNKNOWN until upload receipt' framing with the owner doctrine that Drive is the human orchestration membrane. The optional upload checklist of cloud receipts to Drive remains optional and still needs a named folder before any write. Prior rows are not edited."
+      },
+      "payload": {
+        "receipt_path": "docs/swarm-ops/receipts/DRIVE_GSMB_HUMAN_MEMBRANE_2026-10-01.md",
+        "doctrine": {
+          "drive_gsmb": "Human-in-the-loop orchestration membrane (MMAO + MAO). Owner-authored and owner-kept Google Docs/files. Centric surface for mobile and desktop agent orchestration.",
+          "not": "A byte-for-byte Schematics vault or GitHub checkout under a folder titled GSMB.",
+          "cloud_gsmb": "GitHub: code, CI, NOW.md, PR/issue receipts.",
+          "local_gsmb": "OneDrive Schematics / Obsidian lab: MAIN-BRAIN and raw incubation.",
+          "evidence": "Drive docs are human operating intent (E1/E2 as authored/kept). They do not replace GitHub SHAs for code/runtime proof."
+        },
+        "owner_context_recorded": [
+          "Other agents confuse Drive the same way; the cloud GSMB must carry the correction.",
+          "Drive is where the owner operates much of MMAO + MAO as a heavy human-in-the-loop, often on mobile, also on desktop when building.",
+          "Codex commits have been rearranging GSMB so membranes connect; connection does not help if the human layer does not make sense.",
+          "Obsidian lost children and stale formats exist; fix one step at a time; no rush; do not rebuild everything in one pass."
+        ],
+        "renter_rules": [
+          "Read living KPGS Drive docs (Charter, Hub, current Weekly Orientation, fossils) for human state.",
+          "Do not require a folder named GSMB or Schematics before admitting Drive GSMB exists.",
+          "Do not dig personal space.",
+          "Do not upload cloud receipt trees without a named Drive folder.",
+          "One step at a time."
+        ]
+      },
+      "prev_hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb",
+      "hash": "0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12"
     }
   ]
 }
