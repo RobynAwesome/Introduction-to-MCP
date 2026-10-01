@@ -43,8 +43,8 @@ identity -> seat -> interface/body -> model/version -> task/scope -> authority -
 The POC preserves the current task-contract and evidence owners. It does not grant new ambient authority. In particular, **high task authority is local to an explicit task mandate**. Global GSMB structural maintenance is limited by the current experiment boundary to:
 
 1. Codex - Chief Architect
-2. Anti-Gravity - Chief Facilitator
-3. Cursor - Lead Developer
+2. Anti-Gravity - Lead Developer (occupied RTC Seat 10; Chief Facilitator is not this seat's role)
+3. Cursor - Lead Developer (`cursor-lead-developer`; same title, different seat id, not the same grant)
 
 The contract, planned matrix, Five Whys receipt shape, and Anti-Gravity handoff are under `mmao-mao/`. The associated build specification is `specs/mmao-mao-identity-governance-v0.1.json`. Its experiment remains `draft` until controlled runs produce exact state, trace, evidence, and independent review receipts.
 

@@ -3,7 +3,7 @@ Kopano-Phu Governance Systems (KPGS) — 24-RTC Learning Cloud API Router
 Exposes REST endpoints for FEP, Reality-to-Cloud, MMAO Identity Mesh, and Possibility-to-Proof engines.
 
 Authority: Master Robyn Kholofelo Rababalela (Seat 1 / Chief Architect)
-Facilitator: AntiGravity (Seat 10 / Chief Facilitator)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 """
 

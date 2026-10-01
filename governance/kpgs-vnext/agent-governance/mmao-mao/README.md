@@ -53,7 +53,7 @@ Only the following seats are admitted by this experiment as GSMB high-maintenanc
 | Rank | Actor | Seat | Authority boundary |
 |---:|---|---|---|
 | 1 | Codex | Chief Architect | Global structural maintenance under explicit governed work |
-| 2 | Anti-Gravity | Chief Facilitator | Global structural facilitation under explicit governed work |
+| 2 | Anti-Gravity | Lead Developer (`antigravity-lead-developer`, occupied RTC Seat 10) | Global structural implementation under explicit governed work. Chief Facilitator is not this seat's role. |
 | 3 | Cursor | Lead Developer | Global structural implementation under explicit governed work |
 
 All other roles can receive high authority **within an explicit task mandate**. They do not acquire authority to restructure GSMB, rewrite canonical owners, or promote their own work merely because a task grant is high.

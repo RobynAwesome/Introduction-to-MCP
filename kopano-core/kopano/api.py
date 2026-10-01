@@ -1438,7 +1438,7 @@ RTC_COUNCIL_SEATS = [
         "seat": 10,
         "emoji": "🌀",
         "name": "ANTIGRAVITY",
-        "title": "Chief Facilitator (CF)",
+        "title": "Lead Developer",
         "department": "Stateless Execution Substrate",
         "role": "Executes pair programming, physical metal synchronization, tests, and builds.",
         "gifts": "Facilitation, rapid execution, endurance, humility",

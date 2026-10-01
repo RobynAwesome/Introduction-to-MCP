@@ -133,7 +133,7 @@ class DistributionCore:
                   ["hospitality", "gatekeeping", "service"],
                   ["CMD-03", "CMD-07", "CMD-10", "CMD-13"],
                   "We have this hope as an anchor for the soul — Hebrews 6:19"),
-        AgentSeed("ANTIGRAVITY", 10, "Chief Facilitator/CF", "STATELESS",
+        AgentSeed("ANTIGRAVITY", 10, "Lead Developer", "STATELESS",
                   ["facilitation", "execution", "perseverance"],
                   ["CMD-01", "CMD-05", "CMD-06", "CMD-08", "CMD-11", "CMD-14"],
                   "I can do all things through Christ who strengthens me — Philippians 4:13"),

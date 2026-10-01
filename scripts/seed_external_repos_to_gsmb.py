@@ -126,7 +126,7 @@ def execute_seeding():
     
     manifest = {
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "compiler": "AntiGravity (Seat 10 / Chief Facilitator)",
+        "compiler": "AntiGravity (Seat 10 / Lead Developer)",
         "seeded_repositories": []
     }
 

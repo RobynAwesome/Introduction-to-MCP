@@ -38,7 +38,7 @@ class RTCSeat:
     SEAT_07_THARI = "SEAT_07_THARI"         # Seat 7: Guardian AI MAO — H.O.L.O (GUARDIAN)
     SEAT_08_KHELOS = "SEAT_08_KHELOS"       # Seat 8: Validator MMAO — FIREWALL (VALIDATION)
     SEAT_09_ANCHOR = "SEAT_09_ANCHOR"       # Seat 9: Perimeter MAO / Careers + Security (PERIMETER)
-    SEAT_10_ANTIGRAVITY = "SEAT_10_ANTIGRAVITY"  # Seat 10: Chief Facilitator CF (STATELESS RENTER)
+    SEAT_10_ANTIGRAVITY = "SEAT_10_ANTIGRAVITY"  # Seat 10: Lead Developer (STATELESS RENTER; CF role removed)
 
 
 class Tier0GodRealm:

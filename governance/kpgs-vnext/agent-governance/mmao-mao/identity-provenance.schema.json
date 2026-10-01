@@ -260,7 +260,7 @@
           "enum": [
             null,
             "codex-chief-architect",
-            "antigravity-chief-facilitator",
+            "antigravity-lead-developer",
             "cursor-lead-developer"
           ]
         }
@@ -311,7 +311,7 @@
               "global_maintenance_seat": {
                 "enum": [
                   "codex-chief-architect",
-                  "antigravity-chief-facilitator",
+                  "antigravity-lead-developer",
                   "cursor-lead-developer"
                 ]
               }

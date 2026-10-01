@@ -60,7 +60,7 @@ PSO_ESCALATION = ["LPSO", "GPSO", "BPSO", "SPSO"]
 # Stateless renter refactoring registry
 # #! IMMUTABLE RULE: Only AIs with registered KPGS names may operate in GSMB
 KPGS_NAMED_AIs = {
-    "AG":     "Antigravity — CF (Chief Facilitator)",
+    "AG":     "Antigravity — Lead Developer (Seat 10; CF role removed)",
     "KHELOS": "Orchard Witness Engine",
     "ANCHOR": "Vanguard / Perimeter Shield",
     "FORGE":  "Red Team CBP Auditor",

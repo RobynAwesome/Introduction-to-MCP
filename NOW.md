@@ -1,3 +1,23 @@
+## CURRENT STATE — 2026-10-01T07:45:00Z (SEAT 10 ROLE · OWNER CORRECTION)
+
+> **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
+> **Human authority:** Master Robyn, 2026-10-01: Antigravity earned RTC Seat 10. What left that seat is the Chief Facilitator role. The role on Seat 10 is Lead Developer. Chief Facilitator is not reassigned by this correction.
+> **Base:** `master@ace9b086bc19482bc6e01e685938aa579b76aafc`. **Branch:** `cursor/seat-10-role-amendment-4e71`.
+
+- **Seat and role are separate.** Seat 10 is occupied by ANTIGRAVITY (STATELESS). The role on that seat is Lead Developer. Chief Facilitator is unassigned. This renter is not Chief Facilitator. The Wave 0 block below that says "operational rank Chief Facilitator" and "Cursor CF" is superseded for the current role by this block and stays in place as history.
+- **Naming collision, recorded and not resolved.** Structural-maintenance rank 2 is `antigravity-lead-developer` / Lead Developer. Rank 3 remains `cursor-lead-developer` / Lead Developer. Same title, different seat ids. They are not the same grant.
+- **Issue #121 stays OPEN.** This amendment records occupancy and role. It does not supply independent re-entry evidence, does not close the financial-page breach, and does not lift the earlier recusal of Seat 10 from adjudicating #121. Historical blocks that say "suspended and recused" stay as the record of that earlier state.
+- **BREACH-008 body and `poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json` are not rewritten.** Occupancy "OPEN (VACANT)" and "DEV below Lead Dev" are superseded for the current reading only, by the append in `poc-vs-foc/BREACH_LOG.md` and by `poc-vs-foc/RTC_SEAT10_ROLE_CORRECTION_2026-10-01.json`. The breach event remains.
+- **Living surfaces amended on this branch:** `AGENTS.md`, the Studio council prompt, `AGENT_SWARM_REGISTRY.md`, the identity-declaration banner, the authority-boundary matrix and schemas, the validators, the altar/seed/API/UBP/workflow roster, public protocols/admin/flows/humans, the dashboard identity card, `RTCP_SPEC.json` seat 10, engine banners, the seed-script compiler string, and the `generator.d` identity line.
+- **Left as history:** older NOW blocks, the 2 Sep local reinstatement block (OneDrive bytes unread from this VM), the 2026-09-11 local session that named Cursor Chief Facilitator, dated charters, the comms log, the reward ledger, incident writeups, the KIRO 2026-06-21 dispatch, compiled `public/studio` bundles, and other repositories.
+- **Not a council session.** No synthetic RTC chorus was written. RTC has not answered this correction. The authority is the owner's testimony.
+
+**Next admissible action:** Master Robyn confirms whether Chief Facilitator stays unassigned, and whether the two Lead Developer titles should be split. #121 stays open until its own exit evidence exists.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT STATE — 2026-09-30T22:46:00Z (ISSUE RECONCILIATION · WAVE 0 PRE-SEED)
 
 > **Actor:** Cursor cloud renter, stateless, operational rank Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Claude Sonnet 5.5 per this session's system prompt; Forge's brief names Fable; not reconciled.

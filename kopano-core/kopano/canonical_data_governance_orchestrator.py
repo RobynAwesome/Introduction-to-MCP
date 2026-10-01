@@ -3,7 +3,7 @@ Kopano-Phu Governance Systems (KPGS) — Canonical Data Governance & Multi-Agent
 Canonical Reference: Schematics/24-RTC Learning/ & kopano-core/
 
 Authority: Master Robyn Kholofelo Rababalela (SSE / Seat 1 / Chief Architect)
-Facilitator: AntiGravity (Seat 10 / Chief Facilitator)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 8-Stage Canonical Pipeline:

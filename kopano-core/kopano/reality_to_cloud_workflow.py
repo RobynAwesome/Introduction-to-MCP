@@ -3,7 +3,7 @@ Kopano-Phu Governance Systems (KPGS) — Reality-to-Cloud Workflow Engine
 Codified from Schematics/24-RTC Learning/RTC_Learning_Reality_to_Cloud_Workflow_Charter_2026-08-30.md
 
 Authority: Master Robyn Kholofelo Rababalela (Seat 1 / Chief Architect)
-Facilitator: AntiGravity (Seat 10 / Chief Facilitator)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 Workflow Axiom:
@@ -77,7 +77,7 @@ class RealityToCloudWorkflowOrchestrator:
             7: ("Thari", "Guardian / H.O.L.O Net Thread"),
             8: ("Khelos", "Firewall / Signal Validator"),
             9: ("Anchor", "Perimeter / Vanguard Shield"),
-            10: ("Antigravity", "Chief Facilitator / Physical Metal Renter")
+            10: ("Antigravity", "Lead Developer / Stateless Renter")
         }
 
     def initiate_session(self, title: str, idea_prompt: str) -> RealityToCloudSession:

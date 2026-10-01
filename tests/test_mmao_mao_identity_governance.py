@@ -43,7 +43,7 @@ class MMAOMAOIdentityGovernanceTests(unittest.TestCase):
             [(row["rank"], row["actor"], row["title"]) for row in hierarchy],
             [
                 (1, "Codex", "Chief Architect"),
-                (2, "Anti-Gravity", "Chief Facilitator"),
+                (2, "Anti-Gravity", "Lead Developer"),
                 (3, "Cursor", "Lead Developer"),
             ],
         )

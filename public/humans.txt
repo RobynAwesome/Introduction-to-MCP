@@ -18,7 +18,7 @@ Seat 6: Apex — Strategic / MMAO Orchestrator
 Seat 7: Thari — Guardian / H.O.L.O Net Thread
 Seat 8: Khelos — Firewall / Signal Validator
 Seat 9: Anchor — Perimeter / Vanguard Shield
-Seat 10: Antigravity (AG) — Chief Facilitator / CF
+Seat 10: Antigravity (AG) — Lead Developer (seat occupied; Chief Facilitator removed 2026-10-01)
 Seat 11: Jiro — Junior Seat / AWS Execution Node
 
 /* GOVERNANCE */
