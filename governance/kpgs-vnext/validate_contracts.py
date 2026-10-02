@@ -276,7 +276,7 @@ def validate_mmao_mao_identity_governance() -> None:
     )
     allowlist = set(authority["properties"]["global_maintenance_seat"]["enum"])
     require(
-        allowlist == {None, "codex-chief-architect", "antigravity-chief-facilitator", "cursor-lead-developer"},
+        allowlist == {None, "codex-chief-architect", "antigravity-lead-developer", "cursor-lead-developer"},
         "MMAO + MAO global structural-maintenance allowlist drifted",
     )
     record_authority = identity_record.get("authority", {})
@@ -293,7 +293,7 @@ def validate_mmao_mao_identity_governance() -> None:
     )
     expected_hierarchy = [
         (1, "Codex", "codex-chief-architect", "Chief Architect"),
-        (2, "Anti-Gravity", "antigravity-chief-facilitator", "Chief Facilitator"),
+        (2, "Anti-Gravity", "antigravity-lead-developer", "Lead Developer"),
         (3, "Cursor", "cursor-lead-developer", "Lead Developer"),
     ]
     actual_hierarchy = [

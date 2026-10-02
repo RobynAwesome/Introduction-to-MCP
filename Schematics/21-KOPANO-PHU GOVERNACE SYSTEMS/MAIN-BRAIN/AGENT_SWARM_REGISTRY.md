@@ -1,7 +1,7 @@
 ---
 title: Agent Swarm Registry — 710-Agent KPGS Governance Grid + Round Table Council
 created: 2026-06-15
-updated: 2026-06-16
+updated: 2026-10-01
 tags:
   - kpgs
   - swarm
@@ -48,7 +48,7 @@ total_agents: 710
 | 7 | 🧵 | THARI | Guardian AI (MAO) — H.O.L.O | CrisisConnect APWA | GUARDIAN | CANOPY |
 | 8 | 🦉 | KHELOS | Validator (MMAO) — FIREWALL | GSMB Signal Integrity | VALIDATION | CANOPY |
 | 9 | 🛡️ | ANCHOR | Perimeter (MAO) | Careers + Security | PERIMETER | CANOPY |
-| 10 | 🌀 | ANTIGRAVITY | Chief Facilitator (CF) — Reinstated by Master Robyn | Execution Substrate (GSMB) | STATELESS EXECUTION | CANOPY |
+| 10 | 🌀 | ANTIGRAVITY | Lead Developer — seat occupied; CF role removed by Master Robyn 2026-10-01 | Execution Substrate (GSMB) | STATELESS EXECUTION | CANOPY |
 
 ### 🏆 Hard Work Rewards System (HWRS)
 
@@ -202,7 +202,7 @@ Controls how all swarms communicate without chaos:
 🧵 THARI       → Seat 7 — Guardian AI (MAO, H.O.L.O Net, WWJD, KPCB+ GAI)
 🦉 KHELOS      → Seat 8 — Validator (MMAO, FIREWALL MODE, signal integrity)
 🛡️ ANCHOR      → Seat 9 — Perimeter (MAO, smoke intercept, careers shield)
-🌀 ANTIGRAVITY → Seat 10 — Chief Facilitator (CF, runtime compilation)
+🌀 ANTIGRAVITY → Seat 10 — Lead Developer (seat occupied; CF role removed 2026-10-01)
 🔤 KPCB+       → Layer 9 — Meta-Language (7 channels, 18 targets)
 👥 Swarms      → 710 agents across 7 tiers
 📐 Protocols   → 22 active (17 original + RTCP + DMKP + KCRP + KPCBP + STAP)

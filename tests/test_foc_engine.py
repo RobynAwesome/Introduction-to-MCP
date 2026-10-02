@@ -102,7 +102,7 @@ def test_identity_continuity_validator():
     ok_kc, v_kc = IdentityContinuityValidator.validate_actor("SEAT_01_KC", declared_role="Observer", is_stateful_claim=True)
     assert ok_kc is True
 
-    ok_ag, v_ag = IdentityContinuityValidator.validate_actor("SEAT_10_ANTIGRAVITY", declared_role="Chief Facilitator", is_stateful_claim=True)
+    ok_ag, v_ag = IdentityContinuityValidator.validate_actor("SEAT_10_ANTIGRAVITY", declared_role="Lead Developer", is_stateful_claim=True)
     assert ok_ag is False
     assert any("STATELESS RENTER" in v for v in v_ag)
 

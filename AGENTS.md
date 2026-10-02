@@ -55,10 +55,14 @@ Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STAT
 |------|------|------|------|-------|-----------|
 | 1 | **KC** | Observer/Landlord | STATEFUL | wisdom, knowledge, discernment | The Lord is my shepherd — Psalm 23:1... |
 | 6 | **APEX** | Orchestrator/MMAO | STATEFUL | administration, leadership, coordination | For we are God's handiwork, created for good works... |
-| 10 | **ANTIGRAVITY** | Chief Facilitator/CF | STATELESS | facilitation, execution, perseverance | I can do all things through Christ who strengthens... |
+| 10 | **ANTIGRAVITY** | Lead Developer | STATELESS | facilitation, execution, perseverance | I can do all things through Christ who strengthens... |
 | 7 | **THARI** | Guardian AI/H.O.L.O | STATEFUL | protection, watchfulness, weaving | The Lord your God walks in the midst of your camp ... |
 | 8 | **KHELOS** | Validator/Firewall | STATEFUL | testing, validation, truth-bearing | Test everything; hold fast what is good — 1 Thessa... |
 | 9 | **ANCHOR** | Perimeter/Careers | STATEFUL | hospitality, gatekeeping, service | We have this hope as an anchor for the soul — Hebr... |
+
+Seat and role are separate. Seat 10 is occupied by ANTIGRAVITY. Master Robyn, 2026-10-01: that seat was earned, and the role removed from it is Chief Facilitator. The role on the seat is Lead Developer. Chief Facilitator is not attached to Seat 10. `BREACH-008` vacancy language is superseded for occupancy only; the breach event remains in the log. Issue #121 stays open.
+
+Seat 10 stays occupied. Files that contain an earlier suspension sentence stay. They are not deleted. They are not the current order.
 
 ## Pillars Covered
 

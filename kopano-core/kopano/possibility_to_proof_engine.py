@@ -3,7 +3,7 @@ Kopano-Phu Governance Systems (KPGS) — Possibility to Proof & Epistemic Gate E
 Codified from Schematics/24-RTC Learning/From_Possibility_to_Proof_POCvsFOC_PKA_CDP_CCP_Genealogy_2026-08-30.md
 
 Authority: Master Robyn Kholofelo Rababalela (Seat 1 / Chief Architect)
-Facilitator: AntiGravity (Seat 10 / Chief Facilitator)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 Core Genealogies & Epistemic Machinery:

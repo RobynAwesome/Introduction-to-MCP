@@ -1,5 +1,7 @@
 # 2026-09-29 CodeQL High-Alert Remediation Receipt
 
+> **Added 2026-10-01. This file is not deleted.** Master Robyn: Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. The suspension sentence later in this file stays. Codex Forge wrote it on 2026-09-29. It is not the current order. Issue #121 stays open.
+
 ## Scope and local verification
 
 The isolated branch `codex/security-high-alert-remediation` is based on `RobynAwesome/Introduction-to-MCP` master at `7245adafe08b31b2e70cae9c10b2e50ba2a0af8e`. Commit `acbf68f657702063d5bfb673c9f980e1f31b997f` constrains ECO evidence-file checks to repository-relative paths, rejects traversal and paths resolving outside the repository, and replaces the bracket linter's backtracking regular expression with a one-pass parser.

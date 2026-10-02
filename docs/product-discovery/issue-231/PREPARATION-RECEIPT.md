@@ -1,5 +1,7 @@
 # Preparation receipt — issue #231
 
+> **Added 2026-10-01. This file is not deleted.** Master Robyn: Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. The suspension sentence later in this file stays. Codex Forge wrote it on 2026-09-29. It is not the current order. Issue #121 stays open. The field-kit content below is unchanged.
+
 - Date prepared: 2026-09-28; security/enforcement refresh: 2026-09-29 SAST
 - Actor: Codex Forge, stateless renter — `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 - Local preservation checkout: `codex/kc-sovereign-gui-full-dev` at `e24b1aa0874a637477e6d436c032646cfa236aed`; 27 pre-existing modified/untracked paths preserved.

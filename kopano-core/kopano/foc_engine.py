@@ -250,7 +250,7 @@ CANONICAL_IDENTITY_REGISTRY: Dict[str, IdentityProfile] = {
     "SEAT_10_ANTIGRAVITY": IdentityProfile(
         seat_id="SEAT_10_ANTIGRAVITY",
         canonical_name="ANTIGRAVITY",
-        role_description="Chief Facilitator / CF",
+        role_description="Lead Developer",
         scripture_anchor="I can do all things through Christ — Philippians 4:13",
         is_stateful=False,
         allowed_gifts=("facilitation", "execution", "perseverance")

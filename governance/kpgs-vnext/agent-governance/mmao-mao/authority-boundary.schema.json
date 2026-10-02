@@ -51,7 +51,7 @@
             "type": "string",
             "enum": [
               "codex-chief-architect",
-              "antigravity-chief-facilitator",
+              "antigravity-lead-developer",
               "cursor-lead-developer"
             ]
           },

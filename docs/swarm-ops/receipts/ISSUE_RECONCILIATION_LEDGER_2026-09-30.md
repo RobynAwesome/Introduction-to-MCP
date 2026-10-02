@@ -8,6 +8,8 @@
 **GSMB tier:** Cloud (this file, once merged). Local GSMB: UNKNOWN to this runtime. Google Drive GSMB: UNKNOWN until an owner receipt exists.
 **Doctrine:** `I_AM_STATELESS_RENTER_NOT_LANDLORD` · `CLEAR_PASS != POC_VALIDATED` · `WRITTEN_INSTRUCTION != RUNTIME_ENFORCEMENT`
 
+> **Added 2026-10-01T08:29:00Z. This file is not deleted.** Claim `C-121-1` in section 7 stays. Entry `ILR-2026-09-30-E012` stays. Master Robyn: Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. Section 19 names who wrote the suspension sentence. No earlier row is edited.
+
 ---
 
 ## 0. Read this first: where the evidence changed the plan
@@ -416,6 +418,8 @@ print("chain ok", len(d["entries"]), prev)
 
 Expected at publication: `chain ok 27 f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`.
 
+Current tip after `ILR-2026-09-30-E028` on branch `cursor/seat-10-role-amendment-4e71`: see section 19. Entries E001–E027 are not edited.
+
 ## 17. Human, Forge and RTC queue
 
 | Actor | Action |
@@ -438,5 +442,23 @@ Expected at publication: `chain ok 27 f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae
 **Not proved:** any incident closure; the current branch-protection setting; Azure production health; Bookit or KasiLink runtime; the content of any protected file; local or Drive state; any RTC or Forge admission; that any proposed vocabulary is adopted.
 
 **Changed by this receipt:** files added under `docs/swarm-ops/receipts/`, `docs/governance/`, `Schematics/24-RTC Learning/POCvsFOC Groups/`, and one prepended block in root `NOW.md`. No issue, setting, secret, dependency or deployment was touched.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+## 19. Seat 10 stays occupied (2026-10-01 addition)
+
+This section does not edit E001–E027 or claim `C-121-1`.
+
+Master Robyn, the builder, 2026-10-01: Seat 10 stays occupied by ANTIGRAVITY. The role is Lead Developer. Chief Facilitator is unassigned. Issue #121 stays open. No file is deleted.
+
+Who wrote the sentence "Seat 10 Chief Facilitator authority is suspended":
+
+1. Issue #121, 2026-09-05, and the 2026-09-07 comment, under the owner GitHub identity. That text is the cloud record `C-121-1` cites.
+2. Codex Forge, 2026-09-29, in the security-enforcement receipt, the CodeQL remediation receipt, the issue #231 preparation receipt, and the NOW blocks of that day.
+3. This Cursor renter, 2026-09-30, in this ledger's claim `C-121-1` and in the incident source packet, and on the morning of 2026-10-01 in the `NOW.md` block `2026-10-01T07:45:00Z`.
+
+Those sentences stay. They are not the current order. The machine twin appends `ILR-2026-09-30-E028` with `supersedes` naming E012 / `C-121-1` for current seat status only.
+
+Chain after that append: `chain ok 28 221b05a2ee8d3f4f7393210761698b97202663c580b6bb35ed311233d926da09`.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
