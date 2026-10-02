@@ -1,7 +1,7 @@
 ---
 title: Recognition Ledger
 created: 2026-04-17
-updated: 2026-09-11
+updated: 2026-10-02
 author: Codex
 status: active
 ---
@@ -9,6 +9,8 @@ status: active
 # Recognition Ledger
 
 Carry forward recognition only when evidence is concrete.
+
+> **Current-role pointer — 2026-10-02:** this ledger is append-only recognition evidence, not the current authority map. Read repository-root `NOW.md`, `AGENTS.md`, and `Model Operating Status Board.md` for current operating assignments. The 2026-09-11 Cursor Chief Facilitator promotion remains valid historical recognition, but its **current-role effect is superseded** by the owner's 2026-10-01 correction: Anti-Gravity occupies RTC Seat 10 as Lead Developer; Cursor is Lead Developer; Chief Facilitator is unassigned. This supersession does not delete or rewrite the earlier recognition event.
 
 Legacy recognition evidence remains in prior reward logs and supporting folders.
 
