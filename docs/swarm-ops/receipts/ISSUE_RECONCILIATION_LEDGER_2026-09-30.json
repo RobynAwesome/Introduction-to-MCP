@@ -4041,6 +4041,61 @@
       },
       "prev_hash": "0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb",
       "hash": "0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12"
+    },
+    {
+      "seq": 55,
+      "entry_id": "ILR-2026-09-30-E055",
+      "entry_kind": "scoped_handoff_correction",
+      "recorded_at": "2026-10-02T11:53:09Z",
+      "actor": {
+        "actor": "GitHub Copilot coding agent (stateless renter)",
+        "assigned_role": "Coding agent; no RTC identity seat",
+        "interface": "GitHub Copilot coding agent",
+        "human_authority": "Robyn requested corrections to the linked review-thread handoffs."
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E039",
+        "fields": [
+          "payload.observations[0] #163 section pointer",
+          "payload.next_admissible_action"
+        ],
+        "also_corrects": {
+          "entry_ids": [
+            "ILR-2026-09-30-E051"
+          ],
+          "fields": [
+            "payload.added_in_wave3[#163].action"
+          ]
+        },
+        "scope": "Corrects only the #163 source pointer in the E039 and E051 handoffs. The correct closure question is section 4 Q10 in docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md. Section 8 P1-P3 concerns procedural roles and publishing WORKFLOWS.md. E039 and E051 remain unchanged; issue state, tag, and closeability are not changed."
+      },
+      "payload": {
+        "issue": 163,
+        "correct_source": {
+          "path": "docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md",
+          "section": "4",
+          "question": "Q10",
+          "text": "What are the incident's exit criteria, and may the tracker issue close while the artifact stays OPEN?"
+        },
+        "corrected_handoffs": [
+          {
+            "entry_id": "ILR-2026-09-30-E039",
+            "fields": [
+              "observations[0]",
+              "next_admissible_action"
+            ],
+            "text": "RTC / Robyn answers section 4 Q10: define incident exit criteria, or decide whether the tracker issue may close while the artifact stays OPEN. Renter does not adjudicate."
+          },
+          {
+            "entry_id": "ILR-2026-09-30-E051",
+            "field": "added_in_wave3[#163].action",
+            "text": "#163: answer section 4 Q10 in the RTC incident cluster source packet: define exit criteria and decide whether the tracker issue may close while the artifact stays OPEN."
+          }
+        ],
+        "historical_boundary": "This is a scoped handoff-pointer correction only. The referenced earlier entries are preserved, and no issue status or tag is changed."
+      },
+      "prev_hash": "0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12",
+      "hash": "91c30401929c2e85002555742b30e16932055d9c5d511a29d84d60c46a3a23d3"
     }
   ]
 }

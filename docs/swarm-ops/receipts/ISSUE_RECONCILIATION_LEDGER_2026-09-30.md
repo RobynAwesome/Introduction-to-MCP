@@ -618,3 +618,12 @@ Cloud = GitHub receipts. Local = OneDrive Schematics / Obsidian lab. Drive = own
 Chain tip after E054: `0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12`. Entries 1-53 unchanged.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+## 32. #163 handoff pointer correction (E055, 2026-10-02T11:53:09Z)
+
+E055 corrects only the #163 source pointer in E039 and E051. The incident exit-criteria and tracker-closure question is section 4 Q10 of `docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md`; section 8 P1-P3 concerns procedural roles and publishing `WORKFLOWS.md`.
+
+The corrected handoff is to define incident exit criteria or decide whether the tracker issue may close while the artifact stays OPEN. The renter does not adjudicate. E039 and E051 remain unchanged; this correction does not change issue state, tag, or closeability.
+
+Chain tip after E055: `91c30401929c2e85002555742b30e16932055d9c5d511a29d84d60c46a3a23d3`. Entries 1-54 unchanged.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`

@@ -1,3 +1,18 @@
+## CURRENT STATE — 2026-10-02T11:53:09Z (WAVE 3 HANDOFF CORRECTION)
+
+> **Actor:** GitHub Copilot coding agent, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Authority:** Robyn requested corrections to the two findings in the linked review thread. This block corrects the dated Wave 3 handoff below; it does not represent a new issue-state observation.
+> **Branch / head:** `cursor/reconciliation-closeout-4e71` at `2efb9103fba6b46459fee2399029c653ccb30e6d`.
+
+- **E029–E045 issue outcomes (Wave 3 snapshot):** twelve `HOLD_HUMAN` (#102, #107, #115, #116, #121, #122, #158, #167, #183, #207, #211, #231); two `POC_VALIDATED` (#163, #205); two `POC_PENDING` (#103, #110); one `UNKNOWN` (#94).
+- **Issue-level tag transitions:** only #107, #115, #122 and #183 moved tags. E029 (#94), E031 (#103), E033 (#110) and E042 (#205) explicitly record `tag_moved: false`. E046 indexes eight scoped supersessions (E029, E031, E032, E033, E034, E037, E041, E042); those are distinct from issue-level tag transitions.
+- **#163 handoff:** the owner/RTC question is section 4 Q10 in `docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md`: define exit criteria and decide whether the tracker issue may close while the artifact stays OPEN. E055 corrects the handoff pointer; E039 and E051 remain unchanged.
+- No issue status or tag changed in this correction.
+
+**Next admissible action:** Owner reviews this scoped handoff correction. Renters do not adjudicate or close #163.
+
+---
+
 ## CURRENT STATE — 2026-10-01T06:59:55Z (DRIVE GSMB · HUMAN MEMBRANE DOCTRINE)
 
 > **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
