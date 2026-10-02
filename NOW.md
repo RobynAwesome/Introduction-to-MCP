@@ -1,3 +1,18 @@
+## CURRENT STATE — 2026-10-02T11:49:22Z (WEB DEPLOY GATE CLI FIX)
+
+> **Actor:** OpenAI ChatGPT, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Scope:** Fix the failing `KPGS Web Deploy — Governed IONOS Surfaces` gate from source commit `1b6ac4e5736ecde03462c77b0c08fd71342dd457`.
+
+- **Observed failure:** Actions run `37002701194`, job `110823802220`, failed at the governance tick step with exit code 1. The workflow passed unsupported `--once` to `kopano.gsmb_auto_runner`, whose CLI supports `--cycles`; the following grep pipeline masked argparse's non-matching usage/error output and returned 1.
+- **Change:** `.github/workflows/deploy-web.yml` now runs `python -m kopano.gsmb_auto_runner --cycles 1` without filtering its output. Runner `--help` confirms the supported option. The checkout cleanup also logged the existing `KasiLink` gitlink's missing `.gitmodules` URL; this warning is separate and remains unresolved, with no submodule metadata changed.
+- **Validation:** Renter ingress assertion returned `ACKNOWLEDGED`; the runner help command succeeded. Hosted validation on the patched head and deployment outcome are **UNKNOWN**.
+
+**Next admissible action:** Run the workflow on this patched head and inspect the governance gate and post-job cleanup separately. Do not claim deployment success until the provider deployment and runtime are verified.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT STATE — 2026-10-01T08:29:00Z (SEAT 10 STAYS OCCUPIED · FILES STAY)
 
 > **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat and is not Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.

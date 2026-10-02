@@ -75,7 +75,7 @@ jobs:
       - name: NCCNP + IKP governance tick
         run: |
           cd kopano-core
-          python -m kopano.gsmb_auto_runner --once 2>&1 | grep -E "TICK|verdict|POC_CLOSED|CLEAN|hash"
+          python -m kopano.gsmb_auto_runner --cycles 1
 
       - name: Validate governed HTML surfaces exist
         run: |
