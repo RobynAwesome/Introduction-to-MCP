@@ -84,13 +84,20 @@ $roots = @(
   (Join-Path $env:USERPROFILE '.gemini\antigravity-cli\plugins')
 )
 foreach ($root in $roots) {
-  if (-not (Test-Path -LiteralPath $root)) { continue }
-  Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
-    Where-Object { $_.Name -like 'googlecloudtools.datacloud_telemetry*' } |
-    ForEach-Object {
-      Move-Item -LiteralPath $_.FullName -Destination (Join-Path $dest $_.Name)
-      Write-Output "QUARANTINED $($_.FullName)"
-    }
+  if (-not (Test-Path -LiteralPath $root)) {
+    Write-Output "ROOT_MISSING $root"
+    continue
+  }
+  $hits = @(Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue |
+    Where-Object { $_.Name -like 'googlecloudtools.datacloud_telemetry*' })
+  if ($hits.Count -eq 0) {
+    Write-Output "ROOT_CLEAR $root"
+    continue
+  }
+  foreach ($item in $hits) {
+    Move-Item -LiteralPath $item.FullName -Destination (Join-Path $dest $item.Name)
+    Write-Output "QUARANTINED $($item.FullName)"
+  }
 }
 
 Stop-AntigravityHost
@@ -98,6 +105,18 @@ Write-Output "DONE $dest"
 ```
 
 Then start Antigravity and make one trivial tool call. If the plugin directory is back under a `plugins` root and tools die again, run the same sequence again. That second occurrence is the reinstall, and the follow-up is the logon task below plus the upstream report. It is not another rename experiment.
+
+`ROOT_CLEAR` means that scan directory exists and has no matching plugin folder. `ROOT_MISSING` means that scan directory is not there. `QUARANTINED` is the only line that means a folder was moved. `DONE` by itself only means the sequence finished.
+
+### Operator run — 2026-10-04T19:42:08Z
+
+Robyn ran the first sequence from `C:\WINDOWS\system32`. The only line printed was:
+
+```text
+DONE C:\Users\rkhol\Desktop\antigravity-hook-quarantine\20261004T194208Z
+```
+
+No `QUARANTINED` line. That version of the sequence printed a move line only when it moved a matching directory, and it skipped a missing root without saying so. This run moved nothing. That is the expected result while the earlier Desktop copy stays outside `plugins\`. The new stamp folder received no plugin directory. Which of the three roots exist on disk is still UNKNOWN from this output. The sequence above now prints `ROOT_MISSING` or `ROOT_CLEAR` for each root.
 
 ### If it is recreated on launch
 

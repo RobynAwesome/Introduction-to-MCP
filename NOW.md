@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-04T19:42:08Z (QUARANTINE RUN MOVED NOTHING)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Grok 4.7.
+> **Human authority:** Robyn ran the containment sequence and pasted the console output.
+> **Branch:** `cursor/telemetry-hook-lockout-plan-90ac`.
+
+- **Operator output:** `DONE C:\Users\rkhol\Desktop\antigravity-hook-quarantine\20261004T194208Z`. No `QUARANTINED` line. The sequence moves a directory only when a name matching `googlecloudtools.datacloud_telemetry*` is inside a scanned `plugins` root. This run moved nothing.
+- **Reading:** consistent with the 2026-10-03 containment (plugin directory already outside `plugins\`). It does not, by itself, prove which of the three scan roots exist. The incident sequence now prints `ROOT_MISSING` or `ROOT_CLEAR`.
+- **Next admissible action:** start Antigravity and make one tool call. If the same `MODULE_NOT_FOUND` returns, the IDE recreated the plugin during launch. Run the sequence again and keep the `QUARANTINED` line.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT STATE — 2026-10-04T19:40:00Z (DATACLOUD TELEMETRY PRETOOLUSE LOCKOUT)
 
 > **Actor:** Cursor cloud renter, stateless. No RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
