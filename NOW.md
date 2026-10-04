@@ -1,3 +1,47 @@
+## CURRENT STATE — 2026-10-04 SAST (GSMB MEMBRANE OWNER CORRECTION · DOCUMENTATION DELIVERY)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn directly corrected GSMB to **Governance System Membrane** and FOC to **Field of Concepts**, directed the Local/Cloud/Google Drive boundary and the RTC → CA → CF → Lead Developer → Developers → spawned agents flow, and asked Forge to complete the prepared handoff before Luna's next work.
+> **Worktree:** `C:/Users/rkhol/Documents/Codex/2026-10-01/gsmb-local-ca-cloud-65975a1`, branch `codex/ca-validation-luna-plan-20261003`, starting Cloud head `3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`. Forge is the integrating writer for this branch. The original dirty Local checkout has a separate writer and remains a separate source population.
+
+- **Status:** DOCUMENTATION_CORRECTION_STAGED. Current owner meanings are recorded in `AGENTS.md`, `governance/gsmb/owner-terms-2026-10-03.json`, the selected public GSMB-Issues index and `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`. The former `FOC` fork readiness score has been withdrawn as present capability evidence. Earlier source events remain in Git history and a separate private Local archive. The private Local writer reports byte-exact pre-correction index SHA-256 `5ffcf0c1d7e724abf6c0a590b351aecd8e0689ab8807a91e7e63999cb4ee2c42`; those original Local changes remain dirty and unpublished.
+- **Boundary:** Local is the private generalized KC estate; Cloud is a reviewed public projection; Google Drive is a third source ecosystem. Cloud's `.gitignore` now defaults to ignoring new untracked `/Schematics/` files while existing tracked projections remain tracked. An absent Cloud canonical path does not establish an absent Local source. Exact Drive audit mirror remains UNKNOWN.
+- **Earlier defects:** the prepared Dashboard/Session 3 historical-boundary patch has been applied on this branch; the preceding external-evidence locator and CRLF/LF digest populations are reconciled in the prior CA validation bundle and current correction receipt. These are documentation changes, not proof of runtime admission or behavioral incident exit.
+- **Current roles:** Robyn's stated hierarchy is structural. Current Cloud owner correction leaves CF unassigned and Seat 10 AntiGravity as Lead Developer. No model/agent assignment fills the vacant CF role or adjudicates old incident records.
+- **Receipts and review:** ChatGPT Forge returned an attributed context review; two read-only source reviewers recovered local source paths and protocol controls. Their findings are evidence input, not RTC votes, teacher clearance or KC SAVE. Current CA learning remains CORRECTION_CANDIDATE with replay pending.
+- **Next admissible action:** finish the bounded source/provenance review, validate changed documentation and the Git privacy rule, produce a clean commit and draft PR through the normal provider checks, and file the exact head/status. Luna then resumes the remaining planned work without redoing the completed documentation slice. New runtime enforcement, generator or AI-architecture behavior still needs actual applicable admission.
+
+---
+
+## COORDINATION CHECKPOINT — 2026-10-03T07:32:16.354126+00:00
+
+- **Actor/scope:** Forge CA, stateless renter; Robyn's previously authorized consultation with ChatGPT Forge.
+- **Action:** bounded context/learning review request sent to **Forge Relationship Response** (6ab8ea7b-730c-83ea-86a3-3b85b6cc348b). The returned thread state was active; the bounded readback returned historical turns, so the new response remains PENDING.
+- **Boundary:** this contact supplies no RTC identity testimony, admission, teacher/KC clearance, role assignment or incident exit. Historical product/estate chat was not imported into this sprint.
+- **Receipts:** `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/chat-forge-coordination.json`; `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/coordination-session-closeout.yaml`; integrity successor `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/evidence-manifest-v2.json`.
+- **Next admissible action:** recover the prepared Luna packet and begin documentation slice 1 within current authority; record any later Forge reply as attributed context. New behavior still waits for actual applicable admission. No monitoring job or automation was created.
+
+---
+
+## CURRENT STATE — 2026-10-03T07:17:27.724824+00:00 (CA VALIDATION · LUNA PLAN PREPARED)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn requested validation against existing Local, Cloud and Google Drive KPGS process and a sprint plan for Luna; Sol is the user-reported planning selection.
+> **Worktree:** `C:/Users/rkhol/Documents/Codex/2026-10-01/gsmb-local-ca-cloud-65975a1`. **Branch:** `codex/ca-validation-luna-plan-20261003`. **Source base/HEAD:** `3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`.
+> **Integrating writer:** Forge for this isolated validation worktree only; no cloud/shared NOW writer grant is asserted.
+
+- **Status:** PARTIAL_VALIDATION / CORRECTIONS_REQUIRED / LUNA_PLAN_PREPARED. PR #243 merged at 499876734183011de590668c0b2deabad07e4660 from final head 59b08587dec44ed8a3313d8fef417057b0f96d30. Four documentation defects are supported by review; code/generator/enforcement repairs remain conditional on applicable admission.
+- **Receipts:** `docs/swarm-ops/receipts/CA_GSMB_VALIDATION_2026-10-03.md`; `docs/swarm-ops/receipts/CA_LEARNING_CANDIDATE_2026-10-03.md`; `docs/swarm-ops/plans/LUNA_CONTINUITY_PROOF_SPRINT_2026-10-03.md`; supporting source/provider/probe files in `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation`.
+- **Evidence scope:** current ACK verifier passed canonical/missing/wrong cases without changes to six monitored targets. The 35 unique prior coverage paths have 33 unchanged, one changed root NOW, one expected absence. Google Drive documents are readable; this audit's exact mirror remains UNKNOWN. Whole-house semantic review, RTC admission, transitive no-write and behavioral incident closure remain unproved.
+- **Source boundaries:** original OneDrive e24b1aa remains a dirty separate population (112 visible paths at capture), including ZCode's Oct 2 containment candidate. Current cloud owner record keeps CF unassigned; the old Cursor CF block below remains history. Cursor's issue lane was not executed here.
+- **Machine closeout / integrity index:** `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/session-closeout.yaml`; `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/evidence-manifest.json`. Both belong to this local validation/planning session; they do not supply runtime admission or Drive parity.
+
+- **Dirty state:** this root NOW draft plus four new documentation/plan files, all uncommitted. No runtime code or original OneDrive source was edited. No commit, push, PR, merge, deployment or Drive write is claimed by this packet.
+
+**Next admissible action:** Luna refreshes root NOW/base/source ownership, then begins slice 1 of the prepared packet. Use the unapplied correction patch only after checking current bytes. New generator/resolver/enforcement behavior stays HOLD until actual applicable Design Review admission. Coordinate shared NOW publishing through one writer; preserve prior blocks and linked evidence.
+
+---
+
 ## CURRENT STATE — 2026-10-02T11:49:22Z (WEB DEPLOY GATE CLI FIX)
 
 > **Actor:** OpenAI ChatGPT, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.

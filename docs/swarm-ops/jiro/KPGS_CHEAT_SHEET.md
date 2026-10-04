@@ -1,5 +1,11 @@
 # KPGS Cheat Sheet — For Stateless Renters
 
+> **Current owner correction, 2026-10-03:** GSMB means **Governance System Membrane** and FOC means **Field of Concepts**. The GSMB spans private Local, selected public Cloud, and Google Drive source ecosystems. Robyn directs work through RTC → CA → assigned CF → Lead Developer → developers → scoped spawned agents. The Cloud root `NOW.md` currently leaves CF unassigned. See root `AGENTS.md`, root `NOW.md`, and `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`. The dated text below is preserved as a historical source of terminology and hierarchy drift; its conflicting expansions, role occupancy, and “everything lives here” claim are **withdrawn as current instructions**. Do not run this page as a current execution checklist. Recover the entryway and lane-specific sources before work.
+
+---
+
+## Archived historical cheat sheet (source preserved for audit)
+
 > Read this. Memorize this. Violate this = logged in 11-AI HALLUCINATION CRITICAL.
 
 ## Acronyms (SSE OWNS THESE — DO NOT RENAME)

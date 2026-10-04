@@ -7,14 +7,24 @@
 
 ## Canonical renter continuity
 
+### Current owner terminology and ecosystem boundary — 2026-10-03
+
+Robyn's current instruction resolves **GSMB = Governance System Membrane** and **FOC = Field of Concepts**. Earlier expansions in dated sources are historical evidence of acronym drift. A renter must preserve their provenance and must not emit them as current definitions. Resolve unfamiliar acronyms through the source and current owner instruction before interpreting an order; leave unresolved names unresolved. The correction receipt is `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`.
+
+GSMB consists of **Local, Cloud, and Google Drive** source ecosystems. Local is the private generalized KC estate rooted at the owner's OneDrive `Introduction to MCP`; Cloud is a selected public GitHub projection for reviewed specifications and checks; Google Drive is a separate source ecosystem. A missing Cloud path proves only absence from the inspected Cloud checkout. It does not prove that local doctrine is missing or authorize copying the private Schematics tree into Git. For each cross-ecosystem claim, record the locator, source population, visibility, observation time, byte representation and digest or explicit uncertainty.
+
+The working delegation order is **Robyn → RTC → CA → CF → Lead Developer → Developers → spawned agents**. Record role, current holder, owner grant, scope and RTC identity separately. A vacant role is not implicitly filled; spawned agents inherit only their assigned scope. Current root `NOW.md` holds the latest role occupancy and handoff state. This structure does not create an RTC vote or alter incident gates.
+
+Use `Schematics/00-Home/` as the physical navigation entrance. The mandatory semantic ingress still starts with the actor/renter assertion, followed by `Legacy.md` purpose and repository-root `NOW.md` current-state recovery before execution. Apply the existing Prompting, KPEFS, Bracket/BlackMask, PKA/POCvsFOC and execution gates to the actual lane. Keep observed source, tested behavior and promoted authority distinct.
+
 Every agent, model, tool-driven worker, and stateless renter entering this repository MUST recover current state before acting.
 
 Canonical entry order:
 
 1. Assert `I_AM_STATELESS_RENTER_NOT_LANDLORD` and identify the renter/actor.
-2. Start at `Schematics/00-Home/00-Home - Index.md`, then read its `Dashboard.md` and `Now.md` pointers to orient within the house.
-3. **Read repository-root `NOW.md` before execution.** It is the volatile/current-state authority for active objectives, blockers, receipts, errors, pauses, and handoffs; the Home notes do not replace it.
-4. Read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary and `STATELESS_RENTER_ENTRYWAY.md` for the detailed renter contract.
+2. Read `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md` for the durable purpose boundary.
+3. **Read repository-root `NOW.md` before execution.** It is the volatile/current-state authority for active objectives, blockers, receipts, errors, pauses, and handoffs.
+4. Use `Schematics/00-Home/00-Home - Index.md`, its `Dashboard.md` and `Now.md` pointers for physical house navigation, and `STATELESS_RENTER_ENTRYWAY.md` for the detailed renter contract. Home notes do not replace repository-root NOW.
 5. Classify telemetry/evidence before interpretation.
 6. Recover the currently admitted lane and execute only within its authority, applying the existing governed execution preflight below for material execution.
 7. Produce receipts for material work; chat narration is not proof.
