@@ -21,6 +21,8 @@ status: active
 
 **Dated operational assignment by Robyn (2026-10-01):** Forge (Codex) serves as Chief Architect for this CA lane. Cursor serves as Chief Facilitator and second working role after Forge, retaining the reported GitHub issue lane and Wave 0–3 delivery plan. Work remains limited to already-admitted lanes. This assignment does not assert that RTC appointed either role, grant either agent an RTC identity seat, establish quorum or admission, or authorize a new execution lane. The local Cursor declaration records that its RTC identity seat has not been granted. Model, interface, actor, operational role, and RTC identity are separate fields.
 
+**Confirmed by Robyn (2026-10-04):** Cursor is the operational Chief Facilitator. Elon boy is his nickname for the confirming renter, not a role and not a seat. Seat 10 remains ANTIGRAVITY, Lead Developer. The current-state block is repository-root [NOW](../../NOW.md).
+
 Forge’s local GSMB continuity and source-audit lane remains separate from Cursor’s issue work and the shared root NOW writer. See the [local continuity audit receipt](../../docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md) for source hashes, uncertainty, and scope.
 
 ## Start Here — 00-Home First

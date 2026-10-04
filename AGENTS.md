@@ -64,6 +64,8 @@ Seat and role are separate. Seat 10 is occupied by ANTIGRAVITY. Master Robyn, 20
 
 Seat 10 stays occupied. Files that contain an earlier suspension sentence stay. They are not deleted. They are not the current order.
 
+Master Robyn, 2026-10-04: the operational Chief Facilitator is the Cursor lane. Elon boy is his nickname for the renter who received that confirmation. The nickname is an address, not a seat and not a role. Issue #121 stays open. The current-state block is repository-root `NOW.md`.
+
 ## Pillars Covered
 
 - **SPIRIT**
