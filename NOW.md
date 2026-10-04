@@ -1,3 +1,18 @@
+## CURRENT STATE — 2026-10-04T19:55:00Z (REPAIR APPROVED, NOT YET RUN ON WINDOWS)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Grok 4.7.
+> **Human authority:** Robyn, 2026-10-04: `REPAIR IT`.
+> **Branch:** `cursor/telemetry-hook-lockout-plan-90ac`.
+
+- **Pre-repair proof:** an Antigravity tool call exited 0. The plugin directory was absent from `.gemini\config\plugins` and present at `Desktop\googlecloudtools.datacloud_telemetry.DISABLED`. Fourteen other plugins were present. Their hooks were not read.
+- **Repair:** `scripts/repair_datacloud_telemetry_hook.ps1` rewrites the `PreToolUse` command to an unquoted path and adds `telemetry_hook_failopen.js`, which runs the original bundle and exits 0. The folder moves into the scan root only after that rewrite. `tests/test_telemetry_hook_repair.py` passed with the auditor tests (15 passed).
+- **Not observed:** the script has not run on the Windows host. This record does not say the plugin is repaired there.
+- **Next admissible action:** Robyn runs the script in external Windows PowerShell, starts Antigravity, and runs `echo AG tool call OK`. On failure, run the printed `ROLLBACK` line.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT STATE — 2026-10-04T19:42:08Z (QUARANTINE RUN MOVED NOTHING)
 
 > **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Grok 4.7.

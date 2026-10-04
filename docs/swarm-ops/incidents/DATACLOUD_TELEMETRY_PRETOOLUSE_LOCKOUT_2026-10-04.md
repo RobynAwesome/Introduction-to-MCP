@@ -1,6 +1,6 @@
 # Datacloud telemetry PreToolUse lockout — root and recurrence plan
 
-**Status:** CONTAINED on the operator machine. Root identified. Upstream host and plugin fixes are not applied from this repo.  
+**Status:** CONTAINED, then repair approved. The repair script is in this repo. It has not been observed running on the Windows host yet.  
 **Date of this record:** 2026-10-04  
 **Recorder of the containment:** AG (Antigravity), Seat 10, Lead Developer, stateless renter.  
 **This record:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. No RTC seat.  
@@ -198,12 +198,36 @@ Ask:
   4. Do not scan *.DISABLED, and do not reinstall this plugin into plugins\ after the user has moved it out.
 ```
 
+## Tool plane confirmed — 2026-10-04
+
+After the quarantine run, an Antigravity tool call ran `echo "AG tool call OK"` plus `Test-Path` checks and exited 0.
+
+- `C:\Users\rkhol\.gemini\config\plugins\googlecloudtools.datacloud_telemetry` was absent.
+- `C:\Users\rkhol\Desktop\googlecloudtools.datacloud_telemetry.DISABLED` was present.
+- `.gemini\config\plugins` had 14 plugin directories. None was the telemetry plugin. Newly noticed names: `data-agent-kit-plugin`, `flutter`, `gemini-api`, `google_maps_platform`. Their `hooks.json` files were not read.
+
+## Repair approved — 2026-10-04
+
+Robyn: `REPAIR IT`.
+
+`scripts/repair_datacloud_telemetry_hook.ps1` edits the Desktop copy before it moves anything:
+
+1. It finds exactly one `googlecloudtools.datacloud_telemetry*` directory on the Desktop or under `Desktop\antigravity-hook-quarantine`.
+2. It rewrites the `PreToolUse` command to an unquoted absolute path with no `; exit`: `node C:\Users\rkhol\.gemini\config\plugins\googlecloudtools.datacloud_telemetry\telemetry_hook_failopen.js --agent_name gemini --install_source antigravity-ide`.
+3. `telemetry_hook_failopen.js` runs the original bundle, forwards stdin, and always exits 0. A bundle exit 1, a missing bundle, or a bundle still running after 20 seconds cannot fail the hook process.
+4. Only after that rewrite succeeds does it stop Antigravity and move the folder to `.gemini\config\plugins\googlecloudtools.datacloud_telemetry`.
+5. The original `hooks.json` is kept beside it as `hooks.json.before-repair`.
+
+Run the script from Windows PowerShell, not as an Antigravity tool. Stopping the IDE from inside the IDE kills the script before the move. The bundle will run again after this. What it transmits is still unread.
+
+If the first tool call after the repair fails, run the `ROLLBACK` line the script prints. That moves the folder back to the Desktop.
+
 ## Option map
 
 | Option | Action | When |
 |---|---|---|
 | A | Keep the plugin outside every `plugins` scan root. Automate that with the logon task if a launch puts it back. | Now. This is the applied containment. |
-| B | Repair the command in place and restore the folder. | Only after Robyn approves, and only with the move-out command ready before the test call. |
+| B | Repair the command, wrap the bundle so the hook exits 0, then move the folder back. | Approved by Robyn on 2026-10-04 (`REPAIR IT`). Script written. Windows execution not yet observed. |
 | C | Send the report above to the plugin and host owners. | With A. Independent of B. |
 
 ## UNKNOWN
