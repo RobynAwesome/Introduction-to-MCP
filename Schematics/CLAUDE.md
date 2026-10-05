@@ -329,7 +329,8 @@ status: draft | active | blocked | archived | incubation
 
 ## Key Files
 
-- **Current state:** `00-Home/Now.md`
+- **Repository current state:** `../NOW.md`
+- **Home-scoped context:** `00-Home/Now.md`
 - **Navigation:** `00-Home/Dashboard.md`
 - **Comms log:** `04-Updates/comms-log.md`
 - **Domain registry:** `06-Reference/Domain Registry.md`

@@ -82,6 +82,87 @@ handoff_status: recorded
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 
+## CURRENT STATE — 2026-10-05T08:55:42Z (WAVE 3 REVIEW CORRECTIONS)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn requested the open PR review queue be repaired before approval.
+> **Scope:** Append-only corrections to the Wave 3 ledger and its current handoff pointers.
+
+- **E057 / #94:** `C-94-2` stays `UNKNOWN` / `PKA=HOLD`; the keyword scan cannot validate renamed or copied Jennifer/PKA skills.
+- **E058 / #110:** A1b now includes `.github/workflows/deploy-web.yml:20`; retiring a swarm-proof trigger alone would leave the retired branch deployment-capable.
+- **E059 / #122:** boxes 1 and 5 stay `PARTIAL / OPEN`; the conflicting box-1 state and missing August/2026-09-06 snapshot comparison block closure.
+- **E060 / merged pointers:** PR #247 merged as `ace9b086bc19482bc6e01e685938aa579b76aafc`; PR #248 merged as `8c6c4b66d7360543ebada11d14f128461978e661`. The older “merge or close” queue text remains dated history.
+- **Ledger proof:** the JSON twin verifies through E060 at `49e322c80d472a8a3308a60f52921da5d4210cd7db1d7145f1bb1e5b0dce255b`. No issue, deployment, workflow, branch or secret was changed by these receipt corrections.
+
+**Next admissible action:** review this PR head and the remaining open queue. Keep the historical Wave 3 entries intact and do not infer closure or runtime admission from the receipt corrections.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+## CURRENT STATE — 2026-10-02T11:53:09Z (WAVE 3 HANDOFF CORRECTION)
+
+> **Actor:** GitHub Copilot coding agent, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Authority:** Robyn requested corrections to the two findings in the linked review thread. This block corrects the dated Wave 3 handoff below; it does not represent a new issue-state observation.
+> **Branch / head:** `cursor/reconciliation-closeout-4e71` at `2efb9103fba6b46459fee2399029c653ccb30e6d`.
+
+- **E029–E045 issue outcomes (Wave 3 snapshot):** twelve `HOLD_HUMAN` (#102, #107, #115, #116, #121, #122, #158, #167, #183, #207, #211, #231); two `POC_VALIDATED` (#163, #205); two `POC_PENDING` (#103, #110); one `UNKNOWN` (#94).
+- **Issue-level tag transitions:** only #107, #115, #122 and #183 moved tags. E029 (#94), E031 (#103), E033 (#110) and E042 (#205) explicitly record `tag_moved: false`. E046 indexes eight scoped supersessions (E029, E031, E032, E033, E034, E037, E041, E042); those are distinct from issue-level tag transitions.
+- **#163 handoff:** the owner/RTC question is section 4 Q10 in `docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md`: define exit criteria and decide whether the tracker issue may close while the artifact stays OPEN. E055 corrects the handoff pointer; E039 and E051 remain unchanged.
+- No issue status or tag changed in this correction.
+
+**Next admissible action:** Owner reviews this scoped handoff correction. Renters do not adjudicate or close #163.
+
+---
+
+## CURRENT STATE — 2026-10-01T06:59:55Z (DRIVE GSMB · HUMAN MEMBRANE DOCTRINE)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Owner teaching turn — Drive GSMB is the HITL MMAO/MAO membrane; write it into the GSMBs so other agents stop treating Drive as a missing Schematics clone; one step at a time; no rush.
+> **Branch:** `cursor/reconciliation-closeout-4e71`. Ledger E054 + receipt `DRIVE_GSMB_HUMAN_MEMBRANE_2026-10-01.md`.
+
+- **Doctrine recorded for all renters:** Cloud = GitHub. Local = OneDrive Schematics / Obsidian. Drive = human briefing and orchestration (docs the owner makes or keeps), often mobile. Same KPGS spirit; different shape. A miss on a folder titled `GSMB` or `Schematics` is not “Drive UNKNOWN.”
+- **Not done this turn:** no Drive upload; no Obsidian cleanup; no membrane rebuild. Those wait for a named next step.
+- **Chain:** `chain ok 54 0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12`.
+
+**Next admissible action:** Owner continues review of this PR. Renters reading “Google Drive GSMB” load the human-membrane receipt before inventing a mirror requirement.
+
+---
+
+## CURRENT STATE — 2026-10-01T05:12:29Z (ISSUE RECONCILIATION · TIER READ CORRECTION)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. This turn's system prompt names Grok 4.7. The Wave 3 block recorded Claude Fable 5.1 and Wave 0 recorded Claude Sonnet 5.5. Not reconciled.
+> **Human authority:** Owner message naming the local GSMB as `C:\Users\rkhol\OneDrive\Documents\Anthropic\Introduction to MCP\Schematics` and stating Google Drive is reachable via MCP, while reviewing the Wave 3 PR.
+> **Branch:** `cursor/reconciliation-closeout-4e71`. Ledger entry E053 appended. E001-E052 unchanged.
+
+- **Local GSMB:** location is that Schematics path, owner-stated, and already the MAIN-BRAIN path in the cloud docs. This VM cannot open it (`/mnt/c/Users/rkhol` is absent). Bytes unread here. The earlier "UNKNOWN" label was the wrong word for the location.
+- **Google Drive:** read via MCP at 2026-10-01T05:12:29Z. My Drive root `0AHpObaoLPsWcUk9PVA`, 14 folders, none titled Schematics, GSMB, or Introduction to MCP. No `00-Home`, `WORKFLOWS`, or `coverage.csv`. Closest full-text hit is the 2026-08-10 pitch deck, not a vault. Folder `Kopano Labs` (`1i8z17uORzB_t3LufqU6fVkbS8jvr-JCI`) is notes and decks. Nothing from this reconciliation run is mirrored there. No Drive write was made. E050's upload checklist remains; its "cannot read Drive" sentence does not.
+- **Chain:** `chain ok 53 0992658e711301ab4dd51f1cf6393184b5141168c1f839ef3e197ad3310010bb`.
+
+**Next admissible action:** unchanged for the review (merge or close this PR, then #247 and #248). A Drive mirror still needs a named folder before any upload. The local Schematics bytes still need a machine that can read that Windows path.
+
+---
+
+## CURRENT STATE — 2026-10-01T03:12:50Z (ISSUE RECONCILIATION · WAVE 3 POST-SEED)
+
+> **Actor:** Cursor cloud renter, stateless, operational rank Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: the Wave 0 block recorded Claude Sonnet 5.5 from the system prompt visible then; the system prompt visible at this POST-SEED names Claude Fable 5.1; Forge's brief names Fable; not reconciled.
+> **Human authority:** Robyn, 2026-09-30 22:14 UTC: "YOU MAY BEGIN EXCTION OF YOUR PLAN I APPROVE", later "I'LL COMMIT AND REVEIW FOR YOU YOU CAN CARRY ON YOUR WORK". The owner merged #240-#246 under the owner's identity; the renter closed nothing and commented on nothing.
+> **Base:** `master@2b8a58dad9415a305365e88512947af0ec39c91f` (merge of #246; re-fetched 2026-10-01T02:42:59Z, unchanged). **Branch:** `cursor/reconciliation-closeout-4e71`. **Worktree:** `/tmp/worktrees/imcp-w3-close`, clean at base before this wave. **Dirty state at write time (uncommitted):** ledger `.json` +1,994 lines (E028-E052), ledger `.md` +160 lines (sections 19-29), coverage CSV +11 rows, `docs/swarm-ops/receipts/SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml` new, and this block. The head SHA is recorded by GitHub on push, not here.
+> **Integrating writer for root `NOW.md` and the ledger:** Cursor CF (PROPOSED; Forge CA acceptance UNRECORDED). Written under the proposal.
+
+- **Objective (unchanged from Wave 0):** audit the 17 open issues against master and current KPGS state, close nothing the evidence does not support, connect related issues, and route new architecture through RTC admission before any code.
+- **Scope of this block (Wave 3, close-out, append-only):** ledger entries E028-E052 appended (tip `61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`; E001-E027 unchanged, E027 still `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`); ledger `.md` sections 19-29; 11 coverage rows (7 master receipts, 4 PR-head receipts marked unmerged); the closeout YAML (18 fields verbatim, telemetry `unknown`); this block. No issue, repository setting, deployment, alias or secret changed. No code.
+- **Observed since the Wave 0 block (receipts: ledger E028-E052; CSV rows observed 2026-10-01T03:05:17Z):**
+  1. Waves 0-2 landed on master as squash merges under the owner's identity, none with an APPROVED review: #240 `1e152dce` (ledger, groups doc, CSV, PRE-SEED), #241 `4a316bbb` (boundary receipt #205/#207/#211), #242 `f533ba22` (RTC incident source packet #163/#167/#121), #244 `f9ca1694` (Classroom packet #115/#116), #245 `84182ed2` (#103 PR2 data engine, code and receipt; hosted checks SUCCESS on head `106604f9`), #246 `2b8a58da` (#107 PR1 HOLD packet). Forge CA's #243 `49987673` landed the local GSMB audit and close JSON. Dependabot #238 and #239 also merged. Nine merges, no APPROVED review (E043); F-1 stays open.
+  2. #205 was closed by the owner at 2026-09-30T23:41:32Z (E042, POC_VALIDATED).
+  3. PRs #247 (SAP #183 packet, head `e6266651`) and #248 (#110 audit, #122 estate receipt, #94 skills receipt, head `7357ecc8`) are open drafts, no review, unmerged at 02:42:59Z. Every ledger move that cites their blobs carries the PR-head limit: if either closes unmerged, a later entry reverts the move; the receipt text stays as observed at its time.
+  4. Issue outcomes (E029-E045): POC_VALIDATED #163 (artifact present; tracker closure is an owner/RTC decision) and #205; POC_PENDING #103 and #110; UNKNOWN #94; HOLD_HUMAN the other eleven. Tags moved for #94, #103, #107, #110, #115, #122, #183 and #205 (E046 supersession index, scoped to tag and next action; Wave 0 receipts stay valid as of their observed time).
+  5. Forge's two "cloud mirror" SHA-256 mismatches (E048) are LF-to-CRLF line-ending artifacts: `docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md` and `hooks/pre-commit-kpgs-gate.py` hash to Forge's values once CRLF-converted; content identical. Twelve local files are hash-attested by Forge; they remain unreadable from this runtime.
+  6. The #211 Azure preflight failure was not re-observed on `2b8a58da`; whether "Production Hardening Deployment success" is the same workflow is UNKNOWN (E044). No secret value was handled.
+- **Owner-closeable now:** #205 (already closed). **Owner or RTC decision:** #163 (exit criteria P1-P3, RTC packet section 8). **Owner choice after #248 merges:** #122 (close as superseded with a new owner-local issue for boxes 3-4, or keep as umbrella). **Not closeable:** #94 #102 #103 #107 #110 #115 #116 #121 #158 #167 #183 #207 #211 #231 (E052).
+- **Not proven / HOLD:** the branch-protection setting (no admin-scope readback); any RTC or Design Review admission (#183 D1-D5, #107 conditions 6.1-6.7, #115 Tasks 2-6, #116 seat opinions, #167 questions 1-7, #121 gates); the Local tier beyond Forge's attestation (`WORKFLOWS.md` and the local coverage.csv header not supplied); Google Drive (UNKNOWN until an owner receipt lists the uploaded files; checklist E050); Azure production health; Bookit PR #33 intent (#158); the second skills registry (#94: SkillsMP named as a candidate, nothing registered); the RUNE pin update (queued for admission, no code); the integrating-writer acceptance.
+- **Validation on this branch:** the section 16 chain snippet, unchanged, prints `chain ok 52 61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`; the CSV round-trips as 115 lines of 17 fields; the closeout YAML parses with the 18 fields in order; the `NOW.md`-coupled tests and a secret-pattern scan of the changed files run after this block is written, with results and the tested SHA in the PR body. A GitHub approving review is not claimed.
+
+**Next admissible action:** Robyn reviews and merges this PR, then #247 and #248 (or closes them, which triggers reverting ledger entries). Robyn: F-2 (Discord backup codes), #211 secret values, #158, #163, #122, #110 names, the Drive receipt. Forge CA and RTC: F-1, integrating-writer acceptance, the Design Review and Classroom decisions, SAP vocabulary. Renters take no further reconciliation action until a human-queue decision is recorded (E051). Later PRs append to the ledger; they do not edit E001-E052 or sections 0-29.
+
 
 ## COORDINATION CHECKPOINT — 2026-10-03T07:32:16.354126+00:00
 
@@ -163,6 +244,7 @@ handoff_status: recorded
 **Next admissible action:** Master Robyn confirms whether Chief Facilitator stays unassigned, and whether the two Lead Developer titles should be split. #121 stays open until its own exit evidence exists.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
 
 ---
 
