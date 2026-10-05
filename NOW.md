@@ -1,3 +1,27 @@
+## CURRENT COORDINATION — 2026-10-05T11:35:49Z (IDENTITY-STATE ORDER · RTC-EVOLUTION · #94/#207 RECEIPTS · SECURITY SNAPSHOT)
+
+This current block supersedes conflicting role, provider, issue and PR status in older dated blocks below; those records remain historical evidence.
+
+Actor: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
+Authority: Robyn directed issue completion through reviewable PRs, with Robyn as approver, and corrected current identity coordinates: **AG is the identity; Seat 10 is the RTC seat; Google Antigravity is the platform; Lead Developer is the current role.** This task's Forge / GPT-6 Luna Max embodiment acts in the CA role and does not inherit AG identity or Seat 10.
+
+Cloud baseline: master@a2d0b8fcca1a3340b31b9570797223e9a97e3464 observed 2026-10-05. PRs #253 and #256 are merged; #254 is the only open PR in the last live read. The dirty Local OneDrive checkout remains codex/kc-sovereign-gui-full-dev@e24b1aa0874a637477e6d436c032646cfa236aed; it is a separate population. No Google Drive update or byte mirror is claimed.
+
+The three GSMB states are distinct: **Local** = owner OneDrive/Schematics; **Cloud** = selected GitHub source, PRs, checks and issues; **Heavy Human-in-the-Loop** = Google Drive and direct owner decisions. Stateless renters handling identity AI flows must load and label all three before interpreting cross-state evidence. Actor, authority, identity, seat, platform/interface/model, and assigned role stay separate. Preserve source traces, classify evidence, record contradictions and unknowns, then state the next admissible action. Source-specific FEP wording must retain its exact source, population and ratification status; no consensus or global reconciliation is claimed here.
+
+RTC-Evolution ordered-context peer review (user-authorized bounded discussion in ChatGPT Forge, “Analyze Gemini Failure”; received 2026-10-05): Cloud `kopano-core/kopano/fep_engine.py` names FEP “Forensic Evolution Protocol” and defines E1-E4 evidence classes. The Local and Cloud POP receipts separately state `POP_CANDIDATE / NOT_RATIFIED` and “FEP = EVOLVE FROM PRESERVED EVIDENCE”; Local hash `9D071BD23D140A32DC56FCCCC8668EE342F8E66DD9103758D21056B443C85108`, Cloud hash `6992FF9D0C4899F79F737A594E2024A77C4C4B36C075567BBF6323989E6D7267`. The bounded reading is formal name versus functional description (`NAME_VS_FUNCTION_CANDIDATE`), with semantic overlap observed and byte parity false; full semantic equivalence is unproven. Preserve source/population/actor/verifier/authority/status and do not promote either as the exclusive global name. This peer review is not RTC testimony, vote, consensus, ratification, or runtime enforcement.
+
+Live GitHub snapshot: 15 root issues are open (#231, #211, #207, #183, #167, #163, #158, #122, #116, #115, #110, #107, #103, #102, #94). Robyn closed #121 as completed; this owner disposition is retained but no independent re-entry or runtime restoration receipt is present. #211 remains Azure HOLD because the latest workflow's deployment job was skipped. #231 still has no consented field participant or seven-day outcome receipt. #163/#167 remain separate RTC incident lanes.
+
+#207 provider readback at 2026-10-05T11:19:24Z: PRs required, 14 strict status contexts, admins enforced, conversations resolved, stale reviews dismissed, force-push/deletion disabled; configured approval count is zero. Robyn's approval remains the stated human workflow, not an enforced GitHub review threshold. CodeQL ruleset 24144685 blocks new high-or-higher findings with no bypass actors; Copilot ruleset 19244487 is disabled.
+
+Security snapshot at 2026-10-05T11:19:24Z: 32 open high CodeQL alerts, six open Dependabot alerts (brace-expansion #112-115, fast-uri #116 with a patched version, NLTK #96 without a patched version returned), zero open secret-scanning alerts. Secret scanning and push protection are enabled; zero open alerts does not prove historical exposure absence. No alerts, credentials, incidents, or host settings were changed by this documentation pass. Security fixes remain separate protected PRs.
+
+Next admissible actions: publish the RTC-Evolution ordered-context review, #94 SkillHub discovery receipt and refreshed #207 receipt through a reviewable PR; after protected landing and Robyn's acceptance, close #94 on its bounded discovery criterion. Build and validate the FourWsValidator-backed contributor/review receipt check; do not activate it in branch protection until the reviewed workflow is merged and its exact provider context is verified. Patch only supported dependency vulnerabilities in a separate PR. Keep NLTK #96, CodeQL remediation, #211 provider repair, field work for #231 and RTC dispositions on their own gates.
+
+Evidence boundary: this is a Cloud documentation checkpoint. It does not synchronize Local, write to Drive, deploy application/runtime changes, dismiss alerts, close #207, reopen/close #121, or establish breach exploitation/recovery or incident resolution.
+
+---
 
 ## CURRENT STATE — 2026-10-05 SAST (GSMB MEMBRANE · IDENTITY/ROLE CORRECTION · DOCUMENTATION DELIVERY)
 
