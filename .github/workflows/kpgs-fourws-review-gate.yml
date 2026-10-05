@@ -26,13 +26,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Fetch trusted base revision
+      - name: Fetch workflow event revision
         env:
-          TRUSTED_BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+          EVENT_SHA: ${{ github.sha }}
         run: |
           git init --quiet
           git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
-          git fetch --quiet --no-tags --depth=1 origin "$TRUSTED_BASE_SHA"
+          git fetch --quiet --no-tags --depth=1 origin "$EVENT_SHA"
           git checkout --quiet --detach FETCH_HEAD
 
       - name: Validate current pull-request records

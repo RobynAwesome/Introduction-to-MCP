@@ -181,14 +181,14 @@ def test_workflow_uses_only_unprivileged_events_read_permissions_and_trusted_che
     workflow = yaml.load(workflow_path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
     events = workflow["on"]
     job = workflow["jobs"]["fourws-review-gate"]
-    trusted_fetch = job["steps"][0]
+    event_fetch = job["steps"][0]
 
     assert set(events) == {"pull_request", "pull_request_review", "pull_request_review_comment", "issue_comment"}
     assert "pull_request_target" not in events
     assert workflow["permissions"] == {"pull-requests": "read", "issues": "read"}
-    assert trusted_fetch["env"]["TRUSTED_BASE_SHA"] == "${{ github.event.pull_request.base.sha || github.sha }}"
-    assert "git fetch --quiet --no-tags --depth=1 origin \"$TRUSTED_BASE_SHA\"" in trusted_fetch["run"]
-    assert "git checkout --quiet --detach FETCH_HEAD" in trusted_fetch["run"]
+    assert event_fetch["env"]["EVENT_SHA"] == "${{ github.sha }}"
+    assert "git fetch --quiet --no-tags --depth=1 origin \"$EVENT_SHA\"" in event_fetch["run"]
+    assert "git checkout --quiet --detach FETCH_HEAD" in event_fetch["run"]
     assert job["steps"][1]["env"]["GH_TOKEN"] == "${{ github.token }}"
     source = workflow_path.read_text(encoding="utf-8")
     assert "uses:" not in source
