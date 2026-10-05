@@ -1,0 +1,39 @@
+name: KPGS Four Ws Review Gate
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+  pull_request_review_comment:
+    types: [created, edited, deleted]
+  issue_comment:
+    types: [created, edited, deleted]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
+concurrency:
+  group: kpgs-fourws-${{ github.event.pull_request.number || github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  fourws-review-gate:
+    name: Require current Four Ws receipts
+    if: github.event_name != 'issue_comment' || github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out trusted base revision
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Validate current pull-request records
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/pr_fourws_gate.py --event "$GITHUB_EVENT_PATH" --repository "$GITHUB_REPOSITORY"
