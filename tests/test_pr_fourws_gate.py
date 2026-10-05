@@ -186,6 +186,7 @@ def test_workflow_uses_only_unprivileged_events_read_permissions_and_trusted_che
     assert set(events) == {"pull_request", "pull_request_review", "pull_request_review_comment", "issue_comment"}
     assert "pull_request_target" not in events
     assert workflow["permissions"] == {"contents": "read", "pull-requests": "read", "issues": "read"}
+    assert checkout["uses"] == "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"
     assert checkout["with"]["ref"] == "${{ github.event.pull_request.base.sha || github.sha }}"
     assert checkout["with"]["persist-credentials"] == "false"
     assert job["steps"][1]["env"]["GH_TOKEN"] == "${{ github.token }}"
