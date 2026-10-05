@@ -1,0 +1,105 @@
+# Session closeout — stale issue reconciliation (Waves 0-3), RobynAwesome/Introduction-to-MCP
+# Shape: the session-closeout minimum named in root NOW.md (18 fields, verbatim) and the
+# precedent block in Schematics/04-Updates/comms-log.md (session_closeout, 2026-05-08).
+# Ledger twin: docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.json entries E028-E052.
+# Values marked unknown are not verifiable from inside the session; nothing here is estimated token cost.
+session_closeout:
+  session_date: 2026-09-30
+  session_start: "unknown exact time; owner approval message observed 2026-09-30T22:14Z, reconnaissance preceded it, Wave 0 PRE-SEED stamped 2026-09-30T22:46:00Z"
+  session_end: 2026-10-01T03:09:00Z
+  model: "Claude; self-report from the session system prompt is Claude Fable 5.1, the Forge CA brief also names Fable, a mid-session context summary recorded Sonnet 5.5; the discrepancy cannot be reconciled from inside the session"
+  variant: unknown
+  assigned_role: "Cursor CF, stateless renter; integrating writer for root NOW.md and the ledger PROPOSED, Forge CA acceptance UNRECORDED"
+  mission: "Reconcile the 17 stale issues (#94 #102 #103 #107 #110 #115 #116 #121 #122 #158 #163 #167 #183 #205 #207 #211 #231) under C.L.E.A.R. and the KPGS cloud/local/Drive GSMB tiers: cluster, check each against master, tag POCvsFOC groups, file receipts, append the hash-chained ledger, and hand the owner a closeable list without closing anything"
+  files_read:
+    - NOW.md (root; PRE-SEED block and renter entry instructions)
+    - AGENTS.md
+    - Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md
+    - Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md
+    - /opt/cursor/artifacts/plans/stale_issue_reconciliation_plan_aa0955f9.plan.md (approved plan, outside the repo)
+    - docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.json
+    - docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.md
+    - docs/governance/ISSUE_POCFOC_GROUPS_2026-09-30.md
+    - docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv
+    - poc-vs-foc/FOC_CLASSIFICATION_INDEX.md
+    - docs/swarm-ops/receipts/CLEAR_CV_JOB_FIRE_SEED_RECEIPT_2026-09-11.md (lines 1-40, receipt shape)
+    - Schematics/04-Updates/comms-log.md (session_closeout precedent, lines 5385-5438)
+    - docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md (Forge CA, master 49987673)
+    - poc-vs-foc/CODEX_LOCAL_GSMB_CA_2026-10-01_CLOSE.json (Forge CA, master 49987673)
+    - docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md (bytes hashed for the CRLF check, E048)
+    - hooks/pre-commit-kpgs-gate.py (bytes hashed for the CRLF check, E048)
+    - the seven master receipts and four PR-head receipts listed in E049 (renter-authored, re-read for blob SHAs)
+    - GitHub issues #94 #102 #103 #107 #110 #115 #116 #121 #122 #158 #163 #167 #183 #205 #207 #211 #231 (gh, read-only)
+    - GitHub PRs #238-#248 metadata (gh, read-only; state, head, review decision, merge commit)
+    - Forge CA -> Cursor CF GSMB continuity and admission brief (owner-relayed message)
+    - "note: principal set, not exhaustive; per-file read state for the house-audit population is the review_state column of the coverage CSV"
+  files_changed:
+    - NOW.md (Wave 0 PRE-SEED via #240 squash 1e152dce; Wave 3 POST-SEED on this branch)
+    - docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.json (created #240; E028-E052 appended on this branch)
+    - docs/swarm-ops/receipts/ISSUE_RECONCILIATION_LEDGER_2026-09-30.md (created #240; sections 19-29 appended on this branch)
+    - docs/swarm-ops/receipts/GSMB_HOUSE_AUDIT_COVERAGE_CLOUD_2026-09-30.csv (created #240; 11 rows appended on this branch)
+    - docs/swarm-ops/receipts/SESSION_CLOSEOUT_ISSUE_RECONCILIATION_2026-10-01.yaml (this file, new on this branch)
+    - docs/governance/ISSUE_POCFOC_GROUPS_2026-09-30.md (#240)
+    - Schematics/24-RTC Learning/POCvsFOC Groups/ISSUE_POCFOC_GROUPS_2026-09-30.md (#240, mirror)
+    - docs/swarm-ops/receipts/REPO_BOUNDARY_ENFORCEMENT_RECEIPT_2026-09-30.md (#241 squash 4a316bbb)
+    - docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md (#242 squash f533ba22)
+    - docs/swarm-ops/receipts/CLASSROOM_ADMISSION_PACKET_115_116_2026-09-30.md (#244 squash f9ca1694)
+    - docs/swarm-ops/receipts/MZANSI_DATA_ENGINE_PR2_RECEIPT_2026-09-30.md (#245 squash 84182ed2)
+    - governance/kpgs-vnext/mzansi-language/data_engine.py (#245)
+    - governance/kpgs-vnext/mzansi-language/validate.py (#245)
+    - governance/kpgs-vnext/mzansi-language/README.md (#245)
+    - governance/kpgs-vnext/mzansi-language/fixtures/linguistic-records.synthetic.json (#245)
+    - governance/kpgs-vnext/mzansi-language/fixtures/linguistic-records.invalid.json (#245)
+    - tests/test_mzansi_data_engine.py (#245)
+    - .github/workflows/kpgs-vnext-phase0-gate.yml (#245)
+    - docs/swarm-ops/receipts/KMEC_OBSERVATION_ENGINE_107_ADMISSION_PACKET_2026-09-30.md (#246 squash 2b8a58da)
+    - docs/swarm-ops/receipts/SAP_183_ADMISSION_PACKET_2026-09-30.md (PR #247, UNMERGED at session_end)
+    - docs/swarm-ops/receipts/ESTATE_OBSERVATION_RECEIPT_122_2026-10-01.md (PR #248, UNMERGED at session_end)
+    - docs/swarm-ops/receipts/SKILLS_RESEARCH_94_2026-10-01.md (PR #248, UNMERGED at session_end)
+    - docs/swarm-ops/receipts/STUDIO_VS_PLAN_AUDIT_110_2026-10-01.md (PR #248, UNMERGED at session_end)
+    - "note: #243 (49987673) is Forge CA's change, not this renter's; it is read, not changed, here"
+  tools_used:
+    - Shell (git worktree/fetch/commit/push; gh read-only issue/pr/api; python3 hashlib/json/csv; rg)
+    - Read
+    - Write
+    - StrReplace
+    - Grep
+    - Glob
+    - ManagePullRequest (create_pr, update_pr; drafts only)
+    - TodoWrite
+  skills_used: none
+  agents_used: none
+  browser_surfaces: none
+  reasoning_mode: unknown
+  estimated_high_cost_actions:
+    - full parse and append of the ledger JSON (1,994 lines appended; 52 entries re-hashed on each verification)
+    - nine PR cycles (fresh worktree, commits, push, draft PR create/update) for #240-#242 and #244-#248 plus this branch
+    - repeated gh state polling of 17 issues and PRs #238-#248 across the window
+    - SHA-256 hashing of two files in LF and CRLF forms for the Forge mismatch check
+    - gh api search/code attempts for #94 before falling back to local scans
+  avoidable_waste:
+    - guessed the RTC packet path under receipts/ instead of incidents/ before reading E049; one extra lookup
+    - gh api search/code returned 429 twice; replaced by local scans
+    - KeyError on 'kind' while reading ledger entries (field is entry_kind); one rerun
+    - main checkout /agent/repos/Introduction-to-MCP was stale at 65975a12; every wave used a fresh worktree instead
+    - a regex pass truncated hashes once; re-read the surrounding lines
+    - awk section extraction of the ledger md was unreliable; replaced by rg on headings
+    - mid-session context summarization lost the exact session start time and left the model self-report unreconciled
+  unresolved_blockers:
+    - "F-2: Discord backup codes regeneration and removal decision (owner); file never opened by the renter"
+    - "F-1: admin-scope readback of branch protection and rulesets; nine merges in the window landed with no APPROVED review; independent-review mechanism unchosen (owner / Forge CA)"
+    - "#211: three Azure OIDC secret values and federated identity verification (owner); preflight failure not re-observed on 2b8a58da"
+    - "#158: Bookit PR #33 epoch relaunch decision (owner)"
+    - "RTC / Design Review: #183 D1-D5, #107 conditions 6.1-6.7, #115 Tasks 2-6 admission, #116 ten seat opinions and four E4 concept owners, #167 questions 1-7, #121 gates; code stays on HOLD"
+    - "RTC: SAP naming, the five working tags, PKA mapping, issue-class vocabulary, ControlStateDrift candidate; used as working labels only"
+    - "Forge CA: accept or amend the integrating-writer assignment (UNRECORDED)"
+    - "Local tier: WORKFLOWS.md and the local coverage.csv header not supplied; twelve files hash-attested by Forge (E048)"
+    - "#94: owner confirmation of SkillsMP as the second registry; renter claims no registration"
+    - "#163: answer section 4 Q10 in the RTC incident cluster source packet: define exit criteria and decide whether the tracker issue may close while the artifact stays OPEN"
+    - "#122: owner chooses close-as-superseded or keep-as-umbrella after #248 merges"
+    - "#110: owner names the Main Brain owner-interface file (A4), decides A2/A3, names the A1a compare target"
+    - "RUNE pin update (SAP packet section 7 item 2) queued for admission; no code"
+    - "PRs #247 and #248 open drafts; if either closes unmerged a later ledger entry reverts the moves citing its PR-head blobs"
+    - "Google Drive mirror receipt not supplied; Drive tier UNKNOWN"
+  handoff_status: "Wave 3 close-out on branch cursor/reconciliation-closeout-4e71 (base master@2b8a58dad9415a305365e88512947af0ec39c91f): ledger tip 61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c (52 entries, Wave 0 rows unchanged), 11 CSV rows, this file, NOW.md POST-SEED. Owner-closeable: #205 already closed; #163 owner/RTC decision; #122 owner choice after #248; the other fourteen are not closeable. Cloud tier at this branch; Local UNKNOWN from this runtime (Forge attestation E048); Drive UNKNOWN (E050). Next admissible action: owner reviews and merges this PR, then #247 and #248 or closes them; renters take no further reconciliation action until a human-queue decision is recorded."
+# I_AM_STATELESS_RENTER_NOT_LANDLORD
