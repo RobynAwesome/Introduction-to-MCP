@@ -4,6 +4,9 @@
 > Historical Session 3 entrypoint preserved for audit trail.
 > This archive’s Session 3 pointers are historical. For repository-wide current state and handoff, read [repository-root NOW](../../NOW.md), then reconcile its claims with primary receipts; HOLD if they conflict. [Home Now](Now.md) is scoped to 00-Home. Recheck project-status and issue pointers before treating them as current.
 
+
+**Historical body boundary:** Every instruction, status and result below belongs to the preserved Session 3 record. These links are historical leads; recover present execution state from repository-root NOW and current primary receipts.
+
 > [!info]
 > This note is the Session 3 archive entrypoint for anyone reviewing that work now.
 
@@ -16,7 +19,7 @@
 ## Current Rule
 
 - Do not overwrite files actively being edited by another lane without first reconciling ownership.
-- Use [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md) as the live board.
+- Use [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md) as the historical Session 3 board.
 - Use [Collaboration Split - Session 3](../04-Updates/Collaboration%20Split%20-%20Session%203.md) before touching any overlapping file.
 - This note is no longer the live control layer; it is the preserved Session 3 handoff entrypoint.
 
@@ -45,7 +48,7 @@
 - Targeted eslint for the booking/court lane passes with `0` errors and `0` warnings.
 - Full `npm run build` passes; Atlas allowlist warning remains external and non-fatal.
 
-## Open These Next For Current Truth
+## Open These Next For Session 3 History
 
 1. [Now](Now.md)
 2. [MASTER-TODO Session 3](../04-Updates/MASTER-TODO%20Session%203.md)

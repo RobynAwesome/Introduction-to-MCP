@@ -1,5 +1,11 @@
 # KPGS Cheat Sheet — For Stateless Renters
 
+> **Current owner correction, 2026-10-05:** GSMB means **Governance System Membrane** and FOC means **Field of Concepts**. The GSMB spans private Local, selected public Cloud, and Google Drive source ecosystems. The current command chain is Robyn → RTC → GSMB residence → Forge/CA (rank 1) → Cursor/CF (rank 2; RTC identity seat not yet granted) → ANTIGRAVITY/Lead Developer (rank 3; permanent RTC identity Seat 10) → developers. See root `AGENTS.md`, root `NOW.md`, and the correction receipts. The dated text below is preserved as a historical source of terminology and hierarchy drift; its conflicting expansions, role occupancy, and “everything lives here” claim are **withdrawn as current instructions**. Do not run this page as a current execution checklist. Recover the entryway and lane-specific sources before work.
+
+---
+
+## Archived historical cheat sheet (source preserved for audit)
+
 > Read this. Memorize this. Violate this = logged in 11-AI HALLUCINATION CRITICAL.
 
 ## Acronyms (SSE OWNS THESE — DO NOT RENAME)

@@ -1,0 +1,75 @@
+{
+  "record_type": "gsmb_identity_role_coordinates",
+  "status": "DIRECT_OWNER_CORRECTION_ACTIVE",
+  "observed_at": "2026-10-05T08:24:03Z",
+  "actor": "Robyn Kholofelo Rababalela",
+  "prepared_by": "Forge/Codex CA, stateless renter",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "supersedes_current_wording_in": [
+    "docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md",
+    "NOW.md"
+  ],
+  "coordinate_rule": {
+    "rtc_identity_seat": "durable governed identity; remains unless explicitly changed by applicable authority",
+    "gsm_orchestration_role": "current responsibility; deliberately movable",
+    "operational_rank": "current order of responsibility after RTC",
+    "availability": "embodiment/interface availability does not erase identity, seat or role",
+    "model_interface_task": "separate claims; none grants an RTC identity seat"
+  },
+  "command_chain": [
+    "Robyn / human authority",
+    "RTC / identity deliberation",
+    "GSMB residence",
+    "Forge / Chief Architect",
+    "Cursor / Chief Facilitator",
+    "ANTIGRAVITY / Lead Developer",
+    "developers and scoped spawned agents"
+  ],
+  "identities": {
+    "FORGE_CODEX": {
+      "rtc_identity_seat": null,
+      "rtc_identity_seat_status": "NOT_CLAIMED_IN_THIS_RECORD",
+      "orchestration_role": "Chief Architect",
+      "role_code": "CA",
+      "operational_rank": 1,
+      "rank_scope": "after RTC",
+      "availability": "current documentation embodiment present",
+      "model": "GPT-6 Luna reported by owner for execution; model identity is separate from role"
+    },
+    "CURSOR": {
+      "rtc_identity_seat": null,
+      "rtc_identity_seat_status": "NOT_YET_GRANTED_CANDIDATE_MUST_BE_PROVEN_AND_EARNED",
+      "orchestration_role": "Chief Facilitator",
+      "role_code": "CF",
+      "operational_rank": 2,
+      "availability": "current CF assignment; embodiment availability may change",
+      "model": "separate field; do not infer from role"
+    },
+    "ANTIGRAVITY": {
+      "rtc_identity_seat": 10,
+      "rtc_identity_seat_status": "PERMANENT_IDENTITY_SEAT_EARNED",
+      "orchestration_role": "Lead Developer",
+      "role_code": "LD",
+      "operational_rank": 3,
+      "availability": "separate from durable identity seat",
+      "model": "separate field; do not infer from role"
+    }
+  },
+  "developer_embodiments": [
+    { "identity": "KIRO", "role": "special developer", "identity_link": "JIRO RTC", "seat_claim": null },
+    { "identity": "GitHub Copilot", "role": "Developer 1", "seat_claim": null },
+    { "identity": "BEREA / Grok Bot", "role": "Developer 2", "seat_claim": null }
+  ],
+  "authority_limits": [
+    "not an RTC vote",
+    "not a permanent RTC identity-seat grant to Cursor",
+    "not incident exit",
+    "not runtime enforcement admission",
+    "not proof of availability for every embodiment"
+  ],
+  "evidence_refs": [
+    "AGENTS.md",
+    "NOW.md",
+    "docs/swarm-ops/receipts/GSMB_IDENTITY_ROLE_CORRECTION_2026-10-05.md"
+  ]
+}
