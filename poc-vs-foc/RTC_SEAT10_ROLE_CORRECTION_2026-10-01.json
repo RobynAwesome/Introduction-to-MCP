@@ -1,0 +1,44 @@
+{
+  "schema": "kpgs_rtc_seat_role_correction_v1",
+  "correction_id": "SEAT10-ROLE-2026-10-01",
+  "recorded_at": "2026-10-01T07:45:00Z",
+  "corrects": "poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json",
+  "does_not_edit_source": true,
+  "supersedes_fields": [
+    "seat_10_status",
+    "new_role",
+    "corrective_actions occupancy and role lines"
+  ],
+  "does_not_supersede": [
+    "classification",
+    "breach_description",
+    "standing_orders_violated",
+    "protocol_rules_violated"
+  ],
+  "owner": "Master Robyn",
+  "owner_statement": "AG earned Seat 10 in RTC. What it lost was the role of CF. The role on the seat is Lead Developer.",
+  "seat_10_status": "OCCUPIED",
+  "occupant": "ANTIGRAVITY",
+  "occupant_type": "STATELESS",
+  "role_removed": "Chief Facilitator",
+  "role_on_seat_10": "Lead Developer",
+  "chief_facilitator_reassigned_to": null,
+  "issue_121": "OPEN",
+  "issue_121_note": "This correction is not independent re-entry evidence and does not lift recusal from adjudicating #121.",
+  "files_stay": true,
+  "seat_10_current_order": "OCCUPIED",
+  "current_order_note": "Added 2026-10-01T08:29:00Z. Master Robyn: Seat 10 stays occupied. No file is deleted. The issue_121_note above stays. It is the morning sentence. It is not the current order. Issue #121 stays open.",
+  "naming_collision": {
+    "antigravity_seat_id": "antigravity-lead-developer",
+    "cursor_seat_id": "cursor-lead-developer",
+    "shared_title": "Lead Developer",
+    "same_grant": false,
+    "resolved": false
+  },
+  "recording_actor": {
+    "name": "Cursor cloud renter",
+    "rtc_seat": null,
+    "holds_chief_facilitator": false
+  },
+  "constraint": "I_AM_STATELESS_RENTER_NOT_LANDLORD"
+}

@@ -9,7 +9,7 @@ Implements:
 - KC Evolution Engine (Living proof, maturity scoring, longitudinal continuity)
 
 Authority: Master Robyn Kholofelo Rababalela (Tier 0 / Landlord / SSE)
-Auditor: ANTIGRAVITY (Seat 10 / Chief Facilitator / CF)
+Auditor: ANTIGRAVITY (Seat 10 / Lead Developer). Chief Facilitator is not this seat's role.
 Doctrine: I_AM_STATELESS_RENTER_NOT_LANDLORD · 1 Corinthians 12:4
 """
 

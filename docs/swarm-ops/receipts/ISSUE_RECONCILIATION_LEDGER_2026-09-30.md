@@ -8,6 +8,8 @@
 **GSMB tier:** Cloud (this file, once merged). Local GSMB: UNKNOWN to this runtime. Google Drive GSMB: UNKNOWN until an owner receipt exists.
 **Doctrine:** `I_AM_STATELESS_RENTER_NOT_LANDLORD` · `CLEAR_PASS != POC_VALIDATED` · `WRITTEN_INSTRUCTION != RUNTIME_ENFORCEMENT`
 
+> **Added 2026-10-01T08:29:00Z. This file is not deleted.** Claim `C-121-1` in section 7 stays. Entry `ILR-2026-09-30-E012` stays. Master Robyn: Seat 10 stays occupied by ANTIGRAVITY as Lead Developer. Section 19 names who wrote the suspension sentence. No earlier row is edited.
+
 ---
 
 ## 0. Read this first: where the evidence changed the plan
@@ -416,6 +418,8 @@ print("chain ok", len(d["entries"]), prev)
 
 Expected at publication: `chain ok 27 f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`.
 
+Current tip after `ILR-2026-09-30-E028` on branch `cursor/seat-10-role-amendment-4e71`: see section 19. Entries E001–E027 are not edited.
+
 ## 17. Human, Forge and RTC queue
 
 | Actor | Action |
@@ -440,6 +444,7 @@ Expected at publication: `chain ok 27 f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae
 **Changed by this receipt:** files added under `docs/swarm-ops/receipts/`, `docs/governance/`, `Schematics/24-RTC Learning/POCvsFOC Groups/`, and one prepended block in root `NOW.md`. No issue, setting, secret, dependency or deployment was touched.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
 
 ---
 
@@ -589,11 +594,11 @@ Renter non-actions in the window: no issue closed or commented; no protection, a
 
 ## 28. Verification after Wave 3
 
-The section 16 snippet, unchanged, now prints: `chain ok 52 61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`. Entry 27 still hashes to `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`.
+The section 16 snippet now prints: `chain ok 60 49e322c80d472a8a3308a60f52921da5d4210cd7db1d7145f1bb1e5b0dce255b`. Entry 27 still hashes to `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`; E055 remains the Wave 3 branch tip before the preservation envelope, and E060 is the current correction tip.
 
 ## 29. Receipt boundary (Wave 3)
 
-**Proved by this append:** the merge commits, PR heads, blob SHAs and live issue states named in sections 20-22 at their stated read times; the CRLF reproduction in section 24; the hash chain through entry 52.
+**Proved by this append:** the merge commits, PR heads, blob SHAs and live issue states named in sections 20-22 at their stated read times; the CRLF reproduction in section 24; the hash chain through E055, the separately appended E056 preservation envelope, and review corrections E057-E060.
 
 **Not proved:** any RTC or Forge decision; the branch-protection setting; Azure production health after `8c6d22f2`; Bookit, KasiLink or Jennifer runtime; the content of any local-only or protected file; Drive state; that #247 or #248 will merge; adoption of any proposed vocabulary; that the owner read the #205 limits before closing.
 
@@ -626,4 +631,27 @@ The corrected handoff is to define incident exit criteria or decide whether the 
 
 Chain tip after E055: `91c30401929c2e85002555742b30e16932055d9c5d511a29d84d60c46a3a23d3`. Entries 1-54 unchanged.
 
+---
+
+## 33. Conflict-preserved master branch receipt (E056, 2026-10-05T08:53:06Z)
+
+The merge with current `master` exposed a second historical E028 event. The Wave 3 branch already carried E028-E055 with a different E028 payload and a valid append-only chain, so neither branch was rewritten or falsely concatenated. The master-side event is preserved verbatim inside `E056.payload.source_entry` in the JSON twin.
+
+The preserved source event records the 2026-10-01 observation that ANTIGRAVITY occupied RTC Seat 10 as Lead Developer, that the then-observed Chief Facilitator role was unassigned, that issue #121 remained open, and that no file was deleted. Its original fork hash is `221b05a2ee8d3f4f7393210761698b97202663c580b6bb35ed311233d926da09` with predecessor `f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788`. Those values describe the source fork and are intentionally distinct from the Wave 3 E055 predecessor.
+
+The current role pointer is governed by the later owner confirmation recorded in root `NOW.md` and PR #254; this section preserves the dated source receipt only. The complete machine chain, including E056, verifies to `314738e6c7db5f2a7e743b5027b018d2cb29aca277e796186e22bf6249a67e2c`.
+
+
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+---
+
+## 34. Review corrections (E057-E060, 2026-10-05T08:55:42Z)
+
+These append-only corrections address the outstanding review findings without editing the dated Wave 3 entries.
+
+- **E057 / #94:** `C-94-2` remains `UNKNOWN` with `PKA=HOLD`. A keyword and file-count scan of one skills clone cannot validate renamed or copied Jennifer/PKA skills. The merged PR #248 makes the receipt available on master but does not establish canonical comparison or owner confirmation.
+- **E058 / #110:** the A1b retirement inventory now includes `.github/workflows/deploy-web.yml:20`. That workflow still accepts pushes to `codex/kc-sovereign-gui-full-dev` and can deploy public/careers paths, so no workflow or branch mutation is authorized by this receipt.
+- **E059 / #122:** boxes 1 and 5 remain `PARTIAL / OPEN`; box 1 has a conflicting cloud-state summary and box 5 still lacks the required August and 2026-09-06 snapshot comparison. Boxes 3 and 4 remain owner/provider gated. No close-as-superseded action is admissible yet.
+- **E060 / live pointers:** PR #247 merged at `ace9b086bc19482bc6e01e685938aa579b76aafc`; PR #248 merged at `8c6c4b66d7360543ebada11d14f128461978e661`. Their old open-draft statuses remain historical observations, while the current owner queue no longer asks for those merges.
+
+The verified machine chain now ends at E060 with `49e322c80d472a8a3308a60f52921da5d4210cd7db1d7145f1bb1e5b0dce255b`.

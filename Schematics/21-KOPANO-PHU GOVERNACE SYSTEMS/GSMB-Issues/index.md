@@ -1,41 +1,29 @@
 # 📋 GSMB ISSUES & FORKED REPO LORE — CANONICAL INDEX
-## Governance Smart Model Brain — Issues Intelligence Layer
+## Governance System Membrane — Issues Intelligence Layer
 ### Authority: KRR (https://KRRababalela.com) — 2× Founder Director & Sovereign System Engineer
 ### Entities: Kopano Labs (https://KopanoLabs.com) | Ama-Phu Entertainment (Moniker: OSHEEN VIEWS)
 ### Date Established: 2026-08-29T11:25:00+02:00 (SAST)
-### Pipeline: `CRUD → SWFUS → KPCB+` (Consistent Ingestion & Adaptive Coding Language)
+### Source trace: `CRUD → SWFUS → BP → BMP → POCvsFOC → KPCB+`
+
+> **Owner correction, 2026-10-03:** GSMB means **Governance System Membrane**. FOC means **Field of Concepts**. The original August/September wording and fork scores remain recoverable in Git history and the private local archive; they do not define present capability or authority. This index covers issue-pattern processing **and** fork observations. It does not establish a complete GitHub issue-disposition enum. The Local Schematics source is private; this tracked file is a selected Cloud projection. See `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md` for source populations and supersession scope.
 
 ---
 
 ## 1. PURPOSE & GOVERNANCE PHILOSOPHY
 
-This folder is the **Blockchain Smart Ledger Design** re-engineered into KPGS through PKA and KMEC.
+This folder records issue-pattern and fork observations. Its dated Smart Ledger / PKA / KMEC design is a source for investigation, not a receipt that every stage ran or admitted a capability. The applicable RTCP source defines BP as Bracket Protocol and BMP as Black Mass Protocol. SWFUS and KPCB+ must be resolved against their particular source and operation before use.
 
-The design follows the canonical pipeline:
+The dated source trace is shown below as a **non-executable interpretation**. It does not mean the fork skill ran or that its conflicting BP/BMP terms have been admitted as current gates. A new operation must resolve each acronym against its applicable source and obtain its own admission:
 
 ```text
-┌──────────────────────────────────────────────────────────────────────┐
-│              GSMB ISSUES INTELLIGENCE PIPELINE                       │
-│                                                                      │
-│  Blockchain Smart Ledger Design                                      │
-│       ↓ (Re-engineered into KPGS through PKA & KMEC)                │
-│  CRUD (Create → Read → Update → Delete)                              │
-│       ↓                                                              │
-│  SWFUS (Search → Watch → Filter → Understand → Synthesize)          │
-│       ↓                                                              │
-│  BP (Breaking Points) — Stress test issue patterns                   │
-│       ↓                                                              │
-│  BMP (Breaking-Model Points) — After stress results                  │
-│       ↓                                                              │
-│  POCvsFOC (Proof of Concept vs Full Operational Capability)          │
-│       ↓                                                              │
-│  KPCB+ — Consistent Ingestion & Adaptive Coding Language             │
-│                                                                      │
-│  Used in KPGS Cloud AND Reality                                      │
-│  Including its Creator: KRR                                          │
-│  (2× Founder Director & Sovereign System Engineer {Self Title})      │
-│  of https://KopanoLabs.com and Ama-Phu Entertainment (OSHEEN VIEWS)  │
-└──────────────────────────────────────────────────────────────────────┘
+Issue or fork observation
+  → CRUD source record
+  → SWFUS source-specific workflow
+  → BP lane containment
+  → BMP candidate stress
+  → POCvsFOC claim/evidence distinction
+  → KPCB+ source-specific interpretation
+  → local receipt; selected public projection only when reviewed
 ```
 
 ---
@@ -45,7 +33,7 @@ The design follows the canonical pipeline:
 ```text
 GSMB-Issues/
 ├── index.md                          ← YOU ARE HERE
-├── SKILL.md                          ← Weekly fork audit automation skill
+├── SKILL.md                          ← Historical weekly workflow; HOLD as execution
 │
 ├── Core-Estate/                      ← All 17+ owned repos
 │   ├── Introduction-to-MCP/
@@ -97,37 +85,38 @@ GSMB-Issues/
 
 ---
 
-## 3. FORKED REPO LORE — WEEKLY AUDIT PROTOCOL
+## 3. FORKED REPO LORE — HISTORICAL WEEKLY AUDIT PROTOCOL (HOLD)
 
-> **Every week**, a stateless renter MUST run the `weekly-fork-audit` skill (see `SKILL.md`) to:
+> The dated `SKILL.md` is archived as a source of fork-audit intent and acronym drift. It is **HOLD as an executable workflow** because its older FOC, BP and BMP labels conflict with current and RTCP meanings, and it contains deletion and private-seeding steps. The following list describes historical intent only. A current fork review needs a bounded, non-destructive protocol and applicable admission first.
 
 1. **CRUD** — Check each fork's upstream for new commits, releases, breaking changes
 2. **SWFUS** — Search for patterns across forks that relate to active KPGS lanes
-3. **BP** — Stress-test: "Does this fork's latest state break any of our integrations?"
-4. **BMP** — Model: "What would adopting upstream HEAD mean for our architecture?"
-5. **POCvsFOC** — Classify: "Is this fork still POC-grade or can we declare FOC?"
-6. **KPCB+** — Ingest: Seed useful patterns/assets back into GSMB Local
+3. **BP** — The old skill said “Breaking Points”; the linked RTCP source says “Bracket Protocol.” Resolve the operation against its actual source before invoking a gate.
+4. **BMP** — The old skill said “Breaking-Model Points”; the linked RTCP source says “Black Mass Protocol.” Their historical fork questions are not a Black Mass execution receipt.
+5. **POCvsFOC** — Separate the Field of Concepts from a bounded, evidenced POC claim; an old fork score is not operational proof.
+6. **KPCB+** — Historical seeding proposal only; do not import outside assets into the private Local source without bounded review and authority.
 
-### Fork Usability Scoring
+### Fork Usability Scoring (historical observations, not current capability proof)
+
+The former green `FOC` readiness row is withdrawn as a current classification: it expanded FOC incorrectly. It is preserved in the previous Git revision and local byte archive. No replacement operational grade is admitted by this correction. Validate each fork's present use and integration with current source/runtime receipts before claiming capability.
 
 | Score | Classification | Meaning |
 |---|---|---|
-| 🟢 **FOC** | Full Operational Capability | Fork is actively used, integrated, upstream-tracked |
-| 🟡 **POC** | Proof of Concept | Fork shows promise, needs stress testing |
+| 🟡 **POC** | Historical candidate label | Fork showed promise at the dated audit; bounded current validation remains required |
 | 🔴 **STALE** | Dormant / Diverged | Fork is behind upstream, no active use case |
 | ⚪ **ARCHIVE** | Reference Only | Fork kept for historical reference, not for integration |
 
-### Forks That KRR Will Directly Fork (Canonical Evolution)
+### Forks selected in the dated audit (recheck before present use)
 
-These are forks selected by Master Robyn himself as **canonical to our evolution**:
+The prior index recorded these as owner-selected forks. Recheck present selection, integration and score from current receipts before use:
 
-| Fork | Why It Matters | Current Score |
+| Fork | Dated reason recorded | Dated audit label, not current status |
 |---|---|---|
 | `threeui` | 3D UI catalog — powers FivesArena 3D experiences | 🟡 POC |
 | `orb` | WebGPU dynamic shaders — next-gen visual identity | 🟡 POC |
 | `kage` | Atmospheric lighting — stadium ambiance | 🟡 POC |
 | `towers` | Procedural assembly — generative architecture | 🟡 POC |
-| `posthog` | Analytics — product telemetry for all KPGS surfaces | 🟢 FOC |
+| `posthog` | Analytics — product telemetry for all KPGS surfaces | Historical green score withdrawn; current use unverified here |
 | `speech-to-speech` | Voice agent — Aya/KC voice interfaces | 🟡 POC |
 | `OmniRoute` | AI gateway — multi-model routing | 🟡 POC |
 | `Graft` | Claude Code turbocharger — agent acceleration | 🟡 POC |
@@ -151,8 +140,10 @@ Each folder in `Forked-Repo-Lore/` contains:
 
 ## 5. CONNECTED SYSTEMS
 
-- [GITHUB_ESTATE_ISSUES_AND_PRS_REGISTRY.md](../../MAIN-BRAIN/GITHUB_ESTATE_ISSUES_AND_PRS_REGISTRY.md) — Full estate harvest
-- [GSMB_THREE_GENERATION_ESTATE_INDEX.md](../../MAIN-BRAIN/GSMB_THREE_GENERATION_ESTATE_INDEX.md) — 3-gen estate lineage
-- [RTCP_PIPELINE_CRUD_SWFUS_BP_BMP_POCvsFOC_VNEXT.md](../../MAIN-BRAIN/RTCP_PIPELINE_CRUD_SWFUS_BP_BMP_POCvsFOC_VNEXT.md) — Pipeline governance
-- [KPCB_PLUS_LANGUAGE_STATUS.md](../../MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md) — KPCB+ language spec
-- [11-AI HALLUCINATION - CRITICAL](../../../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) — Failure accountability
+The first three MAIN-BRAIN pointers below are Local source references. Their files were **not present at those paths in the inspected Cloud checkout**; that scope says nothing about Local absence. Recover their actual Local bytes and source authority before using them to admit work. Do not auto-publish them to repair a public link.
+
+- Local `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/GITHUB_ESTATE_ISSUES_AND_PRS_REGISTRY.md` — estate harvest pointer; Cloud target unlocated.
+- Local `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/GSMB_THREE_GENERATION_ESTATE_INDEX.md` — lineage pointer; Cloud target unlocated.
+- Local `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/RTCP_PIPELINE_CRUD_SWFUS_BP_BMP_POCvsFOC_VNEXT.md` — pipeline source; Cloud target unlocated.
+- [KPCB_PLUS_LANGUAGE_STATUS.md](../MAIN-BRAIN/KPCB_PLUS_LANGUAGE_STATUS.md) — selected Cloud KPCB+ language source; this link resolves in the inspected checkout.
+- [11-AI HALLUCINATION - CRITICAL](../../11-AI%20HALLUCINATION%20-%20CRITICAL/11-AI%20HALLUCINATION%20-%20CRITICAL%20-%20Index.md) — failure accountability index.

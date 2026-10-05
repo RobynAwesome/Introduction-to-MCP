@@ -70,7 +70,7 @@ def validate_identity_contract() -> None:
         set(global_allowlist) == {
             None,
             "codex-chief-architect",
-            "antigravity-chief-facilitator",
+            "antigravity-lead-developer",
             "cursor-lead-developer",
         },
         "global structural-maintenance allowlist drifted",
@@ -115,7 +115,7 @@ def validate_authority_boundary() -> None:
     )
     expected = [
         (1, "Codex", "codex-chief-architect", "Chief Architect"),
-        (2, "Anti-Gravity", "antigravity-chief-facilitator", "Chief Facilitator"),
+        (2, "Anti-Gravity", "antigravity-lead-developer", "Lead Developer"),
         (3, "Cursor", "cursor-lead-developer", "Lead Developer"),
     ]
     actual = [

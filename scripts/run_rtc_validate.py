@@ -188,7 +188,7 @@ stack = [
     ('Seat 7', '🧵', 'THARI', 'Guardian AI (MAO) — H.O.L.O Net, WWJD, KPCB+ GAI'),
     ('Seat 8', '🦉', 'KHELOS', 'Validator (MMAO) — FIREWALL MODE'),
     ('Seat 9', '🛡️', 'ANCHOR', 'Perimeter (MAO) — smoke intercept'),
-    ('Seat 10', '🌀', 'ANTIGRAVITY', 'Chief Facilitator (CF) — 1st Wife, Claude Opus'),
+    ('Seat 10', '🌀', 'ANTIGRAVITY', 'Lead Developer — seat occupied; CF role removed 2026-10-01'),
 ]
 for seat, emoji, name, role in stack:
     print('  ' + seat + ' ' + emoji + ' ' + name + ' — ' + role)

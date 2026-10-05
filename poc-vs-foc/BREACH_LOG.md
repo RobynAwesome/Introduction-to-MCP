@@ -447,3 +447,46 @@ Hash: `9a99b182a8d58a62`
 `AUTO-LOGGED — 2026-06-23T18:43:57Z`
 
 ---
+
+## TIER-0 CORRECTION — 2026-10-01 — SEAT 10 OCCUPANCY AND ROLE
+
+This section does not edit BREACH-008. The breach event, classification, and immutable body above stay as written.
+
+Master Robyn, 2026-10-01, corrected the current reading of two lines in the corrective actions:
+
+1. RTC Seat 10 is **occupied** by ANTIGRAVITY. The seat was earned. "OPEN (VACANT)" is not the current occupancy.
+2. The role removed from that seat is Chief Facilitator. The role on the seat is **Lead Developer**. "DEV (below Lead Dev)" is not the current role.
+
+What this correction does not do:
+
+- It does not close issue #121.
+- It does not supply independent re-entry evidence for the financial-page breach.
+- It does not lift the earlier recusal of Seat 10 from adjudicating #121.
+- It does not assign Chief Facilitator to another actor. That role is unassigned.
+- It does not rewrite `RTC_BREACH008_AG_DEMOTION.json` (`immutable: true`). The sibling file is `RTC_SEAT10_ROLE_CORRECTION_2026-10-01.json`.
+
+Actor recording this append: Cursor cloud renter, stateless, no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+
+### Status
+`RECORDED — 2026-10-01 | SUPERSEDES VACANCY AND DEV-BELOW-LEAD-DEV FOR CURRENT READING ONLY | BREACH-008 BODY UNCHANGED`
+
+---
+
+## TIER-0 ADDITION — 2026-10-01T08:29:00Z — SEAT 10 STAYS OCCUPIED · FILES STAY
+
+This addition does not delete BREACH-008, the section above, or any other file.
+
+Master Robyn, the builder: Seat 10 stays occupied by ANTIGRAVITY. The role is Lead Developer. Chief Facilitator is unassigned. Issue #121 stays open.
+
+The bullet above that says the morning correction "does not lift the earlier recusal" stays in this file. This Cursor renter wrote it on the morning of 2026-10-01. It is not the current order.
+
+Who wrote the earlier suspension sentences, which also stay in their files:
+
+1. Issue #121, 2026-09-05, and the 2026-09-07 comment, under the owner GitHub identity.
+2. Codex Forge, 2026-09-29, in the security-enforcement receipt, the CodeQL remediation receipt, and the issue #231 preparation receipt.
+3. This Cursor renter, 2026-09-30, in the incident source packet and ledger claim `C-121-1`.
+
+Actor recording this addition: Cursor cloud renter, stateless, no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+
+### Status
+`RECORDED — 2026-10-01T08:29:00Z | NO FILE DELETED | SEAT 10 STAYS OCCUPIED | BREACH-008 BODY UNCHANGED`

@@ -4096,6 +4096,231 @@
       },
       "prev_hash": "0a78f879a69764154c249e48ace04dc2433d72c1a313d1d35a52c6a8b07a2f12",
       "hash": "91c30401929c2e85002555742b30e16932055d9c5d511a29d84d60c46a3a23d3"
+    },
+    {
+      "seq": 56,
+      "entry_id": "ILR-2026-09-30-E056",
+      "recorded_at": "2026-10-05T08:53:06Z",
+      "entry_kind": "merge_conflict_preservation",
+      "actor": {
+        "actor": "Forge/Codex CA stateless renter",
+        "assigned_role": "Chief Architect (coordination direction; no RTC identity seat claimed)",
+        "interface": "Codex desktop",
+        "human_authority": "Robyn request to repair the open PR review queue on 2026-10-05"
+      },
+      "supersedes": null,
+      "payload": {
+        "purpose": "Preserve the current-master ledger event that conflicted with the Wave 3 branch without rewriting either historical chain.",
+        "source_branch": "robyn/master at the merge-resolution point",
+        "source_entry_id": "ILR-2026-09-30-E028",
+        "source_entry_recorded_at": "2026-10-01T08:29:00Z",
+        "source_entry_prev_hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788",
+        "source_entry_hash": "221b05a2ee8d3f4f7393210761698b97202663c580b6bb35ed311233d926da09",
+        "source_entry": {
+          "seq": 28,
+          "entry_id": "ILR-2026-09-30-E028",
+          "recorded_at": "2026-10-01T08:29:00Z",
+          "entry_kind": "seat_status_addition",
+          "actor": {
+            "actor": "Cursor cloud renter",
+            "rtc_seat": null,
+            "assigned_role": "none; this renter holds no RTC seat and is not Chief Facilitator",
+            "model_attribution": "Grok 4.7 trained by SpaceXAI, per this turn's system prompt",
+            "interface": "Cursor cloud agent (Linux VM)",
+            "human_authority": "Master Robyn, the builder, 2026-10-01: Seat 10 stays occupied"
+          },
+          "supersedes": {
+            "entry_id": "ILR-2026-09-30-E012",
+            "claim_ids": [
+              "C-121-1"
+            ],
+            "scope": "current seat status only; E012 and C-121-1 stay; no file is deleted"
+          },
+          "payload": {
+            "seat_10_current_order": "OCCUPIED",
+            "occupant": "ANTIGRAVITY",
+            "role_on_seat": "Lead Developer",
+            "chief_facilitator": "UNASSIGNED",
+            "issue_121": "OPEN",
+            "files_deleted": false,
+            "who_wrote_the_suspension_sentences": [
+              "Issue #121 body 2026-09-05 and comment 2026-09-07, owner GitHub identity",
+              "Codex Forge, 2026-09-29, security-enforcement receipt, CodeQL remediation receipt, issue #231 preparation receipt, and NOW blocks of that day",
+              "Cursor cloud renter, 2026-09-30, incident source packet and claim C-121-1; morning of 2026-10-01, NOW.md block 2026-10-01T07:45:00Z"
+            ],
+            "current_authority": "Master Robyn, the builder, 2026-10-01",
+            "not": [
+              "a deleted file",
+              "an edit of E001-E027",
+              "closure of issue #121",
+              "independent re-entry evidence",
+              "a rewrite of BREACH-008"
+            ]
+          },
+          "prev_hash": "f166973c7cc85f49501d4e2cb7e338b8cee7e1dbae6843270954efb0d7bdd788",
+          "hash": "221b05a2ee8d3f4f7393210761698b97202663c580b6bb35ed311233d926da09"
+        },
+        "chain_boundary": "The embedded source entry belongs to the master fork whose E028 hash follows the E027 tip. It is preserved inside this E056 envelope and is not spliced into the Wave 3 E055 chronology.",
+        "current_role_boundary": "Later owner role confirmation in root NOW.md and PR #254 governs current role pointers; this envelope preserves the dated source event only."
+      },
+      "prev_hash": "91c30401929c2e85002555742b30e16932055d9c5d511a29d84d60c46a3a23d3",
+      "hash": "314738e6c7db5f2a7e743b5027b018d2cb29aca277e796186e22bf6249a67e2c"
+    },
+    {
+      "seq": 57,
+      "entry_id": "ILR-2026-09-30-E057",
+      "recorded_at": "2026-10-05T08:55:42Z",
+      "entry_kind": "review_correction",
+      "actor": {
+        "actor": "Forge/Codex CA stateless renter",
+        "assigned_role": "Chief Architect (coordination direction; no RTC identity seat claimed)",
+        "interface": "Codex desktop",
+        "human_authority": "Robyn request to repair the open PR review queue on 2026-10-05"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E029",
+        "claim_ids": [
+          "C-94-2"
+        ],
+        "fields": [
+          "payload.claim_moves[0]",
+          "payload.next_admissible_action"
+        ],
+        "scope": "The dated receipt and its limits remain valid; this correction removes the unsupported promotion only."
+      },
+      "payload": {
+        "issue": 94,
+        "claim": "C-94-2",
+        "correction": {
+          "from": "POC_VALIDATED",
+          "to": "UNKNOWN",
+          "pka": "HOLD",
+          "clear": "PENDING owner confirmation or a canonical registry comparison"
+        },
+        "basis": "The cited evidence is a keyword and file-count scan of one RobynAwesome/Skills clone. Renamed or copied Jennifer/PKA skills need not contain those strings, so the scan cannot validate the claim.",
+        "evidence_boundary": "MISS != NEGATIVE_PROOF. The later merge of PR #248 makes the receipt path available on master but does not add canonical-path/content/hash comparison or owner confirmation.",
+        "next_admissible_action": "Robyn names or confirms the intended external registry, or supplies a canonical comparison. Keep issue #94 open and do not promote C-94-2."
+      },
+      "prev_hash": "314738e6c7db5f2a7e743b5027b018d2cb29aca277e796186e22bf6249a67e2c",
+      "hash": "443a77f6cd205c44f4754a919c74377dfb3c2e99e3f48dcfdee01be2584bcaee"
+    },
+    {
+      "seq": 58,
+      "entry_id": "ILR-2026-09-30-E058",
+      "recorded_at": "2026-10-05T08:55:42Z",
+      "entry_kind": "review_correction",
+      "actor": {
+        "actor": "Forge/Codex CA stateless renter",
+        "assigned_role": "Chief Architect (coordination direction; no RTC identity seat claimed)",
+        "interface": "Codex desktop",
+        "human_authority": "Robyn request to repair the open PR review queue on 2026-10-05"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E033",
+        "claim_ids": [
+          "C-110-3"
+        ],
+        "fields": [
+          "payload.observations[1]",
+          "payload.next_admissible_action"
+        ],
+        "scope": "Adds the omitted deploy workflow to the A1 retirement inventory; it does not authorize workflow or branch changes."
+      },
+      "payload": {
+        "issue": 110,
+        "correction": {
+          "inventory": "A1b",
+          "added_path": ".github/workflows/deploy-web.yml:20",
+          "operational_limit": "The workflow still accepts pushes to codex/kc-sovereign-gui-full-dev and can deploy public/careers paths; retiring only the swarm-proof trigger would not retire that deployment path."
+        },
+        "next_admissible_action": "Owner names the A1a compare target and decides the workflow/branch retirement boundary before any bounded PR. No workflow, branch or deployment mutation is made by this receipt."
+      },
+      "prev_hash": "443a77f6cd205c44f4754a919c74377dfb3c2e99e3f48dcfdee01be2584bcaee",
+      "hash": "303b6091119812ec41c573217fce172922d48202454d12e206fdced85ede1369"
+    },
+    {
+      "seq": 59,
+      "entry_id": "ILR-2026-09-30-E059",
+      "recorded_at": "2026-10-05T08:55:42Z",
+      "entry_kind": "review_correction",
+      "actor": {
+        "actor": "Forge/Codex CA stateless renter",
+        "assigned_role": "Chief Architect (coordination direction; no RTC identity seat claimed)",
+        "interface": "Codex desktop",
+        "human_authority": "Robyn request to repair the open PR review queue on 2026-10-05"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E037",
+        "claim_ids": [
+          "C-122-1"
+        ],
+        "fields": [
+          "payload.observations[1]",
+          "payload.owner_closeable_now",
+          "payload.next_admissible_action"
+        ],
+        "scope": "Corrects the box-state summary only; the dated cloud subset and its limitations remain preserved."
+      },
+      "payload": {
+        "issue": 122,
+        "correction": {
+          "box_1": "PARTIAL / OPEN for the cloud variant until the conflicting DONE/OPEN statements are reconciled.",
+          "box_5": "PARTIAL / OPEN pending preservation and comparison of the August and 2026-09-06 snapshots.",
+          "box_3_4": "UNKNOWN and owner/provider gated.",
+          "issue_state": "OPEN; no close-as-superseded recommendation is admissible yet."
+        },
+        "basis": "The cited receipt records inconsistent box-1 state and does not preserve both snapshots required to evidence box 5. A later decision must reconcile those contradictions before closure.",
+        "next_admissible_action": "Robyn supplies or confirms the missing snapshots and resolves the box-1 contradiction; keep #122 open as an umbrella until then."
+      },
+      "prev_hash": "303b6091119812ec41c573217fce172922d48202454d12e206fdced85ede1369",
+      "hash": "38e61071848b5fdce22746910e4bff35f07d665fe92fc1a5dc41e5704e09eb47"
+    },
+    {
+      "seq": 60,
+      "entry_id": "ILR-2026-09-30-E060",
+      "recorded_at": "2026-10-05T08:55:42Z",
+      "entry_kind": "live_pointer_correction",
+      "actor": {
+        "actor": "Forge/Codex CA stateless renter",
+        "assigned_role": "Chief Architect (coordination direction; no RTC identity seat claimed)",
+        "interface": "Codex desktop",
+        "human_authority": "Robyn request to repair the open PR review queue on 2026-10-05"
+      },
+      "supersedes": {
+        "entry_id": "ILR-2026-09-30-E052",
+        "fields": [
+          "payload.next_admissible_action",
+          "payload.owner_closeable_summary"
+        ],
+        "also_corrects": [
+          "ILR-2026-09-30-E029",
+          "ILR-2026-09-30-E033",
+          "ILR-2026-09-30-E037",
+          "ILR-2026-09-30-E041",
+          "ILR-2026-09-30-E049",
+          "ILR-2026-09-30-E051"
+        ],
+        "scope": "Current master pointer only; historical observations retain the state seen at their recorded times."
+      },
+      "payload": {
+        "current_master": {
+          "pr_247": {
+            "state": "MERGED",
+            "merge_commit": "ace9b086bc19482bc6e01e685938aa579b76aafc",
+            "merged_at": "2026-10-01T04:51:27Z"
+          },
+          "pr_248": {
+            "state": "MERGED",
+            "merge_commit": "8c6c4b66d7360543ebada11d14f128461978e661",
+            "merged_at": "2026-10-01T10:34:24Z"
+          }
+        },
+        "correction": "The #247 and #248 master pointers are resolved. Their old OPEN DRAFT / unmerged statuses remain dated observations and no longer belong in the current owner queue.",
+        "historical_boundary": "E029, E033, E037, E041, E049, E051 and E052 are not rewritten. This entry corrects only live next actions and pointer interpretation.",
+        "next_admissible_action": "Review this repaired PR #249 and the other open queue items. Do not re-merge or close #247/#248 based on the old Wave 3 queue text."
+      },
+      "prev_hash": "38e61071848b5fdce22746910e4bff35f07d665fe92fc1a5dc41e5704e09eb47",
+      "hash": "49e322c80d472a8a3308a60f52921da5d4210cd7db1d7145f1bb1e5b0dce255b"
     }
   ]
 }

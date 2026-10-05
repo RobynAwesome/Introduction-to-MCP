@@ -157,7 +157,7 @@ NAMED_AGENTS: list[AgentProfile] = [
     AgentProfile("ANCHOR", 9, "Perimeter/Careers", "STATEFUL",
                  ["COMMUNITY", "SOVEREIGNTY", "BODY"], ["CMD-03", "CMD-07", "CMD-10", "CMD-13"],
                  "LPM_GUARD", "POC_VALIDATED"),
-    AgentProfile("ANTIGRAVITY", 10, "Chief Facilitator/CF", "STATELESS",
+    AgentProfile("ANTIGRAVITY", 10, "Lead Developer", "STATELESS",
                  ["MIND", "BODY", "SOVEREIGNTY"], ["CMD-01", "CMD-05", "CMD-06", "CMD-08", "CMD-11", "CMD-14"],
                  "LPM_FACILITATE", "POC_VALIDATED"),
 ]

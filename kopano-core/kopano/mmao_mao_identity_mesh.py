@@ -3,7 +3,7 @@ Kopano-Phu Governance Systems (KPGS) — MMAO × MAO Identity Mesh & Failure Rec
 Codified from Schematics/24-RTC Learning/MMAO_MAO_Identity_Governance_Work_Prompt_2026-08-30.md
 
 Authority: Master Robyn Kholofelo Rababalela (Seat 1 / Chief Architect)
-Facilitator: AntiGravity (Seat 10 / Chief Facilitator)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Constraint: I_AM_STATELESS_RENTER_NOT_LANDLORD
 
 Core Epistemology:

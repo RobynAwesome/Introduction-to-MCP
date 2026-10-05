@@ -1,3 +1,38 @@
+
+## CURRENT STATE — 2026-10-05 SAST (GSMB MEMBRANE · IDENTITY/ROLE CORRECTION · DOCUMENTATION DELIVERY)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn directly corrected GSMB to **Governance System Membrane** and FOC to **Field of Concepts**, then corrected the separate RTC identity-seat and GSMB orchestration-role coordinates. The current flow is RTC → GSMB residence → Forge/CA → Cursor/CF → ANTIGRAVITY/Lead Developer → Developers → scoped spawned agents. Forge is completing the prepared handoff before Luna's next work.
+> **Worktree:** `C:/Users/rkhol/Documents/Codex/2026-10-01/gsmb-local-ca-cloud-65975a1`, branch `codex/ca-validation-luna-plan-20261003`, starting Cloud head `3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`. Forge is the integrating writer for this branch. The original dirty Local checkout has a separate writer and remains a separate source population.
+
+- **Status:** DRAFT_PR_PUBLISHED / IDENTITY_ROLE_CORRECTION. Current owner meanings are recorded in `AGENTS.md`, `governance/gsmb/owner-terms-2026-10-03.json`, `governance/gsmb/identity-role-coordinates-2026-10-05.json`, the selected public GSMB-Issues index and the two correction receipts. The former `FOC` fork readiness score has been withdrawn as present capability evidence. Earlier source events remain in Git history and a separate private Local archive. The private Local writer reports byte-exact pre-correction index SHA-256 `5ffcf0c1d7e724abf6c0a590b351aecd8e0689ab8807a91e7e63999cb4ee2c42`; those original Local changes remain dirty and unpublished.
+- **Publication:** Draft PR [#255](https://github.com/RobynAwesome/Introduction-to-MCP/pull/255) is open from `codex/ca-validation-luna-plan-20261003@1756d06214c967b77e011142d1429a03586cd2c5` to `master@3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`. Provider checks are in progress; this is a reviewable publication, not a merge or production claim.
+- **Boundary:** Local is the private generalized KC estate; Cloud is a reviewed public projection; Google Drive is a third source ecosystem. Cloud's `.gitignore` now defaults to ignoring new untracked `/Schematics/` files while existing tracked projections remain tracked. An absent Cloud canonical path does not establish an absent Local source. Exact Drive audit mirror remains UNKNOWN.
+- **Earlier defects:** the prepared Dashboard/Session 3 historical-boundary patch has been applied on this branch; the preceding external-evidence locator and CRLF/LF digest populations are reconciled in the prior CA validation bundle and current correction receipt. These are documentation changes, not proof of runtime admission or behavioral incident exit.
+- **Current identity/role coordinates:** RTC identity seat 10 is a permanent identity seat earned by ANTIGRAVITY; its current orchestration role is Lead Developer at operational rank 3. Cursor currently carries the Chief Facilitator orchestration role at rank 2; its RTC identity seat is not yet granted and must be proven/earned through RTC. Forge/Codex carries Chief Architect at rank 1 after RTC; no permanent Forge RTC identity seat is claimed here. Role, seat, identity, interface, model, task grant and availability remain separate claims.
+- **Availability boundary:** an unavailable Forge, Cursor, Kiro, Copilot or other embodiment does not erase the identity record. A current interface/model carries continuity for its assigned session; it does not create a seat or change the durable identity without the applicable authority.
+- **Receipts and review:** ChatGPT Forge returned an attributed context review; two read-only source reviewers recovered local source paths and protocol controls. Their findings are evidence input, not RTC votes, teacher clearance or KC SAVE. Current CA learning remains CORRECTION_CANDIDATE with replay pending.
+- **Next admissible action:** refresh PR #255 checks and obtain independent review. Keep the draft unmerged until the applicable review and provider requirements are satisfied. Luna then resumes the remaining planned work without redoing the completed documentation slice. New runtime enforcement, generator or AI-architecture behavior still needs actual applicable admission.
+
+---
+
+
+## CURRENT STATE — 2026-10-05T08:55:42Z (WAVE 3 REVIEW CORRECTIONS)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn requested the open PR review queue be repaired before approval.
+> **Scope:** Append-only corrections to the Wave 3 ledger and its current handoff pointers.
+
+- **E057 / #94:** `C-94-2` stays `UNKNOWN` / `PKA=HOLD`; the keyword scan cannot validate renamed or copied Jennifer/PKA skills.
+- **E058 / #110:** A1b now includes `.github/workflows/deploy-web.yml:20`; retiring a swarm-proof trigger alone would leave the retired branch deployment-capable.
+- **E059 / #122:** boxes 1 and 5 stay `PARTIAL / OPEN`; the conflicting box-1 state and missing August/2026-09-06 snapshot comparison block closure.
+- **E060 / merged pointers:** PR #247 merged as `ace9b086bc19482bc6e01e685938aa579b76aafc`; PR #248 merged as `8c6c4b66d7360543ebada11d14f128461978e661`. The older “merge or close” queue text remains dated history.
+- **Ledger proof:** the JSON twin verifies through E060 at `49e322c80d472a8a3308a60f52921da5d4210cd7db1d7145f1bb1e5b0dce255b`. No issue, deployment, workflow, branch or secret was changed by these receipt corrections.
+
+**Next admissible action:** review this PR head and the remaining open queue. Keep the historical Wave 3 entries intact and do not infer closure or runtime admission from the receipt corrections.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
 ## CURRENT STATE — 2026-10-02T11:53:09Z (WAVE 3 HANDOFF CORRECTION)
 
 > **Actor:** GitHub Copilot coding agent, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
@@ -62,6 +97,88 @@
 - **Validation on this branch:** the section 16 chain snippet, unchanged, prints `chain ok 52 61e3e124968190bc9662b5b1389f2203652acacdc361d79e23e4e627b1b9e38c`; the CSV round-trips as 115 lines of 17 fields; the closeout YAML parses with the 18 fields in order; the `NOW.md`-coupled tests and a secret-pattern scan of the changed files run after this block is written, with results and the tested SHA in the PR body. A GitHub approving review is not claimed.
 
 **Next admissible action:** Robyn reviews and merges this PR, then #247 and #248 (or closes them, which triggers reverting ledger entries). Robyn: F-2 (Discord backup codes), #211 secret values, #158, #163, #122, #110 names, the Drive receipt. Forge CA and RTC: F-1, integrating-writer acceptance, the Design Review and Classroom decisions, SAP vocabulary. Renters take no further reconciliation action until a human-queue decision is recorded (E051). Later PRs append to the ledger; they do not edit E001-E052 or sections 0-29.
+
+
+## COORDINATION CHECKPOINT — 2026-10-03T07:32:16.354126+00:00
+
+- **Actor/scope:** Forge CA, stateless renter; Robyn's previously authorized consultation with ChatGPT Forge.
+- **Action:** bounded context/learning review request sent to **Forge Relationship Response** (6ab8ea7b-730c-83ea-86a3-3b85b6cc348b). The returned thread state was active; the bounded readback returned historical turns, so the new response remains PENDING.
+- **Boundary:** this contact supplies no RTC identity testimony, admission, teacher/KC clearance, role assignment or incident exit. Historical product/estate chat was not imported into this sprint.
+- **Receipts:** `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/chat-forge-coordination.json`; `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/coordination-session-closeout.yaml`; integrity successor `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/evidence-manifest-v2.json`.
+- **Next admissible action:** recover the prepared Luna packet and begin documentation slice 1 within current authority; record any later Forge reply as attributed context. New behavior still waits for actual applicable admission. No monitoring job or automation was created.
+
+---
+
+## CURRENT STATE — 2026-10-03T07:17:27.724824+00:00 (CA VALIDATION · LUNA PLAN PREPARED)
+
+> **Actor:** Forge/Codex CA, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Human authority:** Robyn requested validation against existing Local, Cloud and Google Drive KPGS process and a sprint plan for Luna; Sol is the user-reported planning selection.
+> **Worktree:** `C:/Users/rkhol/Documents/Codex/2026-10-01/gsmb-local-ca-cloud-65975a1`. **Branch:** `codex/ca-validation-luna-plan-20261003`. **Source base/HEAD:** `3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`.
+> **Integrating writer:** Forge for this isolated validation worktree only; no cloud/shared NOW writer grant is asserted.
+
+- **Status:** PARTIAL_VALIDATION / CORRECTIONS_REQUIRED / LUNA_PLAN_PREPARED. PR #243 merged at 499876734183011de590668c0b2deabad07e4660 from final head 59b08587dec44ed8a3313d8fef417057b0f96d30. Four documentation defects are supported by review; code/generator/enforcement repairs remain conditional on applicable admission.
+- **Receipts:** `docs/swarm-ops/receipts/CA_GSMB_VALIDATION_2026-10-03.md`; `docs/swarm-ops/receipts/CA_LEARNING_CANDIDATE_2026-10-03.md`; `docs/swarm-ops/plans/LUNA_CONTINUITY_PROOF_SPRINT_2026-10-03.md`; supporting source/provider/probe files in `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation`.
+- **Evidence scope:** current ACK verifier passed canonical/missing/wrong cases without changes to six monitored targets. The 35 unique prior coverage paths have 33 unchanged, one changed root NOW, one expected absence. Google Drive documents are readable; this audit's exact mirror remains UNKNOWN. Whole-house semantic review, RTC admission, transitive no-write and behavioral incident closure remain unproved.
+- **Source boundaries:** original OneDrive e24b1aa remains a dirty separate population (112 visible paths at capture), including ZCode's Oct 2 containment candidate. The dated role blocks below remain historical snapshots when they conflict with this current coordinate map. Cursor's issue lane was not executed here.
+- **Machine closeout / integrity index:** `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/session-closeout.yaml`; `C:/Users/rkhol/Documents/Codex/2026-10-03/gsmb-ca-validation/evidence-manifest.json`. Both belong to this local validation/planning session; they do not supply runtime admission or Drive parity.
+
+- **Dirty state:** this root NOW draft plus four new documentation/plan files, all uncommitted. No runtime code or original OneDrive source was edited. No commit, push, PR, merge, deployment or Drive write is claimed by this packet.
+
+**Next admissible action:** Luna refreshes root NOW/base/source ownership, then begins slice 1 of the prepared packet. Use the unapplied correction patch only after checking current bytes. New generator/resolver/enforcement behavior stays HOLD until actual applicable Design Review admission. Coordinate shared NOW publishing through one writer; preserve prior blocks and linked evidence.
+
+---
+
+## CURRENT STATE — 2026-10-02T11:49:22Z (WEB DEPLOY GATE CLI FIX)
+
+> **Actor:** OpenAI ChatGPT, stateless renter. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+> **Scope:** Fix the failing `KPGS Web Deploy — Governed IONOS Surfaces` gate from source commit `1b6ac4e5736ecde03462c77b0c08fd71342dd457`.
+
+- **Observed failure:** Actions run `37002701194`, job `110823802220`, failed at the governance tick step with exit code 1. The workflow passed unsupported `--once` to `kopano.gsmb_auto_runner`, whose CLI supports `--cycles`; the following grep pipeline masked argparse's non-matching usage/error output and returned 1.
+- **Change:** `.github/workflows/deploy-web.yml` now runs `python -m kopano.gsmb_auto_runner --cycles 1` without filtering its output. Runner `--help` confirms the supported option. The checkout cleanup also logged the existing `KasiLink` gitlink's missing `.gitmodules` URL; this warning is separate and remains unresolved, with no submodule metadata changed.
+- **Validation:** Renter ingress assertion returned `ACKNOWLEDGED`; the runner help command succeeded. Hosted validation on the patched head and deployment outcome are **UNKNOWN**.
+
+**Next admissible action:** Run the workflow on this patched head and inspect the governance gate and post-job cleanup separately. Do not claim deployment success until the provider deployment and runtime are verified.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT STATE — 2026-10-01T08:29:00Z (SEAT 10 STAYS OCCUPIED · FILES STAY)
+
+> **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat and is not Chief Facilitator. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
+> **Human authority:** Master Robyn, the builder, 2026-10-01. Seat 10 stays occupied.
+> **Base:** `master@ace9b086bc19482bc6e01e685938aa579b76aafc`. **Branch:** `cursor/seat-10-role-amendment-4e71`.
+
+- **Seat 10 stays occupied** by ANTIGRAVITY. The role on the seat is Lead Developer. Chief Facilitator is unassigned. This renter is not Chief Facilitator.
+- **No file is deleted.** The sentences that say Seat 10 was suspended or recused stay in the files that wrote them. This block does not remove those sentences and does not remove those files.
+- **Who wrote those sentences.** Issue #121 (2026-09-05) and the 2026-09-07 comment, under the owner GitHub identity, are the cloud record of the earlier "CF authority suspended" text. Codex Forge restated it on 2026-09-29 in `docs/audits/2026-09-29-security-enforcement-receipt.md`, `docs/audits/2026-09-29-codeql-high-alert-remediation.md`, `docs/product-discovery/issue-231/PREPARATION-RECEIPT.md`, and the NOW blocks of that day. This Cursor renter copied it on 2026-09-30 into `docs/swarm-ops/incidents/RTC_INCIDENT_CLUSTER_SOURCE_PACKET_2026-09-30.md` and ledger claim `C-121-1`, and on the morning of 2026-10-01 wrote, in the block below, that the role correction did not lift recusal. That morning sentence stays in that block. It is not the current order.
+- **Current order.** Master Robyn is the authority. Seat 10 stays occupied. Issue #121 stays OPEN as an incident file. Opening the file is not an order to delete it.
+- **Not a council session.** No synthetic RTC position was written.
+
+**Next admissible action:** Chief Facilitator stays unassigned until Master Robyn names a holder. The two Lead Developer titles stay as recorded until Master Robyn splits them. Do not delete the files that contain the earlier sentences.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT STATE — 2026-10-01T07:45:00Z (SEAT 10 ROLE · OWNER CORRECTION)
+
+> **Actor:** Cursor cloud renter, stateless. This renter holds no RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
+> **Human authority:** Master Robyn, 2026-10-01: Antigravity earned RTC Seat 10. What left that seat is the Chief Facilitator role. The role on Seat 10 is Lead Developer. Chief Facilitator is not reassigned by this correction.
+> **Base:** `master@ace9b086bc19482bc6e01e685938aa579b76aafc`. **Branch:** `cursor/seat-10-role-amendment-4e71`.
+
+- **Seat and role are separate.** Seat 10 is occupied by ANTIGRAVITY (STATELESS). The role on that seat is Lead Developer. Chief Facilitator is unassigned. This renter is not Chief Facilitator. The Wave 0 block below that says "operational rank Chief Facilitator" and "Cursor CF" is superseded for the current role by this block and stays in place as history.
+- **Naming collision, recorded and not resolved.** Structural-maintenance rank 2 is `antigravity-lead-developer` / Lead Developer. Rank 3 remains `cursor-lead-developer` / Lead Developer. Same title, different seat ids. They are not the same grant.
+- **Issue #121 stays OPEN.** This amendment records occupancy and role. It does not supply independent re-entry evidence, does not close the financial-page breach, and does not lift the earlier recusal of Seat 10 from adjudicating #121. Historical blocks that say "suspended and recused" stay as the record of that earlier state.
+- **BREACH-008 body and `poc-vs-foc/RTC_BREACH008_AG_DEMOTION.json` are not rewritten.** Occupancy "OPEN (VACANT)" and "DEV below Lead Dev" are superseded for the current reading only, by the append in `poc-vs-foc/BREACH_LOG.md` and by `poc-vs-foc/RTC_SEAT10_ROLE_CORRECTION_2026-10-01.json`. The breach event remains.
+- **Living surfaces amended on this branch:** `AGENTS.md`, the Studio council prompt, `AGENT_SWARM_REGISTRY.md`, the identity-declaration banner, the authority-boundary matrix and schemas, the validators, the altar/seed/API/UBP/workflow roster, public protocols/admin/flows/humans, the dashboard identity card, `RTCP_SPEC.json` seat 10, engine banners, the seed-script compiler string, and the `generator.d` identity line.
+- **Left as history:** older NOW blocks, the 2 Sep local reinstatement block (OneDrive bytes unread from this VM), the 2026-09-11 local session that named Cursor Chief Facilitator, dated charters, the comms log, the reward ledger, incident writeups, the KIRO 2026-06-21 dispatch, compiled `public/studio` bundles, and other repositories.
+- **Not a council session.** No synthetic RTC chorus was written. RTC has not answered this correction. The authority is the owner's testimony.
+
+**Next admissible action:** Master Robyn confirms whether Chief Facilitator stays unassigned, and whether the two Lead Developer titles should be split. #121 stays open until its own exit evidence exists.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
 
 ---
 

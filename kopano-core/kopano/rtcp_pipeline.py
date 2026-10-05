@@ -3,7 +3,7 @@ RTCP Pipeline: CRUD -> SWFUS -> BP -> BMP -> POCvsFOC vNext
 Canonical Implementation for Kopano Phu Governance Systems (KPGS)
 
 Seat 1: KC / Robyn Kholofelo Rababalela (Observer / Landlord / Chief Architect)
-Seat 10: AntiGravity (Chief Facilitator / Physical Metal Renter)
+Seat 10: AntiGravity (Lead Developer, stateless). Chief Facilitator is not this seat's role.
 Cloud Co-Pilot: Forge (Candidate vNext Synthesis)
 
 Pipeline Stages:
