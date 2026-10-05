@@ -1,0 +1,136 @@
+{
+  "record_type": "owner_terminology_and_source_boundary",
+  "status": "DIRECT_OWNER_CORRECTION_ACTIVE",
+  "owner_instruction_date_sast": "2026-10-03",
+  "actor": "Robyn Kholofelo Rababalela",
+  "prepared_by": "Forge/Codex CA, stateless renter",
+  "authority_limit": "This records current human terminology and source boundaries; it does not grant an RTC seat, Design Review decision, runtime enforcement, teacher clearance or incident exit.",
+  "terms": {
+    "GSMB": {
+      "current_expansion": "Governance System Membrane",
+      "source_class": "direct current owner instruction",
+      "historical_conflicts": [
+        {
+          "expansion": "Governance Smart Model Brain",
+          "source": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/GSMB-Issues/index.md at master@3a25d77c",
+          "current_authority": false,
+          "source_event_preserved": true
+        },
+        {
+          "expansion": "Governance System Main Brain",
+          "source": "private Local Schematics/04-Updates/comms-log.md, earlier dated SSE correction",
+          "current_authority": false,
+          "source_event_preserved": true
+        }
+      ]
+    },
+    "FOC": {
+      "current_expansion": "Field of Concepts",
+      "source_class": "direct current owner instruction and private Local FOC constitution",
+      "historical_conflicts": [
+        {
+          "expansion": "Full Operational Capability",
+          "source": "nested GSMB-Issues/index.md at master@3a25d77c",
+          "current_authority": false,
+          "fork_capability_proof": false,
+          "source_event_preserved": true
+        }
+      ],
+      "source_specific_diagnostics": "Dated Failure/Freedom/Five-Tiers uses retain their source context and do not redefine the current acronym."
+    },
+    "BP": {
+      "current_expansion": "Bracket Protocol",
+      "source_class": "Local learning session and RTCP pipeline",
+      "historical_index_expansion": "Breaking Points",
+      "historical_index_is_current_authority": false
+    },
+    "BMP": {
+      "source_expansion": "Black Mass Protocol",
+      "source_class": "Local RTCP pipeline",
+      "historical_index_expansion": "Breaking-Model Points",
+      "historical_index_is_current_authority": false
+    },
+    "MAO": {
+      "current_expansion": "Multi-Agent Orchestration",
+      "source_class": "direct current owner instruction"
+    },
+    "MMAO": {
+      "current_expansion": "Mobile Multi-Agent Orchard",
+      "source_class": "direct current owner instruction"
+    },
+    "SWFUS": {
+      "status": "source_specific_use_requires_trace",
+      "universal_expansion": null,
+      "reason": "Dated sources use conflicting expansions; recover the operation and its source before execution."
+    },
+    "KPCB+": {
+      "status": "source_specific_use_requires_trace",
+      "universal_expansion": null,
+      "reason": "Dated sources use differing names and syntax metadata cannot grant authority."
+    },
+    "LLDM": { "status": "OWNER_PROPOSAL_DEFINITION_UNRESOLVED", "expansion": null },
+    "LPDM": { "status": "OWNER_PROPOSAL_DEFINITION_UNRESOLVED", "expansion": null },
+    "LPDH": { "status": "OWNER_PROPOSAL_DEFINITION_UNRESOLVED", "expansion": null }
+  },
+  "ecosystems": {
+    "LOCAL": {
+      "role": "private generalized KC source and physical Schematics house",
+      "owner_root": "C:/Users/rkhol/OneDrive/Documents/Anthropic/Introduction to MCP",
+      "default_visibility": "private"
+    },
+    "CLOUD": {
+      "role": "selected public GitHub projection of reviewed files and checks",
+      "repository": "RobynAwesome/Introduction-to-MCP",
+      "default_visibility": "public"
+    },
+    "GOOGLE_DRIVE": {
+      "role": "third source ecosystem",
+      "target_audit_mirror_status": "UNKNOWN_NOT_LOCATED_IN_BOUNDED_SEARCH",
+      "default_visibility": "source_specific"
+    }
+  },
+  "lookup_rule": "A missing path is absent only from the inspected ecosystem and source population. Do not infer doctrine absence or copy private Local files to Cloud by default.",
+  "cross_ecosystem_receipt_fields": [
+    "locator",
+    "authority_and_source",
+    "visibility",
+    "observed_at",
+    "byte_population",
+    "normalization_rule",
+    "digest_or_unknown",
+    "tested_claim"
+  ],
+  "working_delegation_order": [
+    "Robyn",
+    "RTC",
+    "CA",
+    "CF",
+    "Lead Developer",
+    "Developers",
+    "spawned agents"
+  ],
+  "occupancy_rule": "Resolve holder, grant, scope and RTC identity separately; vacant CF is not auto-filled.",
+  "owner_roadmap": {
+    "status": "OWNER_DIRECTION_NOT_IMPLEMENTATION_PROOF",
+    "stages": [
+      "Generative",
+      "Agentic",
+      "Identic",
+      "Telemetry",
+      "Natural",
+      "Guardian",
+      "KPGSAGI"
+    ]
+  },
+  "evidence_refs": [
+    "docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md",
+    "docs/governance/FOC_VS_POC_EPISTEMIC_CONSTITUTION.md",
+    "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/GSMB-Issues/index.md",
+    "NOW.md"
+  ],
+  "unknowns": [
+    "No current RTC admission for new enforcement behavior",
+    "No complete Local/Cloud/Drive parity receipt",
+    "No measured impact toward the owner-stated 33.6% mission target"
+  ]
+}

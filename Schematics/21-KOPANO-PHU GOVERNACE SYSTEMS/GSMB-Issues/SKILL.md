@@ -1,19 +1,17 @@
 ---
-name: weekly-fork-audit
+name: weekly-fork-audit-historical-hold
 description: >
-  Weekly audit of all forked repositories in RobynAwesome's GitHub estate.
-  Checks upstream deltas, usability scoring, integration mapping, and
-  seeds useful patterns back into GSMB Local. Follows the CRUD → SWFUS →
-  BP → BMP → POCvsFOC → KPCB+ pipeline.
-triggers:
-  - "weekly fork audit"
-  - "check forked repos"
-  - "fork lore update"
-  - "upstream delta check"
-  - "forked repo usability"
+  Historical weekly fork audit source. HOLD as an executable skill pending
+  review of destructive observations, private seeding, acronym meanings,
+  source boundaries, and current admission. Preserve for failure learning.
+triggers: []
 ---
 
 # SKILL: Weekly Forked Repo Audit
+
+> **Historical / HOLD — 2026-10-04:** The body below preserves an earlier workflow as evidence and is not an active instruction. It calls FOC “Full Operational Capability,” assigns BP/BMP fork-specific meanings, deletes observations older than four weeks, and seeds material into Local. Robyn's current FOC expansion is **Field of Concepts**; the linked RTCP source separately uses **Bracket Protocol** and **Black Mass Protocol** for BP/BMP. Those different uses must not be silently merged. Do not invoke this skill or its deletion, promotion, or private seeding steps until a bounded review and applicable admission establish a safe replacement. The current source-boundary receipt is `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`.
+
+---
 
 ## Purpose
 

@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-04T16:43:22Z",
+  "actor": "Forge/Codex CA, stateless renter",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "operation": "Close this bounded documentation-edit session only; no incident, RTC, or runtime closure",
+  "source_base": "3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b",
+  "human_authority": "Robyn's direct 2026-10-03 GSMB and FOC correction",
+  "current_terms": {
+    "GSMB": "Governance System Membrane",
+    "FOC": "Field of Concepts"
+  },
+  "rtc_conditions_met": {
+    "2_read_comms_now_mainbrain": false
+  },
+  "evidence": [
+    "NOW.md",
+    "AGENTS.md",
+    "docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md",
+    "governance/gsmb/owner-terms-2026-10-03.json"
+  ],
+  "validated_claim": "The named documentation files were prepared for a scoped source correction; final staged diff and provider checks are recorded separately",
+  "not_proved": [
+    "full Schematics semantic audit",
+    "runtime acronym enforcement",
+    "RTC admission or identity seat",
+    "teacher or KC clearance",
+    "Google Drive mirror parity",
+    "incident exit or production state"
+  ]
+}
