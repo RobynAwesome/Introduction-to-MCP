@@ -1,11 +1,15 @@
-## CURRENT COORDINATION — 2026-10-05T11:35:49Z (IDENTITY-STATE ORDER · RTC-EVOLUTION · #94/#207 RECEIPTS · SECURITY SNAPSHOT)
+## CURRENT COORDINATION — 2026-10-05T11:57:09Z (IDENTITY-STATE ORDER · RTC-EVOLUTION · ACTIVE PRs · SECURITY SNAPSHOT)
 
 This current block supersedes conflicting role, provider, issue and PR status in older dated blocks below; those records remain historical evidence.
 
 Actor: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
 Authority: Robyn directed issue completion through reviewable PRs, with Robyn as approver, and corrected current identity coordinates: **AG is the identity; Seat 10 is the RTC seat; Google Antigravity is the platform; Lead Developer is the current role.** This task's Forge / GPT-6 Luna Max embodiment acts in the CA role and does not inherit AG identity or Seat 10.
 
-Cloud baseline: master@a2d0b8fcca1a3340b31b9570797223e9a97e3464 observed 2026-10-05. PRs #253 and #256 are merged; #254 is the only open PR in the last live read. The dirty Local OneDrive checkout remains codex/kc-sovereign-gui-full-dev@e24b1aa0874a637477e6d436c032646cfa236aed; it is a separate population. No Google Drive update or byte mirror is claimed.
+Cloud baseline: master@a2d0b8fcca1a3340b31b9570797223e9a97e3464. The dirty Local OneDrive checkout remains codex/kc-sovereign-gui-full-dev@e24b1aa0874a637477e6d436c032646cfa236aed; it is a separate population. No Google Drive update or byte mirror is claimed.
+
+Owner-identified Grok/Cursor branch receipt: GitHub shows PR #234 from `cursor/now-merge-receipt-4e71`, head `9e2ff083debd689f9bb7ba717efd32fe61f241e6`, merged 2026-09-29 as `d6126890ad7bdc4928668cdd09bc648c5dcf8f51`; the PR changed only root `NOW.md`, and GitHub compare reports the merge commit is in current `master`. This verifies branch/PR landing only, not the model/provider identity that authored it.
+
+Active PR snapshot at 2026-10-05T11:57Z: #254 remains open; #257 is open on `codex/gsmb-identity-flow-20261005` at `0cf1eea8b78dec2c09c9ebf5de7853c96fb5b7c2` against `a2d0b8f`, with the 14 required contexts green except `Analyze (rust)` still in progress; #258 is open at `b1661f6f318f6ba42f3d6a2826679d71647cf5c7` against the same base, with `lint-and-test (3.12)` and `Analyze (rust)` in progress. No owner approval or merge is recorded. Vercel preview checks on #257 completed; this is preview evidence, not a production deployment.
 
 The three GSMB states are distinct: **Local** = owner OneDrive/Schematics; **Cloud** = selected GitHub source, PRs, checks and issues; **Heavy Human-in-the-Loop** = Google Drive and direct owner decisions. Stateless renters handling identity AI flows must load and label all three before interpreting cross-state evidence. Actor, authority, identity, seat, platform/interface/model, and assigned role stay separate. Preserve source traces, classify evidence, record contradictions and unknowns, then state the next admissible action. Source-specific FEP wording must retain its exact source, population and ratification status; no consensus or global reconciliation is claimed here.
 
@@ -17,7 +21,7 @@ Live GitHub snapshot: 15 root issues are open (#231, #211, #207, #183, #167, #16
 
 Security snapshot at 2026-10-05T11:19:24Z: 32 open high CodeQL alerts, six open Dependabot alerts (brace-expansion #112-115, fast-uri #116 with a patched version, NLTK #96 without a patched version returned), zero open secret-scanning alerts. Secret scanning and push protection are enabled; zero open alerts does not prove historical exposure absence. No alerts, credentials, incidents, or host settings were changed by this documentation pass. Security fixes remain separate protected PRs.
 
-Next admissible actions: publish the RTC-Evolution ordered-context review, #94 SkillHub discovery receipt and refreshed #207 receipt through a reviewable PR; after protected landing and Robyn's acceptance, close #94 on its bounded discovery criterion. Build and validate the FourWsValidator-backed contributor/review receipt check; do not activate it in branch protection until the reviewed workflow is merged and its exact provider context is verified. Patch only supported dependency vulnerabilities in a separate PR. Keep NLTK #96, CodeQL remediation, #211 provider repair, field work for #231 and RTC dispositions on their own gates.
+Next admissible actions: finish/check the required runs on #257 and #258, then leave both for Robyn's review and approval; #207 and #94 remain open until their reviewed receipts land and Robyn accepts them. Build and validate the FourWsValidator-backed contributor/review receipt check in a separate protected PR; do not add it to branch protection until reviewed, merged, and its exact provider context is verified. Keep NLTK #96, remaining CodeQL remediation, #211 provider repair, field work for #231 and RTC dispositions on their own gates.
 
 Evidence boundary: this is a Cloud documentation checkpoint. It does not synchronize Local, write to Drive, deploy application/runtime changes, dismiss alerts, close #207, reopen/close #121, or establish breach exploitation/recovery or incident resolution.
 
