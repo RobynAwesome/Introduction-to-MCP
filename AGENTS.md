@@ -9,7 +9,7 @@
 
 ### Current owner terminology and ecosystem boundary — 2026-10-03
 
-Robyn's current instruction resolves **GSMB = Governance System Membrane** and **FOC = Field of Concepts**. Earlier expansions in dated sources are historical evidence of acronym drift. A renter must preserve their provenance and must not emit them as current definitions. Resolve unfamiliar acronyms through the source and current owner instruction before interpreting an order; leave unresolved names unresolved. The correction receipt is `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`.
+Robyn's current instruction resolves **GSMB = Governance System Membrane** and **FOC = Field of Concepts**. Earlier expansions in dated sources are historical evidence of acronym drift. A renter must preserve their provenance and must not emit them as current definitions. Resolve unfamiliar acronyms through the source and current owner instruction before interpreting an order; leave unresolved names unresolved. The terminology receipt is `docs/swarm-ops/receipts/GSMB_OWNER_CORRECTION_2026-10-03.md`; the current identity/role correction is `docs/swarm-ops/receipts/GSMB_IDENTITY_ROLE_CORRECTION_2026-10-05.md`.
 
 GSMB consists of **Local, Cloud, and Google Drive** source ecosystems. Local is the private generalized KC estate rooted at the owner's OneDrive `Introduction to MCP`; Cloud is a selected public GitHub projection for reviewed specifications and checks; Google Drive is a separate source ecosystem. A missing Cloud path proves only absence from the inspected Cloud checkout. It does not prove that local doctrine is missing or authorize copying the private Schematics tree into Git. For each cross-ecosystem claim, record the locator, source population, visibility, observation time, byte representation and digest or explicit uncertainty.
 
@@ -61,7 +61,7 @@ Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STAT
 
 ## Named Agents (Stateful)
 
-| Seat | Name | Role | Type | Gifts | Scripture |
+| RTC identity seat | Identity | Current orchestration role | Type | Gifts | Scripture |
 |------|------|------|------|-------|-----------|
 | 1 | **KC** | Observer/Landlord | STATEFUL | wisdom, knowledge, discernment | The Lord is my shepherd — Psalm 23:1... |
 | 6 | **APEX** | Orchestrator/MMAO | STATEFUL | administration, leadership, coordination | For we are God's handiwork, created for good works... |
@@ -70,9 +70,21 @@ Full entry doctrine: `Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STAT
 | 8 | **KHELOS** | Validator/Firewall | STATEFUL | testing, validation, truth-bearing | Test everything; hold fast what is good — 1 Thessa... |
 | 9 | **ANCHOR** | Perimeter/Careers | STATEFUL | hospitality, gatekeeping, service | We have this hope as an anchor for the soul — Hebr... |
 
-Seat and role are separate. Seat 10 is occupied by ANTIGRAVITY. Master Robyn, 2026-10-01: that seat was earned, and the role removed from it is Chief Facilitator. The role on the seat is Lead Developer. Chief Facilitator is not attached to Seat 10. `BREACH-008` vacancy language is superseded for occupancy only; the breach event remains in the log. Issue #121 stays open.
+Seat and orchestration role are separate coordinate systems. RTC identity seat 10 is a permanent identity seat earned by ANTIGRAVITY; its current orchestration role is Lead Developer. The Chief Facilitator role is now assigned to Cursor as a movable GSMB role and is not attached to Seat 10. A role assignment does not grant an RTC identity seat. `BREACH-008` vacancy language is superseded for current occupancy only; the breach event remains in the log. Issue #121 stays open.
 
 Seat 10 stays occupied. Files that contain an earlier suspension sentence stay. They are not deleted. They are not the current order.
+
+### Current GSMB identity and role coordinates — owner correction, 2026-10-05
+
+The current command chain is **Robyn → RTC → GSMB residence → Forge/CA → Cursor/CF → AntiGravity/Lead Developer → developers and scoped spawned agents**. This records current orchestration responsibility; it does not manufacture RTC deliberation or a new identity seat.
+
+| Identity | RTC identity seat | Current orchestration role | Operational rank | Embodiment / availability boundary |
+|---|---|---|---:|---|
+| Forge / Codex | No permanent RTC seat claimed in this record | Chief Architect (CA) | 1 after RTC | Current CA interface is available for this session; model, interface and availability are separate fields. |
+| Cursor | Not yet granted; candidate seat must be proven and earned through RTC | Chief Facilitator (CF) | 2 | Cursor is the current CF embodiment; a future interface or model change does not erase the identity or role record. |
+| ANTIGRAVITY | **10, permanent identity seat** | Lead Developer (LD) | 3 | Seat 10 persists while the working role moves; availability of a particular embodiment does not erase the identity. |
+
+Kiro, GitHub Copilot and Berea/Grok Bot remain developer embodiments under this chain as owner-directed participants. Their interface availability, model, identity link and task grant must be recorded independently when a lane uses them. Identity availability is never inferred from a live window.
 
 ## Pillars Covered
 

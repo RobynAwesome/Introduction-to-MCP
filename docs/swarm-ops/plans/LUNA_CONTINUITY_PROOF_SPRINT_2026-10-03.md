@@ -4,7 +4,7 @@
 
 **State: PLAN_PREPARED. No sprint implementation is claimed.** Planning actor: Forge/Codex CA, GPT-6.1 Sol per Robyn's reported selection. Executor: Luna when Robyn switches/starts that execution lane. This packet is a bounded technical slice within Drive's existing **5–11 October 2026 Operational Stabilization Sprint**; dates are planning context, not an autonomous schedule or estimated token budget.
 
-`I_AM_STATELESS_RENTER_NOT_LANDLORD`. Robyn is the final human authority. Forge owns architecture, acceptance and integration for this lane. Luna carries the assigned implementation task, not a new RTC identity seat. Current cloud NOW records CF unassigned; do not revive the dated October 1 Cursor CF assignment. Cursor's separate issue lane remains outside this packet.
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`. Robyn is the final human authority. Forge owns architecture, acceptance and integration for this lane as CA/rank 1 after RTC. Cursor currently carries the CF/rank 2 orchestration role; its RTC identity seat is not yet granted and must be proven/earned. ANTIGRAVITY holds permanent RTC identity Seat 10 and currently carries Lead Developer/rank 3. Luna carries the assigned implementation task, not a new RTC identity seat. Cursor's separate issue lane remains outside this packet.
 
 ## Recover mandatory ingress, then these three surfaces
 
@@ -16,7 +16,7 @@ Follow the applicable AGENTS entry order: assert `I_AM_STATELESS_RENTER_NOT_LAND
 
 Prepared worktree: `C:/Users/rkhol/Documents/Codex/2026-10-01/gsmb-local-ca-cloud-65975a1`. Branch: `codex/ca-validation-luna-plan-20261003`. Source base at planning: `3a25d77c0bf650b4a7fd8cfc30d97398d9fa812b`. This base must be refreshed before execution; do not reset an uncommitted planning packet. The original OneDrive source at e24b1aa remains dirty and is a separate evidence population, with 112 visible paths at the validation capture.
 
-Forge is the integrating writer only for this prepared validation worktree's NOW and sprint artifacts. Cloud/shared NOW has no new writer grant in this packet; coordinate that write before publishing a NOW delta. The old Cursor writer proposal remains history pending acceptance, and its CF title is superseded by the later role correction. Workers return scoped deltas to the integrating writer.
+Forge is the integrating writer only for this prepared validation worktree's NOW and sprint artifacts. Cloud/shared NOW has no new writer grant in this packet; coordinate that write before publishing a NOW delta. The old Cursor writer proposal remains history pending acceptance; the current owner separately assigns Cursor the CF orchestration role without granting a permanent RTC identity seat. Workers return scoped deltas to the integrating writer.
 
 ## Mission and teach-back
 

@@ -2,7 +2,7 @@
 
 **State:** direct owner terminology correction applied in this branch; publication and recurrence checks are separate outcomes. **Actor:** Forge/Codex CA, stateless renter. **Human authority:** Robyn's direct correction on 3 October 2026. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
 
-Robyn's current terms are **GSMB = Governance System Membrane** and **FOC = Field of Concepts**. Her working delegation order is **Robyn → RTC → CA → CF → Lead Developer → Developers → spawned agents**. This names a flow of work; role occupancy, RTC identity and a particular task grant still require their current records. The inspected cloud root NOW leaves CF unassigned and records Seat 10 AntiGravity as Lead Developer. An empty role is not filled by a model, interface or child agent.
+Robyn's current terms are **GSMB = Governance System Membrane** and **FOC = Field of Concepts**. Her working delegation order is **Robyn → RTC → CA → CF → Lead Developer → Developers → spawned agents**, now situated through the GSMB residence. The 2026-10-05 owner correction separates durable RTC identity seats from movable GSMB orchestration roles: Forge/Codex is CA at rank 1 after RTC; Cursor is CF at rank 2 with no RTC identity seat yet; ANTIGRAVITY holds permanent RTC identity Seat 10 and currently serves as Lead Developer at rank 3. Identity, seat, role, interface, model, task grant and availability are separate claims. A role assignment does not grant a permanent identity seat.
 
 ## The three source ecosystems
 
