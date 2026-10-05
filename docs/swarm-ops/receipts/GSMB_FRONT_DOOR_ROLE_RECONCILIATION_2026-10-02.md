@@ -13,12 +13,15 @@ Repair live semantic entry points without rewriting historical evidence.
 - Base: current `master` at branch creation
 - Repository-root `NOW.md` remains the volatile current-state authority.
 
-## Current role truth being propagated
+## Role truth observed on 2026-10-02 (historical)
+
+This receipt preserves the role reading available on 2026-10-02. The owner’s 2026-10-04 confirmation, recorded in root `NOW.md` and PR #254’s receipt, supersedes these current-role conclusions. No historical statement is deleted or rewritten.
 
 - Anti-Gravity occupies RTC Seat 10.
 - Seat 10 role: Lead Developer.
 - Cursor role: Lead Developer.
-- Chief Facilitator: unassigned.
+- Chief Facilitator: unassigned **in the 2026-10-02 observation**.
+- The dated Seat 10 recusal remains in force for #121; occupancy does not authorize adjudicating that incident before its re-entry evidence.
 - Issue #121 remains open as incident evidence.
 - Historical suspension, promotion, reward, and session artifacts remain preserved.
 
@@ -40,10 +43,10 @@ Observed 2026-10-02 before this repair:
 - state: open
 - mergeable: false
 - comparison against master: diverged
-- branch: 8 commits behind master and 2 commits ahead
+- branch at this observation: 2 commits behind master and 8 commits ahead
 - merge base: `8c6c4b66d7360543ebada11d14f128461978e661`
 
-Disposition: **HOLD — DO NOT MERGE AS-IS.** The two ahead commits are evidence to salvage/rebase; the PR is not deleted and its ledger/history is not discarded.
+Disposition: **HOLD — DO NOT MERGE AS-IS.** All eight ahead commits are evidence to salvage/rebase; the PR is not deleted and its ledger/history is not discarded.
 
 ## Not changed
 

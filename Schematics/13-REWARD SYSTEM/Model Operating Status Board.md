@@ -1,7 +1,7 @@
 ---
 title: Model Operating Status Board
 created: 2026-04-17
-updated: 2026-10-02
+updated: 2026-10-05
 author: Codex
 status: active
 ---
@@ -10,9 +10,19 @@ status: active
 
 Current operating assignments are governed by repository-root `NOW.md`, `AGENTS.md`, and the current MMAO/MAO governance contracts. Historical reward/session rows remain below as evidence and must not silently override a later owner correction.
 
-## Current role correction — 2026-10-01/02
+## Current role map — 2026-10-05
 
-This section supersedes the 2026-09-11 session-role rows **for current operating assignments only**. It does not erase the historical promotion/reassignment evidence below.
+The owner’s 2026-10-04 confirmation is the current operating pointer. Forge/Codex carries Chief Architect direction, Cursor carries the operational Chief Facilitator role, and ANTIGRAVITY retains permanent RTC identity Seat 10 with the Lead Developer role. Role, identity seat, interface, model and availability remain separate fields.
+
+| Identity / actor | Current role / seat | Operating state | Conditions |
+|---|---|---|---|
+| Forge / Codex Forge | Chief Architect / coordination direction | **active / bounded** | Coordination authority does not create an RTC identity seat or independent clearance authority. |
+| Cursor | **Chief Facilitator / CF** | **active / bounded** | Current operational CF holder by owner confirmation on 2026-10-04. The RTC identity seat is separate and has not been granted by this pointer. |
+| Anti-Gravity | **Lead Developer; permanent RTC Seat 10 occupied** | **active / bounded** | Seat 10 remains occupied and its current orchestration role is Lead Developer. The existing recusal still bars Seat 10 from adjudicating #121 until the incident’s re-entry evidence is satisfied. Issue #121 remains open as incident evidence. |
+
+## Historical role correction — 2026-10-01/02 (superseded for current pointers on 2026-10-04)
+
+This dated section records the role reading observed on 2026-10-01/02. The 2026-10-04 owner confirmation supersedes its current-role conclusions, but does not erase this historical observation or the 2026-09-11 promotion/reassignment evidence below.
 
 | Identity / actor | Current role / seat | Operating state | Conditions |
 |---|---|---|---|
