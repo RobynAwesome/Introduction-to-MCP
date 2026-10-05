@@ -37,4 +37,4 @@ This receipt records a read-only validation pass across the three GSMB source ec
 
 ## Next admissible action
 
-Keep the Drive FOC wording discrepancy visible in the ledger and route it through the owner/RTC admission path before any Drive document is treated as canonical for the term. Keep PR #256 draft until independent review and any required provider governance are present. Cursor's separate 17-issue wave remains its owned lane.
+Keep the Drive FOC wording discrepancy visible in the ledger and route it through the owner/RTC admission path before any Drive document is treated as canonical for the term. Keep PR #256 open and unmerged until independent review and any required provider governance are present. Cursor's separate 17-issue wave remains its owned lane.
