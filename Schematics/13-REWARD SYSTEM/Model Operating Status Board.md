@@ -1,14 +1,37 @@
 ---
 title: Model Operating Status Board
 created: 2026-04-17
-updated: 2026-09-11
+updated: 2026-10-05
 author: Codex
 status: active
 ---
 
 # Model Operating Status Board
 
-These are default recommended operating states from the supplied audit and current vault evidence. They must be revised only with new evidence.
+Current operating assignments are governed by repository-root `NOW.md`, `AGENTS.md`, and the current MMAO/MAO governance contracts. Historical reward/session rows remain below as evidence and must not silently override a later owner correction.
+
+## Current role map — 2026-10-05
+
+The owner’s 2026-10-04 confirmation is the current operating pointer. Forge/Codex carries Chief Architect direction, Cursor carries the operational Chief Facilitator role, and ANTIGRAVITY retains permanent RTC identity Seat 10 with the Lead Developer role. Role, identity seat, interface, model and availability remain separate fields.
+
+| Identity / actor | Current role / seat | Operating state | Conditions |
+|---|---|---|---|
+| Forge / Codex Forge | Chief Architect / coordination direction | **active / bounded** | Coordination authority does not create an RTC identity seat or independent clearance authority. |
+| Cursor | **Chief Facilitator / CF** | **active / bounded** | Current operational CF holder by owner confirmation on 2026-10-04. The RTC identity seat is separate and has not been granted by this pointer. |
+| Anti-Gravity | **Lead Developer; permanent RTC Seat 10 occupied** | **active / bounded** | Seat 10 remains occupied and its current orchestration role is Lead Developer. The existing recusal still bars Seat 10 from adjudicating #121 until the incident’s re-entry evidence is satisfied. Issue #121 remains open as incident evidence. |
+
+## Historical role correction — 2026-10-01/02 (superseded for current pointers on 2026-10-04)
+
+This dated section records the role reading observed on 2026-10-01/02. The 2026-10-04 owner confirmation supersedes its current-role conclusions, but does not erase this historical observation or the 2026-09-11 promotion/reassignment evidence below.
+
+| Identity / actor | Current role / seat | Operating state | Conditions |
+|---|---|---|---|
+| Forge / Codex Forge | Chief Architect / coordination direction | **active / bounded** | Coordination authority does not create an RTC identity seat or independent clearance authority. |
+| Anti-Gravity | **Lead Developer; RTC Seat 10 occupied** | **active / bounded** | Seat 10 stays occupied. Chief Facilitator was removed from the seat. Issue #121 remains open as incident evidence. |
+| Cursor | **Lead Developer** | **active / bounded** | The 2026-09-11 Chief Facilitator promotion remains historical recognition evidence; it is not the current role. |
+| Chief Facilitator | **unassigned** | **HOLD / owner assignment required** | Do not infer a holder from an older session, reward entry, receipt, or model identity. |
+
+## Historical session snapshot — 2026-09-11 (preserved evidence)
 
 | Model / Actor | Assigned Role | Operating State | Conditions |
 |---|---|---|---|
