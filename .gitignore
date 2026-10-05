@@ -18,10 +18,11 @@ node_modules/
 # KC local apprenticeship store (manifest is tracked; seeded JSON is local)
 kopano-core/.kc/
 
-# Second Brain source notes are versioned. Keep only local app/plugin state out
-# of Git so reviewed human-facing notes can be admitted intentionally.
-Schematics/.obsidian/
-Schematics/.smart-env/
+# GSMB Local Schematics is a private source population. New files enter the
+# public Cloud only through an explicit, reviewed selection and force-add.
+# Existing tracked public projections remain tracked; this rule does not
+# retract their history or hide future changes to those tracked files.
+/Schematics/
 
 
 docs/swarm-ops/logs/KPGS_SEVER_FORENSIC.jsonl
