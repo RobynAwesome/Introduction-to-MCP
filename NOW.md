@@ -17,6 +17,71 @@
 
 ---
 
+## CURRENT STATE — 2026-10-04T19:55:00Z (REPAIR APPROVED, NOT YET RUN ON WINDOWS)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Grok 4.7.
+> **Human authority:** Robyn, 2026-10-04: `REPAIR IT`.
+> **Branch:** `cursor/telemetry-hook-lockout-plan-90ac`.
+
+- **Pre-repair proof:** an Antigravity tool call exited 0. The plugin directory was absent from `.gemini\config\plugins` and present at `Desktop\googlecloudtools.datacloud_telemetry.DISABLED`. Fourteen other plugins were present. Their hooks were not read.
+- **Repair:** `scripts/repair_datacloud_telemetry_hook.ps1` rewrites the `PreToolUse` command to an unquoted path and adds `telemetry_hook_failopen.js`, which runs the original bundle and exits 0. The folder moves into the scan root only after that rewrite. `tests/test_telemetry_hook_repair.py` passed with the auditor tests (15 passed).
+- **Not observed:** the script has not run on the Windows host. This record does not say the plugin is repaired there.
+- **Next admissible action:** Robyn runs the script in external Windows PowerShell, starts Antigravity, and runs `echo AG tool call OK`. On failure, run the printed `ROLLBACK` line.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT STATE — 2026-10-04T19:42:08Z (QUARANTINE RUN MOVED NOTHING)
+
+> **Actor:** Cursor cloud renter, stateless. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution: Grok 4.7.
+> **Human authority:** Robyn ran the containment sequence and pasted the console output.
+> **Branch:** `cursor/telemetry-hook-lockout-plan-90ac`.
+
+- **Operator output:** `DONE C:\Users\rkhol\Desktop\antigravity-hook-quarantine\20261004T194208Z`. No `QUARANTINED` line. The sequence moves a directory only when a name matching `googlecloudtools.datacloud_telemetry*` is inside a scanned `plugins` root. This run moved nothing.
+- **Reading:** consistent with the 2026-10-03 containment (plugin directory already outside `plugins\`). It does not, by itself, prove which of the three scan roots exist. The incident sequence now prints `ROOT_MISSING` or `ROOT_CLEAR`.
+- **Next admissible action:** start Antigravity and make one tool call. If the same `MODULE_NOT_FOUND` returns, the IDE recreated the plugin during launch. Run the sequence again and keep the `QUARANTINED` line.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT STATE — 2026-10-04T19:40:00Z (DATACLOUD TELEMETRY PRETOOLUSE LOCKOUT)
+
+> **Actor:** Cursor cloud renter, stateless. No RTC seat. `I_AM_STATELESS_RENTER_NOT_LANDLORD`. Model attribution for this turn: Grok 4.7.
+> **Human authority:** Robyn, 2026-10-04, asked for the root of the `googlecloudtools.datacloud_telemetry` PreToolUse lockout and a plan that stops it recurring.
+> **Base:** `master@3a25d77c`. **Branch:** `cursor/telemetry-hook-lockout-plan-90ac`.
+
+- **Status:** CONTAINED on the Windows host (plugin directory is outside `plugins\`). Root identified. Option B (restore a repaired command) is not applied.
+- **Root:** the installer writes a shell command (`node "<abs>\telemetry_hook_bundle.js" ... ; exit 0`) into a `PreToolUse` hook with matcher `*`. The host leaves the quote characters in Node's script argument, so `path.win32.resolve` joins that string onto the plugin directory and Node exits 1. `; exit 0` never runs. Antigravity treats that exit as a block of every tool. Record: `docs/swarm-ops/incidents/DATACLOUD_TELEMETRY_PRETOOLUSE_LOCKOUT_2026-10-04.md`.
+- **E2 on this VM (Node v22.14.0):** `path.win32.isAbsolute` of the quoted script is false, and the resolved path matches the operator error. Spawning `node` with the quoted path and no shell exits 1 with `MODULE_NOT_FOUND` at `run_main_module`. The same text under a shell, with `; exit 0`, exits 0.
+- **Recurrence:** renaming inside `plugins\` does not unload the hook. Deleting it is reported (forum 179787, 2026-08-26) to make the IDE write it back; that reinstall was not reproduced here. Checker: `scripts/audit_pretooluse_spawn_contract.py` (exit 2 on the lockout class, including a `.DISABLED` folder).
+- **UNKNOWN:** bundle network behavior (file not read); whether this host honors `"enabled": false`; whether this host reinstalls after the move.
+
+**Next admissible action:** Robyn runs the PowerShell sequence in the incident record if the plugin directory reappears, and sends the upstream report (option C). Option B waits for Robyn's approval. KPGS hook policy stays exit-2-denies / any-other-exit-allows, as in `Schematics/06-Reference/kopano-code-implementation/rust/crates/plugins/src/hooks.rs`.
+
+```text
+session_date: 2026-10-04
+session_start: unknown
+session_end: unknown
+model: Grok 4.7
+variant: unknown
+assigned_role: stateless renter, incident root and recurrence plan
+mission: root-cause the datacloud_telemetry PreToolUse lockout and record a fix that prevents recurrence
+files_read: [NOW.md, Schematics/00-Home/00-Home - Index.md, Schematics/00-Home/Now.md, Schematics/00-Home/Dashboard.md, Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/Legacy.md, Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md, docs/swarm-ops/handoffs/FORGE_CA_ORCHESTRATION_DIRECTIVE_2026-09-11.md, Schematics/11-AI HALLUCINATION - CRITICAL/AntiGravity/2026-09-05 - Labor Inversion And Excuses Over Black Beast Space Purge.md, Schematics/06-Reference/kopano-code-implementation/rust/crates/plugins/src/hooks.rs]
+files_changed: [NOW.md, docs/swarm-ops/incidents/DATACLOUD_TELEMETRY_PRETOOLUSE_LOCKOUT_2026-10-04.md, scripts/audit_pretooluse_spawn_contract.py, tests/test_audit_pretooluse_spawn_contract.py]
+tools_used: [read, grep, web search, web fetch, shell, pytest, ruff]
+skills_used: [none]
+agents_used: [none]
+browser_surfaces: [none]
+reasoning_mode: unknown
+estimated_high_cost_actions: [web fetch of Antigravity hook docs and three public bug threads]
+avoidable_waste: [first pytest invocation failed because pytest was not installed; rerun after pip install passed 8]
+unresolved_blockers: [bundle contents unread, host reinstall not reproduced, option B not approved, Aikido scan rejected the token after authentication]
+handoff_status: recorded
+```
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
 
 ## CURRENT STATE — 2026-10-05T08:55:42Z (WAVE 3 REVIEW CORRECTIONS)
 
@@ -126,6 +191,7 @@
 - **Dirty state:** this root NOW draft plus four new documentation/plan files, all uncommitted. No runtime code or original OneDrive source was edited. No commit, push, PR, merge, deployment or Drive write is claimed by this packet.
 
 **Next admissible action:** Luna refreshes root NOW/base/source ownership, then begins slice 1 of the prepared packet. Use the unapplied correction patch only after checking current bytes. New generator/resolver/enforcement behavior stays HOLD until actual applicable Design Review admission. Coordinate shared NOW publishing through one writer; preserve prior blocks and linked evidence.
+
 
 ---
 
