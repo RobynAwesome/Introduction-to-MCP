@@ -12,7 +12,6 @@ on:
     types: [created, edited, deleted]
 
 permissions:
-  contents: read
   pull-requests: read
   issues: read
 
@@ -27,11 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check out trusted base revision
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ github.event.pull_request.base.sha || github.sha }}
-          persist-credentials: false
+      - name: Fetch trusted base revision
+        env:
+          TRUSTED_BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+        run: |
+          git init --quiet
+          git remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git fetch --quiet --no-tags --depth=1 origin "$TRUSTED_BASE_SHA"
+          git checkout --quiet --detach FETCH_HEAD
 
       - name: Validate current pull-request records
         env:
