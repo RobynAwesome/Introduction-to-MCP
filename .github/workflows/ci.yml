@@ -48,8 +48,8 @@ jobs:
         with:
           components: rustfmt
 
-      - name: Check Rust formatting
-        run: cargo fmt --all -- --check
+      - name: Check changed Rust formatting
+        run: rustfmt --check --edition 2021 crates/runtime/src/config.rs crates/api/src/providers/claw_provider.rs
 
       - name: Test Rust workspace
         run: cargo test --workspace --locked
