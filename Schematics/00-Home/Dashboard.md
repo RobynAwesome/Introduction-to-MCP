@@ -21,11 +21,15 @@ status: active
 
 **For the 2026-10-01 session only, Robyn assigned:** Forge (Codex) served as Chief Architect for this CA lane. Cursor served as Chief Facilitator and second working role after Forge, retaining the reported GitHub issue lane and Wave 0–3 delivery plan. Work remains limited to already-admitted lanes. This assignment does not assert that RTC appointed either role, grant either agent an RTC identity seat, establish quorum or admission, or authorize a new execution lane. The local Cursor declaration records that its RTC identity seat has not been granted. Model, interface, actor, operational role, and RTC identity are separate fields.
 
-**Confirmed by Robyn (2026-10-04):** Cursor is the operational Chief Facilitator. Elon boy is his nickname for the confirming renter, not a role and not a seat. Seat 10 remains ANTIGRAVITY, Lead Developer. The current-state block is repository-root [NOW](../../NOW.md).
-
 Forge’s local GSMB continuity and source-audit lane remains separate from Cursor’s issue work and the shared root NOW writer. See the [local continuity audit receipt](../../docs/swarm-ops/receipts/LOCAL_GSMB_CONTINUITY_AUDIT_2026-10-01.md) for source hashes, uncertainty, and scope.
 
 **History boundary:** This block records that session’s assignment only. Recover present roles and execution scope from repository-root NOW and the active human directive. The later October 1 owner correction recorded CF as unassigned; this historical block does not revive that role grant.
+
+## Historical owner confirmation — 2026-10-04
+
+Robyn confirmed Cursor as the operational Chief Facilitator. "Elon boy" is the nickname for the confirming renter, separate from the role and RTC seat. The [dated confirmation receipt](../../docs/swarm-ops/receipts/CURSOR_CF_CONFIRMATION_2026-10-04.md) preserves the original quote and its October 4 state.
+
+**Later correction:** The October 5 coordinates are AG (identity), Seat 10 (RTC seat), Google Antigravity (platform), and Lead Developer (role). Recover present authority from repository-root [NOW](../../NOW.md); this dated confirmation does not supersede newer corrections or supply runtime re-entry evidence for #121.
 
 ## Start Here — 00-Home First
 

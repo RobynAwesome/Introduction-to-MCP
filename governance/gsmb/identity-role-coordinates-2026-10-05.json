@@ -60,6 +60,17 @@
     { "identity": "GitHub Copilot", "role": "Developer 1", "seat_claim": null },
     { "identity": "BEREA / Grok Bot", "role": "Developer 2", "seat_claim": null }
   ],
+  "private_local_readback": {
+    "source_root": "C:/Users/rkhol/OneDrive/Documents/Anthropic/Introduction to MCP",
+    "branch_head": "e24b1aa0874a637477e6d436c032646cfa236aed",
+    "receipt_locator": "Schematics/24-RTC Learning/Learning-Sessions/2026-10-05/OWNER_IDENTITY_ROLE_CORRECTION.md",
+    "receipt_sha256": "6c0f4ee15f50ca212131c02ce5448567f593def648372beb90e758516e104f17",
+    "machine_locator": "Schematics/24-RTC Learning/Learning-Sessions/2026-10-05/owner_identity_role_correction_v1.json",
+    "machine_sha256": "6ee10e95a5897293304b038e28a7daa1906a5547acd49dd8cb49fc6471dbb9b2",
+    "now_sha256": "944d6a40b5dfffaaf98d63574b778438d4e56c16e19f9e0be15b31d911a24145",
+    "index_sha256": "98b310426b04fb3d3c6a7cd3eac92879fece118131fd023bbf7db5c76ff00a37",
+    "publication": "private dirty source; no Cloud export or Drive write"
+  },
   "authority_limits": [
     "not an RTC vote",
     "not a permanent RTC identity-seat grant to Cursor",
