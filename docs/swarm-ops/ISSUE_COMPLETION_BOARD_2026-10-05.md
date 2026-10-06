@@ -1,11 +1,11 @@
-## 2026-10-07 Cloud status — observed 2026-10-06T22:22:03Z
+## 2026-10-07 Cloud status — observed 2026-10-06T22:28:47Z
 
 Current Cloud master remains `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9` at this handoff. Earlier rows are historical; this addendum distinguishes completed audits from issue completion.
 
 | Issue / lane | Current tracker state | Current evidence and next action |
 |---|---|---|
 | #94 | CLOSED / COMPLETED by owner | Discovery objective was bounded to live registry discovery. Follow-up listing freshness/publication remains separate. |
-| #207 | CLOSED / COMPLETED by owner | Current branch protection read at 22:15Z still lacks the Four Ws context and requires zero approvals. Preserve owner disposition; trusted-base audit is in progress; no enforcement claim. |
+| #207 | CLOSED / COMPLETED by owner | Preserve the tracker disposition. The 22:26Z audit found the current workflow executes PR-controlled code with a read-only token present; branch protection omits the context and requires zero approvals. No confirmed leak/breach. An app-owned check on the latest PR head is needed before enforcement; no settings changed. See [audit receipt](receipts/ISSUE_207_TRUSTED_GATE_AUDIT_2026-10-07.md). |
 | #96 (Dependabot) | OPEN / HIGH | NLTK 3.10.3 remains within the vulnerable range and provider/upstream report no patched release. Keep open pending a published fix. |
 | #133–#138 (Dependabot) | OPEN | Bounded fixability/exposure triage delegated; do not dismiss or imply fixed before provider reread. |
 | #110 | OPEN / UI remediation in progress | Current Cloud audit found the <=1320px drawer, <=980px hamburger, and backend-unavailable Proof/CI state missing; canonical context host shows IONOS not-connected page. Responsive/empty-state fix is in a clean branch; domain and deployment remain blocked. See [receipt](receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md). |

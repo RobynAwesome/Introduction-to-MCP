@@ -1,4 +1,4 @@
-## CURRENT CLOUD COORDINATION — 2026-10-06T22:22:03Z / 2026-10-07 SAST
+## CURRENT CLOUD COORDINATION — 2026-10-06T22:28:47Z / 2026-10-07 SAST
 
 **WHO:** Codex Forge, stateless renter coordinating as CA; no RTC identity seat is claimed. Delegated renters have separate task roles. Robyn retains repository ownership and RTC authority. For identity coordinates, AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
 
@@ -12,12 +12,13 @@
 
 - [#110 Studio reconciliation receipt](docs/swarm-ops/receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md): the four-column desktop view and seven mode inventory are present. The wireframe's <=1320px right-rail drawer and <=980px hamburger are missing; Proof/CI lack truthful unavailable states without the backend. The canonical context hostname currently serves an IONOS not-connected page. The audit renter has revalidated current `master` and is implementing only those UI gaps with tests in a separate worktree. No domain or deployment change.
 - [#158 booking conflict receipt](docs/swarm-ops/receipts/ISSUE_158_BOOKING_CONFLICT_2026-10-07.md): #158 asks to remove booking calls-to-action from the active root while target Bookit #42 asks to keep booking links in the hero and navigation. No implementation can satisfy both. No root or live-surface change; owner disposition is needed.
+- [#207 Four Ws gate audit receipt](docs/swarm-ops/receipts/ISSUE_207_TRUSTED_GATE_AUDIT_2026-10-07.md): the current workflow executes the PR merge-tree script with a read-only token present, so the check is not a trusted decision source. Current protection still omits that context and requires zero approvals. The audit found no confirmed leak or breach; same-repo Actions secret policy was not inspected. A trusted check needs app-owned execution publishing to the latest PR head; no branch-protection setting changed.
 - PR #257's previously reported preview results remain preview-only. The documentation branch `codex/coordination-receipts-20261007` contains commit `9734ed0b6066b3227e52d37b01c34fc8b3edf2cc`; its KHELOS policy and whitespace checks passed against the active worktree index. The installed shared pre-commit launcher is Cygwin-bound and could not execute from this Windows worktree; no shared hook or persistent Git configuration was changed.
-- Trusted-base Four Ws gate audit and Dependabot #133–#138 triage are delegated read-only/in bounded branches. Until exact new receipts arrive, the prior 22:15Z live security counts remain the last confirmed observation: 32 open high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. No breach closure, secret rotation, settings change, merge, or deployment is claimed.
+- The trusted-base Four Ws gate audit is complete; Dependabot #133–#138 fixability/exposure triage remains in a separate bounded lane. Until a fresh provider readback, the prior 22:15Z live security counts remain the last confirmed observation: 32 open high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. No breach closure, secret rotation, settings change, merge, or deployment is claimed.
 
 ### Next admissible action
 
-Review the documentation PR once created; review the bounded #110 implementation PR when its tests and evidence are ready; obtain the owner decision needed to reconcile #158 and target #42; continue security triage and prepare a trusted-base Four Ws successor without changing branch protection. Re-read provider state before any completion or enforcement claim. Preserve Local, Cloud, and Drive as distinct populations.
+Review the documentation PR once created; review the bounded #110 implementation PR when its tests and evidence are ready; obtain the owner decision needed to reconcile #158 and target #42; continue dependency triage; and identify/approve the GitHub App and hosted worker needed for a trusted Four Ws check before changing branch protection. Re-read provider state before any completion or enforcement claim. Preserve Local, Cloud, and Drive as distinct populations.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 
