@@ -265,7 +265,7 @@ test("affected public page inline scripts remain syntactically valid", () => {
     "public/sovereign-sim/index.html",
   ]) {
     const source = readPage(page);
-    const scripts = [...source.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+    const scripts = [...source.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)];
     for (const [index, script] of scripts.entries()) {
       const attributes = script[1];
       const body = script[2];
