@@ -421,13 +421,32 @@ function compileANSO() {
 const FLUFF_WORDS = ['innovative','paradigm','groundbreaking','synergistic','seamless','cutting-edge','leverage','disruptive','holistic','scalable','ecosystem','best-in-class','world-class','next-generation','thought-leader','game-changing','deep-dive','pivot','robust','bleeding-edge','mission-critical','transformative','empowering','blockchain-powered','ai-driven','revolutionize','unprecedented'];
 function filterFluff() {
     const raw = document.getElementById('raw-script-input').value;
-    let clean = raw; let count = 0;
-    FLUFF_WORDS.forEach(word => {
-        const regex = new RegExp(word, 'gi');
-        const matches = clean.match(regex);
-        if (matches) { count += matches.length; clean = clean.replace(regex, `<span class="bg-red-500/30 text-red-300 px-1 rounded line-through">${word}</span>`); }
-    });
-    document.getElementById('clean-script-output').innerHTML = clean || '<span class="text-slate-500">No fluff detected. Clean script.</span>';
+    const output = document.getElementById('clean-script-output');
+    const fragment = document.createDocumentFragment();
+    const fluffPattern = new RegExp(`(${FLUFF_WORDS.join('|')})`, 'gi');
+    let count = 0;
+    let cursor = 0;
+
+    for (const match of raw.matchAll(fluffPattern)) {
+        const start = match.index;
+        fragment.appendChild(document.createTextNode(raw.slice(cursor, start)));
+        const highlight = document.createElement('span');
+        highlight.className = 'bg-red-500/30 text-red-300 px-1 rounded line-through';
+        highlight.textContent = match[0];
+        fragment.appendChild(highlight);
+        count++;
+        cursor = start + match[0].length;
+    }
+    fragment.appendChild(document.createTextNode(raw.slice(cursor)));
+
+    if (count === 0 && raw.length === 0) {
+        const empty = document.createElement('span');
+        empty.className = 'text-slate-500';
+        empty.textContent = 'No fluff detected. Clean script.';
+        fragment.appendChild(empty);
+    }
+    output.replaceChildren(fragment);
+
     document.getElementById('fluff-count').textContent = `${count} Fluff Detected`;
     document.getElementById('fluff-count').className = count > 0 ? 'text-[10px] font-mono bg-red-500/10 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded' : 'text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded';
 }
@@ -470,16 +489,28 @@ const terminalCmds = {
     'whoami': 'SSE: Kholofelo Robyn Rababalela | Role: CONSCIOUSNESS | Assertion: I_AM_STATELESS_RENTER_NOT_LANDLORD',
     'clear': 'CLEAR'
 };
+function appendTerminalLine(output, text, className) {
+    const line = document.createElement('div');
+    line.className = className;
+    line.textContent = text;
+    output.appendChild(line);
+}
+
 function runTerminalCmd() {
     const input = document.getElementById('terminal-input');
     const output = document.getElementById('terminal-output');
     const cmd = input.value.trim().toLowerCase();
     input.value = '';
     if (!cmd) return;
-    output.innerHTML += `<div class="text-emerald-400">$ ${cmd}</div>`;
-    if (cmd === 'clear') { output.innerHTML = '<div class="text-slate-500">Terminal cleared.</div><div class="text-emerald-400">$ _</div>'; return; }
+    appendTerminalLine(output, `$ ${cmd}`, 'text-emerald-400');
+    if (cmd === 'clear') {
+        output.replaceChildren();
+        appendTerminalLine(output, 'Terminal cleared.', 'text-slate-500');
+        appendTerminalLine(output, '$ _', 'text-emerald-400');
+        return;
+    }
     const response = terminalCmds[cmd] || `Command not found: ${cmd}. Type 'help' for available commands.`;
-    output.innerHTML += `<div class="text-blue-300">${response}</div>`;
+    appendTerminalLine(output, response, 'text-blue-300');
     output.scrollTop = output.scrollHeight;
 }
 </script>
