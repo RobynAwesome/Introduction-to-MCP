@@ -1,3 +1,22 @@
+## 2026-10-07 Cloud status revalidation — observed 2026-10-06T22:15:44Z
+
+This is a dated addendum; earlier observations below remain historical. Current Cloud master is `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. PRs #258, #259 and #257 are merged by Robyn at `608d8c65`, `ea793656` and `cf6cdaa`, respectively. PR #257's checks and Vercel preview contexts passed; they are not production evidence.
+
+| Issue / lane | Current tracker state | Current evidence and next action |
+|---|---|---|
+| #94 | CLOSED / COMPLETED after owner merge of PR #257 | Live SkillHub query returned four entries. The bounded discovery objective is met; a Jennifer listing/source version gap and absent standalone PKA listing remain separate publication/freshness work. No full-catalog or publisher-verification claim. Closeout comment: [issue receipt](https://github.com/RobynAwesome/Introduction-to-MCP/issues/94#issuecomment-6026432635). |
+| #207 | CLOSED / COMPLETED by Robyn at `2026-10-06T21:32:38Z` | PR #259 landed, but current branch protection still requires 14 other contexts; Four Ws is not required and minimum approvals remain zero. Preserve the owner's tracker disposition; prepare a trusted-base successor gate and request owner review before any settings change. |
+| #96 (Dependabot alert) | OPEN / HIGH | `uv.lock` resolves NLTK 3.10.3; advisory's first patched version is null; upstream PR #3826 is a draft. Keep alert open; no pre-release pin. GitHub issue #96 is a distinct, closed issue. |
+| #110 | OPEN / audit in progress | Stale navigation pointer was already removed in merged PRs #111 and #248. Complete the current Studio/plan classification and validation; do not revive the historic branch. |
+| #158 | OPEN / decision conflict | Target #42 has current booking-priority direction and open draft PR #43. No live-surface change without owner disposition. |
+| #121 | CLOSED by Robyn | Runtime re-entry/restoration remains unproven; keep evidence separate from tracker disposition. |
+| #231 / #211 | OPEN / HOLD | No consented driver follow-up outcomes; no actual Azure OIDC/deployment proof. |
+
+Live security at this observation: 32 high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. The latter does not prove that no historical credential exposure occurred. No incident, alert, credential, provider setting, production deployment, or Google Drive state changed in this revalidation.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 # GSMB issue completion — 5 October 2026
 
 Actor: Forge / Codex CA, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
