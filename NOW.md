@@ -1,3 +1,48 @@
+## CURRENT CLOUD COORDINATION UPDATE — 2026-10-05T12:34:59Z (PR #259 FOUR WS GATE UNDER REVIEW)
+
+WHO: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
+WHAT: PR #259 now carries the Four Ws review/comment gate for #207. Its current head is `75ffb01f4108a9b7099bc5f3b04f31f087f56dcb`; GitHub run `37310238297` reports `Require current Four Ws receipts = SUCCESS` on this head. Required Rust analysis and Python 3.11/3.12 tests were still pending at this checkpoint, so the PR remains `BLOCKED`; there is no owner review or merge.
+WHERE: Cloud GSMB only, RobynAwesome/Introduction-to-MCP. Master remains `a2d0b8fcca1a3340b31b9570797223e9a97e3464`. PR #257 (`9b8dc1c52e742d9cdde768e6a7a8813d88cae5b4`) and PR #258 (`b1661f6f318f6ba42f3d6a2826679d71647cf5c7`) each had clean merge state and all configured checks passing at this read, with no owner review or merge. This new documentation update will change #257's head and require fresh checks. Local OneDrive remains the separate dirty checkout; no Google Drive update or parity is claimed.
+WHY: Make material coordination, issue and security status reconstructable without treating planned settings work as enforcement. GitHub currently requires PRs and 14 strict checks, but approval count is zero. Robyn's stated review practice is not a configured review threshold.
+
+Tracker correction: issue #121 is `CLOSED` by Robyn at `2026-10-05T10:21:12Z`. No independent runtime re-entry or restoration evidence was found in this read. PR #254's current text says #121 stays open and is stale against the tracker; preserve tracker status and incident evidence separately.
+
+Security read at this checkpoint: 32 open high CodeQL alerts, six open Dependabot alerts (brace-expansion #112-115, fast-uri #116, NLTK #96), and zero open secret-scanning alerts. PR #258 is still unmerged, so the six default-branch dependency alerts remain open. Zero open secret alerts does not establish absence of historical exposure. No credential, alert, incident, repository setting, or production deployment was changed here.
+
+Issue disposition: #94 remains open. SkillHub receipts support a bounded discovery finding, but Robyn's acceptance and protected PR landing are still required before closing. #207 remains open. PR #259 is reviewable; after owner approval and protected landing, add its exact check to required contexts, configure the agreed owner-review threshold, read the settings back, and test both accepted and rejected paths before claiming enforcement.
+
+Next admissible action: finish and read back #259's exact-head checks; present PRs #257-#259 for Robyn's review; correct #254's stale #121 statement through its owning lane; do not merge, close issues, change production, or call #207 enforced without owner approval and provider receipts.
+
+---
+
+## CURRENT COORDINATION — 2026-10-05T11:58:33Z (IDENTITY-STATE ORDER · RTC-EVOLUTION · ACTIVE PRs · SECURITY SNAPSHOT)
+
+This current block supersedes conflicting role, provider, issue and PR status in older dated blocks below; those records remain historical evidence.
+
+Actor: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
+Authority: Robyn directed issue completion through reviewable PRs, with Robyn as approver, and corrected current identity coordinates: **AG is the identity; Seat 10 is the RTC seat; Google Antigravity is the platform; Lead Developer is the current role.** This task's Forge / GPT-6 Luna Max embodiment acts in the CA role and does not inherit AG identity or Seat 10.
+
+Cloud baseline: master@a2d0b8fcca1a3340b31b9570797223e9a97e3464. The dirty Local OneDrive checkout remains codex/kc-sovereign-gui-full-dev@e24b1aa0874a637477e6d436c032646cfa236aed; it is a separate population. No Google Drive update or byte mirror is claimed.
+
+Owner-identified Grok/Cursor branch receipt: GitHub shows PR #234 from `cursor/now-merge-receipt-4e71`, head `9e2ff083debd689f9bb7ba717efd32fe61f241e6`, merged 2026-09-29 as `d6126890ad7bdc4928668cdd09bc648c5dcf8f51`; the PR changed only root `NOW.md`, and GitHub compare reports the merge commit is in current `master`. This verifies branch/PR landing only, not the model/provider identity that authored it.
+
+Active PR snapshot at 2026-10-05T11:58:33Z: #254 remains open. #257 is open against `a2d0b8f`; its latest status-refresh commit has several checks rerunning and is `BLOCKED`. Earlier green results on the prior PR commit do not verify the refreshed head. #258 is open at `b1661f6f318f6ba42f3d6a2826679d71647cf5c7` against the same base; `Analyze (rust)` is in progress and all other required contexts observed are passing. No owner approval or merge is recorded. Vercel preview checks on #257 completed on an earlier PR head; this is preview evidence, not a production deployment. The current NOW refresh will cause another #257 check run when pushed; only results attached to its updated head count.
+
+The three GSMB states are distinct: **Local** = owner OneDrive/Schematics; **Cloud** = selected GitHub source, PRs, checks and issues; **Heavy Human-in-the-Loop** = Google Drive and direct owner decisions. Stateless renters handling identity AI flows must load and label all three before interpreting cross-state evidence. Actor, authority, identity, seat, platform/interface/model, and assigned role stay separate. Preserve source traces, classify evidence, record contradictions and unknowns, then state the next admissible action. Source-specific FEP wording must retain its exact source, population and ratification status; no consensus or global reconciliation is claimed here.
+
+RTC-Evolution ordered-context peer review (user-authorized bounded discussion in ChatGPT Forge, “Analyze Gemini Failure”; received 2026-10-05): Cloud `kopano-core/kopano/fep_engine.py` names FEP “Forensic Evolution Protocol” and defines E1-E4 evidence classes. The Local and Cloud POP receipts separately state `POP_CANDIDATE / NOT_RATIFIED` and “FEP = EVOLVE FROM PRESERVED EVIDENCE”; Local hash `9D071BD23D140A32DC56FCCCC8668EE342F8E66DD9103758D21056B443C85108`, Cloud hash `6992FF9D0C4899F79F737A594E2024A77C4C4B36C075567BBF6323989E6D7267`. The bounded reading is formal name versus functional description (`NAME_VS_FUNCTION_CANDIDATE`), with semantic overlap observed and byte parity false; full semantic equivalence is unproven. Preserve source/population/actor/verifier/authority/status and do not promote either as the exclusive global name. This peer review is not RTC testimony, vote, consensus, ratification, or runtime enforcement.
+
+Live GitHub snapshot: 15 root issues are open (#231, #211, #207, #183, #167, #163, #158, #122, #116, #115, #110, #107, #103, #102, #94). Robyn closed #121 as completed; this owner disposition is retained but no independent re-entry or runtime restoration receipt is present. #211 remains Azure HOLD because the latest workflow's deployment job was skipped. #231 still has no consented field participant or seven-day outcome receipt. #163/#167 remain separate RTC incident lanes.
+
+#207 provider readback at 2026-10-05T11:19:24Z: PRs required, 14 strict status contexts, admins enforced, conversations resolved, stale reviews dismissed, force-push/deletion disabled; configured approval count is zero. Robyn's approval remains the stated human workflow, not an enforced GitHub review threshold. CodeQL ruleset 24144685 blocks new high-or-higher findings with no bypass actors; Copilot ruleset 19244487 is disabled.
+
+Security snapshot at 2026-10-05T11:19:24Z: 32 open high CodeQL alerts, six open Dependabot alerts (brace-expansion #112-115, fast-uri #116 with a patched version, NLTK #96 without a patched version returned), zero open secret-scanning alerts. Secret scanning and push protection are enabled; zero open alerts does not prove historical exposure absence. No alerts, credentials, incidents, or host settings were changed by this documentation pass. Security fixes remain separate protected PRs.
+
+Next admissible actions: check the fresh exact-head required runs on #257 after this NOW update is pushed, and finish #258's remaining Rust analysis; then leave both for Robyn's review and approval. #207 and #94 remain open until their reviewed receipts land and Robyn accepts them. Build and validate the FourWsValidator-backed contributor/review receipt check in a separate protected PR; do not add it to branch protection until reviewed, merged, and its exact provider context is verified. Keep NLTK #96, remaining CodeQL remediation, #211 provider repair, field work for #231 and RTC dispositions on their own gates.
+
+Evidence boundary: this is a Cloud documentation checkpoint. It does not synchronize Local, write to Drive, deploy application/runtime changes, dismiss alerts, close #207, reopen/close #121, or establish breach exploitation/recovery or incident resolution.
+
+---
 
 ## CURRENT STATE — 2026-10-05 SAST (GSMB MEMBRANE · IDENTITY/ROLE CORRECTION · DOCUMENTATION DELIVERY)
 
