@@ -21,6 +21,18 @@ const DEFAULT_INITIAL_BACKOFF: Duration = Duration::from_millis(200);
 const DEFAULT_MAX_BACKOFF: Duration = Duration::from_secs(2);
 const DEFAULT_MAX_RETRIES: u32 = 2;
 
+fn oauth_http_client_builder() -> reqwest::ClientBuilder {
+    reqwest::Client::builder()
+        .https_only(true)
+        .redirect(reqwest::redirect::Policy::none())
+}
+
+fn new_oauth_http_client() -> reqwest::Client {
+    oauth_http_client_builder()
+        .build()
+        .expect("OAuth HTTP client options are valid")
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum AuthSource {
     None,
@@ -108,6 +120,7 @@ impl From<OAuthTokenSet> for AuthSource {
 #[derive(Debug, Clone)]
 pub struct ClawApiClient {
     http: reqwest::Client,
+    oauth_http: reqwest::Client,
     auth: AuthSource,
     base_url: String,
     max_retries: u32,
@@ -120,6 +133,7 @@ impl ClawApiClient {
     pub fn new(api_key: impl Into<String>) -> Self {
         Self {
             http: reqwest::Client::new(),
+            oauth_http: new_oauth_http_client(),
             auth: AuthSource::ApiKey(api_key.into()),
             base_url: DEFAULT_BASE_URL.to_string(),
             max_retries: DEFAULT_MAX_RETRIES,
@@ -132,6 +146,7 @@ impl ClawApiClient {
     pub fn from_auth(auth: AuthSource) -> Self {
         Self {
             http: reqwest::Client::new(),
+            oauth_http: new_oauth_http_client(),
             auth,
             base_url: DEFAULT_BASE_URL.to_string(),
             max_retries: DEFAULT_MAX_RETRIES,
@@ -240,8 +255,11 @@ impl ClawApiClient {
         config: &OAuthConfig,
         request: &OAuthTokenExchangeRequest,
     ) -> Result<OAuthTokenSet, ApiError> {
+        config
+            .validate_token_endpoint()
+            .map_err(|message| ApiError::Auth(message.to_string()))?;
         let response = self
-            .http
+            .oauth_http
             .post(&config.token_url)
             .header("content-type", "application/x-www-form-urlencoded")
             .form(&request.form_params())
@@ -260,8 +278,11 @@ impl ClawApiClient {
         config: &OAuthConfig,
         request: &OAuthRefreshRequest,
     ) -> Result<OAuthTokenSet, ApiError> {
+        config
+            .validate_token_endpoint()
+            .map_err(|message| ApiError::Auth(message.to_string()))?;
         let response = self
-            .http
+            .oauth_http
             .post(&config.token_url)
             .header("content-type", "application/x-www-form-urlencoded")
             .form(&request.form_params())
@@ -642,13 +663,13 @@ struct ApiErrorBody {
 #[cfg(test)]
 mod tests {
     use super::{ALT_REQUEST_ID_HEADER, REQUEST_ID_HEADER};
-    use std::io::{Read, Write};
-    use std::net::TcpListener;
     use std::sync::{Mutex, OnceLock};
-    use std::thread;
     use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
-    use runtime::{clear_oauth_credentials, save_oauth_credentials, OAuthConfig};
+    use runtime::{
+        clear_oauth_credentials, save_oauth_credentials, OAuthConfig, OAuthRefreshRequest,
+        OAuthTokenExchangeRequest,
+    };
 
     use super::{
         now_unix_timestamp, oauth_token_is_expired, resolve_saved_oauth_token,
@@ -691,25 +712,6 @@ mod tests {
             manual_redirect_url: Some("https://console.test/oauth/callback".to_string()),
             scopes: vec!["org:read".to_string(), "user:write".to_string()],
         }
-    }
-
-    fn spawn_token_server(response_body: &'static str) -> String {
-        let listener = TcpListener::bind("127.0.0.1:0").expect("bind listener");
-        let address = listener.local_addr().expect("local addr");
-        thread::spawn(move || {
-            let (mut stream, _) = listener.accept().expect("accept connection");
-            let mut buffer = [0_u8; 4096];
-            let _ = stream.read(&mut buffer).expect("read request");
-            let response = format!(
-                "HTTP/1.1 200 OK\r\ncontent-type: application/json\r\ncontent-length: {}\r\n\r\n{}",
-                response_body.len(),
-                response_body
-            );
-            stream
-                .write_all(response.as_bytes())
-                .expect("write response");
-        });
-        format!("http://{address}/oauth/token")
     }
 
     #[test]
@@ -823,7 +825,7 @@ mod tests {
     }
 
     #[test]
-    fn resolve_saved_oauth_token_refreshes_expired_credentials() {
+    fn resolve_saved_oauth_token_rejects_http_without_mutating_credentials() {
         let _guard = env_lock();
         let config_home = temp_config_home();
         std::env::set_var("CLAW_CONFIG_HOME", &config_home);
@@ -837,17 +839,20 @@ mod tests {
         })
         .expect("save expired oauth credentials");
 
-        let token_url = spawn_token_server(
-            "{\"access_token\":\"refreshed-token\",\"refresh_token\":\"fresh-refresh\",\"expires_at\":9999999999,\"scopes\":[\"scope:a\"]}",
-        );
-        let resolved = resolve_saved_oauth_token(&sample_oauth_config(token_url))
-            .expect("resolve refreshed token")
-            .expect("token set present");
-        assert_eq!(resolved.access_token, "refreshed-token");
+        let error = resolve_saved_oauth_token(&sample_oauth_config(
+            "http://127.0.0.1/oauth/token".to_string(),
+        ))
+        .expect_err("HTTP token endpoint should be rejected");
+        assert!(matches!(
+            error,
+            crate::error::ApiError::Auth(message)
+                if message.contains("absolute HTTPS URL")
+        ));
         let stored = runtime::load_oauth_credentials()
             .expect("load stored credentials")
             .expect("stored token set");
-        assert_eq!(stored.access_token, "refreshed-token");
+        assert_eq!(stored.access_token, "expired-access-token");
+        assert_eq!(stored.refresh_token.as_deref(), Some("refresh-token"));
 
         clear_oauth_credentials().expect("clear credentials");
         std::env::remove_var("CLAW_CONFIG_HOME");
@@ -911,36 +916,46 @@ mod tests {
     }
 
     #[test]
-    fn resolve_saved_oauth_token_preserves_refresh_token_when_refresh_response_omits_it() {
-        let _guard = env_lock();
-        let config_home = temp_config_home();
-        std::env::set_var("CLAW_CONFIG_HOME", &config_home);
-        std::env::remove_var("ANTHROPIC_AUTH_TOKEN");
-        std::env::remove_var("ANTHROPIC_API_KEY");
-        save_oauth_credentials(&runtime::OAuthTokenSet {
-            access_token: "expired-access-token".to_string(),
-            refresh_token: Some("refresh-token".to_string()),
-            expires_at: Some(1),
-            scopes: vec!["scope:a".to_string()],
-        })
-        .expect("save expired oauth credentials");
-
-        let token_url = spawn_token_server(
-            "{\"access_token\":\"refreshed-token\",\"expires_at\":9999999999,\"scopes\":[\"scope:a\"]}",
+    #[tokio::test]
+    async fn oauth_token_sinks_reject_http_on_directly_constructed_config() {
+        let mut config = sample_oauth_config("http://127.0.0.1/oauth/token".to_string());
+        config.manual_redirect_url = Some("http://localhost:4545/callback".to_string());
+        assert_eq!(
+            config.manual_redirect_url.as_deref(),
+            Some("http://localhost:4545/callback")
         );
-        let resolved = resolve_saved_oauth_token(&sample_oauth_config(token_url))
-            .expect("resolve refreshed token")
-            .expect("token set present");
-        assert_eq!(resolved.access_token, "refreshed-token");
-        assert_eq!(resolved.refresh_token.as_deref(), Some("refresh-token"));
-        let stored = runtime::load_oauth_credentials()
-            .expect("load stored credentials")
-            .expect("stored token set");
-        assert_eq!(stored.refresh_token.as_deref(), Some("refresh-token"));
+        let client = ClawApiClient::from_auth(AuthSource::None);
+        let exchange_request = OAuthTokenExchangeRequest::from_config(
+            &config,
+            "authorization-code",
+            "state",
+            "pkce-verifier",
+            "http://localhost:4545/callback",
+        );
+        let error = client
+            .exchange_oauth_code(&config, &exchange_request)
+            .await
+            .expect_err("HTTP token endpoint should be rejected before exchange");
+        assert!(matches!(
+            error,
+            crate::error::ApiError::Auth(message)
+                if message.contains("absolute HTTPS URL")
+        ));
 
-        clear_oauth_credentials().expect("clear credentials");
-        std::env::remove_var("CLAW_CONFIG_HOME");
-        cleanup_temp_config_home(&config_home);
+        let refresh_request = OAuthRefreshRequest::from_config(
+            &config,
+            "refresh-token",
+            Some(vec!["scope:a".to_string()]),
+        );
+        let error = client
+            .refresh_oauth_token(&config, &refresh_request)
+            .await
+            .expect_err("HTTP token endpoint should be rejected before refresh");
+        assert!(matches!(
+            error,
+            crate::error::ApiError::Auth(message)
+                if message.contains("absolute HTTPS URL")
+        ));
     }
 
     #[test]

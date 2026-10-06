@@ -31,6 +31,29 @@ jobs:
       - name: Enforce DEPENDENCY_FIREWALL floors
         run: python scripts/kc_dependency_firewall_gate.py
 
+  rust-workspace:
+    name: Rust workspace
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Schematics/06-Reference/kopano-code-implementation/rust
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Check Rust formatting
+        run: cargo fmt --all -- --check
+
+      - name: Test Rust workspace
+        run: cargo test --workspace --locked
+
   lint-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
