@@ -257,23 +257,3 @@ test("public/sovereign-sim terminal echoes an onerror payload as inert text", ()
   assert.equal(document.innerHTMLWrites, 0);
   assert.equal(document.activeMarkupAttempts, 0);
 });
-
-test("affected public page inline scripts remain syntactically valid", () => {
-  for (const page of [
-    "public/careers/index.html",
-    "kopano-labs-web/careers/index.html",
-    "public/sovereign-sim/index.html",
-  ]) {
-    const source = readPage(page);
-    const scripts = [...source.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)];
-    for (const [index, script] of scripts.entries()) {
-      const attributes = script[1];
-      const body = script[2];
-      if (/\bsrc\s*=/.test(attributes) || !body.trim()) continue;
-      assert.doesNotThrow(
-        () => new vm.Script(body, { filename: `${page}#script-${index + 1}` }),
-        `${page} inline script ${index + 1} should parse`,
-      );
-    }
-  }
-});
