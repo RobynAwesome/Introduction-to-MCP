@@ -1,3 +1,27 @@
+## CURRENT CLOUD COORDINATION — 2026-10-06T22:22:03Z / 2026-10-07 SAST
+
+**WHO:** Codex Forge, stateless renter coordinating as CA; no RTC identity seat is claimed. Delegated renters have separate task roles. Robyn retains repository ownership and RTC authority. For identity coordinates, AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
+
+**WHAT:** Continue issue completion and controls after the current Cloud handoff. The #110 reconciliation is complete and its bounded responsive/empty-state fix is in progress on a separate clean Cloud branch. #158 remains blocked by conflicting owner directions in the Cloud issue and target Bookit issue. Read-only security audit lanes are checking the Four Ws trust boundary and open dependency alerts.
+
+**WHERE:** Cloud GSMB `RobynAwesome/Introduction-to-MCP`, `master@cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. See the dated #110 and #158 receipts below. No Local OneDrive or Google Drive writes are included.
+
+**WHY:** Separate fixes that can proceed from owner decisions and provider controls that remain outside this renter's authority; keep each issue's closeout tied to source and provider receipts.
+
+### New issue receipts and active work
+
+- [#110 Studio reconciliation receipt](docs/swarm-ops/receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md): the four-column desktop view and seven mode inventory are present. The wireframe's <=1320px right-rail drawer and <=980px hamburger are missing; Proof/CI lack truthful unavailable states without the backend. The canonical context hostname currently serves an IONOS not-connected page. The audit renter has revalidated current `master` and is implementing only those UI gaps with tests in a separate worktree. No domain or deployment change.
+- [#158 booking conflict receipt](docs/swarm-ops/receipts/ISSUE_158_BOOKING_CONFLICT_2026-10-07.md): #158 asks to remove booking calls-to-action from the active root while target Bookit #42 asks to keep booking links in the hero and navigation. No implementation can satisfy both. No root or live-surface change; owner disposition is needed.
+- PR #257's previously reported preview results remain preview-only. The documentation branch `codex/coordination-receipts-20261007` contains commit `9734ed0b6066b3227e52d37b01c34fc8b3edf2cc`; its KHELOS policy and whitespace checks passed against the active worktree index. The installed shared pre-commit launcher is Cygwin-bound and could not execute from this Windows worktree; no shared hook or persistent Git configuration was changed.
+- Trusted-base Four Ws gate audit and Dependabot #133–#138 triage are delegated read-only/in bounded branches. Until exact new receipts arrive, the prior 22:15Z live security counts remain the last confirmed observation: 32 open high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. No breach closure, secret rotation, settings change, merge, or deployment is claimed.
+
+### Next admissible action
+
+Review the documentation PR once created; review the bounded #110 implementation PR when its tests and evidence are ready; obtain the owner decision needed to reconcile #158 and target #42; continue security triage and prepare a trusted-base Four Ws successor without changing branch protection. Re-read provider state before any completion or enforcement claim. Preserve Local, Cloud, and Drive as distinct populations.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 ## CURRENT CLOUD COORDINATION — 2026-10-06T22:15:44Z / 2026-10-07 SAST
 
 **WHO:** Codex Forge, stateless renter in the CA task role; no RTC identity or seat is claimed for this task actor. Robyn remains the repository owner and RTC authority.

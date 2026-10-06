@@ -1,3 +1,23 @@
+## 2026-10-07 Cloud status — observed 2026-10-06T22:22:03Z
+
+Current Cloud master remains `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9` at this handoff. Earlier rows are historical; this addendum distinguishes completed audits from issue completion.
+
+| Issue / lane | Current tracker state | Current evidence and next action |
+|---|---|---|
+| #94 | CLOSED / COMPLETED by owner | Discovery objective was bounded to live registry discovery. Follow-up listing freshness/publication remains separate. |
+| #207 | CLOSED / COMPLETED by owner | Current branch protection read at 22:15Z still lacks the Four Ws context and requires zero approvals. Preserve owner disposition; trusted-base audit is in progress; no enforcement claim. |
+| #96 (Dependabot) | OPEN / HIGH | NLTK 3.10.3 remains within the vulnerable range and provider/upstream report no patched release. Keep open pending a published fix. |
+| #133–#138 (Dependabot) | OPEN | Bounded fixability/exposure triage delegated; do not dismiss or imply fixed before provider reread. |
+| #110 | OPEN / UI remediation in progress | Current Cloud audit found the <=1320px drawer, <=980px hamburger, and backend-unavailable Proof/CI state missing; canonical context host shows IONOS not-connected page. Responsive/empty-state fix is in a clean branch; domain and deployment remain blocked. See [receipt](receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md). |
+| #158 | OPEN / owner decision required | #158's remove-booking-CTA request conflicts with target Bookit #42's booking-first hero/navigation direction. No code or public-surface mutation; see [receipt](receipts/ISSUE_158_BOOKING_CONFLICT_2026-10-07.md). |
+| #121 | CLOSED by owner | Independent Seat 10 re-entry/restoration remains unproven; preserve tracker state and evidence gap. |
+| #231 / #211 | OPEN / HOLD | No consented driver follow-up outcomes and no provider identity/deployment receipts. |
+
+Last confirmed live security counts at 22:15Z: 32 high CodeQL alerts, seven open Dependabot alerts, and zero open secret-scanning alerts. These counts do not establish absence of historical breach or exposure. No alert, secret, incident, protection setting, production deployment, or Google Drive state changed in this handoff.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 ## 2026-10-07 Cloud status revalidation — observed 2026-10-06T22:15:44Z
 
 This is a dated addendum; earlier observations below remain historical. Current Cloud master is `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. PRs #258, #259 and #257 are merged by Robyn at `608d8c65`, `ea793656` and `cf6cdaa`, respectively. PR #257's checks and Vercel preview contexts passed; they are not production evidence.
