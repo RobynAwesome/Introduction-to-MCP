@@ -1,3 +1,27 @@
+## CURRENT CLOUD SECURITY AND ISSUE COORDINATION — 2026-10-06T22:58:23Z / 2026-10-07 SAST
+
+**WHO / authority:** Codex Forge coordinating as a stateless CA task renter; no RTC identity seat is claimed. Robyn retains repository ownership and review authority. AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
+
+**WHAT:** Revalidated open security alerts, dependency PRs, branch protection, and the #110/#207/#16/#43 lanes. PR #284's required checks passed; PR #285's bounded DOM/XSS changes are under review, with one test-regex finding corrected and hosted checks rerunning. A separate #43 HTTPS token-endpoint fix and a trusted-base Four Ws check are in implementation. No PR was merged and no production deployment occurred.
+
+**WHERE:** Cloud GSMB `RobynAwesome/Introduction-to-MCP`, source master `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. The Cloud-only security receipt is [SECURITY_AND_ENFORCEMENT_2026-10-07.md](docs/swarm-ops/receipts/SECURITY_AND_ENFORCEMENT_2026-10-07.md). Local OneDrive and Heavy Human-in-the-Loop Google Drive were not modified or reconciled.
+
+**WHY:** Keep security claims tied to exact source and provider evidence. The current read found source risks but no evidence of a successful exploit or confirmed incident; open-alert counts do not rule out historic exposure.
+
+- GitHub reported 32 open high CodeQL alerts, 0 critical, 7 open Dependabot alerts (#96 and #133–#138), and 0 open secret-scanning alerts. NLTK #96 remains unpatched in the provider record. PRs #277–#280 and #282 have all 14 required contexts passing and `CLEAN` merge state; #281 has its 14 required contexts passing but the Four Ws context reports failure and merge state is `UNSTABLE`. All six are open without owner review/merge, so the default-branch alerts remain open.
+- Source review of CodeQL #16 found salted SHA-256 password storage and fresh-database admin provisioning from a documented default when `KOPANO_ADMIN_PASSWORD` is absent; the setup also appears in Studio and demo instructions. Existing installations, deployment reachability, password use, login activity, and successful exploitation were not inspected. Changing the environment variable alone does not reset an existing account. Treat any reachable installation initialized with that public default as exposed until an owner-led credential reset and session review establish otherwise. Product-safe first-run replacement and password-hash migration remain unimplemented.
+- CodeQL #43 accepts caller-provided OAuth token URLs and sends authorization or refresh credentials to them without an HTTPS-only guarantee at every sink. A bounded Cloud fix is being prepared; no runtime OAuth exchange or exposure was observed.
+- PR #285 XSS remediation head `70ca7c9f4abf541cde2ec662db69d8ada41cdd09` is open against `cf6cdaa`; the test-regex correction is pushed and hosted checks are pending. Earlier CodeQL reported a high finding in the regression helper, which was corrected without dismissing an alert. Do not describe the source alerts as cleared until fresh provider results confirm it.
+- PR #284 `b11c261985bc480d603d80865b90adb1acffa4ce` has all 14 required contexts passing, is open with no review decision, and currently reports `UNSTABLE` merge state. Vercel results are preview-only. PR #283 documentation head `45d450afb866b1194a218960934ac97b45fea72c` has all required contexts and the Four Ws job passing; it remains open for owner review.
+- Master protection readback requires 14 strict checks, enforces admins, resolves conversations, and blocks force-push/deletion; required approvals remain 0, and `Require current Four Ws receipts` is not a required context. Issue #207 remains closed by Robyn. A trusted-base, exact-head check is being prepared; no branch setting changed and the current workflow is not enforcement.
+- Issue #110 remains open pending owner review and any separately evidenced domain/deployment work. Issue #158 remains open; the owner choice between removing booking calls-to-action and the target Bookit booking-first direction is still pending. Issues #211 and #231 remain HOLD for provider identity/deployment and consented field outcomes.
+
+**Next admissible action:** Finish and independently review PRs #285 and the #43/trusted-base check candidates; reread exact-head CI and live alert state; present the reviewable PRs to Robyn. Keep #16's default-admin reset and first-run design explicit for owner review. Do not merge, alter branch protection, close incidents, contact field participants, or claim production deployment from this receipt.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CURRENT CLOUD COORDINATION — 2026-10-06T22:28:47Z / 2026-10-07 SAST
 
 **WHO:** Codex Forge, stateless renter coordinating as CA; no RTC identity seat is claimed. Delegated renters have separate task roles. Robyn retains repository ownership and RTC authority. For identity coordinates, AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
