@@ -1,3 +1,18 @@
+## CURRENT CLOUD COORDINATION UPDATE — 2026-10-06T22:29:48Z (OLDEST PR #254 REPAIR)
+
+WHO: Codex Forge / CA task role, stateless renter acting on Robyn's oldest-first PR repair directive. I_AM_STATELESS_RENTER_NOT_LANDLORD.
+WHAT: Reconcile PR #254 with current master, retain its October 4 owner confirmation as dated history, and correct its present tracker and identity readback. PR review and CI are pending for the repaired head; no merge or owner approval is claimed.
+WHERE: Cloud only, RobynAwesome/Introduction-to-MCP; master snapshot `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`, original #254 head `f71b6506e3df3382ec0b80aa5af1305d803f5808`. Scope: this checkpoint, Dashboard's dated history, and [the preserved confirmation receipt](docs/swarm-ops/receipts/CURSOR_CF_CONFIRMATION_2026-10-04.md). Local and Google Drive sources were not read or reconciled.
+WHY: Unblock review without allowing an older NOW insertion to overwrite newer authority. Robyn asked for a future NOW coordination proposal in an existing governance issue; that proposal belongs to #116 and is not implemented by this repair.
+
+**Current readback:** Cursor is the operational Chief Facilitator lane; AG is the identity at RTC Seat 10, Google Antigravity the platform, and Lead Developer the role, following the October 5 correction. The original October 4 quote, ANTIGRAVITY spelling, and reported model remain historical evidence in the linked receipt.
+
+**Tracker boundary:** #121 is CLOSED by Robyn at `2026-10-05T10:21:12Z`; this is a tracker fact, not independent runtime re-entry proof. #183 remains HOLD. The October 4 OPEN statement and obsolete "top of NOW" pointer are archived with an explicit supersession boundary. Earlier checkpoints below are observations of their dates, including PRs #257–259 before their subsequent landing.
+
+**Execution boundary:** Prompting directive is the active human request to repair stale/conflicted PRs oldest first. Renter ingress and root NOW were read; KPEFS scope is bounded Cloud documentation and PR validation, BlackMask containment preserves history and source separation, and PKA uncertainty keeps runtime admission and owner review unclaimed. Next: validate the repaired head, then continue oldest-first CI repairs. No governance workflow redesign or issue closure is admitted here.
+
+---
+
 ## CURRENT CLOUD COORDINATION UPDATE — 2026-10-05T12:34:59Z (PR #259 FOUR WS GATE UNDER REVIEW)
 
 WHO: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
