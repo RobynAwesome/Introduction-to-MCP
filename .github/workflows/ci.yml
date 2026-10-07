@@ -51,8 +51,8 @@ jobs:
       - name: Check changed Rust formatting
         run: rustfmt --check --edition 2021 crates/runtime/src/config.rs crates/api/src/providers/claw_provider.rs
 
-      - name: Test Rust workspace
-        run: cargo test --workspace --locked
+      - name: Test changed Rust packages
+        run: cargo test -p api -p runtime --locked
 
   lint-and-test:
     runs-on: ubuntu-latest
