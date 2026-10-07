@@ -1,0 +1,21 @@
+{
+  "schema": "kpgs_hood_ack_receipt_v1",
+  "timestamp": "2026-10-07T13:06:59Z",
+  "renter_id": "codex_forge",
+  "renter_class": "CA_task_renter",
+  "assertion": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "hood_ack": "I_AM_STATELESS_RENTER_NOT_LANDLORD",
+  "operation": "reconcile current Cloud security and issue receipts",
+  "entryway_source": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.json",
+  "legacy_contract_ref": "Schematics/21-KOPANO-PHU GOVERNACE SYSTEMS/MAIN-BRAIN/KPGS_LEGACY.json",
+  "gate_status": "ACKNOWLEDGED",
+  "verdict": "ACKNOWLEDGED",
+  "rtc_conditions_met": {
+    "1_read_entryway_first": true,
+    "2_read_comms_now_mainbrain": true,
+    "3_existing_tools_first": true,
+    "4_bracketed_output": true,
+    "5_no_hallucination": true
+  },
+  "scope": "Cloud coordination receipts only; no owner, RTC seat, provider setting, deployment, breach or runtime authority claimed."
+}

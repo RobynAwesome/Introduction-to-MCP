@@ -61,6 +61,27 @@ Live security at this observation: 32 high CodeQL alerts, seven open Dependabot 
 ---
 # GSMB issue completion — 5 October 2026
 
+## 2026-10-07 Cloud revalidation — observed 2026-10-07T12:59:47Z
+
+Cloud GSMB only: `RobynAwesome/Introduction-to-MCP`, current master `29192965eb3b77e91d9ed60a0cad58097d61fda5`. Local OneDrive and Heavy Human-in-the-Loop Google Drive remain separate populations; no parity is claimed.
+
+| Lane | Exact provider observation | Next admissible action |
+|---|---|---|
+| Security | 32 open high CodeQL alerts, 0 critical CodeQL, 7 open Dependabot alerts (#96, #133–#138), 0 open secret alerts. | Keep alerts open until owner-approved fixes land and GitHub rereads them. Zero secret alerts is not a historical exposure finding. |
+| #16 | Public-default admin bootstrap and salted SHA-256 password path remain source findings; no installation, login, session or exploit receipt. | Owner-reviewed password migration plus first-run/reset behavior; treat reachable default-initialized instances as exposed pending reset/session review. |
+| #43 / PR #286 | Open at `860da3fb60614ea42b11d125106ab1d3f62d6616`; targeted Rust/CodeQL/CI checks pass; Four Ws run cancelled because the branch is behind. | Owner review; rebase or otherwise refresh against current master before merge. No alert dismissal or OAuth runtime receipt. |
+| #46 / PR #287 | Open at `f60464150e5375a0a5920f5235e001a7214fbab7`; CodeQL and CI checks pass; no owner review. | Owner review and exact-head reread. |
+| XSS #8–#14 / PR #285 | Open at `08581a1b3e1206cdc3faf70e535d0ac2bee9a2d4`; CodeQL/CI pass, both Vercel statuses report build-rate-limit failures. | Owner review of preview/provider boundary; no production claim. |
+| #207 | Owner-closed. Branch protection still has 0 approvals and omits Four Ws. PR #288 `ba8488e4fd6a2496aa42579f80c638abe6b34f38` proposes a trusted App worker; hosted checks were in progress. | Owner review, App installation and hosted positive/negative receipts before any settings decision. |
+| Deployment | `deploy-web.yml` path-filters `public/**` and `kopano-labs-web/**` on `master` and calls IONOS FTP jobs. | Do not merge #285 or call production until the owner accepts the deployment boundary and a served-SHA receipt exists. |
+| #211 / #231 / #158 | #211 and #231 remain HOLD; #158 still conflicts with Bookit #42. | Preserve each owner/provider decision boundary; no deployment or field outreach. |
+
+No merge, branch-protection mutation, credential rotation, incident closure, breach determination, production deployment, Google Drive write, or human outreach occurred in this observation.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 Actor: Forge / Codex CA, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
 
 This is the current cloud-facing routing snapshot for the Introduction-to-MCP root issue set and the three GSMB states. It supplements the dated October 4 estate intake; it does not overwrite that record or claim every DNS issue is complete.

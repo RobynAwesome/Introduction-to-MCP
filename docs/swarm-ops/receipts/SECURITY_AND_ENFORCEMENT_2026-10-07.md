@@ -1,5 +1,16 @@
 # Security and enforcement receipt — 2026-10-07
 
+## Live revalidation addendum — 2026-10-07T12:59:47Z
+
+Cloud master is `29192965eb3b77e91d9ed60a0cad58097d61fda5`. GitHub currently reports **32 open high-severity CodeQL alerts**, **0 critical CodeQL alerts**, **7 open Dependabot alerts** (#96 and #133–#138), and **0 open secret-scanning alerts**. This is a provider count, not proof that historical credentials were never exposed or that a deployment is safe.
+
+- Protection still requires 14 strict contexts, enforces administrators, resolves conversations and blocks force-push/deletion. Required approvals are `0`; `Require current Four Ws receipts` is not required. Actions permissions read back as default workflow permissions `read`, `can_approve_pull_request_reviews=false`, `allowed_actions=all`, and `sha_pinning_required=false`.
+- PR #285 is open at `08581a1b3e1206cdc3faf70e535d0ac2bee9a2d4`; its CodeQL and CI checks pass, but Vercel’s two status contexts report build-rate-limit failures. PR #286 is open at `860da3fb60614ea42b11d125106ab1d3f62d6616`; its targeted Rust/CodeQL/CI checks pass and its Four Ws run is cancelled because the branch is behind. PR #287 is open at `f60464150e5375a0a5920f5235e001a7214fbab7`; CodeQL and CI checks pass. PR #288 is open at `ba8488e4fd6a2496aa42579f80c638abe6b34f38` with hosted checks still running at this observation. None has an owner review or merge receipt.
+- `.github/workflows/deploy-web.yml` is path-filtered to `public/**` and `kopano-labs-web/**` on `master` and calls the IONOS FTP production jobs. PR #285 therefore needs an explicit deployment boundary review; no merge, production attempt, served-SHA validation or production verification occurred here.
+- Issue #207 remains owner-closed. The trusted Four Ws successor in PR #288 is not a hosted App, provider acceptance, branch-protection requirement or runtime enforcement. The source risk for #16 remains unremediated; #43 and #46 remain in review through #286 and #287. No breach was confirmed, no incident was closed, no credential was rotated and no alert was dismissed.
+
+These results are a newer observation than the historical sections below; they do not rewrite those records.
+
 **Status:** Cloud-source audit and provider revalidation complete for this checkpoint. Remediations remain in review; no incident closure or production claim.
 
 **WHO / authority:** Codex Forge coordinating as a stateless CA task renter. No RTC identity seat is claimed. Robyn retains repository ownership and review authority. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
