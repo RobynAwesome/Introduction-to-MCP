@@ -255,12 +255,12 @@ impl ClawApiClient {
         config: &OAuthConfig,
         request: &OAuthTokenExchangeRequest,
     ) -> Result<OAuthTokenSet, ApiError> {
-        config
-            .validate_token_endpoint()
+        let token_url = config
+            .token_endpoint_url()
             .map_err(|message| ApiError::Auth(message.to_string()))?;
         let response = self
             .oauth_http
-            .post(&config.token_url)
+            .post(token_url)
             .header("content-type", "application/x-www-form-urlencoded")
             .form(&request.form_params())
             .send()
@@ -278,12 +278,12 @@ impl ClawApiClient {
         config: &OAuthConfig,
         request: &OAuthRefreshRequest,
     ) -> Result<OAuthTokenSet, ApiError> {
-        config
-            .validate_token_endpoint()
+        let token_url = config
+            .token_endpoint_url()
             .map_err(|message| ApiError::Auth(message.to_string()))?;
         let response = self
             .oauth_http
-            .post(&config.token_url)
+            .post(token_url)
             .header("content-type", "application/x-www-form-urlencoded")
             .form(&request.form_params())
             .send()
@@ -915,7 +915,6 @@ mod tests {
         cleanup_temp_config_home(&config_home);
     }
 
-    #[test]
     #[tokio::test]
     async fn oauth_token_sinks_reject_http_on_directly_constructed_config() {
         let mut config = sample_oauth_config("http://127.0.0.1/oauth/token".to_string());

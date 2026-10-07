@@ -146,13 +146,17 @@ pub struct OAuthConfig {
 }
 
 impl OAuthConfig {
-    pub fn validate_token_endpoint(&self) -> Result<(), &'static str> {
+    pub fn token_endpoint_url(&self) -> Result<Url, &'static str> {
         let token_url = Url::parse(&self.token_url)
             .map_err(|_| "OAuth tokenUrl must be an absolute HTTPS URL")?;
         if token_url.scheme() != "https" || token_url.host_str().is_none() {
             return Err("OAuth tokenUrl must be an absolute HTTPS URL");
         }
-        Ok(())
+        Ok(token_url)
+    }
+
+    pub fn validate_token_endpoint(&self) -> Result<(), &'static str> {
+        self.token_endpoint_url().map(|_| ())
     }
 }
 
