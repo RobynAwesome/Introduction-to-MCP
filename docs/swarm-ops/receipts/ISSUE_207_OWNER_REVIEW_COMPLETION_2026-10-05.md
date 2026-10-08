@@ -1,3 +1,14 @@
+## Post-merge tracker and enforcement re-read — observed 2026-10-06T22:15:44Z
+
+Robyn merged PR #259 at `2026-10-06T21:32:37Z` as `ea79365676ad0b296257bcdd66e738688f92e794` and closed [issue #207](https://github.com/RobynAwesome/Introduction-to-MCP/issues/207) at `2026-10-06T21:32:38Z` with state reason `COMPLETED`. This addendum preserves that direct owner disposition; it does not reopen the tracker item.
+
+A fresh read of the current `master` protection at `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9` returned strict protection, administrator enforcement, required conversation resolution, and 14 required status contexts. The contexts do not include `Require current Four Ws receipts`. The configured approval count is `0`; force pushes and deletions are disabled. Therefore the Four Ws workflow is present and runs, but it is not currently a required merge-blocking status and owner approvals are not enforced by a positive count. The PR workflow uses a PR-revision event; a trusted-base successor is needed before relying on the result as a tamper-resistant control.
+
+**Next admissible action:** prepare a read-only, trusted-base workflow successor that reads only current GitHub PR/review/comment records; obtain owner review and merge; then add its exact context and the owner-approved review requirement to protection and read the settings back. Until that provider mutation and readback exist, do not claim complete runtime enforcement. No protection settings were changed during this read.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 # Issue 207 — current repository-boundary evidence
 
 Actor: Forge / Codex CA, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
