@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { getApiBase } from '../apiBase';
+import { getApiUnavailableMessage } from '../consoleStatusCopy.mjs';
 import type { FeedLogEntry, LabsAnalytics, McpConsoleReply } from '../types';
 import { PhuLegacyCard } from '../operator/PhuLegacyCard';
 import { SovereignSimCard } from '../operator/SovereignSimCard';
@@ -117,6 +118,31 @@ const modeIcons: Record<ConsoleMode, string> = {
   sim: '▣',
 };
 
+interface BackendUnavailableStateProps {
+  surface: 'Proof' | 'CI';
+  message: string;
+  loading: boolean;
+  onRetry: () => void;
+}
+
+export function BackendUnavailableState({ surface, message, loading, onRetry }: BackendUnavailableStateProps) {
+  return (
+    <div className="swarm-unavailable-state" role="status" aria-live="polite">
+      <span className="signal-chip neutral">{loading ? 'Checking API' : 'API unavailable'}</span>
+      <h3>{loading ? `Checking ${surface} status` : `${surface} status unavailable`}</h3>
+      <p>{loading ? 'Waiting for the configured backend status response.' : message}</p>
+      {!loading && (
+        <p className="swarm-footnote">
+          No {surface === 'Proof' ? 'PASS or FAIL result' : 'CI result'} is inferred without backend status.
+        </p>
+      )}
+      <button type="button" className="action-button ghost" onClick={onRetry} disabled={loading}>
+        {loading ? 'Checking…' : 'Retry status'}
+      </button>
+    </div>
+  );
+}
+
 export function ConsolePage({
   consoleMessage,
   consoleReply,
@@ -131,8 +157,13 @@ export function ConsolePage({
 }: ConsolePageProps) {
   const [mode, setMode] = useState<ConsoleMode>('context');
   const [status, setStatus] = useState<SwarmConsoleStatus | null>(null);
+  const [statusLoading, setStatusLoading] = useState(true);
   const [agents, setAgents] = useState<SwarmAgent[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const [statusDrawerOpen, setStatusDrawerOpen] = useState(false);
+  const navToggleRef = useRef<HTMLButtonElement>(null);
+  const statusToggleRef = useRef<HTMLButtonElement>(null);
   const [maoStatus, setMaoStatus] = useState<{
     total_agents?: number;
     philosophy?: { principle?: string; hierarchy?: string; agent_gate?: string[] };
@@ -146,29 +177,66 @@ export function ConsolePage({
   const [maoRouteResult, setMaoRouteResult] = useState<string | null>(null);
 
   const refreshStatus = useCallback(async () => {
+    setStatusLoading(true);
     try {
-      const [statusRes, agentsRes, maoRes] = await Promise.all([
-        fetch(`${apiRoot}/api/kc/swarm-console/status`),
-        fetch(`${apiRoot}/api/kc/swarm-agents`),
-        fetch(`${apiRoot}/api/mao/status`),
-      ]);
+      const statusRes = await fetch(`${apiRoot}/api/kc/swarm-console/status`);
       if (statusRes.ok) {
         setStatus(await statusRes.json());
+        setLoadError(null);
       } else {
-        setLoadError(await statusRes.text());
+        setStatus(null);
+        setLoadError(getApiUnavailableMessage(apiRoot, statusRes.status));
       }
-      if (agentsRes.ok) {
-        const body = await agentsRes.json();
-        setAgents(body.agents ?? []);
-      }
-      if (maoRes.ok) {
-        setMaoStatus(await maoRes.json());
-      }
-      setLoadError(null);
     } catch {
-      setLoadError('Swarm Console API unreachable — start kopano-core API locally.');
+      setStatus(null);
+      setLoadError(getApiUnavailableMessage(apiRoot));
+    } finally {
+      setStatusLoading(false);
+    }
+    const [agentsResult, maoResult] = await Promise.allSettled([
+      fetch(`${apiRoot}/api/kc/swarm-agents`),
+      fetch(`${apiRoot}/api/mao/status`),
+    ]);
+    if (agentsResult.status === 'fulfilled' && agentsResult.value.ok) {
+      try {
+        const body = await agentsResult.value.json();
+        setAgents(body.agents ?? []);
+      } catch {
+        // The proof/status surface does not depend on the optional agent roster.
+      }
+    }
+    if (maoResult.status === 'fulfilled' && maoResult.value.ok) {
+      try {
+        setMaoStatus(await maoResult.value.json());
+      } catch {
+        // Keep the last known MAO roster when its optional status response is malformed.
+      }
     }
   }, []);
+
+  const closeDrawers = useCallback(() => {
+    const focusTarget = statusDrawerOpen ? statusToggleRef : navToggleRef;
+    setNavDrawerOpen(false);
+    setStatusDrawerOpen(false);
+    requestAnimationFrame(() => focusTarget.current?.focus());
+  }, [statusDrawerOpen]);
+
+  const selectMode = (nextMode: ConsoleMode) => {
+    setMode(nextMode);
+    if (navDrawerOpen) {
+      setNavDrawerOpen(false);
+      requestAnimationFrame(() => navToggleRef.current?.focus());
+    }
+  };
+
+  useEffect(() => {
+    if (!navDrawerOpen && !statusDrawerOpen) return undefined;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeDrawers();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [closeDrawers, navDrawerOpen, statusDrawerOpen]);
 
   useEffect(() => {
     let cancelled = false;
@@ -189,6 +257,7 @@ export function ConsolePage({
   const badgeClass = (ok: boolean | undefined, warn?: boolean) => {
     if (ok) return 'swarm-badge ok';
     if (warn) return 'swarm-badge warn';
+    if (ok === undefined) return 'swarm-badge neutral';
     return 'swarm-badge err';
   };
 
@@ -203,22 +272,31 @@ export function ConsolePage({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.45 }}
     >
-      <aside className="swarm-rail" aria-label="Console modes">
-        <motion.div className="swarm-brand" layout>KC</motion.div>
-        {(Object.keys(modeLabels) as ConsoleMode[]).map((key) => (
-          <button
-            key={key}
-            type="button"
-            className={`swarm-rail-btn ${mode === key ? 'active' : ''}`}
-            title={modeLabels[key]}
-            onClick={() => setMode(key)}
-          >
-            {modeIcons[key]}
-          </button>
-        ))}
-      </aside>
+      {(navDrawerOpen || statusDrawerOpen) && (
+        <button type="button" className="swarm-drawer-backdrop" aria-label="Close console drawer" tabIndex={-1} onClick={closeDrawers} />
+      )}
 
-      <aside className="swarm-sidebar">
+      <div className={`swarm-navigation ${navDrawerOpen ? 'is-open' : ''}`} id="swarm-navigation">
+        <aside className="swarm-rail" aria-label="Console modes">
+          <motion.div className="swarm-brand" layout>KC</motion.div>
+          {(Object.keys(modeLabels) as ConsoleMode[]).map((key) => (
+            <button
+              key={key}
+              type="button"
+              className={`swarm-rail-btn ${mode === key ? 'active' : ''}`}
+              title={modeLabels[key]}
+              aria-label={modeLabels[key]}
+              onClick={() => selectMode(key)}
+            >
+              {modeIcons[key]}
+            </button>
+          ))}
+        </aside>
+
+        <aside className="swarm-sidebar">
+        <button type="button" className="swarm-mobile-drawer-close action-button ghost" onClick={closeDrawers}>
+          Close navigation
+        </button>
         <motion.div className="swarm-workspace swarm-cassy-card" layout>
           <span className="swarm-dot live" />
           <motion.div layout>
@@ -251,7 +329,7 @@ export function ConsolePage({
                 key={key}
                 type="button"
                 className={`swarm-nav-item ${mode === key ? 'active' : ''}`}
-                onClick={() => setMode(key)}
+                onClick={() => selectMode(key)}
               >
                 <span>{modeIcons[key]} {modeLabels[key]}</span>
                 {key === 'mao' && (
@@ -259,14 +337,14 @@ export function ConsolePage({
                     {maoStatus?.total_agents ? 'Live' : '…'}
                   </span>
                 )}
-                {key === 'proof' && status && (
-                  <span className={badgeClass(status.proof_bar_pass)}>
-                    {status.proof_bar_pass ? 'PASS' : `${status.proof_gaps.length} gaps`}
+                {key === 'proof' && (
+                  <span className={badgeClass(status?.proof_bar_pass)}>
+                    {status ? (status.proof_bar_pass ? 'PASS' : `${status.proof_gaps.length} gaps`) : (statusLoading ? 'Loading' : 'Unavailable')}
                   </span>
                 )}
-                {key === 'ci' && status && (
-                  <span className={badgeClass(status.checks.guard_all_ok)}>
-                    {status.checks.guard_all_ok ? 'Ready' : 'Check'}
+                {key === 'ci' && (
+                  <span className={badgeClass(status?.checks.guard_all_ok)}>
+                    {status ? (status.checks.guard_all_ok ? 'Ready' : 'Check') : (statusLoading ? 'Loading' : 'Unavailable')}
                   </span>
                 )}
                 {key === 'kpefs' && (
@@ -286,7 +364,7 @@ export function ConsolePage({
             </motion.div>
             <motion.div className="swarm-nav-item static" layout>
               <span>⌘ Git / GitHub</span>
-              <span className={badgeClass(Boolean(status?.git.origin_fetch_url))}>
+              <span className={badgeClass(status ? Boolean(status.git.origin_fetch_url) : undefined)}>
                 {status?.git.origin_fetch_url ? 'Bound' : '…'}
               </span>
             </motion.div>
@@ -296,8 +374,8 @@ export function ConsolePage({
             </motion.div>
             <motion.div className="swarm-nav-item static" layout>
               <span>⬡ Swarm receipts</span>
-              <span className={badgeClass(status?.doctrine.swarm_ack_met, !status?.doctrine.swarm_ack_met)}>
-                {status?.doctrine.swarm_ack_met ? 'ACK' : 'Manual'}
+              <span className={badgeClass(status?.doctrine.swarm_ack_met, status ? !status.doctrine.swarm_ack_met : undefined)}>
+                {status ? (status.doctrine.swarm_ack_met ? 'ACK' : 'Manual') : '…'}
               </span>
             </motion.div>
           </div>
@@ -310,7 +388,8 @@ export function ConsolePage({
             Refresh proof strip
           </button>
         </motion.div>
-      </aside>
+        </aside>
+      </div>
 
       <main className="swarm-main">
         <header className="swarm-main-head">
@@ -319,16 +398,53 @@ export function ConsolePage({
             <h2>{modeLabels[mode]}</h2>
             <p>
               One composer · server-mediated tools · receipts before “complete”.
-              {loadError && ` ${loadError}`}
+              {loadError && <span className="swarm-api-error" role="status"> {loadError}</span>}
             </p>
           </div>
-          <div className="badge-cluster">
-            <span className={`status-badge ${status?.proof_bar_pass ? 'live' : 'neutral'}`}>
-              Proof bar: {status?.proof_bar_pass ? 'PASS' : 'OPEN'}
-            </span>
-            <span className="status-badge neutral">
-              Verified prod: {status?.doctrine.verified_production ?? '…'} / {status?.doctrine.public_graduation_bar ?? 10}
-            </span>
+          <div className="swarm-header-tools">
+            <div className="swarm-compact-actions">
+              <button
+                ref={navToggleRef}
+                type="button"
+                className="action-button ghost swarm-menu-toggle"
+                aria-label={navDrawerOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={navDrawerOpen}
+                aria-controls="swarm-navigation"
+                onClick={() => {
+                  if (navDrawerOpen) closeDrawers();
+                  else {
+                    setStatusDrawerOpen(false);
+                    setNavDrawerOpen(true);
+                  }
+                }}
+              >
+                <span aria-hidden="true">☰</span> Menu
+              </button>
+              <button
+                ref={statusToggleRef}
+                type="button"
+                className="action-button ghost swarm-proof-toggle"
+                aria-expanded={statusDrawerOpen}
+                aria-controls="swarm-status-drawer"
+                onClick={() => {
+                  if (statusDrawerOpen) closeDrawers();
+                  else {
+                    setNavDrawerOpen(false);
+                    setStatusDrawerOpen(true);
+                  }
+                }}
+              >
+                Proof &amp; sync
+              </button>
+            </div>
+            <div className="badge-cluster">
+              <span className={`status-badge ${status?.proof_bar_pass ? 'live' : 'neutral'}`}>
+                Proof bar: {status ? (status.proof_bar_pass ? 'PASS' : 'GAPS') : (statusLoading ? 'Checking API' : 'API unavailable')}
+              </span>
+              <span className="status-badge neutral">
+                Verified prod: {status?.doctrine.verified_production ?? (statusLoading ? 'checking' : 'unavailable')} / {status?.doctrine.public_graduation_bar ?? 10}
+              </span>
+            </div>
           </div>
         </header>
 
@@ -625,6 +741,20 @@ export function ConsolePage({
             </motion.div>
           )}
 
+          {mode === 'proof' && !status && (
+            <motion.div className="glass-card swarm-mode-card" layout>
+              <motion.div className="card-topline" layout>
+                <span className="eyebrow">Proof validator</span>
+              </motion.div>
+              <BackendUnavailableState
+                surface="Proof"
+                message={loadError ?? getApiUnavailableMessage(apiRoot)}
+                loading={statusLoading}
+                onRetry={() => { void refreshStatus(); }}
+              />
+            </motion.div>
+          )}
+
           {mode === 'ci' && status && (
             <motion.div className="glass-card swarm-mode-card" layout>
               <div className="card-topline">
@@ -647,6 +777,20 @@ export function ConsolePage({
                 Requests: {labsAnalytics?.mcp_console.requests ?? 0} ·
                 Sessions: {labsAnalytics?.mcp_console.sessions ?? 0}
               </p>
+            </motion.div>
+          )}
+
+          {mode === 'ci' && !status && (
+            <motion.div className="glass-card swarm-mode-card" layout>
+              <motion.div className="card-topline" layout>
+                <span className="eyebrow">CI enforcer</span>
+              </motion.div>
+              <BackendUnavailableState
+                surface="CI"
+                message={loadError ?? getApiUnavailableMessage(apiRoot)}
+                loading={statusLoading}
+                onRetry={() => { void refreshStatus(); }}
+              />
             </motion.div>
           )}
 
@@ -680,7 +824,13 @@ export function ConsolePage({
         </motion.section>
       </main>
 
-      <aside className="swarm-right">
+      <aside className={`swarm-right ${statusDrawerOpen ? 'is-open' : ''}`} id="swarm-status-drawer" aria-label="Proof and sync status">
+        <div className="swarm-right-head">
+          <h2>Proof &amp; sync</h2>
+          <button type="button" className="action-button ghost swarm-drawer-close" onClick={closeDrawers}>
+            Close
+          </button>
+        </div>
         <motion.div className="glass-card swarm-right-card" layout>
           <h3>Git sync</h3>
           {status ? (
@@ -692,15 +842,27 @@ export function ConsolePage({
               ))}
             </>
           ) : (
-            <p>Loading…</p>
+            <>
+              <p>{statusLoading ? 'Loading API status…' : 'API status unavailable.'}</p>
+              {!statusLoading && <p className="swarm-footnote">{loadError ?? getApiUnavailableMessage(apiRoot)}</p>}
+              <button type="button" className="action-button ghost" onClick={() => { void refreshStatus(); }} disabled={statusLoading}>
+                {statusLoading ? 'Retrying…' : 'Retry status'}
+              </button>
+            </>
           )}
         </motion.div>
 
         <motion.div className="glass-card swarm-right-card" layout>
           <h3>Proof strip</h3>
-          <p>Validate: {status?.checks.jsonl_validate_ok ? 'OK' : 'FAIL'}</p>
-          <p>Proof-check: {status?.checks.proof_check_ok ? 'OK' : 'FAIL'}</p>
-          <p>Roadmap gate: {status?.doctrine.roadmap_gate_met ? 'OK' : 'OPEN'}</p>
+          {status ? (
+            <>
+              <p>Validate: {status.checks.jsonl_validate_ok ? 'OK' : 'FAIL'}</p>
+              <p>Proof-check: {status.checks.proof_check_ok ? 'OK' : 'FAIL'}</p>
+              <p>Roadmap gate: {status.doctrine.roadmap_gate_met ? 'OK' : 'OPEN'}</p>
+            </>
+          ) : (
+            <p>Unavailable — no PASS or FAIL result is inferred without backend status.</p>
+          )}
         </motion.div>
 
         <motion.div className="glass-card swarm-right-card" layout>
