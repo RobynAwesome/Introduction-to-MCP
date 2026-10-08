@@ -1,3 +1,125 @@
+## CLOUD CHECK REVALIDATION — 2026-10-07T13:10:36Z
+
+PR #288's hosted run finished with **19 successful checks, 0 failing, 0 pending and 1 cancelled** (`Require current Four Ws receipts`); GitHub reports `UNSTABLE`. This is a source/test proposal and review receipt, not a required or trusted provider control. PR #283 has its main checks passing while Rust analysis, Four Ws and Python 3.12 remain pending. The provider API returned zero open CodeQL alerts for the PR #286 and #287 merge refs; master still reports 32 open CodeQL alerts until an owner-approved merge and default-branch reread. No merge or deployment occurred.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT CLOUD SECURITY AND ISSUE COORDINATION — 2026-10-07T12:59:47Z / 2026-10-07 SAST
+
+**WHO / authority:** Codex Forge coordinating as a stateless CA task renter; no RTC identity seat is claimed. Robyn retains repository ownership and review authority. AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
+
+**WHAT:** Revalidated the Cloud master, security alerts, protection settings and review artifacts. Current master is `29192965eb3b77e91d9ed60a0cad58097d61fda5`. PR #285 remains open at `08581a1b3e1206cdc3faf70e535d0ac2bee9a2d4`; its CodeQL and CI checks pass, while both Vercel status contexts report provider build-rate-limit failures. PR #286 is open at `860da3fb60614ea42b11d125106ab1d3f62d6616` with targeted Rust/CodeQL/CI checks passing and its Four Ws job cancelled because the branch is behind. PR #287 is open at `f60464150e5375a0a5920f5235e001a7214fbab7` with CodeQL and CI checks passing and no owner review. PR #288 is open at `ba8488e4fd6a2496aa42579f80c638abe6b34f38`; its hosted checks were still running at this read. No PR was merged and no production deployment occurred.
+
+**WHERE:** Cloud GSMB `RobynAwesome/Introduction-to-MCP`, source master above. The Cloud-only security receipt is [SECURITY_AND_ENFORCEMENT_2026-10-07.md](docs/swarm-ops/receipts/SECURITY_AND_ENFORCEMENT_2026-10-07.md). Local OneDrive and Heavy Human-in-the-Loop Google Drive remain separate populations and were not modified or reconciled.
+
+**WHY:** Keep security, issue completion and enforcement claims tied to exact provider state. The read found source risks and reviewable remediations but no confirmed successful exploit or breach; zero current secret alerts does not disprove historical exposure.
+
+- GitHub reports **32 open high-severity CodeQL alerts**, **0 critical CodeQL alerts**, **7 open Dependabot alerts** (#96 and #133–#138), and **0 open secret-scanning alerts**. #16's public-default admin bootstrap and salted SHA-256 password path remain owner-review work. #43 is represented by PR #286, and reflected XSS #46 by PR #287; no alert is dismissed.
+- Branch protection requires 14 strict contexts, enforces administrators, resolves conversations, and blocks force-push/deletion. Required approvals remain `0`, and `Require current Four Ws receipts` is absent. Actions report default workflow permissions `read`, `can_approve_pull_request_reviews=false`, `allowed_actions=all`, and `sha_pinning_required=false`. Issue #207 remains owner-closed; PR #288 is a source/test proposal only and does not establish a hosted App, provider enforcement or runtime authority.
+- `.github/workflows/deploy-web.yml` runs on a push to `master` when `public/**` or `kopano-labs-web/**` changes and invokes the IONOS FTP production jobs. PR #285 touches those path families, so an owner merge would create a deployment attempt; no merge, deployment receipt, served-SHA check or production verification exists here.
+- No credential rotation, incident closure, breach determination, branch-rule mutation, Google Drive action, or human field outreach was performed. Issues #211 and #231 remain HOLD; #158 still needs owner disposition against Bookit #42.
+
+**Next admissible action:** Owner review and approval of the concrete PRs; after any merge, reread the exact head, required checks, alert state and deployment receipt. For #207, obtain owner-approved App installation and hosted positive/negative receipts before considering a settings change. Keep #16's reset/migration work explicit. Do not merge, change protection, close an incident, contact field participants, or claim production from this receipt.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT CLOUD SECURITY AND ISSUE COORDINATION — 2026-10-06T22:58:23Z / 2026-10-07 SAST
+
+**WHO / authority:** Codex Forge coordinating as a stateless CA task renter; no RTC identity seat is claimed. Robyn retains repository ownership and review authority. AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
+
+**WHAT:** Revalidated open security alerts, dependency PRs, branch protection, and the #110/#207/#16/#43 lanes. PR #284's required checks passed; PR #285's bounded DOM/XSS changes are under review, with one test-regex finding corrected and hosted checks rerunning. A separate #43 HTTPS token-endpoint fix and a trusted-base Four Ws check are in implementation. No PR was merged and no production deployment occurred.
+
+**WHERE:** Cloud GSMB `RobynAwesome/Introduction-to-MCP`, source master `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. The Cloud-only security receipt is [SECURITY_AND_ENFORCEMENT_2026-10-07.md](docs/swarm-ops/receipts/SECURITY_AND_ENFORCEMENT_2026-10-07.md). Local OneDrive and Heavy Human-in-the-Loop Google Drive were not modified or reconciled.
+
+**WHY:** Keep security claims tied to exact source and provider evidence. The current read found source risks but no evidence of a successful exploit or confirmed incident; open-alert counts do not rule out historic exposure.
+
+- GitHub reported 32 open high CodeQL alerts, 0 critical, 7 open Dependabot alerts (#96 and #133–#138), and 0 open secret-scanning alerts. NLTK #96 remains unpatched in the provider record. PRs #277–#280 and #282 have all 14 required contexts passing and `CLEAN` merge state; #281 has its 14 required contexts passing but the Four Ws context reports failure and merge state is `UNSTABLE`. All six are open without owner review/merge, so the default-branch alerts remain open.
+- Source review of CodeQL #16 found salted SHA-256 password storage and fresh-database admin provisioning from a documented default when `KOPANO_ADMIN_PASSWORD` is absent; the setup also appears in Studio and demo instructions. Existing installations, deployment reachability, password use, login activity, and successful exploitation were not inspected. Changing the environment variable alone does not reset an existing account. Treat any reachable installation initialized with that public default as exposed until an owner-led credential reset and session review establish otherwise. Product-safe first-run replacement and password-hash migration remain unimplemented.
+- CodeQL #43 accepts caller-provided OAuth token URLs and sends authorization or refresh credentials to them without an HTTPS-only guarantee at every sink. A bounded Cloud fix is being prepared; no runtime OAuth exchange or exposure was observed.
+- PR #285 XSS remediation head `70ca7c9f4abf541cde2ec662db69d8ada41cdd09` is open against `cf6cdaa`; the test-regex correction is pushed and hosted checks are pending. Earlier CodeQL reported a high finding in the regression helper, which was corrected without dismissing an alert. Do not describe the source alerts as cleared until fresh provider results confirm it.
+- PR #284 `b11c261985bc480d603d80865b90adb1acffa4ce` has all 14 required contexts passing, is open with no review decision, and currently reports `UNSTABLE` merge state. Vercel results are preview-only. PR #283 documentation head `45d450afb866b1194a218960934ac97b45fea72c` has all required contexts and the Four Ws job passing; it remains open for owner review.
+- Master protection readback requires 14 strict checks, enforces admins, resolves conversations, and blocks force-push/deletion; required approvals remain 0, and `Require current Four Ws receipts` is not a required context. Issue #207 remains closed by Robyn. A trusted-base, exact-head check is being prepared; no branch setting changed and the current workflow is not enforcement.
+- Issue #110 remains open pending owner review and any separately evidenced domain/deployment work. Issue #158 remains open; the owner choice between removing booking calls-to-action and the target Bookit booking-first direction is still pending. Issues #211 and #231 remain HOLD for provider identity/deployment and consented field outcomes.
+
+**Next admissible action:** Finish and independently review PRs #285 and the #43/trusted-base check candidates; reread exact-head CI and live alert state; present the reviewable PRs to Robyn. Keep #16's default-admin reset and first-run design explicit for owner review. Do not merge, alter branch protection, close incidents, contact field participants, or claim production deployment from this receipt.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## CURRENT CLOUD COORDINATION — 2026-10-06T22:28:47Z / 2026-10-07 SAST
+
+**WHO:** Codex Forge, stateless renter coordinating as CA; no RTC identity seat is claimed. Delegated renters have separate task roles. Robyn retains repository ownership and RTC authority. For identity coordinates, AG remains identity / Seat 10 / Google Antigravity / Lead Developer.
+
+**WHAT:** Continue issue completion and controls after the current Cloud handoff. The #110 reconciliation is complete and its bounded responsive/empty-state fix is in progress on a separate clean Cloud branch. #158 remains blocked by conflicting owner directions in the Cloud issue and target Bookit issue. Read-only security audit lanes are checking the Four Ws trust boundary and open dependency alerts.
+
+**WHERE:** Cloud GSMB `RobynAwesome/Introduction-to-MCP`, `master@cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. See the dated #110 and #158 receipts below. No Local OneDrive or Google Drive writes are included.
+
+**WHY:** Separate fixes that can proceed from owner decisions and provider controls that remain outside this renter's authority; keep each issue's closeout tied to source and provider receipts.
+
+### New issue receipts and active work
+
+- [#110 Studio reconciliation receipt](docs/swarm-ops/receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md): the four-column desktop view and seven mode inventory are present. The wireframe's <=1320px right-rail drawer and <=980px hamburger are missing; Proof/CI lack truthful unavailable states without the backend. The canonical context hostname currently serves an IONOS not-connected page. The audit renter has revalidated current `master` and is implementing only those UI gaps with tests in a separate worktree. No domain or deployment change.
+- [#158 booking conflict receipt](docs/swarm-ops/receipts/ISSUE_158_BOOKING_CONFLICT_2026-10-07.md): #158 asks to remove booking calls-to-action from the active root while target Bookit #42 asks to keep booking links in the hero and navigation. No implementation can satisfy both. No root or live-surface change; owner disposition is needed.
+- [#207 Four Ws gate audit receipt](docs/swarm-ops/receipts/ISSUE_207_TRUSTED_GATE_AUDIT_2026-10-07.md): the current workflow executes the PR merge-tree script with a read-only token present, so the check is not a trusted decision source. Current protection still omits that context and requires zero approvals. The audit found no confirmed leak or breach; same-repo Actions secret policy was not inspected. A trusted check needs app-owned execution publishing to the latest PR head; no branch-protection setting changed.
+- PR #257's previously reported preview results remain preview-only. The documentation branch `codex/coordination-receipts-20261007` contains commit `9734ed0b6066b3227e52d37b01c34fc8b3edf2cc`; its KHELOS policy and whitespace checks passed against the active worktree index. The installed shared pre-commit launcher is Cygwin-bound and could not execute from this Windows worktree; no shared hook or persistent Git configuration was changed.
+- The trusted-base Four Ws gate audit is complete; Dependabot #133–#138 fixability/exposure triage remains in a separate bounded lane. Until a fresh provider readback, the prior 22:15Z live security counts remain the last confirmed observation: 32 open high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. No breach closure, secret rotation, settings change, merge, or deployment is claimed.
+
+### Next admissible action
+
+Review the documentation PR once created; review the bounded #110 implementation PR when its tests and evidence are ready; obtain the owner decision needed to reconcile #158 and target #42; continue dependency triage; and identify/approve the GitHub App and hosted worker needed for a trusted Four Ws check before changing branch protection. Re-read provider state before any completion or enforcement claim. Preserve Local, Cloud, and Drive as distinct populations.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+## CURRENT CLOUD COORDINATION — 2026-10-06T22:15:44Z / 2026-10-07 SAST
+
+**WHO:** Codex Forge, stateless renter in the CA task role; no RTC identity or seat is claimed for this task actor. Robyn remains the repository owner and RTC authority.
+
+**WHAT:** Refresh the Cloud handoff after owner-merged PRs #258, #259 and #257; record the bounded completion of #94; preserve the owner-closed status of #207 separately from its remaining provider-enforcement gap; and route live security and issue work to bounded lanes.
+
+**WHERE:** Cloud GSMB, `RobynAwesome/Introduction-to-MCP`, current `master@cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. This is not a Local OneDrive or Google Drive update.
+
+**WHY:** Keep the issue queue and enforcement claims bound to current provider evidence so learning from a completed discovery lane does not overstate catalog coverage, and so a closed tracker item does not conceal a remaining runtime control gap.
+
+### Current receipts
+
+- Robyn merged [PR #258](https://github.com/RobynAwesome/Introduction-to-MCP/pull/258) at `2026-10-06T21:16:22Z` as `608d8c658cd71f16bfbf36a5bab7e64d8b42574c` and [PR #259](https://github.com/RobynAwesome/Introduction-to-MCP/pull/259) at `2026-10-06T21:32:37Z` as `ea79365676ad0b296257bcdd66e738688f92e794`. Robyn merged [PR #257](https://github.com/RobynAwesome/Introduction-to-MCP/pull/257) at `2026-10-06T22:08:01Z` as current master `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`; its required checks and preview contexts passed. Vercel results were preview deployments, not production.
+- [Issue #94](https://github.com/RobynAwesome/Introduction-to-MCP/issues/94) is now `CLOSED / COMPLETED` after the owner merged PR #257. The closeout comment is [#6026432635](https://github.com/RobynAwesome/Introduction-to-MCP/issues/94#issuecomment-6026432635). Live SkillHub search at `2026-10-06T22:07:50Z` returned four RobynAwesome entries, including one PKA-based case skill and one Project Jennifer runtime-memory skill. The Project Jennifer listing reports version `1.0.0`, while current source at `cc74b56b879881defbbb885167b1b75a4a26f6db` is version `1.2.0`; the listing gap is separate follow-up work. No standalone PKA listing, complete catalog, verified publisher identity, or source synchronization is claimed.
+- [Issue #207](https://github.com/RobynAwesome/Introduction-to-MCP/issues/207) is `CLOSED / COMPLETED` by Robyn at `2026-10-06T21:32:38Z`, one second after PR #259 merged. The issue's owner disposition is preserved. A fresh read of master protection at `2026-10-06T22:15:44Z` shows strict PR protection and 14 required contexts, but **does not include `Require current Four Ws receipts`**; `required_approving_review_count=0`. The PR #259 workflow runs, but its check is not currently merge-blocking and its `pull_request` execution can be changed by the PR under review. Do not describe Four Ws as provider-enforced or reopen the owner's tracker item from this renter. Prepare a trusted-base successor PR, then obtain the owner's review before any branch-rule setting change.
+- Security at `2026-10-06T22:15:44Z`: **32 open high CodeQL alerts, seven open Dependabot alerts** (#96 high NLTK, #133 medium rustls, #134/#135 high source-map-js, #136 critical proxy-addr, #137 high fsspec, #138 medium multidict), and **zero open secret-scanning alerts**. Zero current secret alerts does not disprove historical exposure; no incident was closed and no credential was rotated here.
+- Dependabot alert #96 is distinct from closed GitHub issue #96. It affects root `uv.lock` at NLTK `3.10.3`, has no patched version in the provider record, and upstream's related release-preparation PR #3826 is an open draft. Scoped app search found VADER use and no calls to the named model-artifact APIs, which narrows but does not resolve exposure. Keep the alert open and wait for a published patched release; do not use a development snapshot.
+- #110 remains open. The assigned lane confirmed the stale GUI pointer was already removed by merged PRs #111 and #248; current plan-to-Studio audit and bounded validation continue.
+- #158 remains open. The target repository's issue #42 has a live booking-priority conflict and draft PR #43; do not change the live public surface until the owner resolves the conflict.
+- #121 remains tracker-closed by Robyn at `2026-10-05T10:21:12Z`; independent Seat 10 re-entry/restoration evidence remains absent. PR #254's stale wording is not rewritten by this renter.
+- #231 still has no consented field participant or seven-day re-contact outcome. #211 remains HOLD without actual provider identity and deployment receipts. Heavy Human-in-the-Loop Google Drive was not read or changed during this Cloud update.
+
+### Next admissible action
+
+Finish the trusted-base Four Ws successor proposal and keep it reviewable; after owner review/merge, re-read branch protection before claiming enforcement. Continue the separate #110 audit and #158 conflict receipt. Keep the NLTK alert open until a published patched version is available. Preserve Local, Cloud, and Drive as distinct source populations.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+## CURRENT CLOUD COORDINATION UPDATE — 2026-10-06T22:29:48Z (OLDEST PR #254 REPAIR)
+
+WHO: Codex Forge / CA task role, stateless renter acting on Robyn's oldest-first PR repair directive. I_AM_STATELESS_RENTER_NOT_LANDLORD.
+WHAT: Reconcile PR #254 with current master, retain its October 4 owner confirmation as dated history, and correct its present tracker and identity readback. PR review and CI are pending for the repaired head; no merge or owner approval is claimed.
+WHERE: Cloud only, RobynAwesome/Introduction-to-MCP; master snapshot `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`, original #254 head `f71b6506e3df3382ec0b80aa5af1305d803f5808`. Scope: this checkpoint, Dashboard's dated history, and [the preserved confirmation receipt](docs/swarm-ops/receipts/CURSOR_CF_CONFIRMATION_2026-10-04.md). Local and Google Drive sources were not read or reconciled.
+WHY: Unblock review without allowing an older NOW insertion to overwrite newer authority. Robyn asked for a future NOW coordination proposal in an existing governance issue; that proposal belongs to #116 and is not implemented by this repair.
+
+**Current readback:** Cursor is the operational Chief Facilitator lane; AG is the identity at RTC Seat 10, Google Antigravity the platform, and Lead Developer the role, following the October 5 correction. The original October 4 quote, ANTIGRAVITY spelling, and reported model remain historical evidence in the linked receipt.
+
+**Tracker boundary:** #121 is CLOSED by Robyn at `2026-10-05T10:21:12Z`; this is a tracker fact, not independent runtime re-entry proof. #183 remains HOLD. The October 4 OPEN statement and obsolete "top of NOW" pointer are archived with an explicit supersession boundary. Earlier checkpoints below are observations of their dates, including PRs #257–259 before their subsequent landing.
+
+**Execution boundary:** Prompting directive is the active human request to repair stale/conflicted PRs oldest first. Renter ingress and root NOW were read; KPEFS scope is bounded Cloud documentation and PR validation, BlackMask containment preserves history and source separation, and PKA uncertainty keeps runtime admission and owner review unclaimed. Next: validate the repaired head, then continue oldest-first CI repairs. No governance workflow redesign or issue closure is admitted here.
+
+---
+
 ## CURRENT CLOUD COORDINATION UPDATE — 2026-10-05T12:34:59Z (PR #259 FOUR WS GATE UNDER REVIEW)
 
 WHO: Codex Forge / CA task role, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
