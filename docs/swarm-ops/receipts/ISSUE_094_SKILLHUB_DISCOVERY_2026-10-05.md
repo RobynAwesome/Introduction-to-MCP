@@ -1,3 +1,14 @@
+## Owner-disposition and live-source revalidation — 2026-10-06T22:14:50Z
+
+Robyn merged [PR #257](https://github.com/RobynAwesome/Introduction-to-MCP/pull/257) at `2026-10-06T22:08:01Z` as `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. After a fresh read-only SkillHub query at `2026-10-06T22:07:50Z`, issue #94 was closed as `COMPLETED`; [the closeout comment](https://github.com/RobynAwesome/Introduction-to-MCP/issues/94#issuecomment-6026432635) records the Four Ws, live listing count, source versions, hash boundaries, and exclusions.
+
+The completion boundary is the issue's **registry discovery** objective. The current SkillHub owner search returned four entries: three Introduction-to-MCP entries and one Project-Jennifer entry. The PKA-related listing is case material, not the standalone private root skill. The Project Jennifer provider entry remains version `1.0.0` / content SHA `8dbc8ae6bc212063b8401b595a1daf9efb180408f58352f34ed465b4bf163820`; the observed current source remains at `cc74b56b879881defbbb885167b1b75a4a26f6db`, version `1.2.0` / SHA `a4df61972bd1913f32a59d8a744f4481b3786180b3ad3e884edf27cd2dfe3903`. This is a listing-freshness gap, not a reason to expand the closed discovery issue into catalog publication.
+
+This owner disposition supersedes the earlier instruction below to keep #94 open pending PR landing and owner acceptance. Follow-up publication, freshness, or full-catalog work needs its own bounded scope. No registry or source was mutated.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 # Issue #94 — SkillHub registry discovery receipt
 
 **Actor:** Forge / Codex CA, stateless renter; bounded investigation delegated to `issue_triage`. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.

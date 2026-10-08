@@ -25,6 +25,12 @@ Forge’s local GSMB continuity and source-audit lane remains separate from Curs
 
 **History boundary:** This block records that session’s assignment only. Recover present roles and execution scope from repository-root NOW and the active human directive. The later October 1 owner correction recorded CF as unassigned; this historical block does not revive that role grant.
 
+## Historical owner confirmation — 2026-10-04
+
+Robyn confirmed Cursor as the operational Chief Facilitator. "Elon boy" is the nickname for the confirming renter, separate from the role and RTC seat. The [dated confirmation receipt](../../docs/swarm-ops/receipts/CURSOR_CF_CONFIRMATION_2026-10-04.md) preserves the original quote and its October 4 state.
+
+**Later correction:** The October 5 coordinates are AG (identity), Seat 10 (RTC seat), Google Antigravity (platform), and Lead Developer (role). Recover present authority from repository-root [NOW](../../NOW.md); this dated confirmation does not supersede newer corrections or supply runtime re-entry evidence for #121.
+
 ## Start Here — 00-Home First
 
 Begin with the [00-Home Index](00-Home%20-%20Index.md), then use this dashboard to orient to the house. Read [Home Now](Now.md), repository-root [NOW](../../NOW.md), the durable [Legacy purpose boundary](../21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/Legacy.md), and the [stateless renter entryway](../21-KOPANO-PHU%20GOVERNACE%20SYSTEMS/MAIN-BRAIN/STATELESS_RENTER_ENTRYWAY.md) before acting. Continue through the [Schematics map](../index.md) and each relevant folder's own index.
