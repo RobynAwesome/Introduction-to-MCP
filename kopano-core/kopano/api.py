@@ -11,7 +11,6 @@ from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
 import html
-import json
 import asyncio
 import os
 import sys
@@ -626,9 +625,9 @@ def observability_dashboard(session_id: str = "default_session"):
     """
     Renders the rich Observable Cognition Surface & KMEC Observational Dataset Dashboard.
     """
-    # Escape query param for HTML text nodes and as a JSON string for JS embedding.
+    # Escape query parameters for HTML text and quoted-attribute contexts.
+    # Read the data attribute back from the DOM instead of embedding raw JSON in a script.
     safe_session_html = html.escape(session_id, quote=True)
-    safe_session_js = json.dumps(session_id)
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -783,7 +782,7 @@ def observability_dashboard(session_id: str = "default_session"):
             <p>Weight-Bearing Activity Ledger · Cold-Restart Resilient · Anti-"Trust Me Bro" Derivation Gate</p>
         </div>
         <div style="display: flex; gap: 10px; align-items: center;">
-            <span class="badge">Session: {safe_session_html}</span>
+            <span class="badge" id="sessionBadge" data-session-id="{safe_session_html}">Session: {safe_session_html}</span>
             <span class="badge" style="color: var(--accent-cyan); background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.3);">29/29 Metal Pass</span>
         </div>
     </div>
@@ -850,7 +849,7 @@ def observability_dashboard(session_id: str = "default_session"):
     </div>
 
     <script>
-        const sessionId = {safe_session_js};
+        const sessionId = document.getElementById('sessionBadge').dataset.sessionId;
         let globalLineageMap = {{}};
 
         async function loadAnalytics() {{

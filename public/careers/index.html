@@ -1078,20 +1078,33 @@ function processAdaptiveness(rawText) {
         translated_intent: translated
       }
     };
-    addMsg(`📡 [Civic Utility Router]: Routed municipal alert.\n<pre style="margin-top:0.4rem;font-size:0.65rem;color:var(--c-iidp);white-space:pre-wrap;word-break:break-all;">${JSON.stringify(reportPayload, null, 2)}</pre>`, 'adapt');
+    const reportMessage = document.createDocumentFragment();
+    reportMessage.appendChild(document.createTextNode('📡 [Civic Utility Router]: Routed municipal alert.\n'));
+    const reportPre = document.createElement('pre');
+    reportPre.style.cssText = 'margin-top:0.4rem;font-size:0.65rem;color:var(--c-iidp);white-space:pre-wrap;word-break:break-all;';
+    reportPre.textContent = JSON.stringify(reportPayload, null, 2);
+    reportMessage.appendChild(reportPre);
+    addMsg(reportMessage, 'adapt');
   }
 
   return translated;
 }
 
-function addMsg(text, from='vc') {
+function addMsg(content, from='vc') {
   const msgs = document.getElementById('vc-messages');
   const div = document.createElement('div');
   div.className = `msg ${from}`;
-  if(from==='vc') {
-    div.innerHTML = `<span class="msg-tag">VC — VanGuard C</span>${text}`;
+  div.style.whiteSpace = 'pre-wrap';
+  if (from === 'vc') {
+    const tag = document.createElement('span');
+    tag.className = 'msg-tag';
+    tag.textContent = 'VC — VanGuard C';
+    div.appendChild(tag);
+  }
+  if (typeof content === 'string') {
+    div.appendChild(document.createTextNode(content));
   } else {
-    div.innerHTML = text.replace(/\n/g, '<br/>');
+    div.appendChild(content);
   }
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
@@ -1161,13 +1174,19 @@ function openVC(domain) {
   if(!vcOpen) toggleVC();
   if(domain) {
     const msgs = document.getElementById('vc-messages');
-    msgs.innerHTML = '';
+    msgs.replaceChildren();
     const domainNames = {
       crisis:'CrisisConnect PWA',kasilink:'KasiLink Mesh',
       starfall:'StarFallSalvage Web3GL',ops:'Operations Node',
       governance:'Governance Protocol',mmao:'MMAO Engineering'
     };
-    addMsg(`I see you're interested in <strong>${domainNames[domain]||'a Kopano Labs role'}</strong>. Good. Let's validate your DSO vector first.`, 'vc');
+    const introduction = document.createDocumentFragment();
+    introduction.appendChild(document.createTextNode("I see you're interested in "));
+    const domainLabel = document.createElement('strong');
+    domainLabel.textContent = domainNames[domain] || 'a Kopano Labs role';
+    introduction.appendChild(domainLabel);
+    introduction.appendChild(document.createTextNode(". Good. Let's validate your DSO vector first."));
+    addMsg(introduction, 'vc');
     setTimeout(()=>runState('HUNGER_CHECK'), 800);
   }
 }

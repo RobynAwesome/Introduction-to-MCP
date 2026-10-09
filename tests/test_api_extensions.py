@@ -5,9 +5,12 @@ Integration tests for new API endpoints in Kopano Control Plane:
 - RTC Voice turn processing & seat switching
 """
 
+import html
+from html.parser import HTMLParser
+
 import pytest
 from fastapi.testclient import TestClient
-from kopano.api import app
+from kopano.api import app, observability_dashboard
 
 
 @pytest.fixture
@@ -124,6 +127,48 @@ def test_api_observability_html_dashboard(client):
     assert "Observable Cognition Surface" in res.text
     assert "KMEC Dataset Engine" in res.text
     assert "cell-interactive" in res.text
+
+
+def test_api_observability_keeps_script_payload_in_escaped_data_attribute():
+    payload = '</script><script>alert(1)</script><img src=x onerror="alert(2)">'
+    response = observability_dashboard(session_id=payload)
+
+    assert any(
+        getattr(route, "path", None) == "/observability"
+        and getattr(route, "endpoint", None) is observability_dashboard
+        for route in app.routes
+    )
+    escaped = html.escape(payload, quote=True)
+    assert f'data-session-id="{escaped}"' in response
+    assert f'Session: {escaped}' in response
+    assert payload not in response
+    assert "document.getElementById('sessionBadge').dataset.sessionId" in response
+
+    class SessionBadgeParser(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.in_badge = False
+            self.session_id = None
+            self.text = ""
+
+        def handle_starttag(self, tag, attrs):
+            attributes = dict(attrs)
+            if tag == "span" and attributes.get("id") == "sessionBadge":
+                self.in_badge = True
+                self.session_id = attributes.get("data-session-id")
+
+        def handle_endtag(self, tag):
+            if self.in_badge and tag == "span":
+                self.in_badge = False
+
+        def handle_data(self, data):
+            if self.in_badge:
+                self.text += data
+
+    parsed = SessionBadgeParser()
+    parsed.feed(response)
+    assert parsed.session_id == payload
+    assert parsed.text == f"Session: {payload}"
 
 
 def test_api_smart_ledger_and_reconciliation_flow(client):
