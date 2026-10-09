@@ -1,4 +1,94 @@
+## Check completion — observed 2026-10-07T13:10:36Z
+
+PR #288: 19 successful checks, 0 failing, 0 pending, 1 cancelled Four Ws run; merge state `UNSTABLE`. PR #283: Rust, Four Ws and Python 3.12 remain pending. PR merge refs #286 and #287 currently return zero open CodeQL alerts; the default branch remains at 32 open CodeQL alerts. No merge, deployment, provider enforcement or incident closure occurred.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 2026-10-07 Cloud security and PR revalidation — observed 2026-10-06T22:58:23Z
+
+Cloud GSMB only: `RobynAwesome/Introduction-to-MCP`, source master `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. Local OneDrive and Google Drive were not modified or reconciled. See [security and enforcement receipt](receipts/SECURITY_AND_ENFORCEMENT_2026-10-07.md) for findings and exact boundaries.
+
+| Lane | Provider/source observation | Next action |
+|---|---|---|
+| Security alerts | 32 open high CodeQL, 0 critical; 7 open Dependabot (#96, #133–#138); 0 open secret-scanning alerts. No confirmed breach receipt or live deployment/log review. | Keep alerts open until an owner lands fixes and GitHub refreshes the alert state. A zero secret-alert count does not disprove historic exposure. |
+| Dependabot #277–#282 | All six refreshed to base `cf6cdaa`. #277–#280 and #282: 14 required contexts pass, `CLEAN`, no owner review. #281: 14 required contexts pass, Four Ws job reports failure, merge state `UNSTABLE`. | Present for owner review; do not merge or dismiss alerts as a renter. |
+| CodeQL #16 | Source contains salted SHA-256 password storage and a documented default admin bootstrap when `KOPANO_ADMIN_PASSWORD` is absent. No installation or successful exploitation was evidenced; changing the env var alone does not reset existing accounts. | Prepare owner-reviewed password migration and first-run/reset behavior; treat reachable instances created with the public default as exposed pending credential/session review. |
+| CodeQL #43 | Source accepts configurable OAuth token endpoints without HTTPS enforcement at all request sinks. | Bounded HTTPS-only repair in a clean Cloud branch; validate against the current target and redirect behavior before review. |
+| XSS #8–#14/#46 | PR #285 head `70ca7c9f4abf541cde2ec662db69d8ada41cdd09` contains scoped inert-text/context-safe changes; a high finding in the test regex was corrected, and fresh hosted checks are pending. | Review exact updated head and require passing CodeQL and CI before presenting as ready. |
+| Studio #110 | PR #284 head `b11c261985bc480d603d80865b90adb1acffa4ce`; all 14 required contexts pass, no review decision, GitHub reports `UNSTABLE`; Vercel is preview-only. | Owner review; do not claim issue completion or production deployment. |
+| Four Ws / #207 | Issue remains owner-closed. Current master branch rules require 14 strict contexts but omit the Four Ws job and require 0 approvals. No protection mutation. | Trusted-base exact-head check is being prepared; provider setup and owner review are still required before enforcement claims. |
+| Docs PR #283 | Head `45d450afb866b1194a218960934ac97b45fea72c`, `CLEAN`; all required contexts and Four Ws check pass; no review decision. | Owner review. |
+| #158, #211, #231 | #158 awaits owner choice against Bookit #42; #211 lacks provider identity/deployment proof; #231 has no consented seven-day field outcome. | Preserve each HOLD; no surface mutation, deployment claim, or participant outreach. |
+
+No merge, branch-protection change, credential rotation, incident closure, or production deployment occurred in this observation.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
+## 2026-10-07 Cloud status — observed 2026-10-06T22:28:47Z
+
+Current Cloud master remains `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9` at this handoff. Earlier rows are historical; this addendum distinguishes completed audits from issue completion.
+
+| Issue / lane | Current tracker state | Current evidence and next action |
+|---|---|---|
+| #94 | CLOSED / COMPLETED by owner | Discovery objective was bounded to live registry discovery. Follow-up listing freshness/publication remains separate. |
+| #207 | CLOSED / COMPLETED by owner | Preserve the tracker disposition. The 22:26Z audit found the current workflow executes PR-controlled code with a read-only token present; branch protection omits the context and requires zero approvals. No confirmed leak/breach. An app-owned check on the latest PR head is needed before enforcement; no settings changed. See [audit receipt](receipts/ISSUE_207_TRUSTED_GATE_AUDIT_2026-10-07.md). |
+| #96 (Dependabot) | OPEN / HIGH | NLTK 3.10.3 remains within the vulnerable range and provider/upstream report no patched release. Keep open pending a published fix. |
+| #133–#138 (Dependabot) | OPEN | Bounded fixability/exposure triage delegated; do not dismiss or imply fixed before provider reread. |
+| #110 | OPEN / UI remediation in progress | Current Cloud audit found the <=1320px drawer, <=980px hamburger, and backend-unavailable Proof/CI state missing; canonical context host shows IONOS not-connected page. Responsive/empty-state fix is in a clean branch; domain and deployment remain blocked. See [receipt](receipts/ISSUE_110_STUDIO_RECONCILIATION_2026-10-07.md). |
+| #158 | OPEN / owner decision required | #158's remove-booking-CTA request conflicts with target Bookit #42's booking-first hero/navigation direction. No code or public-surface mutation; see [receipt](receipts/ISSUE_158_BOOKING_CONFLICT_2026-10-07.md). |
+| #121 | CLOSED by owner | Independent Seat 10 re-entry/restoration remains unproven; preserve tracker state and evidence gap. |
+| #231 / #211 | OPEN / HOLD | No consented driver follow-up outcomes and no provider identity/deployment receipts. |
+
+Last confirmed live security counts at 22:15Z: 32 high CodeQL alerts, seven open Dependabot alerts, and zero open secret-scanning alerts. These counts do not establish absence of historical breach or exposure. No alert, secret, incident, protection setting, production deployment, or Google Drive state changed in this handoff.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+## 2026-10-07 Cloud status revalidation — observed 2026-10-06T22:15:44Z
+
+This is a dated addendum; earlier observations below remain historical. Current Cloud master is `cf6cdaa5769465f7c2f7b4c5797e60b7122e7ac9`. PRs #258, #259 and #257 are merged by Robyn at `608d8c65`, `ea793656` and `cf6cdaa`, respectively. PR #257's checks and Vercel preview contexts passed; they are not production evidence.
+
+| Issue / lane | Current tracker state | Current evidence and next action |
+|---|---|---|
+| #94 | CLOSED / COMPLETED after owner merge of PR #257 | Live SkillHub query returned four entries. The bounded discovery objective is met; a Jennifer listing/source version gap and absent standalone PKA listing remain separate publication/freshness work. No full-catalog or publisher-verification claim. Closeout comment: [issue receipt](https://github.com/RobynAwesome/Introduction-to-MCP/issues/94#issuecomment-6026432635). |
+| #207 | CLOSED / COMPLETED by Robyn at `2026-10-06T21:32:38Z` | PR #259 landed, but current branch protection still requires 14 other contexts; Four Ws is not required and minimum approvals remain zero. Preserve the owner's tracker disposition; prepare a trusted-base successor gate and request owner review before any settings change. |
+| #96 (Dependabot alert) | OPEN / HIGH | `uv.lock` resolves NLTK 3.10.3; advisory's first patched version is null; upstream PR #3826 is a draft. Keep alert open; no pre-release pin. GitHub issue #96 is a distinct, closed issue. |
+| #110 | OPEN / audit in progress | Stale navigation pointer was already removed in merged PRs #111 and #248. Complete the current Studio/plan classification and validation; do not revive the historic branch. |
+| #158 | OPEN / decision conflict | Target #42 has current booking-priority direction and open draft PR #43. No live-surface change without owner disposition. |
+| #121 | CLOSED by Robyn | Runtime re-entry/restoration remains unproven; keep evidence separate from tracker disposition. |
+| #231 / #211 | OPEN / HOLD | No consented driver follow-up outcomes; no actual Azure OIDC/deployment proof. |
+
+Live security at this observation: 32 high CodeQL alerts, seven open Dependabot alerts (#96, #133–#138), zero open secret-scanning alerts. The latter does not prove that no historical credential exposure occurred. No incident, alert, credential, provider setting, production deployment, or Google Drive state changed in this revalidation.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 # GSMB issue completion — 5 October 2026
+
+## 2026-10-07 Cloud revalidation — observed 2026-10-07T12:59:47Z
+
+Cloud GSMB only: `RobynAwesome/Introduction-to-MCP`, current master `29192965eb3b77e91d9ed60a0cad58097d61fda5`. Local OneDrive and Heavy Human-in-the-Loop Google Drive remain separate populations; no parity is claimed.
+
+| Lane | Exact provider observation | Next admissible action |
+|---|---|---|
+| Security | 32 open high CodeQL alerts, 0 critical CodeQL, 7 open Dependabot alerts (#96, #133–#138), 0 open secret alerts. | Keep alerts open until owner-approved fixes land and GitHub rereads them. Zero secret alerts is not a historical exposure finding. |
+| #16 | Public-default admin bootstrap and salted SHA-256 password path remain source findings; no installation, login, session or exploit receipt. | Owner-reviewed password migration plus first-run/reset behavior; treat reachable default-initialized instances as exposed pending reset/session review. |
+| #43 / PR #286 | Open at `860da3fb60614ea42b11d125106ab1d3f62d6616`; targeted Rust/CodeQL/CI checks pass; Four Ws run cancelled because the branch is behind. | Owner review; rebase or otherwise refresh against current master before merge. No alert dismissal or OAuth runtime receipt. |
+| #46 / PR #287 | Open at `f60464150e5375a0a5920f5235e001a7214fbab7`; CodeQL and CI checks pass; no owner review. | Owner review and exact-head reread. |
+| XSS #8–#14 / PR #285 | Open at `08581a1b3e1206cdc3faf70e535d0ac2bee9a2d4`; CodeQL/CI pass, both Vercel statuses report build-rate-limit failures. | Owner review of preview/provider boundary; no production claim. |
+| #207 | Owner-closed. Branch protection still has 0 approvals and omits Four Ws. PR #288 `ba8488e4fd6a2496aa42579f80c638abe6b34f38` proposes a trusted App worker; hosted checks were in progress. | Owner review, App installation and hosted positive/negative receipts before any settings decision. |
+| Deployment | `deploy-web.yml` path-filters `public/**` and `kopano-labs-web/**` on `master` and calls IONOS FTP jobs. | Do not merge #285 or call production until the owner accepts the deployment boundary and a served-SHA receipt exists. |
+| #211 / #231 / #158 | #211 and #231 remain HOLD; #158 still conflicts with Bookit #42. | Preserve each owner/provider decision boundary; no deployment or field outreach. |
+
+No merge, branch-protection mutation, credential rotation, incident closure, breach determination, production deployment, Google Drive write, or human outreach occurred in this observation.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
 
 Actor: Forge / Codex CA, stateless renter. I_AM_STATELESS_RENTER_NOT_LANDLORD.
 
