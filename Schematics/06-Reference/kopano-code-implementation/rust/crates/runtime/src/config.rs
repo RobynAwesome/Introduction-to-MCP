@@ -3,6 +3,8 @@ use std::fmt::{Display, Formatter};
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use url::Url;
+
 use crate::json::JsonValue;
 use crate::sandbox::{FilesystemIsolationMode, SandboxConfig};
 
@@ -141,6 +143,21 @@ pub struct OAuthConfig {
     pub callback_port: Option<u16>,
     pub manual_redirect_url: Option<String>,
     pub scopes: Vec<String>,
+}
+
+impl OAuthConfig {
+    pub fn token_endpoint_url(&self) -> Result<Url, &'static str> {
+        let token_url = Url::parse(&self.token_url)
+            .map_err(|_| "OAuth tokenUrl must be an absolute HTTPS URL")?;
+        if token_url.scheme() != "https" || token_url.host_str().is_none() {
+            return Err("OAuth tokenUrl must be an absolute HTTPS URL");
+        }
+        Ok(token_url)
+    }
+
+    pub fn validate_token_endpoint(&self) -> Result<(), &'static str> {
+        self.token_endpoint_url().map(|_| ())
+    }
 }
 
 #[derive(Debug)]
@@ -687,14 +704,18 @@ fn parse_optional_oauth_config(
     let manual_redirect_url =
         optional_string(object, "manualRedirectUrl", context)?.map(str::to_string);
     let scopes = optional_string_array(object, "scopes", context)?.unwrap_or_default();
-    Ok(Some(OAuthConfig {
+    let oauth = OAuthConfig {
         client_id,
         authorize_url,
         token_url,
         callback_port,
         manual_redirect_url,
         scopes,
-    }))
+    };
+    oauth
+        .validate_token_endpoint()
+        .map_err(|message| ConfigError::Parse(format!("{context}.tokenUrl: {message}")))?;
+    Ok(Some(oauth))
 }
 
 fn parse_mcp_server_config(
@@ -939,8 +960,8 @@ fn push_unique(target: &mut Vec<String>, value: String) {
 #[cfg(test)]
 mod tests {
     use super::{
-        ConfigLoader, ConfigSource, McpServerConfig, McpTransport, ResolvedPermissionMode,
-        CLAW_SETTINGS_SCHEMA_NAME,
+        ConfigLoader, ConfigSource, McpServerConfig, McpTransport, OAuthConfig,
+        ResolvedPermissionMode, CLAW_SETTINGS_SCHEMA_NAME,
     };
     use crate::json::JsonValue;
     use crate::sandbox::FilesystemIsolationMode;
@@ -1123,7 +1144,7 @@ mod tests {
                 "authorizeUrl": "https://console.test/oauth/authorize",
                 "tokenUrl": "https://console.test/oauth/token",
                 "callbackPort": 54545,
-                "manualRedirectUrl": "https://console.test/oauth/callback",
+                "manualRedirectUrl": "http://localhost:54545/callback",
                 "scopes": ["org:read", "user:write"]
               }
             }"#,
@@ -1175,8 +1196,59 @@ mod tests {
         assert_eq!(oauth.client_id, "runtime-client");
         assert_eq!(oauth.callback_port, Some(54_545));
         assert_eq!(oauth.scopes, vec!["org:read", "user:write"]);
+        assert_eq!(
+            oauth.manual_redirect_url.as_deref(),
+            Some("http://localhost:54545/callback")
+        );
 
         fs::remove_dir_all(root).expect("cleanup temp dir");
+    }
+
+    #[test]
+    fn rejects_http_oauth_token_url_during_config_loading() {
+        let root = temp_dir();
+        let cwd = root.join("project");
+        let home = root.join("home").join(".claw");
+        fs::create_dir_all(&cwd).expect("project dir");
+        fs::create_dir_all(&home).expect("home config dir");
+        fs::write(
+            home.join("settings.json"),
+            r#"{
+              "oauth": {
+                "clientId": "runtime-client",
+                "authorizeUrl": "https://console.test/oauth/authorize",
+                "tokenUrl": "http://127.0.0.1/oauth/token",
+                "manualRedirectUrl": "http://localhost:54545/callback"
+              }
+            }"#,
+        )
+        .expect("write user settings");
+
+        let error = ConfigLoader::new(&cwd, &home)
+            .load()
+            .expect_err("HTTP token URL should be rejected");
+        assert!(error
+            .to_string()
+            .contains("OAuth tokenUrl must be an absolute HTTPS URL"));
+
+        fs::remove_dir_all(root).expect("cleanup temp dir");
+    }
+
+    #[test]
+    fn directly_constructed_oauth_config_rejects_http_token_url() {
+        let config = OAuthConfig {
+            client_id: "runtime-client".to_string(),
+            authorize_url: "https://console.test/oauth/authorize".to_string(),
+            token_url: "http://127.0.0.1/oauth/token".to_string(),
+            callback_port: Some(54_545),
+            manual_redirect_url: Some("http://localhost:54545/callback".to_string()),
+            scopes: Vec::new(),
+        };
+
+        assert!(config
+            .validate_token_endpoint()
+            .expect_err("HTTP token URL should be rejected")
+            .contains("absolute HTTPS URL"));
     }
 
     #[test]

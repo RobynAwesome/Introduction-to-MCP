@@ -14,6 +14,7 @@ regex = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json.workspace = true
 tokio = { version = "1", features = ["io-util", "macros", "process", "rt", "rt-multi-thread", "time"] }
+url = "2"
 walkdir = "2"
 
 [lints]

@@ -31,6 +31,29 @@ jobs:
       - name: Enforce DEPENDENCY_FIREWALL floors
         run: python scripts/kc_dependency_firewall_gate.py
 
+  rust-workspace:
+    name: Rust workspace
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: Schematics/06-Reference/kopano-code-implementation/rust
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: false
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Check changed Rust formatting
+        run: rustfmt --check --edition 2021 crates/runtime/src/config.rs crates/api/src/providers/claw_provider.rs
+
+      - name: Test changed Rust packages
+        run: cargo test -p api -p runtime --locked
+
   lint-and-test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
