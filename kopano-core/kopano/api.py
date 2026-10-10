@@ -854,7 +854,7 @@ def observability_dashboard(session_id: str = "default_session"):
 
         async function loadAnalytics() {{
             try {{
-                const res = await fetch(`/api/governance-traces/analytics?session_id=${{sessionId}}`);
+                const res = await fetch(`/api/governance-traces/analytics?session_id=${{encodeURIComponent(sessionId)}}`);
                 const data = await res.json();
                 if (data.message) {{
                     document.getElementById('pivotContainer').innerHTML = `<p style="color: var(--text-muted);">${{data.message}}</p>`;
@@ -933,7 +933,7 @@ def observability_dashboard(session_id: str = "default_session"):
         async function inspectCell(key) {{
             const traceIds = globalLineageMap[key] || [];
             if (traceIds.length === 0) return;
-            const res = await fetch(`/api/governance-traces/cell-lineage?session_id=${{sessionId}}`, {{
+            const res = await fetch(`/api/governance-traces/cell-lineage?session_id=${{encodeURIComponent(sessionId)}}`, {{
                 method: 'POST',
                 headers: {{ 'Content-Type': 'application/json' }},
                 body: JSON.stringify(traceIds)
