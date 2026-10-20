@@ -169,6 +169,7 @@ def test_api_observability_keeps_script_payload_in_escaped_data_attribute():
     parsed.feed(response)
     assert parsed.session_id == payload
     assert parsed.text == f"Session: {payload}"
+    assert "encodeURIComponent(sessionId)" in response
 
 
 def test_api_smart_ledger_and_reconciliation_flow(client):
