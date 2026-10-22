@@ -30,7 +30,7 @@ def evaluate(record: object) -> dict:
     """Return a bounded disposition; claims are not independent attestations."""
     if not isinstance(record, dict):
         return {"verdict": "BLOCK", "reasons": ["input must be a JSON object"],
-                "runtime_verified": False}
+                "runtime_verified": False, "production_authority": False}
     blocked: list[str] = []
     held: list[str] = []
     mode = record.get("mode")
