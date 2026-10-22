@@ -1,0 +1,22 @@
+name: Security Playground fixture admission gate
+
+on:
+  pull_request:
+    paths:
+      - "docs/swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md"
+      - "scripts/security_playground_inventory_gate.py"
+      - "tests/test_security_playground_inventory_gate.py"
+      - ".github/workflows/security-playground-fixture.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixture-admission:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synthetic admission regression tests (no credentials or production access)
+        run: python -m unittest discover -s tests -p 'test_security_playground_inventory_gate.py' -v
