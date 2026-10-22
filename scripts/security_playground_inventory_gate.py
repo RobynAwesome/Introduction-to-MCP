@@ -13,7 +13,7 @@ import re
 import sys
 from pathlib import Path
 
-SCHEMA = "gsm b_security_playground_inventory_gate_v1".replace(" ", "")
+SCHEMA = "gsmb_security_playground_inventory_gate_v1"
 ISOLATION_CONTROLS = (
     "dedicated_isolation_domain",
     "deny_production_network",
@@ -36,7 +36,7 @@ def evaluate(record: object) -> dict:
     mode = record.get("mode")
     if record.get("schema") != SCHEMA:
         held.append("schema is missing or unsupported")
-    if mode not in VALID_MODES:
+    if not isinstance(mode, str) or mode not in VALID_MODES:
         held.append("mode must be fixture, cloud or local")
     revision = record.get("source_revision")
     if not isinstance(revision, str) or not re.fullmatch(r"[0-9a-fA-F]{40}", revision):
@@ -77,7 +77,7 @@ def evaluate(record: object) -> dict:
             else:
                 ids.add(asset_id)
             kind = asset.get("kind")
-            if kind not in VALID_KINDS:
+            if not isinstance(kind, str) or kind not in VALID_KINDS:
                 held.append(f"{prefix} kind unknown")
             if kind == "php_runtime":
                 has_php = True
@@ -86,7 +86,7 @@ def evaluate(record: object) -> dict:
                 blocked.append(f"{prefix} has vulnerable status")
             elif status == "unknown":
                 held.append(f"{prefix} status unknown")
-            elif status not in VALID_STATUSES:
+            elif not isinstance(status, str) or status not in VALID_STATUSES:
                 held.append(f"{prefix} status invalid")
             if not isinstance(asset.get("evidence_ref"), str) or not asset["evidence_ref"].strip():
                 held.append(f"{prefix} evidence_ref missing")
