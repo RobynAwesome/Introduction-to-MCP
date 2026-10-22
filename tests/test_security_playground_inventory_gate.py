@@ -111,6 +111,21 @@ class PlaygroundGateTests(unittest.TestCase):
                 self.assertEqual(run.returncode, expected, run.stderr)
                 self.assertFalse(json.loads(run.stdout)["runtime_verified"])
 
+    def test_cli_malformed_json_exits_4_and_blocks(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            path = Path(tempdir) / "evidence.json"
+            path.write_text('{"bad": json,,}', encoding="utf-8")
+            run = subprocess.run(
+                [sys.executable, str(GATE), "--input", str(path)],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(run.returncode, 4, run.stderr)
+            out = json.loads(run.stdout)
+            self.assertEqual(out["verdict"], "BLOCK")
+            self.assertFalse(out["runtime_verified"])
+            self.assertFalse(out["production_authority"])
+            self.assertEqual(run.stderr.strip(), "")
+
 
 if __name__ == "__main__":
     unittest.main()

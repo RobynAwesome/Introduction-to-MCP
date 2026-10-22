@@ -30,7 +30,7 @@ def evaluate(record: object) -> dict:
     """Return a bounded disposition; claims are not independent attestations."""
     if not isinstance(record, dict):
         return {"verdict": "BLOCK", "reasons": ["input must be a JSON object"],
-                "runtime_verified": False}
+                "runtime_verified": False, "production_authority": False}
     blocked: list[str] = []
     held: list[str] = []
     mode = record.get("mode")
@@ -120,8 +120,13 @@ def main() -> int:
     try:
         record = json.loads(args.input.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
-        print(json.dumps({"verdict": "BLOCK", "error": type(exc).__name__,
-                          "runtime_verified": False}), sort_keys=True)
+        print(json.dumps({
+            "verdict": "BLOCK",
+            "error": type(exc).__name__,
+            "reasons": [f"failed to parse JSON input: {exc}"],
+            "runtime_verified": False,
+            "production_authority": False,
+        }, sort_keys=True))
         return 4
     result = evaluate(record)
     print(json.dumps(result, sort_keys=True))
