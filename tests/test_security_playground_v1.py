@@ -120,6 +120,124 @@ def base_fixture() -> dict:
 
 class SecurityPlaygroundV1Tests(unittest.TestCase):
 
+    def assert_disposition(self, sample, expected):
+        result = evaluate_playground(sample)
+        self.assertEqual(result["verdict"], expected, result)
+        self.assertIs(result["runtime_verified"], False)
+        self.assertIs(result["production_authority"], False)
+
+    def test_copilot_resource_constraints(self):
+        for ceilings in (None, [], {}, {"cpu_cores": -1, "memory_mb": None, "timeout_sec": 0}):
+            with self.subTest(ceilings=ceilings):
+                sample = base_fixture()
+                sample["resource_ceilings"] = ceilings
+                self.assert_disposition(sample, "HOLD")
+        for field in ("cpu_cores", "memory_mb", "timeout_sec"):
+            for value in (True, "1", 0, -1, float("nan"), float("inf")):
+                with self.subTest(field=field, value=value):
+                    sample = base_fixture()
+                    sample["resource_ceilings"][field] = value
+                    self.assert_disposition(sample, "HOLD")
+            sample = base_fixture()
+            sample["resource_ceilings"][field] = 10 ** 1000
+            self.assert_disposition(sample, "BLOCK")
+
+    def test_copilot_privilege_flags_require_explicit_false(self):
+        for flag in ("is_privileged", "is_production_authority"):
+            for value in (None, "false", 0, [], True):
+                with self.subTest(flag=flag, value=value):
+                    sample = base_fixture()
+                    sample["execution_identity"][flag] = value
+                    self.assert_disposition(sample, "BLOCK" if value is True else "HOLD")
+            sample = base_fixture()
+            del sample["execution_identity"][flag]
+            self.assert_disposition(sample, "HOLD")
+
+    def test_copilot_caller_cannot_grant_privileged_authority(self):
+        for authority in ("founder", "rtc_founder", "ca_codex_forge", "teacher_cassey"):
+            sample = base_fixture()
+            sample.update(claimed_authority=authority, caller_domain="canonical_governance")
+            self.assert_disposition(sample, "BLOCK")
+
+    def test_copilot_sink_requires_all_boolean_assertions(self):
+        for sink in (None, [], {}):
+            sample = base_fixture()
+            sample["evidence_sink"] = sink
+            self.assert_disposition(sample, "HOLD")
+        for flag, expected in (("tamper_evident", True), ("authenticated", True),
+                               ("compromised", False), ("mutable_storage", False)):
+            for value in (None, "false", 0, not expected):
+                with self.subTest(flag=flag, value=value):
+                    sample = base_fixture()
+                    sample["evidence_sink"][flag] = value
+                    self.assert_disposition(sample, "BLOCK" if type(value) is bool else "HOLD")
+
+    def test_copilot_receipts_are_explicitly_synthetic(self):
+        for ref in ("renamed-receipt", "sha256:abc123", "https://example.invalid/receipt"):
+            sample = base_fixture()
+            sample["receipt_refs"] = [ref]
+            self.assert_disposition(sample, "HOLD")
+        sample = base_fixture()
+        sample["receipt_refs"] = ["fixture://arbitrary-synthetic-receipt"]
+        self.assert_disposition(sample, "DRILL_PASS")
+
+    def test_copilot_nonempty_teacher_signature_is_unverified(self):
+        sample = base_fixture()
+        sample.update(teacher_ack_claimed=True, teacher_review_packet={"teacher_signature": "anything"})
+        self.assert_disposition(sample, "HOLD")
+
+    def test_copilot_standalone_php_checks_version(self):
+        for version, verdict in (("8.2.14", "BLOCK"), ("8.2.35", "DRILL_PASS"),
+                                  (None, "HOLD"), (123, "HOLD"), ("99.0.0", "HOLD"),
+                                  ("8.2.35-unverified-backport", "HOLD")):
+            sample = base_fixture()
+            sample["assets"][0].update(status="patched", source_files_present=True, php_version=version)
+            self.assert_disposition(sample, verdict)
+
+    def test_copilot_container_requires_isolation_and_version(self):
+        for isolation in (None, "true", 1, False, True):
+            for version in (None, 123, [], "8.4.27"):
+                with self.subTest(isolation=isolation, version=version):
+                    sample = base_fixture()
+                    sample["assets"].append(dict(id="php-container", kind="container", status="patched",
+                        contains_php=True, container_isolated=isolation, php_version=version,
+                        evidence_ref="fixture://container"))
+                    verdict = "BLOCK" if isolation is False else (
+                        "DRILL_PASS" if isolation is True and version == "8.4.27" else "HOLD")
+                    self.assert_disposition(sample, verdict)
+
+    def test_copilot_every_outbound_crossing_requires_boolean_admission(self):
+        for target in ("swfus", "blackmask", "telemetry", "unknown", "production"):
+            for admitted in (False, None, "true", 1, True):
+                with self.subTest(target=target, admitted=admitted):
+                    sample = base_fixture()
+                    sample["oz_boundary_crossing"] = dict(source="playground", target=target,
+                                                          zero_trust_admitted=admitted)
+                    self.assert_disposition(sample, "DRILL_PASS" if admitted is True else "BLOCK")
+        sample = base_fixture()
+        sample["oz_boundary_crossing"] = dict(source="playground", target=[], zero_trust_admitted=True)
+        self.assert_disposition(sample, "HOLD")
+
+    def test_copilot_malformed_fields_never_raise_for_direct_callers(self):
+        for field in ("schema", "claimed_authority", "mode", "source_revision"):
+            for value in ([], {}, 42, None):
+                with self.subTest(field=field, value=value):
+                    sample = base_fixture()
+                    sample[field] = value
+                    result = evaluate_playground(sample)
+                    self.assertIn(result["verdict"], ("HOLD", "BLOCK"))
+        for value in ([], {}, 42, None):
+            sample = base_fixture()
+            sample["assets"][0]["status"] = value
+            self.assert_disposition(sample, "HOLD")
+
+    def test_cli_invalid_and_malformed_input_remain_bounded(self):
+        for raw in ("{broken", "[]", json.dumps(dict(base_fixture(), schema=[]))):
+            proc = subprocess.run([sys.executable, str(GATE)], input=raw, text=True, capture_output=True)
+            self.assertIn(proc.returncode, (2, 4))
+            self.assertNotIn("Traceback", proc.stderr)
+            self.assertIs(json.loads(proc.stdout)["production_authority"], False)
+
     # Scenario 1: PHP absent
     def test_scenario_01_php_absent(self) -> None:
         sample = base_fixture()

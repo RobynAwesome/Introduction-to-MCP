@@ -6,6 +6,8 @@ on:
       - "docs/swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md"
       - "scripts/security_playground_inventory_gate.py"
       - "tests/test_security_playground_inventory_gate.py"
+      - "scripts/security_playground_v1.py"
+      - "tests/test_security_playground_v1.py"
       - ".github/workflows/security-playground-fixture.yml"
   workflow_dispatch:
 
@@ -19,4 +21,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Synthetic admission regression tests (no credentials or production access)
-        run: python -m unittest discover -s tests -p 'test_security_playground_inventory_gate.py' -v
+        run: python -m unittest discover -s tests -p 'test_security_playground*.py' -v

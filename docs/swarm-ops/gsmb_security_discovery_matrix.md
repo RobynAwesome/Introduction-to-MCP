@@ -1,5 +1,7 @@
 # GSMB Security Discovery & Control Matrix
 
+**2026-10-26 correction:** Earlier PHP absence/runtime-clearance claims are superseded by the bounded inventory classifications below. Other October 22 provider/deployment/alert entries are historical claims pending live revalidation. V1 evaluates synthetic assertions; it does not enforce host isolation or authenticate receipts/signatures.
+
 **Document ID:** SEC-MATRIX-2026-1022  
 **Auditor / Lead:** Lead Dev AG (AntiGravity)  
 **Authority:** Founder / RTC  
@@ -35,7 +37,7 @@
 | **OAuth Token Endpoint HTTPS Enforcement (CodeQL #43)** | `SECURITY_AND_ENFORCEMENT_2026-10-07.md#L57-L63` | PR #286 (`codex/security-oauth-token-tls-20261007`) | Rust CI checks | PR #286 open at `860da3fb`; checks pass; CodeQL alert #43 open on master | `TESTED` (PR) / `UNKNOWN` (Master) | PR #286 unmerged; requires owner review and rebase onto master. |
 | **XSS Hardening & DOM Escaping (CodeQL #8-#14, #46)** | `SECURITY_AND_ENFORCEMENT_2026-10-07.md#L65-L75` | PR #285 (`08581a1b`), PR #287 (`f6046415`) | Pytest 2/2, Node regressions 7/7 pass | Provider CodeQL checks pass on PR merge refs; 32 alerts open on master | `TESTED` (PR) / `UNKNOWN` (Master) | PRs unmerged; Vercel preview status context rate-limit failure on #285; awaits owner review. |
 | **Trusted Four Ws Provenance Gate** | `SECURITY_AND_ENFORCEMENT_2026-10-07.md#L77-L86`, PR #288 | `.github/workflows/kpgs-fourws-review-gate.yml`, PR #288 proposal | GitHub Actions PR runs | In PR #326, run was `cancelled`; check is not required in branch protection | `IMPLEMENTED` (Workflow) / `SPECIFIED` (Trusted successor) | Check currently runs validator from PR merge revision rather than trusted base; 0 required approvals on master. |
-| **PHP2Shell Exposure Gate (CVE-2026-109618, CVE-2026-109619)** | Current incident briefing & threat intelligence | `scripts/security_playground_v1.py` (PHP asset evaluator) | `test_scenario_01` through `test_scenario_04c` | Local: absent; Cloud: absent; Production (IONOS): unknown | `IMPLEMENTED` (Gate) / `RUNTIME_VERIFIED` (Local/Cloud) / `HOLD` (Production) | IONOS shared hosting upstream PHP runtime configuration cannot be verified without control panel access. |
+| **PHP2Shell Exposure Gate (CVE-2026-109618, CVE-2026-109619)** | Current incident briefing & threat intelligence | `scripts/security_playground_v1.py` (PHP asset evaluator) | `test_scenario_01` through `test_scenario_04c` | Local: PARTIAL_INVENTORY / HOLD; Cloud: SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD; Production (IONOS): HOLD | `IMPLEMENTED` (Fixture gate) / `HOLD` (Local/Cloud/Production runtime) | IONOS shared hosting upstream PHP runtime configuration cannot be verified without control panel access. |
 | **Production Deployment Boundaries** | `.github/workflows/deploy-web.yml`, `.github/workflows/deploy.yml` | `scripts/ci/production_deploy_gate.py`, IONOS FTP deploy, Azure `azd up` | `kpgs-gate` job in `deploy-web.yml` | Live deployments to Azure South Africa North, Vercel, and IONOS FTP | `RUNTIME_VERIFIED` | Production web deploy FTP credential scope must be audited against PHP execution permissions. |
 
 ---

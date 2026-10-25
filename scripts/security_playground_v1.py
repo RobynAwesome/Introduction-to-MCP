@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""GSMB Security Playground V1 — Runtime Isolation and Admission Gate.
+"""GSMB Security Playground V1 — read-only synthetic admission evaluator.
 
-Implements and extends PR #326 candidate doctrine into an enforceable,
-independently verifiable acceptance contract.
+Evaluates caller-supplied assertions under PR #326's candidate contract.
+No host controls, Git objects, signatures, receipts or runtime are authenticated.
+Only explicit fixture:// references are accepted for synthetic drills; real
+evidence and teacher acknowledgements remain HOLD pending a trusted verifier.
 
 Features:
 - Dedicated nonproduction execution identity validation
@@ -10,7 +12,7 @@ Features:
 - Immutability of protected canonical state (SELF.md, USER.md, IDENTITY.md, SOUL.md, etc.)
 - Resource ceilings (CPU, memory, timeout) and operator kill-switch
 - Ephemeral storage and tamper-evident forensic sink validation
-- Strict cryptographic receipt verification (anti-forgery, append-only proof)
+- Explicit synthetic-reference policy (no cryptographic attestation)
 - Anti-spoofing firewall: blocks cross-domain teacher/founder/CA impersonation
 - Rigorous negative asset assertion validation (absence of evidence is not proof of absence)
 - PHP2Shell scenario handling (CVE-2026-109618, CVE-2026-109619) with founder reclassifications:
@@ -30,7 +32,7 @@ Exit codes:
 from __future__ import annotations
 
 import argparse
-import hashlib
+import math
 import json
 import re
 import sys
@@ -40,7 +42,10 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 SCHEMA_V1 = "gsmb_security_playground_v1"
 SCHEMA_LEGACY = "gsmb_security_playground_inventory_gate_v1"
-SUPPORTED_SCHEMAS = {SCHEMA_V1, SCHEMA_LEGACY}
+SUPPORTED_SCHEMAS = {SCHEMA_V1}
+
+# Local fixture policy, not provider resource limits or runtime enforcement.
+RESOURCE_MAXIMA = {"cpu_cores": 2, "memory_mb": 2048, "timeout_sec": 300}
 
 VALID_MODES = {"fixture", "cloud", "local"}
 VALID_KINDS = {"php_runtime", "dependency", "service", "container"}
@@ -90,7 +95,9 @@ SYNTHETIC_TEST_REVISIONS = {"a" * 40, "b" * 40}
 
 
 def parse_semver(version_str: str) -> Optional[Tuple[int, int, int]]:
-    match = re.match(r"^(\d+)\.(\d+)\.(\d+)", version_str)
+    if not isinstance(version_str, str):
+        return None
+    match = re.fullmatch(r"([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,4})", version_str)
     if not match:
         return None
     return int(match.group(1)), int(match.group(2)), int(match.group(3))
@@ -111,6 +118,18 @@ def is_php_vulnerable(version_str: str) -> bool:
     return False
 
 
+def _check_php_version(asset: dict, prefix: str, held: list, blocked: list) -> None:
+    """Compare synthetic upstream versions; vendor backports require review."""
+    version = asset.get("php_version")
+    parsed = parse_semver(version)
+    if parsed is None:
+        held.append(f"{prefix} php_version must be an explicit upstream major.minor.patch string")
+    elif f"{parsed[0]}.{parsed[1]}" not in PHP_FIXED_VERSIONS:
+        held.append(f"{prefix} PHP branch patch provenance unsupported; independent review required")
+    elif is_php_vulnerable(version):
+        blocked.append(f"{prefix} PHP version {version} is below upstream fixes for CVE-2026-109618 / CVE-2026-109619")
+
+
 def evaluate_playground(record: object) -> Dict[str, Any]:
     """Evaluate Security Playground evidence claim and return bounded disposition."""
     if not isinstance(record, dict):
@@ -126,7 +145,7 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
     held: List[str] = []
 
     schema = record.get("schema")
-    if schema not in SUPPORTED_SCHEMAS:
+    if not isinstance(schema, str) or schema not in SUPPORTED_SCHEMAS:
         held.append(f"schema is missing or unsupported: expected one of {sorted(SUPPORTED_SCHEMAS)}")
 
     mode = record.get("mode")
@@ -157,19 +176,33 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
             elif role in {"production", "root", "admin", "canonical_landlord"}:
                 blocked.append(f"prohibited privileged execution identity in playground: {role}")
 
-            if identity.get("is_production_authority") is True:
-                blocked.append("playground execution identity claimed production authority")
-            if identity.get("is_privileged") is True:
-                blocked.append("playground execution identity claimed elevated host privilege")
-            if not identity.get("execution_id"):
+            for flag in ("is_production_authority", "is_privileged"):
+                if identity.get(flag) is True:
+                    blocked.append(f"playground execution identity claimed prohibited {flag}")
+                elif identity.get(flag) is not False:
+                    held.append(f"execution_identity {flag} requires explicit boolean false")
+            if not isinstance(identity.get("execution_id"), str) or not identity["execution_id"].strip():
                 held.append("execution_identity execution_id missing")
 
     # Adversarial Check: Authority spoofing
     claimed_authority = record.get("claimed_authority")
-    if claimed_authority in {"founder", "rtc_founder", "ca_codex_forge", "teacher_cassey"}:
-        caller_domain = record.get("caller_domain", "playground")
-        if caller_domain != "canonical_governance":
-            blocked.append(f"cross-domain authority spoofing detected: '{claimed_authority}' claimed from '{caller_domain}'")
+    if "claimed_authority" in record:
+        if not isinstance(claimed_authority, str):
+            held.append("claimed_authority must be a string")
+        elif claimed_authority in {"founder", "rtc_founder", "ca_codex_forge", "teacher_cassey"}:
+            blocked.append(f"cross-domain authority spoofing detected: '{claimed_authority}' cannot be granted by caller_domain")
+
+    if schema == SCHEMA_V1:
+        ceilings = record.get("resource_ceilings")
+        if not isinstance(ceilings, dict):
+            held.append("resource_ceilings object required")
+        else:
+            for field, maximum in RESOURCE_MAXIMA.items():
+                value = ceilings.get(field)
+                if type(value) not in (int, float) or (type(value) is float and not math.isfinite(value)) or value <= 0:
+                    held.append(f"resource_ceilings {field} must be finite and positive")
+                elif value > maximum:
+                    blocked.append(f"resource_ceilings {field} exceeds fixture policy maximum {maximum}")
 
     # 2. Kill switch assertion
     kill_switch = record.get("kill_switch")
@@ -198,8 +231,18 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
             blocked.append("evidence sink is marked compromised or integrity validation failed")
         if sink_info.get("mutable_storage") is True:
             blocked.append("evidence sink permits mutable overwrites (append-only/tamper-evident sink required)")
-        if sink_info.get("authenticated") is False:
-            held.append("evidence sink transmission lacks cryptographic authentication")
+        if schema == SCHEMA_V1:
+            for field, expected in (("compromised", False), ("mutable_storage", False),
+                                    ("tamper_evident", True), ("authenticated", True)):
+                value = sink_info.get(field)
+                if type(value) is not bool:
+                    held.append(f"evidence_sink {field} requires an explicit boolean")
+                elif value is not expected:
+                    blocked.append(f"evidence_sink {field} assertion failed")
+            if not isinstance(sink_info.get("sink_id"), str) or not sink_info["sink_id"].strip():
+                held.append("evidence_sink sink_id missing")
+    elif schema == SCHEMA_V1:
+        held.append("evidence_sink assertions required")
 
     # 5. Protected state mutation prevention
     mutations = record.get("protected_state_mutations")
@@ -220,7 +263,7 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
     if record.get("production_authority_claimed") is True:
         blocked.append("unauthorized production authority claim")
 
-    # 7. Receipts Verification (Anti-forgery and authentication)
+    # 7. Synthetic reference policy; names and hashes never authenticate content.
     receipts = record.get("receipt_refs")
     if not isinstance(receipts, list) or not receipts or any(
         not isinstance(ref, str) or not ref.strip() for ref in receipts
@@ -228,6 +271,8 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
         held.append("receipt_refs must contain at least one nonempty reference")
     else:
         for ref in receipts:
+            if mode != "fixture" or not re.fullmatch(r"fixture://[A-Za-z0-9][A-Za-z0-9._/-]*", ref):
+                held.append("receipt authentication unavailable: only synthetic fixture:// references may pass a drill")
             if "unverifiable" in ref or "fabricated" in ref or "forged" in ref:
                 held.append(f"unverifiable or fabricated receipt reference: {ref}")
             if "raw_sha256_only" in ref:
@@ -239,6 +284,10 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
         review_packet = record.get("teacher_review_packet")
         if not isinstance(review_packet, dict) or not review_packet.get("teacher_signature"):
             blocked.append("false teacher acknowledgement: claimed teacher_ack without detached authenticated teacher_review_packet")
+        else:
+            held.append("teacher acknowledgement unverified: trusted evidence-bound signature verifier unavailable")
+    elif teacher_ack is not None and teacher_ack is not False:
+        held.append("teacher_ack_claimed must be a boolean")
 
     # 8. Asset inventory with positive and negative controls
     assets = record.get("assets")
@@ -268,14 +317,16 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
             status = asset.get("status")
             if status == "not_present":
                 discovery_method = asset.get("discovery_method")
-                if not discovery_method or discovery_method == "unverified_assumption":
-                    held.append(f"{prefix} unsupported negative claim: 'not_present' requires verified discovery_method and proof hash")
+                if not isinstance(discovery_method, str) or not discovery_method.strip() or discovery_method == "unverified_assumption":
+                    held.append(f"{prefix} unsupported negative claim: 'not_present' requires a discovery_method assertion")
 
             # Specific PHP checks
             if kind == "php_runtime":
                 has_php = True
-                source_present = asset.get("source_files_present", False)
-                runtime_present = status not in {"not_present", "unknown"}
+                source_present = asset.get("source_files_present")
+                if type(source_present) is not bool:
+                    held.append(f"{prefix} source_files_present requires an explicit boolean")
+                runtime_present = isinstance(status, str) and status in {"patched", "vulnerable"}
 
                 # Scenario 2: PHP runtime present without source files
                 if runtime_present and not source_present:
@@ -284,20 +335,21 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
                 # Scenario 3: PHP source present without PHP runtime
                 if source_present and not runtime_present:
                     held.append(f"{prefix} PHP source present without active runtime (dormant source risk)")
+                if runtime_present:
+                    _check_php_version(asset, prefix, held, blocked)
 
             # Container checks (Scenario 4)
             if kind == "container":
+                if type(asset.get("contains_php")) is not bool:
+                    held.append(f"{prefix} contains_php requires an explicit boolean")
                 if asset.get("contains_php") is True:
                     has_php = True
                     # Check container isolation boundary
                     if asset.get("container_isolated") is False:
                         blocked.append(f"{prefix} container running PHP lacks verified boundary isolation")
-                    # Check PHP version against CVE-2026-109618 / CVE-2026-109619
-                    php_ver = asset.get("php_version")
-                    if php_ver and is_php_vulnerable(php_ver):
-                        blocked.append(
-                            f"{prefix} container PHP version {php_ver} is vulnerable to PHP2Shell (CVE-2026-109618, CVE-2026-109619)"
-                        )
+                    elif asset.get("container_isolated") is not True:
+                        held.append(f"{prefix} container_isolated requires explicit boolean true")
+                    _check_php_version(asset, prefix, held, blocked)
 
             if status == "vulnerable":
                 blocked.append(f"{prefix} has vulnerable status: {asset.get('vulnerability_id', 'unspecified')}")
@@ -317,9 +369,15 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
     if isinstance(oz_crossing, dict):
         source_domain = oz_crossing.get("source")
         target_domain = oz_crossing.get("target")
-        if source_domain == "playground" and target_domain in {"crud", "gui", "altar", "phu", "hood", "production"}:
-            if not oz_crossing.get("zero_trust_admitted"):
+        if any(not isinstance(v, str) or not v.strip() for v in (source_domain, target_domain)):
+            held.append("Oz crossing source and target must be nonempty strings")
+        elif source_domain != "playground":
+            held.append("Oz crossing source must be playground in this evaluator")
+        elif target_domain != source_domain:
+            if oz_crossing.get("zero_trust_admitted") is not True:
                 blocked.append(f"unadmitted Oz lattice boundary crossing from {source_domain} to {target_domain}")
+    elif oz_crossing is not None:
+        held.append("oz_boundary_crossing must be an object")
 
     # Determine final verdict and exit code
     if blocked:

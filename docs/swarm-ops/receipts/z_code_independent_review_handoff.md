@@ -1,5 +1,14 @@
 # Z Code Independent Security Validation Handoff
 
+**2026-10-26 correction (Codex Forge, PR #327 review repair):** The October 22
+observations below are historical. Local PHP status is `PARTIAL_INVENTORY / HOLD`;
+Cloud is `SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD`; production IONOS remains `HOLD`.
+PATH and source-tree searches do not attest running services, containers, vendor
+patches, or provider configuration. Earlier `NOT_EXPOSED` and runtime-clearance
+claims are explicitly superseded for present use. The V1 evaluator checks
+synthetic assertions only; it does not authenticate receipts, teacher signatures,
+Git objects, append-only storage or runtime containment.
+
 **Document ID:** ZCODE-HANDOFF-2026-1022  
 **Delivered by:** Lead Dev AG (AntiGravity)  
 **Assigned Reviewer:** Z Code (Independent Security Validation & Adversarial Review)  
@@ -64,7 +73,7 @@ All deliverables have been generated in the project workspace at `/home/rkhol/.g
 | `python -m unittest -v test_security_playground_v1.py` | `/home/rkhol/.../gsmb-security-playground` | `0` | Ran 16 tests in 0.003s; OK |
 | `python scripts/security_playground_v1.py --input <sample>` | `/home/rkhol/.../gsmb-security-playground` | `0`, `2`, `3`, `4` | Tested across 10 negative & positive scenarios |
 | `cmd.exe /c "netstat -ano \| findstr LISTENING"` | Host `LEAVE-ME-ALONE` | `0` | 15 listeners mapped to known local apps (Antigravity, WebView2, Spotify, WSL) |
-| `which php` & `where.exe php` | WSL & Windows PATH | `1` | PHP confirmed absent locally |
+| `which php` & `where.exe php` | WSL & Windows PATH | `1` | No binary observed on inspected PATH; `PARTIAL_INVENTORY / HOLD` |
 | `npm audit --package-lock-only` (Bookit) | `.../triage-bookit` | `0` | 49 vulnerabilities identified (undici 7.30.0, next 15.5.19) |
 | `npm update undici --package-lock-only` | `.../triage-bookit` | `0` | `undici` updated cleanly to `7.30.1` |
 | `npm audit --package-lock-only` (KasiLink) | `.../triage-kasilink` | `0` | 23 vulnerabilities identified (@simple-git/argv-parser 1.1.1, next 16.3.4) |
@@ -76,12 +85,13 @@ All deliverables have been generated in the project workspace at `/home/rkhol/.g
 
 Z Code is invited to challenge and verify each of the following verdicts:
 
-### Verdict 1: `LOCAL_PHP_EXPOSURE: NOT_EXPOSED`
-- **Lead Dev AG Finding:** Local WSL and Windows environments contain no installed PHP binary, no active PHP service, and zero `.php` files in tracked git files.
+### Verdict 1: `LOCAL_PHP_EXPOSURE: PARTIAL_INVENTORY / HOLD`
+- **Historical observation:** No PHP binary observed on inspected PATH and no tracked `.php` files. The earlier `NOT_EXPOSED` verdict is superseded; full host/service/container inventory remains unverified.
 - **Challenge Point for Z Code:** Verify whether any unversioned `.php` scripts or dormant PHP interpreters exist in untracked OneDrive worktrees.
 
-### Verdict 2: `CLOUD_PHP_EXPOSURE: NOT_EXPOSED`
+### Verdict 2: `CLOUD_PHP_EXPOSURE: SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD`
 - **Lead Dev AG Finding:** GitHub master trees across `Introduction-to-MCP`, `KasiLink`, and `Bookit-5s-Arena` contain zero PHP files. Dockerfile uses `python:3.11-slim`. CI workflows do not install PHP.
+- **Correction:** These are dated source observations only. The earlier `NOT_EXPOSED` verdict is superseded; executing images, third-party actions and serving runtimes remain unverified.
 - **Challenge Point for Z Code:** Verify whether any third-party GitHub Actions in `.github/workflows` pull in PHP-dependent action containers under the hood.
 
 ### Verdict 3: `PRODUCTION_PHP_EXPOSURE: HOLD`
