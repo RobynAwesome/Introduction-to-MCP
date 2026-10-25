@@ -1,0 +1,20 @@
+# Open PR review preparation - 2026-10-26 SAST
+
+WHO: Codex Forge, stateless owner-directed PR repair renter; no RTC seat.
+WHAT: Investigate #327 Copilot findings, repair #326/#327, and prepare all 31 open dependency PRs for owner review.
+WHERE: Cloud GSMB RobynAwesome/Introduction-to-MCP; master observed at 2d903efdae14d2be0abc2d1dee27dc2408c04fcf. Local OneDrive and Google Drive remain separate evidence populations.
+WHY: Reduce review blockers while preserving owner merge/production authority and exact-head validation.
+
+Security Playground: #326 backports malformed JSON / non-object authority denial; 12 local synthetic tests pass at 8a50a481ca97b7d24b1c644f083ea0f0a88ce491. #327 addresses all 11 Copilot findings, adds malformed-input/adversarial regressions and V1 CI; 42 local tests pass. Hosted fixture admission passed at 5aae68dcf89b17460896d4619eea18e4905039e8. Both target master for full required CI; #326 was marked ready for review. No PR was merged. Review #326 first; refresh and recheck #327 after #326 merges.
+
+Dependency PRs amended: #279, #282, #289, #290, #291, #292, #293, #295, #297, #298, #300, #302, #303, #307, #310, #311, #312, #313, #314, #315, #316, #317, #318, #319, #320, #321, #322, #323, #324, #325, #328. Every description now has explicit WHO/WHAT/WHERE/WHY; original Dependabot notes retained except #328's superseded major-upgrade proposal. No unresolved inline threads were observed on these 31 PRs. Guarded API branch refreshes updated stale heads without conflicts; already-current branches were retained. Cancelled Four Ws jobs were retried after metadata/branch updates.
+
+Substantive dependency repair: original #328 filelock 4.2.1 downgraded Safety 3.8.1 to 3.2.3. Live PyPI metadata for Safety 3.8.1 requires filelock>=3.16.1,<4.0. Amended head f3b4ba7b0d67445e9777625d966fc4a25500dea0 uses filelock 3.32.7, retains Safety 3.8.1, and adds an explicit Safety minimum. `uv lock --check`, TOML version-delta comparison (only filelock differs from master), and isolated FileLock acquire/release smoke passed. Major 4 is deferred until dependency compatibility is resolved.
+
+Other uv updates inspected: #325 changes Pillow 12.3.0 -> 13.0.0; #324 changes aiohttp 3.14.3 -> 3.14.4 and yarl 1.24.2 -> 1.25.1; #282 changes multidict 6.7.1 -> 6.9.1. No further package-version downgrades observed in those locks. npm and requirements PR diffs were inspected; full provider CI, rather than static diffs alone, determines source/test readiness.
+
+Live master protection read: strict checks, conversation resolution, 14 required contexts, 0 required approving reviews. No provider rules/settings changed. All initial code checks on dependency heads passed; two explicit Four Ws failures (#279/#289) were missing PR-description fields. Refreshed heads have new runs; old passes are not carried forward as current proof. Some latest Four Ws runs were cancelled by concurrency and were explicitly retried. A pending/cancelled optional context does not equal a required-context pass or failure. Vercel previews are separate from production.
+
+Acceptance: re-read the current head, required check conclusions, conflict state, unresolved threads and optional/provider statuses before each merge. Shared npm/uv lockfiles may conflict after an earlier dependency merge; refresh/re-resolve rather than accepting stale evidence. Do not bulk-merge from this receipt. No issue closure, security-alert dismissal, credential rotation, deployment, real-environment isolation or Local/Cloud/Drive parity is asserted. Owner review is the next authority boundary.
+
+Post-refresh observation: 25 dependency branches updated successfully and 6 were already current. The subsequent exact-head provider read found #326 and 30 dependency PRs with all 14 required contexts passing and CLEAN merge state; #328 had only Rust analysis pending. #327 received the review-receipt commit and its full master CI remains subject to fresh head verification. This is a dated observation, not a promise that strict readiness survives later merges.
