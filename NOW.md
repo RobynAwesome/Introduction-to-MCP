@@ -5,8 +5,8 @@ WHAT: Addressed all 11 Copilot findings on #327, added adversarial regressions a
 WHERE: Cloud GSMB RobynAwesome/Introduction-to-MCP. Original #327 head 1b625b624ba11325da2bc32fbf4ab4380226118a; #326 repair head 8a50a481ca97b7d24b1c644f083ea0f0a88ce491. Earlier state below remains historical; no Local/Cloud/Drive parity is asserted.
 WHY: Prepare bounded, reviewable PRs and preserve fail-closed fixture admission. All runtime/production/teacher-acceptance claims remain HOLD.
 Evidence: docs/swarm-ops/receipts/PR327_COPILOT_REPAIR_2026-10-26.md; 42 synthetic tests pass locally. Hosted checks must be re-read at pushed heads. No merge, deployment or issue closure occurred.
-Known uncertainty: filelock 4 PR #328 also downgrades Safety 3.8.1 to 3.2.3 because Safety 3.8.1 requires filelock<4. Compatibility remediation is being investigated; existing passing CI does not settle that issue.
-Next admissible action: Review #326 before #327; after merging #326 retarget #327 to master and revalidate. Review dependency PRs individually and re-read strict checks after each merge.
+Dependency correction: PR #328 now updates filelock to compatible 3.32.7, keeps Safety 3.8.1 and adds safety>=3.8.1. Lock resolution/check and acquire/release smoke passed; only filelock changes package version against master. Pushed head f3b4ba7b0d67445e9777625d966fc4a25500dea0; hosted results require live reread.
+Next admissible action: Both #326 and #327 now target master so full required CI can run. Review #326 first, then #327 after its diff is recomputed; refresh branches and reread strict checks after each merge. All 31 dependency PR descriptions were amended; 24 stale dependency branches were refreshed with expected-head guards; 7 were already current. Cancelled Four Ws jobs were explicitly retried after edits settled. No merge/issue closure is claimed. See OPEN_PR_REVIEW_PREPARATION_2026-10-26.md for scope and acceptance limits.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
 

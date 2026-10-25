@@ -28,3 +28,5 @@ Limits: This evaluator consumes untrusted assertions, does not discover or conta
 Commit gate: See PR326_BASE_REPAIR_2026-10-26.md for the temporary direct-Python KHELOS launcher. Gate logic was retained and scoped to this worktree; no shared hook/configuration mutation.
 
 Next: Re-read hosted results at the pushed commit; owner reviews #326 first, then retargets #327 to master after #326 merges and rechecks its head. No merge, deployment, incident disposition, credential rotation, production acceptance or issue closure is asserted.
+
+Routing update: #327 was retargeted to master to run every required workflow before owner review. The updated #326 remains an ancestor; review #326 first, then reread the reduced #327 diff and strict checks after any merge. Earlier retarget-after-merge guidance above is superseded. All 11 Copilot threads were resolved after the regression suite and pushed source repair; this is not independent teacher/owner acceptance.
