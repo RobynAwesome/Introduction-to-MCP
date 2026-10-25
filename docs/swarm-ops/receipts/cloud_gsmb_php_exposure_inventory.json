@@ -1,0 +1,167 @@
+{
+  "$schema": "cloud_gsmb_php_exposure_inventory_v1",
+  "audit_timestamp": "2026-10-22T16:30:00+02:00",
+  "auditor": "Lead Dev AG (AntiGravity)",
+  "authority": "Founder / RTC (Review Classification Mandate Applied)",
+  "mission": "PHP2Shell Exposure Gate & Asset Inventory (CVE-2026-109618, CVE-2026-109619)",
+  "threat_intelligence": {
+    "cve_identifiers": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "vuln_name": "PHP2Shell",
+    "cvss_v4_score": 9.2,
+    "severity": "CRITICAL",
+    "attack_vector": "Network, unauthenticated remote code execution via fatal error longjmp OOM uninitialized byte read and stale global state across worker requests",
+    "affected_versions": "All unpatched PHP 5.4 through 8.5",
+    "minimum_fixed_versions": {
+      "php_8_2": "8.2.35",
+      "php_8_3": "8.3.36",
+      "php_8_4": "8.4.27",
+      "php_8_5": "8.5.12"
+    },
+    "founder_doctrine_mandate": "Do not mark SAFE based merely on missing .php files or a PATH check. Local GSMB is PARTIAL_INVENTORY / HOLD until the full relevant runtime and provider boundary is demonstrated. Cloud GSMB is SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD. Production IONOS is HOLD until serving configuration, PHP SAPI/version or authoritative absence evidence, and patch provenance are independently established."
+  },
+  "assets": [
+    {
+      "asset_id": "asset-local-host-wsl",
+      "environment": "local_wsl2",
+      "target": "LEAVE-ME-ALONE /usr/bin",
+      "executable": null,
+      "running_version": "none observed via which php (exit 1)",
+      "source_files_present": false,
+      "exposure_status": "partial_inventory_hold",
+      "vendor_patch_provenance": "Unverified beyond local user PATH; full host boundary not yet formally attested",
+      "evidence_ref": "evidence://local-wsl-which-php-exit-1",
+      "timestamp": "2026-10-22T13:42:16Z",
+      "remediation_owner": "Lead Dev AG"
+    },
+    {
+      "asset_id": "asset-local-host-windows",
+      "environment": "local_windows11",
+      "target": "LEAVE-ME-ALONE C:\\Windows\\System32; Program Files",
+      "executable": null,
+      "running_version": "none observed via where.exe php (exit 1)",
+      "source_files_present": false,
+      "exposure_status": "partial_inventory_hold",
+      "vendor_patch_provenance": "Unverified beyond Windows system PATH; full workstation services not exhaustively profiled",
+      "evidence_ref": "evidence://windows-where-php-exit-1",
+      "timestamp": "2026-10-22T13:44:56Z",
+      "remediation_owner": "Lead Dev AG"
+    },
+    {
+      "asset_id": "asset-cloud-gsmb-source",
+      "environment": "cloud_github_source",
+      "target": "RobynAwesome/Introduction-to-MCP (master)",
+      "executable": null,
+      "running_version": "none in git tree",
+      "source_files_present": false,
+      "exposure_status": "source_no_php_observed",
+      "vendor_patch_provenance": "Static tree inspection (6461 items) contains 0 .php files",
+      "evidence_ref": "github://RobynAwesome/Introduction-to-MCP/git/trees/master",
+      "timestamp": "2026-10-22T13:45:39Z",
+      "remediation_owner": "Founder / RTC"
+    },
+    {
+      "asset_id": "asset-cloud-gsmb-dockerfile",
+      "environment": "cloud_container_spec",
+      "target": "Introduction-to-MCP/Dockerfile",
+      "executable": "python:3.11-slim",
+      "running_version": "none (Python container only)",
+      "source_files_present": false,
+      "exposure_status": "source_no_php_observed",
+      "vendor_patch_provenance": "Base image python:3.11-slim; runtime layers in production held pending deployment verification",
+      "evidence_ref": "github://RobynAwesome/Introduction-to-MCP/blob/master/Dockerfile",
+      "timestamp": "2026-10-22T13:46:24Z",
+      "remediation_owner": "Lead Dev AG"
+    },
+    {
+      "asset_id": "asset-cloud-ci-runners",
+      "environment": "cloud_github_actions",
+      "target": "GitHub-hosted ubuntu-latest runners",
+      "executable": "actions/setup-python, actions/setup-node, cargo",
+      "running_version": "runtime_hold (underlying host image contains system PHP unless purged)",
+      "source_files_present": false,
+      "exposure_status": "runtime_hold",
+      "vendor_patch_provenance": "GitHub Actions hosted runner default images (Ubuntu image typically bundles dormant PHP cli)",
+      "evidence_ref": "github://RobynAwesome/Introduction-to-MCP/tree/master/.github/workflows",
+      "timestamp": "2026-10-22T13:41:31Z",
+      "remediation_owner": "Lead Dev AG"
+    },
+    {
+      "asset_id": "asset-kasilink-source",
+      "environment": "cloud_github_source",
+      "target": "RobynAwesome/KasiLink (main)",
+      "executable": null,
+      "running_version": "none observed in git tree",
+      "source_files_present": false,
+      "exposure_status": "source_no_php_observed",
+      "vendor_patch_provenance": "Static tree inspection contains 0 PHP files",
+      "evidence_ref": "github://RobynAwesome/KasiLink/git/trees/main",
+      "timestamp": "2026-10-22T13:43:12Z",
+      "remediation_owner": "Founder / RTC"
+    },
+    {
+      "asset_id": "asset-bookit-source",
+      "environment": "cloud_github_source",
+      "target": "RobynAwesome/Bookit-5s-Arena (main)",
+      "executable": null,
+      "running_version": "none observed in git tree",
+      "source_files_present": false,
+      "exposure_status": "source_no_php_observed",
+      "vendor_patch_provenance": "Static tree inspection contains 0 PHP files",
+      "evidence_ref": "github://RobynAwesome/Bookit-5s-Arena/git/trees/main",
+      "timestamp": "2026-10-22T13:43:12Z",
+      "remediation_owner": "Founder / RTC"
+    },
+    {
+      "asset_id": "asset-prod-azure-southafrica",
+      "environment": "production_cloud_azure",
+      "target": "Azure South Africa North (Kopano Core API)",
+      "executable": "python3 / azd container",
+      "running_version": "Python 3.11 runtime",
+      "source_files_present": false,
+      "exposure_status": "runtime_hold",
+      "vendor_patch_provenance": "Azure Linux Container image; host hypervisor boundary unverified",
+      "evidence_ref": "github://RobynAwesome/Introduction-to-MCP/blob/master/.github/workflows/deploy.yml",
+      "timestamp": "2026-10-22T13:45:21Z",
+      "remediation_owner": "Founder / RTC"
+    },
+    {
+      "asset_id": "asset-prod-vercel-edge",
+      "environment": "production_serverless_vercel",
+      "target": "bookit-5s-arena.vercel.app, kasi-link, kopanolabs.com",
+      "executable": "Vercel edge/node lambda runtime",
+      "running_version": "Node.js 20 LTS serverless",
+      "source_files_present": false,
+      "exposure_status": "runtime_hold",
+      "vendor_patch_provenance": "Vercel platform edge infrastructure; upstream proxy SAPI not independently verified",
+      "evidence_ref": "live-http-response-headers-server-vercel",
+      "timestamp": "2026-10-22T13:47:20Z",
+      "remediation_owner": "Founder / RTC"
+    },
+    {
+      "asset_id": "asset-prod-ionos-managed-ftp",
+      "environment": "production_managed_hosting_ionos",
+      "target": "IONOS FTP Managed Shared Webspace (kopanolabs.com & careers.kopanolabs.com)",
+      "executable": "IONOS Managed Web Server (Apache/Nginx upstream with potential default PHP SAPI worker)",
+      "running_version": "UNKNOWN_UNVERIFIED",
+      "source_files_present": false,
+      "exposure_status": "hold",
+      "vendor_patch_provenance": "IONOS managed hosting tier (serving configuration, PHP SAPI/version or authoritative absence evidence, and patch provenance for CVE-2026-109618/19 are unverified)",
+      "evidence_ref": "github://RobynAwesome/Introduction-to-MCP/blob/master/.github/workflows/deploy-web.yml#L104-L125",
+      "timestamp": "2026-10-22T13:45:21Z",
+      "remediation_owner": "Founder / RTC"
+    }
+  ],
+  "verdicts": {
+    "LOCAL_PHP_EXPOSURE": "PARTIAL_INVENTORY / HOLD",
+    "CLOUD_PHP_EXPOSURE": "SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD",
+    "PRODUCTION_PHP_EXPOSURE": "HOLD"
+  },
+  "verdict_justifications": {
+    "LOCAL_PHP_EXPOSURE": "PARTIAL_INVENTORY / HOLD: While 'which php' and 'where.exe php' return exit code 1, and no PHP listeners were detected on examined ports, this does not constitute full provider and workstation boundary proof. Per founder doctrine, absence of binary in current user PATH is not authoritative proof of complete host absence. Held until full system boundary is demonstrated.",
+    "CLOUD_PHP_EXPOSURE": "SOURCE_NO_PHP_OBSERVED / RUNTIME_HOLD: Zero PHP source files are observed in repository trees (Introduction-to-MCP, KasiLink, Bookit-5s-Arena). However, runtime environments (GitHub-hosted runners, base images, build containers) hold dormant system runtimes unless explicitly purged and verified. Held pending runtime attestation.",
+    "PRODUCTION_PHP_EXPOSURE": "HOLD: Deployments to Azure and Vercel are Python and Node.js. However, deploy-web.yml targets an IONOS shared web hosting environment via FTP. IONOS web packages commonly maintain active PHP modules on document roots. Serving configuration, PHP SAPI/version or authoritative absence evidence, and vendor patch provenance for CVE-2026-109618 / CVE-2026-109619 are not independently established. Unauthorized scanning is prohibited. Posture is HOLD."
+  }
+}
