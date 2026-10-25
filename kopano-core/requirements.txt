@@ -5,7 +5,7 @@
 typer[all]==0.27.2
 rich==15.0.0
 pydantic-settings==2.15.0
-python-dotenv==1.2.3
+python-dotenv==1.2.4
 azure-monitor-opentelemetry==1.8.10
 litellm==1.89.7
 sqlalchemy==2.1.1
