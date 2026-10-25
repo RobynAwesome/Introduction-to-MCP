@@ -1,3 +1,17 @@
+## PR #326 BASE REPAIR — 2026-10-26 SAST
+
+WHO: Codex Forge, stateless renter in the owner-directed PR repair lane; no RTC seat claimed.
+WHAT: Backported the malformed-JSON CLI repair and explicit non-object authority denial from #327 into its base PR #326. Earlier October 7 status entries below remain historical.
+WHERE: Cloud GSMB RobynAwesome/Introduction-to-MCP, PR #326, originally d724844d66614619c0d5a47bba52648d6ef582c5; clean managed worktree only.
+WHY: Make the base PR independently reviewable before #327. No Local OneDrive source or Google Drive content is synchronized.
+Evidence: scripts/security_playground_inventory_gate.py and its 12 synthetic tests; repair receipt at docs/swarm-ops/receipts/PR326_BASE_REPAIR_2026-10-26.md.
+Status: Source/test candidate. Runtime containment, teacher review and production acceptance remain HOLD. No merge or deployment authorized by this receipt.
+Next admissible action: Review #326 first; after merge, retarget #327 to master and recheck its exact head. No issue closure inferred.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## CLOUD CHECK REVALIDATION — 2026-10-07T13:10:36Z
 
 PR #288's hosted run finished with **19 successful checks, 0 failing, 0 pending and 1 cancelled** (`Require current Four Ws receipts`); GitHub reports `UNSTABLE`. This is a source/test proposal and review receipt, not a required or trusted provider control. PR #283 has its main checks passing while Rust analysis, Four Ws and Python 3.12 remain pending. The provider API returned zero open CodeQL alerts for the PR #286 and #287 merge refs; master still reports 32 open CodeQL alerts until an owner-approved merge and default-branch reread. No merge or deployment occurred.
