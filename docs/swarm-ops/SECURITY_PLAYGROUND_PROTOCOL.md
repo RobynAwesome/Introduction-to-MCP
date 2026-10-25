@@ -157,3 +157,32 @@ CI workflow: `.github/workflows/security-playground-fixture.yml` (PR/dispatch, r
 Required acceptance chain: `INVENTORY_EVIDENCED -> ISOLATION_ATTESTED -> NEGATIVE_TESTS_PASS -> CASSY_SUBMISSION -> CASSEY_TEACHER_REVIEW -> KC_RECEIPT -> HUMAN_APPROVAL -> PKA/KMEC RECEIVING_GATE`. Any missing stage remains `HOLD`; a synthetic `DRILL_PASS` is **not** production acceptance.
 
 `[SECURITY_PLAYGROUND | FIXTURE_GATE_CANDIDATE | RUNTIME_ISOLATION_UNVERIFIED | OWNER_REVIEW_REQUIRED]`
+
+## V1 synthetic assertion policy (review candidate, 2026-10-26)
+
+`scripts/security_playground_v1.py` accepts `gsmb_security_playground_v1` only;
+the earlier schema remains with its separate inventory evaluator. V1 is a
+read-only assertion checker. It does not authenticate receipt contents, teacher
+signatures, Git objects, append-only storage, OS controls or runtime state.
+Only `mode=fixture` with explicit `fixture://` receipt references can receive
+`DRILL_PASS`. Arbitrarily named synthetic references remain synthetic; their
+names convey no authentication. Real receipt references and claimed teacher
+signatures remain HOLD until a trusted verifier is implemented.
+
+V1 requires explicit boolean false production/privilege flags; all eight
+isolation assertions; an evidence sink with explicit `tamper_evident=true`,
+`authenticated=true`, `compromised=false`, `mutable_storage=false` and a sink ID;
+and finite positive numeric CPU, memory and timeout limits. Fixture policy maxima
+are 2 CPU cores, 2048 MB memory and 300 seconds. Missing/malformed assertions HOLD;
+failed controls or excessive limits BLOCK. These are fixture policy limits and
+caller assertions, not enforced provider controls.
+
+Standalone PHP runtimes and PHP-bearing containers use the same explicit
+upstream version policy. Missing/malformed versions, unsupported branches and
+vendor backport strings HOLD for independent provenance review. PHP containers
+also require explicit isolation. Every declared outbound crossing requires
+boolean `zero_trust_admitted=true`; no caller-domain string grants privileged
+authority. All outputs deny runtime verification and production authority.
+
+Run both evaluator suites with:
+`python -m unittest discover -s tests -p 'test_security_playground*.py' -v`.

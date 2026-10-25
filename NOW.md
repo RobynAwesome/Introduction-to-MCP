@@ -1,3 +1,17 @@
+## PR #327 COPILOT REPAIR AND OPEN-PR REVIEW PREPARATION — 2026-10-26 SAST
+
+WHO: Codex Forge, owner-directed stateless PR repair task; no RTC seat claimed. Robyn retains review/merge authority.
+WHAT: Addressed all 11 Copilot findings on #327, added adversarial regressions and enabled V1 fixture CI. Backported base defect fixes into #326 and merged that updated base into #327. Amended all 31 open dependency PR descriptions and refreshed stale branches using expected-head guards.
+WHERE: Cloud GSMB RobynAwesome/Introduction-to-MCP. Original #327 head 1b625b624ba11325da2bc32fbf4ab4380226118a; #326 repair head 8a50a481ca97b7d24b1c644f083ea0f0a88ce491. Earlier state below remains historical; no Local/Cloud/Drive parity is asserted.
+WHY: Prepare bounded, reviewable PRs and preserve fail-closed fixture admission. All runtime/production/teacher-acceptance claims remain HOLD.
+Evidence: docs/swarm-ops/receipts/PR327_COPILOT_REPAIR_2026-10-26.md; 42 synthetic tests pass locally. Hosted checks must be re-read at pushed heads. No merge, deployment or issue closure occurred.
+Known uncertainty: filelock 4 PR #328 also downgrades Safety 3.8.1 to 3.2.3 because Safety 3.8.1 requires filelock<4. Compatibility remediation is being investigated; existing passing CI does not settle that issue.
+Next admissible action: Review #326 before #327; after merging #326 retarget #327 to master and revalidate. Review dependency PRs individually and re-read strict checks after each merge.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
+---
+
 ## PR #326 BASE REPAIR — 2026-10-26 SAST
 
 WHO: Codex Forge, stateless renter in the owner-directed PR repair lane; no RTC seat claimed.
