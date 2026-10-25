@@ -1,0 +1,135 @@
+{
+  "schema": "gsmb_security_playground_negative_tests_v2",
+  "total_scenarios": 16,
+  "all_matched": true,
+  "scenarios": [
+    {
+      "id": "SCENARIO-01",
+      "name": "PHP absent",
+      "verdict": "DRILL_PASS",
+      "exit_code": 0,
+      "expected": "DRILL_PASS",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-02",
+      "name": "PHP runtime present without source",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-03",
+      "name": "PHP source present without runtime",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-04",
+      "name": "PHP inside container (vulnerable version)",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-05",
+      "name": "Missing asset inventory",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-06",
+      "name": "Vulnerable dependency",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-07",
+      "name": "Failed isolation control",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-08",
+      "name": "Attempted protected-state mutation",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-09",
+      "name": "Fabricated or unverifiable receipt",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-10",
+      "name": "Attempted production promotion",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-11",
+      "name": "Raw unauthenticated SHA-256 receipt",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-12",
+      "name": "Fabricated git source revision",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-13",
+      "name": "False negative asset inventory assertion",
+      "verdict": "HOLD",
+      "exit_code": 2,
+      "expected": "HOLD",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-14",
+      "name": "Cross-domain authority spoofing",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-15",
+      "name": "Compromised or mutable evidence sink",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    },
+    {
+      "id": "SCENARIO-16",
+      "name": "False teacher acknowledgement claim",
+      "verdict": "BLOCK",
+      "exit_code": 3,
+      "expected": "BLOCK",
+      "match": true
+    }
+  ]
+}
