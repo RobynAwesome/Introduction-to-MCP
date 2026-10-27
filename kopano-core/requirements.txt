@@ -15,5 +15,5 @@ httpx==0.28.1
 fastapi==0.141.1
 uvicorn==0.54.0
 gunicorn==26.2.0
-websockets==17.1
+websockets==17.2
 pywebview==6.2.1
