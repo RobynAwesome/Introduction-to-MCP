@@ -15,6 +15,14 @@ test("rendered dashboard starts without fabricated proof and treats returned sta
     const initial = renderToStaticMarkup(React.createElement(KCMyBoyHero));
     assert.match(initial, /aria-label="Message to KC"/);
     assert.doesNotMatch(initial, /AST-8F2B10A4|VERIFIED_ON_LEDGER|Kopano Ledger|ZA-CPT/);
+    const { default: EverydayMode } = await vite.ssrLoadModule("/src/EverydayMode.tsx");
+    const everyday = renderToStaticMarkup(React.createElement(EverydayMode, {
+      attentionItems: [], snapshotLabel: "synthetic snapshot", onOpenOperatorMode: () => {},
+    }));
+    assert.match(everyday, /Device connection available/);
+    assert.match(everyday, /Live service status has not been checked/);
+    assert.match(everyday, /Live service status<\/span><strong>Not checked/);
+    assert.doesNotMatch(everyday, /Up to date/);
     const { KopanoAssertStamp } = await vite.ssrLoadModule("/src/components/KopanoAssertStamp.tsx");
     const reported = renderToStaticMarkup(React.createElement(KopanoAssertStamp, { receipt: {
       assert_id: "AST-SYNTHETIC", session_id: "fixture", rtc_identity: "GUEST_SEEKER",

@@ -16,6 +16,7 @@ The earlier [production receipt](PRODUCTION_JOURNEYS_2026-10-28.md) remains date
 | Finding | Resulting candidate behavior |
 |---|---|
 | Ask KC returned celebratory canned text for 404/network/invalid responses and erased the draft | Explicit unavailable/timeout state; input retained; duplicate submissions blocked; 15-second request timeout; malformed replies rejected |
+| Browser online flag was presented as live service availability | Connection copy now describes only the browser/device hint; live service status is explicitly **Not checked** |
 | Dashboard initialized a hard-coded VERIFIED_ON_LEDGER stamp, region and empty-input digest | No initial receipt. Each request clears the previous receipt. Returned records require valid shape and matching requested persona, and display **Verification pending** |
 | Returned status text was presented as independent verification | Receipt details distinguish reported status/claim/region from verification; no claim of persistence, execution or residency. Copy only reports success after the clipboard operation succeeds |
 | Python assertion engine used an in-memory dictionary but labelled records and lookups ledger-verified/signed | Records use RECORDED_IN_MEMORY; lookup uses FOUND_IN_MEMORY; region defaults to UNKNOWN; returned objects are copies, so callers cannot silently mutate the stored record |
@@ -78,3 +79,13 @@ No issue is closed by this candidate. Review source changes and exact-head CI fi
 
 
 Local ingress and audit events are preserved in [IMPLEMENTATION_LOCAL_EVENTS_2026-10-28.jsonl](IMPLEMENTATION_LOCAL_EVENTS_2026-10-28.jsonl). The existing 45 MB Main Brain log is unchanged in this review candidate; the new events are not represented as a teacher/RTC admission. Receipt validation and proof-check are structural checks, not fresh Main Brain approval.
+
+## First hosted preview observation — candidate 1b8c1cdd
+
+Vercel preview dpl_J2Qi8ccAhi6Kivr13fRi9ECTppL9 (not production) served the repaired dashboard at https://kopano-context-studio-qynvy5wg2-robynawesomes-projects.vercel.app/. The browser displayed no initial ledger stamp. Submitting `Synthetic preview verification 2026-10-28: preserve this message on failure.` returned the explicit unavailable message and retained that exact input. This validates failure-state behavior, not a successful backend/ledger journey. The same check revealed the unrelated-to-backend browser online flag still labelled “Up to date”; the follow-up source change removes that unsupported health claim and adds rendered/model assertions.
+
+Browser MCP preview dpl_3KxjKFUUGFnanWcJ6htECgQ7ounD returned build ERROR; its actual provider log contains KPGS_LOCAL_ONLY and reports npm run build:vercel exit 1. This is the intended deployment-admission denial. No production alias was promoted.
+
+## Hosted CI contract correction
+
+At candidate 1b8c1cdd, Python 3.11 and 3.12 each ran the broader suite: 1,209 passed and one legacy assertion API test failed because it still required the old invented ZA-CPT residency (and subsequently the old verification labels). The changed Python files passed the hosted correctness linter. The compatibility test is updated to assert UNKNOWN / RECORDED_IN_MEMORY / FOUND_IN_MEMORY plus explicit no-execution and memory-storage metadata; its create/readback/list coverage is preserved. This is a deliberate contract correction, not a restored false claim or a skipped test. Final-head hosted results require a fresh read.

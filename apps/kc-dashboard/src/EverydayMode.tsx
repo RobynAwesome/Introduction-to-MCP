@@ -213,7 +213,7 @@ export default function EverydayMode({
             <span>Review progress</span><strong>This device</strong>
           </div>
           <div className="trust-row">
-            <span>Live status</span><strong>{online ? "Available" : "May be stale"}</strong>
+            <span>Live service status</span><strong>Not checked</strong>
           </div>
           <p className="snapshot-note">Source view: {snapshotLabel}. A saved preference never becomes permission to change protected work.</p>
         </aside>
