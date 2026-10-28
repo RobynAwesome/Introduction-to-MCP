@@ -6,6 +6,20 @@ KPGS Browser MCP gives an MCP-capable agent structured access to a **user-contro
 
 It is intentionally implemented inside `Introduction-to-MCP` as a governed POC. It does **not** modify or extend the WebMCP Challenge submission repository.
 
+## Hosting boundary
+
+This is a **local stdio server**, not an HTTP MCP endpoint. The Vercel build command
+fails with `KPGS_LOCAL_ONLY` instead of publishing the stdio process as a function.
+`npm run build` and `npm start` remain the local entry points. A previous READY
+Vercel build did not establish HTTP discovery, local Chromium access, human TTY
+approval, or durable hosted receipts. This guard does not repair or remove an
+already-promoted deployment; provider changes require their own review.
+
+`npm run check` also starts the compiled stdio process, performs real MCP
+initialization/tool discovery, checks denial of an unstaged action, and confirms
+that an unavailable loopback endpoint returns a tool error while discovery stays
+available. This is process/transport proof, not the Windows metal graduation gate.
+
 ## Architecture
 
 ```text
@@ -158,6 +172,7 @@ The local ledger is:
 ```text
 pending/       full staged payload before completion
 approved/      local human approval waiting to be claimed
+approval-grants/ immutable one-grant-per-action markers; restage after any grant failure
 executing/     atomically claimed approval
 consumed/      successfully spent approvals
 failed/        claimed approvals that did not complete normally
@@ -165,6 +180,7 @@ archived/      redacted completed/denied action summaries
 quarantined/   full indeterminate staged payload + no-replay metadata
 receipts/      execution receipts
 receipt-head.json
+receipt-writer.lock  exclusive receipt writer; crash leftovers require human inspection
 ```
 
 ### Successful action
@@ -313,6 +329,14 @@ Each receipt binds:
 - current SHA-256 receipt hash.
 
 `verify_receipt` recomputes integrity. Modified receipt content returns `TAMPER_DETECTED` and the verifier reports whether the receipt is the current chain head.
+
+Receipt publication takes an exclusive local writer lock and rejects a receipt
+whose predecessor does not match the current head. Head replacement uses an
+atomic rename. Contention or a stale head after a browser side effect follows
+the existing `INDETERMINATE` / quarantine / no-replay path. A crash may leave a
+writer lock or an unreferenced receipt: inspect the local files and browser;
+never delete the lock and replay an action automatically. This is not a claim
+of power-loss durability or transactional filesystem recovery.
 
 ## Install and source validation
 

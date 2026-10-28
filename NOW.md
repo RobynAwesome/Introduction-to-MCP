@@ -1,3 +1,30 @@
+## IMPLEMENTATION REVIEW CANDIDATE — 2026-10-28 SAST
+
+WHO: Codex Forge, owner-directed stateless implementation/review renter; `I_AM_STATELESS_RENTER_NOT_LANDLORD`. No RTC seat or independent teacher decision claimed.
+WHAT: Prepared bounded KC companion and Browser MCP repairs, plus a current-source review of all 13 open issues. Publishing a review candidate follows the current owner instruction; merge, production promotion, incident clearance and new architecture admission are not inferred.
+WHERE: Isolated Cloud checkout, base `master@4dfe0bc7008ce97f9e033a2851384b79257b47fb`, branch `codex/production-receipts-2026-10-28`. Local OneDrive/Windows and Drive remain separate, unreviewed populations.
+WHY: Remove canned success/false ledger verification; preserve one-use approvals and single-head receipt publication. Production READY is not runtime proof.
+EVIDENCE: [Implementation review and 13-issue matrix](docs/swarm-ops/receipts/IMPLEMENTATION_REVIEW_2026-10-28.md). Dashboard: explicit errors, retained drafts, validated returned records, no initial fabricated receipt. Python: PROCESS_MEMORY / RECORDED_IN_MEMORY / FOUND_IN_MEMORY, no unperformed external-action claims. Browser MCP: immutable approval-grant markers, receipt writer lock/head check and atomic head replacement; real stdio discovery and non-TTY denial tests.
+VALIDATION: 7 dashboard request/render tests; 22 Browser MCP policy/ledger/process tests; 58 targeted Python tests pass. Dashboard typecheck/build pass. Intended Studio lint exits 0 with five existing warnings; build and UI smoke scripts pass. Three new Browser ledger regressions failed before repair and pass after. Hosted build command intentionally exits 1 with KPGS_LOCAL_ONLY: this is a policy denial, not a hosted-service fix or a green deployment check.
+STATUS: SOURCE/TEST REVIEW_CANDIDATE; production end-to-end acceptance and security signoff remain HOLD. No issue closed. Local ingress/audit events are preserved as IMPLEMENTATION_LOCAL_EVENTS_2026-10-28.jsonl; the existing Main Brain log is unchanged and no teacher/RTC admission is inferred. Cloud browser cannot reach workspace localhost; PR preview click-path validation is pending. Initial local Python dependency import failures were resolved by installing dependencies; no test bypass counted.
+CURRENT REVIEW GAPS: #103 PR2 is implemented (29 fixture tests pass), despite its stale issue comment. #107 and #183 have explicit unresolved admission packets; do not invent new contracts. #158 still conflicts with booking-first Bookit #42; existing PRs #33 and #43 remain open. #163/#167 need independent disposition; #231 needs human field receipts.
+NEXT: Review the exact-head candidate and hosted checks; verify the dashboard failure state in its preview if available. Production backend configuration, physical Chromium/TTY graduation, Azure successful deployment and all independent/field acceptance gates remain separate.
+
+---
+
+## PRODUCTION JOURNEY OBSERVATION / 13-ISSUE ROUTING — 2026-10-28 SAST
+
+WHO: Codex Forge, owner-directed stateless receipt review; `I_AM_STATELESS_RENTER_NOT_LANDLORD`. No RTC seat or independent teacher opinion claimed.
+WHAT: Reconciled two current Vercel aliases against exact repository SHA, tested one Studio chat journey, inspected Browser MCP hosted entry and source transport, read all 13 open issues and their comments. Documentation candidate only; no application fix, merge, deployment setting change or issue closure.
+WHERE: Cloud `RobynAwesome/Introduction-to-MCP@4dfe0bc7008ce97f9e033a2851384b79257b47fb`; isolated checkout. Production observations 14:15–14:18 SAST. Local OneDrive/Windows metal and Drive were not audited.
+WHY: Promotion and passing source checks do not prove working production journeys or security acceptance.
+EVIDENCE: [Production journey receipt and exact 13-issue routing](docs/swarm-ops/receipts/PRODUCTION_JOURNEYS_2026-10-28.md). Studio root renders, but Ask KC produces a local fallback and direct POST `/api/kc/chat` returns 404. Its VERIFIED_ON_LEDGER stamp is initialized in client source. Root Vercel config serves `apps/kc-dashboard`, distinct from `kopano-core/studio`. Browser MCP returns HTTP 500 FUNCTION_INVOCATION_FAILED; build uses `src/server.ts`, whose transport is local stdio. Runtime stack trace was not available from the inspected logs.
+STATUS: RUNTIME_HOLD / REVIEW_CANDIDATE. Shared deployed head has 15 successful check runs and 1 skipped Azure deploy job. No end-to-end receipt or new security signoff is claimed. Renter ingress returned ACKNOWLEDGED / exit 0.
+LIVE-STATE RECONCILIATION: The dated October 26 block below is preserved as history. Current GitHub records show #326 closed without merge and #327 merged; do not reuse its old review order. Dependabot merges including #302, #300, #298, #297 and #295 are witnessed progress, not issue-closure receipts.
+NEXT ADMISSIBLE ACTION: #110 first: reconcile intended production application/backend and replace unsupported success/ledger displays in bounded implementation slices, then prove real response plus persisted/retrieved receipt. Separately reproduce Browser MCP startup and preserve its local CDP/human-approval contract. The remaining 12 issues retain their individual proof/admission boundaries in the receipt; no closure from this two-deployment audit.
+
+---
+
 ## PR #327 COPILOT REPAIR AND OPEN-PR REVIEW PREPARATION — 2026-10-26 SAST
 
 WHO: Codex Forge, owner-directed stateless PR repair task; no RTC seat claimed. Robyn retains review/merge authority.

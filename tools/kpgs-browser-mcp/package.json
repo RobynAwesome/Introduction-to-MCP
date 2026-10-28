@@ -6,9 +6,10 @@
   "description": "Governed MCP bridge from agents to a user-controlled Chromium instance.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "build:vercel": "node scripts/refuse-hosted-build.mjs",
     "start": "node dist/server.js",
     "approve": "node dist/approve.js",
-    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js",
+    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js dist/server.test.js",
     "check": "npm run test"
   },
   "dependencies": {

@@ -1,6 +1,8 @@
 """
-Kopano Assertion Engine (Verifiable Claims & Sovereign Receipts)
-Signs, tracks, and validates operational assertions emitted by KC and RTC Council identities.
+Process-local assertion records for the reference KC companion.
+
+A self-computed hash is not a signature, a durable ledger write, or proof that
+the recorded claim happened. No external action is authorized by these records.
 """
 
 import hashlib
@@ -15,9 +17,9 @@ class KopanoAssert(BaseModel):
     rtc_identity: str
     intent_domain: str
     claim: str
-    residency: str = "ZA-CPT (South Africa North)"
+    residency: str = "UNKNOWN"
     proof_hash: str
-    status: str = "VERIFIED_ON_LEDGER"
+    status: str = "RECORDED_IN_MEMORY"
     timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     @classmethod
@@ -27,7 +29,7 @@ class KopanoAssert(BaseModel):
         identity: str,
         domain: str,
         claim: str,
-        residency: str = "ZA-CPT (South Africa North)"
+        residency: str = "UNKNOWN"
     ) -> "KopanoAssert":
         ts = datetime.now(timezone.utc).timestamp()
         payload = f"{session_id}:{identity}:{domain}:{claim}:{residency}:{ts}"
@@ -41,24 +43,29 @@ class KopanoAssert(BaseModel):
             claim=claim,
             residency=residency,
             proof_hash=proof,
-            status="VERIFIED_ON_LEDGER"
+            status="RECORDED_IN_MEMORY"
         )
 
 
 class KopanoAssertStore:
-    """In-memory & ledger-synchronized store for active assertions."""
+    """Volatile process-local store. No ledger synchronization is implemented."""
     def __init__(self):
         self._store: Dict[str, KopanoAssert] = {}
 
     def emit(self, assertion: KopanoAssert) -> KopanoAssert:
-        self._store[assertion.assert_id] = assertion
-        return assertion
+        # Callers cannot upgrade this store's evidence class by supplying a label.
+        stored = assertion.model_copy(update={"status": "RECORDED_IN_MEMORY"}, deep=True)
+        self._store[stored.assert_id] = stored
+        return stored.model_copy(deep=True)
 
     def get(self, assert_id: str) -> Optional[KopanoAssert]:
-        return self._store.get(assert_id)
+        stored = self._store.get(assert_id)
+        return stored.model_copy(deep=True) if stored is not None else None
 
     def list_all(self, limit: int = 50) -> List[KopanoAssert]:
-        return list(self._store.values())[-limit:]
+        if limit <= 0:
+            return []
+        return [record.model_copy(deep=True) for record in list(self._store.values())[-limit:]]
 
     def count(self) -> int:
         return len(self._store)
