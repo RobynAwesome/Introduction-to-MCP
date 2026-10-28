@@ -8,12 +8,12 @@ pydantic-settings==2.15.0
 python-dotenv==1.2.4
 azure-monitor-opentelemetry==1.8.11
 litellm==1.89.7
-sqlalchemy==2.1.1
+sqlalchemy==2.1.5
 google-generativeai==0.8.6
 openai==3.19.2
 httpx==0.28.1
 fastapi==0.141.1
 uvicorn==0.54.0
 gunicorn==26.2.0
-websockets==17.1
+websockets==17.2
 pywebview==6.2.1
