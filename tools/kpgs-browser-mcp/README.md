@@ -8,12 +8,13 @@ It is intentionally implemented inside `Introduction-to-MCP` as a governed POC. 
 
 ## Hosting boundary
 
-This is a **local stdio server**, not an HTTP MCP endpoint. The Vercel build command
-fails with `KPGS_LOCAL_ONLY` instead of publishing the stdio process as a function.
-`npm run build` and `npm start` remain the local entry points. A previous READY
-Vercel build did not establish HTTP discovery, local Chromium access, human TTY
-approval, or durable hosted receipts. This guard does not repair or remove an
-already-promoted deployment; provider changes require their own review.
+This is a **local stdio server**, not an HTTP MCP endpoint. Vercel builds the
+code and publishes only a static `LOCAL_ONLY` information page from `public/`;
+it does not expose the server as a function. `npm run build` and `npm start`
+remain the local entry points. A READY deployment does not establish HTTP
+discovery, local Chromium access, human TTY approval, or durable hosted receipts.
+This preview change does not repair or remove an already-promoted deployment;
+provider changes require their own review.
 
 `npm run check` also starts the compiled stdio process, performs real MCP
 initialization/tool discovery, checks denial of an unstaged action, and confirms

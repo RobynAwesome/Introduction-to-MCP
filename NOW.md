@@ -1,3 +1,7 @@
+## VERCEL AND DEPENDABOT REVIEW — 2026-10-29
+
+Status: REVIEW_CANDIDATE. Codex Forge, owner-directed stateless renter; no RTC or security signoff claimed. PR #335 replaces its intentionally failing Browser MCP Vercel build with a static LOCAL_ONLY information page while keeping the stdio server and human approval boundary local. Local Browser MCP check: 22 tests pass. Preview build and runtime still require exact-head provider receipts; existing production is unchanged until promotion. GitHub reported 66 open Dependabot alerts. Critical Pillow has PR #325; critical root certifi has PR #337; requested a separate Dependabot security update for CLI/uv.lock alert #217. These remain open until fixes merge and GitHub re-evaluates them. The advisory recommends certifi 2026.10.19 or newer; rebuilding affected images is separate. No security clearance, issue closure, merge, or production promotion is implied. Main Brain ingress event is recorded in `docs/swarm-ops/receipts/VERCEL_DEPENDABOT_LOCAL_EVENT_2026-10-29.jsonl`. Next: inspect exact-head Vercel preview and checks, then review dependency PRs and remaining alerts.
+
 ## IMPLEMENTATION REVIEW CANDIDATE — 2026-10-28 SAST
 
 WHO: Codex Forge, owner-directed stateless implementation/review renter; `I_AM_STATELESS_RENTER_NOT_LANDLORD`. No RTC seat or independent teacher decision claimed.
