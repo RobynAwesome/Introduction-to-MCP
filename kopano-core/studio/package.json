@@ -11,24 +11,24 @@
     "test:ui": "node tests/labs-ui-smoke.mjs && node tests/console-responsive-empty-state.mjs"
   },
   "dependencies": {
-    "@microsoft/applicationinsights-web": "^3.4.4",
+    "@microsoft/applicationinsights-web": "^3.4.5",
     "framer-motion": "^13.4.4",
     "react": "^19.2.8",
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.5",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.1",
+    "@vitejs/plugin-react": "^6.1.2",
     "eslint": "^10.11.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.13.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.71.2",
-    "vite": "^8.3.1"
+    "vite": "^8.3.4"
   },
   "overrides": {
     "browserslist": ">=4.28.7",
