@@ -70,6 +70,11 @@ test("offline state is explicit and recoverable", () => {
   assert.equal(offline.title, "You’re offline");
   assert.match(offline.detail, /stay on this device/i);
   assert.match(offline.action ?? "", /reconnect/i);
+  const online = connectionMessage({ online: true, reconnecting: false });
+  assert.equal(online.title, "Device connection available");
+  assert.match(online.detail, /has not been checked/);
+  const reconnected = connectionMessage({ online: true, reconnecting: true });
+  assert.match(reconnected.detail, /still needs a check/);
 });
 
 test("permission explanation is read-only and grants no authority", () => {

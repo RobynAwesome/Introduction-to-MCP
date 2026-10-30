@@ -19,6 +19,7 @@
 | KC Swarm Console (architecture prose) | [KC_SWARM_CONSOLE_ARCHITECTURE.md](./KC_SWARM_CONSOLE_ARCHITECTURE.md) | BFF model, flow, CI vs optional `proof_gate`, citations |
 | KC Swarm Console (GUI IA spec) | [KC_SWARM_CONSOLE_WIREFRAME_SPEC.md](./KC_SWARM_CONSOLE_WIREFRAME_SPEC.md) | Four-column layout, flows, branch protection notes |
 | KC Swarm Console (Studio + API) | `GET /api/kc/swarm-console/status` · `kopano-core/studio/src/pages/ConsolePage.tsx` | Current implementation: Context / Swarm / MAO / KPEFS / Proof / CI / Sovereign SIM; BFF for git + JSONL gates |
+| Current Vercel surface mapping / production journey receipt | [2026-10-28 runtime receipt](./receipts/PRODUCTION_JOURNEYS_2026-10-28.md) | `kopano-context-studio` currently serves `apps/kc-dashboard`; this does not prove `kopano-core/studio` is deployed. Browser MCP hosted entry returns 500; both runtime journeys remain HOLD. |
 | KC GUI reconciliation lane | [Issue #110](https://github.com/RobynAwesome/Introduction-to-MCP/issues/110) | Current UI/UX truth audit and bounded remediation; replaces the obsolete `codex/kc-sovereign-gui-full-dev` compare pointer |
 | Windows desktop binary | `scripts/build_kopano_context.ps1` → `dist/KopanoContext.exe` | API + bundled Studio; DB under `%LOCALAPPDATA%\\KopanoContext\\` |
 | Unified guard CLI | `scripts/kc_guard.py` | `status` / `validate` / `proof` / `all` / `watch`; delegates to `git_sync_monitor` + `kc_log_append` |
