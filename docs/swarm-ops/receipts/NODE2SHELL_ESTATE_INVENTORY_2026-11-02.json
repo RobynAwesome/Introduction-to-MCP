@@ -406,2166 +406,6 @@
     "renter_entry": "ACKNOWLEDGED; own stateless-renter assertion only; not KC/Cassey activation"
   },
   "next_action": "AG measures exact runtimes and decoder reachability on priority public services, then prepares bounded runtime remediation and fixture proofs; owner controls release.",
-  "public_lockfile_evidence": [
-    {
-      "repo": "Kopano-Labs/Bookit-5s-Arena",
-      "path": "package-lock.json",
-      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
-      "blob": "7db875e9b0ddf7101312cefd982e21c2550b47e9",
-      "lockfileVersion": 3,
-      "resolved": [
-        {
-          "path": "node_modules/axios",
-          "version": "1.18.1"
-        },
-        {
-          "path": "node_modules/next",
-          "version": "15.5.19"
-        },
-        {
-          "path": "node_modules/undici",
-          "version": "7.29.0"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/KasiMargin",
-      "path": "package-lock.json",
-      "ref": "85d3cc9398701c451734eafe62aa1d15770fc6d1",
-      "blob": "1c44aa9ef4b269b780658e4218e757c6281d771c",
-      "lockfileVersion": 3,
-      "resolved": []
-    },
-    {
-      "repo": "RobynAwesome/KasiLink",
-      "path": "package-lock.json",
-      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
-      "blob": "ef85ed212d1531e713cc16f845e97f140cd38873",
-      "lockfileVersion": 3,
-      "resolved": [
-        {
-          "path": "node_modules/body-parser",
-          "version": "1.20.5"
-        },
-        {
-          "path": "node_modules/express",
-          "version": "4.22.2"
-        },
-        {
-          "path": "node_modules/next",
-          "version": "16.3.4"
-        },
-        {
-          "path": "node_modules/undici",
-          "version": "6.28.1"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/starfall-salvage",
-      "path": "package-lock.json",
-      "ref": "763380b01819a4b38c6fe048a33333fbc7c8d208",
-      "blob": "89670e7834c55f66211c15b88e7a564e7e771ee0",
-      "lockfileVersion": 3,
-      "resolved": [
-        {
-          "path": "node_modules/node-fetch",
-          "version": "2.7.0"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/Project-Jennifer",
-      "path": "pnpm-lock.yaml",
-      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
-      "blob": "bd79c5ca101bff9ae16e2b5d91e6c02578cae725",
-      "matches": [
-        {
-          "line": 65,
-          "text": "      express:"
-        },
-        {
-          "line": 81,
-          "text": "      '@types/express':"
-        },
-        {
-          "line": 353,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 366,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 372,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 378,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 384,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 390,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 396,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 402,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 408,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 414,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 420,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 426,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 432,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 438,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 444,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 450,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 456,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 462,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 468,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 474,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 480,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 486,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 492,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 498,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 504,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 510,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 516,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 522,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 528,
-          "text": "    engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}"
-        },
-        {
-          "line": 532,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 536,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 540,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 544,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 548,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 552,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 556,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 560,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 564,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 568,
-          "text": "    engines: {node: '>=18.18.0'}"
-        },
-        {
-          "line": 572,
-          "text": "    engines: {node: '>=18.18.0'}"
-        },
-        {
-          "line": 576,
-          "text": "    engines: {node: '>=18.18.0'}"
-        },
-        {
-          "line": 580,
-          "text": "    engines: {node: '>=10.10.0'}"
-        },
-        {
-          "line": 585,
-          "text": "    engines: {node: '>=12.22'}"
-        },
-        {
-          "line": 593,
-          "text": "    engines: {node: '>=18.18'}"
-        },
-        {
-          "line": 597,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 604,
-          "text": "    engines: {node: '>=6.0.0'}"
-        },
-        {
-          "line": 629,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 635,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 641,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 647,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 653,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 659,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 665,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 671,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 677,
-          "text": "    engines: {node: '>= 10'}"
-        },
-        {
-          "line": 683,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 687,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 691,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 695,
-          "text": "    engines: {node: '>=12.4.0'}"
-        },
-        {
-          "line": 699,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 703,
-          "text": "    engines: {node: '>=20'}"
-        },
-        {
-          "line": 708,
-          "text": "    engines: {node: '>=18.18'}"
-        },
-        {
-          "line": 784,
-          "text": "  '@types/body-parser@1.19.6':"
-        },
-        {
-          "line": 796,
-          "text": "  '@types/express-serve-static-core@4.19.9':"
-        },
-        {
-          "line": 799,
-          "text": "  '@types/express@4.17.25':"
-        },
-        {
-          "line": 854,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 862,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 869,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 875,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 879,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 885,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 892,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 896,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 902,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 909,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 913,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 919,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 925,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 931,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 937,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 943,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 949,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 955,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 961,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 967,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 973,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 979,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 985,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 991,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 997,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1003,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1009,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1015,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1021,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1027,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 1130,
-          "text": "    engines: {node: '>=14.0.0'}"
-        },
-        {
-          "line": 1150,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1159,
-          "text": "    engines: {node: '>=0.4.0'}"
-        },
-        {
-          "line": 1167,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1171,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 1175,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1179,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 1186,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 1196,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1200,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1207,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1211,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1215,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1219,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1223,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1227,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1231,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1238,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1242,
-          "text": "    engines: {node: ^10 || ^12 || >=14}"
-        },
-        {
-          "line": 1249,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1253,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 1257,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1264,
-          "text": "    engines: {node: 18 || 20 || >=22}"
-        },
-        {
-          "line": 1268,
-          "text": "    engines: {node: '>=6.0.0'}"
-        },
-        {
-          "line": 1273,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1275,
-          "text": "  body-parser@1.20.6:"
-        },
-        {
-          "line": 1277,
-          "text": "    engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}"
-        },
-        {
-          "line": 1287,
-          "text": "    engines: {node: 20 || >=22}"
-        },
-        {
-          "line": 1291,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1295,
-          "text": "    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}"
-        },
-        {
-          "line": 1300,
-          "text": "    engines: {node: '>=20.19.0'}"
-        },
-        {
-          "line": 1304,
-          "text": "    engines: {node: '>=10.16.0'}"
-        },
-        {
-          "line": 1308,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 1320,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1324,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1328,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1332,
-          "text": "    engines: {node: '>=6'}"
-        },
-        {
-          "line": 1336,
-          "text": "    engines: {node: '>= 6'}"
-        },
-        {
-          "line": 1343,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 1347,
-          "text": "    engines: {node: '>= 8.10.0'}"
-        },
-        {
-          "line": 1351,
-          "text": "    engines: {node: '>= 14.16.0'}"
-        },
-        {
-          "line": 1364,
-          "text": "    engines: {node: '>=7.0.0'}"
-        },
-        {
-          "line": 1371,
-          "text": "    engines: {node: '>= 6'}"
-        },
-        {
-          "line": 1381,
-          "text": "    engines: {node: ^14.18.0 || >=16.10.0}"
-        },
-        {
-          "line": 1385,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1389,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1396,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1400,
-          "text": "    engines: {node: '>= 0.10'}"
-        },
-        {
-          "line": 1404,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 1408,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 1419,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1423,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1427,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1447,
-          "text": "    engines: {node: '>=6.0'}"
-        },
-        {
-          "line": 1459,
-          "text": "    engines: {node: '>=16.0.0'}"
-        },
-        {
-          "line": 1463,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1467,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1474,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 1481,
-          "text": "    engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}"
-        },
-        {
-          "line": 1491,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 1495,
-          "text": "    engines: {node: '>=6.0.0'}"
-        },
-        {
-          "line": 1499,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 1503,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1525,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 1529,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 1533,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1537,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1541,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1545,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1549,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1553,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1557,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1561,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1565,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1569,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 1574,
-          "text": "    engines: {node: '>=6'}"
-        },
-        {
-          "line": 1581,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 1597,
-          "text": "    engines: {node: ^14.18.0 || >=16.0.0}"
-        },
-        {
-          "line": 1610,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 1614,
-          "text": "      eslint-import-resolver-node: '*'"
-        },
-        {
-          "line": 1622,
-          "text": "      eslint-import-resolver-node:"
-        },
-        {
-          "line": 1631,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 1641,
-          "text": "    engines: {node: '>=4.0'}"
-        },
-        {
-          "line": 1647,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 1653,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 1659,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 1663,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 1667,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 1671,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 1675,
-          "text": "    engines: {node: ^20.19.0 || ^22.13.0 || >=24}"
-        },
-        {
-          "line": 1679,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 1685,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 1696,
-          "text": "    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}"
-        },
-        {
-          "line": 1700,
-          "text": "    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}"
-        },
-        {
-          "line": 1704,
-          "text": "    engines: {node: '>=0.10'}"
-        },
-        {
-          "line": 1708,
-          "text": "    engines: {node: '>=4.0'}"
-        },
-        {
-          "line": 1712,
-          "text": "    engines: {node: '>=4.0'}"
-        },
-        {
-          "line": 1716,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 1720,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1725,
-          "text": "  express@4.22.2:"
-        },
-        {
-          "line": 1727,
-          "text": "    engines: {node: '>= 0.10.0'}"
-        },
-        {
-          "line": 1734,
-          "text": "    engines: {node: '>=8.0.0'}"
-        },
-        {
-          "line": 1741,
-          "text": "    engines: {node: '>=8.6.0'}"
-        },
-        {
-          "line": 1754,
-          "text": "    engines: {node: '>=12.0.0'}"
-        },
-        {
-          "line": 1763,
-          "text": "    engines: {node: ^10.12.0 || >=12.0.0}"
-        },
-        {
-          "line": 1767,
-          "text": "    engines: {node: '>=16.0.0'}"
-        },
-        {
-          "line": 1771,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1775,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 1779,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 1783,
-          "text": "    engines: {node: ^10.12.0 || >=12.0.0}"
-        },
-        {
-          "line": 1787,
-          "text": "    engines: {node: '>=16'}"
-        },
-        {
-          "line": 1794,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1798,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 1802,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1809,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 1816,
-          "text": "    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}"
-        },
-        {
-          "line": 1824,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1831,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1835,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1839,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1843,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1854,
-          "text": "    engines: {node: '>= 6'}"
-        },
-        {
-          "line": 1858,
-          "text": "    engines: {node: '>=10.13.0'}"
-        },
-        {
-          "line": 1862,
-          "text": "    engines: {node: '>=16 || 14 >=14.17'}"
-        },
-        {
-          "line": 1872,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1876,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 1880,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1884,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1894,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1898,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1905,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1909,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1913,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1917,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1921,
-          "text": "    engines: {node: '>=16.0.0'}"
-        },
-        {
-          "line": 1925,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 1929,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 1933,
-          "text": "    engines: {node: '>= 4'}"
-        },
-        {
-          "line": 1937,
-          "text": "    engines: {node: '>= 4'}"
-        },
-        {
-          "line": 1941,
-          "text": "    engines: {node: '>=6'}"
-        },
-        {
-          "line": 1945,
-          "text": "    engines: {node: '>=0.8.19'}"
-        },
-        {
-          "line": 1956,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1960,
-          "text": "    engines: {node: '>= 0.10'}"
-        },
-        {
-          "line": 1964,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1968,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1972,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1976,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 1980,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1987,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1991,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1995,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 1999,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2003,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2007,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2011,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2015,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2019,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2023,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2027,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2031,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2035,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2039,
-          "text": "    engines: {node: '>=0.12.0'}"
-        },
-        {
-          "line": 2043,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2047,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2051,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2055,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2059,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2063,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2067,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2071,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2075,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2079,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2089,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2093,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 2125,
-          "text": "    engines: {node: '>=4.0'}"
-        },
-        {
-          "line": 2135,
-          "text": "    engines: {node: '>=0.10'}"
-        },
-        {
-          "line": 2139,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2143,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 2150,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 2164,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2168,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2178,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 2182,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2186,
-          "text": "    engines: {node: '>=8.6'}"
-        },
-        {
-          "line": 2190,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2194,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2198,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2203,
-          "text": "    engines: {node: 18 || 20 || >=22}"
-        },
-        {
-          "line": 2210,
-          "text": "    engines: {node: '>=16 || 14 >=14.17'}"
-        },
-        {
-          "line": 2217,
-          "text": "    engines: {node: '>=16 || 14 >=14.17'}"
-        },
-        {
-          "line": 2221,
-          "text": "    engines: {node: '>=20.19.0'}"
-        },
-        {
-          "line": 2225,
-          "text": "    engines: {node: '>=20.19.0'}"
-        },
-        {
-          "line": 2261,
-          "text": "    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}"
-        },
-        {
-          "line": 2266,
-          "text": "    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}"
-        },
-        {
-          "line": 2274,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2278,
-          "text": "    engines: {node: '>=18.17.0'}"
-        },
-        {
-          "line": 2296,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2303,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 2307,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2311,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 2316,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2320,
-          "text": "    engines: {node: '>= 6'}"
-        },
-        {
-          "line": 2324,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2328,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2332,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2336,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2340,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2344,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2348,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2355,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2362,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2366,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2370,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 2374,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 2378,
-          "text": "    engines: {node: '>=6'}"
-        },
-        {
-          "line": 2382,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2386,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2390,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2394,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2401,
-          "text": "    engines: {node: '>=16 || 14 >=14.18'}"
-        },
-        {
-          "line": 2420,
-          "text": "    engines: {node: '>=4.0.0'}"
-        },
-        {
-          "line": 2432,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2436,
-          "text": "    engines: {node: '>= 16.0.0'}"
-        },
-        {
-          "line": 2454,
-          "text": "    engines: {node: '>=8.6'}"
-        },
-        {
-          "line": 2458,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 2462,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2466,
-          "text": "    engines: {node: '>= 6'}"
-        },
-        {
-          "line": 2473,
-          "text": "    engines: {node: '>=20'}"
-        },
-        {
-          "line": 2478,
-          "text": "    engines: {node: '>=20'}"
-        },
-        {
-          "line": 2483,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2487,
-          "text": "    engines: {node: '>=14.0.0'}"
-        },
-        {
-          "line": 2493,
-          "text": "    engines: {node: ^12 || ^14 || >= 16}"
-        },
-        {
-          "line": 2499,
-          "text": "    engines: {node: '>= 18'}"
-        },
-        {
-          "line": 2517,
-          "text": "    engines: {node: '>=12.0'}"
-        },
-        {
-          "line": 2523,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2530,
-          "text": "    engines: {node: ^10 || ^12 || >=14}"
-        },
-        {
-          "line": 2534,
-          "text": "    engines: {node: ^10 || ^12 || >=14}"
-        },
-        {
-          "line": 2538,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2542,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2546,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2550,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2554,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2558,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 2563,
-          "text": "    engines: {node: '>=18.18'}"
-        },
-        {
-          "line": 2576,
-          "text": "    engines: {node: '>= 0.10'}"
-        },
-        {
-          "line": 2580,
-          "text": "    engines: {node: '>=6'}"
-        },
-        {
-          "line": 2587,
-          "text": "    engines: {node: '>=0.6'}"
-        },
-        {
-          "line": 2594,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2598,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2613,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2620,
-          "text": "    engines: {node: '>=8.10.0'}"
-        },
-        {
-          "line": 2624,
-          "text": "    engines: {node: '>= 14.18.0'}"
-        },
-        {
-          "line": 2628,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2632,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2636,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2643,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2648,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2653,
-          "text": "    engines: {iojs: '>=1.0.0', node: '>=0.10.0'}"
-        },
-        {
-          "line": 2665,
-          "text": "    engines: {node: '>=0.4'}"
-        },
-        {
-          "line": 2672,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2676,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2690,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 2695,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2699,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2703,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2707,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2711,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2718,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2722,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2726,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2730,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2734,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2738,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2742,
-          "text": "    engines: {node: '>=14'}"
-        },
-        {
-          "line": 2746,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 2753,
-          "text": "    engines: {node: '>= 10.x'}"
-        },
-        {
-          "line": 2760,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2764,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2768,
-          "text": "    engines: {node: '>=10.0.0'}"
-        },
-        {
-          "line": 2772,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2776,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 2780,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2784,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2791,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2795,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2799,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2803,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2807,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 2811,
-          "text": "    engines: {node: '>=4'}"
-        },
-        {
-          "line": 2815,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2819,
-          "text": "    engines: {node: '>= 12.0.0'}"
-        },
-        {
-          "line": 2832,
-          "text": "    engines: {node: '>=16 || 14 >=14.17'}"
-        },
-        {
-          "line": 2837,
-          "text": "    engines: {node: '>=8'}"
-        },
-        {
-          "line": 2841,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2845,
-          "text": "    engines: {node: '>=14.0.0'}"
-        },
-        {
-          "line": 2853,
-          "text": "    engines: {node: '>=0.8'}"
-        },
-        {
-          "line": 2860,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 2864,
-          "text": "    engines: {node: '>=12.0.0'}"
-        },
-        {
-          "line": 2868,
-          "text": "    engines: {node: '>=8.0'}"
-        },
-        {
-          "line": 2872,
-          "text": "    engines: {node: '>=0.6'}"
-        },
-        {
-          "line": 2876,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 2880,
-          "text": "    engines: {node: '>=18.12'}"
-        },
-        {
-          "line": 2895,
-          "text": "    engines: {node: '>=18.0.0'}"
-        },
-        {
-          "line": 2904,
-          "text": "    engines: {node: '>= 0.8.0'}"
-        },
-        {
-          "line": 2908,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 2912,
-          "text": "    engines: {node: '>= 0.6'}"
-        },
-        {
-          "line": 2916,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2920,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2924,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2928,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2932,
-          "text": "    engines: {node: '>=14.17'}"
-        },
-        {
-          "line": 2937,
-          "text": "    engines: {node: '>=16.20.0'}"
-        },
-        {
-          "line": 2942,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2949,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2968,
-          "text": "    engines: {node: '>= 0.4.0'}"
-        },
-        {
-          "line": 2972,
-          "text": "    engines: {node: '>= 0.8'}"
-        },
-        {
-          "line": 2976,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 2980,
-          "text": "    engines: {node: '>=18'}"
-        },
-        {
-          "line": 2984,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2988,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2992,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 2996,
-          "text": "    engines: {node: '>= 0.4'}"
-        },
-        {
-          "line": 3000,
-          "text": "    engines: {node: '>= 8'}"
-        },
-        {
-          "line": 3005,
-          "text": "    engines: {node: '>=0.10.0'}"
-        },
-        {
-          "line": 3009,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 3013,
-          "text": "    engines: {node: '>=12'}"
-        },
-        {
-          "line": 3020,
-          "text": "    engines: {node: '>=0.4'}"
-        },
-        {
-          "line": 3024,
-          "text": "    engines: {node: '>=10'}"
-        },
-        {
-          "line": 3376,
-          "text": "  '@types/body-parser@1.19.6':"
-        },
-        {
-          "line": 3391,
-          "text": "  '@types/express-serve-static-core@4.19.9':"
-        },
-        {
-          "line": 3398,
-          "text": "  '@types/express@4.17.25':"
-        },
-        {
-          "line": 3400,
-          "text": "      '@types/body-parser': 1.19.6"
-        },
-        {
-          "line": 3401,
-          "text": "      '@types/express-serve-static-core': 4.19.9"
-        },
-        {
-          "line": 3825,
-          "text": "  body-parser@1.20.6:"
-        },
-        {
-          "line": 4229,
-          "text": "      eslint-import-resolver-node: 0.3.10"
-        },
-        {
-          "line": 4271,
-          "text": "      eslint-import-resolver-node: 0.3.10"
-        },
-        {
-          "line": 4286,
-          "text": "      eslint-import-resolver-node: 0.3.10"
-        },
-        {
-          "line": 4478,
-          "text": "  express@4.22.2:"
-        },
-        {
-          "line": 4482,
-          "text": "      body-parser: 1.20.6"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/lefa-ai",
-      "path": "package-lock.json",
-      "ref": "7c4576fb653663d8a557f4960814db10bfc62b0f",
-      "blob": "f467a1b85e96b85c902297324376ba9b34c9730d",
-      "lockfileVersion": 3,
-      "resolved": []
-    },
-    {
-      "repo": "RobynAwesome/Portfolio",
-      "path": "package-lock.json",
-      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
-      "blob": "b62aff1518884220b0145483049b5e05070d57e4",
-      "lockfileVersion": 3,
-      "resolved": []
-    },
-    {
-      "repo": "RobynAwesome/amaphu-app",
-      "path": "package-lock.json",
-      "ref": "e15963833fd3722deebd30829528521309934d7b",
-      "blob": "569eead5c9a0223bc1dc4df584312ddb4301bc44",
-      "lockfileVersion": 3,
-      "resolved": [
-        {
-          "path": "node_modules/next",
-          "version": "16.3.2"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/5s-Arena-Blog",
-      "path": "package-lock.json",
-      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
-      "blob": "e30d61a38f316b9e730e688ecb2eaf9c5fe985a0",
-      "lockfileVersion": 3,
-      "resolved": [
-        {
-          "path": "node_modules/axios",
-          "version": "1.15.2"
-        },
-        {
-          "path": "node_modules/body-parser",
-          "version": "2.2.2"
-        },
-        {
-          "path": "node_modules/express",
-          "version": "5.2.1"
-        }
-      ]
-    },
-    {
-      "repo": "Kopano-Labs/Bookit-5s-Arena",
-      "path": "lib/media/news.js",
-      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
-      "blob": "9d1075c82aec6ba766b8049b19a52cf59d09fdde",
-      "matches": [
-        {
-          "line": 36,
-          "text": "function normalizeArticleUrl(url) {"
-        },
-        {
-          "line": 38,
-          "text": "    const parsed = new URL(url);"
-        },
-        {
-          "line": 51,
-          "text": "  const link = normalizeArticleUrl("
-        },
-        {
-          "line": 80,
-          "text": "  const response = await fetch(feed.url, {"
-        },
-        {
-          "line": 107,
-          "text": "      const response = await fetch(article.url, {"
-        },
-        {
-          "line": 134,
-          "text": "        url: normalizeArticleUrl(canonical),"
-        },
-        {
-          "line": 155,
-          "text": "      url: normalizeArticleUrl(result.url),"
-        }
-      ]
-    },
-    {
-      "repo": "Kopano-Labs/Bookit-5s-Arena",
-      "path": "lib/sports/football.js",
-      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
-      "blob": "59edd9b15ab152628d10d8cc7d5bc4ff5de1b533",
-      "matches": []
-    },
-    {
-      "repo": "Kopano-Labs/Bookit-5s-Arena",
-      "path": "app/api/rss/route.js",
-      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
-      "blob": "24d1f53444eba3df00a675c267bacf13c1503514",
-      "matches": [
-        {
-          "line": 5,
-          "text": "const SITE_URL = process.env.NEXTAUTH_URL || 'https://fivesarena.com';"
-        }
-      ]
-    },
-    {
-      "repo": "Kopano-Labs/Bookit-5s-Arena",
-      "path": "app/api/weather/locations/route.js",
-      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
-      "blob": "b4d85d805c425d7486c7850b1b5166366e36d373",
-      "matches": []
-    },
-    {
-      "repo": "RobynAwesome/KasiLink",
-      "path": "app/api/orch/[...path]/route.ts",
-      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
-      "blob": "16fabd4dbfa8865e9036c3386581684b994a368e",
-      "matches": [
-        {
-          "line": 5,
-          "text": "  process.env.ORCH_BASE_URL ?? process.env.NEXT_PUBLIC_ORCH_BASE_URL;"
-        },
-        {
-          "line": 16,
-          "text": "  const url = new URL(path.join(\"/\"), base.endsWith(\"/\") ? base : `${base}/`);"
-        },
-        {
-          "line": 24,
-          "text": "  const response = await fetch(url, {"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/KasiLink",
-      "path": "app/api/grok/route.ts",
-      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
-      "blob": "cfb5f5a462b51a192cfa89b80fec4eaa9ea45836",
-      "matches": [
-        {
-          "line": 8,
-          "text": "  apiKey: process.env.KasiLinkAI_XAI_API_KEY!,"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/KasiLink",
-      "path": "app/api/load-shedding/schedule/route.ts",
-      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
-      "blob": "80ebc68579bc6197a7a1f583256b2b7d5a42df44",
-      "matches": [
-        {
-          "line": 85,
-          "text": "  const apiKey = process.env.ESKOMSEPUSH_API_KEY;"
-        },
-        {
-          "line": 93,
-          "text": "      const res = await fetch("
-        },
-        {
-          "line": 119,
-          "text": "        const statusRes = await fetch("
-        },
-        {
-          "line": 147,
-          "text": "    const stageRes = await fetch("
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/KasiLink",
-      "path": "app/api/water-alerts/route.ts",
-      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
-      "blob": "10d942baaa4c4dd3208888febfdfc05621ffbd70",
-      "matches": []
-    },
-    {
-      "repo": "RobynAwesome/5s-Arena-Blog",
-      "path": "server/index.js",
-      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
-      "blob": "d38df5c12922737720101c1787770c6d03c94fc5",
-      "matches": [
-        {
-          "line": 1,
-          "text": "import express from \"express\";"
-        },
-        {
-          "line": 13,
-          "text": "const app = express();"
-        },
-        {
-          "line": 15,
-          "text": "const CLIENT_URL = process.env.CLIENT_URL || \"http://localhost:5173\";"
-        },
-        {
-          "line": 19,
-          "text": "app.use(express.json());"
-        },
-        {
-          "line": 28,
-          "text": "  await mongoose.connect(process.env.MONGODB_URI);"
-        },
-        {
-          "line": 55,
-          "text": "if (process.env.NODE_ENV !== \"production\") {"
-        },
-        {
-          "line": 56,
-          "text": "  const PORT = process.env.PORT || 5000;"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/5s-Arena-Blog",
-      "path": "server/routes/organism.js",
-      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
-      "blob": "8c1a072c193c9574c993164e33f37fc1c15a73ee",
-      "matches": [
-        {
-          "line": 1,
-          "text": "import express from 'express';"
-        },
-        {
-          "line": 3,
-          "text": "const router = express.Router();"
-        },
-        {
-          "line": 6,
-          "text": "  process.env.FIVESARENA_ORIGIN || 'https://fivesarena.com'"
-        },
-        {
-          "line": 30,
-          "text": "    const response = await fetch("
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/Project-Jennifer",
-      "path": "apps/api/src/middleware/index.ts",
-      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
-      "blob": "e85e284553bbcb100bfdb1a075838d0b876b4e8e",
-      "matches": [
-        {
-          "line": 1,
-          "text": "import type { Request, Response, NextFunction } from \"express\";"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/kopano-sovereign-hub",
-      "path": "api/lefa/market-status.ts",
-      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
-      "blob": "a017b96892b3558f91f77618f8d41ee49fca03e7",
-      "matches": [
-        {
-          "line": 54,
-          "text": "  async fetch(request: Request) {"
-        },
-        {
-          "line": 100,
-          "text": "        fetch(snapshotEndpoint, { method: 'GET', headers, cache: 'no-store' }),"
-        },
-        {
-          "line": 101,
-          "text": "        fetch(ALPACA_PAPER_CLOCK_ENDPOINT, { method: 'GET', headers, cache: 'no-store' }),"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/kopano-sovereign-hub",
-      "path": "api/lefa/alpaca-status.ts",
-      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
-      "blob": "b94fe177a24525875a92d362dc2f94be217ec8e5",
-      "matches": [
-        {
-          "line": 85,
-          "text": "  async fetch(request: Request) {"
-        },
-        {
-          "line": 125,
-          "text": "      response = await fetch(ALPACA_PAPER_ACCOUNT_ENDPOINT, {"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/Portfolio",
-      "path": "api/contact.js",
-      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
-      "blob": "4dd7f58a46d589dacf698029507a16fdd80c0bfd",
-      "matches": [
-        {
-          "line": 28,
-          "text": "  const apiKey = process.env.RESEND_API_KEY;"
-        },
-        {
-          "line": 29,
-          "text": "  const toEmail = process.env.CONTACT_TO_EMAIL || \"rkholofelo@gmail.com\";"
-        },
-        {
-          "line": 30,
-          "text": "  const fromEmail = process.env.CONTACT_FROM_EMAIL || \"noreply@kholofelorababalela.vercel.app\";"
-        },
-        {
-          "line": 40,
-          "text": "    const response = await fetch(\"https://api.resend.com/emails\", {"
-        }
-      ]
-    },
-    {
-      "repo": "RobynAwesome/Portfolio",
-      "path": "api/cv-download.js",
-      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
-      "blob": "abcb246f1955a6d60e8d3fce4090abe198984c1e",
-      "matches": [
-        {
-          "line": 1,
-          "text": "import fs from \"node:fs/promises\";"
-        },
-        {
-          "line": 2,
-          "text": "import path from \"node:path\";"
-        },
-        {
-          "line": 3,
-          "text": "import { fileURLToPath } from \"node:url\";"
-        },
-        {
-          "line": 11,
-          "text": "  const apiKey = process.env.MAILCHIMP_API_KEY;"
-        },
-        {
-          "line": 12,
-          "text": "  const listId = process.env.MAILCHIMP_LIST_ID;"
-        },
-        {
-          "line": 19,
-          "text": "    await fetch(url, {"
-        }
-      ]
-    }
-  ],
   "session_closeout": {
     "session_date": "2026-11-02",
     "session_start": "unknown",
@@ -2612,5 +452,244 @@
       "Production changes/reviewer signoff not performed"
     ],
     "handoff_status": "Reviewable documentation/source triage; runtime remediation and fixture execution not claimed"
-  }
+  },
+  "public_source_references": [
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "package-lock.json",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "7db875e9b0ddf7101312cefd982e21c2550b47e9",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/axios",
+          "version": "1.18.1"
+        },
+        {
+          "path": "node_modules/next",
+          "version": "15.5.19"
+        },
+        {
+          "path": "node_modules/undici",
+          "version": "7.29.0"
+        }
+      ],
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/KasiMargin",
+      "path": "package-lock.json",
+      "ref": "85d3cc9398701c451734eafe62aa1d15770fc6d1",
+      "blob": "1c44aa9ef4b269b780658e4218e757c6281d771c",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/KasiMargin/blob/85d3cc9398701c451734eafe62aa1d15770fc6d1/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "package-lock.json",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "ef85ed212d1531e713cc16f845e97f140cd38873",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/body-parser",
+          "version": "1.20.5"
+        },
+        {
+          "path": "node_modules/express",
+          "version": "4.22.2"
+        },
+        {
+          "path": "node_modules/next",
+          "version": "16.3.4"
+        },
+        {
+          "path": "node_modules/undici",
+          "version": "6.28.1"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/starfall-salvage",
+      "path": "package-lock.json",
+      "ref": "763380b01819a4b38c6fe048a33333fbc7c8d208",
+      "blob": "89670e7834c55f66211c15b88e7a564e7e771ee0",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/node-fetch",
+          "version": "2.7.0"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/starfall-salvage/blob/763380b01819a4b38c6fe048a33333fbc7c8d208/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/Project-Jennifer",
+      "path": "pnpm-lock.yaml",
+      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
+      "blob": "bd79c5ca101bff9ae16e2b5d91e6c02578cae725",
+      "url": "https://github.com/RobynAwesome/Project-Jennifer/blob/cc74b56b879881defbbb885167b1b75a4a26f6db/pnpm-lock.yaml"
+    },
+    {
+      "repo": "RobynAwesome/lefa-ai",
+      "path": "package-lock.json",
+      "ref": "7c4576fb653663d8a557f4960814db10bfc62b0f",
+      "blob": "f467a1b85e96b85c902297324376ba9b34c9730d",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/lefa-ai/blob/7c4576fb653663d8a557f4960814db10bfc62b0f/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "package-lock.json",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "b62aff1518884220b0145483049b5e05070d57e4",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/amaphu-app",
+      "path": "package-lock.json",
+      "ref": "e15963833fd3722deebd30829528521309934d7b",
+      "blob": "569eead5c9a0223bc1dc4df584312ddb4301bc44",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/next",
+          "version": "16.3.2"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/amaphu-app/blob/e15963833fd3722deebd30829528521309934d7b/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "package-lock.json",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "e30d61a38f316b9e730e688ecb2eaf9c5fe985a0",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/axios",
+          "version": "1.15.2"
+        },
+        {
+          "path": "node_modules/body-parser",
+          "version": "2.2.2"
+        },
+        {
+          "path": "node_modules/express",
+          "version": "5.2.1"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/package-lock.json"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "lib/media/news.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "9d1075c82aec6ba766b8049b19a52cf59d09fdde",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/lib/media/news.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "lib/sports/football.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "59edd9b15ab152628d10d8cc7d5bc4ff5de1b533",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/lib/sports/football.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "app/api/rss/route.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "24d1f53444eba3df00a675c267bacf13c1503514",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/app/api/rss/route.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "app/api/weather/locations/route.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "b4d85d805c425d7486c7850b1b5166366e36d373",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/app/api/weather/locations/route.js"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/orch/[...path]/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "16fabd4dbfa8865e9036c3386581684b994a368e",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/orch/[...path]/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/grok/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "cfb5f5a462b51a192cfa89b80fec4eaa9ea45836",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/grok/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/load-shedding/schedule/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "80ebc68579bc6197a7a1f583256b2b7d5a42df44",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/load-shedding/schedule/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/water-alerts/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "10d942baaa4c4dd3208888febfdfc05621ffbd70",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/water-alerts/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "server/index.js",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "d38df5c12922737720101c1787770c6d03c94fc5",
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/server/index.js"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "server/routes/organism.js",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "8c1a072c193c9574c993164e33f37fc1c15a73ee",
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/server/routes/organism.js"
+    },
+    {
+      "repo": "RobynAwesome/Project-Jennifer",
+      "path": "apps/api/src/middleware/index.ts",
+      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
+      "blob": "e85e284553bbcb100bfdb1a075838d0b876b4e8e",
+      "url": "https://github.com/RobynAwesome/Project-Jennifer/blob/cc74b56b879881defbbb885167b1b75a4a26f6db/apps/api/src/middleware/index.ts"
+    },
+    {
+      "repo": "RobynAwesome/kopano-sovereign-hub",
+      "path": "api/lefa/market-status.ts",
+      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
+      "blob": "a017b96892b3558f91f77618f8d41ee49fca03e7",
+      "url": "https://github.com/RobynAwesome/kopano-sovereign-hub/blob/f109bf87b94a788ed97468bc74d8dc91bef3da7a/api/lefa/market-status.ts"
+    },
+    {
+      "repo": "RobynAwesome/kopano-sovereign-hub",
+      "path": "api/lefa/alpaca-status.ts",
+      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
+      "blob": "b94fe177a24525875a92d362dc2f94be217ec8e5",
+      "url": "https://github.com/RobynAwesome/kopano-sovereign-hub/blob/f109bf87b94a788ed97468bc74d8dc91bef3da7a/api/lefa/alpaca-status.ts"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "api/contact.js",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "4dd7f58a46d589dacf698029507a16fdd80c0bfd",
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/api/contact.js"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "api/cv-download.js",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "abcb246f1955a6d60e8d3fce4090abe198984c1e",
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/api/cv-download.js"
+    }
+  ]
 }
