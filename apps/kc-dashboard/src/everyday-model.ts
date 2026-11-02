@@ -180,14 +180,14 @@ export function connectionMessage(state: ConnectionState): {
   }
   if (state.reconnecting) {
     return {
-      title: "Checking the latest status",
-      detail: "Your saved progress is safe while the live view catches up.",
+      title: "Device reconnected",
+      detail: "Your saved progress stays on this device. Live service status still needs a check.",
       action: null,
     };
   }
   return {
-    title: "Up to date",
-    detail: "This view can refresh live status while keeping your local preferences separate.",
+    title: "Device connection available",
+    detail: "Your browser reports a connection. Live service status has not been checked.",
     action: null,
   };
 }
