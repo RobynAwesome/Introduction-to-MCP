@@ -1,3 +1,49 @@
+## CURRENT HANDOFF — 2026-11-02 SAST — SECURITY PLAYGROUND / NODE2SHELL
+
+**Status:** Source/metadata triage recorded; deployed runtime security remains UNKNOWN/HOLD.
+**WHO:** Fox Forge / Codex, owner-directed stateless CA task renter and integrating writer for this change; no RTC seat or independent teacher/security signoff claimed. `I_AM_STATELESS_RENTER_NOT_LANDLORD`.
+**Human direction:** Robyn requested continuity repair and a Node2Shell estate investigation so AG can resume useful building, experimentation and testing after Robyn regains laptop/connectivity access. The immediate priority is evidence-led Node runtime exposure triage, followed by the existing fixture-only Playground work.
+**Source baseline:** Cloud `master@5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5`. Local Windows/OneDrive is unavailable here; Drive was not synchronized. A Cloud source observation never establishes Local state.
+
+### Salient state — do not repeat completed work
+
+| Work | Current witnessed state | What remains |
+| --- | --- | --- |
+| Security Playground base | [#327 merged](https://github.com/RobynAwesome/Introduction-to-MCP/pull/327) as `9f94cb9a90ab1576e87413198340f05550ce02f6`; [#326 closed unmerged as superseded](https://github.com/RobynAwesome/Introduction-to-MCP/pull/326). | Continue from merged evaluators; do not merge/rebuild #326 or repeat the old review order. The prior #327 fixture CI receipt supports 42 synthetic tests, not runtime isolation. |
+| KC / Browser MCP repair | [#335 merged](https://github.com/RobynAwesome/Introduction-to-MCP/pull/335) on November 2 as `5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5`. Both production aliases now map to that SHA and report provider READY. | Source/test work has landed. Backend response/persisted-receipt journey, physical Chromium/TTY, hosted transport and independent/field acceptance remain separate. READY does not close these gates. |
+| Node2Shell | CVE-2026-111497 is confirmed upstream. Source/metadata inspection: 12 application repos plus this core repo; 169 reachable repositories enumerated and 33 Vercel projects inventoried. | Exact deployed/local Node binary patch and Brotli reachability are not measured. Four inspected app repos declare Node 20 CI jobs. No compromise determination. See [triage and takeover](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md). |
+| Procurement specimen | [#342 open](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342), no issue assignee/comments at readback. One bounded replay-adapter definition was prepared for owner/engineering review; no new scenario execution is claimed. | AG confirms actual builder/embodiment and scope, then implements the seven-case fixture-only slice using existing contracts; do not create a duplicate protocol/playground. |
+
+### AG takeover — first admissible action
+
+**AG / Lead Developer owns engineering; Forge coordinates scope, integration and evidence review; Robyn retains approval.** AG identity, RTC Seat 10, Google Antigravity platform and the current builder/interface/model are separate coordinates. Record whether the first AG or agent-orchestrated AG actually performs the work; do not infer availability from a name. Cassy proposes exercises; Cassey independently reviews; KC records Save/Watch and does not execute.
+
+**First action:** build a read-only runtime inventory for the actual public Node services and local/tooling processes. Record Node exact version, executable/image identity and architecture, source SHA, deployment/provider/role, observation time, and whether untrusted Brotli reaches incoming parsers or outgoing responses. Use the existing [machine-readable investigation record](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_INVENTORY_2026-11-02.json) as an evidence checklist, not an attestation.
+
+1. Start with canonical Bookit/Fives and both KasiLink production projects; verify the Fives blog's Express backend deployment separately. Bookit production maps to an October 20 build; both KasiLink production projects to September 14 builds. These precede Vercel's patched-new-deployment cutoff, so a new preview does not clear the existing production aliases.
+2. If a vulnerable binary is found, prepare the smallest reviewed runtime/image update, rebuild and restart/redeploy that exact source. Keep application repair, dependency upgrades and production release authority separate. Verify the new binary and served SHA plus the application's meaningful journey before recording remediation.
+3. Replace confirmed Node 20 CI declarations through scoped app-owned changes and emit exact runtime receipts. A package lock, `@types/node` update, major-only selector or npm audit result cannot prove the native runtime is patched.
+4. Continue the existing Security Playground with harmless fixture cases for patched/vulnerable/missing runtime evidence and conflicting receipts. Then implement/replay #342's separate advisory/human decision and tamper scenarios. Both exercise groups need expected/observed results, counterexamples and exact-head receipts; no live exploit payloads or runtime-isolation claims from assertions.
+
+**Done when:** each priority surface has either a measured runtime+reachability verdict and any tested remediation receipt, or an explicit gap, accountable owner and next probe. #342 completes only against its seven scenario groups and restart/idempotency/integrity evidence. Cassey/security review and founder graduation approval remain unclaimed.
+
+**Other active work:** #110's production/backend journey and the existing #107/#183 admission/field lanes retain their owning receipts and HOLD conditions. This security focus does not close or erase them.
+
+**Revisit triggers:** owner changes priority; local access resumes; a serving deployment/runtime changes; a source head or advisory changes; a test fails or new contradictory evidence arrives. Refresh this current block and attach receipts at each material handoff.
+
+### Evidence and limits
+
+- [Investigation / source and deployment map](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md).
+- [Machine-readable observations and unknowns](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_INVENTORY_2026-11-02.json).
+- Existing [Security Playground discovery matrix](docs/swarm-ops/gsmb_security_discovery_matrix.md) and [continuity contract](governance/kpgs-vnext/continuity/README.md) remain the governing surfaces.
+- Real human authentication, off-host evidence retention, runtime isolation and production enforcement remain UNKNOWN/HOLD. No Local/Cloud/Drive parity, actual KC/Cassey activation, scan, exploit, credential access, production setting change or incident clearance is claimed.
+
+---
+
+## PRESERVED DATED SNAPSHOTS — NOT THE CURRENT WORK QUEUE
+
+The dated status blocks below remain unchanged as historical evidence. Their old PR states, deployment observations and “next” instructions do not supersede the current handoff above. Durable governance/entry/authority instructions remain applicable; history is preserved rather than deleted.
+
 ## VERCEL AND DEPENDABOT REVIEW — 2026-10-29
 
 Status: REVIEW_CANDIDATE. Codex Forge, owner-directed stateless renter; no RTC or security signoff claimed. PR #335 replaces its intentionally failing Browser MCP Vercel build with a static LOCAL_ONLY information page while keeping the stdio server and human approval boundary local. Local Browser MCP check: 22 tests pass. Preview build and runtime still require exact-head provider receipts; existing production is unchanged until promotion. GitHub reported 66 open Dependabot alerts. Critical Pillow has PR #325; critical root certifi has PR #337; requested a separate Dependabot security update for CLI/uv.lock alert #217. These remain open until fixes merge and GitHub re-evaluates them. The advisory recommends certifi 2026.10.19 or newer; rebuilding affected images is separate. No security clearance, issue closure, merge, or production promotion is implied. Main Brain ingress event is recorded in `docs/swarm-ops/receipts/VERCEL_DEPENDABOT_LOCAL_EVENT_2026-10-29.jsonl`. Next: inspect exact-head Vercel preview and checks, then review dependency PRs and remaining alerts.
@@ -1516,3 +1562,4 @@ Historical instruction: implement these tests in `kopano-core/kopano/test_adapti
 - **Next admissible action:** #102 bounded live-estate evidence admission through a reviewable PR, retaining HOLD for unsupported provider cutover or missing conformance evidence.
 
 `I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
