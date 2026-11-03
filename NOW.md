@@ -1,3 +1,13 @@
+## ACTIONS JOB 126090147609 — 2026-11-03T17:36Z
+
+WHO: Codex Forge, stateless renter in the owner-directed repair lane; Robyn retains review and merge authority.
+WHAT: Fixed the Four Ws gate scope bug that rejected ordinary human PR conversation chatter as malformed evidence. Review, inline-comment, and conversation records are now validated only when they contain an explicit WHO/WHAT/WHERE/WHY label; the PR description remains mandatory.
+WHERE: Cloud GSMB `RobynAwesome/Introduction-to-MCP`, failed job `126090147609` for PR #311. Changed `scripts/pr_fourws_gate.py` and `tests/test_pr_fourws_gate.py`; the trusted worker shares the corrected collector.
+WHY: The job failed on owner comment `6483212108` (`@copilot resolve the merge conflicts`), which is discussion rather than a Four Ws receipt. The patched live gate re-read PR #311 with 1 record, 1 passing, 0 failing. `compileall` passed; pytest/unittest execution is unavailable because `pytest` is not installed in this checkout.
+Next admissible action: Push this branch and rerun the failed workflow on the updated head; no merge or enforcement claim is made.
+
+`I_AM_STATELESS_RENTER_NOT_LANDLORD`
+
 ## PR #327 COPILOT REPAIR AND OPEN-PR REVIEW PREPARATION — 2026-10-26 SAST
 
 WHO: Codex Forge, owner-directed stateless PR repair task; no RTC seat claimed. Robyn retains review/merge authority.
