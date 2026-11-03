@@ -1,0 +1,695 @@
+{
+  "kind": "bounded_node2shell_investigation_receipt",
+  "observed_date_sast": "2026-11-02",
+  "scope": "source and authenticated provider metadata; no exploit, runtime probing, app fix or production mutation",
+  "advisory": {
+    "id": "CVE-2026-111497",
+    "component": "bundled native Brotli decoder",
+    "fixed_node_release_floors": {
+      "22": "22.23.4",
+      "24": "24.22.1",
+      "26": "26.12.1"
+    },
+    "sources": [
+      "https://nodejs.org/en/blog/vulnerability/october-2026-security-releases",
+      "https://vercel.com/kb/bulletin/node-js-security-advisory",
+      "https://www.imperva.com/blog/node2shell-from-brotli-data-to-remote-code-execution/"
+    ]
+  },
+  "cloud_core_source_revision": "5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5",
+  "continuity": {
+    "pr327": {
+      "state": "merged",
+      "sha": "9f94cb9a90ab1576e87413198340f05550ce02f6"
+    },
+    "pr326": {
+      "state": "closed",
+      "merged": false,
+      "superseded": true
+    },
+    "pr335": {
+      "state": "merged",
+      "sha": "5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5"
+    },
+    "old_root_now_blob": "ad30689753f6dd977a33ba10b1417fe1dbf875e5",
+    "prior_reconciliation": "Present lower in NOW; current correction repairs salience/placement, not absent knowledge",
+    "history_preserved": true
+  },
+  "coverage": {
+    "reachable_repositories": 169,
+    "source_inspected_application_repositories": 12,
+    "source_inspected_core_repositories": 1,
+    "public_application_repositories": 11,
+    "private_application_repositories": 1,
+    "vercel_projects": 33,
+    "vercel_project_node_major_settings": {
+      "24.x": 33
+    },
+    "exact_running_node_versions_observed": 0
+  },
+  "source_candidate_count_is_not_affected_runtime_count": true,
+  "source_inspection_results": [
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "priority": "P1",
+      "class": "Node server/outbound response candidate",
+      "evidence": [
+        "package.json: next ^15.5.18, start next start; lock next15.5.19 undici7.29.0",
+        "lib/media/news.js:80 fetch feed URL; :107 fetch article URL parsed from feed; :119 consumes response.text()",
+        "vercel.json framework nextjs, app/api functions"
+      ],
+      "gap": "No source Node patch floor; actual production binary/served SHA/provider rollout unknown.",
+      "patchTargets": [
+        "runtime version setting/deployed binary",
+        "package.json engines/toolchain policy",
+        ".github/workflows/court-assets.yml Node20:25"
+      ],
+      "commit": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/tree/85e6e2b4aa2035552c396d8e7d632a706e524f2d"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "priority": "P1",
+      "class": "Concrete inbound Brotli-capable parser source candidate",
+      "evidence": [
+        "package-lock.json express5.2.1 body-parser2.2.2",
+        "server/index.js:19 app.use(express.json()) before routes/DB/auth; :60 export app",
+        "server/routes/organism.js:30 fetch Fives upstream"
+      ],
+      "gap": "Whether Express server is hosted/reachable, runtime patch and deployment mapping unknown; Vercel source rewrites alone do not prove backend mounted.",
+      "patchTargets": [
+        "deployed runtime / image",
+        "optional interim middleware before express.json to reject compressed bodies after compatibility check",
+        "record Node supported patch floor"
+      ],
+      "commit": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/tree/c5b145d344f4a88d8a7009cf9d1214186eee48bd"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "priority": "P1",
+      "class": "Next server/outbound response candidate",
+      "evidence": [
+        "lock next16.3.4; express4.22.2/body-parser1.20.5 are transitive and do not by themselves prove Express5 incoming Brotli path",
+        "app/api/orch/[...path]/route.ts:24 fetch upstream; :35/:39 consume response; route auth gate retained",
+        "app/api/load-shedding/schedule/route.ts:93,:119,:147 fetch remote data"
+      ],
+      "gap": "Actual provider Node patch, deployed SHA, upstream response encoding unknown.",
+      "patchTargets": [
+        "runtime/deploy settings",
+        "CI .github/workflows/ci.yml:22 and kpgs-branch-proof.yml:33 use Node20",
+        "package.json toolchain floor"
+      ],
+      "commit": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "url": "https://github.com/RobynAwesome/KasiLink/tree/c090e74fd9a19735b6a7034b2e55966f05aa97ca"
+    },
+    {
+      "repo": "RobynAwesome/Project-Jennifer",
+      "priority": "P2",
+      "class": "Express4 Node API plus Next web; EOL toolchain declarations",
+      "evidence": [
+        "apps/api/package.json:11 start node dist/server.js; :28 express^4.19.2",
+        "pnpm-lock express4.22.2 body-parser1.20.6",
+        "apps/api/src/server.ts:71 express.json(); root engines node>=20",
+        "CI/deploy/proof NODE_VERSION20"
+      ],
+      "gap": "No Express5/body-parser2 path established; need source fetch inventory and actual API/provider/runtime patch.",
+      "patchTargets": [
+        ".github/workflows/ci.yml:10 deploy.yml:14 and Node20 proof workflows",
+        "package.json engines",
+        "API and web deploy runtimes"
+      ],
+      "commit": "cc74b56b879881defbbb885167b1b75a4a26f6db",
+      "url": "https://github.com/RobynAwesome/Project-Jennifer/tree/cc74b56b879881defbbb885167b1b75a4a26f6db"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "priority": "P2",
+      "class": "Static frontend with Node serverless functions",
+      "evidence": [
+        "package.json vite build",
+        "api/contact.js:40 fetch Resend; api/cv-download.js:19 fetch Mailchimp",
+        "CI .github/workflows/ci.yml:20 Node20"
+      ],
+      "gap": "Static homepage cannot clear API functions; function runtime patch and production deployment unknown.",
+      "patchTargets": [
+        "function Node runtime/redeploy",
+        "CI Node20",
+        "source patch floor"
+      ],
+      "commit": "a8c980337176a69e2c96dda014fe89430130822c",
+      "url": "https://github.com/RobynAwesome/Portfolio/tree/a8c980337176a69e2c96dda014fe89430130822c"
+    },
+    {
+      "repo": "RobynAwesome/kopano-sovereign-hub",
+      "priority": "P2",
+      "class": "Vite frontend with API fetch handlers; runtime type unresolved",
+      "evidence": [
+        "api/lefa/market-status.ts:100,:101 fetch fixed Alpaca endpoints",
+        "api/lefa/alpaca-status.ts:125 fetch account endpoint",
+        "API exports fetch object; no runtime edge marker in inspected files; CI major22"
+      ],
+      "gap": "Confirm actual handler hosting/runtime (Node vs other); cannot assume Vite means static-only or Node deployment proven.",
+      "patchTargets": [
+        "runtime/provider map",
+        "deployed version if Node",
+        "source floor and receipts"
+      ],
+      "commit": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
+      "url": "https://github.com/RobynAwesome/kopano-sovereign-hub/tree/f109bf87b94a788ed97468bc74d8dc91bef3da7a"
+    },
+    {
+      "repo": "RobynAwesome/amaphu-app",
+      "priority": "P2",
+      "class": "Next server-capable scaffold",
+      "evidence": [
+        "next16.3.2; start next start",
+        "engines node>=20.9.0; CI major24"
+      ],
+      "gap": "No production Node or reachable untrusted Brotli path established.",
+      "patchTargets": [
+        "restrict allowed supported patch range",
+        "verify actual runtime/deployment before public use"
+      ],
+      "commit": "e15963833fd3722deebd30829528521309934d7b",
+      "url": "https://github.com/RobynAwesome/amaphu-app/tree/e15963833fd3722deebd30829528521309934d7b"
+    },
+    {
+      "repo": "RobynAwesome/starfall-salvage",
+      "priority": "P3",
+      "class": "Inspected Vercel config explicitly static; Node tooling/local exposure separate",
+      "evidence": [
+        "vercel.json:3 no dependency install; :4 no build; outputDirectory .",
+        "root engines node>=20.0.0; monorepo/local tooling and Python backend"
+      ],
+      "gap": "No live Node service established by inspected deployment config; local/dev/build runtimes still inventory.",
+      "patchTargets": [
+        "local/build Node toolchain floor",
+        "separate Python/Brotli dependency check if present",
+        "confirm provider production config matches source"
+      ],
+      "commit": "763380b01819a4b38c6fe048a33333fbc7c8d208",
+      "url": "https://github.com/RobynAwesome/starfall-salvage/tree/763380b01819a4b38c6fe048a33333fbc7c8d208"
+    },
+    {
+      "repo": "RobynAwesome/Kopano-Labs-Website",
+      "priority": "P3",
+      "class": "Source Vite static build with remote evidence sync scripts",
+      "evidence": [
+        "vercel.json framework vite/output dist",
+        "scripts build sync evidence/projection; CI major22"
+      ],
+      "gap": "Build-time outbound sync may run Node; deployed static asset serving is not an app Node decoder path; production provider mapping unverified.",
+      "patchTargets": [
+        "build runner Node patch receipt",
+        "source Node policy",
+        "verify no functions in actual deployment"
+      ],
+      "commit": "d6e5cc3fba6cd5d76e3a21e26bef9ae9ae6cdb04",
+      "url": "https://github.com/RobynAwesome/Kopano-Labs-Website/tree/d6e5cc3fba6cd5d76e3a21e26bef9ae9ae6cdb04"
+    },
+    {
+      "repo": "RobynAwesome/lefa-ai",
+      "priority": "P3",
+      "class": "Vite frontend/Python API in source",
+      "evidence": [
+        "vercel.json output dist and /api rewrite /api/index.py",
+        "CI major22; Vite Node dev/build"
+      ],
+      "gap": "No production Node API source path established here; Python Brotli dependency applicability separate.",
+      "patchTargets": [
+        "build/dev Node patch",
+        "Python artifact/Brotli inventory if installed",
+        "deployed function language/version"
+      ],
+      "commit": "7c4576fb653663d8a557f4960814db10bfc62b0f",
+      "url": "https://github.com/RobynAwesome/lefa-ai/tree/7c4576fb653663d8a557f4960814db10bfc62b0f"
+    },
+    {
+      "repo": "RobynAwesome/KasiMargin",
+      "priority": "P3",
+      "class": "Python application / TS browser compile+tests; no Node service established",
+      "evidence": [
+        "package.json TypeScript only devDependency; build tsc; test node --test",
+        "CI major24; Python tests"
+      ],
+      "gap": "Node tests/build version not exact; no internet-facing Node decoder path found in this bounded source inspection.",
+      "patchTargets": [
+        "build/test runtime patch receipt",
+        "local tooling inventory"
+      ],
+      "commit": "85d3cc9398701c451734eafe62aa1d15770fc6d1",
+      "url": "https://github.com/RobynAwesome/KasiMargin/tree/85d3cc9398701c451734eafe62aa1d15770fc6d1"
+    },
+    {
+      "repository": "PRIVATE_SOURCE_WITHHELD",
+      "classification": "Node server candidate; actual deployment and runtime unknown",
+      "private_details_published": false
+    }
+  ],
+  "production_alias_observations": [
+    {
+      "label": "bookit-production",
+      "id": "dpl_BsHZ6xKnFTpgmjW4kSZwU2h7kjGv",
+      "provider_deployment_url": "https://bookit-5s-arena-6udibuur7-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-10-20T08:24:33.919Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "Kopano-Labs/Bookit-5s-Arena",
+      "source_sha": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "aliases": [
+        "fivesarena.com",
+        "www.fivesarena.com",
+        "bookit-5s-arena.vercel.app",
+        "bookit-5s-arena-robynawesomes-projects.vercel.app",
+        "bookit-5s-arena-git-main-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "kasilink-production",
+      "id": "dpl_G5E4CUipKezy11RXttg79ua9P1nD",
+      "provider_deployment_url": "https://kasi-link-etg1hi4iu-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-09-14T11:08:00.815Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/KasiLink",
+      "source_sha": "13be1ba8df4a086394d998815d57c1c885f1ec2b",
+      "aliases": [
+        "www.kasilink.com",
+        "kasi-link.vercel.app",
+        "kasi-link-robynawesomes-projects.vercel.app",
+        "kasi-link-git-main-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "kasilink-rsa-production",
+      "id": "dpl_AqG9ZsnQDgj3XP1rjkDKWf9wNGQi",
+      "provider_deployment_url": "https://kasi-link-jupgqy8oz-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-09-14T11:08:00.791Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/KasiLink",
+      "source_sha": "13be1ba8df4a086394d998815d57c1c885f1ec2b",
+      "aliases": [
+        "kasilink.com",
+        "kasi-linkrsa.vercel.app",
+        "kasi-linkrsa-robynawesomes-projects.vercel.app",
+        "kasi-linkrsa-git-main-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "kc-production",
+      "id": "dpl_C32FqnKXYnDX1g3zL9ZBLeaxPFGD",
+      "provider_deployment_url": "https://kopano-context-studio-4c7mk5rq7-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-11-02T18:10:27.886Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/Introduction-to-MCP",
+      "source_sha": "5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5",
+      "aliases": [
+        "kopano-context-studio.vercel.app",
+        "kopano-context-studio-robynawesomes-projects.vercel.app",
+        "kopano-context-studio-git-master-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "browser-mcp-production",
+      "id": "dpl_9LT6PpJEEyeoqP4o3KR4g8yQToh3",
+      "provider_deployment_url": "https://kpgs-browser-mu1jh09xn-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-11-02T18:10:27.898Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/Introduction-to-MCP",
+      "source_sha": "5a5ffd1836c2abe83baf3a154ad1bf70f6047ef5",
+      "aliases": [
+        "kpgs-browser-mcp.vercel.app",
+        "kpgs-browser-mcp-robynawesomes-projects.vercel.app",
+        "kpgs-browser-mcp-git-master-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "starfall-production",
+      "id": "dpl_d3pwryLL8Ra2DAWCdw9ScWNL5GWe",
+      "provider_deployment_url": "https://starfall-salvage-qu00yd3xb-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-10-30T17:55:25.705Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/starfall-salvage",
+      "source_sha": "763380b01819a4b38c6fe048a33333fbc7c8d208",
+      "aliases": [
+        "starfallsalvage.kopanolabs.com",
+        "starfall-salvage-beryl.vercel.app",
+        "starfall-salvage-robynawesomes-projects.vercel.app",
+        "starfall-salvage-git-main-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    },
+    {
+      "label": "blog-production",
+      "id": "dpl_HwCz5BvooWBb1d4fhpkiLXz9iUS3",
+      "provider_deployment_url": "https://5s-arena-blog-o4ydidc1e-robynawesomes-projects.vercel.app",
+      "created_at_utc": "2026-09-09T01:32:02.227Z",
+      "state": "READY",
+      "target": "production",
+      "repository": "RobynAwesome/5s-Arena-Blog",
+      "source_sha": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "aliases": [
+        "5s-arena-blog-robynawesomes-projects.vercel.app",
+        "5s-arena-blog-git-main-robynawesomes-projects.vercel.app"
+      ],
+      "exact_runtime_node_version": null,
+      "proof_class": "PROVIDER_DEPLOYMENT_METADATA",
+      "runtime_remediation": "UNKNOWN/HOLD"
+    }
+  ],
+  "node20_ci_declarations": [
+    "Kopano-Labs/Bookit-5s-Arena",
+    "RobynAwesome/KasiLink",
+    "RobynAwesome/Project-Jennifer",
+    "RobynAwesome/Portfolio"
+  ],
+  "assessment": {
+    "source_risk_candidates": "OBSERVED",
+    "deployed_affected_binary": "UNKNOWN",
+    "reachable_brotli_decoder_per_deployment": "UNKNOWN",
+    "exploitability": "UNKNOWN",
+    "compromise": "NOT_ASSESSED",
+    "actual_human_authentication": "UNKNOWN/HOLD",
+    "runtime_containment": "UNKNOWN/HOLD",
+    "production_authority": false
+  },
+  "verification": {
+    "source_inspection": true,
+    "production_alias_metadata_read": true,
+    "build_log_samples_read": true,
+    "exact_runtime_probe": false,
+    "exploit_payload_run": false,
+    "source_or_provider_remediation": false,
+    "bracket_lint_self_test": "PASS (6 cases)",
+    "renter_entry": "ACKNOWLEDGED; own stateless-renter assertion only; not KC/Cassey activation"
+  },
+  "next_action": "AG measures exact runtimes and decoder reachability on priority public services, then prepares bounded runtime remediation and fixture proofs; owner controls release.",
+  "session_closeout": {
+    "session_date": "2026-11-02",
+    "session_start": "unknown",
+    "session_end": "2026-11-02T20:57:20.036282+02:00",
+    "model": "not independently attested",
+    "variant": "unknown",
+    "assigned_role": "Fox Forge / Codex owner-directed CA source/continuity task",
+    "mission": "Repair NOW salience and investigate Node2Shell across reachable source/provider surfaces",
+    "files_read": "Source file paths and refs recorded in report/inventory; personal salience proposal read privately",
+    "files_changed": [
+      "NOW.md",
+      "docs/swarm-ops/gsmb_security_discovery_matrix.md",
+      "docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md",
+      "docs/swarm-ops/receipts/NODE2SHELL_ESTATE_INVENTORY_2026-11-02.json"
+    ],
+    "tools_used": [
+      "GitHub connector read/write for scoped review candidate",
+      "Vercel connector read-only",
+      "primary-source web research",
+      "Personal Context",
+      "Library read",
+      "local source inspection/document checks"
+    ],
+    "skills_used": [
+      "ccp-context-first",
+      "personal-context",
+      "Vercel deployments-cicd"
+    ],
+    "agents_used": [
+      "read-only core Node audit",
+      "read-only app estate audit"
+    ],
+    "browser_surfaces": [],
+    "reasoning_mode": "unknown",
+    "estimated_high_cost_actions": "unknown",
+    "avoidable_waste": [
+      "Some early outputs exceeded useful scope; later reads were narrowed",
+      "Deployment response wrapper required correction before field extraction"
+    ],
+    "unresolved_blockers": [
+      "No exact live/local Node patch measurement",
+      "No real decoder reachability test",
+      "Local Windows unavailable",
+      "Production changes/reviewer signoff not performed"
+    ],
+    "handoff_status": "Reviewable documentation/source triage; runtime remediation and fixture execution not claimed"
+  },
+  "public_source_references": [
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "package-lock.json",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "7db875e9b0ddf7101312cefd982e21c2550b47e9",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/axios",
+          "version": "1.18.1"
+        },
+        {
+          "path": "node_modules/next",
+          "version": "15.5.19"
+        },
+        {
+          "path": "node_modules/undici",
+          "version": "7.29.0"
+        }
+      ],
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/KasiMargin",
+      "path": "package-lock.json",
+      "ref": "85d3cc9398701c451734eafe62aa1d15770fc6d1",
+      "blob": "1c44aa9ef4b269b780658e4218e757c6281d771c",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/KasiMargin/blob/85d3cc9398701c451734eafe62aa1d15770fc6d1/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "package-lock.json",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "ef85ed212d1531e713cc16f845e97f140cd38873",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/body-parser",
+          "version": "1.20.5"
+        },
+        {
+          "path": "node_modules/express",
+          "version": "4.22.2"
+        },
+        {
+          "path": "node_modules/next",
+          "version": "16.3.4"
+        },
+        {
+          "path": "node_modules/undici",
+          "version": "6.28.1"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/starfall-salvage",
+      "path": "package-lock.json",
+      "ref": "763380b01819a4b38c6fe048a33333fbc7c8d208",
+      "blob": "89670e7834c55f66211c15b88e7a564e7e771ee0",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/node-fetch",
+          "version": "2.7.0"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/starfall-salvage/blob/763380b01819a4b38c6fe048a33333fbc7c8d208/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/Project-Jennifer",
+      "path": "pnpm-lock.yaml",
+      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
+      "blob": "bd79c5ca101bff9ae16e2b5d91e6c02578cae725",
+      "url": "https://github.com/RobynAwesome/Project-Jennifer/blob/cc74b56b879881defbbb885167b1b75a4a26f6db/pnpm-lock.yaml"
+    },
+    {
+      "repo": "RobynAwesome/lefa-ai",
+      "path": "package-lock.json",
+      "ref": "7c4576fb653663d8a557f4960814db10bfc62b0f",
+      "blob": "f467a1b85e96b85c902297324376ba9b34c9730d",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/lefa-ai/blob/7c4576fb653663d8a557f4960814db10bfc62b0f/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "package-lock.json",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "b62aff1518884220b0145483049b5e05070d57e4",
+      "lockfileVersion": 3,
+      "resolved": [],
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/amaphu-app",
+      "path": "package-lock.json",
+      "ref": "e15963833fd3722deebd30829528521309934d7b",
+      "blob": "569eead5c9a0223bc1dc4df584312ddb4301bc44",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/next",
+          "version": "16.3.2"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/amaphu-app/blob/e15963833fd3722deebd30829528521309934d7b/package-lock.json"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "package-lock.json",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "e30d61a38f316b9e730e688ecb2eaf9c5fe985a0",
+      "lockfileVersion": 3,
+      "resolved": [
+        {
+          "path": "node_modules/axios",
+          "version": "1.15.2"
+        },
+        {
+          "path": "node_modules/body-parser",
+          "version": "2.2.2"
+        },
+        {
+          "path": "node_modules/express",
+          "version": "5.2.1"
+        }
+      ],
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/package-lock.json"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "lib/media/news.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "9d1075c82aec6ba766b8049b19a52cf59d09fdde",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/lib/media/news.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "lib/sports/football.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "59edd9b15ab152628d10d8cc7d5bc4ff5de1b533",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/lib/sports/football.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "app/api/rss/route.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "24d1f53444eba3df00a675c267bacf13c1503514",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/app/api/rss/route.js"
+    },
+    {
+      "repo": "Kopano-Labs/Bookit-5s-Arena",
+      "path": "app/api/weather/locations/route.js",
+      "ref": "85e6e2b4aa2035552c396d8e7d632a706e524f2d",
+      "blob": "b4d85d805c425d7486c7850b1b5166366e36d373",
+      "url": "https://github.com/Kopano-Labs/Bookit-5s-Arena/blob/85e6e2b4aa2035552c396d8e7d632a706e524f2d/app/api/weather/locations/route.js"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/orch/[...path]/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "16fabd4dbfa8865e9036c3386581684b994a368e",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/orch/[...path]/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/grok/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "cfb5f5a462b51a192cfa89b80fec4eaa9ea45836",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/grok/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/load-shedding/schedule/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "80ebc68579bc6197a7a1f583256b2b7d5a42df44",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/load-shedding/schedule/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/KasiLink",
+      "path": "app/api/water-alerts/route.ts",
+      "ref": "c090e74fd9a19735b6a7034b2e55966f05aa97ca",
+      "blob": "10d942baaa4c4dd3208888febfdfc05621ffbd70",
+      "url": "https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/app/api/water-alerts/route.ts"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "server/index.js",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "d38df5c12922737720101c1787770c6d03c94fc5",
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/server/index.js"
+    },
+    {
+      "repo": "RobynAwesome/5s-Arena-Blog",
+      "path": "server/routes/organism.js",
+      "ref": "c5b145d344f4a88d8a7009cf9d1214186eee48bd",
+      "blob": "8c1a072c193c9574c993164e33f37fc1c15a73ee",
+      "url": "https://github.com/RobynAwesome/5s-Arena-Blog/blob/c5b145d344f4a88d8a7009cf9d1214186eee48bd/server/routes/organism.js"
+    },
+    {
+      "repo": "RobynAwesome/Project-Jennifer",
+      "path": "apps/api/src/middleware/index.ts",
+      "ref": "cc74b56b879881defbbb885167b1b75a4a26f6db",
+      "blob": "e85e284553bbcb100bfdb1a075838d0b876b4e8e",
+      "url": "https://github.com/RobynAwesome/Project-Jennifer/blob/cc74b56b879881defbbb885167b1b75a4a26f6db/apps/api/src/middleware/index.ts"
+    },
+    {
+      "repo": "RobynAwesome/kopano-sovereign-hub",
+      "path": "api/lefa/market-status.ts",
+      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
+      "blob": "a017b96892b3558f91f77618f8d41ee49fca03e7",
+      "url": "https://github.com/RobynAwesome/kopano-sovereign-hub/blob/f109bf87b94a788ed97468bc74d8dc91bef3da7a/api/lefa/market-status.ts"
+    },
+    {
+      "repo": "RobynAwesome/kopano-sovereign-hub",
+      "path": "api/lefa/alpaca-status.ts",
+      "ref": "f109bf87b94a788ed97468bc74d8dc91bef3da7a",
+      "blob": "b94fe177a24525875a92d362dc2f94be217ec8e5",
+      "url": "https://github.com/RobynAwesome/kopano-sovereign-hub/blob/f109bf87b94a788ed97468bc74d8dc91bef3da7a/api/lefa/alpaca-status.ts"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "api/contact.js",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "4dd7f58a46d589dacf698029507a16fdd80c0bfd",
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/api/contact.js"
+    },
+    {
+      "repo": "RobynAwesome/Portfolio",
+      "path": "api/cv-download.js",
+      "ref": "a8c980337176a69e2c96dda014fe89430130822c",
+      "blob": "abcb246f1955a6d60e8d3fce4090abe198984c1e",
+      "url": "https://github.com/RobynAwesome/Portfolio/blob/a8c980337176a69e2c96dda014fe89430130822c/api/cv-download.js"
+    }
+  ]
+}

@@ -7,7 +7,8 @@
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:chat": "tsc src/kc-chat.ts --ignoreConfig --target ES2022 --module ES2022 --moduleResolution Bundler --strict --skipLibCheck --outDir .proof && node --test tests/kc-chat.test.mjs tests/kc-chat-render.test.mjs"
   },
   "dependencies": {
     "@types/three": "^0.186.0",
