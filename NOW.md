@@ -14,6 +14,16 @@
 | Node2Shell | CVE-2026-111497 is confirmed upstream. Source/metadata inspection: 12 application repos plus this core repo; 169 reachable repositories enumerated and 33 Vercel projects inventoried. | Exact deployed/local Node binary patch and Brotli reachability are not measured. Four inspected app repos declare Node 20 CI jobs. No compromise determination. See [triage and takeover](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md). |
 | Procurement specimen | [#342 open](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342), no issue assignee/comments at readback. One bounded replay-adapter definition was prepared for owner/engineering review; no new scenario execution is claimed. | AG confirms actual builder/embodiment and scope, then implements the seven-case fixture-only slice using existing contracts; do not create a duplicate protocol/playground. |
 
+### REV-01 trial handoff — 2026-11-03 SAST
+
+**Status:** Draft decision aid, available for a bounded KPGS trial. [PR #355 merged](https://github.com/RobynAwesome/Introduction-to-MCP/pull/355), so the continuity repair is already on the Cloud base. [Issue #342](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342) is still open.
+
+**First use:** AG can invoke `REV this: Is #342 ready for its first fixture replay?` with the issue, current repository head and existing Security Playground contracts. REV-01 v0.2.0 advises on the next step through the existing gates. Record the chosen lane, evidence by source population, what would change the decision and the stopping condition. Robyn retains approval. REV-01 carries no execution grant or ratification.
+
+**Observed receipt:** One fresh Codex handoff trial recovered the open procurement work and ran the existing inventory-gate suite with 12 passing fixture tests. This supports that bounded handoff only. AG takeover, new procurement replay results and independent Cassey review are still pending. Local Windows/OneDrive was unavailable and Drive parity was not verified.
+
+**AG's first procurement step:** Record the actual builder/interface and base SHA, then use the existing Playground fixture entry point for a deterministic AI recommendation, a separate simulated human decision, tamper detection and replay receipts. Capture expected and observed outcomes against #342 before advancing the broader scenario set. Real authentication, runtime enforcement and production graduation stay UNKNOWN/HOLD.
+
 ### AG takeover — first admissible action
 
 **AG / Lead Developer owns engineering; Forge coordinates scope, integration and evidence review; Robyn retains approval.** AG identity, RTC Seat 10, Google Antigravity platform and the current builder/interface/model are separate coordinates. Record whether the first AG or agent-orchestrated AG actually performs the work; do not infer availability from a name. Cassy proposes exercises; Cassey independently reviews; KC records Save/Watch and does not execute.
