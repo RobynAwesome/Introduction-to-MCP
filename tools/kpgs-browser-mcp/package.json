@@ -8,16 +8,16 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "approve": "node dist/approve.js",
-    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js",
+    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js dist/server.test.js",
     "check": "npm run test"
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "2.1.0",
+    "@modelcontextprotocol/server": "2.3.1",
     "puppeteer-core": "25.14.0",
-    "zod": "4.6.5"
+    "zod": "4.6.7"
   },
   "devDependencies": {
-    "@types/node": "26.6.2",
+    "@types/node": "26.6.6",
     "typescript": "7.0.2"
   },
   "engines": {
