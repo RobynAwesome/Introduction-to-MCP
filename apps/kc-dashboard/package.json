@@ -11,12 +11,12 @@
     "test:chat": "tsc src/kc-chat.ts --ignoreConfig --target ES2022 --module ES2022 --moduleResolution Bundler --strict --skipLibCheck --outDir .proof && node --test tests/kc-chat.test.mjs tests/kc-chat-render.test.mjs"
   },
   "dependencies": {
-    "@types/three": "^0.186.0",
+    "@types/three": "^0.187.0",
     "@vitejs/plugin-react": "^6.1.2",
     "framer-motion": "^14.3.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "three": "^0.186.1",
+    "three": "^0.187.0",
     "vite": "^8.3.5"
   },
   "devDependencies": {
