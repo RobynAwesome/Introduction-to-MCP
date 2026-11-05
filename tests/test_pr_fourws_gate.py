@@ -114,10 +114,10 @@ def test_pending_review_and_its_inline_comments_are_not_submitted_receipts():
 
 def test_gate_uses_edited_current_records_and_ignores_deleted_comments_omitted_by_api():
     pr = {"number": 17, "user": actor("author"), "body": GOOD_BODY, "base": {"ref": "master"}}
-    empty_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": ""}]
+    partial_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": "WHO: reviewer"}]
     edited_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": GOOD_BODY}]
 
-    assert gate.record_failures(gate.collect_records(pr, empty_review, [], []))
+    assert gate.record_failures(gate.collect_records(pr, partial_review, [], []))
     assert gate.record_failures(gate.collect_records(pr, edited_review, [], [])) == []
     assert gate.record_failures(gate.collect_records(pr, [], [], [])) == []
 
