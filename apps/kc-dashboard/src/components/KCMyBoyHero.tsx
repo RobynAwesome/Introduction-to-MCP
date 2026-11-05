@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { KCMascot3D, MascotMood } from "./KCMascot3D";
 import { RTCIdentityKey, RTC_IDENTITY_PROFILES, KopanoAssertReceipt } from "../types/rtc";
 import { KopanoAssertStamp } from "./KopanoAssertStamp";
+import { KcChatError, requestKcReply } from "../kc-chat";
 
 interface KCMyBoyHeroProps {
   onOpenOperatorMode?: () => void;
@@ -19,20 +20,12 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
   const [query, setQuery] = useState("");
   const [mascotMood, setMascotMood] = useState<MascotMood>("idle");
   const [activeIdentity, setActiveIdentity] = useState<RTCIdentityKey>("GUEST_SEEKER");
-  const [assertReceipt, setAssertReceipt] = useState<KopanoAssertReceipt | null>({
-    assert_id: "AST-8F2B10A4",
-    session_id: "guest_session",
-    rtc_identity: "GUEST_SEEKER",
-    intent_domain: "EVERYDAY_ORCHESTRATION",
-    claim: "Sovereign companion active and listening at front door",
-    residency: "ZA-CPT (South Africa North)",
-    proof_hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    status: "VERIFIED_ON_LEDGER",
-    timestamp: new Date().toISOString(),
-  });
+  const [assertReceipt, setAssertReceipt] = useState<KopanoAssertReceipt | null>(null);
+  const [chatError, setChatError] = useState<string | null>(null);
+  const requestInFlight = useRef(false);
 
   const [kcReply, setKcReply] = useState<string>(
-    "KC My Boy is ready! Ask me anything about your projects, township opportunities, or how Kopano Labs can help you build."
+    "Ask KC about your projects or what you want to explore. A reply needs a working connection."
   );
   const [suggestedActions, setSuggestedActions] = useState<string[]>([
     "Explore KasiLink Work",
@@ -46,44 +39,31 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
 
   const handleAskKc = async (customQuery?: string) => {
     const text = customQuery || query;
-    if (!text.trim()) return;
+    if (!text.trim() || requestInFlight.current) return;
 
+    requestInFlight.current = true;
+    setQuery(text);
+    setAssertReceipt(null);
+    setChatError(null);
+    setKcReply("Waiting for KC to reply…");
     setIsLoading(true);
     setMascotMood("thinking");
 
     try {
-      // Call backend KC endpoint with active RTC identity
-      const response = await fetch("/api/kc/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: text,
-          rtc_identity: activeIdentity,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setKcReply(data.reply);
-        setMascotMood((data.mascot_state as MascotMood) || "celebrating");
-        if (data.suggested_actions) {
-          setSuggestedActions(data.suggested_actions);
-        }
-        if (data.assert_receipt) {
-          setAssertReceipt(data.assert_receipt);
-        }
-      } else {
-        // Fallback local response
-        setKcReply(`I'm with you, my boy! Let's get to work on: "${text}".`);
-        setMascotMood("celebrating");
-      }
-    } catch {
-      setKcReply(`I got you, my boy! Moving forward with: "${text}".`);
-      setMascotMood("celebrating");
-    } finally {
-      setIsLoading(false);
+      const data = await requestKcReply(text, activeIdentity);
+      setKcReply(data.reply);
+      setSuggestedActions(data.suggestedActions);
+      setAssertReceipt(data.receipt);
       setQuery("");
-      setTimeout(() => setMascotMood("idle"), 4000);
+    } catch (error) {
+      setKcReply("");
+      setChatError(error instanceof KcChatError && error.reason === "timeout"
+        ? "KC took too long to reply. Your message is still here; you can try again."
+        : "KC couldn’t return a reply. Your message is still here; try again when the connection is available.");
+    } finally {
+      requestInFlight.current = false;
+      setIsLoading(false);
+      setMascotMood("idle");
     }
   };
 
@@ -164,7 +144,8 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
                 return (
                   <button
                     key={key}
-                    onClick={() => setActiveIdentity(key)}
+                    disabled={isLoading}
+                    onClick={() => { setActiveIdentity(key); setAssertReceipt(null); }}
                     className={`px-3 py-2 rounded-xl text-left border transition-all cursor-pointer flex items-center space-x-2 ${
                       isSelected
                         ? "bg-slate-900 border-cyan-400 text-slate-100 shadow-md shadow-cyan-500/20"
@@ -190,8 +171,8 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
                 <p className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-1">
                   KC My Boy says:
                 </p>
-                <p className="text-sm text-slate-200 font-medium leading-normal">
-                  {kcReply}
+                <p role={chatError ? "alert" : "status"} className="text-sm text-slate-200 font-medium leading-normal">
+                  {chatError ?? kcReply}
                 </p>
               </div>
             </div>
@@ -199,7 +180,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
             {/* Verifiable Kopano Assert Stamp */}
             {assertReceipt && (
               <div className="pt-2 border-t border-slate-800/80">
-                <KopanoAssertStamp receipt={assertReceipt} />
+                <KopanoAssertStamp key={assertReceipt.assert_id} receipt={assertReceipt} />
               </div>
             )}
           </div>
@@ -208,6 +189,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
           <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
+              aria-label="Message to KC"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAskKc()}
@@ -231,6 +213,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
             {suggestedActions.map((chip, idx) => (
               <button
                 key={idx}
+                disabled={isLoading}
                 onClick={() => handleAskKc(chip)}
                 className="text-xs px-3 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-cyan-300 transition-colors cursor-pointer"
               >
@@ -283,6 +266,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
               </p>
             </div>
             <button
+              disabled={isLoading}
               onClick={() => handleAskKc("How can I find work through KasiLink?")}
               className="mt-6 text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center space-x-1 cursor-pointer"
             >
@@ -303,6 +287,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
               </p>
             </div>
             <button
+              disabled={isLoading}
               onClick={() => handleAskKc("Tell me about FiveS Arena football matches")}
               className="mt-6 text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center space-x-1 cursor-pointer"
             >
@@ -323,6 +308,7 @@ export const KCMyBoyHero: React.FC<KCMyBoyHeroProps> = ({
               </p>
             </div>
             <button
+              disabled={isLoading}
               onClick={() => handleAskKc("What is Cars4Mars building?")}
               className="mt-6 text-xs font-semibold text-amber-400 hover:text-amber-300 flex items-center space-x-1 cursor-pointer"
             >
