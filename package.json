@@ -2,7 +2,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",
     "braintrust": "^3.37.2",
-    "mongodb": "^7.7.0"
+    "mongodb": "^7.8.0"
   },
   "name": "kopano-context",
   "version": "0.1.0",
