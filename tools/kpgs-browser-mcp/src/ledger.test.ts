@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
-import test from "node:test";
+import test, { after } from "node:test";
 import {
   POLICY_VERSION,
   buildReceipt,
@@ -11,7 +12,9 @@ import {
   type BrowserPageContext,
   type HumanApproval
 } from "./governance.js";
-import {
+const temporaryLedger = await mkdtemp(path.join(os.tmpdir(), "kpgs-browser-ledger-test-"));
+process.env.KPGS_BROWSER_LEDGER_DIR = temporaryLedger;
+const {
   archiveStagedAction,
   claimApproval,
   finalizeApprovalConsumption,
@@ -24,7 +27,8 @@ import {
   writeHumanApproval,
   writeReceipt,
   writeStagedAction
-} from "./ledger.js";
+} = await import("./ledger.js");
+after(() => rm(temporaryLedger, { recursive: true, force: true }));
 
 function element(
   selector = "#save",
@@ -163,4 +167,63 @@ test("receipt hash and chain head persist together", async () => {
   assert.deepEqual(await readReceipt(receipt.receiptId), receipt);
   assert.deepEqual(await readReceiptHead(), { receiptId: receipt.receiptId, receiptHash: receipt.receiptHash });
   await rm(ledgerRoot(), { recursive: true, force: true });
+});
+
+test("claimed and consumed actions cannot be re-approved under the same action id", async () => {
+  await rm(ledgerRoot(), { recursive: true, force: true });
+  const staged = stageBrowserAction({ pageIndex: 0, operation: "click", selector: "#save" }, context());
+  const approval: HumanApproval = {
+    actionId: staged.actionId, binding: staged.binding, policyVersion: POLICY_VERSION,
+    approvedAt: new Date().toISOString(), approvedBy: "LOCAL_HUMAN",
+  };
+  await writeStagedAction(staged);
+  await writeHumanApproval(approval);
+  assert.ok(await claimApproval(staged.actionId));
+  await assert.rejects(writeHumanApproval(approval));
+  await finalizeApprovalConsumption(staged.actionId);
+  await assert.rejects(writeHumanApproval(approval));
+  assert.equal(await claimApproval(staged.actionId), undefined);
+});
+
+function sampleReceipt(suffix: string, previousReceiptHash: string | null = null) {
+  const page = context();
+  return buildReceipt({
+    receiptId: `RCP-00000000-0000-0000-0000-${suffix}`,
+    actionId: `BRA-00000000-0000-0000-0000-${suffix}`,
+    binding: "b".repeat(64), policyVersion: POLICY_VERSION, operation: "click", pageIndex: 0,
+    executedAt: "2026-10-28T00:00:00.000Z", pageBefore: page, pageAfter: { ...page, element: null },
+    result: { operation: "click", selector: "#save" }, previousReceiptHash,
+  });
+}
+
+test("concurrent receipt writers cannot silently fork the chain", async () => {
+  await rm(ledgerRoot(), { recursive: true, force: true });
+  const candidates = [sampleReceipt("000000000020"), sampleReceipt("000000000021")];
+  const outcomes = await Promise.allSettled(candidates.map(writeReceipt));
+  assert.equal(outcomes.filter((result) => result.status === "fulfilled").length, 1);
+  const winner = candidates[outcomes.findIndex((result) => result.status === "fulfilled")];
+  const loser = candidates[outcomes.findIndex((result) => result.status === "rejected")];
+  assert.equal((await readReceiptHead())?.receiptHash, winner.receiptHash);
+  assert.equal(await readReceipt(loser.receiptId), undefined);
+});
+
+test("a stale receipt cannot replace the head; a correctly linked successor can", async () => {
+  await rm(ledgerRoot(), { recursive: true, force: true });
+  const first = sampleReceipt("000000000030");
+  await writeReceipt(first);
+  await assert.rejects(writeReceipt(sampleReceipt("000000000031")), /RECEIPT_HEAD_MISMATCH/);
+  assert.equal((await readReceiptHead())?.receiptHash, first.receiptHash);
+  const next = sampleReceipt("000000000032", first.receiptHash);
+  await writeReceipt(next);
+  assert.equal((await readReceiptHead())?.receiptHash, next.receiptHash);
+});
+
+test("a leftover writer lock blocks publication and is preserved for human recovery", async () => {
+  await rm(ledgerRoot(), { recursive: true, force: true });
+  await readReceiptHead(); // Create the test ledger directories.
+  const lockPath = path.join(ledgerRoot(), "receipt-writer.lock");
+  await writeFile(lockPath, "SYNTHETIC_CRASH_LOCK");
+  await assert.rejects(writeReceipt(sampleReceipt("000000000040")), { code: "EEXIST" });
+  assert.equal(await readFile(lockPath, "utf8"), "SYNTHETIC_CRASH_LOCK");
+  assert.equal(await readReceiptHead(), undefined);
 });
