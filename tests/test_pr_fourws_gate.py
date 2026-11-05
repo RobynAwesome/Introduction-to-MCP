@@ -76,6 +76,18 @@ def test_reviews_comments_and_inline_comments_require_four_ws_but_bots_are_exemp
     assert len(gate.record_failures(records)) == 2
 
 
+def test_non_four_ws_human_chatter_is_not_treated_as_a_receipt():
+    records = gate.collect_records(
+        {"number": 17, "user": actor("author"), "body": GOOD_BODY},
+        [{"id": 1, "state": "COMMENTED", "user": actor("reviewer"), "body": "Looks good."}],
+        [],
+        [{"id": 2, "user": actor("author"), "body": "@copilot resolve the merge conflicts"}],
+    )
+
+    assert [(record["kind"], record["id"]) for record in records] == [("PR description", "#17")]
+    assert gate.record_failures(records) == []
+
+
 def test_review_dismissal_removes_its_review_and_inline_comments_from_current_gate():
     records = gate.collect_records(
         {"number": 17, "user": actor("author"), "body": GOOD_BODY},
@@ -102,10 +114,10 @@ def test_pending_review_and_its_inline_comments_are_not_submitted_receipts():
 
 def test_gate_uses_edited_current_records_and_ignores_deleted_comments_omitted_by_api():
     pr = {"number": 17, "user": actor("author"), "body": GOOD_BODY, "base": {"ref": "master"}}
-    empty_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": ""}]
+    partial_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": "WHO: reviewer"}]
     edited_review = [{"id": 5, "state": "COMMENTED", "user": actor("reviewer"), "body": GOOD_BODY}]
 
-    assert gate.record_failures(gate.collect_records(pr, empty_review, [], []))
+    assert gate.record_failures(gate.collect_records(pr, partial_review, [], []))
     assert gate.record_failures(gate.collect_records(pr, edited_review, [], [])) == []
     assert gate.record_failures(gate.collect_records(pr, [], [], [])) == []
 
