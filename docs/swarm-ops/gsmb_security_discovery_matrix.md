@@ -1,5 +1,22 @@
 # GSMB Security Discovery & Control Matrix
 
+## Current evidence update — 2026-11-02 — Node2Shell and continuity
+
+This dated addition records only observed source/provider metadata. Earlier rows and runtime labels below are preserved history and are not newly revalidated by this update.
+
+| Claim | Observed evidence | Classification | Outstanding proof |
+| --- | --- | --- | --- |
+| Playground source landing | #327 merged; #326 closed unmerged/superseded. Historical 42-test fixture log was inspected in the prior bounded audit. | IMPLEMENTED / TESTED (fixture, historical) | Runtime isolation and genuine reviewer authentication remain UNKNOWN/HOLD. |
+| Node2Shell applicability | Official Node advisory CVE-2026-111497; multiple inspected Node response-fetch paths and one Express 5/body-parser 2 parser source. | SPECIFIED / source candidates | Exact running Node patch, actual decoder reachability and exploitability per deployment remain UNKNOWN. |
+| Estate coverage | 169 reachable repo IDs enumerated; 12 app repos plus core source-inspected; 33 Vercel project configurations observed. | Inventory/source/provider metadata | Not a vulnerability count; no complete Local/container/tooling inventory. Private source details remain private. |
+| Runtime remediation | No production binary/settings or app code changed in this investigation. | UNKNOWN/HOLD | Upgrade affected runtime, rebuild/restart/redeploy under owning review, verify exact binary + served SHA and behavior. |
+| #342 procurement replay | Issue is open; source/acceptance definition exists. | SPECIFIED | Seven cases, fresh-ledger restart, idempotency, evidence integrity and independent acceptance are not executed by this update. |
+
+Evidence: [estate triage / takeover](receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md), [machine-readable observations](receipts/NODE2SHELL_ESTATE_INVENTORY_2026-11-02.json), and root [NOW](../../NOW.md).
+Existing Cassy → Cassey → KC → authorized human review boundaries remain unchanged.
+
+---
+
 **2026-10-26 correction:** Earlier PHP absence/runtime-clearance claims are superseded by the bounded inventory classifications below. Other October 22 provider/deployment/alert entries are historical claims pending live revalidation. V1 evaluates synthetic assertions; it does not enforce host isolation or authenticate receipts/signatures.
 
 **Document ID:** SEC-MATRIX-2026-1022  
@@ -52,3 +69,4 @@
    `.github/workflows/deploy-web.yml` pushes static files to IONOS shared hosting. If the IONOS package has PHP enabled on the root directory, an uploaded `.php` file or unpatched server worker could expose CVE-2026-109618 / CVE-2026-109619. This is held under `PRODUCTION_PHP_EXPOSURE: HOLD`.
 
 `[LEAD_DEV_AG | DISCOVERY_MATRIX | COMPLETED | NO_PRODUCTION_WITHOUT_PROOF]`
+
