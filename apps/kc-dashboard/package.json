@@ -7,7 +7,8 @@
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:chat": "tsc src/kc-chat.ts --ignoreConfig --target ES2022 --module ES2022 --moduleResolution Bundler --strict --skipLibCheck --outDir .proof && node --test tests/kc-chat.test.mjs tests/kc-chat-render.test.mjs"
   },
   "dependencies": {
     "@types/three": "^0.186.0",
@@ -16,7 +17,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.3.1",
     "three": "^0.186.1",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
