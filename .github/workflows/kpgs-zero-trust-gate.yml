@@ -26,14 +26,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           EXPECTED_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           repo="${{ github.repository }}"
           if [ "$EVENT_NAME" = "pull_request" ]; then
-            ref="refs/pull/$PR_NUMBER/head"
+            ref="$PR_HEAD_SHA"
             expected="$PR_HEAD_SHA"
           else
             ref="$EXPECTED_SHA"
