@@ -67,6 +67,9 @@ jobs:
       - name: Execute interaction-profile and pilot model tests
         run: node --test tests/everyday-model.test.mjs
 
+      - name: Prove KC request and returned-receipt boundaries
+        run: npm run test:chat
+
       - name: Run repository-level UX/accessibility invariants
         working-directory: .
         run: python -m unittest discover -s tests -p 'test_sovereign_everyday_mode.py' -v

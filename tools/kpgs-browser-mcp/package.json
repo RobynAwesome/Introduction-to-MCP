@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "approve": "node dist/approve.js",
-    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js",
+    "test": "npm run build && node --test dist/governance.test.js dist/ledger.test.js dist/server.test.js",
     "check": "npm run test"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@types/node": "26.6.5",
+    "@types/node": "26.6.6",
     "typescript": "7.0.2"
   },
   "engines": {
