@@ -65,6 +65,8 @@
 
 **Other active work:** #110's production/backend journey and the existing #107/#183 admission/field lanes retain their owning receipts and HOLD conditions. This security focus does not close or erase them.
 
+**#110 Studio follow-up — 2026-11-06 SAST:** The Console requires a valid status envelope before displaying proof and CI signals. Invalid successful HTTP responses use the unavailable state, and the CI compare link no longer points to the retired GUI branch. The focused contract tests passed. The serving Vercel dashboard at the inspected Cloud master returned HTTP 200 at `/` and 404 on GET to `/api/kc/chat` and `/api/kc/swarm-console/status`. Hosted backend response and persisted/retrieved receipt evidence remain HOLD.
+
 **Revisit triggers:** owner changes priority; local access resumes; a serving deployment/runtime changes; a source head or advisory changes; a test fails or new contradictory evidence arrives. Refresh this current block and attach receipts at each material handoff.
 
 ### Evidence and limits
