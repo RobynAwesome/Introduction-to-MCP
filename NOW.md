@@ -27,6 +27,8 @@
 
 **Done when:** each priority surface has either a measured runtime+reachability verdict and any tested remediation receipt, or an explicit gap, accountable owner and next probe. #342 completes only against its seven scenario groups and restart/idempotency/integrity evidence. Cassey/security review and founder graduation approval remain unclaimed.
 
+**#103 Mzansi Data Engine follow-up — 2026-11-06 SAST:** PR2 already landed in [#245](https://github.com/RobynAwesome/Introduction-to-MCP/pull/245). This repair keeps ledger records with missing provenance, validator ID or license out of downstream admissible results while preserving them for audit. A regression reproduced the gap before and after ledger reload. The repaired contract gate and 30 targeted tests pass. Real speaker validation and the language/speech slice remain pending.
+
 **Other active work:** #110's production/backend journey and the existing #107/#183 admission/field lanes retain their owning receipts and HOLD conditions. This security focus does not close or erase them.
 
 **Revisit triggers:** owner changes priority; local access resumes; a serving deployment/runtime changes; a source head or advisory changes; a test fails or new contradictory evidence arrives. Refresh this current block and attach receipts at each material handoff.
