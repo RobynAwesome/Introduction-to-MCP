@@ -74,13 +74,17 @@ def _make_record(kind: str, record_id: str | int, actor: str, body: str | None) 
     }
 
 
+def _is_four_ws_candidate(body: str | None) -> bool:
+    return any(FIELD_LINE.match(line) for line in (body or "").splitlines())
+
+
 def collect_records(
     pull_request: dict[str, Any],
     reviews: list[dict[str, Any]],
     review_comments: list[dict[str, Any]],
     issue_comments: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Validate the PR description and all current human-authored review/comment records."""
+    """Validate the PR description and current human-authored Four Ws records."""
     number = pull_request.get("number", "unknown")
     author = _actor(pull_request)
     records = [
@@ -100,6 +104,8 @@ def collect_records(
     for review in reviews:
         if str(review.get("state") or "").upper() in {"DISMISSED", "PENDING"} or _is_bot(review):
             continue
+        if not _is_four_ws_candidate(review.get("body")):
+            continue
         records.append(
             _make_record(
                 "review",
@@ -112,6 +118,8 @@ def collect_records(
     for comment in review_comments:
         if _is_bot(comment) or comment.get("pull_request_review_id") in inactive_review_ids:
             continue
+        if not _is_four_ws_candidate(comment.get("body")):
+            continue
         records.append(
             _make_record(
                 "inline review comment",
@@ -123,6 +131,8 @@ def collect_records(
 
     for comment in issue_comments:
         if _is_bot(comment):
+            continue
+        if not _is_four_ws_candidate(comment.get("body")):
             continue
         records.append(
             _make_record(
@@ -228,7 +238,7 @@ def evaluate_pull_request(
         )
         return "fail", "\n".join(lines)
 
-    lines.extend(["", "Every current human-authored record has non-empty WHO, WHAT, WHERE, and WHY fields."])
+    lines.extend(["", "Every current human-authored Four Ws record has non-empty WHO, WHAT, WHERE, and WHY fields."])
     return "pass", "\n".join(lines)
 
 

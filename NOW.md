@@ -14,15 +14,21 @@
 | Node2Shell | CVE-2026-111497 is confirmed upstream. Source/metadata inspection: 12 application repos plus this core repo; 169 reachable repositories enumerated and 33 Vercel projects inventoried. | Exact deployed/local Node binary patch and Brotli reachability are not measured. Four inspected app repos declare Node 20 CI jobs. No compromise determination. See [triage and takeover](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md). |
 | Procurement specimen | [#342 open](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342), no issue assignee/comments at readback. One bounded replay-adapter definition was prepared for owner/engineering review; no new scenario execution is claimed. | AG confirms actual builder/embodiment and scope, then implements the seven-case fixture-only slice using existing contracts; do not create a duplicate protocol/playground. |
 
-### REV-01 trial handoff — 2026-11-03 SAST
+### REV-01 trial handoff — 2026-11-06 SAST
 
-**Status:** Draft decision aid, available for a bounded KPGS trial. [PR #355 merged](https://github.com/RobynAwesome/Introduction-to-MCP/pull/355), so the continuity repair is already on the Cloud base. [Issue #342](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342) is still open.
+**Status:** Draft decision aid for AG's fixture work. Robyn retains approval. [PR #355](https://github.com/RobynAwesome/Introduction-to-MCP/pull/355) repaired Cloud continuity. [Issue #342](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342) remains `SPECIFIED`.
 
-**First use:** AG can invoke `REV this: Is #342 ready for its first fixture replay?` with the issue, current repository head and existing Security Playground contracts. REV-01 v0.2.0 advises on the next step through the existing gates. Record the chosen lane, evidence by source population, what would change the decision and the stopping condition. Robyn retains approval. REV-01 carries no execution grant or ratification.
+**Validated baseline:** The [November 5 fixture job](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42087161491/job/127455257143) passed 42 existing tests. Both evaluators, both test files and the fixture workflow have identical Git blob IDs on Cloud master `2ba850e458b93e9fe4b5c78cda8f00363f6e6836` and the job's head `8e9525c431a48316824afc39f14a14ae8da71a15`. An earlier fresh Codex handoff trial reported 12 passing inventory tests. These receipts cover synthetic admission and handoff only. Procurement replay and Rust compatibility results are pending.
 
-**Observed receipt:** One fresh Codex handoff trial recovered the open procurement work and ran the existing inventory-gate suite with 12 passing fixture tests. This supports that bounded handoff only. AG takeover, new procurement replay results and independent Cassey review are still pending. Local Windows/OneDrive was unavailable and Drive parity was not verified.
+| Existing surface | First replay boundary |
+| --- | --- |
+| [Inventory gate](scripts/security_playground_inventory_gate.py) and [Playground V1](scripts/security_playground_v1.py) | Preserve fixture admission, fail-closed verdicts and the existing regression baseline. A `fixture://` string is a synthetic reference. |
+| [Zero Trust](docs/swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md) and [Oz](docs/swarm-ops/OZ_CONTEXT_BLEED_PROTOCOL.md) | Keep decisions scoped and fail closed on unauthorized crossings. Caller role strings and receipt hashes cannot establish authority. |
+| [Discovery matrix](docs/swarm-ops/gsmb_security_discovery_matrix.md) | Record the eventual observed result by source and revision. The procurement adapter owns deterministic evaluation, decision binding and replay integrity. |
 
-**AG's first procurement step:** Record the actual builder/interface and base SHA, then use the existing Playground fixture entry point for a deterministic AI recommendation, a separate simulated human decision, tamper detection and replay receipts. Capture expected and observed outcomes against #342 before advancing the broader scenario set. Real authentication, runtime enforcement and production graduation stay UNKNOWN/HOLD.
+**AG's first procurement step:** Record the actual builder/interface, source revision and fixture isolation evidence. Use one fictional tender, three synthetic bids and versioned criteria. Produce an advisory recommendation and a separate simulated override with a reason and a fixture authorization check. Re-run from a fresh ledger load with the same idempotency key and verify the same receipt and one decision. Alter one evidence digest and verify that replay refuses the decision. Record expected and observed results, fixture and policy revisions, evidence digest and decision disposition. Stop at this first replay and counterexample for review before extending the remaining #342 scenarios.
+
+**Pending:** AG execution and independent Cassey/security review. Real human authentication, off-host evidence retention, runtime isolation and production enforcement remain `UNKNOWN/HOLD`. Local Windows/OneDrive was unavailable. Drive context was consulted and parity remains unverified.
 
 ### AG takeover — first admissible action
 

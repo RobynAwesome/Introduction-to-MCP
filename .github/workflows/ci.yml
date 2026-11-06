@@ -78,9 +78,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e . -e ./kopano-core -e ./CLI
+          pip install -r kopano-core/requirements.txt -e . -e ./kopano-core -e ./CLI
           pip install pytest pytest-asyncio ruff==0.16.3
           pip check
+
+          python - <<'PY'
+          from importlib.metadata import version
+          for package in ("litellm", "openai", "fastapi", "sqlalchemy", "websockets"):
+              print(f"{package}=={version(package)}")
+          PY
 
       - name: Compile before tests
         run: python -m compileall -q kopano-core tests scripts
