@@ -15,6 +15,7 @@ import asyncio
 import os
 import sys
 import logging
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from contextlib import asynccontextmanager
@@ -1147,7 +1148,7 @@ class CreateAssertRequest(BaseModel):
     rtc_identity: str
     intent_domain: str
     claim: str
-    residency: Optional[str] = "ZA-CPT (South Africa North)"
+    residency: Optional[str] = "UNKNOWN"
 
 
 @app.post("/api/kc/chat")
@@ -1155,51 +1156,51 @@ def kc_my_boy_chat(req: KcChatRequest):
     """
     Friendly, non-developer front-door conversation with KC.
     Speaks simply, guides with warmth, and avoids technical jargon.
-    Emits an authentic Kopano Assert verifiable receipt on every interaction.
+    Returns reference guidance and a volatile observation record; executes no external action.
     Slogan: 'KC My Boy'.
     """
-    lower = req.message.lower()
+    words = set(re.findall(r"[a-z0-9]+", req.message.lower()))
     identity = req.rtc_identity or "GUEST_SEEKER"
 
-    if identity == "SYSTEM_TELEMETRY" or any(w in lower for w in ["cars4mars", "car", "ev", "hardware", "telematics", "rover", "battery", "sensor"]):
-        reply = "Cars4Mars is our flagship smart mobility division powered by Kopano Labs. We're building real electric vehicle telematics and smart hardware right here in South Africa."
+    if identity == "SYSTEM_TELEMETRY" or words.intersection({"cars4mars", "car", "cars", "ev", "hardware", "telematics", "rover", "battery", "sensor"}):
+        reply = "Cars4Mars is our flagship smart mobility division powered by Kopano Labs. You can explore its telematics and hardware plans here; this conversation does not connect to a vehicle."
         mascot_state = "thinking"
         domain = "CARS4MARS_HARDWARE"
-        claim = "Telemetry pipeline bound to DFR-01 rover telematics"
+        claim = "Returned reference guidance about Cars4Mars; no telemetry connection established"
         suggested_actions = ["Explore Cars4Mars", "View DFR-01 Telematics", "Hardware Specs"]
-    elif identity == "APPRENTICE" or any(w in lower for w in ["learn", "study", "code", "curriculum", "rust", "python", "builder"]):
+    elif identity == "APPRENTICE" or words.intersection({"learn", "study", "code", "curriculum", "rust", "python", "builder"}):
         reply = "You're in the right place. Our classroom takes you step-by-step from zero to building sovereign software, without confusing tech jargon."
         mascot_state = "thinking"
         domain = "SOVEREIGN_LEARNING"
-        claim = "Curriculum path synchronized to Sovereign Classroom Tier 1"
+        claim = "Returned reference guidance about learning; no enrollment or progress synchronization performed"
         suggested_actions = ["Start Learning Module", "Ask Cassey", "View Progress"]
-    elif any(w in lower for w in ["work", "job", "career", "earn", "kasilink", "vanguard"]):
-        reply = "I got you, my boy. Through Vanguard C and KasiLink, we have active digital and township opportunities. Let me queue up your capability profile so we can match you with real work."
+    elif words.intersection({"work", "job", "career", "earn", "kasilink", "vanguard"}):
+        reply = "I got you, my boy. We can explore KasiLink and Vanguard C as work pathways. This reply does not create a profile, verify a vacancy, or match you to a job."
         mascot_state = "celebrating"
         domain = "KASILINK_WORK"
-        claim = "Routed to KasiLink & Vanguard C capability matchmaking"
+        claim = "Returned reference guidance about work pathways; no profile or matchmaking action performed"
         suggested_actions = ["Explore KasiLink Work", "Check My Capability Profile", "Connect to Vanguard C"]
-    elif any(w in lower for w in ["football", "soccer", "fives", "play", "pitch"]):
-        reply = "Let's kick it! FiveSArena is live. We've got 3D physics courts and instant match reservations ready for you."
+    elif words.intersection({"football", "soccer", "fives", "fivesarena", "play", "pitch"}):
+        reply = "Let’s explore FiveS Arena. Check its current offering and availability directly before planning a match; this conversation does not make a reservation."
         mascot_state = "celebrating"
         domain = "FIVES_PITCH"
-        claim = "Verified live court reservation at FiveS Arena"
+        claim = "Returned reference guidance about FiveS Arena; no availability check or reservation performed"
         suggested_actions = ["Open FiveS Arena", "Book a Match", "View Leaderboard"]
     else:
         reply = f"KC here, my boy! I'm tracking '{req.message}'. Let's turn that into clean progress without the chaos. Where should we start?"
         mascot_state = "listening"
         domain = "EVERYDAY_ORCHESTRATION"
-        claim = f"General intent routed cleanly through {identity} persona"
+        claim = f"Returned reference guidance for requested persona {identity}; no external action performed"
         suggested_actions = ["Organize Workspace", "Talk to KC", "Explore Kopano Labs"]
 
-    # Emit verifiable Kopano Assert
+    # Record what this handler actually did; memory storage is not a durable ledger.
     assertion = KopanoAssert.create(
         session_id=req.user_id or "guest_session",
         identity=identity,
         domain=domain,
         claim=claim
     )
-    assert_store.emit(assertion)
+    assertion = assert_store.emit(assertion)
 
     return {
         "mascot": "KC",
@@ -1207,6 +1208,9 @@ def kc_my_boy_chat(req: KcChatRequest):
         "reply": reply,
         "mascot_state": mascot_state,
         "energy_pulse": 0.95,
+        "response_kind": "REFERENCE_GUIDANCE",
+        "actions_executed": False,
+        "receipt_storage": "PROCESS_MEMORY",
         "suggested_actions": suggested_actions,
         "assert_receipt": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict(),
         "timestamp": datetime.now(timezone.utc).isoformat()
@@ -1215,15 +1219,15 @@ def kc_my_boy_chat(req: KcChatRequest):
 
 @app.post("/api/kc/assert/create")
 def create_kopano_assert(req: CreateAssertRequest):
-    """Manually emit a signed Kopano Assertion."""
+    """Record an unsigned caller-supplied claim in volatile process memory."""
     assertion = KopanoAssert.create(
         session_id=req.session_id,
         identity=req.rtc_identity,
         domain=req.intent_domain,
         claim=req.claim,
-        residency=req.residency or "ZA-CPT (South Africa North)"
+        residency=req.residency or "UNKNOWN"
     )
-    assert_store.emit(assertion)
+    assertion = assert_store.emit(assertion)
     return {
         "status": "EMITTED",
         "assert": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict()
@@ -1232,22 +1236,23 @@ def create_kopano_assert(req: CreateAssertRequest):
 
 @app.get("/api/kc/assert/{assert_id}")
 def get_kopano_assert(assert_id: str):
-    """Retrieve a signed Kopano Assertion by ID."""
+    """Retrieve a process-local record; lookup is not claim or ledger verification."""
     assertion = assert_store.get(assert_id)
     if not assertion:
-        raise HTTPException(status_code=404, detail=f"Assertion {assert_id} not found on ledger")
+        raise HTTPException(status_code=404, detail=f"Assertion {assert_id} not found in process memory")
     return {
-        "status": "VERIFIED",
+        "status": "FOUND_IN_MEMORY",
         "assert": assertion.model_dump() if hasattr(assertion, "model_dump") else assertion.dict()
     }
 
 
 @app.get("/api/kc/asserts")
 def list_kopano_asserts(limit: int = 50):
-    """List recent verifiable assertions emitted on the ledger."""
+    """List recent volatile assertion records; no durable ledger is connected."""
     return {
         "total_asserts": assert_store.count(),
-        "residency_region": "ZA-CPT (South Africa North)",
+        "residency_region": "UNKNOWN",
+        "storage_scope": "PROCESS_MEMORY",
         "asserts": [
             a.model_dump() if hasattr(a, "model_dump") else a.dict()
             for a in assert_store.list_all(limit=limit)

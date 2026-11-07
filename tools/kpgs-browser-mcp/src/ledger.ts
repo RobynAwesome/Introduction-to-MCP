@@ -1,4 +1,4 @@
-import { mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
+import { mkdir, open, readFile, rename, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   publicActionSummary,
@@ -11,6 +11,7 @@ import {
 const ROOT = path.resolve(process.env.KPGS_BROWSER_LEDGER_DIR ?? ".kpgs-browser-ledger");
 const PENDING = path.join(ROOT, "pending");
 const APPROVED = path.join(ROOT, "approved");
+const APPROVAL_GRANTS = path.join(ROOT, "approval-grants");
 const EXECUTING = path.join(ROOT, "executing");
 const RECEIPTS = path.join(ROOT, "receipts");
 const CONSUMED = path.join(ROOT, "consumed");
@@ -18,6 +19,7 @@ const FAILED = path.join(ROOT, "failed");
 const ARCHIVED = path.join(ROOT, "archived");
 const QUARANTINED = path.join(ROOT, "quarantined");
 const RECEIPT_HEAD = path.join(ROOT, "receipt-head.json");
+const RECEIPT_WRITER_LOCK = path.join(ROOT, "receipt-writer.lock");
 
 function assertActionId(actionId: string): void {
   if (!/^BRA-[0-9a-f-]+$/i.test(actionId)) throw new Error("Invalid browser action id");
@@ -30,7 +32,7 @@ function assertReceiptId(receiptId: string): void {
 async function ensureLedger(): Promise<void> {
   await mkdir(ROOT, { recursive: true, mode: 0o700 });
   await Promise.all(
-    [PENDING, APPROVED, EXECUTING, RECEIPTS, CONSUMED, FAILED, ARCHIVED, QUARANTINED].map((dir) =>
+    [PENDING, APPROVED, APPROVAL_GRANTS, EXECUTING, RECEIPTS, CONSUMED, FAILED, ARCHIVED, QUARANTINED].map((dir) =>
       mkdir(dir, { recursive: true, mode: 0o700 })
     )
   );
@@ -100,6 +102,18 @@ export async function quarantineStagedAction(actionId: string, reason: string): 
 export async function writeHumanApproval(approval: HumanApproval): Promise<void> {
   await ensureLedger();
   assertActionId(approval.actionId);
+  // Also reject already-issued grants from ledgers created before grant markers.
+  for (const directory of [APPROVED, EXECUTING, CONSUMED, FAILED]) {
+    if (await readJson(path.join(directory, `${approval.actionId}.json`))) {
+      throw new Error("APPROVAL_ALREADY_ISSUED_RESTAGE_REQUIRED");
+    }
+  }
+  // An immutable grant marker closes the check/write race and survives claiming,
+  // consumption, failure or a crash before the approval file is written.
+  // A failed grant must be restaged with a new action id; never retry it in place.
+  await writeNewJson(path.join(APPROVAL_GRANTS, `${approval.actionId}.json`), {
+    actionId: approval.actionId, binding: approval.binding, approvedAt: approval.approvedAt,
+  });
   await writeNewJson(path.join(APPROVED, `${approval.actionId}.json`), approval);
 }
 
@@ -148,12 +162,22 @@ export async function writeReceipt(receipt: BrowserReceipt): Promise<void> {
   await ensureLedger();
   assertReceiptId(receipt.receiptId);
   if (!verifyReceiptIntegrity(receipt)) throw new Error("RECEIPT_INTEGRITY_INVALID_BEFORE_WRITE");
-  await writeNewJson(path.join(RECEIPTS, `${receipt.receiptId}.json`), receipt);
-  await writeFile(
-    RECEIPT_HEAD,
-    JSON.stringify({ receiptId: receipt.receiptId, receiptHash: receipt.receiptHash }, null, 2),
-    { mode: 0o600 }
-  );
+  // Exclusive creation works across local processes. A crash leaves the lock
+  // for human inspection; this code never steals a lock or retries a side effect.
+  const lock = await open(RECEIPT_WRITER_LOCK, "wx", 0o600);
+  try {
+    const head = await readReceiptHead();
+    if (receipt.previousReceiptHash !== (head?.receiptHash ?? null)) {
+      throw new Error("RECEIPT_HEAD_MISMATCH_HUMAN_REVIEW_REQUIRED");
+    }
+    await writeNewJson(path.join(RECEIPTS, `${receipt.receiptId}.json`), receipt);
+    const nextHead = path.join(ROOT, `receipt-head-${receipt.receiptId}.tmp`);
+    await writeNewJson(nextHead, { receiptId: receipt.receiptId, receiptHash: receipt.receiptHash });
+    await rename(nextHead, RECEIPT_HEAD);
+  } finally {
+    await lock.close();
+    await unlink(RECEIPT_WRITER_LOCK);
+  }
 }
 
 export async function readReceipt(receiptId: string): Promise<BrowserReceipt | undefined> {

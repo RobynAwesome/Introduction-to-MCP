@@ -330,8 +330,12 @@ def test_api_kopano_assertion_engine(client):
     assert receipt["assert_id"].startswith("AST-")
     assert receipt["rtc_identity"] == "SYSTEM_TELEMETRY"
     assert receipt["intent_domain"] == "CARS4MARS_HARDWARE"
-    assert receipt["residency"] == "ZA-CPT (South Africa North)"
-    assert receipt["status"] == "VERIFIED_ON_LEDGER"
+    assert receipt["residency"] == "UNKNOWN"
+    assert receipt["status"] == "RECORDED_IN_MEMORY"
+    assert d["response_kind"] == "REFERENCE_GUIDANCE"
+    assert d["actions_executed"] is False
+    assert d["receipt_storage"] == "PROCESS_MEMORY"
+    assert "no telemetry connection established" in receipt["claim"]
     assert len(receipt["proof_hash"]) == 64
 
     # 2. Test Get Assertion by ID
@@ -339,7 +343,7 @@ def test_api_kopano_assertion_engine(client):
     res_get = client.get(f"/api/kc/assert/{assert_id}")
     assert res_get.status_code == 200
     get_d = res_get.json()
-    assert get_d["status"] == "VERIFIED"
+    assert get_d["status"] == "FOUND_IN_MEMORY"
     assert get_d["assert"]["assert_id"] == assert_id
 
     # 3. Test Manual Assertion Emission
@@ -353,10 +357,13 @@ def test_api_kopano_assertion_engine(client):
     created = res_create.json()
     assert created["status"] == "EMITTED"
     assert created["assert"]["rtc_identity"] == "APPRENTICE"
+    assert created["assert"]["status"] == "RECORDED_IN_MEMORY"
+    assert created["assert"]["residency"] == "UNKNOWN"
 
     # 4. Test List Assertions
     res_list = client.get("/api/kc/asserts")
     assert res_list.status_code == 200
     list_d = res_list.json()
     assert list_d["total_asserts"] >= 2
-    assert list_d["residency_region"] == "ZA-CPT (South Africa North)"
+    assert list_d["residency_region"] == "UNKNOWN"
+    assert list_d["storage_scope"] == "PROCESS_MEMORY"
