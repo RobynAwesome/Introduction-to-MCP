@@ -357,7 +357,7 @@ const App = () => {
 
     const bootstrapTimer = window.setTimeout(() => {
       void loadInitial<Lesson[]>('/sessions', (data) => (
-        Array.isArray(data) && data.every((session) => typeof session?.id === 'string')
+        Array.isArray(data) && data.every((session) => Number.isInteger(session?.id))
       ), setSessions);
       void loadInitial<LabsOverview>('/api/labs/overview', (data) => (
         Boolean(data?.metrics) && Array.isArray(data.installer_actions)
@@ -549,7 +549,7 @@ const App = () => {
     await fetchLabsAnalytics();
   };
 
-  const loadSession = async (id: string) => {
+  const loadSession = async (id: number) => {
     const session = await (await fetch(`${apiBase}/sessions/${id}`)).json();
     setSelectedSession(session);
     navigate('admin');
