@@ -49,6 +49,7 @@
 
 ### Evidence and limits
 
+- [#102 provider revalidation — 2026-11-06](governance/kpgs-vnext/estate-registry/evidence/LIVE_PROVIDER_REVALIDATION_2026-11-06.md) records Starfall's current deployment and KasiLink's still-split projects. All six KasiLink data-route probes returned 500 with MongoDB SRV `ENOTFOUND` in matching logs. Runtime repair belongs to [KasiLink #15](https://github.com/RobynAwesome/KasiLink/issues/15); domain convergence and Starfall rollback proof remain HOLD.
 - [Investigation / source and deployment map](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md).
 - [Machine-readable observations and unknowns](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_INVENTORY_2026-11-02.json).
 - Existing [Security Playground discovery matrix](docs/swarm-ops/gsmb_security_discovery_matrix.md) and [continuity contract](governance/kpgs-vnext/continuity/README.md) remain the governing surfaces.
