@@ -14,6 +14,22 @@
 | Node2Shell | CVE-2026-111497 is confirmed upstream. Source/metadata inspection: 12 application repos plus this core repo; 169 reachable repositories enumerated and 33 Vercel projects inventoried. | Exact deployed/local Node binary patch and Brotli reachability are not measured. Four inspected app repos declare Node 20 CI jobs. No compromise determination. See [triage and takeover](docs/swarm-ops/receipts/NODE2SHELL_ESTATE_TRIAGE_2026-11-02.md). |
 | Procurement specimen | [#342 open](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342), no issue assignee/comments at readback. One bounded replay-adapter definition was prepared for owner/engineering review; no new scenario execution is claimed. | AG confirms actual builder/embodiment and scope, then implements the seven-case fixture-only slice using existing contracts; do not create a duplicate protocol/playground. |
 
+### REV-01 trial handoff — 2026-11-06 SAST
+
+**Status:** Draft decision aid for AG's fixture work. Robyn retains approval. [PR #355](https://github.com/RobynAwesome/Introduction-to-MCP/pull/355) repaired Cloud continuity. [Issue #342](https://github.com/RobynAwesome/Introduction-to-MCP/issues/342) remains `SPECIFIED`.
+
+**Validated baseline:** The [November 5 fixture job](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42087161491/job/127455257143) passed 42 existing tests. Both evaluators, both test files and the fixture workflow have identical Git blob IDs on Cloud master `2ba850e458b93e9fe4b5c78cda8f00363f6e6836` and the job's head `8e9525c431a48316824afc39f14a14ae8da71a15`. An earlier fresh Codex handoff trial reported 12 passing inventory tests. These receipts cover synthetic admission and handoff only. Procurement replay and Rust compatibility results are pending.
+
+| Existing surface | First replay boundary |
+| --- | --- |
+| [Inventory gate](scripts/security_playground_inventory_gate.py) and [Playground V1](scripts/security_playground_v1.py) | Preserve fixture admission, fail-closed verdicts and the existing regression baseline. A `fixture://` string is a synthetic reference. |
+| [Zero Trust](docs/swarm-ops/ZERO_TRUST_STATE_ADMISSION_PROTOCOL.md) and [Oz](docs/swarm-ops/OZ_CONTEXT_BLEED_PROTOCOL.md) | Keep decisions scoped and fail closed on unauthorized crossings. Caller role strings and receipt hashes cannot establish authority. |
+| [Discovery matrix](docs/swarm-ops/gsmb_security_discovery_matrix.md) | Record the eventual observed result by source and revision. The procurement adapter owns deterministic evaluation, decision binding and replay integrity. |
+
+**AG's first procurement step:** Record the actual builder/interface, source revision and fixture isolation evidence. Use one fictional tender, three synthetic bids and versioned criteria. Produce an advisory recommendation and a separate simulated override with a reason and a fixture authorization check. Re-run from a fresh ledger load with the same idempotency key and verify the same receipt and one decision. Alter one evidence digest and verify that replay refuses the decision. Record expected and observed results, fixture and policy revisions, evidence digest and decision disposition. Stop at this first replay and counterexample for review before extending the remaining #342 scenarios.
+
+**Pending:** AG execution and independent Cassey/security review. Real human authentication, off-host evidence retention, runtime isolation and production enforcement remain `UNKNOWN/HOLD`. Local Windows/OneDrive was unavailable. Drive context was consulted and parity remains unverified.
+
 ### AG takeover — first admissible action
 
 **AG / Lead Developer owns engineering; Forge coordinates scope, integration and evidence review; Robyn retains approval.** AG identity, RTC Seat 10, Google Antigravity platform and the current builder/interface/model are separate coordinates. Record whether the first AG or agent-orchestrated AG actually performs the work; do not infer availability from a name. Cassy proposes exercises; Cassey independently reviews; KC records Save/Watch and does not execute.
