@@ -26,6 +26,15 @@ VALID_KINDS = {"php_runtime", "dependency", "service", "container"}
 VALID_STATUSES = {"patched", "not_present", "vulnerable", "unknown"}
 
 
+def reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    record: dict[str, object] = {}
+    for key, value in pairs:
+        if key in record:
+            raise ValueError("duplicate JSON key")
+        record[key] = value
+    return record
+
+
 def evaluate(record: object) -> dict:
     """Return a bounded disposition; claims are not independent attestations."""
     if not isinstance(record, dict):
@@ -118,7 +127,9 @@ def main() -> int:
     parser.add_argument("--input", required=True, type=Path, help="Read-only JSON evidence claim")
     args = parser.parse_args()
     try:
-        record = json.loads(args.input.read_text(encoding="utf-8"))
+        record = json.loads(
+            args.input.read_text(encoding="utf-8"), object_pairs_hook=reject_duplicate_keys,
+        )
     except (OSError, ValueError) as exc:
         print(json.dumps({
             "verdict": "BLOCK",

@@ -238,6 +238,19 @@ class SecurityPlaygroundV1Tests(unittest.TestCase):
             self.assertNotIn("Traceback", proc.stderr)
             self.assertIs(json.loads(proc.stdout)["production_authority"], False)
 
+    def test_cli_duplicate_isolation_key_cannot_hide_failure(self):
+        payload = json.dumps(base_fixture()).replace(
+            '"deny_production_network": true',
+            '"deny_production_network": false, "deny_production_network": true',
+        )
+        proc = subprocess.run(
+            [sys.executable, str(GATE)], input=payload, text=True, capture_output=True,
+        )
+        self.assertEqual(proc.returncode, 4, proc.stderr)
+        result = json.loads(proc.stdout)
+        self.assertEqual(result["verdict"], "BLOCK")
+        self.assertFalse(result["production_authority"])
+
     # Scenario 1: PHP absent
     def test_scenario_01_php_absent(self) -> None:
         sample = base_fixture()
