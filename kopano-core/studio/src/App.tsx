@@ -34,6 +34,8 @@ const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage'
 const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
 
 const apiBase = getApiBase();
+const isLocalStudio = typeof window !== 'undefined'
+  && ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
 /** Cassey = teacher; cassy/kopano = KC student lanes (Cassy lead). */
 const agentList = ['cassey', 'cassy', 'kopano', 'claude', 'grok', 'gemini', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
@@ -313,6 +315,9 @@ const App = () => {
     const pollUpdates = window.setInterval(async () => {
       try {
         const response = await fetch(`${apiBase}/updates`);
+        if (!response.ok) {
+          throw new Error(`Updates returned HTTP ${response.status}`);
+        }
         const updates = await response.json();
         if (!Array.isArray(updates)) {
           return;
@@ -326,43 +331,64 @@ const App = () => {
       }
     }, 4000);
 
-    const loadInitialData = async () => {
-      const [sessionsData, overviewData, analyticsData, roomsPayload, microsoftReadinessData] = await Promise.all([
-        fetch(`${apiBase}/sessions`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/overview`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/analytics`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/cowork/rooms`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/microsoft-readiness`).then((response) => response.json()),
-      ]);
-
-      if (!isMounted) {
-        return;
-      }
-
-      setSessions(sessionsData);
-      setLabsOverview(overviewData);
-      setLabsAnalytics(analyticsData);
-      setCoworkRooms(roomsPayload.rooms);
-      setMicrosoftReadiness(microsoftReadinessData);
-      logSystemEvent('bootstrap', 'Council, labs, forge, and vault data loaded.');
-
-      if (roomsPayload.rooms.length > 0) {
-        const detailPayload = await fetch(`${apiBase}/api/labs/cowork/rooms/${roomsPayload.rooms[0].id}`).then((response) => response.json());
-        if (!isMounted) {
-          return;
+    async function loadInitial<T>(path: string, accepts: (data: T) => boolean, apply: (data: T) => void | Promise<void>) {
+      let reason = 'Request failed';
+      try {
+        const response = await fetch(`${apiBase}${path}`);
+        if (!response.ok) {
+          reason = `HTTP ${response.status}`;
+        } else {
+          reason = 'Unexpected response';
+          const data: T = await response.json();
+          if (accepts(data)) {
+            if (isMounted) {
+              await apply(data);
+            }
+            return;
+          }
         }
-        const room: CoworkRoom = detailPayload.room;
-        setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
-        setActiveRoomId(room.id);
+      } catch {
+        // Keep response and exception text out of the shared feed.
       }
-    };
+      if (isMounted) {
+        logSystemEvent('bootstrap-error', `${path} unavailable (${reason}).`);
+      }
+    }
 
-    window.setTimeout(() => {
-      void loadInitialData();
+    const bootstrapTimer = window.setTimeout(() => {
+      void loadInitial<Lesson[]>('/sessions', (data) => (
+        Array.isArray(data) && data.every((session) => typeof session?.id === 'string')
+      ), setSessions);
+      void loadInitial<LabsOverview>('/api/labs/overview', (data) => (
+        Boolean(data?.metrics) && Array.isArray(data.installer_actions)
+          && Array.isArray(data.kopano_interfaces) && Array.isArray(data.tools)
+      ), setLabsOverview);
+      void loadInitial<LabsAnalytics>('/api/labs/analytics', (data) => (
+        Boolean(data?.mcp_console && data.forge)
+      ), setLabsAnalytics);
+      void loadInitial<MicrosoftReadiness>('/api/labs/microsoft-readiness', (data) => (
+        Boolean(data?.summary && data.tooling?.az && data.tooling.azd && data.tooling.telemetry && data.azure_account)
+          && Array.isArray(data.env?.azure_openai?.missing) && Array.isArray(data.next_steps)
+      ), setMicrosoftReadiness);
+      void loadInitial<{ rooms: CoworkRoomSummary[] }>('/api/labs/cowork/rooms', (data) => (
+        Array.isArray(data?.rooms) && data.rooms.every((room) => Number.isInteger(room?.id))
+      ), async ({ rooms }) => {
+        setCoworkRooms(rooms);
+        const firstRoom = rooms[0];
+        if (firstRoom) {
+          await loadInitial<{ room: CoworkRoom }>(`/api/labs/cowork/rooms/${firstRoom.id}`, (data) => (
+            data?.room?.id === firstRoom.id && hasCoworkRoomDetail(data.room)
+          ), ({ room }) => {
+            setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
+            setActiveRoomId(room.id);
+          });
+        }
+      });
     }, 0);
 
     return () => {
       isMounted = false;
+      window.clearTimeout(bootstrapTimer);
       window.clearInterval(pollUpdates);
       ws.current?.close();
     };
@@ -594,7 +620,7 @@ const App = () => {
 
   return (
     <div className={`cassy-app page-${page}`}>
-      <DesktopBootOverlay />
+      {isLocalStudio && <DesktopBootOverlay />}
       <AnimatedBackdrop page={page} connectionState={connectionState} />
       <div className="shell-frame">
         <AppTopNav
@@ -616,7 +642,7 @@ const App = () => {
           ) : (
             <div className="badge-cluster">
               <span className="status-badge neutral">{clientTelemetryConfigured ? 'Browser telemetry armed' : 'Browser telemetry pending'}</span>
-              <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Loading Microsoft checks'}</span>
+              <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Microsoft checks unavailable'}</span>
             </div>
           )}
         </div>
