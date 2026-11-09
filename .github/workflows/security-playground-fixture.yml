@@ -8,6 +8,7 @@ on:
       - "tests/test_security_playground_inventory_gate.py"
       - "scripts/security_playground_v1.py"
       - "tests/test_security_playground_v1.py"
+      - "governance/kpgs-vnext/security-playground-core/**"
       - ".github/workflows/security-playground-fixture.yml"
   workflow_dispatch:
 
@@ -18,7 +19,20 @@ jobs:
   fixture-admission:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      SPP_CORE: governance/kpgs-vnext/security-playground-core
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Synthetic admission regression tests (no credentials or production access)
         run: python -m unittest discover -s tests -p 'test_security_playground*.py' -v
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install 1.91.0 --profile minimal --component rustfmt --component clippy
+      - name: Rust fixture and inventory parity checks
+        run: |
+          cargo +1.91.0 fmt --manifest-path "$SPP_CORE/Cargo.toml" -- --check
+          cargo +1.91.0 test --locked --manifest-path "$SPP_CORE/Cargo.toml"
+          cargo +1.91.0 clippy --locked --manifest-path "$SPP_CORE/Cargo.toml" --all-targets -- -D warnings
+          cargo +1.91.0 build --locked --manifest-path "$SPP_CORE/Cargo.toml"
+          python3 "$SPP_CORE/tests/inventory_parity.py" --core "$SPP_CORE/target/debug/spp-core"

@@ -1,5 +1,55 @@
 # GSMB Security Discovery & Control Matrix
 
+## Current implementation evidence — 2026-11-09 — Playground inventory replay
+
+The Rust candidate is prepared on current Cloud `master@0a8950277656266273b813ce85f93c4230d4b0ff`.
+It replays the existing Python inventory claim alongside a separate synthetic
+Node lane. The prior 39-case local replay records shared outcomes and stricter
+Rust handling of fixture references, duplicate keys and bounded input. On
+November 9, six Rust/Python inventory parity tests passed with a prebuilt Rust
+binary; the three Rust source files matched this candidate by SHA-256. All 42
+Python Playground tests, 13 Progressive Updates tests and 4 Zero Trust
+workflow-policy tests passed on this checkout. The current workspace has no
+`cargo` or `rustup`, so Rust compilation/unit tests were not rerun. Both
+evaluators deny runtime verification and production authority in every replay
+outcome. The separate Python V1 contract has no Rust parity evidence yet.
+Hosted review-branch CI, independent review, runtime isolation and runner
+activation remain open.
+The November 5 section below preserves the earlier Node-only snapshot.
+
+## Current evidence reconciliation — 2026-11-05 — SPP terminology and runtime
+
+This note records a source conflict without merging the evidence populations.
+
+| Population / source | Observed statement | Classification and consequence |
+|---|---|---|
+| Cloud `AGENTS.md` at `master@30cdbbfd95e3b88e3124496c2d13167740c28077` | Current owner correction defines FOC as **Field of Concepts**. | Current Cloud terminology for this repository. |
+| Cloud copy of `Schematics/24-RTC Learning/POCvsFOC Groups/ISSUE_POCFOC_GROUPS_2026-09-30.md` | Labels itself **PROPOSED WORKING CLASSIFICATION — NOT ADMITTED** and records multiple FOC senses, including “Full Operational Capability.” | Draft classification only; it does not override the current Cloud owner correction or authorize a Full Operational Capability claim. |
+| Cloud `poc-vs-foc/FOC_CLASSIFICATION_INDEX.md` | Contains the named FOC-G01–G08 failure-pattern taxonomy. | Preserve these group IDs for that taxonomy. This implementation created no group, made no actor classification, and did not treat the IDs as a replacement acronym expansion. |
+| Cloud `docs/swarm-ops/SECURITY_PLAYGROUND_PROTOCOL.md` at the same SHA | The protocol says it specifies containment doctrine and does not claim an isolated runtime or network boundary is deployed. Its Python evaluators are read-only claim evaluators. | Runtime isolation remains `UNKNOWN/HOLD`; fixture results do not attest a provider, host, or production environment. |
+| Cloud root `NOW.md` as read at the same SHA | The dated November 2 handoff says deployed Node patch and Brotli reachability are not measured and runtime evidence remains `UNKNOWN/HOLD`. Its source-baseline pointer is older than this current branch head. | Historical handoff is still useful as a gap list, not a November 5 runtime attestation. |
+| Drive document “KPGS Cybersecurity Strategies Analysis,” modified 2026-10-30 | Uses FOC as “Full Operational Capability” and describes microVM/WASM isolation, egress controls, and a 3,000 ms CPU cap as operational architecture. | Separate Drive report and attributed claims; the inspected document is not a current provider/runtime receipt. Those controls remain unverified against the Cloud implementation and Local state. |
+| Local GSMB | The supplied Windows/OneDrive Schematics path is unavailable in this environment. | `UNAVAILABLE`; no Local safety or isolation inference. |
+
+Accordingly, current Cloud records use FOC = **Field of Concepts**. The Drive
+report's wording and the unadmitted September working classification remain
+separately attributed. The FOC-G01–G08 names are retained as a distinct
+failure-pattern index. No `Full Operational Capability`, isolation deployment,
+measured CPU cap, RTC/Cassey approval, KC activation, new FOC group, or actor
+classification is inferred here. Historical matrix rows below that use
+`RUNTIME_VERIFIED` refer to their dated, row-specific evidence scope; they do
+not establish Security Playground runner isolation or supersede this current
+SPP hold.
+
+The local Rust candidate implements a synthetic Node runtime version/evidence
+classifier only. Its Rust and Python fixture tests exercise fixtures; no
+runtime integration, Rust/Python differential suite, isolation test, or system
+adapter is claimed. Next.js package/lock evidence and GitHub advisory mapping
+remain outside this slice. The owner-described Next.js 15 monorepo is not
+resolved to a canonical current Cloud repository by the inspected artifacts.
+Keep system integrations at `PROPOSED / NOT_RUN` until each existing contract
+has its own bounded adapter and evidence.
+
 ## Current evidence update — 2026-11-02 — Node2Shell and continuity
 
 This dated addition records only observed source/provider metadata. Earlier rows and runtime labels below are preserved history and are not newly revalidated by this update.

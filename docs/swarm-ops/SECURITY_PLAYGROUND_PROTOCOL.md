@@ -186,3 +186,55 @@ authority. All outputs deny runtime verification and production authority.
 
 Run both evaluator suites with:
 `python -m unittest discover -s tests -p 'test_security_playground*.py' -v`.
+
+## Rust shadow evaluator candidate — updated 2026-11-09
+
+The review candidate at `governance/kpgs-vnext/security-playground-core/`,
+rebased for review on Cloud `master@0a8950277656266273b813ce85f93c4230d4b0ff`,
+adds a bounded, fixture-only Rust evaluator and versioned request/result
+schemas for synthetic Node.js runtime evidence. It exercises
+synthetic affected/fixed version boundaries, a named feature prerequisite,
+missing and conflicting runtime evidence, and stale deployment source SHA. Its
+outputs keep `runtime_verified=false` and `production_authority=false`.
+
+The CLI's `--inventory` mode also replays the existing
+`gsmb_security_playground_inventory_gate_v1` claim against the Python inventory
+reference. The shared corpus checks explicit containment failure, missing
+evidence, vulnerable dependency claims, protected-state mutation, duplicate
+keys and forged authority flags. Rust holds real or unnamed fixture references
+and rejects duplicate keys or over-limit input. The separate Python V1
+assertion policy has yet to be ported.
+
+This is an implementation candidate, not a change to the founder-authored
+doctrine or an activation receipt. The existing Python evaluators remain the
+compatibility reference; they are not suspended. The Rust candidate has no
+runner, live inventory, receipt authenticator, isolation enforcement, external
+system adapter, or production write path. The Cloud runtime-isolation verdict
+therefore remains `UNKNOWN/HOLD`. Fixture `DRILL_PASS` is not runtime
+isolation, exploitability proof, or production graduation.
+
+Next.js package/lock evidence, GitHub-reviewed advisories and GitHub Actions
+version evidence are not integrated in this slice. The owner-described Next.js
+15 monorepo mapping remains unresolved in current accessible Cloud artifacts;
+this evaluator does not claim that it is the inspected repository or that its
+Next.js dependencies are covered.
+
+Run the candidate checks from the repository root:
+
+```sh
+cargo fmt --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml -- --check
+cargo test --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml
+cargo clippy --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml --all-targets -- -D warnings
+cargo build --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml
+python3 governance/kpgs-vnext/security-playground-core/tests/inventory_parity.py \
+  --core governance/kpgs-vnext/security-playground-core/target/debug/spp-core
+```
+
+The result is still a fixture classification. It does not independently prove
+that any named repository, installed package, provider, or serving runtime has
+the version represented by a test input. On November 9, the 42 Python
+Playground tests, 13 Progressive Updates tests, 4 Zero Trust workflow-policy
+tests and six Rust/Python inventory parity cases passed locally. The parity
+cases used a prebuilt binary whose Rust source hashes matched this candidate.
+The current workspace lacks `cargo` and `rustup`; a fresh Rust build and the
+Rust unit suite remain pending hosted review-branch CI.
