@@ -1,21 +1,53 @@
 # GSMB Security Discovery & Control Matrix
 
-## Current implementation evidence — 2026-11-09 — Playground inventory replay
+## Current implementation evidence — 2026-11-09 — Exact-head Playground CI
 
-The Rust candidate is prepared on current Cloud `master@0a8950277656266273b813ce85f93c4230d4b0ff`.
-It replays the existing Python inventory claim alongside a separate synthetic
-Node lane. The prior 39-case local replay records shared outcomes and stricter
-Rust handling of fixture references, duplicate keys and bounded input. On
-November 9, six Rust/Python inventory parity tests passed with a prebuilt Rust
-binary; the three Rust source files matched this candidate by SHA-256. All 42
-Python Playground tests, 13 Progressive Updates tests and 4 Zero Trust
-workflow-policy tests passed on this checkout. The current workspace has no
-`cargo` or `rustup`, so Rust compilation/unit tests were not rerun. Both
-evaluators deny runtime verification and production authority in every replay
-outcome. The separate Python V1 contract has no Rust parity evidence yet.
-Hosted review-branch CI, independent review, runtime isolation and runner
-activation remain open.
-The November 5 section below preserves the earlier Node-only snapshot.
+Draft PR #369 is based on current Cloud `master@0a8950277656266273b813ce85f93c4230d4b0ff`.
+Its exact head `a3a82c8d240b62227a7c497aed7738acc9d55426` passed hosted
+[Security Playground run #14](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42597655902):
+42 existing Python Playground tests, 19 Rust tests, formatting, clippy with
+warnings denied, build, and six Rust/Python inventory-parity cases. Branch
+Proof, Zero Trust, RTC Learning, vNext Contract, Swarm Proof, CodeQL and Kopano
+CI passed; Four Ws was cancelled. No human review is recorded and the PR
+remains draft.
+
+The exact code-validation receipt above is for `a3a82c8d240b62227a7c497aed7738acc9d55426`.
+A later documentation-only refresh is kept separate from that Rust-code
+receipt; any checks on its resulting head must be read at that new SHA.
+
+Draft PR #366's exact head `3b40b2f58c9d2223d43e4e4c7ecfecbdef4d2b4f` has
+one successful push-triggered KPGS vNext Contract Gate ([run #430](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42596458506))
+with 21 validation/conformance/compile steps. This is not the full Playground
+regression suite. The 44-test receipt belongs to an earlier head; no human
+review is recorded.
+
+Read-only lockfile inspection at exact production-mapped source revisions
+found pre-fix Next.js/Sharp and, where applicable, Undici versions. The
+candidate PR locks contain verified fixed releases. Detailed deployment
+identifiers remain in private audit notes; lockfile evidence does not attest
+installed artifacts, provider binaries, or exploit prerequisites. Five
+Bookit Actions jobs failed before the first step with no runner assignment;
+log downloads are unavailable, so the cause remains `UNAVAILABLE`.
+
+The [current KasiLink comms log](https://github.com/RobynAwesome/KasiLink/blob/c090e74fd9a19735b6a7034b2e55966f05aa97ca/Structure/04-Updates/comms-log.md)
+records a September 11 Next.js 15 platform-suite extraction to a local path
+and names `apps/connect`, `apps/alpha`, `apps/beta` and `apps/web`. A
+[contemporaneous Cloud orchestration handoff](https://github.com/RobynAwesome/Introduction-to-MCP/blob/0a8950277656266273b813ce85f93c4230d4b0ff/docs/swarm-ops/handoffs/FORGE_CA_ORCHESTRATION_DIRECTIVE_2026-09-11.md)
+says Git initialization was held. Current accessible Cloud evidence does not
+map that suite to a repository; the Local path cannot be inspected here. Do
+not infer that `Introduction-to-MCP`, the Vite Kopano Labs website, or the
+older `kopano-context` repository is that suite.
+
+Checkout cleanup still reports the repository's `KasiLink` gitlink without a
+`.gitmodules` URL. The workflow continues after that cleanup error only if its
+immediate `HEAD == github.sha` guard succeeds; it did. The missing metadata is
+an open repository defect. Both evaluators keep `runtime_verified=false` and
+`production_authority=false`. No runtime adapter, authenticated receipt
+verifier, isolation enforcement, or runner is implemented. The separate
+Python V1 contract has no Rust parity evidence. Fixture `DRILL_PASS`, hosted CI
+success, and a READY preview do not establish runtime isolation or production
+graduation. The November 5 section below preserves the earlier Node-only
+snapshot.
 
 ## Current evidence reconciliation — 2026-11-05 — SPP terminology and runtime
 

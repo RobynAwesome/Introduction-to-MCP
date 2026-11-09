@@ -214,10 +214,14 @@ therefore remains `UNKNOWN/HOLD`. Fixture `DRILL_PASS` is not runtime
 isolation, exploitability proof, or production graduation.
 
 Next.js package/lock evidence, GitHub-reviewed advisories and GitHub Actions
-version evidence are not integrated in this slice. The owner-described Next.js
-15 monorepo mapping remains unresolved in current accessible Cloud artifacts;
-this evaluator does not claim that it is the inspected repository or that its
-Next.js dependencies are covered.
+version evidence are not integrated in this slice. A current KasiLink Cloud
+comms-log entry records a September 11 extraction of the owner-described
+Next.js 15 platform suite to a local path; the contemporaneous Cloud
+orchestration handoff says Git initialization was held. Current accessible
+Cloud artifacts do not resolve a matching source repository, and the supplied
+Local path remains unavailable. This evaluator does not claim that
+`Introduction-to-MCP` or any other inspected repository is that suite, or that
+the suite's Next.js dependencies are covered.
 
 Run the candidate checks from the repository root:
 
@@ -230,11 +234,21 @@ python3 governance/kpgs-vnext/security-playground-core/tests/inventory_parity.py
   --core governance/kpgs-vnext/security-playground-core/target/debug/spp-core
 ```
 
-The result is still a fixture classification. It does not independently prove
-that any named repository, installed package, provider, or serving runtime has
-the version represented by a test input. On November 9, the 42 Python
-Playground tests, 13 Progressive Updates tests, 4 Zero Trust workflow-policy
-tests and six Rust/Python inventory parity cases passed locally. The parity
-cases used a prebuilt binary whose Rust source hashes matched this candidate.
-The current workspace lacks `cargo` and `rustup`; a fresh Rust build and the
-Rust unit suite remain pending hosted review-branch CI.
+Exact-head hosted validation completed on November 9 for draft PR #369 at
+`a3a82c8d240b62227a7c497aed7738acc9d55426` ([workflow run #14](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42597655902)).
+The run passed all 42 existing Python Playground tests, all 19 Rust tests
+(11 library, 3 CLI, 5 fixture), `cargo fmt --check`, clippy with warnings
+denied, build, and six Rust/Python inventory-parity cases. Branch Proof, Zero
+Trust, RTC Learning, vNext Contract, Swarm Proof, CodeQL and Kopano CI also
+passed on this head. The Four Ws review gate was cancelled; no human review is
+recorded and the PR remains draft.
+
+The checkout step emitted a cleanup error because the current repository has
+a `KasiLink` gitlink but no `.gitmodules` URL. The workflow allows that cleanup
+failure to continue, then verifies `git rev-parse HEAD == github.sha` before
+running tests. That exact-SHA guard passed; the missing submodule metadata is
+still a repository defect and is not fixed by this candidate. Local `cargo`
+and `rustup` are unavailable, so the Rust compilation evidence is the hosted
+run, not a local compile. A `DRILL_PASS` remains fixture classification only;
+it does not prove installed or serving package versions, isolation,
+exploitability, or production readiness.
