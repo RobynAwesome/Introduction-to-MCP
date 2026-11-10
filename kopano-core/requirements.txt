@@ -6,7 +6,7 @@ typer[all]==0.27.3
 rich==15.0.0
 pydantic-settings==2.16.2
 python-dotenv==1.2.4
-azure-monitor-opentelemetry==1.8.11
+azure-monitor-opentelemetry==1.8.12
 litellm==1.108.0
 sqlalchemy==2.1.6
 google-generativeai==0.8.6
