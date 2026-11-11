@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kopanolabs.com/schemas/kpgs.spp.core.result.v1.json",
+  "title": "KPGS Security Playground fixture evaluation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "case_id",
+    "component",
+    "environment",
+    "source_revision",
+    "advisory_id",
+    "target_source_sha",
+    "verdict",
+    "finding",
+    "reason",
+    "runtime_verified",
+    "production_authority"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.spp.core.result.v1" },
+    "case_id": { "type": ["string", "null"] },
+    "component": { "oneOf": [{ "const": "node" }, { "type": "null" }] },
+    "environment": { "oneOf": [{ "enum": ["production", "preview", "local", "build_ci", "tooling"] }, { "type": "null" }] },
+    "source_revision": { "type": ["string", "null"] },
+    "advisory_id": { "type": ["string", "null"] },
+    "target_source_sha": { "type": ["string", "null"] },
+    "verdict": { "enum": ["DRILL_PASS", "HOLD", "BLOCK", "INVALID_INPUT"] },
+    "finding": {
+      "enum": [
+        "FIXED_VERSION_CANDIDATE",
+        "OUTSIDE_DECLARED_AFFECTED_RANGE",
+        "AFFECTED_VERSION_PREREQUISITE_MATCHED",
+        "AFFECTED_VERSION_PREREQUISITE_NOT_MET",
+        "MISSING_RUNTIME_EVIDENCE",
+        "STALE_RUNTIME_EVIDENCE",
+        "CONFLICTING_RUNTIME_EVIDENCE",
+        "NON_FIXTURE_EVIDENCE",
+        "INCOMPLETE_RUNTIME_IDENTITY",
+        "STALE_DEPLOYMENT_SOURCE",
+        "UNKNOWN_PREREQUISITE",
+        "UNSUPPORTED_SCHEMA",
+        "INVALID_EVIDENCE",
+        "INVALID_INPUT"
+      ]
+    },
+    "reason": { "type": "string" },
+    "runtime_verified": { "const": false },
+    "production_authority": { "const": false }
+  }
+}

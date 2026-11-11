@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kpgs:spp:core:fixture:v1",
+  "title": "KPGS Security Playground fixture evaluation request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "mode",
+    "source_revision",
+    "case_id",
+    "component",
+    "environment",
+    "target_source_sha",
+    "advisory",
+    "runtime",
+    "prerequisite"
+  ],
+  "properties": {
+    "schema": { "const": "kpgs.spp.core.fixture.v1" },
+    "mode": { "enum": ["fixture", "cloud", "local"] },
+    "source_revision": { "$ref": "#/$defs/gitSha" },
+    "case_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "component": { "const": "node" },
+    "environment": { "enum": ["production", "preview", "local", "build_ci", "tooling"] },
+    "target_source_sha": { "$ref": "#/$defs/gitSha" },
+    "advisory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "affected_from", "fixed_at"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "affected_from": { "$ref": "#/$defs/version" },
+        "fixed_at": { "$ref": "#/$defs/version" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "exact_version",
+        "deployment_identity",
+        "deployment_source_sha",
+        "artifact_digest_sha256",
+        "observed_at_utc",
+        "evidence_ref"
+      ],
+      "properties": {
+        "state": { "enum": ["observed", "missing", "stale", "conflicting"] },
+        "exact_version": { "oneOf": [{ "$ref": "#/$defs/version" }, { "type": "null" }] },
+        "deployment_identity": { "type": ["string", "null"], "maxLength": 512 },
+        "deployment_source_sha": { "oneOf": [{ "$ref": "#/$defs/gitSha" }, { "type": "null" }] },
+        "artifact_digest_sha256": { "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "observed_at_utc": { "oneOf": [{ "type": "string", "format": "date-time", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" }, { "type": "null" }] },
+        "evidence_ref": { "type": "string", "pattern": "^fixture://.*\\S", "maxLength": 512 }
+      }
+    },
+    "prerequisite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "state"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "state": { "enum": ["satisfied", "not_satisfied", "unknown", "not_required"] }
+      }
+    }
+  },
+  "$defs": {
+    "gitSha": { "type": "string", "pattern": "^[A-Fa-f0-9]{40}$" },
+    "sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+    "version": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" }
+  }
+}
