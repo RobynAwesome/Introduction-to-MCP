@@ -19,9 +19,32 @@ def test_roadmap_loads() -> None:
     assert roadmap["cassy"]["lead_student"] is True
 
 
-def test_entry_gate_passes_on_repo_log() -> None:
+def test_historical_rows_never_promote_to_production() -> None:
     ok, msg = check_entry_gate()
+    assert not ok
+    assert "HOLD_UNVERIFIED_RUNTIME" in msg
+
+
+def test_forged_runtime_claim_denied() -> None:
+    for verifier in (lambda: False, lambda: "true", lambda: {"status": "PASS"}):
+        ok, msg = check_entry_gate(live_proof_verifier=verifier)
+        assert not ok
+        assert "HOLD_RUNTIME_UNVERIFIED" in msg
+
+
+def test_live_verifier_exception_denied() -> None:
+    def unavailable():
+        raise RuntimeError("provider unreachable")
+    ok, msg = check_entry_gate(live_proof_verifier=unavailable)
+    assert not ok
+    assert "HOLD_RUNTIME_VERIFIER_ERROR" in msg
+
+
+def test_injected_verifier_admission_interface_fixture_only() -> None:
+    # Unit-test seam, never a production verification source.
+    ok, msg = check_entry_gate(live_proof_verifier=lambda: True)
     assert ok, msg
+    assert "authenticated_live_provider" in msg
 
 
 def test_swarm_agents_registry() -> None:
