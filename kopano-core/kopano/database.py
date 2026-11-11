@@ -230,8 +230,16 @@ def setup_database():
     init_db()
 
 
+PBKDF2_ITERATIONS = 600_000
+
+
 def _hash_password(password: str, salt: str) -> str:
-    return hashlib.sha256(f"{salt}:{password}".encode("utf-8")).hexdigest()
+    return hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        salt.encode("utf-8"),
+        PBKDF2_ITERATIONS,
+    ).hex()
 
 
 def register_user(email: str, password: str, full_name: Optional[str] = None) -> dict:
@@ -287,7 +295,7 @@ def authenticate_user(email: str, password: str) -> Optional[dict]:
         return None
 
     expected = _hash_password(password, row["password_salt"])
-    if expected != row["password_hash"]:
+    if not secrets.compare_digest(expected, row["password_hash"]):
         return None
 
     return {
