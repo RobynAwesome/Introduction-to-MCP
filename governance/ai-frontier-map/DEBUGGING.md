@@ -30,3 +30,10 @@ No commands above are substitutes for serving production probes. The Black Mask 
 
 ## Triage report fields
 Actor; target repo/commit; deployment exact SHA; source and timestamp; command and exit; prior vs observed; expected falsifier; external permissions; unverified scope; next bounded correction. Preserve previous failures. State `HOLD` when a proof path is missing.
+
+## 11 November additional execution results
+- [Swarm proof run 43005583857](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/43005583857): 54 source regressions succeeded; separate roadmap production-admission step deliberately failed with `HOLD_UNVERIFIED_RUNTIME`. Do not describe entire release as green.
+- [Isolation run 43005135685](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/43005135685): `unshare` returned EPERM; restricted Docker process demonstrated actual network denial, immutable rootfs, nonroot user and no GITHUB_TOKEN injection. These checks execute on the GitHub **runner**, not the founder's runtime.
+- Historical 19 rows now have an explicit `[HISTORICAL_URL_ROWS_ONLY; NOT_LIVE_RUNTIME_PROOF]` suffix, including when a source gate accepts their row format.
+- `python scripts/ci/local_gsmb_parity.py --local-schematics "C:\\Users\\rkhol\\OneDrive\\Documents\\Anthropic\\Introduction to MCP\\Schematics" --cloud-repo "<EXACT_LOCAL_GIT_CHECKOUT>"` should be run only by a trusted operator on the owner's PC; it hashes four critical files and returns `HOLD_PARITY_NOT_PROVEN` if any differ or head is missing. Replace placeholder checkout with actual checked-out repository. Real local output has not been obtained.
+- Release verifier has deliberately no accept path until securely bound to the intended serving host. A test callback or a `verified=true` field cannot be counted as a real proof.
