@@ -74,8 +74,8 @@ jobs:
           python scripts/kc_log_append.py validate
           python scripts/kc_log_append.py proof-check
 
-      - name: KC guard (sync + validate + proof + doc hosts + verified production)
-        run: python scripts/kc_guard.py all --require-verified-production 10 --require-roadmap-gate
+      - name: KC guard (source/JSONL checks; historical production rows are not runtime proof)
+        run: python scripts/kc_guard.py all --require-verified-production 10
 
       - name: Install Kopano-Phu validator deps
         run: |
@@ -95,3 +95,11 @@ jobs:
 
       - name: Pytest swarm tools
         run: python -m pytest tests/test_kc_log_append.py tests/test_kc_guard.py tests/test_kc_apprenticeship.py tests/test_kc_training_api.py tests/test_kc_verified_production.py tests/test_kc_main_brain_roadmap.py tests/test_swarm_agents_api.py tests/test_swarm_console_api.py tests/test_agent_build_poc_validate.py tests/test_operating_mesh.py tests/test_graduation_bar.py tests/test_external_swarm_lane.py -q
+
+  production-roadmap-admission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Require authenticated runtime evidence before production promotion
+        run: |
+          python scripts/kc_guard.py doctrine-roadmap-gate

@@ -19,9 +19,22 @@ def test_roadmap_loads() -> None:
     assert roadmap["cassy"]["lead_student"] is True
 
 
-def test_entry_gate_passes_on_repo_log() -> None:
+def test_historical_rows_never_promote_to_production() -> None:
     ok, msg = check_entry_gate()
-    assert ok, msg
+    assert not ok
+    assert "HOLD_UNVERIFIED_RUNTIME" in msg
+
+
+def test_no_caller_supplied_verifier_bypass() -> None:
+    import pytest
+    with pytest.raises(TypeError):
+        check_entry_gate(live_proof_verifier=lambda: True)
+
+
+def test_existing_historical_count_remains_non_authoritative() -> None:
+    ok, msg = check_entry_gate()
+    assert not ok
+    assert "provider-authenticated serving-runtime verification not implemented" in msg
 
 
 def test_swarm_agents_registry() -> None:

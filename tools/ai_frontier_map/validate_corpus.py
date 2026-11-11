@@ -3,7 +3,8 @@
 from __future__ import annotations
 import argparse,json
 from pathlib import Path
-CLASSIFICATIONS={'safeskill_fork','other_fork','detached_fork','oya_authored','oya_agent_generated','unresolved'}
+CLASSIFICATIONS={'safeskill_fork','other_fork','detached_fork','oya_authored','oya_agent_generated','unresolved','founder_fork'}
+ORIGIN_KINDS={'oya_corpus','founder_fork','external_discovery'}
 DECISIONS={'ADOPT','ADAPT','STUDY','MONITOR','REJECT'}
 REUSE_MODES={'code_reuse','architectural_reuse','research_only'}
 SIGNALS={'mcp-server','model-context-protocol','agent-skills','claude-skill','claude-code','openclaw','curated-list','npm','smithery','unknown'}
@@ -12,8 +13,25 @@ def validate(r:dict,n:int)->list[str]:
     e=[]; pfx=f'line {n}: '
     for k in ('provenance','discovery','safeskill','technical_intelligence','capability_surface','reuse_governance','frontier_score','convergence','evidence'):
         if k not in r:e.append(pfx+f'missing top-level field {k}')
-    p=r.get('provenance',{}); cls=p.get('classification')
+    p=r.get('provenance',{})
+    if not isinstance(p,dict):
+        return [pfx+'provenance must be an object']
+    cls=p.get('classification')
     if cls not in CLASSIFICATIONS:e.append(pfx+f'invalid classification: {cls!r}')
+    origin=p.get('origin_kind')
+    if origin is None or origin=='oya_corpus':
+        if not p.get('oya_repo'):e.append(pfx+'legacy/Oya record requires oya_repo')
+        if 'oya_repo_id' not in p or 'oya_created_at' not in p:
+            e.append(pfx+'legacy/Oya record requires oya_repo_id and oya_created_at')
+    elif origin not in ORIGIN_KINDS:
+        e.append(pfx+f'invalid origin_kind: {origin!r}')
+    else:
+        if not p.get('observed_repo'):e.append(pfx+'general discovery requires observed_repo')
+        if 'observed_repo_id' not in p or 'observed_at' not in p:
+            e.append(pfx+'general discovery requires observed_repo_id and observed_at')
+        if cls != ('unresolved' if origin=='external_discovery' else origin):e.append(pfx+'general discovery classification not appropriate for source kind')
+    if cls=='founder_fork' and not p.get('upstream_repo'):
+        e.append(pfx+'founder_fork requires verified upstream_repo; otherwise classify unresolved with a HOLD receipt')
     if cls in {'safeskill_fork','other_fork','detached_fork'} and not p.get('upstream_repo'):e.append(pfx+f'{cls} requires upstream_repo')
     s=r.get('safeskill',{})
     if cls=='safeskill_fork' and not(s.get('scan_branch') or s.get('pr_url')):e.append(pfx+'safeskill_fork requires scan_branch or pr_url evidence')
