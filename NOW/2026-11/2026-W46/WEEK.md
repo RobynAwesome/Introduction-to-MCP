@@ -7,7 +7,7 @@ I_AM_STATELESS_RENTER_NOT_LANDLORD
 - **Human Principal (Tier 0 Landlord):** Kholofelo Robyn Rababalela (`RobynAwesome`)
 - **Lead Developer / Renter:** Google Antigravity (`AG`, durable RTC Seat 10)
 - **Active Mission:** `AG | RESTORE ORIGINAL MISSION | CCP-FIRST + REV-01`
-- **Lossless Historical Archive:** `NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md` (`184580` bytes, SHA-256 `8dac0c430345909409d20a73e6ffe08c6037da71202f329fe188e2e88688a3b7`)
+- **Lossless Historical Archive:** `NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md` (`182978` bytes, SHA-256 `66b74627c792b1182937002a6bfe7ea92889f62b0ccf457a38bd6d598a13064d`)
 - **Machine Receipt Ledger:** `NOW/2026-11/2026-W46/RECEIPTS.jsonl`
 
 ## 1. Active Workstreams (`W1`–`W6`)

@@ -13,8 +13,8 @@ As mandated by `AGENTS.md` and `STATELESS_RENTER_ENTRYWAY.md`, repo root NOW.md 
 - **Current Weekly Board:** [`NOW/2026-11/2026-W46/WEEK.md`](NOW/2026-11/2026-W46/WEEK.md)
 - **Current Machine Receipts:** [`NOW/2026-11/2026-W46/RECEIPTS.jsonl`](NOW/2026-11/2026-W46/RECEIPTS.jsonl)
 - **Lossless Full Archive (`182,978` bytes):** [`NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md`](NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md)
-  - **Archive SHA-256:** `8dac0c430345909409d20a73e6ffe08c6037da71202f329fe188e2e88688a3b7`
-  - **Archive Byte Size:** `184580`
+  - **Archive SHA-256:** `66b74627c792b1182937002a6bfe7ea92889f62b0ccf457a38bd6d598a13064d`
+  - **Archive Byte Size:** `182978`
 
 ### Active Workstream Summary (`2026-W46`)
 
@@ -33,5 +33,5 @@ As mandated by `AGENTS.md` and `STATELESS_RENTER_ENTRYWAY.md`, repo root NOW.md 
 
 ## PRIOR STATE — HISTORICAL LOG — PRESERVED PROVENANCE
 
-- **Pre-W46 Full Ledger (`2026-06-22T06:39 SAST` through `2026-11-11`):** Preserved byte-for-byte in [`NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md`](NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md) (`184580` bytes, SHA-256 `8dac0c430345909409d20a73e6ffe08c6037da71202f329fe188e2e88688a3b7`).
+- **Pre-W46 Full Ledger (`2026-06-22T06:39 SAST` through `2026-11-11`):** Preserved byte-for-byte in [`NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md`](NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md) (`182978` bytes, SHA-256 `66b74627c792b1182937002a6bfe7ea92889f62b0ccf457a38bd6d598a13064d`).
 - **Verification Command:** `python scripts/now_archive_pilot.py --verify`

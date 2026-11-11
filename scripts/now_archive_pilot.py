@@ -343,15 +343,19 @@ As mandated by `AGENTS.md` and `STATELESS_RENTER_ENTRYWAY.md`, repo root NOW.md 
 """
 
 
+def _read_normalized_lf_bytes(path: Path) -> bytes:
+    return path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
+
+
 def run_migration() -> dict[str, Any]:
     ARCHIVE_PATH.parent.mkdir(parents=True, exist_ok=True)
     WEEK_DIR.mkdir(parents=True, exist_ok=True)
 
     if not ARCHIVE_PATH.exists():
-        raw_now = ROOT_NOW.read_bytes()
+        raw_now = _read_normalized_lf_bytes(ROOT_NOW)
         ARCHIVE_PATH.write_bytes(raw_now)
     else:
-        raw_now = ARCHIVE_PATH.read_bytes()
+        raw_now = _read_normalized_lf_bytes(ARCHIVE_PATH)
 
     archive_sha256 = sha256_bytes(raw_now)
     archive_bytes = len(raw_now)
@@ -382,9 +386,9 @@ def verify_migration() -> dict[str, Any]:
     if not RECEIPTS_JSONL.is_file():
         raise AssertionError("Receipts ledger missing: NOW/2026-11/2026-W46/RECEIPTS.jsonl")
 
-    archive_data = ARCHIVE_PATH.read_bytes()
+    archive_data = _read_normalized_lf_bytes(ARCHIVE_PATH)
     archive_sha256 = sha256_bytes(archive_data)
-    root_now_bytes = len(ROOT_NOW.read_bytes())
+    root_now_bytes = len(_read_normalized_lf_bytes(ROOT_NOW))
     root_now_text = ROOT_NOW.read_text(encoding="utf-8")
 
     if root_now_bytes >= 10_240:
