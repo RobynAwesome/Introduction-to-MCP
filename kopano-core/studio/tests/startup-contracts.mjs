@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {
   hasCoworkRoomDetail,
+  isConnectorActionResult,
   isCoworkRoomDetailPayload,
   isCoworkRoomsPayload,
   isLabsAnalytics,
@@ -182,6 +183,32 @@ for (const malformedRoom of [
   assert.equal(isCoworkRoomDetailPayload({ room: malformedRoom }, 1), false);
 }
 
+// 7. /api/labs/connectors/actions/execute contract
+const validConnectorAction = {
+  status: 'ready',
+  action_id: 'azure-demo-playbook',
+  title: 'Azure Demo Day Bootstrap',
+  summary: 'Prepare Azure-first hosting.',
+  commands: ['az login', 'azd auth login'],
+  next_steps: ['Run az account show.'],
+};
+assert.equal(isConnectorActionResult(validConnectorAction), true);
+assert.equal(isConnectorActionResult({ title: 'Minimal', summary: 'Summary' }), true);
+assert.equal(isConnectorActionResult({ ...validConnectorAction, readiness: { bad: true } }), true);
+assert.equal(isMicrosoftReadiness({ bad: true }), false);
+for (const malformedAction of [
+  null,
+  {},
+  { ...validConnectorAction, title: {} },
+  { ...validConnectorAction, summary: null },
+  { ...validConnectorAction, commands: { unexpected: true } },
+  { ...validConnectorAction, commands: [123] },
+  { ...validConnectorAction, next_steps: { bad: true } },
+  { ...validConnectorAction, next_steps: [{}] },
+]) {
+  assert.equal(isConnectorActionResult(malformedAction), false);
+}
+
 export const validStartupFixtures = {
   sessions: validSessions,
   overview: validOverview,
@@ -189,6 +216,7 @@ export const validStartupFixtures = {
   readiness: validReadiness,
   roomSummary: validRoomSummary,
   roomDetail: validRoomDetail,
+  connectorAction: validConnectorAction,
 };
 
 console.log('startup contracts tests passed');

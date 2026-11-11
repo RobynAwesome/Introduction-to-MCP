@@ -22,8 +22,10 @@ import type {
   PageId,
 } from './types';
 import { getApiBase, getWsLiveUrl } from './apiBase';
+import { isString } from './consoleStatusCopy.mjs';
 import {
   hasCoworkRoomDetail,
+  isConnectorActionResult,
   isCoworkRoomDetailPayload,
   isCoworkRoomsPayload,
   isLabsAnalytics,
@@ -505,24 +507,47 @@ const App = () => {
   };
 
   const runConnectorAction = async (actionId: string) => {
-    const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
-    const readiness = isMicrosoftReadiness(data.readiness) ? data.readiness : null;
-    const readinessLines = readiness
-      ? [
-        `Required checks: ${readiness.summary.required_ready}/${readiness.summary.required_total}`,
-        `Azure CLI: ${readiness.tooling.az.healthy ? readiness.tooling.az.version : 'missing or broken'}`,
-        `Azure Developer CLI: ${readiness.tooling.azd.healthy ? readiness.tooling.azd.version : 'missing or broken'}`,
-        `Azure login: ${readiness.azure_account.logged_in ? readiness.azure_account.subscription_name : 'not signed in'}`,
-        `Server telemetry: ${readiness.tooling.telemetry.configured ? 'configured' : readiness.tooling.telemetry.reason}`,
-      ]
-      : [];
+    let reason = 'Request failed';
+    try {
+      const response = await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId });
+      if (!response.ok) {
+        reason = `HTTP ${response.status}`;
+      } else {
+        reason = 'Unexpected response';
+        const data: unknown = await response.json();
+        if (isConnectorActionResult(data)) {
+          const readiness = isMicrosoftReadiness(data.readiness) ? data.readiness : null;
+          const readinessLines = readiness
+            ? [
+              `Required checks: ${readiness.summary.required_ready}/${readiness.summary.required_total}`,
+              `Azure CLI: ${readiness.tooling.az.healthy ? (isString(readiness.tooling.az.version) ? readiness.tooling.az.version : 'ready') : 'missing or broken'}`,
+              `Azure Developer CLI: ${readiness.tooling.azd.healthy ? (isString(readiness.tooling.azd.version) ? readiness.tooling.azd.version : 'ready') : 'missing or broken'}`,
+              `Azure login: ${readiness.azure_account.logged_in ? (readiness.azure_account.subscription_name ?? 'signed in') : 'not signed in'}`,
+              `Server telemetry: ${readiness.tooling.telemetry.configured ? 'configured' : (isString(readiness.tooling.telemetry.reason) ? readiness.tooling.telemetry.reason : 'not configured')}`,
+            ]
+            : [];
 
-    setConnectorResult([data.title, data.summary, ...readinessLines, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
-    if (readiness) {
-      setMicrosoftReadiness(readiness);
+          setConnectorResult([
+            data.title,
+            data.summary,
+            ...readinessLines,
+            ...(data.commands ?? []),
+            ...(data.next_steps ?? []),
+          ].join('\n'));
+          if (readiness) {
+            setMicrosoftReadiness(readiness);
+          }
+          trackClientEvent('cassy_connector_action', { action_id: actionId });
+          logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
+          return;
+        }
+      }
+    } catch {
+      // Keep response and exception text out of the connector output and shared feed.
     }
-    trackClientEvent('cassy_connector_action', { action_id: actionId });
-    logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
+
+    setConnectorResult(`Connector playbook unavailable (${reason}). Check the configured backend and retry.`);
+    logSystemEvent('connector-error', `/api/labs/connectors/actions/execute unavailable (${reason}).`);
   };
 
   const sendConsoleMessage = async () => {

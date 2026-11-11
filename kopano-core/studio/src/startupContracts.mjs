@@ -160,3 +160,16 @@ export function isCoworkRoomDetailPayload(value, expectedRoomId) {
     && hasCoworkRoomDetail(value.room)
     && value.room.id === expectedRoomId;
 }
+
+/**
+ * Validate the /api/labs/connectors/actions/execute response before rendering playbooks.
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+export function isConnectorActionResult(value) {
+  if (!isObject(value)) return false;
+  return isString(value.title)
+    && isString(value.summary)
+    && (value.commands === undefined || isStringArray(value.commands))
+    && (value.next_steps === undefined || isStringArray(value.next_steps));
+}
