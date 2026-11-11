@@ -99,3 +99,23 @@ jobs:
       - name: Execute production gate negative regressions
         run: |
           python -m pytest -q tests/test_kc_main_brain_roadmap.py tests/test_kc_verified_production.py
+
+      - name: Exercise signed capability lease authority (real Python implementation)
+        run: |
+          python -m unittest discover -s tests -p "test_capability_lease_runtime.py" -v
+      - name: Probe actual kernel isolation on disposable runner; do not greenwash HOLD
+        shell: bash
+        run: |
+          set +e
+          python scripts/ci/probe_os_isolation.py > "$RUNNER_TEMP/os-probe.json"
+          rc=$?
+          set -e
+          cat "$RUNNER_TEMP/os-probe.json"
+          if [[ "$rc" -ne 0 ]]; then
+            echo "HOLD: no demonstrated isolated kernel user+network namespace on this runner"
+            echo "Production/runtime containment MUST remain HOLD."
+          else
+            echo "Runner namespace isolation observed; production still unverified."
+          fi
+          # A probe that reports no isolation does not silently pass as evidence.
+          python -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/os-probe.json")); assert p["production_runtime_verified"] is False; assert p["capability_permission_enforced"] is False'
