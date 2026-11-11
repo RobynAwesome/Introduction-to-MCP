@@ -44,8 +44,7 @@
             "oya_authored",
             "oya_agent_generated",
             "unresolved",
-            "founder_fork",
-            "independent_upstream"
+            "founder_fork"
           ]
         },
         "upstream_repo": {
@@ -88,7 +87,7 @@
           "enum": [
             "oya_corpus",
             "founder_fork",
-            "independent_upstream"
+            "external_discovery"
           ]
         },
         "observed_repo": {
@@ -154,7 +153,7 @@
               "origin_kind": {
                 "enum": [
                   "founder_fork",
-                  "independent_upstream"
+                  "external_discovery"
                 ]
               }
             },
@@ -498,5 +497,5 @@
     }
   },
   "additionalProperties": true,
-  "description": "Unified AI Frontier Map provenance contract: historical OyaAI records remain valid; new founder forks and independent upstream discoveries are first-class without inventing OyaAI provenance. Source lookup/ingestion is research only until code/licence/authority proof."
+  "description": "Unified AI Frontier Map provenance contract. OyaAI seed records remain unchanged. Newly discovered external projects remain unresolved until authorship/fork lineage is verified. New founder forks are research-only until provenance and authority are witnessed."
 }
