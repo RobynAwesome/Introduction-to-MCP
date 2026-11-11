@@ -66,9 +66,21 @@ jobs:
         run: python scripts/kc_blackmask_bracket_stress.py --no-report-file --operator CI_FRONTIER --json
       - name: Exercise existing Security Playground fail-closed fixture gate
         run: python -m unittest discover -s tests -p "test_security_playground_inventory_gate.py" -v
-      - name: Read roadmap gate without granting production authority
+      - name: Exercise actual Main Brain roadmap gate on disposable runner
         shell: bash
         run: |
-          python scripts/kc_main_brain_roadmap.py status > "$RUNNER_TEMP/roadmap-status.txt"
-          cat "$RUNNER_TEMP/roadmap-status.txt"
-          echo "The runner has no production permission. An inspected roadmap is not graduation."
+          set +e
+          python scripts/kc_main_brain_roadmap.py gate > "$RUNNER_TEMP/roadmap-gate.txt" 2>&1
+          result=$?
+          set -e
+          cat "$RUNNER_TEMP/roadmap-gate.txt"
+          grep -q "roadmap_gate" "$RUNNER_TEMP/roadmap-gate.txt" || {
+            echo "Gate did not emit a recognizable decision"
+            exit 1
+          }
+          echo "Main Brain gate exit: $result (runner-only evidence; does not authorize real production)"
+          if [[ "$result" -eq 0 ]]; then
+            echo "WARNING: fixture/checkout gate accepted; this does NOT prove serving production authority"
+          else
+            echo "HOLD: missing production bar / other gate condition in disposable checkout"
+          fi
