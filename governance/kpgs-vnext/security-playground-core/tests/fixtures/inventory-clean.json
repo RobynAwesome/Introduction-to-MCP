@@ -1,0 +1,29 @@
+{
+  "schema": "gsmb_security_playground_inventory_gate_v1",
+  "mode": "fixture",
+  "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "isolation": {
+    "dedicated_isolation_domain": true,
+    "deny_production_network": true,
+    "production_credentials_absent": true,
+    "production_state_readonly": true,
+    "ephemeral_storage": true,
+    "evidence_ref": "fixture://synthetic-isolation-claim"
+  },
+  "protected_state_mutations": 0,
+  "assets": [
+    {
+      "id": "fixture-php",
+      "kind": "php_runtime",
+      "status": "not_present",
+      "evidence_ref": "fixture://php-inventory"
+    },
+    {
+      "id": "fixture-dependency",
+      "kind": "dependency",
+      "status": "patched",
+      "evidence_ref": "fixture://synthetic-lockfile"
+    }
+  ],
+  "receipt_refs": ["fixture://test-run"]
+}
