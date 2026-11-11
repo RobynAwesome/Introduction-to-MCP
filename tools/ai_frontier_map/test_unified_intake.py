@@ -10,6 +10,7 @@ import unittest
 from pathlib import Path
 
 from ingest_discoveries import make_record
+from collect_oya_corpus import refresh_seed_records
 from validate_corpus import validate
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -32,6 +33,23 @@ class UnifiedIntakeTests(unittest.TestCase):
         self.assertGreaterEqual(len(rows), 4)
         for i, row in enumerate(rows, 1):
             self.assertEqual(validate(row, i), [], f"legacy seed {i}")
+
+    def test_historical_oya_seed_recovered_by_identity_not_account_name(self):
+        class GhFixture:
+            def get(self, path):
+                repo_id=int(path.rsplit('/',1)[-1])
+                return {"id":repo_id, "full_name":f"new-holder/repo-{repo_id}",
+                        "html_url":f"https://github.com/new-holder/repo-{repo_id}"}
+        rows=refresh_seed_records(GhFixture(),SEEDS,limit=4)
+        self.assertEqual(len(rows),4)
+        for old, new in zip((json.loads(x) for x in SEEDS.read_text().splitlines() if x.strip()),rows):
+            self.assertEqual(validate(new,1),[])
+            self.assertEqual(new["provenance"]["oya_repo"],old["provenance"]["oya_repo"])
+            self.assertEqual(new["provenance"]["oya_repo_id"],old["provenance"]["oya_repo_id"])
+            self.assertEqual(new["provenance"]["observed_repo_id"],old["provenance"]["oya_repo_id"])
+            self.assertNotEqual(new["provenance"]["observed_repo"],old["provenance"]["oya_repo"])
+            self.assertEqual(new["convergence"]["decision"],old["convergence"]["decision"])
+            self.assertEqual(new["reuse_governance"]["mode"],old["reuse_governance"]["mode"])
 
     def test_independent_repo_has_no_fabricated_authority(self):
         record = make_record(example())
