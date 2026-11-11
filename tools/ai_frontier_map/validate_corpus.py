@@ -3,8 +3,8 @@
 from __future__ import annotations
 import argparse,json
 from pathlib import Path
-CLASSIFICATIONS={'safeskill_fork','other_fork','detached_fork','oya_authored','oya_agent_generated','unresolved','founder_fork','independent_upstream'}
-ORIGIN_KINDS={'oya_corpus','founder_fork','independent_upstream'}
+CLASSIFICATIONS={'safeskill_fork','other_fork','detached_fork','oya_authored','oya_agent_generated','unresolved','founder_fork'}
+ORIGIN_KINDS={'oya_corpus','founder_fork','external_discovery'}
 DECISIONS={'ADOPT','ADAPT','STUDY','MONITOR','REJECT'}
 REUSE_MODES={'code_reuse','architectural_reuse','research_only'}
 SIGNALS={'mcp-server','model-context-protocol','agent-skills','claude-skill','claude-code','openclaw','curated-list','npm','smithery','unknown'}
@@ -29,7 +29,7 @@ def validate(r:dict,n:int)->list[str]:
         if not p.get('observed_repo'):e.append(pfx+'general discovery requires observed_repo')
         if 'observed_repo_id' not in p or 'observed_at' not in p:
             e.append(pfx+'general discovery requires observed_repo_id and observed_at')
-        if cls != origin:e.append(pfx+'general discovery classification must match origin_kind')
+        if cls != ('unresolved' if origin=='external_discovery' else origin):e.append(pfx+'general discovery classification not appropriate for source kind')
     if cls=='founder_fork' and not p.get('upstream_repo'):
         e.append(pfx+'founder_fork requires verified upstream_repo; otherwise classify unresolved with a HOLD receipt')
     if cls in {'safeskill_fork','other_fork','detached_fork'} and not p.get('upstream_repo'):e.append(pfx+f'{cls} requires upstream_repo')
