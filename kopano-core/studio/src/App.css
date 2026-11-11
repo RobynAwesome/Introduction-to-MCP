@@ -330,6 +330,8 @@ button {
   box-shadow: 0 0 18px currentColor;
 }
 
+.page-caption-row[hidden] { display: none; }
+
 .page-caption-row {
   display: flex;
   align-items: center;

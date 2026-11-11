@@ -65,6 +65,8 @@
 
 **Other active work:** #110's production/backend journey and the existing #107/#183 admission/field lanes retain their owning receipts and HOLD conditions. This security focus does not close or erase them.
 
+**#110 spatial Studio — 2026-11-11 SAST:** The owner selected the seven-mode Studio with Dashboard as its entrance. The [specification and validation receipt](docs/swarm-ops/ISSUE_110_SPATIAL_STUDIO_SPEC.md) covers the REA reference, the Cloud/Local/Drive readbacks, the local build and seven-mode browser verification. The review branch depends on #365. Hosted backend and durable receipt store selection, chat response and restart retrieval remain HOLD.
+
 **#110 Studio follow-up — 2026-11-07 SAST:** [PR #365](https://github.com/RobynAwesome/Introduction-to-MCP/pull/365) validates Console status and isolates failed startup requests. The local startup panel can be dismissed and the hosted Studio shell opens directly. All seven Console modes opened in local Edge with API error fixtures. The [browser and API receipt](docs/swarm-ops/receipts/ISSUE_110_STUDIO_BROWSER_2026-11-07.md) records the checks, scope and remaining blockers. The served Vercel dashboard returned 404 on GET to the status path. The local synthetic chat receipt disappeared when the store was replaced. Hosted application and backend approval, a real chat response and a receipt retrievable across processes remain HOLD.
 
 **Revisit triggers:** owner changes priority; local access resumes; a serving deployment/runtime changes; a source head or advisory changes; a test fails or new contradictory evidence arrives. Refresh this current block and attach receipts at each material handoff.

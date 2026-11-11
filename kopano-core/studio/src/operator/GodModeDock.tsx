@@ -22,7 +22,7 @@ export function GodModeDock() {
     runGit,
   } = useOperator();
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [renterId, setRenterId] = useState('');
