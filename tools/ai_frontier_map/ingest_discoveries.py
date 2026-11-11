@@ -16,7 +16,7 @@ from collect_oya_corpus import blank_score
 from validate_corpus import validate
 
 REPO_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$")
-ORIGINS = {"founder_fork", "independent_upstream"}
+ORIGINS = {"founder_fork", "external_discovery"}
 
 
 def checked_repo(value: object) -> str:
@@ -33,7 +33,7 @@ def make_record(row: dict) -> dict:
     repo = checked_repo(row.get("repo"))
     origin = row.get("origin_kind")
     if origin not in ORIGINS:
-        raise ValueError("origin_kind must be founder_fork or independent_upstream")
+        raise ValueError("origin_kind must be founder_fork or external_discovery")
     observed_at = row.get("observed_at")
     if not isinstance(observed_at, str) or not observed_at.strip():
         raise ValueError("observed_at must be an explicit nonempty source observation date")
@@ -62,7 +62,7 @@ def make_record(row: dict) -> dict:
     return {
         "provenance": {
             "origin_kind": origin, "observed_repo": repo, "observed_repo_id": None,
-            "observed_at": observed_at, "classification": origin,
+            "observed_at": observed_at, "classification": "unresolved" if origin == "external_discovery" else origin,
             "upstream_repo": upstream, "upstream_owner": None,
             "upstream_owner_type": None, "upstream_repo_id": None,
             "original_repo_created_at": None, "upstream_commit_sha": None,
