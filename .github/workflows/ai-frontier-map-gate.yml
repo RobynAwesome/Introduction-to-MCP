@@ -101,6 +101,8 @@ jobs:
           python -m pip install "pytest==8.4.2"
           python -m pytest -q tests/test_kc_main_brain_roadmap.py tests/test_kc_verified_production.py
 
+      - name: Run Local parity script negative/positive fixtures (NOT owner PC)
+        run: python -m unittest discover -s scripts/ci -p "test_local_gsmb_parity.py" -v
       - name: Exercise signed capability lease authority (real Python implementation)
         run: |
           python -m unittest discover -s tests -p "test_capability_lease_runtime.py" -v
