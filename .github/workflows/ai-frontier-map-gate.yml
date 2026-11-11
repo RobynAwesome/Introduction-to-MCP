@@ -98,6 +98,7 @@ jobs:
           echo "PASS: historical URL-only rows did not grant production authority"
       - name: Execute production gate negative regressions
         run: |
+          python -m pip install "pytest==8.4.2"
           python -m pytest -q tests/test_kc_main_brain_roadmap.py tests/test_kc_verified_production.py
 
       - name: Exercise signed capability lease authority (real Python implementation)
