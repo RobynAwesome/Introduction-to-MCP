@@ -25,26 +25,16 @@ def test_historical_rows_never_promote_to_production() -> None:
     assert "HOLD_UNVERIFIED_RUNTIME" in msg
 
 
-def test_forged_runtime_claim_denied() -> None:
-    for verifier in (lambda: False, lambda: "true", lambda: {"status": "PASS"}):
-        ok, msg = check_entry_gate(live_proof_verifier=verifier)
-        assert not ok
-        assert "HOLD_RUNTIME_UNVERIFIED" in msg
+def test_no_caller_supplied_verifier_bypass() -> None:
+    import pytest
+    with pytest.raises(TypeError):
+        check_entry_gate(live_proof_verifier=lambda: True)
 
 
-def test_live_verifier_exception_denied() -> None:
-    def unavailable():
-        raise RuntimeError("provider unreachable")
-    ok, msg = check_entry_gate(live_proof_verifier=unavailable)
+def test_existing_historical_count_remains_non_authoritative() -> None:
+    ok, msg = check_entry_gate()
     assert not ok
-    assert "HOLD_RUNTIME_VERIFIER_ERROR" in msg
-
-
-def test_injected_verifier_admission_interface_fixture_only() -> None:
-    # Unit-test seam, never a production verification source.
-    ok, msg = check_entry_gate(live_proof_verifier=lambda: True)
-    assert ok, msg
-    assert "authenticated_live_provider" in msg
+    assert "provider-authenticated serving-runtime verification not implemented" in msg
 
 
 def test_swarm_agents_registry() -> None:
