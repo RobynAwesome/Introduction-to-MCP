@@ -184,21 +184,47 @@ const App = () => {
     body: JSON.stringify(body),
   });
 
-  const fetchLabsAnalytics = async () => setLabsAnalytics(await (await fetch(`${apiBase}/api/labs/analytics`)).json());
-  const fetchMicrosoftReadiness = async () => setMicrosoftReadiness(await (await fetch(`${apiBase}/api/labs/microsoft-readiness`)).json());
+  const fetchStudioData = async <T,>(path: string, accepts: (data: unknown) => data is T): Promise<T | undefined> => {
+    try {
+      const response = await fetch(`${apiBase}${path}`);
+      if (response.ok) {
+        const data: unknown = await response.json();
+        if (accepts(data)) return data;
+      }
+    } catch {
+      // Keep response and exception text out of the shared feed.
+    }
+    logSystemEvent('request-error', `${path} unavailable.`);
+    return undefined;
+  };
+
+  const fetchLabsAnalytics = async () => {
+    const analytics = await fetchStudioData('/api/labs/analytics', isLabsAnalytics);
+    if (analytics) setLabsAnalytics(analytics);
+  };
+
+  const fetchMicrosoftReadiness = async () => {
+    const readiness = await fetchStudioData('/api/labs/microsoft-readiness', isMicrosoftReadiness);
+    if (readiness) setMicrosoftReadiness(readiness);
+  };
 
   const fetchCoworkRoomDetail = async (roomId: number) => {
-    const data = await (await fetch(`${apiBase}/api/labs/cowork/rooms/${roomId}`)).json();
-    const room: CoworkRoom = data.room;
+    const data = await fetchStudioData(
+      `/api/labs/cowork/rooms/${roomId}`,
+      (payload): payload is { room: CoworkRoom } => isCoworkRoomDetailPayload(payload, roomId),
+    );
+    if (!data) return;
+    const { room } = data;
     setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== roomId)].sort((a, b) => b.id - a.id));
     setActiveRoomId(roomId);
   };
 
   const fetchCoworkRooms = async () => {
-    const data = await (await fetch(`${apiBase}/api/labs/cowork/rooms`)).json();
+    const data = await fetchStudioData('/api/labs/cowork/rooms', isCoworkRoomsPayload);
+    if (!data) return;
     setCoworkRooms((prev) => {
       const detailedRooms = prev.filter((room) => hasCoworkRoomDetail(room));
-      return data.rooms.map((room: CoworkRoomSummary) => detailedRooms.find((candidate) => candidate.id === room.id) ?? room);
+      return data.rooms.map((room) => detailedRooms.find((candidate) => candidate.id === room.id) ?? room);
     });
     if (!activeRoomId && data.rooms.length > 0) {
       await fetchCoworkRoomDetail(data.rooms[0].id);
@@ -480,19 +506,20 @@ const App = () => {
 
   const runConnectorAction = async (actionId: string) => {
     const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
-    const readinessLines = data.readiness
+    const readiness = isMicrosoftReadiness(data.readiness) ? data.readiness : null;
+    const readinessLines = readiness
       ? [
-        `Required checks: ${data.readiness.summary.required_ready}/${data.readiness.summary.required_total}`,
-        `Azure CLI: ${data.readiness.tooling.az.healthy ? data.readiness.tooling.az.version : 'missing or broken'}`,
-        `Azure Developer CLI: ${data.readiness.tooling.azd.healthy ? data.readiness.tooling.azd.version : 'missing or broken'}`,
-        `Azure login: ${data.readiness.azure_account.logged_in ? data.readiness.azure_account.subscription_name : 'not signed in'}`,
-        `Server telemetry: ${data.readiness.tooling.telemetry.configured ? 'configured' : data.readiness.tooling.telemetry.reason}`,
+        `Required checks: ${readiness.summary.required_ready}/${readiness.summary.required_total}`,
+        `Azure CLI: ${readiness.tooling.az.healthy ? readiness.tooling.az.version : 'missing or broken'}`,
+        `Azure Developer CLI: ${readiness.tooling.azd.healthy ? readiness.tooling.azd.version : 'missing or broken'}`,
+        `Azure login: ${readiness.azure_account.logged_in ? readiness.azure_account.subscription_name : 'not signed in'}`,
+        `Server telemetry: ${readiness.tooling.telemetry.configured ? 'configured' : readiness.tooling.telemetry.reason}`,
       ]
       : [];
 
     setConnectorResult([data.title, data.summary, ...readinessLines, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
-    if (data.readiness) {
-      setMicrosoftReadiness(data.readiness as MicrosoftReadiness);
+    if (readiness) {
+      setMicrosoftReadiness(readiness);
     }
     trackClientEvent('cassy_connector_action', { action_id: actionId });
     logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
