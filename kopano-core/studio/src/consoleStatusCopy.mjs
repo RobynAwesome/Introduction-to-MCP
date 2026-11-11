@@ -25,10 +25,10 @@ export function getApiUnavailableMessage(apiBase, responseStatus) {
     : `${source} is unavailable. Check the configured endpoint and network, then retry.`;
 }
 
-const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-const isString = (value) => typeof value === 'string';
-const isBoolean = (value) => typeof value === 'boolean';
-const isStringArray = (value) => Array.isArray(value) && value.every(isString);
+export const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+export const isString = (value) => typeof value === 'string';
+export const isBoolean = (value) => typeof value === 'boolean';
+export const isStringArray = (value) => Array.isArray(value) && value.every(isString);
 
 /**
  * Confirm the version and the fields Studio renders before using a status response.
