@@ -18,7 +18,7 @@ SEEDS = ROOT / "data" / "ai-frontier-map" / "seed.records.jsonl"
 MANIFEST = ROOT / "data" / "ai-frontier-map" / "intake-2026-11-10.jsonl"
 
 
-def example(origin_kind="independent_upstream"):
+def example(origin_kind="external_discovery"):
     data = {"repo": "test-engineer/example-skill", "origin_kind": origin_kind,
             "observed_at": "2026-11-11"}
     if origin_kind == "founder_fork":
@@ -37,7 +37,8 @@ class UnifiedIntakeTests(unittest.TestCase):
         record = make_record(example())
         self.assertEqual(validate(record, 1), [])
         self.assertNotIn("oya_repo", record["provenance"])
-        self.assertEqual(record["provenance"]["origin_kind"], "independent_upstream")
+        self.assertEqual(record["provenance"]["origin_kind"], "external_discovery")
+        self.assertEqual(record["provenance"]["classification"], "unresolved")
         self.assertIsNone(record["provenance"]["observed_repo_id"])
         self.assertIsNone(record["reuse_governance"]["source_commit"])
         self.assertIsNone(record["reuse_governance"]["license"])
@@ -111,7 +112,7 @@ class UnifiedIntakeTests(unittest.TestCase):
             self.assertEqual(run.returncode, 2)
             self.assertFalse(out.exists())
             self.assertIn("HOLD", run.stderr)
-            inp.write_text(json.dumps({"repo": "../a", "origin_kind": "independent_upstream",
+            inp.write_text(json.dumps({"repo": "../a", "origin_kind": "external_discovery",
                                         "observed_at": "2026-11-11"}) + "\n", encoding="utf-8")
             run = subprocess.run([sys.executable, str(CLI), "--input", str(inp), "--output", str(out)],
                                  capture_output=True, text=True, check=False)
