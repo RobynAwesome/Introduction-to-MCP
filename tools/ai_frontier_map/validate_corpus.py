@@ -13,9 +13,10 @@ def validate(r:dict,n:int)->list[str]:
     e=[]; pfx=f'line {n}: '
     for k in ('provenance','discovery','safeskill','technical_intelligence','capability_surface','reuse_governance','frontier_score','convergence','evidence'):
         if k not in r:e.append(pfx+f'missing top-level field {k}')
-    p=r.get('provenance',{}); cls=p.get('classification')
+    p=r.get('provenance',{})
     if not isinstance(p,dict):
         return [pfx+'provenance must be an object']
+    cls=p.get('classification')
     if cls not in CLASSIFICATIONS:e.append(pfx+f'invalid classification: {cls!r}')
     origin=p.get('origin_kind')
     if origin is None or origin=='oya_corpus':
