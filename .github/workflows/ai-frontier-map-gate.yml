@@ -122,3 +122,18 @@ jobs:
           fi
           # A probe that reports no isolation does not silently pass as evidence.
           python -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/os-probe.json")); assert p["production_runtime_verified"] is False; assert p["capability_permission_enforced"] is False'
+
+      - name: Execute restricted Docker kernel/process boundary drill
+        shell: bash
+        run: |
+          set +e
+          python scripts/ci/probe_docker_boundary.py > "$RUNNER_TEMP/docker-boundary.json"
+          rc=$?
+          set -e
+          cat "$RUNNER_TEMP/docker-boundary.json"
+          if [[ "$rc" -eq 0 ]]; then
+            echo "PASS_RUNNER_ONLY: deny-network/read-only/nonroot Docker execution witnessed"
+          else
+            echo "HOLD: real disposable Docker boundary not proven in this runner"
+          fi
+          python -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/docker-boundary.json")); assert p["production_runtime_verified"] is False'
