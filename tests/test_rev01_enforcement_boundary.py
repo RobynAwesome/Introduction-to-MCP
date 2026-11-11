@@ -667,13 +667,14 @@ def test_recovery_and_promotion_lifts_restriction_only_after_3_seat_and_explicit
     assert dec.subject_id == "cassy"
 
 
-def test_pretooluse_denies_write_outside_allowed_roots():
+def test_pretooluse_denies_write_outside_allowed_roots(monkeypatch):
     """Verifier finding: writes outside the workspace must be denied before side effects."""
     import json
     import subprocess
     import sys
 
-    gate = Path(__file__).resolve().parents[1] / "scripts" / "kpgs_pretooluse_gate.py"
+    repo_root = Path(__file__).resolve().parents[1]
+    gate = repo_root / "scripts" / "kpgs_pretooluse_gate.py"
 
     def run(target: str) -> dict:
         payload = {"toolCall": {"name": "write_to_file", "args": {"TargetFile": target}}}
@@ -683,7 +684,22 @@ def test_pretooluse_denies_write_outside_allowed_roots():
         )
         return json.loads(proc.stdout)
 
-    outside = run(r"C:\Windows\System32\outside.txt")
-    assert outside["decision"] == "deny" and outside["permissionDecision"] == "deny"
-    inside = run(str(Path(__file__).resolve().parents[1] / "allowed.txt"))
+    for outside_target in (
+        str(repo_root.parent / "outside.txt"),
+        r"C:\Windows\System32\outside.txt",
+        "/etc/outside.txt",
+    ):
+        outside = run(outside_target)
+        assert outside["decision"] == "deny" and outside["permissionDecision"] == "deny"
+
+    # Also verify foreign Windows drive/UNC syntax is denied when running on POSIX.
+    spec = importlib.util.spec_from_file_location("kpgs_pretooluse_gate_test", gate)
+    assert spec is not None and spec.loader is not None
+    gate_mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate_mod)
+    monkeypatch.setattr(gate_mod.os, "name", "posix")
+    assert gate_mod._path_in_allowed_roots(r"C:\Windows\System32\outside.txt") is False
+    assert gate_mod._path_in_allowed_roots(r"\\server\share\outside.txt") is False
+
+    inside = run(str(repo_root / "allowed.txt"))
     assert inside["decision"] == "allow" and inside["permissionDecision"] == "allow"

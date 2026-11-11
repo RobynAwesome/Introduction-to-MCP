@@ -11,7 +11,7 @@ import argparse
 import importlib.util
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 import sys
 from typing import Any
@@ -109,6 +109,10 @@ def _allowed_roots() -> list[Path]:
 
 
 def _path_in_allowed_roots(target: str) -> bool:
+    if os.name != "nt":
+        win = PureWindowsPath(target)
+        if win.drive or win.is_absolute() or target.startswith("\\\\"):
+            return False
     try:
         resolved = Path(target).resolve()
     except (OSError, ValueError):
