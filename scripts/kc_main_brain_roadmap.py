@@ -41,7 +41,7 @@ def _main_brain_kinds(path: Path | None = None) -> set[str]:
     return kinds
 
 
-def check_entry_gate(roadmap: dict | None = None, *, live_proof_verifier=None) -> tuple[bool, str]:
+def check_entry_gate(roadmap: dict | None = None) -> tuple[bool, str]:
     roadmap = roadmap or load_roadmap()
     gate = roadmap.get("entry_gate", {})
     required_kinds = set(gate.get("required_main_brain_kinds", []))
@@ -57,21 +57,13 @@ def check_entry_gate(roadmap: dict | None = None, *, live_proof_verifier=None) -
     ok, msg = check_minimum(min_prod)
     if not ok:
         return False, f"roadmap_gate {msg}"
-    # Review-log rows and URL patterns are historical provenance, NOT live runtime proof.
-    # The gate cannot self-attest based on a supplied receipt string or boolean.
-    # Only a separately injected, authenticated live verifier may authorize a pass.
-    if live_proof_verifier is None:
-        return False, (
-            f"roadmap_gate HOLD_UNVERIFIED_RUNTIME: historical {msg}; "
-            "no authenticated live provider verifier attached"
-        )
-    try:
-        verified = live_proof_verifier()
-    except Exception as exc:
-        return False, f"roadmap_gate HOLD_RUNTIME_VERIFIER_ERROR: {type(exc).__name__}"
-    if verified is not True:
-        return False, "roadmap_gate HOLD_RUNTIME_UNVERIFIED: live verifier did not attest runtime"
-    return True, f"roadmap_gate OK authenticated_live_provider kinds={sorted(required_kinds)} {msg}"
+    # Historical rows cannot authorize deployment. Until a provider-authenticated
+    # verification implementation is reviewed and integrated, there is deliberately
+    # NO success branch here, including for a caller-supplied lambda/boolean.
+    return False, (
+        f"roadmap_gate HOLD_UNVERIFIED_RUNTIME: historical {msg}; "
+        "provider-authenticated serving-runtime verification not implemented"
+    )
 
 
 def append_receipt(kind: str, summary: str) -> None:
