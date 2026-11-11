@@ -22,6 +22,15 @@ import type {
   PageId,
 } from './types';
 import { getApiBase, getWsLiveUrl } from './apiBase';
+import {
+  hasCoworkRoomDetail,
+  isCoworkRoomDetailPayload,
+  isCoworkRoomsPayload,
+  isLabsAnalytics,
+  isLabsOverview,
+  isMicrosoftReadiness,
+  isSessionList,
+} from './startupContracts.mjs';
 import { GodModeDock } from './operator/GodModeDock';
 import { useOperator } from './operator/OperatorProvider';
 import { storeOperator } from './operator/operatorApi';
@@ -49,10 +58,6 @@ const pageHeadlines: Record<PageId, string> = {
   console: 'Swarm Console',
   admin: 'Admin',
 };
-
-const hasCoworkRoomDetail = (room: CoworkRoomSummary | null | undefined): room is CoworkRoom => (
-  Boolean(room?.tasks && room?.artifacts && room?.lanes && room?.dispatch_summary && room?.artifact_summary)
-);
 
 const readPageFromHash = (): PageId => {
   if (typeof window === 'undefined') {
@@ -331,7 +336,11 @@ const App = () => {
       }
     }, 4000);
 
-    async function loadInitial<T>(path: string, accepts: (data: T) => boolean, apply: (data: T) => void | Promise<void>) {
+    async function loadInitial<T>(
+      path: string,
+      accepts: (data: unknown) => data is T,
+      apply: (data: T) => void | Promise<void>,
+    ) {
       let reason = 'Request failed';
       try {
         const response = await fetch(`${apiBase}${path}`);
@@ -339,7 +348,7 @@ const App = () => {
           reason = `HTTP ${response.status}`;
         } else {
           reason = 'Unexpected response';
-          const data: T = await response.json();
+          const data: unknown = await response.json();
           if (accepts(data)) {
             if (isMounted) {
               await apply(data);
@@ -356,32 +365,22 @@ const App = () => {
     }
 
     const bootstrapTimer = window.setTimeout(() => {
-      void loadInitial<Lesson[]>('/sessions', (data) => (
-        Array.isArray(data) && data.every((session) => Number.isInteger(session?.id))
-      ), setSessions);
-      void loadInitial<LabsOverview>('/api/labs/overview', (data) => (
-        Boolean(data?.metrics) && Array.isArray(data.installer_actions)
-          && Array.isArray(data.kopano_interfaces) && Array.isArray(data.tools)
-      ), setLabsOverview);
-      void loadInitial<LabsAnalytics>('/api/labs/analytics', (data) => (
-        Boolean(data?.mcp_console && data.forge)
-      ), setLabsAnalytics);
-      void loadInitial<MicrosoftReadiness>('/api/labs/microsoft-readiness', (data) => (
-        Boolean(data?.summary && data.tooling?.az && data.tooling.azd && data.tooling.telemetry && data.azure_account)
-          && Array.isArray(data.env?.azure_openai?.missing) && Array.isArray(data.next_steps)
-      ), setMicrosoftReadiness);
-      void loadInitial<{ rooms: CoworkRoomSummary[] }>('/api/labs/cowork/rooms', (data) => (
-        Array.isArray(data?.rooms) && data.rooms.every((room) => Number.isInteger(room?.id))
-      ), async ({ rooms }) => {
+      void loadInitial('/sessions', isSessionList, setSessions);
+      void loadInitial('/api/labs/overview', isLabsOverview, setLabsOverview);
+      void loadInitial('/api/labs/analytics', isLabsAnalytics, setLabsAnalytics);
+      void loadInitial('/api/labs/microsoft-readiness', isMicrosoftReadiness, setMicrosoftReadiness);
+      void loadInitial('/api/labs/cowork/rooms', isCoworkRoomsPayload, async ({ rooms }) => {
         setCoworkRooms(rooms);
         const firstRoom = rooms[0];
         if (firstRoom) {
-          await loadInitial<{ room: CoworkRoom }>(`/api/labs/cowork/rooms/${firstRoom.id}`, (data) => (
-            data?.room?.id === firstRoom.id && hasCoworkRoomDetail(data.room)
-          ), ({ room }) => {
-            setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
-            setActiveRoomId(room.id);
-          });
+          await loadInitial(
+            `/api/labs/cowork/rooms/${firstRoom.id}`,
+            (data): data is { room: CoworkRoom } => isCoworkRoomDetailPayload(data, firstRoom.id),
+            ({ room }) => {
+              setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
+              setActiveRoomId(room.id);
+            },
+          );
         }
       });
     }, 0);
