@@ -89,8 +89,10 @@ def make_record(detail:dict,safe_prs:dict[str,list[dict]])->dict:
 
 def main()->int:
     p=argparse.ArgumentParser(); p.add_argument('--owner',default='OyaAIProd'); p.add_argument('--output',default='data/ai-frontier-map/oya-corpus.jsonl'); p.add_argument('--limit',type=int,default=0)
+    p.add_argument('--max-pages',type=int,default=100,help='Bound metadata listing for a pilot; does not change the original record contract')
     a=p.parse_args(); gh=GitHub(os.getenv('GITHUB_TOKEN'))
-    repos=gh.paginate(f'/users/{a.owner}/repos?sort=created&direction=asc')
+    if a.max_pages<1 or a.limit<0: p.error('--max-pages must be >=1 and --limit >=0')
+    repos=gh.paginate(f'/users/{a.owner}/repos?sort=created&direction=asc',max_pages=a.max_pages)
     if a.limit: repos=repos[:a.limit]
     safe_prs=collect_safeskill_prs(gh,a.owner); records=[]
     for i,repo in enumerate(repos,1):
