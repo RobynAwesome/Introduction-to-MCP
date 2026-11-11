@@ -1098,6 +1098,12 @@ button {
   cursor: pointer;
 }
 
+.page-console .god-dock-tab {
+  position: static;
+  display: block;
+  margin: 0 16px 16px auto;
+}
+
 .god-dock-head {
   display: flex;
   justify-content: space-between;
