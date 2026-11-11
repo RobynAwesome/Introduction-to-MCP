@@ -91,6 +91,37 @@ def _extract_target_path(args: dict[str, Any]) -> str | None:
     return None
 
 
+def _allowed_roots() -> list[Path]:
+    """Workspace roots a write may touch: this repo plus KPGS_ALLOWED_PATHS (os.pathsep-separated)."""
+    roots = [REPO_ROOT.resolve()]
+    extra = os.environ.get("KPGS_ALLOWED_PATHS", "")
+    ctx_file = os.environ.get("KPGS_HOOK_CONTEXT_FILE")
+    ctx_paths: list[str] = []
+    if ctx_file and Path(ctx_file).is_file():
+        try:
+            data = json.loads(Path(ctx_file).read_text(encoding="utf-8"))
+            ctx_paths = [str(p) for p in data.get("allowed_paths", []) if isinstance(p, str)]
+        except (OSError, ValueError):
+            ctx_paths = []
+    for raw in [p for p in extra.split(os.pathsep) if p.strip()] + ctx_paths:
+        roots.append(Path(raw).resolve())
+    return roots
+
+
+def _path_in_allowed_roots(target: str) -> bool:
+    try:
+        resolved = Path(target).resolve()
+    except (OSError, ValueError):
+        return False
+    for root in _allowed_roots():
+        try:
+            resolved.relative_to(root)
+            return True
+        except ValueError:
+            continue
+    return False
+
+
 def handle_session_start(payload: dict[str, Any]) -> dict[str, Any]:
     now_path = REPO_ROOT / "NOW.md"
     now_status = "PRESENT" if now_path.is_file() else "MISSING"
@@ -142,13 +173,22 @@ def handle_pre_tool_use(payload: dict[str, Any]) -> dict[str, Any]:
 
     if capability == "repo.file.write":
         target_path = _extract_target_path(tool_args)
-        if target_path:
-            norm_target = target_path.replace("/", "\\").lower()
-            if "onedrive\\documents\\anthropic\\introduction to mcp" in norm_target:
-                return {
-                    "decision": "deny",
-                    "reason": f"HOLD: write tool {tool_name!r} targeting dirty OneDrive checkout is prohibited",
-                }
+        if not target_path:
+            return {
+                "decision": "deny",
+                "reason": f"HOLD: write tool {tool_name!r} has no resolvable target path (fail-closed)",
+            }
+        norm_target = target_path.replace("/", "\\").lower()
+        if "onedrive\\documents\\anthropic\\introduction to mcp" in norm_target:
+            return {
+                "decision": "deny",
+                "reason": f"HOLD: write tool {tool_name!r} targeting dirty OneDrive checkout is prohibited",
+            }
+        if not _path_in_allowed_roots(target_path):
+            return {
+                "decision": "deny",
+                "reason": f"HOLD: write tool {tool_name!r} target outside allowed roots: {target_path[:120]}",
+            }
 
     # Verify lease & tamper-evident restriction ledger when configured via environment or context file
     ctx_file = os.environ.get("KPGS_HOOK_CONTEXT_FILE")
@@ -214,6 +254,8 @@ def main() -> int:
     else:
         out = handle_pre_tool_use(payload)
 
+    if "decision" in out:
+        out["permissionDecision"] = out["decision"]
     print(json.dumps(out))
     return 0
 

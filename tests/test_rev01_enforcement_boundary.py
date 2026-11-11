@@ -665,3 +665,25 @@ def test_recovery_and_promotion_lifts_restriction_only_after_3_seat_and_explicit
         correlation_id="corr:lifted",
     )
     assert dec.subject_id == "cassy"
+
+
+def test_pretooluse_denies_write_outside_allowed_roots():
+    """Verifier finding: writes outside the workspace must be denied before side effects."""
+    import json
+    import subprocess
+    import sys
+
+    gate = Path(__file__).resolve().parents[1] / "scripts" / "kpgs_pretooluse_gate.py"
+
+    def run(target: str) -> dict:
+        payload = {"toolCall": {"name": "write_to_file", "args": {"TargetFile": target}}}
+        proc = subprocess.run(
+            [sys.executable, str(gate), "--event", "pre-tool-use"],
+            input=json.dumps(payload), capture_output=True, text=True, check=True,
+        )
+        return json.loads(proc.stdout)
+
+    outside = run(r"C:\Windows\System32\outside.txt")
+    assert outside["decision"] == "deny" and outside["permissionDecision"] == "deny"
+    inside = run(str(Path(__file__).resolve().parents[1] / "allowed.txt"))
+    assert inside["decision"] == "allow" and inside["permissionDecision"] == "allow"
