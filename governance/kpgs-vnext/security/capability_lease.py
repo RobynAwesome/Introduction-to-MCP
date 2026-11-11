@@ -17,6 +17,7 @@ from datetime import datetime, timedelta, timezone
 import hashlib
 import hmac
 import json
+from pathlib import Path
 import secrets
 from typing import Any, Callable, Iterable, Mapping
 
@@ -163,6 +164,8 @@ class CapabilityLeaseAuthority:
         issuer: str = "kpgs-sovereign-hub",
         max_ttl_seconds: int = 900,
         clock: Callable[[], datetime] | None = None,
+        restriction_ledger_path: Path | str | None = None,
+        restriction_hmac_key: bytes | None = None,
     ):
         if max_ttl_seconds <= 0:
             raise ValueError("max_ttl_seconds must be positive")
@@ -170,10 +173,86 @@ class CapabilityLeaseAuthority:
         self.issuer = issuer
         self.max_ttl_seconds = max_ttl_seconds
         self._clock = clock or (lambda: datetime.now(timezone.utc))
+        self._restriction_ledger_path = Path(restriction_ledger_path) if restriction_ledger_path else None
+        self._restriction_hmac_key = restriction_hmac_key or self.key_ring._keys[self.key_ring.active_key_id]
         self._revocations: dict[str, dict[str, str]] = {}
         self._operation_nonces: set[tuple[str, str]] = set()
         self._issued_nonces: set[str] = set()
         self._audit_log: list[dict[str, Any]] = []
+
+    @staticmethod
+    def _reject_dup_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        record: dict[str, Any] = {}
+        for k, v in pairs:
+            if k in record:
+                raise LeaseDenied(f"restriction_ledger_tampered: duplicate JSON key {k!r}")
+            record[k] = v
+        return record
+
+    def _load_and_verify_restriction_entries(self) -> list[dict[str, Any]]:
+        if not self._restriction_ledger_path or not self._restriction_ledger_path.is_file():
+            return []
+        entries: list[dict[str, Any]] = []
+        prev_hash = "GENESIS"
+        try:
+            raw_lines = self._restriction_ledger_path.read_text(encoding="utf-8").splitlines()
+        except OSError as exc:
+            raise LeaseDenied(f"restriction_ledger_unreadable: {exc}") from exc
+        for idx, line in enumerate(raw_lines):
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line, object_pairs_hook=self._reject_dup_keys)
+            except LeaseDenied:
+                raise
+            except Exception as exc:
+                raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}") from exc
+            if not isinstance(row, dict) or row.get("prev_entry_sha256") != prev_hash:
+                raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: broken hash chain")
+            filtered = {k: v for k, v in row.items() if k not in {"entry_sha256", "hmac_sha256"}}
+            canonical = json.dumps(filtered, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+            expected_sha = hashlib.sha256(canonical).hexdigest()
+            expected_hmac = hmac.new(self._restriction_hmac_key, canonical, hashlib.sha256).hexdigest()
+            if not hmac.compare_digest(str(row.get("entry_sha256", "")), expected_sha):
+                raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: entry_sha256 mismatch")
+            if not hmac.compare_digest(str(row.get("hmac_sha256", "")), expected_hmac):
+                raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: hmac_sha256 mismatch")
+            prev_hash = expected_sha
+            entries.append(row)
+        return entries
+
+    def _assert_not_restricted(
+        self,
+        *,
+        subject_id: str,
+        domain_id: str,
+        capabilities: Iterable[str],
+    ) -> None:
+        entries = self._load_and_verify_restriction_entries()
+        if not entries:
+            return
+        lifted_receipts = {
+            str(e.get("receipt_id"))
+            for e in entries
+            if e.get("status") == "RESTRICTION_LIFTED" and e.get("subject_id") == subject_id
+        }
+        req_caps = {str(c).strip() for c in capabilities if str(c).strip()}
+        for entry in entries:
+            if entry.get("status") != "RESTRICTED":
+                continue
+            if entry.get("subject_id") != subject_id:
+                continue
+            receipt_id = str(entry.get("receipt_id", ""))
+            if receipt_id in lifted_receipts:
+                continue
+            entry_domain = str(entry.get("domain_id", ""))
+            if entry_domain not in {"*", domain_id}:
+                continue
+            entry_caps = {str(c).strip() for c in (entry.get("capabilities") or [])}
+            if "*" in entry_caps or (req_caps & entry_caps):
+                raise LeaseDenied(
+                    f"subject {subject_id!r} restricted by validated failure receipt {receipt_id!r}"
+                )
 
     @staticmethod
     def _validate_capabilities(capabilities: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -294,6 +373,11 @@ class CapabilityLeaseAuthority:
         lease_id = "lease_" + secrets.token_urlsafe(18)
         nonce = self._new_nonce()
         capability_list = self._validate_capabilities(capabilities)
+        self._assert_not_restricted(
+            subject_id=subject_id,
+            domain_id=domain_id,
+            capabilities=[c["name"] for c in capability_list],
+        )
         provider_refs = self._validate_secret_provider_refs(secret_provider_refs)
 
         payload: dict[str, Any] = {
@@ -381,6 +465,17 @@ class CapabilityLeaseAuthority:
             raise LeaseDenied("lease identity is missing")
         if lease_id in self._revocations:
             raise LeaseRevoked("lease revoked")
+        subject = payload.get("subject") if isinstance(payload.get("subject"), dict) else {}
+        caps = [
+            str(item.get("name", ""))
+            for item in (payload.get("capabilities") or [])
+            if isinstance(item, dict)
+        ]
+        self._assert_not_restricted(
+            subject_id=str(subject.get("id", "")),
+            domain_id=str(payload.get("domain_id", "")),
+            capabilities=caps,
+        )
         nonce = payload.get("nonce")
         if not isinstance(nonce, str) or len(nonce) < 8:
             raise LeaseDenied("lease nonce is missing")
