@@ -33,6 +33,14 @@ jobs:
             python tools/ai_frontier_map/validate_corpus.py data/ai-frontier-map/oya-corpus.jsonl
           fi
 
+      - name: Collect first 25 OyaAI source metadata records using original collector
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python tools/ai_frontier_map/collect_oya_corpus.py \
+            --owner OyaAIProd --max-pages 1 --limit 25 \
+            --output "$RUNNER_TEMP/oya-corpus-sample.jsonl"
+          python tools/ai_frontier_map/validate_corpus.py "$RUNNER_TEMP/oya-corpus-sample.jsonl"
       - name: Validate five newly discovered upstream sources against the SAME map
         run: |
           python tools/ai_frontier_map/ingest_discoveries.py \
