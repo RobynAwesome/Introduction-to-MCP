@@ -32,3 +32,43 @@ jobs:
           if [[ -f data/ai-frontier-map/oya-corpus.jsonl ]]; then
             python tools/ai_frontier_map/validate_corpus.py data/ai-frontier-map/oya-corpus.jsonl
           fi
+
+      - name: Validate five newly discovered upstream sources against the SAME map
+        run: |
+          python tools/ai_frontier_map/ingest_discoveries.py \
+            --input data/ai-frontier-map/intake-2026-11-10.jsonl \
+            --output "$RUNNER_TEMP/unified-intake.jsonl"
+          python tools/ai_frontier_map/validate_corpus.py "$RUNNER_TEMP/unified-intake.jsonl"
+      - name: Negative tests for legacy Oya and new source compatibility
+        run: python -m unittest discover -s tools/ai_frontier_map -p "test_*.py" -v
+
+  governance-drill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Entrypoint denial must reject missing acknowledgement
+        shell: bash
+        run: |
+          if python scripts/kc_kpgs_governance.py entry --renter-id ci_frontier_probe --assert > "$RUNNER_TEMP/denied.txt" 2>&1; then
+            echo "FAIL: renter entry silently accepted absent acknowledgement"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/denied.txt"
+      - name: Run real KPGS CLI renter entry on disposable checkout
+        run: |
+          python scripts/kc_kpgs_governance.py entry \
+            --renter-id ci_frontier_probe --renter-class stateless_renter \
+            --assert --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+      - name: Run existing Black Mask v0.5 and Bracket stress CLI (no persisted report)
+        run: python scripts/kc_blackmask_bracket_stress.py --no-report-file --operator CI_FRONTIER --json
+      - name: Exercise existing Security Playground fail-closed fixture gate
+        run: python -m unittest discover -s tests -p "test_security_playground_inventory_gate.py" -v
+      - name: Read roadmap gate without granting production authority
+        shell: bash
+        run: |
+          python scripts/kc_main_brain_roadmap.py status > "$RUNNER_TEMP/roadmap-status.txt"
+          cat "$RUNNER_TEMP/roadmap-status.txt"
+          echo "The runner has no production permission. An inspected roadmap is not graduation."
