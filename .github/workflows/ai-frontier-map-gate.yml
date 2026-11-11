@@ -88,7 +88,14 @@ jobs:
           }
           echo "Main Brain gate exit: $result (runner-only evidence; does not authorize real production)"
           if [[ "$result" -eq 0 ]]; then
-            echo "WARNING: fixture/checkout gate accepted; this does NOT prove serving production authority"
-          else
-            echo "HOLD: missing production bar / other gate condition in disposable checkout"
+            echo "FAIL: gate accepted without authenticated live-runtime verifier"
+            exit 1
           fi
+          grep -q "HOLD_UNVERIFIED_RUNTIME" "$RUNNER_TEMP/roadmap-gate.txt" || {
+            echo "FAIL: gate did not fail closed on historic URL-only receipts"
+            exit 1
+          }
+          echo "PASS: historical URL-only rows did not grant production authority"
+      - name: Execute production gate negative regressions
+        run: |
+          python -m pytest -q tests/test_kc_main_brain_roadmap.py tests/test_kc_verified_production.py
