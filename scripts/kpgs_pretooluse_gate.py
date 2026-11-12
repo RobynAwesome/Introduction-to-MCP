@@ -600,66 +600,91 @@ def _paths_overlap_writable(protected_path: Path, writable_roots: Sequence[Path]
     return False
 
 
-def _load_trusted_context(repo_root: Path = REPO_ROOT) -> tuple[dict[str, Any] | None, str | None]:
+_CONTEXT_DENY_REASONS: dict[str, str] = {
+    "forbidden_env": "HOLD: reusable signing authority env var is prohibited",
+    "missing_env": "HOLD: missing trusted lease context (KPGS_HOOK_CONTEXT_FILE unset)",
+    "symlink_ctx": "HOLD: symlinked hook context file is prohibited",
+    "missing_ctx_file": "HOLD: trusted lease context file missing",
+    "invalid_ctx_json": "HOLD: invalid hook context JSON",
+    "non_object_ctx": "HOLD: hook context must be a JSON object",
+    "forbidden_ctx_field": "HOLD: reusable signing authority must not be stored in hook context",
+    "writable_ctx": "HOLD: hook context file must not reside inside renter-modifiable workspace",
+    "invalid_pk_file": "HOLD: trusted public keys file missing or symlinked",
+    "writable_pk_file": "HOLD: trusted public keys file must not reside inside renter-modifiable workspace",
+    "invalid_pk_json": "HOLD: invalid trusted public keys file",
+    "non_object_pk": "HOLD: trusted public keys file must map kid -> hex key",
+    "missing_pk": "HOLD: hook context missing Ed25519 verifying keys (public_keys_hex/public_keys_file)",
+    "symlink_ledger": "HOLD: symlinked restriction ledger path is prohibited",
+    "writable_ledger": "HOLD: restriction ledger must not reside inside renter-modifiable workspace",
+}
+
+
+class _ContextRejectedError(ValueError):
+    def __init__(self, code: str) -> None:
+        super().__init__(code)
+        self.code = code
+
+
+def _load_trusted_context(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     """Load and validate non-renter-modifiable hook context with Ed25519 public keys ONLY."""
     if any(os.environ.get(var_name) for var_name in FORBIDDEN_SIGNING_ENV_VARS):
-        return None, "HOLD: reusable signing authority env var is prohibited"
+        raise _ContextRejectedError("forbidden_env")
 
     ctx_file = os.environ.get("KPGS_HOOK_CONTEXT_FILE", "").strip()
     if not ctx_file:
-        return None, "HOLD: missing trusted lease context (KPGS_HOOK_CONTEXT_FILE unset)"
+        raise _ContextRejectedError("missing_env")
 
     ctx_path = Path(ctx_file)
     if os.path.islink(ctx_path) or ctx_path.is_symlink():
-        return None, "HOLD: symlinked hook context file is prohibited"
+        raise _ContextRejectedError("symlink_ctx")
     if not ctx_path.is_file():
-        return None, "HOLD: trusted lease context file missing"
+        raise _ContextRejectedError("missing_ctx_file")
 
     try:
         raw_text = ctx_path.read_text(encoding="utf-8")
         ctx = json.loads(raw_text, object_pairs_hook=_reject_dup_keys)
-    except Exception:
-        return None, "HOLD: invalid hook context JSON"
+    except Exception as exc:
+        raise _ContextRejectedError("invalid_ctx_json") from exc
 
     if not isinstance(ctx, dict):
-        return None, "HOLD: hook context must be a JSON object"
+        raise _ContextRejectedError("non_object_ctx")
 
     # Reject any reusable signing authority in context
     if any(field_name in ctx and ctx[field_name] for field_name in FORBIDDEN_SIGNING_CONTEXT_KEYS):
-        return None, "HOLD: reusable signing authority must not be stored in hook context"
+        raise _ContextRejectedError("forbidden_ctx_field")
 
     writable_roots = _default_allowed_roots(ctx=ctx, repo_root=repo_root)
     if _paths_overlap_writable(ctx_path, writable_roots):
-        return None, "HOLD: hook context file must not reside inside renter-modifiable workspace"
+        raise _ContextRejectedError("writable_ctx")
 
     pub_keys_hex: dict[str, str] | None = None
     pub_keys_file = os.environ.get("KPGS_TRUSTED_PUBLIC_KEYS_FILE", "").strip() or str(ctx.get("public_keys_file", "")).strip()
     if pub_keys_file:
         pk_path = Path(pub_keys_file)
         if os.path.islink(pk_path) or pk_path.is_symlink() or not pk_path.is_file():
-            return None, "HOLD: trusted public keys file missing or symlinked"
+            raise _ContextRejectedError("invalid_pk_file")
         if _paths_overlap_writable(pk_path, writable_roots):
-            return None, "HOLD: trusted public keys file must not reside inside renter-modifiable workspace"
+            raise _ContextRejectedError("writable_pk_file")
         try:
             pk_obj = json.loads(pk_path.read_text(encoding="utf-8"), object_pairs_hook=_reject_dup_keys)
-        except Exception:
-            return None, "HOLD: invalid trusted public keys file"
+        except Exception as exc:
+            raise _ContextRejectedError("invalid_pk_json") from exc
         if not isinstance(pk_obj, dict) or not pk_obj:
-            return None, "HOLD: trusted public keys file must map kid -> hex key"
+            raise _ContextRejectedError("non_object_pk")
         pub_keys_hex = {str(k): str(v) for k, v in pk_obj.items()}
     elif isinstance(ctx.get("public_keys_hex"), dict) and ctx["public_keys_hex"]:
         pub_keys_hex = {str(k): str(v) for k, v in ctx["public_keys_hex"].items()}
 
     if not pub_keys_hex:
-        return None, "HOLD: hook context missing Ed25519 verifying keys (public_keys_hex/public_keys_file)"
+        raise _ContextRejectedError("missing_pk")
 
     ledger_raw = os.environ.get("KPGS_RESTRICTION_LEDGER", "").strip() or str(ctx.get("restriction_ledger_path", "")).strip()
     if ledger_raw:
         ledger_path = Path(ledger_raw)
         if os.path.islink(ledger_path) or ledger_path.is_symlink():
-            return None, "HOLD: symlinked restriction ledger path is prohibited"
+            raise _ContextRejectedError("symlink_ledger")
         if _paths_overlap_writable(ledger_path, writable_roots):
-            return None, "HOLD: restriction ledger must not reside inside renter-modifiable workspace"
+            raise _ContextRejectedError("writable_ledger")
 
     return {
         "ctx": ctx,
@@ -667,7 +692,7 @@ def _load_trusted_context(repo_root: Path = REPO_ROOT) -> tuple[dict[str, Any] |
         "pub_keys_hex": pub_keys_hex,
         "ledger_path": ledger_raw or None,
         "writable_roots": writable_roots,
-    }, None
+    }
 
 
 def _authorize_capabilities(
@@ -711,7 +736,6 @@ def _authorize_capabilities(
 def _deny(reason: str) -> dict[str, Any]:
     return {
         "decision": "deny",
-        "permissionDecision": "deny",
         "reason": reason,
     }
 
@@ -719,7 +743,6 @@ def _deny(reason: str) -> dict[str, Any]:
 def _allow(reason: str) -> dict[str, Any]:
     return {
         "decision": "allow",
-        "permissionDecision": "allow",
         "reason": reason,
     }
 
@@ -727,8 +750,11 @@ def _allow(reason: str) -> dict[str, Any]:
 def handle_session_start(payload: dict[str, Any]) -> dict[str, Any]:
     now_path = REPO_ROOT / "NOW.md"
     now_status = "PRESENT" if now_path.is_file() else "MISSING"
-    _, ctx_err = _load_trusted_context()
-    lease_status = "VALIDATED_CONTEXT" if ctx_err is None else "UNADMITTED"
+    try:
+        _load_trusted_context()
+        lease_status = "VALIDATED_CONTEXT"
+    except _ContextRejectedError:
+        lease_status = "UNADMITTED"
     context = (
         "[KPGS_SESSION_START] I_AM_STATELESS_RENTER_NOT_LANDLORD | "
         f"repo_root={REPO_ROOT} | NOW.md={now_status} | "
@@ -736,10 +762,13 @@ def handle_session_start(payload: dict[str, Any]) -> dict[str, Any]:
         "PreToolUse cross-platform boundary & Ed25519 verifier gate active."
     )
     return {
-        "hookSpecificOutput": {
-            "hookEventName": "SessionStart",
-            "additionalContext": context,
-        }
+        "injectSteps": [
+            {
+                "systemMessage": {
+                    "systemMessage": context,
+                }
+            }
+        ]
     }
 
 
@@ -759,9 +788,10 @@ def handle_pre_tool_use(payload: dict[str, Any]) -> dict[str, Any]:
         return _deny(f"HOLD: CX_UNKNOWN unmapped tool {tool_name!r} denied by fail-closed policy")
 
     # Fail-closed: missing or untrusted lease context MUST deny all mutating operations
-    loaded_ctx, ctx_err = _load_trusted_context()
-    if ctx_err or loaded_ctx is None:
-        return _deny(ctx_err or "HOLD: missing trusted lease context")
+    try:
+        loaded_ctx = _load_trusted_context()
+    except _ContextRejectedError as exc:
+        return _deny(_CONTEXT_DENY_REASONS.get(exc.code, "HOLD: missing trusted lease context"))
 
     allowed_roots: list[Path] = loaded_ctx["writable_roots"]
     required_capabilities: list[str] = [capability]

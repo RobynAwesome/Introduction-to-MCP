@@ -772,10 +772,10 @@ def test_missing_trusted_lease_context_denies_mutations_but_allows_reads(tmp_pat
         ("invoke_subagent", {"TypeName": "self", "Role": "r", "Prompt": "p"}),
     ):
         res = _run_gate_subprocess(tool_name, args, clean_env)
-        assert res["decision"] == "deny" and res["permissionDecision"] == "deny", res
+        assert res["decision"] == "deny" and "permissionDecision" not in res, res
 
     ro_res = _run_gate_subprocess("read_file", {"Path": str(REPO_ROOT / "NOW.md")}, clean_env)
-    assert ro_res["decision"] == "allow" and ro_res["permissionDecision"] == "allow"
+    assert ro_res["decision"] == "allow" and "permissionDecision" not in ro_res, ro_res
 
     # Nonexistent path also fails closed
     bad_env = {**clean_env, "KPGS_HOOK_CONTEXT_FILE": str(tmp_path / "does_not_exist.json")}
@@ -885,10 +885,10 @@ def test_cross_platform_path_classification_drive_unc_traversal_and_symlinks(tmp
         "/etc/outside.txt",
     ):
         outside = _run_gate_subprocess("write_to_file", {"TargetFile": outside_target}, env)
-        assert outside["decision"] == "deny" and outside["permissionDecision"] == "deny", outside
+        assert outside["decision"] == "deny" and "permissionDecision" not in outside, outside
 
     inside = _run_gate_subprocess("write_to_file", {"TargetFile": str(REPO_ROOT / "allowed.txt")}, env)
-    assert inside["decision"] == "allow" and inside["permissionDecision"] == "allow", inside
+    assert inside["decision"] == "allow" and "permissionDecision" not in inside, inside
 
 
 def test_no_reusable_signing_authority_in_hook_context(tmp_path: Path):
@@ -1021,10 +1021,22 @@ def test_lockout_recovery_contract_and_quarantine(tmp_path: Path):
         ("command_status", {"CommandId": "cmd-1"}),
     ):
         ro_res = _run_gate_subprocess(ro_tool, ro_args, clean_env)
-        assert ro_res["decision"] == "allow" and ro_res["permissionDecision"] == "allow", ro_res
+        assert ro_res["decision"] == "allow" and "permissionDecision" not in ro_res, ro_res
 
     write_res = _run_gate_subprocess("write_file", {"Path": str(REPO_ROOT / "allowed.txt")}, clean_env)
-    assert write_res["decision"] == "deny" and write_res["permissionDecision"] == "deny", write_res
+    assert write_res["decision"] == "deny" and "permissionDecision" not in write_res, write_res
+
+    ss = subprocess.run(
+        [sys.executable, str(REPO_ROOT / "scripts" / "kpgs_pretooluse_gate.py"), "--event", "session-start"],
+        input="{}",
+        capture_output=True,
+        text=True,
+        env=clean_env,
+        check=False,
+    )
+    assert ss.returncode == 0, ss.stderr
+    ss_json = json.loads(ss.stdout)
+    assert "injectSteps" in ss_json and "I_AM_STATELESS_RENTER_NOT_LANDLORD" in ss_json["injectSteps"][0]["systemMessage"]["systemMessage"]
 
     audit_script = REPO_ROOT / "scripts" / "audit_pretooluse_spawn_contract.py"
     scan_root = tmp_path / "plugins"
