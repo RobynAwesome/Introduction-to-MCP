@@ -785,10 +785,11 @@ def test_missing_trusted_lease_context_denies_mutations_but_allows_reads(tmp_pat
 
 def test_cross_platform_path_classification_drive_unc_traversal_and_symlinks(tmp_path: Path, monkeypatch):
     """AC-REV01-08: Explicit Windows/POSIX classification covers drives, UNC, traversal, symlinks & boundaries."""
-    from pathlib import PurePosixPath
+    from pathlib import PurePosixPath, PureWindowsPath
 
     gate_mod = _load_gate_module()
     posix_repo = PurePosixPath("/workspace/Introduction-to-MCP")
+    win_repo = PureWindowsPath(r"C:\workspace\Introduction-to-MCP")
     nt_repo = REPO_ROOT
 
     # 1. Explicit POSIX host semantics (drive letters, drive-relative, UNC, traversal, outside, inside)
@@ -834,6 +835,17 @@ def test_cross_platform_path_classification_drive_unc_traversal_and_symlinks(tmp
     ):
         dec = gate_mod.classify_target_path(bad_nt, allowed_roots=[nt_repo], repo_root=nt_repo, host_os="nt")
         assert dec.allowed is False, f"Windows should deny {bad_nt!r}: {dec}"
+        dec_pure_win = gate_mod.classify_target_path(bad_nt, allowed_roots=[win_repo], repo_root=win_repo, host_os="nt")
+        assert dec_pure_win.allowed is False, f"PureWindows should deny {bad_nt!r}: {dec_pure_win}"
+
+    for ok_win in (
+        "allowed.txt",
+        r"scripts\kpgs_pretooluse_gate.py",
+        r"sub\..\allowed.txt",
+        r"C:\workspace\Introduction-to-MCP\allowed.txt",
+    ):
+        dec_ok_win = gate_mod.classify_target_path(ok_win, allowed_roots=[win_repo], repo_root=win_repo, host_os="nt")
+        assert dec_ok_win.allowed is True, f"PureWindows should allow {ok_win!r}: {dec_ok_win}"
 
     # 3. Symlink escape detection (real OS symlink on POSIX/privileged hosts + simulated symlink check on restricted Windows)
     workspace_dir = tmp_path / "ws_root"

@@ -22,7 +22,7 @@ from dataclasses import dataclass
 import importlib.util
 import json
 import os
-from pathlib import Path, PurePosixPath, PureWindowsPath
+from pathlib import Path, PurePath, PurePosixPath, PureWindowsPath
 import re
 import shlex
 import sys
@@ -239,9 +239,46 @@ def _lexical_traversal_escapes(rel_text: str) -> bool:
     return False
 
 
-def _detect_symlink_escape(candidate: Path, allowed_roots: Sequence[Path]) -> str | None:
+def _coerce_native_path(r: Path | PurePath | str) -> Path:
+    return r if isinstance(r, Path) else Path(str(r))
+
+
+def _is_pure_simulation(effective_os: str, paths: Sequence[Path | PurePath | str | None]) -> bool:
+    return effective_os != os.name or any(
+        isinstance(p, PurePath) and not isinstance(p, Path) for p in paths if p is not None
+    )
+
+
+def _win_norm(path_str: str) -> PureWindowsPath:
+    p = PureWindowsPath(path_str.replace("/", "\\"))
+    parts = list(p.parts)
+    anchor = p.anchor
+    body = parts[1:] if anchor and parts and parts[0] == anchor else parts
+    stack: list[str] = []
+    for seg in body:
+        if seg in {"", "."}:
+            continue
+        if seg == "..":
+            if stack:
+                stack.pop()
+            continue
+        stack.append(seg)
+    return PureWindowsPath(anchor, *stack) if anchor else (PureWindowsPath(*stack) if stack else PureWindowsPath("."))
+
+
+def _is_relative_win(candidate: PureWindowsPath, root: PureWindowsPath) -> bool:
+    try:
+        c_low = PureWindowsPath(*(part.lower() for part in candidate.parts))
+        r_low = PureWindowsPath(*(part.lower() for part in root.parts))
+        c_low.relative_to(r_low)
+        return True
+    except ValueError:
+        return False
+
+
+def _detect_symlink_escape(candidate: Path, allowed_roots: Sequence[Path | PurePath | str]) -> str | None:
     """Return reason if any existing component along ``candidate`` is a symlink exiting roots."""
-    resolved_roots = [r.resolve() for r in allowed_roots]
+    resolved_roots = [_coerce_native_path(r).resolve() for r in allowed_roots]
     # Walk from top prefix down to candidate so intermediate directory symlinks are caught
     parts = candidate.parts
     for end in range(1, len(parts) + 1):
@@ -279,21 +316,27 @@ def _default_allowed_roots(
 def classify_target_path(
     raw_target: str,
     *,
-    allowed_roots: Sequence[Path | PurePosixPath | str],
-    repo_root: Path | PurePosixPath | str = REPO_ROOT,
+    allowed_roots: Sequence[Path | PurePath | str],
+    repo_root: Path | PurePath | str = REPO_ROOT,
     host_os: str | None = None,
-    cwd: Path | PurePosixPath | str | None = None,
+    cwd: Path | PurePath | str | None = None,
 ) -> PathClassification:
     """Classify a target path under explicit Windows and POSIX semantics."""
     effective_os = host_os if host_os is not None else os.name
     target = raw_target.strip() if isinstance(raw_target, str) else ""
+    pure_sim = _is_pure_simulation(effective_os, [*allowed_roots, repo_root, cwd])
 
-    def _to_posix_root(r: Path | PurePosixPath | str) -> PurePosixPath:
+    def _to_posix_root(r: Path | PurePath | str) -> PurePosixPath:
         if isinstance(r, PurePosixPath):
             return r
         if isinstance(r, str):
             return PurePosixPath(r.replace("\\", "/"))
         return PurePosixPath(r.as_posix())
+
+    def _to_win_root(r: Path | PurePath | str) -> PureWindowsPath:
+        if isinstance(r, PureWindowsPath):
+            return r
+        return _win_norm(str(r))
 
     if not target:
         return PathClassification(raw_target, effective_os, "empty", "invalid", False, None, "empty target path")
@@ -351,6 +394,21 @@ def classify_target_path(
                 "ambiguous drive-relative Windows path is prohibited",
             )
         syntax = "windows_drive_absolute"
+        if pure_sim:
+            cand_win = _win_norm(target)
+            if _is_dirty_onedrive(str(cand_win)):
+                return PathClassification(raw_target, effective_os, syntax, "dirty_onedrive", False, str(cand_win), "dirty OneDrive checkout is prohibited")
+            win_roots = [_to_win_root(r) for r in allowed_roots]
+            allowed = any(_is_relative_win(cand_win, root) for root in win_roots)
+            return PathClassification(
+                raw_target,
+                effective_os,
+                syntax,
+                syntax if allowed else "outside_allowed_roots",
+                allowed,
+                str(cand_win),
+                "within allowed Windows roots" if allowed else f"outside allowed workspace roots: {cand_win}",
+            )
         candidate = Path(PureWindowsPath(target))
     elif target.startswith("/"):
         if effective_os != "nt":
@@ -361,8 +419,8 @@ def classify_target_path(
             candidate_posix = _posix_norm(target)
             if _is_dirty_onedrive(str(candidate_posix)):
                 return PathClassification(raw_target, effective_os, syntax, "dirty_onedrive", False, str(candidate_posix), "dirty OneDrive checkout is prohibited")
-            if os.name == "nt":
-                # Simulated POSIX evaluation on Windows test host (do not call Path.resolve())
+            if pure_sim:
+                # Explicit/simulated POSIX evaluation (never mix PurePosixPath with Path.resolve())
                 posix_roots = [_to_posix_root(r) for r in allowed_roots]
                 allowed = any(_is_relative_posix(candidate_posix, root) for root in posix_roots)
                 return PathClassification(
@@ -405,7 +463,7 @@ def classify_target_path(
             return PathClassification(raw_target, effective_os, "home_relative", "home_escape", False, None, "home-directory paths are prohibited")
         syntax = "relative"
         norm_rel = target.replace("\\", "/")
-        if os.name == "nt" and effective_os != "nt":
+        if effective_os != "nt" and pure_sim:
             anchor_posix = _to_posix_root(cwd if cwd is not None else repo_root)
             posix_roots = [_to_posix_root(r) for r in allowed_roots]
             if _lexical_traversal_escapes(norm_rel):
@@ -423,7 +481,25 @@ def classify_target_path(
                 str(joined),
                 "within allowed POSIX roots" if allowed else f"outside allowed workspace roots: {joined}",
             )
-        anchor = (Path(cwd).resolve() if cwd is not None else Path(repo_root).resolve())
+        if effective_os == "nt" and pure_sim:
+            anchor_win = _to_win_root(cwd if cwd is not None else repo_root)
+            win_roots = [_to_win_root(r) for r in allowed_roots]
+            joined_win = _win_norm(str(anchor_win / target.replace("/", "\\")))
+            if _is_dirty_onedrive(str(joined_win)):
+                return PathClassification(raw_target, effective_os, syntax, "dirty_onedrive", False, str(joined_win), "dirty OneDrive checkout is prohibited")
+            if _lexical_traversal_escapes(target) and not any(_is_relative_win(joined_win, root) for root in win_roots):
+                return PathClassification(raw_target, effective_os, syntax, "relative_traversal", False, str(joined_win), f"relative traversal escapes workspace: {target}")
+            allowed = any(_is_relative_win(joined_win, root) for root in win_roots)
+            return PathClassification(
+                raw_target,
+                effective_os,
+                syntax,
+                "relative_inside" if allowed else "outside_allowed_roots",
+                allowed,
+                str(joined_win),
+                "within allowed Windows roots" if allowed else f"outside allowed workspace roots: {joined_win}",
+            )
+        anchor = (_coerce_native_path(cwd).resolve() if cwd is not None else _coerce_native_path(repo_root).resolve())
         candidate = Path(os.path.abspath(anchor / norm_rel))
 
     # Native filesystem checks (symlink escape, realpath, dirty OneDrive, allowed_roots)
@@ -439,7 +515,7 @@ def classify_target_path(
     if _is_dirty_onedrive(str(resolved)):
         return PathClassification(raw_target, effective_os, syntax, "dirty_onedrive", False, str(resolved), "resolved path hits dirty OneDrive checkout")
 
-    resolved_roots = [r.resolve() for r in allowed_roots]
+    resolved_roots = [_coerce_native_path(r).resolve() for r in allowed_roots]
     if not any(_is_relative_native(resolved, root) for root in resolved_roots):
         kind = "relative_traversal" if (syntax == "relative" and _lexical_traversal_escapes(target)) else "outside_allowed_roots"
         return PathClassification(raw_target, effective_os, syntax, kind, False, str(resolved), f"target resolves outside allowed roots: {resolved}")
@@ -526,9 +602,8 @@ def _paths_overlap_writable(protected_path: Path, writable_roots: Sequence[Path]
 
 def _load_trusted_context(repo_root: Path = REPO_ROOT) -> tuple[dict[str, Any] | None, str | None]:
     """Load and validate non-renter-modifiable hook context with Ed25519 public keys ONLY."""
-    for env_key in FORBIDDEN_SIGNING_ENV_VARS:
-        if os.environ.get(env_key):
-            return None, f"HOLD: reusable signing authority env var {env_key!r} is prohibited"
+    if any(os.environ.get(var_name) for var_name in FORBIDDEN_SIGNING_ENV_VARS):
+        return None, "HOLD: reusable signing authority env var is prohibited"
 
     ctx_file = os.environ.get("KPGS_HOOK_CONTEXT_FILE", "").strip()
     if not ctx_file:
@@ -538,24 +613,20 @@ def _load_trusted_context(repo_root: Path = REPO_ROOT) -> tuple[dict[str, Any] |
     if os.path.islink(ctx_path) or ctx_path.is_symlink():
         return None, "HOLD: symlinked hook context file is prohibited"
     if not ctx_path.is_file():
-        return None, f"HOLD: trusted lease context file {ctx_file!r} missing"
+        return None, "HOLD: trusted lease context file missing"
 
     try:
         raw_text = ctx_path.read_text(encoding="utf-8")
         ctx = json.loads(raw_text, object_pairs_hook=_reject_dup_keys)
-    except Exception as exc:
-        return None, f"HOLD: invalid hook context JSON: {exc}"
+    except Exception:
+        return None, "HOLD: invalid hook context JSON"
 
     if not isinstance(ctx, dict):
         return None, "HOLD: hook context must be a JSON object"
 
     # Reject any reusable signing authority in context
-    forbidden_present = sorted(k for k in FORBIDDEN_SIGNING_CONTEXT_KEYS if k in ctx and ctx[k])
-    if forbidden_present:
-        return None, (
-            "HOLD: reusable signing authority must not be stored in hook context "
-            f"(forbidden fields: {', '.join(forbidden_present)})"
-        )
+    if any(field_name in ctx and ctx[field_name] for field_name in FORBIDDEN_SIGNING_CONTEXT_KEYS):
+        return None, "HOLD: reusable signing authority must not be stored in hook context"
 
     writable_roots = _default_allowed_roots(ctx=ctx, repo_root=repo_root)
     if _paths_overlap_writable(ctx_path, writable_roots):
@@ -571,16 +642,16 @@ def _load_trusted_context(repo_root: Path = REPO_ROOT) -> tuple[dict[str, Any] |
             return None, "HOLD: trusted public keys file must not reside inside renter-modifiable workspace"
         try:
             pk_obj = json.loads(pk_path.read_text(encoding="utf-8"), object_pairs_hook=_reject_dup_keys)
-        except Exception as exc:
-            return None, f"HOLD: invalid trusted public keys file: {exc}"
+        except Exception:
+            return None, "HOLD: invalid trusted public keys file"
         if not isinstance(pk_obj, dict) or not pk_obj:
-            return None, "HOLD: trusted public keys file must map kid -> hex public key"
+            return None, "HOLD: trusted public keys file must map kid -> hex key"
         pub_keys_hex = {str(k): str(v) for k, v in pk_obj.items()}
     elif isinstance(ctx.get("public_keys_hex"), dict) and ctx["public_keys_hex"]:
         pub_keys_hex = {str(k): str(v) for k, v in ctx["public_keys_hex"].items()}
 
     if not pub_keys_hex:
-        return None, "HOLD: hook context missing Ed25519 public verifying keys (public_keys_hex/public_keys_file)"
+        return None, "HOLD: hook context missing Ed25519 verifying keys (public_keys_hex/public_keys_file)"
 
     ledger_raw = os.environ.get("KPGS_RESTRICTION_LEDGER", "").strip() or str(ctx.get("restriction_ledger_path", "")).strip()
     if ledger_raw:
@@ -633,8 +704,8 @@ def _authorize_capabilities(
                 correlation_id=f"corr:{conv_id}:{step_idx}",
             )
         return None
-    except Exception as exc:
-        return f"HOLD: pre-tool lease/restriction gate denied {tool_name!r}: {type(exc).__name__}: {exc}"
+    except Exception:
+        return f"HOLD: pre-tool lease/restriction gate denied {tool_name!r}"
 
 
 def _deny(reason: str) -> dict[str, Any]:
@@ -657,7 +728,7 @@ def handle_session_start(payload: dict[str, Any]) -> dict[str, Any]:
     now_path = REPO_ROOT / "NOW.md"
     now_status = "PRESENT" if now_path.is_file() else "MISSING"
     _, ctx_err = _load_trusted_context()
-    lease_status = "VALIDATED_CONTEXT" if ctx_err is None else f"UNADMITTED ({ctx_err})"
+    lease_status = "VALIDATED_CONTEXT" if ctx_err is None else "UNADMITTED"
     context = (
         "[KPGS_SESSION_START] I_AM_STATELESS_RENTER_NOT_LANDLORD | "
         f"repo_root={REPO_ROOT} | NOW.md={now_status} | "
