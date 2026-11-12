@@ -1,0 +1,36 @@
+{
+  "kpgs-renter-admission-and-lease-gate": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ../scripts/kpgs_pretooluse_gate.py --event session-start"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^(run_command|send_command_input|manage_task|schedule|write_to_file|write_file|replace_file_content|multi_replace_file_content|edit_file|apply_patch|delete_file|invoke_subagent|define_subagent|manage_subagents|send_message|swarm|call_mcp_tool|mcp_.*|browser_.*)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ../scripts/kpgs_pretooluse_gate.py --event pre-tool-use"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ../scripts/kpgs_pretooluse_gate.py --event pre-tool-use"
+          }
+        ]
+      }
+    ]
+  }
+}

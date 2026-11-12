@@ -129,13 +129,27 @@ def blackmask_drill(
     commandments_ack: list[str] | None = None,
     pillars_ack: list[str] | None = None,
     persist: bool = True,
+    require_explicit_ack: bool = False,
 ) -> dict[str, Any]:
-    """Drill agent against 15 Commandments + 5 Pillars. All must be acknowledged to SHIP."""
+    """Drill agent against 15 Commandments + 5 Pillars. All must be acknowledged to SHIP.
+
+    When ``require_explicit_ack=True`` (mandatory for recovery/promotion gates),
+    ``commandments_ack`` and ``pillars_ack`` must be explicitly supplied by the caller;
+    ``None`` or empty lists evaluate to zero acknowledgements (``HOLD``).
+    Even when ``require_explicit_ack=False``, passing an explicit empty list ``[]``
+    never defaults to full acknowledgement.
+    """
     doctrine = load_black_mask_doctrine()
     commandments = doctrine.get("commandments", [])
     pillars = doctrine.get("pillars", [])
-    ack_cmd = set(commandments_ack or [c["id"] for c in commandments])
-    ack_pil = set(pillars_ack or [p["id"] for p in pillars])
+    explicit_supplied = commandments_ack is not None and pillars_ack is not None
+
+    if require_explicit_ack:
+        ack_cmd = set(commandments_ack) if commandments_ack is not None else set()
+        ack_pil = set(pillars_ack) if pillars_ack is not None else set()
+    else:
+        ack_cmd = set(commandments_ack) if commandments_ack is not None else {c["id"] for c in commandments}
+        ack_pil = set(pillars_ack) if pillars_ack is not None else {p["id"] for p in pillars}
 
     cmd_results = [
         {"id": c["id"], "text": c["text"], "passed": c["id"] in ack_cmd}
@@ -147,7 +161,13 @@ def blackmask_drill(
     ]
     cmd_pass = sum(1 for r in cmd_results if r["passed"])
     pil_pass = sum(1 for r in pil_results if r["passed"])
-    all_pass = cmd_pass == len(commandments) and pil_pass == len(pillars)
+    all_pass = (
+        len(commandments) > 0
+        and len(pillars) > 0
+        and cmd_pass == len(commandments)
+        and pil_pass == len(pillars)
+    )
+    explicit_ack_verified = bool(explicit_supplied and all_pass)
     verdict = "SHIP" if all_pass else "HOLD"
 
     summary = _bracket_blackmask(
@@ -162,6 +182,7 @@ def blackmask_drill(
                 "agent_id": agent_id,
                 "summary": summary,
                 "verdict": verdict,
+                "explicit_ack_verified": explicit_ack_verified,
             },
         )
 
@@ -173,6 +194,7 @@ def blackmask_drill(
                 "verdict": verdict,
                 "commandments_pass": cmd_pass,
                 "pillars_pass": pil_pass,
+                "explicit_ack_verified": explicit_ack_verified,
                 "drilled_at": _utc_now(),
             },
         }
@@ -185,6 +207,7 @@ def blackmask_drill(
         "pillars": pil_results,
         "summary": summary,
         "drill_complete": all_pass,
+        "explicit_ack_verified": explicit_ack_verified,
         "persisted": persist,
     }
 

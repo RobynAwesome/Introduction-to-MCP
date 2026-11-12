@@ -126,6 +126,23 @@ class PlaygroundGateTests(unittest.TestCase):
             self.assertFalse(out["production_authority"])
             self.assertEqual(run.stderr.strip(), "")
 
+    def test_cli_duplicate_isolation_key_cannot_hide_failure(self) -> None:
+        payload = json.dumps(fixture()).replace(
+            '"deny_production_network": true',
+            '"deny_production_network": false, "deny_production_network": true',
+        )
+        with tempfile.TemporaryDirectory() as tempdir:
+            path = Path(tempdir) / "evidence.json"
+            path.write_text(payload, encoding="utf-8")
+            run = subprocess.run(
+                [sys.executable, str(GATE), "--input", str(path)],
+                capture_output=True, text=True, check=False,
+            )
+        self.assertEqual(run.returncode, 4, run.stderr)
+        result = json.loads(run.stdout)
+        self.assertEqual(result["verdict"], "BLOCK")
+        self.assertFalse(result["production_authority"])
+
 
 if __name__ == "__main__":
     unittest.main()
