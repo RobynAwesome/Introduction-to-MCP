@@ -42,7 +42,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // Google Fonts — cache with stale-while-revalidate
-  if (url.hostname.includes('fonts.googleapis.com') || url.hostname.includes('fonts.gstatic.com')) {
+  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
     event.respondWith(
       caches.open(FONT_CACHE).then(cache =>
         cache.match(event.request).then(cached => {
