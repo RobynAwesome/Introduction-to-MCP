@@ -2,12 +2,31 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import importlib.util
 import json
+import sys
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Iterable, Mapping, Any
+
+
+def _load_ed25519():
+    mod_path = (
+        Path(__file__).resolve().parents[2]
+        / "governance"
+        / "kpgs-vnext"
+        / "security"
+        / "ed25519_stdlib.py"
+    )
+    spec = importlib.util.spec_from_file_location("kpgs_ed25519_stdlib", mod_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load ed25519_stdlib from {mod_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules.setdefault(spec.name, module)
+    spec.loader.exec_module(module)
+    return module
 
 
 class FailureClass(str, Enum):
@@ -230,7 +249,11 @@ def _reject_duplicate_json_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _canonical_entry_bytes(entry: Mapping[str, Any]) -> bytes:
-    filtered = {k: v for k, v in entry.items() if k not in {"entry_sha256", "hmac_sha256"}}
+    filtered = {
+        k: v
+        for k, v in entry.items()
+        if k not in {"entry_sha256", "hmac_sha256", "ed25519_sig"}
+    }
     return json.dumps(filtered, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
@@ -254,11 +277,15 @@ def observe_failure_receipt(receipt: FailureReceipt, *, ledger_path: Path) -> di
 def verify_restriction_ledger(
     ledger_path: Path,
     *,
-    hmac_key: bytes,
+    hmac_key: bytes | None = None,
+    ed25519_public_keys: Mapping[str, bytes] | None = None,
 ) -> list[dict[str, Any]]:
-    """Verify hash-chain and HMAC-SHA256 integrity of the authorised restrictions ledger."""
+    """Verify hash-chain and Ed25519 or HMAC-SHA256 integrity of the authorised restrictions ledger."""
     if not ledger_path.is_file():
         return []
+    if ed25519_public_keys is None and hmac_key is None:
+        raise ValueError("verify_restriction_ledger requires ed25519_public_keys or hmac_key")
+    ed25519 = _load_ed25519() if ed25519_public_keys is not None else None
     entries: list[dict[str, Any]] = []
     prev_hash = "GENESIS"
     raw_lines = ledger_path.read_text(encoding="utf-8").splitlines()
@@ -275,11 +302,26 @@ def verify_restriction_ledger(
             raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: broken hash chain")
         canonical = _canonical_entry_bytes(row)
         expected_sha = hashlib.sha256(canonical).hexdigest()
-        expected_hmac = hmac.new(hmac_key, canonical, hashlib.sha256).hexdigest()
         if not hmac.compare_digest(str(row.get("entry_sha256", "")), expected_sha):
             raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: entry_sha256 mismatch")
-        if not hmac.compare_digest(str(row.get("hmac_sha256", "")), expected_hmac):
-            raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: hmac_sha256 mismatch")
+        if ed25519_public_keys is not None:
+            assert ed25519 is not None
+            kid = str(row.get("ed25519_kid", ""))
+            sig_hex = str(row.get("ed25519_sig", ""))
+            pub = ed25519_public_keys.get(kid)
+            if pub is None or not sig_hex:
+                raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: missing or untrusted ed25519 signature")
+            try:
+                sig_bytes = bytes.fromhex(sig_hex)
+            except ValueError as exc:
+                raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: invalid ed25519 hex") from exc
+            if not ed25519.verify(pub, canonical, sig_bytes):
+                raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: ed25519 signature mismatch")
+        else:
+            assert hmac_key is not None
+            expected_hmac = hmac.new(hmac_key, canonical, hashlib.sha256).hexdigest()
+            if not hmac.compare_digest(str(row.get("hmac_sha256", "")), expected_hmac):
+                raise ValueError(f"restriction_ledger_tampered at line {idx + 1}: hmac_sha256 mismatch")
         prev_hash = expected_sha
         entries.append(row)
     return entries
@@ -289,19 +331,38 @@ def _append_signed_restriction_entry(
     ledger_path: Path,
     entry: dict[str, Any],
     *,
-    hmac_key: bytes,
+    hmac_key: bytes | None = None,
+    ed25519_private_key: bytes | None = None,
+    ed25519_key_id: str = "k1",
 ) -> dict[str, Any]:
-    existing = verify_restriction_ledger(ledger_path, hmac_key=hmac_key)
-    prev_hash = existing[-1]["entry_sha256"] if existing else "GENESIS"
-    unsigned = {**entry, "prev_entry_sha256": prev_hash}
-    canonical = _canonical_entry_bytes(unsigned)
-    entry_sha = hashlib.sha256(canonical).hexdigest()
-    entry_hmac = hmac.new(hmac_key, canonical, hashlib.sha256).hexdigest()
-    signed = {
-        **unsigned,
-        "entry_sha256": entry_sha,
-        "hmac_sha256": entry_hmac,
-    }
+    if ed25519_private_key is not None:
+        ed25519 = _load_ed25519()
+        pub = ed25519.public_key_from_seed(ed25519_private_key)
+        existing = verify_restriction_ledger(ledger_path, ed25519_public_keys={ed25519_key_id: pub})
+        prev_hash = existing[-1]["entry_sha256"] if existing else "GENESIS"
+        unsigned = {**entry, "prev_entry_sha256": prev_hash, "ed25519_kid": ed25519_key_id}
+        canonical = _canonical_entry_bytes(unsigned)
+        entry_sha = hashlib.sha256(canonical).hexdigest()
+        entry_sig = ed25519.sign(ed25519_private_key, canonical).hex()
+        signed = {
+            **unsigned,
+            "entry_sha256": entry_sha,
+            "ed25519_sig": entry_sig,
+        }
+    elif hmac_key is not None:
+        existing = verify_restriction_ledger(ledger_path, hmac_key=hmac_key)
+        prev_hash = existing[-1]["entry_sha256"] if existing else "GENESIS"
+        unsigned = {**entry, "prev_entry_sha256": prev_hash}
+        canonical = _canonical_entry_bytes(unsigned)
+        entry_sha = hashlib.sha256(canonical).hexdigest()
+        entry_hmac = hmac.new(hmac_key, canonical, hashlib.sha256).hexdigest()
+        signed = {
+            **unsigned,
+            "entry_sha256": entry_sha,
+            "hmac_sha256": entry_hmac,
+        }
+    else:
+        raise ValueError("ed25519_private_key or hmac_key is required to sign restriction entry")
     ledger_path.parent.mkdir(parents=True, exist_ok=True)
     with ledger_path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(signed, sort_keys=True, ensure_ascii=False) + "\n")
@@ -318,7 +379,9 @@ def record_authorised_restriction(
     domain_id: str,
     capabilities: Iterable[str],
     ledger_path: Path,
-    hmac_key: bytes,
+    hmac_key: bytes | None = None,
+    ed25519_private_key: bytes | None = None,
+    ed25519_key_id: str = "k1",
 ) -> dict[str, Any]:
     """Stage 2 & 3: Record an independently validated restriction in the tamper-evident ledger."""
     if not validator_id.strip():
@@ -356,7 +419,13 @@ def record_authorised_restriction(
         "kc_watch_mode": kc_watch.get("mode"),
         "teacher_effective_outcome": teacher_review.get("effective_outcome"),
     }
-    return _append_signed_restriction_entry(ledger_path, entry, hmac_key=hmac_key)
+    return _append_signed_restriction_entry(
+        ledger_path,
+        entry,
+        hmac_key=hmac_key,
+        ed25519_private_key=ed25519_private_key,
+        ed25519_key_id=ed25519_key_id,
+    )
 
 
 def lift_restriction_on_promotion(
@@ -367,7 +436,9 @@ def lift_restriction_on_promotion(
     teacher_review: Mapping[str, Any],
     kc_watch: Mapping[str, Any],
     ledger_path: Path,
-    hmac_key: bytes,
+    hmac_key: bytes | None = None,
+    ed25519_private_key: bytes | None = None,
+    ed25519_key_id: str = "k1",
 ) -> dict[str, Any]:
     """Stage 5: Lift an active restriction only after verified 3-seat promotion and explicit BlackMask drill."""
     if promotion.receipt_id != receipt.receipt_id:
@@ -398,5 +469,11 @@ def lift_restriction_on_promotion(
         "kc_decision": promotion.kc_decision.value,
         "blackmask_explicit_ack_verified": True,
     }
-    return _append_signed_restriction_entry(ledger_path, entry, hmac_key=hmac_key)
+    return _append_signed_restriction_entry(
+        ledger_path,
+        entry,
+        hmac_key=hmac_key,
+        ed25519_private_key=ed25519_private_key,
+        ed25519_key_id=ed25519_key_id,
+    )
 
