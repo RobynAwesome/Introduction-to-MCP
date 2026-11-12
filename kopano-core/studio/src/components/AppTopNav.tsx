@@ -6,7 +6,7 @@ const pageLabels: Array<{ id: PageId; label: string; short: string }> = [
   { id: 'council', label: 'Council', short: 'Council' },
   { id: 'labs', label: 'Kopano Labs', short: 'Labs' },
   { id: 'forge', label: 'Forge', short: 'Forge' },
-  { id: 'console', label: 'Swarm Console', short: 'Swarm' },
+  { id: 'console', label: 'Dashboard', short: 'Dashboard' },
   { id: 'admin', label: 'Admin', short: 'Admin' },
 ];
 
@@ -30,7 +30,7 @@ export function AppTopNav({
       <motion.button
         type="button"
         className="brand-lockup"
-        onClick={() => onNavigate('training')}
+        onClick={() => onNavigate('console')}
         whileHover={{ y: -2, scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
       >

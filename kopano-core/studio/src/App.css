@@ -330,6 +330,8 @@ button {
   box-shadow: 0 0 18px currentColor;
 }
 
+.page-caption-row[hidden] { display: none; }
+
 .page-caption-row {
   display: flex;
   align-items: center;
@@ -1094,6 +1096,12 @@ button {
   background: rgba(6, 12, 16, 0.92);
   color: var(--gold);
   cursor: pointer;
+}
+
+.page-console .god-dock-tab {
+  position: static;
+  display: block;
+  margin: 0 16px 16px auto;
 }
 
 .god-dock-head {
