@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -347,7 +348,18 @@ def _read_normalized_lf_bytes(path: Path) -> bytes:
     return path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
 
 
-def run_migration() -> dict[str, Any]:
+def run_migration(force: bool = False) -> dict[str, Any]:
+    existing = [p for p in (ARCHIVE_PATH, RECEIPTS_JSONL, WEEK_MD) if p.exists()]
+    if existing and not force:
+        existing_rel = ", ".join(
+            str(p.relative_to(REPO_ROOT)) if p.is_relative_to(REPO_ROOT) else str(p)
+            for p in existing
+        )
+        raise RuntimeError(
+            f"NOW archive migration already exists ({existing_rel}); "
+            "pass --force (force=True) to overwrite WEEK.md, RECEIPTS.jsonl, and compact NOW.md."
+        )
+
     ARCHIVE_PATH.parent.mkdir(parents=True, exist_ok=True)
     WEEK_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -447,12 +459,21 @@ def verify_migration() -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="NOW.md lossless weekly continuity pilot")
     parser.add_argument("--verify", action="store_true", help="Verify existing migration")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite existing WEEK.md, RECEIPTS.jsonl, and compact NOW.md when migrating",
+    )
     parser.add_argument("--query-failure", type=str, default="", help="Query failure context without founder intervention")
     args = parser.parse_args()
     if args.query_failure:
         print(json.dumps(retrieve_failure_context(args.query_failure), indent=2))
         return 0
-    result = verify_migration() if args.verify else run_migration()
+    try:
+        result = verify_migration() if args.verify else run_migration(force=args.force)
+    except RuntimeError as exc:
+        print(json.dumps({"error": str(exc)}, indent=2), file=sys.stderr)
+        return 1
     print(json.dumps(result, indent=2))
     return 0
 
