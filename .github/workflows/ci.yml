@@ -178,6 +178,9 @@ jobs:
       - name: Lint GUI
         run: npm run lint
 
+      - name: Test GUI response handling
+        run: npm run test:ui
+
       - name: Build GUI
         run: npm run build
 

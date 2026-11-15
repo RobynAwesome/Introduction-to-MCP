@@ -131,7 +131,18 @@ def main() -> int:
         if ln.startswith("origin\t") and "(fetch)" in ln:
             origin_url = ln.split()[1]
             break
-    if "Kopano-Labs" in origin_url and "github.com" in origin_url:
+    is_kopano_labs_github = False
+    if origin_url.startswith("git@github.com:"):
+        repo_path = origin_url.split("git@github.com:", 1)[1]
+        is_kopano_labs_github = repo_path.startswith("Kopano-Labs/")
+    else:
+        from urllib.parse import urlparse
+        parsed_origin = urlparse(origin_url)
+        is_kopano_labs_github = (
+            parsed_origin.hostname == "github.com"
+            and parsed_origin.path.startswith("/Kopano-Labs/")
+        )
+    if is_kopano_labs_github:
         warn.append(
             "origin points at Kopano-Labs. If your *personal public fork* is RobynAwesome/Introduction-to-MCP, "
             "add it explicitly:  git remote add fork https://github.com/RobynAwesome/Introduction-to-MCP.git  "

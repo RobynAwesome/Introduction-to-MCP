@@ -34,6 +34,7 @@ def test_swarm_console_status(client: TestClient) -> None:
     assert body["cassy"]["teacher"] == "cassey"
     assert "student_primary" in body["cassy"]["role"]
     assert body["ci"]["actions_url"].startswith("https://github.com/")
+    assert body["ci"]["compare_url"] == "https://github.com/RobynAwesome/Introduction-to-MCP/compare"
     agents = body["agents"]
     assert agents["registry_total"] == 13
     assert agents["cassy_runnable"] == 7

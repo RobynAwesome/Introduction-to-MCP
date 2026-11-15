@@ -186,3 +186,69 @@ authority. All outputs deny runtime verification and production authority.
 
 Run both evaluator suites with:
 `python -m unittest discover -s tests -p 'test_security_playground*.py' -v`.
+
+## Rust shadow evaluator candidate — updated 2026-11-09
+
+The review candidate at `governance/kpgs-vnext/security-playground-core/`,
+rebased for review on Cloud `master@0a8950277656266273b813ce85f93c4230d4b0ff`,
+adds a bounded, fixture-only Rust evaluator and versioned request/result
+schemas for synthetic Node.js runtime evidence. It exercises
+synthetic affected/fixed version boundaries, a named feature prerequisite,
+missing and conflicting runtime evidence, and stale deployment source SHA. Its
+outputs keep `runtime_verified=false` and `production_authority=false`.
+
+The CLI's `--inventory` mode also replays the existing
+`gsmb_security_playground_inventory_gate_v1` claim against the Python inventory
+reference. The shared corpus checks explicit containment failure, missing
+evidence, vulnerable dependency claims, protected-state mutation, duplicate
+keys and forged authority flags. Rust holds real or unnamed fixture references
+and rejects duplicate keys or over-limit input. The separate Python V1
+assertion policy has yet to be ported.
+
+This is an implementation candidate, not a change to the founder-authored
+doctrine or an activation receipt. The existing Python evaluators remain the
+compatibility reference; they are not suspended. The Rust candidate has no
+runner, live inventory, receipt authenticator, isolation enforcement, external
+system adapter, or production write path. The Cloud runtime-isolation verdict
+therefore remains `UNKNOWN/HOLD`. Fixture `DRILL_PASS` is not runtime
+isolation, exploitability proof, or production graduation.
+
+Next.js package/lock evidence, GitHub-reviewed advisories and GitHub Actions
+version evidence are not integrated in this slice. A current KasiLink Cloud
+comms-log entry records a September 11 extraction of the owner-described
+Next.js 15 platform suite to a local path; the contemporaneous Cloud
+orchestration handoff says Git initialization was held. Current accessible
+Cloud artifacts do not resolve a matching source repository, and the supplied
+Local path remains unavailable. This evaluator does not claim that
+`Introduction-to-MCP` or any other inspected repository is that suite, or that
+the suite's Next.js dependencies are covered.
+
+Run the candidate checks from the repository root:
+
+```sh
+cargo fmt --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml -- --check
+cargo test --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml
+cargo clippy --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml --all-targets -- -D warnings
+cargo build --locked --manifest-path governance/kpgs-vnext/security-playground-core/Cargo.toml
+python3 governance/kpgs-vnext/security-playground-core/tests/inventory_parity.py \
+  --core governance/kpgs-vnext/security-playground-core/target/debug/spp-core
+```
+
+Exact-head hosted validation completed on November 9 for draft PR #369 at
+`a3a82c8d240b62227a7c497aed7738acc9d55426` ([workflow run #14](https://github.com/RobynAwesome/Introduction-to-MCP/actions/runs/42597655902)).
+The run passed all 42 existing Python Playground tests, all 19 Rust tests
+(11 library, 3 CLI, 5 fixture), `cargo fmt --check`, clippy with warnings
+denied, build, and six Rust/Python inventory-parity cases. Branch Proof, Zero
+Trust, RTC Learning, vNext Contract, Swarm Proof, CodeQL and Kopano CI also
+passed on this head. The Four Ws review gate was cancelled; no human review is
+recorded and the PR remains draft.
+
+The checkout step emitted a cleanup error because the current repository has
+a `KasiLink` gitlink but no `.gitmodules` URL. The workflow allows that cleanup
+failure to continue, then verifies `git rev-parse HEAD == github.sha` before
+running tests. That exact-SHA guard passed; the missing submodule metadata is
+still a repository defect and is not fixed by this candidate. Local `cargo`
+and `rustup` are unavailable, so the Rust compilation evidence is the hosted
+run, not a local compile. A `DRILL_PASS` remains fixture classification only;
+it does not prove installed or serving package versions, isolation,
+exploitability, or production readiness.

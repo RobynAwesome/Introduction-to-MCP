@@ -6,8 +6,12 @@ type BootState = 'starting' | 'ready' | 'timeout';
 
 export function DesktopBootOverlay() {
   const [state, setState] = useState<BootState>('starting');
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
+    if (dismissed) {
+      return;
+    }
     let cancelled = false;
     let attempts = 0;
     const maxAttempts = 240;
@@ -18,7 +22,9 @@ export function DesktopBootOverlay() {
         try {
           const response = await fetch(`${getApiBase()}/health`);
           if (response.ok) {
-            setState('ready');
+            if (!cancelled) {
+              setState('ready');
+            }
             return;
           }
         } catch {
@@ -35,9 +41,9 @@ export function DesktopBootOverlay() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [dismissed]);
 
-  if (state === 'ready') {
+  if (state === 'ready' || dismissed) {
     return null;
   }
 
@@ -56,6 +62,11 @@ export function DesktopBootOverlay() {
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1.1, ease: 'linear' }}
         />
+        <div>
+          <button type="button" className="action-button ghost" onClick={() => setDismissed(true)}>
+            Continue without API
+          </button>
+        </div>
       </div>
     </motion.div>
   );

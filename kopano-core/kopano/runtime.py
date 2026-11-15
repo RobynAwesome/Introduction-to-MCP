@@ -110,7 +110,9 @@ def ensure_desktop_admin() -> None:
 
     init_db()
     email = os.environ.get("KOPANO_ADMIN_EMAIL", "admin@kopano.local").strip().lower()
-    password = os.environ.get("KOPANO_ADMIN_PASSWORD", "demo-admin")
+    password = os.environ.get("KOPANO_ADMIN_PASSWORD", "").strip()
+    if not email or not password:
+        return
 
     conn = get_db_connection()
     cursor = conn.cursor()

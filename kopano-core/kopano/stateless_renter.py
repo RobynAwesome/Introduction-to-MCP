@@ -294,7 +294,10 @@ class StatelessRenter:
             )
 
         trust_grant_id: str | None = None
-        if cycle in ORCHESTRATION_CYCLES:
+        consequence = (context.consequence_class or "").strip().lower()
+        requires_trust_grant = cycle in ORCHESTRATION_CYCLES or consequence in {"high", "critical", "r2", "r3"}
+        if requires_trust_grant:
+            effective_cycle = cycle if cycle in ORCHESTRATION_CYCLES else "mao"
             if trust_grant is None:
                 return self._event(
                     event_kind="policy.denied",
@@ -302,12 +305,12 @@ class StatelessRenter:
                     lease=lease,
                     payload={"operation": operation, "resource": resource},
                     now=event_time,
-                    orchestration_cycle=cycle,
+                    orchestration_cycle=cycle or None,
                     failure={
                         "code": "trust_not_earned",
                         "recoverability": "operator_action",
                         "message": (
-                            f"{cycle.upper()} entry denied: stateless renter must earn KPGS trust "
+                            f"{(cycle or consequence).upper()} entry denied: stateless renter must earn KPGS trust "
                             "and present an evidence-backed trust grant"
                         ),
                     },
@@ -315,7 +318,7 @@ class StatelessRenter:
             trust_failure = trust_grant.authorization_failure(
                 context,
                 renter_id=self.renter_id,
-                cycle=cycle,
+                cycle=effective_cycle,
                 now=event_time,
             )
             if trust_failure:
@@ -326,7 +329,7 @@ class StatelessRenter:
                     lease=lease,
                     payload={"operation": operation, "resource": resource},
                     now=event_time,
-                    orchestration_cycle=cycle,
+                    orchestration_cycle=cycle or None,
                     trust_grant_id=trust_grant.grant_id or None,
                     failure={
                         "code": failure_code,

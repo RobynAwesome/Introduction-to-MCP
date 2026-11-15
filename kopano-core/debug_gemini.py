@@ -11,7 +11,7 @@ if not key:
 else:
     try:
         client = genai.Client(api_key=key)
-        print(f"--- 🛰️ AUTHORIZED GEMINI MODELS FOR KEY: {key[:10]}... ---")
+        print("--- 🛰️ AUTHORIZED GEMINI MODELS (API KEY CONFIGURED) ---")
         for model in client.models.list():
             print(f"✓ {model.name}")
     except Exception as e:

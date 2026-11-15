@@ -22,6 +22,17 @@ import type {
   PageId,
 } from './types';
 import { getApiBase, getWsLiveUrl } from './apiBase';
+import { isString } from './consoleStatusCopy.mjs';
+import {
+  hasCoworkRoomDetail,
+  isConnectorActionResult,
+  isCoworkRoomDetailPayload,
+  isCoworkRoomsPayload,
+  isLabsAnalytics,
+  isLabsOverview,
+  isMicrosoftReadiness,
+  isSessionList,
+} from './startupContracts.mjs';
 import { GodModeDock } from './operator/GodModeDock';
 import { useOperator } from './operator/OperatorProvider';
 import { storeOperator } from './operator/operatorApi';
@@ -34,6 +45,8 @@ const AdminPage = lazy(async () => ({ default: (await import('./pages/AdminPage'
 const TrainingPage = lazy(async () => ({ default: (await import('./pages/TrainingPage')).TrainingPage }));
 
 const apiBase = getApiBase();
+const isLocalStudio = typeof window !== 'undefined'
+  && ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
 /** Cassey = teacher; cassy/kopano = KC student lanes (Cassy lead). */
 const agentList = ['cassey', 'cassy', 'kopano', 'claude', 'grok', 'gemini', 'copilot'];
 const laneOrder = ['research', 'build', 'review'];
@@ -47,10 +60,6 @@ const pageHeadlines: Record<PageId, string> = {
   console: 'Swarm Console',
   admin: 'Admin',
 };
-
-const hasCoworkRoomDetail = (room: CoworkRoomSummary | null | undefined): room is CoworkRoom => (
-  Boolean(room?.tasks && room?.artifacts && room?.lanes && room?.dispatch_summary && room?.artifact_summary)
-);
 
 const readPageFromHash = (): PageId => {
   if (typeof window === 'undefined') {
@@ -177,21 +186,47 @@ const App = () => {
     body: JSON.stringify(body),
   });
 
-  const fetchLabsAnalytics = async () => setLabsAnalytics(await (await fetch(`${apiBase}/api/labs/analytics`)).json());
-  const fetchMicrosoftReadiness = async () => setMicrosoftReadiness(await (await fetch(`${apiBase}/api/labs/microsoft-readiness`)).json());
+  const fetchStudioData = async <T,>(path: string, accepts: (data: unknown) => data is T): Promise<T | undefined> => {
+    try {
+      const response = await fetch(`${apiBase}${path}`);
+      if (response.ok) {
+        const data: unknown = await response.json();
+        if (accepts(data)) return data;
+      }
+    } catch {
+      // Keep response and exception text out of the shared feed.
+    }
+    logSystemEvent('request-error', `${path} unavailable.`);
+    return undefined;
+  };
+
+  const fetchLabsAnalytics = async () => {
+    const analytics = await fetchStudioData('/api/labs/analytics', isLabsAnalytics);
+    if (analytics) setLabsAnalytics(analytics);
+  };
+
+  const fetchMicrosoftReadiness = async () => {
+    const readiness = await fetchStudioData('/api/labs/microsoft-readiness', isMicrosoftReadiness);
+    if (readiness) setMicrosoftReadiness(readiness);
+  };
 
   const fetchCoworkRoomDetail = async (roomId: number) => {
-    const data = await (await fetch(`${apiBase}/api/labs/cowork/rooms/${roomId}`)).json();
-    const room: CoworkRoom = data.room;
+    const data = await fetchStudioData(
+      `/api/labs/cowork/rooms/${roomId}`,
+      (payload): payload is { room: CoworkRoom } => isCoworkRoomDetailPayload(payload, roomId),
+    );
+    if (!data) return;
+    const { room } = data;
     setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== roomId)].sort((a, b) => b.id - a.id));
     setActiveRoomId(roomId);
   };
 
   const fetchCoworkRooms = async () => {
-    const data = await (await fetch(`${apiBase}/api/labs/cowork/rooms`)).json();
+    const data = await fetchStudioData('/api/labs/cowork/rooms', isCoworkRoomsPayload);
+    if (!data) return;
     setCoworkRooms((prev) => {
       const detailedRooms = prev.filter((room) => hasCoworkRoomDetail(room));
-      return data.rooms.map((room: CoworkRoomSummary) => detailedRooms.find((candidate) => candidate.id === room.id) ?? room);
+      return data.rooms.map((room) => detailedRooms.find((candidate) => candidate.id === room.id) ?? room);
     });
     if (!activeRoomId && data.rooms.length > 0) {
       await fetchCoworkRoomDetail(data.rooms[0].id);
@@ -313,6 +348,9 @@ const App = () => {
     const pollUpdates = window.setInterval(async () => {
       try {
         const response = await fetch(`${apiBase}/updates`);
+        if (!response.ok) {
+          throw new Error(`Updates returned HTTP ${response.status}`);
+        }
         const updates = await response.json();
         if (!Array.isArray(updates)) {
           return;
@@ -326,43 +364,58 @@ const App = () => {
       }
     }, 4000);
 
-    const loadInitialData = async () => {
-      const [sessionsData, overviewData, analyticsData, roomsPayload, microsoftReadinessData] = await Promise.all([
-        fetch(`${apiBase}/sessions`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/overview`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/analytics`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/cowork/rooms`).then((response) => response.json()),
-        fetch(`${apiBase}/api/labs/microsoft-readiness`).then((response) => response.json()),
-      ]);
-
-      if (!isMounted) {
-        return;
-      }
-
-      setSessions(sessionsData);
-      setLabsOverview(overviewData);
-      setLabsAnalytics(analyticsData);
-      setCoworkRooms(roomsPayload.rooms);
-      setMicrosoftReadiness(microsoftReadinessData);
-      logSystemEvent('bootstrap', 'Council, labs, forge, and vault data loaded.');
-
-      if (roomsPayload.rooms.length > 0) {
-        const detailPayload = await fetch(`${apiBase}/api/labs/cowork/rooms/${roomsPayload.rooms[0].id}`).then((response) => response.json());
-        if (!isMounted) {
-          return;
+    async function loadInitial<T>(
+      path: string,
+      accepts: (data: unknown) => data is T,
+      apply: (data: T) => void | Promise<void>,
+    ) {
+      let reason = 'Request failed';
+      try {
+        const response = await fetch(`${apiBase}${path}`);
+        if (!response.ok) {
+          reason = `HTTP ${response.status}`;
+        } else {
+          reason = 'Unexpected response';
+          const data: unknown = await response.json();
+          if (accepts(data)) {
+            if (isMounted) {
+              await apply(data);
+            }
+            return;
+          }
         }
-        const room: CoworkRoom = detailPayload.room;
-        setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
-        setActiveRoomId(room.id);
+      } catch {
+        // Keep response and exception text out of the shared feed.
       }
-    };
+      if (isMounted) {
+        logSystemEvent('bootstrap-error', `${path} unavailable (${reason}).`);
+      }
+    }
 
-    window.setTimeout(() => {
-      void loadInitialData();
+    const bootstrapTimer = window.setTimeout(() => {
+      void loadInitial('/sessions', isSessionList, setSessions);
+      void loadInitial('/api/labs/overview', isLabsOverview, setLabsOverview);
+      void loadInitial('/api/labs/analytics', isLabsAnalytics, setLabsAnalytics);
+      void loadInitial('/api/labs/microsoft-readiness', isMicrosoftReadiness, setMicrosoftReadiness);
+      void loadInitial('/api/labs/cowork/rooms', isCoworkRoomsPayload, async ({ rooms }) => {
+        setCoworkRooms(rooms);
+        const firstRoom = rooms[0];
+        if (firstRoom) {
+          await loadInitial(
+            `/api/labs/cowork/rooms/${firstRoom.id}`,
+            (data): data is { room: CoworkRoom } => isCoworkRoomDetailPayload(data, firstRoom.id),
+            ({ room }) => {
+              setCoworkRooms((prev) => [room, ...prev.filter((entry) => entry.id !== room.id)].sort((a, b) => b.id - a.id));
+              setActiveRoomId(room.id);
+            },
+          );
+        }
+      });
     }, 0);
 
     return () => {
       isMounted = false;
+      window.clearTimeout(bootstrapTimer);
       window.clearInterval(pollUpdates);
       ws.current?.close();
     };
@@ -454,23 +507,47 @@ const App = () => {
   };
 
   const runConnectorAction = async (actionId: string) => {
-    const data = await (await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId })).json();
-    const readinessLines = data.readiness
-      ? [
-        `Required checks: ${data.readiness.summary.required_ready}/${data.readiness.summary.required_total}`,
-        `Azure CLI: ${data.readiness.tooling.az.healthy ? data.readiness.tooling.az.version : 'missing or broken'}`,
-        `Azure Developer CLI: ${data.readiness.tooling.azd.healthy ? data.readiness.tooling.azd.version : 'missing or broken'}`,
-        `Azure login: ${data.readiness.azure_account.logged_in ? data.readiness.azure_account.subscription_name : 'not signed in'}`,
-        `Server telemetry: ${data.readiness.tooling.telemetry.configured ? 'configured' : data.readiness.tooling.telemetry.reason}`,
-      ]
-      : [];
+    let reason = 'Request failed';
+    try {
+      const response = await postJson(`${apiBase}/api/labs/connectors/actions/execute`, { action_id: actionId });
+      if (!response.ok) {
+        reason = `HTTP ${response.status}`;
+      } else {
+        reason = 'Unexpected response';
+        const data: unknown = await response.json();
+        if (isConnectorActionResult(data)) {
+          const readiness = isMicrosoftReadiness(data.readiness) ? data.readiness : null;
+          const readinessLines = readiness
+            ? [
+              `Required checks: ${readiness.summary.required_ready}/${readiness.summary.required_total}`,
+              `Azure CLI: ${readiness.tooling.az.healthy ? (isString(readiness.tooling.az.version) ? readiness.tooling.az.version : 'ready') : 'missing or broken'}`,
+              `Azure Developer CLI: ${readiness.tooling.azd.healthy ? (isString(readiness.tooling.azd.version) ? readiness.tooling.azd.version : 'ready') : 'missing or broken'}`,
+              `Azure login: ${readiness.azure_account.logged_in ? (readiness.azure_account.subscription_name ?? 'signed in') : 'not signed in'}`,
+              `Server telemetry: ${readiness.tooling.telemetry.configured ? 'configured' : (isString(readiness.tooling.telemetry.reason) ? readiness.tooling.telemetry.reason : 'not configured')}`,
+            ]
+            : [];
 
-    setConnectorResult([data.title, data.summary, ...readinessLines, ...(data.commands ?? []), ...(data.next_steps ?? [])].join('\n'));
-    if (data.readiness) {
-      setMicrosoftReadiness(data.readiness as MicrosoftReadiness);
+          setConnectorResult([
+            data.title,
+            data.summary,
+            ...readinessLines,
+            ...(data.commands ?? []),
+            ...(data.next_steps ?? []),
+          ].join('\n'));
+          if (readiness) {
+            setMicrosoftReadiness(readiness);
+          }
+          trackClientEvent('cassy_connector_action', { action_id: actionId });
+          logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
+          return;
+        }
+      }
+    } catch {
+      // Keep response and exception text out of the connector output and shared feed.
     }
-    trackClientEvent('cassy_connector_action', { action_id: actionId });
-    logSystemEvent('connector', `${data.title} executed from Kopano Labs.`);
+
+    setConnectorResult(`Connector playbook unavailable (${reason}). Check the configured backend and retry.`);
+    logSystemEvent('connector-error', `/api/labs/connectors/actions/execute unavailable (${reason}).`);
   };
 
   const sendConsoleMessage = async () => {
@@ -523,7 +600,7 @@ const App = () => {
     await fetchLabsAnalytics();
   };
 
-  const loadSession = async (id: string) => {
+  const loadSession = async (id: number) => {
     const session = await (await fetch(`${apiBase}/sessions/${id}`)).json();
     setSelectedSession(session);
     navigate('admin');
@@ -594,7 +671,7 @@ const App = () => {
 
   return (
     <div className={`cassy-app page-${page}`}>
-      <DesktopBootOverlay />
+      {isLocalStudio && <DesktopBootOverlay />}
       <AnimatedBackdrop page={page} connectionState={connectionState} />
       <div className="shell-frame">
         <AppTopNav
@@ -616,7 +693,7 @@ const App = () => {
           ) : (
             <div className="badge-cluster">
               <span className="status-badge neutral">{clientTelemetryConfigured ? 'Browser telemetry armed' : 'Browser telemetry pending'}</span>
-              <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Loading Microsoft checks'}</span>
+              <span className="status-badge neutral">{microsoftReadiness ? `${microsoftReadiness.summary.required_ready}/${microsoftReadiness.summary.required_total} Microsoft checks ready` : 'Microsoft checks unavailable'}</span>
             </div>
           )}
         </div>

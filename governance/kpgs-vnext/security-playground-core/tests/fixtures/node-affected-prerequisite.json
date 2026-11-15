@@ -1,0 +1,27 @@
+{
+  "schema": "kpgs.spp.core.fixture.v1",
+  "mode": "fixture",
+  "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "case_id": "node-affected-prerequisite-match",
+  "component": "node",
+  "environment": "build_ci",
+  "target_source_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "advisory": {
+    "id": "FIXTURE-NODE-ADVISORY-A",
+    "affected_from": "20.0.0",
+    "fixed_at": "20.10.0"
+  },
+  "runtime": {
+    "state": "observed",
+    "exact_version": "20.9.9",
+    "deployment_identity": "fixture://build/job-7",
+    "deployment_source_sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "artifact_digest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "observed_at_utc": "2026-11-05T12:00:00Z",
+    "evidence_ref": "fixture://runtime/node-affected"
+  },
+  "prerequisite": {
+    "name": "synthetic-feature-precondition",
+    "state": "satisfied"
+  }
+}

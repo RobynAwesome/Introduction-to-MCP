@@ -21,7 +21,7 @@ export interface Round {
 }
 
 export interface Lesson {
-  id: string;
+  id: number;
   topic: string;
   created_at: string;
   rounds?: Round[];

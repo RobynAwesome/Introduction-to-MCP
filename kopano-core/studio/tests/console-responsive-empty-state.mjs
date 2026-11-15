@@ -1,3 +1,5 @@
+import './console-status-contract.mjs';
+import { validStartupFixtures } from './startup-contracts.mjs';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -89,6 +91,126 @@ try {
   assert.match(ciMarkup, /Configured API is unavailable/);
   assert.match(ciMarkup, /No CI result is inferred/);
   assert.match(ciMarkup, /Retry status/);
+
+  const noop = () => {};
+  const { AdminPage } = await vite.ssrLoadModule('/src/pages/AdminPage.tsx');
+  const { LabsPage } = await vite.ssrLoadModule('/src/pages/LabsPage.tsx');
+  const { ForgePage } = await vite.ssrLoadModule('/src/pages/ForgePage.tsx');
+
+  const baseAdminProps = {
+    isAdminLoggedIn: true,
+    adminUser: {
+      id: 1,
+      email: 'admin@kopano.local',
+      role: 'admin',
+      god_mode: false,
+      is_active: true,
+      created_at: '2026-11-07T00:00:00Z',
+    },
+    adminEmail: 'admin@kopano.local',
+    adminPassword: '',
+    adminError: null,
+    adminLoading: false,
+    selectedSession: null,
+    adminFeedPreview: [],
+    onAdminEmailChange: noop,
+    onAdminPasswordChange: noop,
+    onLogin: noop,
+    onLogout: noop,
+    onLoadSession: noop,
+    onOverrideScore: noop,
+  };
+
+  const adminValidMarkup = renderToStaticMarkup(React.createElement(AdminPage, {
+    ...baseAdminProps,
+    sessions: validStartupFixtures.sessions,
+    labsAnalytics: validStartupFixtures.analytics,
+    microsoftReadiness: validStartupFixtures.readiness,
+  }));
+  assert.match(adminValidMarkup, /KC apprenticeship/);
+  assert.match(adminValidMarkup, /4\/6/);
+
+  const adminFallbackMarkup = renderToStaticMarkup(React.createElement(AdminPage, {
+    ...baseAdminProps,
+    sessions: [],
+    labsAnalytics: null,
+    microsoftReadiness: null,
+  }));
+  assert.match(adminFallbackMarkup, /Forensic sessions/);
+
+  const labsValidMarkup = renderToStaticMarkup(React.createElement(LabsPage, {
+    labsOverview: validStartupFixtures.overview,
+    labsAnalytics: validStartupFixtures.analytics,
+    microsoftReadiness: validStartupFixtures.readiness,
+    connectorResult: '',
+    isAdminLoggedIn: false,
+    onNavigate: noop,
+    onRunConnectorAction: noop,
+  }));
+  assert.match(labsValidMarkup, /Azure Demo Day Bootstrap/);
+  assert.match(labsValidMarkup, /Demo Subscription/);
+  assert.match(labsValidMarkup, /IDE Workspace/);
+  assert.match(labsValidMarkup, /Gig Matcher/);
+
+  const labsFallbackMarkup = renderToStaticMarkup(React.createElement(LabsPage, {
+    labsOverview: null,
+    labsAnalytics: null,
+    microsoftReadiness: null,
+    connectorResult: '',
+    isAdminLoggedIn: false,
+    onNavigate: noop,
+    onRunConnectorAction: noop,
+  }));
+  assert.match(labsFallbackMarkup, /0\/6/);
+
+  const baseForgeProps = {
+    roomName: '',
+    roomMission: '',
+    taskTitle: '',
+    taskDescription: '',
+    taskOwner: 'DEV_1',
+    taskPriority: 'high',
+    artifactTitle: '',
+    artifactSummary: '',
+    artifactType: 'api',
+    editingTaskId: null,
+    editingArtifactId: null,
+    laneOrder: ['research', 'build', 'review'],
+    ownerOptions: ['Lead', 'DEV_1'],
+    onRoomNameChange: noop,
+    onRoomMissionChange: noop,
+    onTaskTitleChange: noop,
+    onTaskDescriptionChange: noop,
+    onTaskOwnerChange: noop,
+    onTaskPriorityChange: noop,
+    onArtifactTitleChange: noop,
+    onArtifactSummaryChange: noop,
+    onArtifactTypeChange: noop,
+    onCreateRoom: noop,
+    onSelectRoom: noop,
+    onCreateOrUpdateTask: noop,
+    onCreateArtifact: noop,
+    onUpdateTaskStatus: noop,
+    onUpdateTaskOwner: noop,
+    onMoveTaskToLane: noop,
+    onEditTask: noop,
+    onEditArtifact: noop,
+  };
+
+  const forgeValidMarkup = renderToStaticMarkup(React.createElement(ForgePage, {
+    ...baseForgeProps,
+    coworkRooms: [validStartupFixtures.roomDetail],
+    activeRoom: validStartupFixtures.roomDetail,
+  }));
+  assert.match(forgeValidMarkup, /Kopano Context Premiere/);
+  assert.match(forgeValidMarkup, /Connector Pack/);
+
+  const forgeSummaryOnlyMarkup = renderToStaticMarkup(React.createElement(ForgePage, {
+    ...baseForgeProps,
+    coworkRooms: [validStartupFixtures.roomSummary],
+    activeRoom: null,
+  }));
+  assert.match(forgeSummaryOnlyMarkup, /Kopano Context Premiere/);
 } finally {
   await vite.close();
 }

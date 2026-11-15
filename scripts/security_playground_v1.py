@@ -414,6 +414,15 @@ def evaluate_playground(record: object) -> Dict[str, Any]:
     }
 
 
+def reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    record: dict[str, object] = {}
+    for key, value in pairs:
+        if key in record:
+            raise ValueError("duplicate JSON key")
+        record[key] = value
+    return record
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", "-i", type=Path, help="Path to evidence JSON file (reads stdin if omitted)")
@@ -421,7 +430,7 @@ def main() -> int:
 
     try:
         raw = sys.stdin.read() if args.input is None else args.input.read_text(encoding="utf-8")
-        record = json.loads(raw)
+        record = json.loads(raw, object_pairs_hook=reject_duplicate_keys)
     except Exception as exc:
         output = {
             "verdict": "BLOCK",

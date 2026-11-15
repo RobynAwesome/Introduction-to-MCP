@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { getApiBase } from '../apiBase';
-import { getApiUnavailableMessage } from '../consoleStatusCopy.mjs';
+import { getApiUnavailableMessage, isSwarmConsoleStatus } from '../consoleStatusCopy.mjs';
 import type { FeedLogEntry, LabsAnalytics, McpConsoleReply } from '../types';
 import { PhuLegacyCard } from '../operator/PhuLegacyCard';
 import { SovereignSimCard } from '../operator/SovereignSimCard';
@@ -180,12 +180,18 @@ export function ConsolePage({
     setStatusLoading(true);
     try {
       const statusRes = await fetch(`${apiRoot}/api/kc/swarm-console/status`);
-      if (statusRes.ok) {
-        setStatus(await statusRes.json());
-        setLoadError(null);
-      } else {
+      if (!statusRes.ok) {
         setStatus(null);
         setLoadError(getApiUnavailableMessage(apiRoot, statusRes.status));
+      } else {
+        const payload: unknown = await statusRes.json().catch(() => null);
+        if (isSwarmConsoleStatus(payload)) {
+          setStatus(payload as SwarmConsoleStatus);
+          setLoadError(null);
+        } else {
+          setStatus(null);
+          setLoadError('The API response did not match the Studio status contract. Check the configured backend, then retry.');
+        }
       }
     } catch {
       setStatus(null);
@@ -442,7 +448,7 @@ export function ConsolePage({
                 Proof bar: {status ? (status.proof_bar_pass ? 'PASS' : 'GAPS') : (statusLoading ? 'Checking API' : 'API unavailable')}
               </span>
               <span className="status-badge neutral">
-                Verified prod: {status?.doctrine.verified_production ?? (statusLoading ? 'checking' : 'unavailable')} / {status?.doctrine.public_graduation_bar ?? 10}
+                Verified prod: {status ? `${status.doctrine.verified_production} / ${status.doctrine.public_graduation_bar}` : (statusLoading ? 'checking' : 'unavailable')}
               </span>
             </div>
           </div>
@@ -769,7 +775,7 @@ export function ConsolePage({
                   Open Actions
                 </a>
                 <a className="action-button ghost" href={status.ci.compare_url} target="_blank" rel="noreferrer">
-                  Compare branch
+                  Compare revisions
                 </a>
               </div>
               <pre className="swarm-ci-pre">{status.ci.guard_command}</pre>
