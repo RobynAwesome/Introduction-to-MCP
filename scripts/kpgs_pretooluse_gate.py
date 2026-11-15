@@ -167,6 +167,18 @@ def _load_capability_lease_module():
     return module
 
 
+def _load_entry_attestation_module():
+    """Load bounded signed source-read verifier without granting signing authority."""
+    path = REPO_ROOT / "governance" / "kpgs-vnext" / "security" / "entry_read_attestation.py"
+    spec = importlib.util.spec_from_file_location("kpgs_entry_read_attestation", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("Entry-read attestation verifier missing")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def _map_tool_capability(tool_name: str) -> str | None:
     if tool_name in TOOL_TO_CAPABILITY:
         return TOOL_TO_CAPABILITY[tool_name]
@@ -792,6 +804,36 @@ def handle_pre_tool_use(payload: dict[str, Any]) -> dict[str, Any]:
         loaded_ctx = _load_trusted_context()
     except _ContextRejectedError as exc:
         return _deny(_CONTEXT_DENY_REASONS.get(exc.code, "HOLD: missing trusted lease context"))
+
+    # Rollout candidate: enforce only when a trusted host explicitly opts in.
+    # Legacy mode remains for the existing PR #403 tests and hosts lacking a
+    # trusted source-reader; it is NOT proof of GSMB entry compliance.
+    entry_mode = loaded_ctx["ctx"].get("entry_admission_mode", "legacy")
+    if entry_mode not in {"legacy", "enforce"}:
+        return _deny("HOLD: invalid entry admission mode")
+    if entry_mode == "enforce":
+        try:
+            entry_mod = _load_entry_attestation_module()
+            lease_mod = _load_capability_lease_module()
+            admitted, admission_reason = entry_mod.verify_entry_attestation(
+                loaded_ctx["ctx"],
+                loaded_ctx["pub_keys_hex"],
+                str(payload.get("conversationId") or ""),
+                lease_mod._ED25519.verify,
+            )
+        except Exception:
+            return _deny("HOLD: entry-read verifier unavailable or failed")
+        if not admitted:
+            return _deny("HOLD: " + admission_reason)
+
+    # There is no trusted, typed authorization adapter yet for shell execution,
+    # agent spawning, browser control, or indirect MCP writes. A signed read
+    # receipt is not a universal capability grant. Do not cross populations
+    # through one of those unmediated tools in enforced mode.
+    if entry_mode == "enforce" and capability in {
+        "command.execute", "agent.spawn", "mcp.invoke", "browser.interact"
+    }:
+        return _deny("HOLD: typed host adapter required before external or shell execution")
 
     allowed_roots: list[Path] = loaded_ctx["writable_roots"]
     required_capabilities: list[str] = [capability]
