@@ -201,5 +201,25 @@ def test_pretooluse_enforce_mode_accepts_signed_fixture_before_lease(monkeypatch
     ctx["entry_admission_mode"] = "enforce"
     monkeypatch.setattr(gate, "_load_trusted_context", lambda: {"ctx": ctx, "pub_keys_hex": keys, "writable_roots": [ROOT], "ctx_path": ROOT / "out-of-band", "ledger_path": None})
     monkeypatch.setattr(gate, "_authorize_capabilities", lambda *args: None)
-    p = {"conversationId": "conv-fixture-1", "toolCall": {"name": "run_command", "args": {"CommandLine": "echo sample"}}}
+    # The positive path covers only bounded file mutation; remote/shell tools
+    # are held until their own trusted typed adapters exist.
+    p = {"conversationId": "conv-fixture-1", "toolCall": {"name": "write_file", "args": {"Path": str(ROOT / "review-only.txt")}}}
     assert gate.handle_pre_tool_use(p)["decision"] == "allow"
+
+def test_pretooluse_enforce_mode_denies_unmediated_external_tool_families(monkeypatch):
+    gate = _load_gate_module()
+    ctx, _, _, keys = _fixture()
+    ctx["entry_admission_mode"] = "enforce"
+    monkeypatch.setattr(gate, "_load_trusted_context", lambda: {"ctx": ctx, "pub_keys_hex": keys, "writable_roots": [ROOT]})
+    monkeypatch.setattr(gate, "_authorize_capabilities", lambda *args: None)
+    cases = [
+        ("run_command", {"CommandLine": "echo sample"}),
+        ("invoke_subagent", {"TypeName": "child", "Prompt": "work"}),
+        ("call_mcp_tool", {"ServerName": "drive", "ToolName": "write", "Arguments": {}}),
+        ("mcp_google_drive_update_file", {"file_id": "test"}),
+        ("browser_click", {"element": "save"}),
+    ]
+    for name, args in cases:
+        p = {"conversationId": "conv-fixture-1", "toolCall": {"name": name, "args": args}}
+        result = gate.handle_pre_tool_use(p)
+        assert result["decision"] == "deny" and "typed host adapter" in result["reason"], result
