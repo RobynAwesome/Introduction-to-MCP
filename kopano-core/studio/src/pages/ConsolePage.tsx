@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { getApiBase } from '../apiBase';
 import { getApiUnavailableMessage, isSwarmConsoleStatus } from '../consoleStatusCopy.mjs';
 import type { FeedLogEntry, LabsAnalytics, McpConsoleReply } from '../types';
@@ -7,7 +7,9 @@ import { PhuLegacyCard } from '../operator/PhuLegacyCard';
 import { SovereignSimCard } from '../operator/SovereignSimCard';
 import { KpefsConsolePanel } from '../operator/KpefsConsolePanel';
 
-type ConsoleMode = 'context' | 'swarm' | 'mao' | 'kpefs' | 'proof' | 'ci' | 'sim';
+import { StudioDashboard } from './StudioDashboard';
+import { consoleModes, readConsoleMode, subscribeToConsoleRoute } from './consoleRoutes';
+import type { ConsoleMode } from './consoleRoutes';
 
 interface SwarmAgent {
   id: string;
@@ -98,26 +100,6 @@ interface ConsolePageProps {
 
 const apiRoot = getApiBase();
 
-const modeLabels: Record<ConsoleMode, string> = {
-  context: 'Context',
-  swarm: 'Swarm',
-  mao: 'MAO',
-  kpefs: 'KPEFS',
-  proof: 'Proof',
-  ci: 'CI',
-  sim: 'Sovereign SIM',
-};
-
-const modeIcons: Record<ConsoleMode, string> = {
-  context: '⌘',
-  swarm: '◎',
-  mao: '⬡',
-  kpefs: '◈',
-  proof: '✓',
-  ci: '∿',
-  sim: '▣',
-};
-
 interface BackendUnavailableStateProps {
   surface: 'Proof' | 'CI';
   message: string;
@@ -155,7 +137,9 @@ export function ConsolePage({
   onSend,
   onStream,
 }: ConsolePageProps) {
-  const [mode, setMode] = useState<ConsoleMode>('context');
+  const mode = useSyncExternalStore(subscribeToConsoleRoute, readConsoleMode, () => null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const previousMode = useRef(mode);
   const [status, setStatus] = useState<SwarmConsoleStatus | null>(null);
   const [statusLoading, setStatusLoading] = useState(true);
   const [agents, setAgents] = useState<SwarmAgent[]>([]);
@@ -228,12 +212,24 @@ export function ConsolePage({
   }, [statusDrawerOpen]);
 
   const selectMode = (nextMode: ConsoleMode) => {
-    setMode(nextMode);
-    if (navDrawerOpen) {
-      setNavDrawerOpen(false);
-      requestAnimationFrame(() => navToggleRef.current?.focus());
+    setNavDrawerOpen(false);
+    if (nextMode === mode) {
+      requestAnimationFrame(() => headingRef.current?.focus());
+    } else {
+      window.location.assign(`#/console/${nextMode}`);
     }
   };
+
+  useEffect(() => {
+    if (previousMode.current === mode) return;
+    previousMode.current = mode;
+    const frame = requestAnimationFrame(() => {
+      setNavDrawerOpen(false);
+      setStatusDrawerOpen(false);
+      headingRef.current?.focus();
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [mode]);
 
   useEffect(() => {
     if (!navDrawerOpen && !statusDrawerOpen) return undefined;
@@ -255,6 +251,15 @@ export function ConsolePage({
       cancelled = true;
     };
   }, [refreshStatus]);
+
+  if (mode === null) {
+    return (
+      <StudioDashboard
+        headingRef={headingRef}
+        status={statusLoading ? 'checking' : status ? 'available' : 'unavailable'}
+      />
+    );
+  }
 
   const modelOptions = consoleReply?.model_options ?? [
     { id: 'deterministic', label: 'deterministic fallback', model: 'deterministic-fallback' },
@@ -285,16 +290,16 @@ export function ConsolePage({
       <div className={`swarm-navigation ${navDrawerOpen ? 'is-open' : ''}`} id="swarm-navigation">
         <aside className="swarm-rail" aria-label="Console modes">
           <motion.div className="swarm-brand" layout>KC</motion.div>
-          {(Object.keys(modeLabels) as ConsoleMode[]).map((key) => (
+          {consoleModes.map(({ id: key, label, icon }) => (
             <button
               key={key}
               type="button"
               className={`swarm-rail-btn ${mode === key ? 'active' : ''}`}
-              title={modeLabels[key]}
-              aria-label={modeLabels[key]}
+              title={label}
+              aria-label={label}
               onClick={() => selectMode(key)}
             >
-              {modeIcons[key]}
+              {icon}
             </button>
           ))}
         </aside>
@@ -330,14 +335,14 @@ export function ConsolePage({
         <div className="swarm-block">
           <h3>Modes</h3>
           <nav className="swarm-nav">
-            {(Object.keys(modeLabels) as ConsoleMode[]).map((key) => (
+            {consoleModes.map(({ id: key, label, icon }) => (
               <button
                 key={key}
                 type="button"
                 className={`swarm-nav-item ${mode === key ? 'active' : ''}`}
                 onClick={() => selectMode(key)}
               >
-                <span>{modeIcons[key]} {modeLabels[key]}</span>
+                <span>{icon} {label}</span>
                 {key === 'mao' && (
                   <span className={badgeClass(Boolean(maoStatus?.total_agents))}>
                     {maoStatus?.total_agents ? 'Live' : '…'}
@@ -397,11 +402,11 @@ export function ConsolePage({
         </aside>
       </div>
 
-      <main className="swarm-main">
+      <section className="swarm-main">
         <header className="swarm-main-head">
           <div>
             <span className="eyebrow">KC Swarm Console</span>
-            <h2>{modeLabels[mode]}</h2>
+            <h2 ref={headingRef} tabIndex={-1}>{consoleModes.find(({ id }) => id === mode)?.label}</h2>
             <p>
               One composer · server-mediated tools · receipts before “complete”.
               {loadError && <span className="swarm-api-error" role="status"> {loadError}</span>}
@@ -828,7 +833,7 @@ export function ConsolePage({
             ))}
           </div>
         </motion.section>
-      </main>
+      </section>
 
       <aside className={`swarm-right ${statusDrawerOpen ? 'is-open' : ''}`} id="swarm-status-drawer" aria-label="Proof and sync status">
         <div className="swarm-right-head">
