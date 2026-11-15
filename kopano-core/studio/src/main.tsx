@@ -1,4 +1,5 @@
 import React from 'react'
+import { MotionConfig } from 'framer-motion'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
@@ -9,8 +10,10 @@ initClientTelemetry()
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <OperatorProvider>
-      <App />
-    </OperatorProvider>
+    <MotionConfig reducedMotion="user">
+      <OperatorProvider>
+        <App />
+      </OperatorProvider>
+    </MotionConfig>
   </React.StrictMode>,
 )

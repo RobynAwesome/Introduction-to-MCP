@@ -211,6 +211,42 @@ try {
     activeRoom: null,
   }));
   assert.match(forgeSummaryOnlyMarkup, /Kopano Context Premiere/);
+
+  const { StudioDashboard } = await vite.ssrLoadModule('/src/pages/StudioDashboard.tsx');
+  const { consoleModes, readConsoleMode } = await vite.ssrLoadModule('/src/pages/consoleRoutes.ts');
+  assert.deepEqual(
+    consoleModes.map((m) => m.id),
+    ['context', 'swarm', 'mao', 'kpefs', 'proof', 'ci', 'sim'],
+  );
+  for (const [status, expectedLabel] of [
+    ['checking', /Checking Studio API/],
+    ['available', /Studio API responded/],
+    ['unavailable', /Studio API unavailable/],
+  ]) {
+    const dashboardMarkup = renderToStaticMarkup(React.createElement(StudioDashboard, {
+      headingRef: { current: null },
+      status,
+    }));
+    assert.match(dashboardMarkup, expectedLabel);
+    for (const mode of consoleModes) {
+      assert.match(dashboardMarkup, new RegExp(`href="#/console/${mode.id}"`));
+    }
+  }
+  const previousWindow = globalThis.window;
+  try {
+    globalThis.window = { location: { hash: '#/console/proof' } };
+    assert.equal(readConsoleMode(), 'proof');
+    globalThis.window = { location: { hash: '#/console' } };
+    assert.equal(readConsoleMode(), null);
+    globalThis.window = { location: { hash: '#/console/unknown' } };
+    assert.equal(readConsoleMode(), null);
+  } finally {
+    if (previousWindow === undefined) {
+      delete globalThis.window;
+    } else {
+      globalThis.window = previousWindow;
+    }
+  }
 } finally {
   await vite.close();
 }

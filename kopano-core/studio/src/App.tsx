@@ -67,6 +67,7 @@ const readPageFromHash = (): PageId => {
   }
 
   const raw = window.location.hash.replace(/^#\/?/, '').trim().toLowerCase();
+  if (!raw || raw === 'dashboard' || raw.startsWith('console/')) return 'console';
   if (raw === 'training' || raw === 'labs' || raw === 'forge' || raw === 'console' || raw === 'admin' || raw === 'council') {
     return raw;
   }
@@ -305,7 +306,7 @@ const App = () => {
     };
 
     if (!window.location.hash) {
-      window.location.hash = '#/training';
+      window.location.hash = '#/console';
     }
     handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
@@ -682,7 +683,7 @@ const App = () => {
           onNavigate={navigate}
         />
 
-        <div className={`page-caption-row ${page === 'training' ? 'sovereign-caption-row' : ''}`}>
+        <div hidden={page === 'console'} className={`page-caption-row ${page === 'training' ? 'sovereign-caption-row' : ''}`}>
           <span className="eyebrow">Now showing</span>
           <h1>{pageHeadlines[page]}</h1>
           {page === 'training' ? (
