@@ -231,6 +231,7 @@ def setup_database():
 
 
 PBKDF2_ITERATIONS = 600_000
+PBKDF2_MAX_ITERATIONS = 10_000_000
 PBKDF2_PREFIX = "pbkdf2_sha256"
 
 _SHA256_K = (
@@ -313,6 +314,8 @@ def _verify_password_with_migration(password: str, salt: str, stored_hash: str) 
         try:
             iterations = int(parts[1])
         except ValueError:
+            return False, False
+        if not (1 <= iterations <= PBKDF2_MAX_ITERATIONS):
             return False, False
         expected = _hash_password(password, salt, iterations=iterations)
         return secrets.compare_digest(expected, stored_hash), iterations != PBKDF2_ITERATIONS
