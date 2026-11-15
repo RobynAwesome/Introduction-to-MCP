@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
+import scripts.now_archive_pilot as pilot
 from scripts.now_archive_pilot import (
     ARCHIVE_PATH,
     RECEIPTS_JSONL,
@@ -71,6 +75,39 @@ class NowWeeklyRehydrationTests(unittest.TestCase):
             self.assertEqual(rec["workstream"], expected_ws)
             self.assertTrue(rec["failed_assumptions"])
             self.assertIn(expected_keyword, json.dumps(rec))
+
+    def test_rerun_guard_preserves_existing_now_and_receipts_without_force(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            root_now = root / "NOW.md"
+            archive_path = root / "NOW" / "ARCHIVE" / "NOW_PRE_W46_2026-11-11.md"
+            week_dir = root / "NOW" / "2026-11" / "2026-W46"
+            week_md = week_dir / "WEEK.md"
+            receipts_jsonl = week_dir / "RECEIPTS.jsonl"
+            root_now.write_text("# Original pre-W46 NOW\n" + ("x" * 100) + "\n", encoding="utf-8")
+
+            with mock.patch.multiple(
+                pilot,
+                REPO_ROOT=root,
+                ROOT_NOW=root_now,
+                ARCHIVE_PATH=archive_path,
+                WEEK_DIR=week_dir,
+                WEEK_MD=week_md,
+                RECEIPTS_JSONL=receipts_jsonl,
+            ):
+                pilot.run_migration()
+                sentinel_now = "\n<!-- SENTINEL_NOW_ENTRY -->\n"
+                sentinel_receipt = '{"sentinel":"KEEP_ME"}\n'
+                root_now.write_text(root_now.read_text(encoding="utf-8") + sentinel_now, encoding="utf-8")
+                receipts_jsonl.write_text(
+                    receipts_jsonl.read_text(encoding="utf-8") + sentinel_receipt, encoding="utf-8"
+                )
+
+                with self.assertRaises(RuntimeError):
+                    pilot.run_migration()
+
+                self.assertIn("SENTINEL_NOW_ENTRY", root_now.read_text(encoding="utf-8"))
+                self.assertIn("KEEP_ME", receipts_jsonl.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

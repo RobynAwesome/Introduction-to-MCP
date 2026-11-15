@@ -141,3 +141,35 @@ def test_legacy_sha256_password_hash_migrates_to_pbkdf2_on_login(tmp_path, monke
     assert database.authenticate_user("legacy@kopano.local", legacy_secret) is not None
 
 
+def test_pbkdf2_iteration_bounds_reject_out_of_range_values(tmp_path, monkeypatch):
+    import hashlib
+    import sqlite3
+    import kopano.database as database
+
+    db_file = tmp_path / "datalake.db"
+    monkeypatch.setattr(database, "DB_PATH", db_file)
+    database.init_db()
+    salt = "deadbeef" * 4
+
+    def _forbid_pbkdf2(*args, **kwargs):
+        raise AssertionError("pbkdf2_hmac should not be invoked for out-of-bounds iteration counts")
+
+    monkeypatch.setattr(hashlib, "pbkdf2_hmac", _forbid_pbkdf2)
+
+    for invalid_count in ("0", "-1", "notanint", str(database.PBKDF2_MAX_ITERATIONS + 1)):
+        stored = f"{database.PBKDF2_PREFIX}${invalid_count}${'00' * 32}"
+        assert database._verify_password_with_migration("Secret123!", salt, stored) == (False, False)
+
+    conn = sqlite3.connect(db_file)
+    conn.execute(
+        """
+        INSERT INTO users (email, full_name, password_hash, password_salt, role, referral_code)
+        VALUES (?, ?, ?, ?, 'member', 'KC-BOUND01')
+        """,
+        ("baditer@kopano.local", "Bad Iter", f"{database.PBKDF2_PREFIX}$0${'00' * 32}", salt),
+    )
+    conn.commit()
+    conn.close()
+    assert database.authenticate_user("baditer@kopano.local", "Secret123!") is None
+
+
