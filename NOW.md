@@ -37,3 +37,11 @@ As mandated by `AGENTS.md` and `STATELESS_RENTER_ENTRYWAY.md`, repo root NOW.md 
 
 - **Pre-W46 Full Ledger (`2026-06-22T06:39 SAST` through `2026-11-11`):** Preserved byte-for-byte in [`NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md`](NOW/ARCHIVE/NOW_PRE_W46_2026-11-11.md) (`182978` bytes, SHA-256 `66b74627c792b1182937002a6bfe7ea92889f62b0ccf457a38bd6d598a13064d`).
 - **Verification Command:** `python scripts/now_archive_pilot.py --verify`
+
+## 2026-11-15 — W3 Bookit court restoration and release state (SAST)
+
+- Live GitHub status on this date: [PR #55](https://github.com/Kopano-Labs/Bookit-5s-Arena/pull/55) and [PR #58](https://github.com/Kopano-Labs/Bookit-5s-Arena/pull/58) are open drafts; [PR #60](https://github.com/Kopano-Labs/Bookit-5s-Arena/pull/60) is open for review. None is merged. This corrects the W46 summary above, which described #55 and #58 as merged.
+- Production currently runs 85e6e2b on fivesarena.com. On 2026-11-15, GET https://fivesarena.com/api/courts returned HTTP 200 with [] and X-FivesArena-Data-State: database-empty. A non-decrypting Vercel environment-variable listing found no COURT_CATALOGUE_MONGODB_URI configured.
+- [Draft PR #61](https://github.com/Kopano-Labs/Bookit-5s-Arena/pull/61) proposes restoring the four public Hellenic courts through a separately scoped catalogue reader, with an allowlist of the observed court IDs and public fields. Existing booking/admin writes remain on the current operations connection. The court cards and detail page keep Setmore as the booking destination. The /bookings court CTA correction is included in #61.
+- For [issue #42](https://github.com/Kopano-Labs/Bookit-5s-Arena/issues/42), the first release acceptance is the four real courts with correct images/rates and Setmore booking links. Preview and production need a dedicated Atlas principal restricted to find on bookit.courts before this can be verified with live data. The shared operations URI remains unchanged.
+- Native booking remains on hold until existing Setmore and manual reservations are reconciled, overlapping requests cannot both succeed, and one persisted booking reference matches the customer confirmation and venue operator record.
