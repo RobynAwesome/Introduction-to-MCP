@@ -16,15 +16,32 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import hashlib
 import hmac
+import importlib.util
 import json
 from pathlib import Path
 import secrets
+import sys
 from typing import Any, Callable, Iterable, Mapping
 
 TOKEN_TYPE = "KPGS-LEASE"
 TOKEN_ALG = "HS256"
+EDDSA_ALG = "EdDSA"
 SUBJECT_KINDS = {"renter", "adapter", "skill", "agent", "human", "service"}
 FORBIDDEN_AMBIENT_CAPABILITIES = {"admin", "all-access", "*"}
+
+
+def _load_ed25519():
+    mod_path = Path(__file__).resolve().parent / "ed25519_stdlib.py"
+    spec = importlib.util.spec_from_file_location("kpgs_ed25519_stdlib", mod_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Unable to load ed25519_stdlib from {mod_path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules.setdefault(spec.name, module)
+    spec.loader.exec_module(module)
+    return module
+
+
+_ED25519 = _load_ed25519()
 
 
 class LeaseError(Exception):
@@ -66,11 +83,10 @@ class AuthorizationDecision:
 
 
 class KeyRing:
-    """Server-side signing/verification keys with explicit rotation.
+    """Server-side signing/verification keys with explicit rotation (HS256)."""
 
-    Rotation switches the active signing key while retaining prior verification
-    keys until their leases have naturally expired. Frontends need no redeploy.
-    """
+    algorithm = TOKEN_ALG
+    can_sign = True
 
     def __init__(self, keys: Mapping[str, bytes], active_key_id: str):
         self._keys: dict[str, bytes] = {}
@@ -116,6 +132,94 @@ class KeyRing:
         return hmac.compare_digest(expected, signature)
 
 
+class Ed25519KeyRing:
+    """Server-side Ed25519 signing/verification key ring (no shared secret in verifier)."""
+
+    algorithm = EDDSA_ALG
+    can_sign = True
+
+    def __init__(self, private_seeds: Mapping[str, bytes], active_key_id: str):
+        self._seeds: dict[str, bytes] = {}
+        self._public_keys: dict[str, bytes] = {}
+        for key_id, seed in private_seeds.items():
+            self._validate_seed(key_id, seed)
+            seed_bytes = bytes(seed)
+            self._seeds[key_id] = seed_bytes
+            self._public_keys[key_id] = _ED25519.public_key_from_seed(seed_bytes)
+        if active_key_id not in self._seeds:
+            raise ValueError("active key id must exist in key ring")
+        self._active_key_id = active_key_id
+
+    @staticmethod
+    def _validate_seed(key_id: str, seed: bytes) -> None:
+        if not isinstance(key_id, str) or not key_id.strip():
+            raise ValueError("key id is required")
+        if not isinstance(seed, (bytes, bytearray)) or len(seed) != 32:
+            raise ValueError("Ed25519 signing seeds must contain exactly 32 bytes")
+
+    @property
+    def active_key_id(self) -> str:
+        return self._active_key_id
+
+    def rotate(self, key_id: str, seed: bytes) -> None:
+        self._validate_seed(key_id, seed)
+        seed_bytes = bytes(seed)
+        self._seeds[key_id] = seed_bytes
+        self._public_keys[key_id] = _ED25519.public_key_from_seed(seed_bytes)
+        self._active_key_id = key_id
+
+    def retire(self, key_id: str) -> None:
+        if key_id == self._active_key_id:
+            raise ValueError("active signing key cannot be retired")
+        self._seeds.pop(key_id, None)
+        self._public_keys.pop(key_id, None)
+
+    def sign(self, key_id: str, message: bytes) -> bytes:
+        seed = self._seeds.get(key_id)
+        if seed is None:
+            raise LeaseSignatureError("unknown Ed25519 signing key")
+        return _ED25519.sign(seed, message)
+
+    def verify(self, key_id: str, message: bytes, signature: bytes) -> bool:
+        pub = self._public_keys.get(key_id)
+        if pub is None:
+            return False
+        return _ED25519.verify(pub, message, signature)
+
+    def export_public_keys(self) -> dict[str, bytes]:
+        return dict(self._public_keys)
+
+    def export_public_keys_hex(self) -> dict[str, str]:
+        return {k: v.hex() for k, v in self._public_keys.items()}
+
+
+class Ed25519PublicKeyRing:
+    """Verifier-only Ed25519 public key ring holding zero signing authority."""
+
+    algorithm = EDDSA_ALG
+    can_sign = False
+
+    def __init__(self, public_keys: Mapping[str, bytes]):
+        if not public_keys:
+            raise ValueError("at least one Ed25519 public verifying key is required")
+        self._public_keys: dict[str, bytes] = {}
+        for key_id, pub in public_keys.items():
+            if not isinstance(key_id, str) or not key_id.strip():
+                raise ValueError("key id is required")
+            if not isinstance(pub, (bytes, bytearray)) or len(pub) != 32:
+                raise ValueError("Ed25519 public keys must contain exactly 32 bytes")
+            self._public_keys[key_id] = bytes(pub)
+
+    def sign(self, key_id: str, message: bytes) -> bytes:
+        raise LeaseSignatureError("verifier-only Ed25519 public key ring cannot sign leases")
+
+    def verify(self, key_id: str, message: bytes, signature: bytes) -> bool:
+        pub = self._public_keys.get(key_id)
+        if pub is None:
+            return False
+        return _ED25519.verify(pub, message, signature)
+
+
 def _b64encode(value: bytes) -> str:
     return urlsafe_b64encode(value).decode("ascii").rstrip("=")
 
@@ -159,13 +263,14 @@ class CapabilityLeaseAuthority:
 
     def __init__(
         self,
-        key_ring: KeyRing,
+        key_ring: KeyRing | Ed25519KeyRing | Ed25519PublicKeyRing,
         *,
         issuer: str = "kpgs-sovereign-hub",
         max_ttl_seconds: int = 900,
         clock: Callable[[], datetime] | None = None,
         restriction_ledger_path: Path | str | None = None,
         restriction_hmac_key: bytes | None = None,
+        restriction_public_keys: Mapping[str, bytes] | None = None,
     ):
         if max_ttl_seconds <= 0:
             raise ValueError("max_ttl_seconds must be positive")
@@ -174,7 +279,19 @@ class CapabilityLeaseAuthority:
         self.max_ttl_seconds = max_ttl_seconds
         self._clock = clock or (lambda: datetime.now(timezone.utc))
         self._restriction_ledger_path = Path(restriction_ledger_path) if restriction_ledger_path else None
-        self._restriction_hmac_key = restriction_hmac_key or self.key_ring._keys[self.key_ring.active_key_id]
+        self._restriction_public_keys: dict[str, bytes] | None = (
+            {k: bytes(v) for k, v in restriction_public_keys.items()}
+            if restriction_public_keys
+            else None
+        )
+        if restriction_hmac_key is not None:
+            self._restriction_hmac_key: bytes | None = restriction_hmac_key
+        elif hasattr(self.key_ring, "_keys") and getattr(self.key_ring, "can_sign", False):
+            self._restriction_hmac_key = self.key_ring._keys[self.key_ring.active_key_id]
+        else:
+            self._restriction_hmac_key = None
+        if self._restriction_ledger_path is not None and not self._restriction_public_keys and not self._restriction_hmac_key:
+            raise LeaseDenied("restriction ledger verification requires public keys or verification key")
         self._revocations: dict[str, dict[str, str]] = {}
         self._operation_nonces: set[tuple[str, str]] = set()
         self._issued_nonces: set[str] = set()
@@ -209,14 +326,35 @@ class CapabilityLeaseAuthority:
                 raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}") from exc
             if not isinstance(row, dict) or row.get("prev_entry_sha256") != prev_hash:
                 raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: broken hash chain")
-            filtered = {k: v for k, v in row.items() if k not in {"entry_sha256", "hmac_sha256"}}
+            filtered = {
+                k: v
+                for k, v in row.items()
+                if k not in {"entry_sha256", "hmac_sha256", "ed25519_sig"}
+            }
             canonical = json.dumps(filtered, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
             expected_sha = hashlib.sha256(canonical).hexdigest()
-            expected_hmac = hmac.new(self._restriction_hmac_key, canonical, hashlib.sha256).hexdigest()
             if not hmac.compare_digest(str(row.get("entry_sha256", "")), expected_sha):
                 raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: entry_sha256 mismatch")
-            if not hmac.compare_digest(str(row.get("hmac_sha256", "")), expected_hmac):
-                raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: hmac_sha256 mismatch")
+
+            if self._restriction_public_keys is not None:
+                kid = str(row.get("ed25519_kid", ""))
+                sig_hex = str(row.get("ed25519_sig", ""))
+                pub = self._restriction_public_keys.get(kid)
+                if pub is None or not sig_hex:
+                    raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: missing or untrusted ed25519 signature")
+                try:
+                    sig_bytes = bytes.fromhex(sig_hex)
+                except ValueError as exc:
+                    raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: invalid ed25519 hex") from exc
+                if not _ED25519.verify(pub, canonical, sig_bytes):
+                    raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: ed25519 signature mismatch")
+            elif self._restriction_hmac_key is not None:
+                expected_hmac = hmac.new(self._restriction_hmac_key, canonical, hashlib.sha256).hexdigest()
+                if not hmac.compare_digest(str(row.get("hmac_sha256", "")), expected_hmac):
+                    raise LeaseDenied(f"restriction_ledger_tampered at line {idx + 1}: hmac_sha256 mismatch")
+            else:
+                raise LeaseDenied("restriction_ledger_tampered: no trusted verifier configured")
+
             prev_hash = expected_sha
             entries.append(row)
         return entries
@@ -353,6 +491,8 @@ class CapabilityLeaseAuthority:
         correlation_id: str = "",
         evidence_ref: str = "",
     ) -> str:
+        if not getattr(self.key_ring, "can_sign", True):
+            raise LeaseSignatureError("verifier-only authority cannot issue capability leases")
         if subject_kind not in SUBJECT_KINDS:
             raise LeaseDenied("unsupported subject kind")
         for label, value in {
@@ -411,8 +551,9 @@ class CapabilityLeaseAuthority:
         return token
 
     def _encode(self, payload: Mapping[str, Any]) -> str:
+        alg = getattr(self.key_ring, "algorithm", TOKEN_ALG)
         header = {
-            "alg": TOKEN_ALG,
+            "alg": alg,
             "typ": TOKEN_TYPE,
             "kid": self.key_ring.active_key_id,
             "iss": self.issuer,
@@ -437,7 +578,8 @@ class CapabilityLeaseAuthority:
             raise LeaseSignatureError("lease token JSON is invalid") from exc
         if not isinstance(header, dict) or not isinstance(payload, dict):
             raise LeaseSignatureError("lease token envelope is invalid")
-        if header.get("alg") != TOKEN_ALG or header.get("typ") != TOKEN_TYPE:
+        expected_alg = getattr(self.key_ring, "algorithm", TOKEN_ALG)
+        if header.get("alg") != expected_alg or header.get("typ") != TOKEN_TYPE:
             raise LeaseSignatureError("unsupported lease token algorithm/type")
         if header.get("iss") != self.issuer:
             raise LeaseSignatureError("lease issuer mismatch")
