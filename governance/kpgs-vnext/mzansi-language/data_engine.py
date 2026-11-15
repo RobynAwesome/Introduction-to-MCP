@@ -413,13 +413,18 @@ class LinguisticRecordStore:
         for record_id in sorted(self._heads):
             record = self._heads[record_id]
             evidence = record["evidence"]
+            validation = record["validation"]
             if evidence["class"] != "HUMAN_VALIDATED":
                 continue
-            if record["validation"]["status"] != "validated":
+            if validation["status"] != "validated":
                 continue
             if evidence["speaker_consent"] is not True:
                 continue
-            if evidence["license"] is None:
+            if not (evidence["provenance_uri"] or "").strip():
+                continue
+            if not any(validator_id.strip() for validator_id in validation["validator_ids"]):
+                continue
+            if not (evidence["license"] or "").strip():
                 continue
             if evidence["synthetic"] and not include_synthetic:
                 continue

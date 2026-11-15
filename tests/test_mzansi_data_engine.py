@@ -294,6 +294,33 @@ class ConsentAndAdmissibilityTests(StoreCase):
         self.store.transition_evidence_class("test-human-0002", "HUMAN_VALIDATED", actor="test", validator_ids=["v1"])
         self.assertEqual([r["record_id"] for r in self.store.admissible_records()], ["test-human-0001"])
 
+    def test_admissibility_requires_attributable_validation_and_provenance(self) -> None:
+        variants = {
+            "no-validator": {"validator_ids": []},
+            "blank-validator": {"validator_ids": ["   "]},
+            "no-provenance": {"provenance_uri": None},
+            "blank-provenance": {"provenance_uri": ""},
+            "blank-license": {"license": "   "},
+            "complete": {},
+        }
+        for name, overrides in variants.items():
+            record = human_record(f"test-evidence-{name}")
+            record["evidence"]["class"] = "HUMAN_VALIDATED"
+            record["validation"].update(status="validated", validator_ids=["v1"])
+            for key, value in overrides.items():
+                section = "validation" if key == "validator_ids" else "evidence"
+                record[section][key] = value
+            self.assertEqual(self.store.admit(record, actor="test").outcome, "admitted")
+
+        reopened = engine.LinguisticRecordStore(self.ledger, clock=FixedClock())
+        self.assertEqual(len(reopened.record_ids()), len(variants))
+        for store in (self.store, reopened):
+            with self.subTest(reopened=store is reopened):
+                self.assertEqual(
+                    [record["record_id"] for record in store.admissible_records()],
+                    ["test-evidence-complete"],
+                )
+
     def test_consent_withdrawal_removes_admissibility_and_is_one_way(self) -> None:
         self.store.admit(human_record(), actor="test")
         self.store.transition_validation("test-human-0001", "validated", actor="test", validator_ids=["v1"])

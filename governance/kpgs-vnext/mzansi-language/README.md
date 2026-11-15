@@ -1,6 +1,6 @@
 # Mzansi Language Contracts — Phase 7
 
-Status: **PR1 contract slice merged** (`b994272`); **PR2 Data Engine foundation** under review for `RobynAwesome/Introduction-to-MCP#103`.
+Status: **PR1 contract slice merged** (`b994272`); **PR2 Data Engine foundation** merged via [#245](https://github.com/RobynAwesome/Introduction-to-MCP/pull/245) for `RobynAwesome/Introduction-to-MCP#103`.
 
 This directory defines the first governed boundary for KPGS sociolinguistic inference. It does **not** claim a trained Sepedi model, production TTS quality, or native-speaker validation.
 
@@ -101,7 +101,7 @@ Admitted scope (owner comment on #103, 2026-08-24, restated 2026-09-07): *record
 - **Validates** every record against `linguistic-record.schema.json` with a small Draft 2020-12 subset evaluator that reads the schema file itself. An unsupported keyword in the schema is a load-time error, so the evaluator cannot silently skip a constraint.
 - **Persists** one entry per governed event to a JSONL ledger. Each entry carries `prev_hash` and `entry_hash` (`sha256(prev_hash + canonical_json(entry))`), so the file is tamper-evident; reload re-verifies the chain and refuses a broken one.
 - **Replays** idempotently: re-admitting an identical record appends nothing; re-admitting a changed record with the same `record_id` appends a `record_conflict` entry and leaves the head untouched.
-- **Computes admissibility** from data-plane fields only: class `HUMAN_VALIDATED`, status `validated`, `speaker_consent: true`, non-null `license`, and `synthetic: false` unless the caller explicitly asks for synthetic records.
+- **Computes admissibility** from data-plane fields only: class `HUMAN_VALIDATED`, status `validated`, `speaker_consent: true`, a non-blank provenance reference and license, at least one non-blank validator ID, and `synthetic: false` unless the caller explicitly asks for synthetic records. Incomplete records remain in the ledger for review. The gate checks recorded fields and does not authenticate their issuer.
 
 ### Lifecycle rule tables
 

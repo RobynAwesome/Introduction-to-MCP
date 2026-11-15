@@ -126,7 +126,7 @@ class InventoryParity(unittest.TestCase):
         for duplicate in cases:
             with self.subTest(duplicate=duplicate):
                 python, rust = self.replay(duplicate)
-                self.result(python, "DRILL_PASS")
+                self.assertIn("duplicate JSON key", self.result(python, "BLOCK", exit_code=4)["reasons"][0])
                 self.assertIn("duplicate keys", self.result(rust, "INVALID_INPUT")["reasons"][0])
 
     def test_caller_authority_flags_are_ignored(self):

@@ -23,7 +23,7 @@ interface AdminPageProps {
   onAdminPasswordChange: (value: string) => void;
   onLogin: () => void;
   onLogout: () => void;
-  onLoadSession: (id: string) => void;
+  onLoadSession: (id: number) => void;
   onOverrideScore: (blockId: string, score: number) => void;
 }
 
