@@ -826,6 +826,15 @@ def handle_pre_tool_use(payload: dict[str, Any]) -> dict[str, Any]:
         if not admitted:
             return _deny("HOLD: " + admission_reason)
 
+    # There is no trusted, typed authorization adapter yet for shell execution,
+    # agent spawning, browser control, or indirect MCP writes. A signed read
+    # receipt is not a universal capability grant. Do not cross populations
+    # through one of those unmediated tools in enforced mode.
+    if entry_mode == "enforce" and capability in {
+        "command.execute", "agent.spawn", "mcp.invoke", "browser.interact"
+    }:
+        return _deny("HOLD: typed host adapter required before external or shell execution")
+
     allowed_roots: list[Path] = loaded_ctx["writable_roots"]
     required_capabilities: list[str] = [capability]
 
