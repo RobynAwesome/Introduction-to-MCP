@@ -67,8 +67,8 @@ def count_verified(path: Path | None = None) -> tuple[int, list[dict]]:
 def check_minimum(min_required: int = DEFAULT_MIN, path: Path | None = None) -> tuple[bool, str]:
     n, rows = count_verified(path)
     if n >= min_required:
-        return True, f"verified_production={n} (min {min_required})"
-    return False, f"verified_production={n} need {min_required}; run: python scripts/kc_production_verify_run.py"
+        return True, f"verified_production={n} (min {min_required}) [HISTORICAL_URL_ROWS_ONLY; NOT_LIVE_RUNTIME_PROOF]"
+    return False, f"verified_production={n} need {min_required} [HISTORICAL_URL_ROWS_ONLY; NOT_LIVE_RUNTIME_PROOF]; run: python scripts/kc_production_verify_run.py"
 
 
 def main() -> int:

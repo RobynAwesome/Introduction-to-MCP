@@ -5,7 +5,8 @@ The collector records GitHub-observable facts and conservative classifications.
 It intentionally leaves technical-intelligence conclusions for source review.
 """
 from __future__ import annotations
-import argparse, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
+import argparse, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request, copy
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 API='https://api.github.com'
@@ -87,14 +88,54 @@ def make_record(detail:dict,safe_prs:dict[str,list[dict]])->dict:
       'convergence':{'target_systems':[],'reusable_primitive':None,'integration_pattern':None,'gaps':None,'decision':'STUDY'},
       'evidence':evidence}
 
+def refresh_seed_records(gh:GitHub,seed_file:Path,limit:int=0)->list[dict]:
+    """Resolve historical OyaAI observations by STABLE GitHub repository ID.
+
+    This does not enumerate the renamed owner's account or confuse their other
+    repositories with the historic Oya corpus. Original seed ancestry and
+    SafeSkill claims remain historical; only observed ID/name/url are refreshed.
+    """
+    seeds=[json.loads(line) for line in seed_file.read_text(encoding='utf-8').splitlines() if line.strip()]
+    if limit: seeds=seeds[:limit]
+    if not seeds: raise ValueError('no historical seed records to refresh')
+    result=[]
+    for old in seeds:
+        old_id=old.get('provenance',{}).get('oya_repo_id')
+        if not isinstance(old_id,int):
+            raise ValueError('seed has no stable integer oya_repo_id')
+        current=gh.get(f'/repositories/{old_id}')
+        if not isinstance(current,dict) or current.get('id')!=old_id:
+            raise ValueError(f'repository identity mismatch for stable ID {old_id}')
+        if not current.get('full_name') or not current.get('html_url'):
+            raise ValueError(f'incomplete GitHub identity observation for ID {old_id}')
+        row=copy.deepcopy(old)
+        p=row['provenance']
+        p['origin_kind']='oya_corpus'
+        p['observed_repo']=current['full_name']
+        p['observed_repo_id']=old_id
+        p['observed_at']=datetime.now(timezone.utc).isoformat()
+        row.setdefault('evidence',[]).append({
+            'kind':'current_repository_id_resolution',
+            'url':current['html_url'],
+            'note':f'Current GitHub API owner/name for unchanged repository ID {old_id}; original source/scan claims remain historical.'
+        })
+        result.append(row)
+    return result
+
 def main()->int:
     p=argparse.ArgumentParser(); p.add_argument('--owner',default='OyaAIProd'); p.add_argument('--output',default='data/ai-frontier-map/oya-corpus.jsonl'); p.add_argument('--limit',type=int,default=0)
+    p.add_argument('--max-pages',type=int,default=100,help='Bound metadata listing for a pilot; does not change the original record contract')
+    p.add_argument('--seed-file',type=Path,default=None,help='Resolve historical Oya records by stable GitHub repository IDs, not a stale username')
     a=p.parse_args(); gh=GitHub(os.getenv('GITHUB_TOKEN'))
-    repos=gh.paginate(f'/users/{a.owner}/repos?sort=created&direction=asc')
-    if a.limit: repos=repos[:a.limit]
-    safe_prs=collect_safeskill_prs(gh,a.owner); records=[]
-    for i,repo in enumerate(repos,1):
-        detail=gh.get(f"/repos/{repo['full_name']}"); records.append(make_record(detail,safe_prs)); print(f"[{i}/{len(repos)}] {repo['full_name']}",file=sys.stderr)
+    if a.max_pages<1 or a.limit<0: p.error('--max-pages must be >=1 and --limit >=0')
+    if a.seed_file is not None:
+        records=refresh_seed_records(gh,a.seed_file,a.limit)
+    else:
+        repos=gh.paginate(f'/users/{a.owner}/repos?sort=created&direction=asc',max_pages=a.max_pages)
+        if a.limit: repos=repos[:a.limit]
+        safe_prs=collect_safeskill_prs(gh,a.owner); records=[]
+        for i,repo in enumerate(repos,1):
+            detail=gh.get(f"/repos/{repo['full_name']}"); records.append(make_record(detail,safe_prs)); print(f"[{i}/{len(repos)}] {repo['full_name']}",file=sys.stderr)
     out=Path(a.output); out.parent.mkdir(parents=True,exist_ok=True)
     with out.open('w',encoding='utf-8') as f:
         for r in records:f.write(json.dumps(r,ensure_ascii=False,sort_keys=True)+'\n')

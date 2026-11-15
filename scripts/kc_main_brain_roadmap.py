@@ -57,7 +57,13 @@ def check_entry_gate(roadmap: dict | None = None) -> tuple[bool, str]:
     ok, msg = check_minimum(min_prod)
     if not ok:
         return False, f"roadmap_gate {msg}"
-    return True, f"roadmap_gate OK kinds={sorted(required_kinds)} {msg}"
+    # Historical rows cannot authorize deployment. Until a provider-authenticated
+    # verification implementation is reviewed and integrated, there is deliberately
+    # NO success branch here, including for a caller-supplied lambda/boolean.
+    return False, (
+        f"roadmap_gate HOLD_UNVERIFIED_RUNTIME: historical {msg}; "
+        "provider-authenticated serving-runtime verification not implemented"
+    )
 
 
 def append_receipt(kind: str, summary: str) -> None:

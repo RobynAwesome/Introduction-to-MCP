@@ -32,3 +32,108 @@ jobs:
           if [[ -f data/ai-frontier-map/oya-corpus.jsonl ]]; then
             python tools/ai_frontier_map/validate_corpus.py data/ai-frontier-map/oya-corpus.jsonl
           fi
+
+      - name: Resolve four historical OyaAI source IDs against current GitHub
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python tools/ai_frontier_map/collect_oya_corpus.py \
+            --seed-file data/ai-frontier-map/seed.records.jsonl --limit 4 \
+            --output "$RUNNER_TEMP/oya-corpus-id-refresh.jsonl"
+          python tools/ai_frontier_map/validate_corpus.py "$RUNNER_TEMP/oya-corpus-id-refresh.jsonl"
+      - name: Validate five newly discovered upstream sources against the SAME map
+        run: |
+          python tools/ai_frontier_map/ingest_discoveries.py \
+            --input data/ai-frontier-map/intake-2026-11-10.jsonl \
+            --output "$RUNNER_TEMP/unified-intake.jsonl"
+          python tools/ai_frontier_map/validate_corpus.py "$RUNNER_TEMP/unified-intake.jsonl"
+      - name: Negative tests for legacy Oya and new source compatibility
+        run: python -m unittest discover -s tools/ai_frontier_map -p "test_*.py" -v
+
+  governance-drill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Entrypoint denial must reject missing acknowledgement
+        shell: bash
+        run: |
+          if python scripts/kc_kpgs_governance.py entry --renter-id ci_frontier_probe --assert > "$RUNNER_TEMP/denied.txt" 2>&1; then
+            echo "FAIL: renter entry silently accepted absent acknowledgement"
+            exit 1
+          fi
+          cat "$RUNNER_TEMP/denied.txt"
+      - name: Run real KPGS CLI renter entry on disposable checkout
+        run: |
+          python scripts/kc_kpgs_governance.py entry \
+            --renter-id ci_frontier_probe --renter-class stateless_renter \
+            --assert --hood-ack I_AM_STATELESS_RENTER_NOT_LANDLORD
+      - name: Run existing Black Mask v0.5 and Bracket stress CLI (no persisted report)
+        run: python scripts/kc_blackmask_bracket_stress.py --no-report-file --operator CI_FRONTIER --json
+      - name: Exercise existing Security Playground fail-closed fixture gate
+        run: python -m unittest discover -s tests -p "test_security_playground_inventory_gate.py" -v
+      - name: Exercise actual Main Brain roadmap gate on disposable runner
+        shell: bash
+        run: |
+          set +e
+          python scripts/kc_main_brain_roadmap.py gate > "$RUNNER_TEMP/roadmap-gate.txt" 2>&1
+          result=$?
+          set -e
+          cat "$RUNNER_TEMP/roadmap-gate.txt"
+          grep -q "roadmap_gate" "$RUNNER_TEMP/roadmap-gate.txt" || {
+            echo "Gate did not emit a recognizable decision"
+            exit 1
+          }
+          echo "Main Brain gate exit: $result (runner-only evidence; does not authorize real production)"
+          if [[ "$result" -eq 0 ]]; then
+            echo "FAIL: gate accepted without authenticated live-runtime verifier"
+            exit 1
+          fi
+          grep -q "HOLD_UNVERIFIED_RUNTIME" "$RUNNER_TEMP/roadmap-gate.txt" || {
+            echo "FAIL: gate did not fail closed on historic URL-only receipts"
+            exit 1
+          }
+          echo "PASS: historical URL-only rows did not grant production authority"
+      - name: Execute production gate negative regressions
+        run: |
+          python -m pip install "pytest==8.4.2"
+          python -m pytest -q tests/test_kc_main_brain_roadmap.py tests/test_kc_verified_production.py
+
+      - name: Run Local parity script negative/positive fixtures (NOT owner PC)
+        run: python -m unittest discover -s scripts/ci -p "test_local_gsmb_parity.py" -v
+      - name: Exercise signed capability lease authority (real Python implementation)
+        run: |
+          python -m unittest discover -s tests -p "test_capability_lease_runtime.py" -v
+      - name: Probe actual kernel isolation on disposable runner; do not greenwash HOLD
+        shell: bash
+        run: |
+          set +e
+          python scripts/ci/probe_os_isolation.py > "$RUNNER_TEMP/os-probe.json"
+          rc=$?
+          set -e
+          cat "$RUNNER_TEMP/os-probe.json"
+          if [[ "$rc" -ne 0 ]]; then
+            echo "HOLD: no demonstrated isolated kernel user+network namespace on this runner"
+            echo "Production/runtime containment MUST remain HOLD."
+          else
+            echo "Runner namespace isolation observed; production still unverified."
+          fi
+          # A probe that reports no isolation does not silently pass as evidence.
+          python -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/os-probe.json")); assert p["production_runtime_verified"] is False; assert p["capability_permission_enforced"] is False'
+
+      - name: Execute restricted Docker kernel/process boundary drill
+        shell: bash
+        run: |
+          set +e
+          python scripts/ci/probe_docker_boundary.py > "$RUNNER_TEMP/docker-boundary.json"
+          rc=$?
+          set -e
+          cat "$RUNNER_TEMP/docker-boundary.json"
+          if [[ "$rc" -eq 0 ]]; then
+            echo "PASS_RUNNER_ONLY: deny-network/read-only/nonroot Docker execution witnessed"
+          else
+            echo "HOLD: real disposable Docker boundary not proven in this runner"
+          fi
+          python -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/docker-boundary.json")); assert p["production_runtime_verified"] is False'

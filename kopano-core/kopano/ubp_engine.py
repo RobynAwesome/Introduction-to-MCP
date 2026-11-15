@@ -9,7 +9,10 @@ FORMULA:
 WHERE:
   #! = Shebang operator — the FIRST instruction, the genesis command
   #% = Modulo operator — the remainder, what's LEFT after processing
-  BMP = Blueprint Management Protocol — CRUD baseline
+  BMP = Blueprint Management Protocol — CRUD baseline  [HISTORICAL UBP SOURCE-LOCAL EXPANSION]
+  CURRENT GOVERNING MEANING: BMP = BLACK MASK PROTOCOL, per KPGS_PROTOCOL_REGISTRY.json
+  This UBP source-local prior usage is an acronym conflict, NOT a current BMP override.
+  Do not run or interpret historical blueprint CRUD mechanics as a Black Mask v0.5 drill.
   CBP = Conceptual Bracket Protocol — containment before interpretation
   UFCP = Ultimate Focus of CBP Protocol — 150% UFC MODE operation
   KPGS = Kopano-Phu Governance Systems

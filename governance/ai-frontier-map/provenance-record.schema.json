@@ -18,9 +18,6 @@
     "provenance": {
       "type": "object",
       "required": [
-        "oya_repo",
-        "oya_repo_id",
-        "oya_created_at",
         "classification"
       ],
       "properties": {
@@ -46,7 +43,8 @@
             "detached_fork",
             "oya_authored",
             "oya_agent_generated",
-            "unresolved"
+            "unresolved",
+            "founder_fork"
           ]
         },
         "upstream_repo": {
@@ -84,9 +82,111 @@
             "string",
             "null"
           ]
+        },
+        "origin_kind": {
+          "enum": [
+            "oya_corpus",
+            "founder_fork",
+            "external_discovery"
+          ]
+        },
+        "observed_repo": {
+          "type": "string",
+          "minLength": 3,
+          "description": "Observed owner/repository; historical Oya records retain oya_repo"
+        },
+        "observed_repo_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Stable GitHub repository ID; null until independently fetched"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Observation date/time, not release or provenance attestation"
         }
       },
-      "additionalProperties": true
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "if": {
+            "not": {
+              "required": [
+                "origin_kind"
+              ]
+            }
+          },
+          "then": {
+            "required": [
+              "oya_repo",
+              "oya_repo_id",
+              "oya_created_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_kind": {
+                "const": "oya_corpus"
+              }
+            },
+            "required": [
+              "origin_kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "oya_repo",
+              "oya_repo_id",
+              "oya_created_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "origin_kind": {
+                "enum": [
+                  "founder_fork",
+                  "external_discovery"
+                ]
+              }
+            },
+            "required": [
+              "origin_kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "observed_repo",
+              "observed_repo_id",
+              "observed_at"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "classification": {
+                "const": "founder_fork"
+              }
+            },
+            "required": [
+              "classification"
+            ]
+          },
+          "then": {
+            "required": [
+              "upstream_repo"
+            ]
+          }
+        }
+      ]
     },
     "discovery": {
       "type": "object",
@@ -396,5 +496,6 @@
       }
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "description": "Unified AI Frontier Map provenance contract. OyaAI seed records remain unchanged. Newly discovered external projects remain unresolved until authorship/fork lineage is verified. New founder forks are research-only until provenance and authority are witnessed."
 }
