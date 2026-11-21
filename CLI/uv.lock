@@ -550,7 +550,7 @@ dependencies = [
 requires-dist = [
     { name = "anthropic" },
     { name = "httpx", specifier = ">=0.27.0" },
-    { name = "mcp", specifier = ">=1.28,<2" },
+    { name = "mcp", specifier = ">=1.30.0,<2" },
     { name = "prompt-toolkit" },
     { name = "pydantic" },
     { name = "pyinstaller" },
